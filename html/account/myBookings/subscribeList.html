@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>预约列表</title>
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/font.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/usage/account/myBookings/subscribeList.css" />
+	</head>
+
+	<body>
+		<div class="mui-content mui-scroll-wrapper"  id='list'>
+			<div class="mui-scroll">
+				<ul class="mui-table-view man">
+					<li class="mui-media man-li" v-for="(value, key) in objectlist" v-bind:pid='value.pid'>
+						<div class="man-li_title">
+							<h3 class="h3-list_title" v-html="value.title">【10年交】华夏健康人生重大疾病保险</h3>
+						</div>
+						<div class="man-li_body clear">
+							<span class="span-list_body left" v-html="value.fuwu">服务人员:罗娟</span>
+							<span class="span-list_body right" v-html="value.riqi">提交日期:2017-8-16 10:28:12</span>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="../../../js/lib/widget/mui/mui.min.js"></script>
+	<script src="../../../js/lib/common/zepto.min.js"></script>
+	<script src="../../../js/lib/common/base.js"></script>
+	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
+	<script src="../../../js/usage/account/myBookings/subscribeList.js"></script>
+</html>

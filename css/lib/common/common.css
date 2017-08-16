@@ -1,0 +1,135 @@
+@CHARSET "UTF-8";
+/** 
+ *wusaijie
+ *2017/08/16
+ *同道项目2.0公共样式
+ **/
+body{
+	background: #ebebeb;
+}
+
+/*--------------------------------重写mui部分样式--------------------------*/
+
+input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea {
+    line-height: 22px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 0;
+    padding: inherit;
+    -webkit-user-select: text;
+    border: none;
+    border-radius: 0;
+    outline: 0;
+    background-color: #fff;
+    -webkit-appearance: none;
+}
+/* 上拉加载底部样式 */
+.mui-pull-bottom-tips {
+	text-align: center;
+	background-color: #efeff4;
+	font-size: 15px;
+	line-height: 40px;
+	color: #777;
+}	
+.mui-toast-container{
+	width: 100%;
+	margin: 0 auto;
+	bottom: 100px;
+}
+.mui-toast-message{
+	width: 200px;
+	height: 3rem;
+	padding: 0; 
+	font-size: 14px;
+	margin: 0 auto;
+	border-radius: 2rem;
+	line-height: 3rem;
+}
+/*--------------------------------XXX公共样式--------------------------*/
+/*H3列表头公用样式*/
+h1, h2, h3, h4, h5, h6{
+	margin: 0;
+	padding: 0;
+}
+p{
+	margin-bottom: 0;
+	color: #333;
+}
+.h3-list_title{
+	font-size: 16px;
+	font-weight: 800;
+	color: #212121;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+/*span列表公用样式*/
+.span-list_body{
+	font-size: 12px;
+	color: #333333;
+}
+/*页面list间隔*/
+.man-li{
+	margin-bottom: 10px;
+}
+/*重写mui 列表背景颜色*/
+.mui-table-view{
+	background-color: #ECECEC;
+}
+.mui-media{
+	background: #FFFFFF;
+}
+/*包裹icon标签的p的样式*/
+.p_icon{
+	overflow: hidden;
+	margin-bottom: 0;
+	margin: 10px 20px 10px 20px;
+}
+/*蓝色小标签*/
+.icon-blue{
+	color: #48A0F0;
+	background-color: #EBF5FF;
+	font-size: 11px;
+	padding:2px 5px;
+	margin: 0 6px 6px 0;
+	line-height: 13px;
+	float: left;
+	
+}
+/*推广费*/
+.icon_tuiguang{
+	font-size: 12px;
+	color: #FF6E1A;
+	padding:2px 5px;
+	margin: 0 6px 6px 0;
+	line-height:14px;
+	float: right;
+}
+/*--------------------------------线上产品公共样式--------------------------*/
+/*线上产品bannner图  */
+.bannner{
+	display: block;
+	width: 100%;
+}
+/*白色背景*/
+.whitebackground{
+	background: #fff; 
+}
+/* 底部外边距10px */
+.mb10{
+	margin-bottom: 10px;
+}
+/*基本的内边距  */
+.con{
+	padding: 10px 4%;
+}
+.con h3{
+	line-height: 20px;
+	font-size: 16px;
+	color: #212121;
+	font-weight: bold;
+}
+.con .company{
+	line-height: 20px;
+	font-size: 12px;
+	color: #333;
+}

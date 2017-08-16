@@ -1,0 +1,86 @@
+.man-div-title {
+	padding-top: 10px;
+	padding-bottom: 5px;
+	background: #FFFFFF;
+}
+
+.man-div-title_icon {}
+
+ul li {
+	height: 20px;
+	line-height: 20px;
+}
+
+.man-div-title_body ul li {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.man-div-title_body ul li span {
+	color: #333;
+	font-size: 13px;
+	line-height: 20px;
+}
+
+.man-div-title_body ul li span:first-child {
+	color: #878787;
+	font-size: 14px;
+	margin-right: 5px;
+	line-height: 20px;
+}
+
+
+/*推广ul*/
+
+.man-div-title_body_ul {
+	margin-top: 10px;
+}
+
+
+/*预约成功图标*/
+
+.man-div-body {
+	width: 100%;
+	height: 335px;
+	background-color: #fff;
+	border: 1px solid #fff;
+}
+
+.yuyue-status{
+	text-align: center;
+	font-size: 18px;
+	line-height: 18px;
+	font-weight: bold;
+	color: #000;
+	margin-top: 35px;
+	margin-bottom: 37.5px;
+}
+.man-div-body .yuyue-img{
+	width:32.4%;
+	height: 121px;
+	margin: 0 auto;
+}
+.man-div-body .yuyue-img img{
+	width:100%;
+	height: 121px;
+}
+.man-div-body .yuyue-alert{
+	text-align: center;
+	font-size: 12px;
+	line-height: 12px;
+	color:#000;
+	margin-top:35px;
+	margin-bottom: 30px;
+}
+.man-div-body .btn{
+	width:53.3%;
+	height:30px;
+	line-height: 30px;
+	border:1px solid #999;
+	border-radius: 5px;
+	color:#000;
+	font-size: 12px;
+	text-align: center;
+	margin: 0 auto;
+}
