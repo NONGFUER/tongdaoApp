@@ -1,0 +1,12 @@
+.result-download{
+    margin-top: 20px;
+}
+.result-download p{
+    text-align: center;
+    font-size: 12px;
+}
+.download-botton{
+    width:60%;
+    margin: 0 auto;
+    font-size: 12px;
+}
