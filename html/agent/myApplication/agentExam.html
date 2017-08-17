@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 -->
+	    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	    <!-- 忽略IOS将页面中的数字识别为电话号码 -->
+	    <meta name="format-detection" content="telephone=no" />
+	    <!-- 忽略Android平台中对邮箱地址的识别 -->
+	    <meta name="format-detection" content="email=no" />
+	    <title>代理人考试</title>
+	    <link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.picker.min.css" />		
+    	<link rel="stylesheet" href="../../../css/lib/common/base.css">
+		<link rel="stylesheet" href="../../../css/lib/common/common.css">			    
+	    <link rel="stylesheet" href="../../../css/usage/agent/myApplication/agentExam.css" />
+	</head>
+	<body>		
+		<div id="indexpart" class="mui-scroll-wrapper">
+		<div id="insure_iscroll" class="mui-scroll">
+			
+			
+		</div>
+		</div>
+		<!--  遮罩  提示框  没通过考试 -->
+			<div id="shadow" class="shadow" style="display:none;">
+				<div class="tip">
+					<div class="tiphead">
+						<p>温馨提示</p>
+						<!-- <img src="../../image/delete.png" class="cancleimg"> -->
+					</div>
+					<div class="tipbody">
+						<p>您一共答对了<span class="tipTrueNum"></span>道题，很遗憾没有通过考试，还要继续努力哦！</p>
+					</div>
+					<div class="tipfoot">
+						<div class="cancle">取消</div>
+						<div class="retest">重新考试</div>
+					</div>
+				</div>
+			</div>
+			<!--  遮罩  提示框  通过考试-->
+			<div id="shadowpass" class="shadowpass" style="display:none;">
+				<div class="tippass">
+					<div class="tiphead">
+						<p>温馨提示</p>
+						<!-- <img src="../../image/delete.png" class="cancleimg"> -->
+					</div>
+					<div class="tipbodypass">
+						<p>恭喜您，一共答对了<span class="tipTrueNum"></span>道题，分数为<span class="score"></span>分，考试通过！</p>
+					</div>
+					<div class="tipfoot">
+						<!-- <div class="cancle">取消</div> -->
+						<div class="sure">确定</div>
+					</div>
+				</div>
+			</div>
+		<script src="../../../js/lib/common/zepto.min.js"></script>
+		<script src="../../../js/lib/widget/mui/mui.min.js"></script>
+		<script src="../../../js/lib/widget/mui/mui.picker.min.js"></script>
+    	<script src="../../../js/lib/common/base.js"></script>
+		<script src="../../../js/lib/common/common.js"></script>
+		<script src="../../../js/usage/agent/myApplication/agentExam.js.js" ></script> 
+	</body>	
+</html>

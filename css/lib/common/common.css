@@ -7,6 +7,17 @@
 body{
 	background: #ebebeb;
 }
+.hidden{
+	display: none;
+}
+/* 底部外边距10px */
+.mb10{
+	margin-bottom: 10px;
+}
+/*隐藏仍占用位置  */
+.yc {
+    visibility: hidden;
+}
 
 /*--------------------------------重写mui部分样式--------------------------*/
 
@@ -114,22 +125,116 @@ p{
 .whitebackground{
 	background: #fff; 
 }
-/* 底部外边距10px */
-.mb10{
-	margin-bottom: 10px;
-}
-/*基本的内边距  */
-.con{
-	padding: 10px 4%;
-}
-.con h3{
+.banner-con h3{
 	line-height: 20px;
 	font-size: 16px;
 	color: #212121;
 	font-weight: bold;
 }
-.con .company{
+.banner-con .company{
 	line-height: 20px;
 	font-size: 12px;
 	color: #333;
 }
+/*在线产品试算项样式  */
+.insurance-choice{
+	padding: 10px 4%;
+    font-size: 13px;
+}
+.insurance-choice .d1{
+	width: 100%;
+	overflow: hidden;
+    margin-bottom: 10px;
+}
+.label{
+	color:#222;
+	width: 70px;
+    height: 24px;
+    line-height: 24px;
+    float: left;
+}
+.conter{
+	width: 70%;
+	float: left;
+    line-height: 24px;
+    position: relative
+}
+.insurance-choice .radio li {
+	font-size: 12px;
+	float: left;
+	width: 65px;
+    padding: 0 .26rem;
+    overflow: hidden;
+    min-width: 20px;
+    text-align: center;
+    height: 24px;
+    line-height:24px;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    margin-right: .7rem;
+    color: #999;
+}
+.insurance-choice .radio .on{
+	color:#ff6e1a;
+	 border: 1px solid #ff6e1a;
+}
+/*保费显示颜色  */
+.baofee{
+	color:#ee1919;	
+	font-weight: bold;	
+}
+/*--------------------------------支付结果公共样式--------------------------*/
+.result{
+	padding: 0 7%;
+}
+.result-status{
+	padding: 26px 0;
+	border-bottom: 1px solid #ccc;
+}
+.result-status_img{
+	width: 65px;
+	margin: 0 auto;
+	display: block;
+}
+.result-status_p{
+	text-align: center;
+	color:#222;
+	line-height: 20px;
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 16px;
+	
+}
+.result-content{
+	padding-bottom:20px;
+}
+.result-content dd{
+	font-size: 14px;
+	color: #4d4d4d;
+	line-height: 20px;
+}
+.result-content dt{
+	padding:12px 0;
+	font-size: 16px;
+	font-weight: bold;
+}
+/*12号字体，3个中文间距设置  */
+.letter3{
+	letter-spacing: 4px;
+}
+.result-click{
+	background: #ebebeb;
+	padding: 50px 0;
+}
+.result-button{
+	color: #48a0f0;
+	text-align: center;
+    width: 34%;
+    float: left;
+    border: 1px solid #48a0f0;
+    border-radius: 5px;
+    padding: 8px;
+	font-size: 16px;
+	margin: 0 8%;
+}
+   

@@ -71,9 +71,9 @@
 | 规范名称 | Cook                                 |
 | ---- | ------------------------------------ |
 | 当前版本 | v1.0 beta                            |
-| 规范发起 | [杜瑶(@doyoe)](http://weibo.com/doyoe) |
+| 规范发起 | 吴赛杰                                                                                    |
 | 参与人群 | Qunar FED                            |
-| 最后更新 | 2015.03.20                           |
+| 最后更新 | 2017.08.16                           |
 
 <a name="general"></a>
 ## 通用约定
@@ -1045,3 +1045,24 @@ body {
 
 
 backlast
+<a name="html"></a>
+##html模板
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../../css/lib/widget/mui/mui.min.css" />
+    <link rel="stylesheet" href="../../css/lib/common/base.css">
+    <link rel="stylesheet" href="../../css/lib/common/common.css">
+</head>
+<body>
+    <script src="../../js/lib/common/zepto.min.js"></script>
+    <script src="../../js/lib/widget/mui/mui.min.js"></script>
+    <script src="../../js/lib/common/base.js"></script>
+    <script src="../../js/lib/common/common.js"></script>
+</body>
+</html>
