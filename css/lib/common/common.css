@@ -18,6 +18,11 @@ body{
 .yc {
     visibility: hidden;
 }
+/*蓝底白字按钮*/
+.on1{
+  background:#48a0f0;
+  color: #fff !important;
+} 
 
 /*--------------------------------重写mui部分样式--------------------------*/
 
@@ -237,4 +242,4 @@ p{
 	font-size: 16px;
 	margin: 0 8%;
 }
-   
+  

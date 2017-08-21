@@ -1,8 +1,7 @@
 /**
  * @作者：马巍巍 时间：2016-01-13 功能：包含移动端所用的一些方法
  */
-document.write("<script language='javascript' src='../../js/lib/common/aes.js' ></script>");
-document.write("<script language='javascript' src='../../js/lib/common/pad-iso10126-min.js' ></script>");
+
 // 秘钥
 var secretKey = "t171420100302rsa";
 var actionStartTime;//浏览页面的埋点时间
@@ -17,6 +16,8 @@ var base = {
 var suixinyi = {
 		url : window.location.protocol+"//"+window.location.host+"/tongdaoSxyPlatform/",
 }
+document.write("<script language='javascript' src='"+base.url+"tongdaoApp/js/lib/common/aes.js' ></script>");
+document.write("<script language='javascript' src='"+base.url+"tongdaoApp/js/lib/common/pad-iso10126-min.js' ></script>");
 var dic_m = new Map();
 var dic_m1 = new Map();
 if (typeof tit !== 'object') {
