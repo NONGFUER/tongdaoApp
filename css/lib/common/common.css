@@ -1,11 +1,15 @@
 @CHARSET "UTF-8";
 /** 
- *wusaijie
+ *wusaijie songhuajian
  *2017/08/16
  *同道项目2.0公共样式
  **/
 body{
 	background: #ebebeb;
+}
+a {
+    text-decoration: none;
+    color: #48a0f0;
 }
 .hidden{
 	display: none;
@@ -23,7 +27,72 @@ body{
   background:#48a0f0;
   color: #fff !important;
 } 
-
+.clearfix:after {
+	content:"";
+	display:block;
+	height:0;
+	visibility:hidden;
+	clear:both;
+}
+li:after{
+	content:"";
+	display:block;
+	height:0;
+	visibility:hidden;
+	clear:both;
+}
+.orange{
+	 color:#ff6e1a;
+}
+.iconleft{
+	background: url("../../../image/common/right_arrow.png") no-repeat;
+	display: inline-block;
+    width: 6.5px;
+	height: 11px;
+	background-size: 100% 100%;
+	margin-left: 10px;
+	position: relative;
+    top: 2px;
+}
+.contact{
+	font-size:14px;
+	margin-bottom: 60px;
+}
+.phone{
+	width: 15.5px;
+	height: 17px;
+	position: relative;
+	top: -4px;
+	margin: 0 4px;
+}
+.huise{
+	color: #999;
+	font-size: 12px;
+	margin-left: 4px;
+}
+/*底部纯色按钮  */
+.single-footer{
+	width: 100%;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	z-index: 300;
+	height: 50px;
+	line-height: 50px;
+	font-size:17px;
+	text-align: center;
+	color:#fff;
+	font-weight: bold;
+	opacity: 0;	
+}
+.blue{
+	background:#48A0F0;
+	opacity: 1;
+}
+.grey{
+	background:#999;
+	opacity: 1;
+}
 /*--------------------------------重写mui部分样式--------------------------*/
 
 input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea {
@@ -130,9 +199,13 @@ p{
 .whitebackground{
 	background: #fff; 
 }
+/*基本的内边距  */
+.con{
+	padding: 10px 4%;
+}
 .banner-con h3{
 	line-height: 20px;
-	font-size: 16px;
+	font-size: 15px;
 	color: #212121;
 	font-weight: bold;
 }
@@ -168,15 +241,15 @@ p{
 	font-size: 12px;
 	float: left;
 	width: 65px;
-    padding: 0 .26rem;
+    /* padding: 0 .26rem; */
     overflow: hidden;
     min-width: 20px;
     text-align: center;
-    height: 24px;
+    height: 26px;
     line-height:24px;
     border: 1px solid #e1e1e1;
     border-radius: 5px;
-    margin-right: .7rem;
+    margin-right: .3rem;
     color: #999;
 }
 .insurance-choice .radio .on{
@@ -188,6 +261,50 @@ p{
 	color:#ee1919;	
 	font-weight: bold;	
 }
+.content-title{
+	padding: 10px 4%;
+	font-size: 15px;
+	color: #212121;
+	font-weight: bold;
+	border-bottom: 1px solid #e0e0e0;
+}
+.content-title img{
+	width: 14px;
+	height: 16px;
+	position: relative;
+	top: -2px;
+	margin-right: 5px;
+}
+.content-info p{
+	font-size: 13px;
+}
+.content-info .star:before{
+	content: "";
+	margin-right: 8px;
+	display: inline-block;
+	width: 13.5px;
+	height: 13.5px;
+	background: url(../../../image/insurance/five.png) no-repeat;
+	background-size:100% 100%;
+	-webkit-background-size: 100% 100%;
+}
+.content-info li{
+	margin-left: 4%;
+	padding:10px 4% 10px 0 ;
+	border-bottom: 1px solid #ebebeb;
+}
+.li-left{
+	
+	float: left;
+	width:60%;
+	
+}
+.li-right{
+	text-align: right;
+	float: right;
+	
+}
+
 /*--------------------------------支付结果公共样式--------------------------*/
 .result{
 	padding: 0 7%;
@@ -242,4 +359,19 @@ p{
 	font-size: 16px;
 	margin: 0 8%;
 }
-  
+/*--------------------------------弹窗样式--------------------------*/
+.popup-shadow{
+	width: 100%;
+    height: 100%;
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;   
+    z-index: 300;
+    background: rgba(0,0,0,.7);
+}
+.popup-content{
+	position:fixed;
+	z-index: 400;
+	background:#fff;
+}
