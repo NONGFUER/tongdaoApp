@@ -1,0 +1,62 @@
+
+/*body—保单样式*/
+
+.man-div-body {}
+
+.man-div-body-ul_li {
+	background-color: #FFFFFF;
+	padding: 0;
+}
+
+.man-div-body-ul_li_div {
+	padding: 10px 20px 10px 20px;
+	background: #FFFFFF;
+}
+
+.man-div-body-ul_li_div ul li {
+	clear: both;
+	/*overflow: hidden;*/
+	height: 27px;
+	line-height: 27px;
+}
+
+ul li span {
+	color: #333;
+	font-size: 15px;
+}
+
+.man-div-body-ul_li_div ul li span:first-child {
+	float: left;
+}
+
+.man-div-body-ul_li_div ul li span:last-child {
+	float: right;
+}
+
+.man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:first-child span:last-child {
+	color: #878787;
+}
+.jiantou{
+	width: 10px;
+	height: 10px;
+	background: url(../../../../image/common/youjiantou.png);
+	background-size: 100%;
+	position:absolute;
+	right: 20px;
+	top: -10px;
+}
+.man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:last-child span{
+	font-size: 12px;
+	color: #878787;
+}
+.man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:last-child span:last-child{
+	float: left;
+	margin-left: 10px;
+}
+
+/*线*/
+
+.xian {
+	border-bottom: 1px solid #E0E0E0;
+	margin-top: 10px;
+}

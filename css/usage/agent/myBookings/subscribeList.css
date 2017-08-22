@@ -2,6 +2,10 @@
 	margin-left: 20px;
 	margin-right: 20px;
 	overflow: hidden;
+	display: flex;
+}
+.span-list_body{
+	color: #878787;
 }
 .man-li_title{
 	padding-top: 5px;
@@ -11,10 +15,27 @@
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
+.man-li_body_div1{
+	flex: 3;
+}
+.man-li_body_div2{
+	flex: 1;
+}
 .left {
 	float: left;
 }
 
 .right {
 	float: right;
+	color: #333;
+}
+.vlaue_name{
+	color: #333;
+	margin-left: 5px;
+}
+.span_img{
+	background:url(../../../../image/common/youjiantou.png) ;
+	background-size: 100%;
+	width: 20px;
+	height: 20px;
 }

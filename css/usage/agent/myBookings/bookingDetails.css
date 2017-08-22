@@ -1,14 +1,25 @@
-.man-div-title {
-	padding-top: 10px;
-	padding-bottom: 5px;
+.mui-content {
 	background: #FFFFFF;
+}
+
+.man-div-title {
+	padding-top: 20px;
+	padding-bottom: 5px;
+	background: #F7FAFC;
+}
+
+.h3-list_title {
+	font-size: 15px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .man-div-title_icon {}
 
-ul li {
-	height: 20px;
-	line-height: 20px;
+.man-div-title_body ul li {
+	height: 25px;
+	line-height: 25px;
 }
 
 .man-div-title_body ul li {
@@ -30,6 +41,14 @@ ul li {
 	line-height: 20px;
 }
 
+.li_name {
+	color: #878787;
+}
+
+.li_value {
+	color: #333;
+}
+
 
 /*推广ul*/
 
@@ -40,47 +59,102 @@ ul li {
 
 /*预约成功图标*/
 
+.icon_duigou {
+	background: url(../../../../image/common/yuanquan.png);
+	background-size: 100%;
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+
 .man-div-body {
 	width: 100%;
-	height: 335px;
 	background-color: #fff;
 	border: 1px solid #fff;
 }
 
-.yuyue-status{
+.xian {
+	border-bottom: 1px solid #E0E0E0;
+	margin: 0 20px 0 20px;
+}
+
+.yuyue-status {
 	text-align: center;
-	font-size: 18px;
-	line-height: 18px;
 	font-weight: bold;
-	color: #000;
-	margin-top: 35px;
-	margin-bottom: 37.5px;
+	color: #333;
+	margin-top: 14px;
+	margin-bottom: 14px;
 }
-.man-div-body .yuyue-img{
-	width:32.4%;
-	height: 121px;
-	margin: 0 auto;
+
+.yuyue-table {
+	margin-top: 30px;
 }
-.man-div-body .yuyue-img img{
-	width:100%;
-	height: 121px;
+
+.yuyue-table ul li {
+	padding: 0 20px 0 20px;
+	height: 27px;
+	line-height: 27px;
 }
-.man-div-body .yuyue-alert{
-	text-align: center;
-	font-size: 12px;
-	line-height: 12px;
-	color:#000;
-	margin-top:35px;
-	margin-bottom: 30px;
+
+.yuyue-table ul li span {
+	padding: 0 20px 0 20px;
+	font-size: 13px;
 }
-.man-div-body .btn{
-	width:53.3%;
-	height:30px;
+
+.yuyue-table ul li span:first-child {
+	border-right: 1px solid #E0E0E0;
+}
+
+.li_xian {
+	border-bottom: 1px solid #E0E0E0;
+	margin: 0 20px 0 20px;
+	margin-top: 13px;
+}
+
+.wenxin {
+	margin: 0 20px 0 20px;
+	font-size: 13px;
+}
+
+.wenxin table td:first-child {
+	padding: 0 20px 0 20px;
+	s
+}
+
+.wenxin table td:last-child {
+	padding: 0 20px 0 20px;
+}
+
+.pd20 {
+	padding: 0 20px 0 20px;
+}
+
+.wenxin .td_xian {
+	border-right: 1px solid #E0E0E0;
+	height: 17px;
+	line-height: 17px;
+}
+
+.wenxin_div1 {
+	padding: 0 0px 0 20px;
+	font-size: 13px;
+	float: left;
+}
+
+.wenxin table tr {
+	padding: 0 0px 0 20px;
+}
+
+.btn {
+	width: 53.3%;
+	height: 30px;
 	line-height: 30px;
-	border:1px solid #999;
+	border: 1px solid #999;
 	border-radius: 5px;
-	color:#000;
+	color: #000;
 	font-size: 12px;
 	text-align: center;
-	margin: 0 auto;
+	margin: 80px auto;
 }
