@@ -1,0 +1,490 @@
+/*body—保单样式*/
+
+.man-div-body {}
+
+.man-div-body-ul_li {
+	background-color: #FFFFFF;
+	padding: 0;
+}
+
+.man-div-body-ul_li_div {
+	padding: 21px 20px 10px 20px;
+	background: #FFFFFF;
+}
+
+.man-div-body-ul_li_div ul li {
+	clear: both;
+	height: 27px;
+	line-height: 27px;
+}
+
+
+/*第一个li 字体居中*/
+
+.man-div-body-ul_li_div_ul1 li {
+	text-align: center;
+}
+
+ul li span {
+	color: #333;
+	font-size: 15px;
+}
+
+.marb20 {
+	margin-bottom: 20px;
+}
+
+.mb30 {
+	margin-bottom: 20px;
+}
+
+.list_two {
+	height: 100%!important;
+	color: #FF6E1A;
+	font-size: 23.5px;
+	margin-bottom: 20px;
+}
+
+.list_two h1 {
+	font-size: 36px;
+	color: #FF6E1A;
+	font-weight: bold;
+	margin-left: 15px;
+}
+
+.jiantou {
+	width: 15px;
+	height: 15px;
+	background: url(../../../../image/managemoney/productDetails/xiajiantou.png) no-repeat;
+	background-size: 100%;
+	position: absolute;
+	right: 20px;
+	margin-top: -16.5px;
+}
+
+.shangjiantou {
+	width: 15px;
+	height: 15px;
+	background: url(../../../../image/managemoney/productDetails/shangjiantou.png) no-repeat;
+	background-size: 100%;
+	position: absolute;
+	right: 20px;
+	margin-top: -16.5px;
+}
+
+.man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:last-child span {
+	font-size: 12px;
+	color: #878787;
+}
+
+
+/*第二个div ul2*/
+
+.man-div-body-ul_li_div_two .body_title_div {
+	height: 25px;
+	line-height: 25px;
+	font-size: 14px;
+	color: #333;
+}
+
+.man-div-body-ul_li_div_two ul li {
+	height: 41px;
+}
+
+.man-div-body-ul_li_div_two {
+	background-color: #FFFFFF;
+	padding: 10px 0px 0px 0px;
+}
+
+.body_title_div {
+	padding: 0px 20px 0px 20px;
+}
+
+.man-div-body-ul {
+	padding: 0px 20px 0px 20px;
+}
+
+.man-div-body-ul li span:first-child {
+	float: left;
+	color: #959595;
+}
+
+.man-div-body-ul li span:last-child {
+	float: right;
+	text-align: right;
+}
+
+.man-div-body-ul_li_div_two ul li span:first-child {
+	line-height: 41px;
+	height: 41px;
+	width: 30%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.man-div-body-ul_li_div_two ul li span:last-child {
+	line-height: 41px;
+	height: 41px;
+	width: 70%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+/*第三个div*/
+
+.man-div-body-ul_li_div_three .body_title_div {
+	height: 25px;
+	line-height: 25px;
+	font-size: 14px;
+	color: #333;
+}
+
+.man-div-body-ul_li_div_three ul li {
+	height: 41px;
+}
+
+.man-div-body-ul_li_div_three {
+	background-color: #FFFFFF;
+	padding: 10px 0px 0px 0px;
+}
+
+.man-div-body-ul_three {
+	padding: 0px 0px 0px 20px;
+}
+
+.man-div-body-ul_three li span:last-child {
+	float: right;
+	text-align: right;
+	margin-right: 20px;
+}
+
+.man-div-body-ul_li_div_three ul li span:first-child {
+	color: #333;
+	line-height: 41px;
+	height: 41px;
+	width: 70%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.man-div-body-ul_li_div_three ul li span:last-child {
+	line-height: 41px;
+	height: 41px;
+	width: 30%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+/*购买说明*/
+
+.man-div-body-ul_li_div_goumai {
+	background-color: #FFFFFF;
+	padding: 10px 0px 0px 0px;
+}
+
+.man-div-body-ul_li_div_goumai .body_title_div {
+	height: 25px;
+	line-height: 25px;
+	font-size: 14px;
+	color: #333;
+}
+
+.man-div-body-ulgoumai {
+	padding: 0px 20px 0px 20px;
+}
+
+.man-div-body-ulgoumai li {
+	padding: 12px 0 18px 0;
+}
+
+.goumai {
+	font-size: 13px;
+	width: 100%!important;
+}
+
+
+/*底部按钮*/
+
+.man-div-body-ul_li_div_btn {
+	margin-top: 17px;
+	text-align: center;
+}
+
+.man-div-body-ul_li_div_btn_one {
+	margin-top: 17px;
+	padding: 0 20px 0 20px;
+}
+
+.man-div-body-ul_li_div_btn_one ul li span {
+	font-size: 12px;
+	color: #B3B3B3;
+}
+
+.div_btn {
+	display: inline-block;
+	height: 50px;
+	padding: 2px 7px 2px 7px;
+	width: 100%;
+	line-height: 50px;
+	color: #FFFFFF;
+	background-color: #48A0F0;
+}
+
+
+/*线*/
+
+.xian {
+	border-bottom: 1px solid #E0E0E0;
+	margin-top: 10px;
+}
+
+.xianqian {
+	border-bottom: 1px solid #EBEBEB;
+	margin-top: 10px;
+}
+
+
+/*竖线*/
+
+.xianshu {
+	margin: 0 10px 0 10px;
+	border-right: 1px solid #CCCCCC;
+}
+
+.xianli {
+	height: 0!important;
+	border-bottom: 1px solid #E0E0E0;
+}
+
+
+/*箭头*/
+
+.youjiantouhuise {
+	width: 9px!important;
+	height: 15px!important;
+	background: url(../../../../image/managemoney/productDetails/youjiantouhuise.png) no-repeat;
+	background-size: 100%;
+	line-height: 41px;
+	margin-top: 13px;
+}
+
+
+/*li-body*/
+
+.li_body {
+	display: flex;
+}
+
+.li_body span:first-child {
+	flex: 1;
+}
+
+.li_body span:last-child {
+	flex: 1;
+}
+
+.li_body span {
+	font-size: 15px!important;
+	color: #333!important;
+}
+
+.li_body_two {
+	display: flex;
+}
+
+.li_body_two span:first-child {
+	flex: 1;
+}
+
+.li_body_two span:last-child {
+	flex: 1;
+}
+
+.li_body_two span {
+	font-size: 12px!important;
+}
+
+
+/*个别字体单独颜色*/
+
+.heise {
+	color: #333!important;
+}
+
+.lanse {
+	color: #48A0F0;
+}
+
+.chengse {
+	color: #F19972;
+}
+
+
+/*小图标》*/
+
+.rightjiantou {
+	background: url(../../../../image/common/youjiantou.png);
+	background-size: 100%;
+	width: 16px;
+	height: 16px;
+}
+
+.biao {
+	display: inline-block;
+	background: url(../../../../image/managemoney/productDetails/xiaoyuanquan.png) no-repeat;
+	background-size: 100%;
+	width: 18px;
+	height: 18px;
+	vertical-align: bottom;
+}
+
+
+/*定位top 12.5*/
+
+.postop10 {
+	position: relative;
+	top: 12.5px;
+}
+
+.mbright30 {
+	margin-right: 30px;
+}
+
+
+/*中间线条CSS*/
+
+.info_content {
+	font-size: 14px;
+	padding-left: 2.6%;
+}
+
+.p_bar {
+	padding-left: 4.05%;
+	padding-right: 6.66%;
+	padding-top: 2px;
+	padding-bottom: 6px;
+}
+
+.youyuqi {
+	color: #2baf92;
+	padding-left: 14px;
+}
+
+.youyuqi img {
+	width: 14px;
+	margin-top: -4px;
+	margin-left: 7px;
+}
+
+.suoding {
+	color: #1B6BB8;
+	overflow: hidden;
+}
+
+.suoding img {
+	width: 14px;
+	margin-top: -4px;
+	margin-left: 7px;
+}
+
+.suoding_left,
+.suoding_right {
+	float: left;
+	width: 50%;
+	text-align: center;
+}
+
+
+/*分享微信页面头部css*/
+
+.mui-bar {
+	background-color: #FFFFFF;
+}
+
+.mui-bar-nav {
+	box-shadow: 0 2px 1px #F1F1F1;
+}
+
+
+/*发送短信页面*/
+.note{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(51, 51, 51, 0.2);
+	z-index: 2;
+}
+.note-div {
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right:0;
+	opacity: 1;
+	height: 250px;
+	width: 90%;
+	background-color: #FFFFFF;
+	z-index: 9999;
+	border-radius: 12px;
+}
+.note-div_title{
+	height: 26%;
+	width: 100%;
+	background: url(../../../../image/common/notetitle.png) no-repeat;
+	background-size: 100%;
+}
+.note-div_title_right{
+	width: 13%;
+	height: 70%;
+	float: right;
+}
+.note-div_body_title{
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 25px;
+}
+.note-div_body_input{
+	text-align: center;
+	padding: 0 20px 0 20px;
+}
+.note-div_body_input li:last-child{
+	display: flex;
+	border-bottom: 1px solid #E0E0E0;
+	padding-bottom: 15px;
+}
+
+.note-div_body_input li span:first-child{
+	flex: 2;
+	border-right: 1px solid #E0E0E0;
+}
+.note-div_body_input li span:first-child input{
+	font-size: 15px;
+	color: #333;
+	padding-left: 10px;
+	font-family: 微软雅黑;
+}
+.note-div_body_input li span:last-child{
+	flex: 1;
+}
+/*btn按钮 确定*/
+.note-div-button{
+	
+}
+.note-div-btn{
+	width: 50%;
+	height: 37px;
+	background-color: #48A0F0;
+	border-radius: 5px;
+	text-align: center;
+	line-height: 37px;
+	color: #FFFFFF;
+	margin: 0 auto;
+	margin-top: 26.5px;
+}

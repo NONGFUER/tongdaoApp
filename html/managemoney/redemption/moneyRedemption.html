@@ -4,56 +4,46 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>保单列表</title>
+		<title>理财赎回</title>
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/font.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
-		<link rel="stylesheet" type="text/css" href="../../../css/usage/managemoney/warRanty/warrantyList.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/usage/managemoney/redemption/moneyRedemption.css" />
 	</head>
 
 	<body>
 		<div class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
 				<div class="man mui-table-view">
-					<div class="man-div-title ">
-						<ul>
-							<li class="li_xuan">全部</li>
-							<li>待生效</li>
-							<li>保障中</li>
-							<li>已领取</li>
-						</ul>
-					</div>
 					<div id='list' class="man-div-body ">
 						<ul class="man-div-body-ul ">
 							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist">
-								<div v-if="value.baozhang=='已过期'" class="mui-slider-right mui-disabled shanchu">
-									<a class="mui-btn mui-btn-red">
-										<i class="lajitong"></i>
-										<span>删除</span>
-									</a>
-								</div>
 								<div class="man-div-body-ul_li_div mui-slider-handle">
 									<ul class="man-div-body-ul_li_div_ul1">
 										<li>
-											<span v-html="value.baodan">保单号:&nbsp;8888888888888888</span>
-											<span  class="baozhang" v-html="value.baozhang"></span>
+											<span v-html="value.baodan"></span>
+											<span class="baozhang" v-html="value.baozhang"></span>
 										</li>
 										<li>
-											<span v-html="value.shaoer">少儿高发恶性肿瘤险</span>
-											<span v-html="value.chengbao">天安财险承保</span>
+											<span>保单号:</span>
+											<span>123213662622</span>
 										</li>
 									</ul>
-									<!--<div class="xian" v-if="value.baozhang!='已领取'"></div>
-									<ul class="man-div-body-ul_li_div_ul2" v-if="value.baozhang!='已领取'">自动隐藏-->
+									<div class="xian"></div>
+									<ul class="man-div-body-ul_li_div_ul2">
 										<ul class="man-div-body-ul_li_div_ul2">
-										<ul class="man-div-body-ul_li_div_ul2">
-										<li v-for="(value,key) in bao">
-											<span v-html="value.name">被保人</span>
-											<span v-html="value.name_value">陈某人</span>
-										</li>
-									</ul>
+											<li v-for="(value,key) in bao">
+												<span v-html="value.name">被保人</span>
+												<span v-html="value.name_value">陈某人</span>
+											</li>
+										</ul>
+										<ul class="man-div-body-ul_li_div_ul3">
+											<li>
+												<div class="div_btn">赎回</div>
+											</li>
+										</ul>
 								</div>
 							</li>
 						</ul>
@@ -67,5 +57,6 @@
 	<script src="../../../js/lib/common/base.js"></script>
 	<script src="../../../js/lib/common/common.js"></script>
 	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
-	<script src="../../../js/usage/managemoney/warRanty/warrantyList.js"></script>
+	<script src="../../../js/usage/managemoney/redemption/moneyRedemption.js"></script>
+
 </html>

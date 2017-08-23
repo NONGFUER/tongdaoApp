@@ -1,5 +1,5 @@
-var data = '{"body": [{"baodan": "安溢保两全保险(一年期)","baozhang": "待生效","shaoer": "弘康人寿","chengbao":"投资连结险"},{"baodan": "安溢保两全保险(一年期)","baozhang": "已领取","shaoer": "弘康人寿","chengbao":"投资连结险"},{"baodan": "安溢保两全保险(一年期)","baozhang": "已过期","shaoer": "弘康人寿","chengbao":"投资连结险"},{"baodan": "安溢保两全保险(一年期)","baozhang": "保障中","shaoer": "弘康人寿","chengbao":"投资连结险"},]}';
-var datajiazhi = '{"body": [{"name":"保单价值","name_value":"190000.00元"},{"name":"投资本金","name_value":"2.33元"},{"name":"昨日收益","name_value":"190000.00元"},{"name":"累计收益","name_value":"190000.00元"},{"name":"保单价值","name_value":"190000.00元"},{"name":"初始费","name_value":"190000.00元"},{"name":"承保时间","name_value":"2017/05/29 15:30"}]}';
+var data = '{"body": [{"baodan": "安溢保两全保险(一年期)","baozhang": "保障中","shaoer": "弘康人寿","chengbao":"投资连结险"},{"baodan": "安溢保两全保险(一年期)","baozhang": "保障中","shaoer": "弘康人寿","chengbao":"投资连结险"},{"baodan": "安溢保两全保险(一年期)","baozhang": "保障中","shaoer": "弘康人寿","chengbao":"投资连结险"},{"baodan": "安溢保两全保险(一年期)","baozhang": "保障中","shaoer": "弘康人寿","chengbao":"投资连结险"},]}';
+var datajiazhi = '{"body": [{"name":"保单价值","name_value":"190000.00元"},{"name":"领取手续费","name_value":"2.33元"},{"name":"实际领取金额","name_value":"190000.00元"},{"name":"下次免费领取时间","name_value":"2016/10/29 20:22"}]}';
 
 function strToJson(str) {
 	var json = eval('(' + str + ')');

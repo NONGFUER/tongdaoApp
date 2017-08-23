@@ -26,16 +26,18 @@ ul li span {
 
 .man-div-body-ul_li_div ul li span:first-child {
 	float: left;
+	color: #878787;
 }
 
-.man-div-body-ul_li_div ul li span:last-child {
+
+/*.man-div-body-ul_li_div ul li span:last-child {
 	float: right;
-}
+}*/
 
 
 /*li man-div-body-ul_li_div_ul1 */
 
-.man-div-body-ul_li_div_ul1 li:first-child {
+.marb20 {
 	margin-bottom: 20px;
 }
 
@@ -46,25 +48,20 @@ ul li span {
 	margin-bottom: 5px;
 }
 
-.man-div-body-ul_li_div_ul1 li:last-child span:last-child {
-	background:url(../../../../image/managemoney/productDetails/baozhangkuang.png) no-repeat;
-	background-size: 100%;
-	width: 67px;
-	height: 35px;
+
+/*.man-div-body-ul_li_div_ul1 li:last-child span:last-child {
+	background-color: #48A0F0;
 	color: #FFFFFF!important;
 	padding: 0 5px 0 5px;
 	border-radius: 5px;
 	position: relative;
-	top: -13px;
-	line-height: 35px;
-	text-align: center;
-	
-}
+	top: -13px
+}*/
 
-.man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:first-child span:last-child {
-	font-size: 10.5px;
+
+/*.man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:first-child span:last-child {
 	color: #878787;
-}
+}*/
 
 .jiantou {
 	width: 10px;
@@ -119,24 +116,31 @@ ul li span {
 
 .man-div-body-ul_li_div_two ul li span {
 	line-height: 41px;
+	height: 41px;
+	width: 50%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
+
+
 /*底部按钮*/
-.man-div-body-ul_li_div_btn{
-	height: 135px;
-	line-height: 135px;
-	padding: 10px 20px 10px 20px;
+
+.man-div-body-ul_li_div_btn {
+	margin-top: 25%;
 	text-align: center;
 }
-.div_btn{
+
+.div_btn {
 	display: inline-block;
-	height: 37.5px;
+	height: 50px;
 	padding: 2px 7px 2px 7px;
-	width: 38%;
-	line-height: 37.5px;
+	width: 100%;
+	line-height: 50px;
 	color: #FFFFFF;
 	background-color: #48A0F0;
-	border-radius: 5px;
 }
+
 
 /*线*/
 
@@ -161,6 +165,11 @@ ul li span {
 	color: #48A0F0;
 }
 
+.chengse {
+	color: #F19972;
+}
+
+
 /*小图标》*/
 
 .rightjiantou {
@@ -170,11 +179,14 @@ ul li span {
 	height: 16px;
 }
 
+
 /*定位top 12.5*/
+
 .postop10 {
 	position: relative;
 	top: 12.5px;
 }
-.mbright30{
+
+.mbright30 {
 	margin-right: 30px;
 }

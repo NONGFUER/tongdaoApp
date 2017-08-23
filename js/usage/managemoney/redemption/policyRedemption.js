@@ -19,11 +19,7 @@ var vm = new Vue({
 $(function() {
 	vm.Objectlist = data;
 	mui('.man-div-body-ul_li_div_btn').on('tap','#huifang', function() {
-		alert(1);
-		/*接口请求位子*/
-	})
-	mui('.man-div-body-ul_li_div_btn').on('tap','#lingqu', function() {
-		alert(2);
+		mui.alert(2);
 		/*接口请求位子*/
 	})
 })

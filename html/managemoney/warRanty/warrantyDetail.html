@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>保单列表</title>
+		<title>保单详细</title>
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/font.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
@@ -24,42 +24,117 @@
 								<span class="jiantou"></span>
 								<span style="margin-right: 15px;">查看产品详细</span>
 							</li>
+							<li class="list_two">
+								<h1>5.40%</h1>
+							</li>
 							<li>
-								<span v-html="value.shaoer">少儿高发恶性肿瘤险</span>
-								<span v-html="value.chengbao">天安财险承保</span>
+								<span>历史年化投资回报率</span>
+								<span class="baozhang">保障中</span>
 							</li>
 						</ul>
 					</div>
-					<div id='list' class="man-div-body ">
-						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist">
-								<div v-if="value.baozhang=='已过期'" class="mui-slider-right mui-disabled shanchu">
-									<a class="mui-btn mui-btn-red">
-										<i class="lajitong"></i>
-										<span>删除</span>
-									</a>
-								</div>
-								<div class="man-div-body-ul_li_div mui-slider-handle">
-									<ul class="man-div-body-ul_li_div_ul1">
-										<li>
-											<span v-html="value.baodan">保单号:&nbsp;8888888888888888</span>
-											<span class="baozhang" v-html="value.baozhang"></span>
-										</li>
-										<li>
-											<span v-html="value.shaoer">少儿高发恶性肿瘤险</span>
-											<span v-html="value.chengbao">天安财险承保</span>
-										</li>
-									</ul>
-									<div class="xian" v-if="value.baozhang!='已领取'"></div>
-									<ul class="man-div-body-ul_li_div_ul2" v-if="value.baozhang!='已领取'">
-										<li v-for="(value,key) in bao">
-											<span v-html="value.name">被保人</span>
-											<span v-html="value.name_value">陈某人</span>
-										</li>
-									</ul>
-								</div>
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title_div">保单信息</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li>
+								<span>保单价值</span>
+								<span>232323.32元</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>累计收益</span>
+								<span>232323.32元</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>昨日收益</span>
+								<span>232323.32元</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>投资本金</span>
+								<span>232323.32元</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>初始费用</span>
+								<span>232323.32元</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>保单号</span>
+								<span>123456789010292821</span>
 							</li>
 						</ul>
+					</div>
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title_div">投保人信息</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li>
+								<span>投保人</span>
+								<span>王大伟</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>手机号</span>
+								<span>13333333333</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>城市</span>
+								<span>江苏省 常州市</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>地址</span>
+								<span>浦东大道18号8楼803室</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>电子邮箱</span>
+								<span>827266172@qq.com</span>
+							</li>
+						</ul>
+					</div>
+					<!--投保人信息-->
+					<div class="man-div-body-ul_li_div_two mb10">
+						<ul class="man-div-body-ul">
+							<li>
+								<span class="heise">被保人信息</span>
+								<span class="lanse">同投保人</span>
+							</li>
+						</ul>
+					</div>
+					<!--银行卡-->
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title_div">银行卡信息</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li>
+								<span>银行名称</span>
+								<span>工商银行</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>银行卡号</span>
+								<span>尾号 2333</span>
+							</li>
+						</ul>
+					</div>
+					<!--电子保单-->
+					<div class="man-div-body-ul_li_div_two">
+						<ul class="man-div-body-ul">
+							<li>
+								<span class="heise">电子保单</span>
+								<span class="rightjiantou  postop10"></span>
+							</li>
+						</ul>
+					</div>
+					<div class="man-div-body-ul_li_div_btn">
+						 <div id="huifang" class="div_btn mbright30">回访确认</div>
+						 <div id='lingqu' class="div_btn">退保领取</div>
 					</div>
 				</div>
 			</div>

@@ -1,0 +1,163 @@
+/*头部选项卡样式*/
+
+.man-div-title {
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #E0E0E0;
+}
+
+.man-div-title ul {
+	padding: 10px 20px 10px 20px;
+	text-align: center;
+	display: flex;
+	color: #878787;
+}
+
+.man-div-title ul li {
+	height: 30px;
+	line-height: 28px;
+	font-size: 14px;
+}
+
+.man-div-title ul li:first-child {
+	flex: 1;
+	border: 1px solid #E0E0E0;
+}
+
+.man-div-title ul li:last-child {
+	flex: 1;
+}
+
+.man-div-title ul li {
+	flex: 1;
+	border-top: 1px solid #E0E0E0;
+	border-bottom: 1px solid #E0E0E0;
+	border-right: 1px solid #E0E0E0;
+}
+
+.li_xuan {
+	background-color: #F2F2F2;
+	color: #333;
+}
+
+
+/*body—保单样式*/
+
+.man-div-body {}
+
+.man-div-body-ul_li {
+	background-color: #FFFFFF;
+	padding: 0;
+}
+
+.man-div-body-ul_li_div {
+	padding: 10px 20px 10px 20px;
+}
+
+.man-div-body-ul_li_div ul li {
+	clear: both;
+	/*overflow: hidden;*/
+	height: 27px;
+	line-height: 27px;
+}
+
+ul li span {
+	color: #333;
+	font-size: 15px;
+}
+
+.man-div-body-ul_li_div ul li span:first-child {
+	float: left;
+}
+
+.man-div-body-ul_li_div ul li:first-child span:last-child {
+	float: right;
+}
+.man-div-body-ul_li_div ul li:last-child {
+	display: flex;
+}
+.man-div-body-ul_li_div ul li:last-child div:first-child{
+	flex: 1;
+}
+.man-div-body-ul_li_div ul li:last-child div:last-child{
+	flex: 1;
+	text-align: right;
+}
+.man-div-body-ul_li_div ul li:last-child div:last-child span:first-child{
+	float: none;
+}
+.man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:first-child span:last-child {
+/*	position:relative;*/
+	top: 14px;
+	color: #878787;
+}
+
+.man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:last-child span{
+	font-size: 12px;
+	color: #878787;
+}
+.man-div-body-ul_li_div_ul1 li span{
+	    vertical-align: super;
+}
+
+/*ul2样式*/
+.man-div-body-ul_li_div_ul2{
+	margin-top: 10px;
+}
+.man-div-body-ul_li_div .man-div-body-ul_li_div_ul2 li span:first-child {
+	color: #878787;
+}
+
+
+/*垃圾桶*/
+
+.lajitong {
+	position: absolute;
+	top: 35%;
+	width: 30px;
+	height: 30px;
+	background: url(../../../../image/account/myOrder/lajitong.png);
+	background-size: 100%;
+}
+.mui-btn-red span {
+	position: relative;
+	top: 15%;
+	color: #FFFFFF;
+}
+/*保障名称颜色*/
+.lanse{
+	color: #48A0F0!important;
+}
+.huangse{
+	color: #F07935!important;
+}
+.huise{
+	color: #878787!important;
+}
+/*重写MUI*/
+.mui-table-view-cell:after{
+	left: 15px;
+	right: 15px;
+}
+/*标识 样式*/
+.xian {
+	border-bottom: 1px solid #E0E0E0;
+	margin-top: 10px;
+}
+
+.xianright{
+	border-right: 1px solid #E0E0E0;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.xianright2{
+	border-right: 1px solid #E0E0E0;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.mbleft10{
+	margin-left: 10px;
+}
+.xianli{
+	border-bottom: 1px solid #CCCCCC;
+}
