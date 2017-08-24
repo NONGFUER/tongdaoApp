@@ -1923,9 +1923,9 @@ $.getBirthDay = function(data) {
  */
 $.getAge=function(birth,now){
 	if (now != null && now != "" && now != undefined) {
-		var current = new Date();
-	}else{
 		var current = new Date(Date.parse(now));
+	}else{
+		var current = new Date();
 	}	
 
 	var yearNow = current.getFullYear();
