@@ -19,16 +19,16 @@
 				<div class="man mui-table-view">
 					<div class="man-div-title ">
 						<ul>
-							<li class="li_xuan">全部</li>
-							<li>待生效</li>
-							<li>保障中</li>
-							<li>已领取</li>
+							<li orderStatus='' class="li_xuan">全部</li>
+							<li orderStatus='01'>待生效</li>
+							<li orderStatus='02'>保障中</li>
+							<li orderStatus='03'>已领取</li>
 						</ul>
 					</div>
 					<div id='list' class="man-div-body ">
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist">
-								<div v-if="value.baozhang=='已过期'" class="mui-slider-right mui-disabled shanchu">
+							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist"   v-bind:policyNo='value.policyNo'>
+								<div v-if="value.orderStatus=='99'" class="mui-slider-right mui-disabled shanchu">
 									<a class="mui-btn mui-btn-red">
 										<i class="lajitong"></i>
 										<span>删除</span>
@@ -37,8 +37,8 @@
 								<div class="man-div-body-ul_li_div mui-slider-handle">
 									<ul class="man-div-body-ul_li_div_ul1">
 										<li>
-											<span v-html="value.baodan">保单号:&nbsp;8888888888888888</span>
-											<span  class="baozhang" v-html="value.baozhang"></span>
+											<span class="commdityComName" v-html="value.commdityComName">保单名称</span>
+											<span class="baozhang" v-html="value.orderStatus"></span>
 										</li>
 										<li>
 											<span v-html="value.shaoer">少儿高发恶性肿瘤险</span>
@@ -47,12 +47,33 @@
 									</ul>
 									<!--<div class="xian" v-if="value.baozhang!='已领取'"></div>
 									<ul class="man-div-body-ul_li_div_ul2" v-if="value.baozhang!='已领取'">自动隐藏-->
+									<ul class="man-div-body-ul_li_div_ul2">
 										<ul class="man-div-body-ul_li_div_ul2">
-										<ul class="man-div-body-ul_li_div_ul2">
-										<li v-for="(value,key) in bao">
-											<span v-html="value.name">被保人</span>
-											<span v-html="value.name_value">陈某人</span>
-										</li>
+											<li>
+												<span>保单价值</span>
+												<span v-html="value.accountValue"></span>
+											</li>
+											<li>
+												<span>投资本金</span>
+												<span v-html="value.investmentPri"></span>
+											</li>
+											<li>
+												<span>昨日收益</span>
+												<span v-html="value.yesterdayProfit"></span>
+											</li>
+											<li>
+												<span>累计收益</span>
+												<span v-html="value.totalProfit"></span>
+											</li>
+											<li>
+												<span>初始费用</span>
+												<span v-html="value.initialFee"></span>
+											</li>
+											<li>
+												<span>保障时间</span>
+												<span v-html="value.underWrite"></span>
+											</li>
+										</ul>
 									</ul>
 								</div>
 							</li>
@@ -68,4 +89,5 @@
 	<script src="../../../js/lib/common/common.js"></script>
 	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
 	<script src="../../../js/usage/managemoney/warRanty/warrantyList.js"></script>
+
 </html>

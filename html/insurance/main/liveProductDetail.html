@@ -12,16 +12,17 @@
 </head>
 
 <body>
+    <div id="bodyMuiScroll" class="mui-scroll-wrapper"><div class="mui-scroll">
     <div class="insurance">
         <div class="insurance-banner mb10">
-            <img alt="" src="../../image/banner/babyCancer.png" class="banner-img" />
+            <img alt="" id="banner" src="" class="banner-img" />
             <div class="banner-con whitebackground con">
-                <h3>华夏健康人生重大疾病保险</h3>
-                <p class="company">本产品由天安财产保险股份有限公司承保并负责理赔</p>
+                <h3 id="commodityCombinationName">华夏健康人生重大疾病保险</h3>
+                <p class="company">本产品由<span id="companyName">天安财产保险股份有限公司</span>承保并负责理赔</p>
             </div>
         </div>
-        <div class="insurance-choice whitebackground con mb10">                      
-            <div class="d1">
+        <div class="insurance-choice whitebackground con mb10" id="insurance-choice">                      
+            <!-- <div class="d1">
                 <div class="label">投保年龄：</div>
                 <div class="conter">
                    0周岁（出生满28天）至54周岁
@@ -50,10 +51,10 @@
                         <li class="">10年缴 </li>
                     </ul>
                 </div>
-            </div>          
+            </div>           -->
         </div>
         <div class="insurance-content">          
-            <dl class="module mb10 whitebackground ">
+            <!-- <dl class="module mb10 whitebackground ">
                 <dt class="content-title"><img src="../../../image/insurance/product_detail.png">产品特色</dt>
                 <dd class="con content-info">
                      <p class="star">免体检：无需体检，突破传统核保上的素服</p>
@@ -65,12 +66,12 @@
             <dl class="module mb10 whitebackground">
                 <dt class="content-title"><img src="../../../image/insurance/product_point.png">保险产品详细说明</dt>
                 <dd class="content-info">
-                    <ul class="clearfix">
+                    <ul class="clearfix" id="">
                         <li><p class="li-left"><span class="orange">(必选)</span>恒大新福保险</p>  <p class="li-right">主险<span class="iconleft"></span></p></li>
                         <li><p class="li-left"><span class="orange">(必选)</span>恒大新福保险恒大新福保险恒大新福保险恒大新</p>  <p class="li-right">主险<span class="iconleft"></span></p></li>                      
                     </ul>
                 </dd>
-            </dl>
+            </dl> -->
         </div>
         <div class="contact con whitebackground">          
                 咨询热线<img class="phone"  src="../../../image/insurance/phone.png" > <a class="kefu kefuPhone">4006895505</a><span class="huise">(周一至周五 9:00-18:00)</span>           
@@ -101,14 +102,18 @@
 
             </div>
         </div>
-        <div class="single-footer blue">
+        
+    </div>
+    </div></div>
+    <div class="single-footer blue">
             预约出单
-        </div>
     </div>
     <script src="../../../js/lib/common/zepto.min.js"></script>
     <script src="../../../js/lib/widget/mui/mui.min.js"></script>
     <script src="../../../js/lib/common/base.js"></script>
     <script src="../../../js/lib/common/common.js"></script>
+    <script src="../../../js/usage/insurance/head.js"></script>
+    <script src="../../../js/usage/insurance/getjson.js"></script>
     <script src="../../../js/usage/insurance/liveProductDetail.js"></script>
     
 </body>

@@ -56,7 +56,7 @@
 .man-div-body-ul_li_div ul li {
 	clear: both;
 	overflow: hidden;
-	height: 27px;
+	height: 25px;
 	line-height: 25px;
 }
 
@@ -117,25 +117,4 @@ ul li span {
 }
 .bao{
 	color: #48A0F0!important;
-}
-
-/*btn*/
-.man-div-body-ul_li_div_ul3{
-	padding-top: 6px;
-	margin-top: 16px;
-	border-top: 1px dotted #E0E0E0;
-}
-.man-div-body-ul_li_div_ul3 li{
-	text-align: center;
-}
-.div_btn {
-	text-align: center;
-	font-size: 12px;
-	display: inline-block;
-	height: 27px;
-	line-height: 27px;
-	width: 50%;
-	color: #48A0F0;
-	border: 1px solid #48A0F0;
-	border-radius: 3px;
 }

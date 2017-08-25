@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 -->
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>佣金管理</title>
+		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.picker.min.css" />
+		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.poppicker.css" />
+		<link rel="stylesheet" href="../../../css/lib/common/base.css" />
+		<link rel="stylesheet" href="../../../css/lib/common/common.css" />
+		<link rel="stylesheet" href="../../../css/usage/agent/commissionDetail/commissionDetail.css?s=20170411" />
+	</head>
+
+	<body>
+		<div id="order_index" class="mui-scroll-wrapper">
+			<div id="insure_iscroll" class="mui-scroll">
+				<div class="cm-info">
+					<div class="cm-info-up"><span id="myCommission">--.--</span></div>
+					<div class="cm-info-down">已发放(元)</div>
+				</div>
+				<img src="../../../image/agent/banner1.png">
+				<div class="cm-date-input">
+					<div class="yearAndMonth" id="yearAndMonth"><img class="left-cross" src="../../../image/agent/left-cross.png"><span id="choosedate">---- 年-- 月</span><img class="right-cross" src="../../../image/agent/right-cross.png"></div>
+				</div>
+				<div class="cm-calculate">
+					<div class="cm-calculate-split bdright popupshow">
+						<div class="cm-split-up"><span id="originalCommissionTotal">--.--</span><img src="../../../image/agent/hao.png" style="width:9px;margin-left:5px"></div>
+						<div class="cm-split-down">本月应发(元)</div>
+					</div>
+					<div class="cm-calculate-split bdright">
+						<div class="cm-split-up"><span id="actualCommissionTotal">--.--</span></div>
+						<div class="cm-split-down">本月实发(元)</div>
+					</div>
+					<div class="cm-calculate-split">
+						<div class="cm-split-up"><span id="taxesTotal">--.--</span></div>
+						<div class="cm-split-down">所得税(元)</div>
+					</div>
+				</div>
+				<div class="commissionDetail"></div>
+			</div>
+		</div>
+
+		<div class="popup">
+			<div class="popup_content">
+				<div class="popup_title"><span>应发明细</span>
+					<div class="pophide"><img src="../../image/account/x.png"></div>
+				</div>
+				<div class="popup_body">
+					<div class="popbar"><span>寿险基础佣金(元)</span><span class="ri" id="lifeBase">0.00</span></div>
+					<div class="popbar"><span>寿险奖励佣金(元)</span><span class="ri" id="lifeArea">0.00</span></div>
+					<div class="popbar"><span>寿险续年佣金(元)</span><span class="ri" id="lifeRenewal">0.00</span></div>
+					<div class="popbar"><span>寿险竞赛兑现(元)</span><span class="ri" id="lifeCompetition">0.00</span></div>
+					<div class="popbar"><span>财险佣金(元)</span><span class="ri" id="propertyl">0.00</span></div>
+					<div class="popbar"><span>财险竞赛兑现(元)</span ><span class="ri" id="propertylCompetition">0.00</span></div>
+					<div class="popbar"><span>其他调整(元)</span><span class="ri" id="otherAdjust">0.00</span></div>
+					<div class="popbar total"><span>合计(元)</span><span class="ri" id="originalTotal">0.00</span></div>
+				</div>
+			</div>
+		</div>
+		<script src="../../../js/lib/widget/mui/mui.min.js"></script>
+		<script src="../../../js/lib/common/zepto.min.js"></script>
+		<script src="../../../js/lib/common/base.js"></script>
+		<script src="../../../js/lib/common/common.js"></script>
+		<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
+		<script type="text/javascript" src="../../../js/lib/widget/mui/mui.picker.min.js"></script>
+		<script type="text/javascript" src="../../../js/lib/widget/mui/mui.poppicker.js"></script>
+		<script src="../../js/commissionDetail/commissionDetail.js"></script>
+	</body>
+
+</html>
