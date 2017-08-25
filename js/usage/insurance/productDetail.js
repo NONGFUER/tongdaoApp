@@ -31,8 +31,8 @@ function moduleStr(mapperList){
     }          								
     str += '</dd></dl>';
     if( mapperList.bigModuleName == "产品介绍" ){
-        $(".insurance-tab_content").append(str);
+        $(".insurance-tab_content:first").append(str);
     }else if( mapperList.bigModuleName == "详细说明" ){
-
+        $(".insurance-tab_content:first").append(str);
     }
 }

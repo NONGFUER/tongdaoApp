@@ -136,3 +136,36 @@
     background:url("../../../image/insurance/choice.png") no-repeat;
     background-size: 100% 100%;
 }
+
+
+.wenda {
+	margin-top: 12px;
+}
+
+.wenda .da,
+.wenda .wen {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	position: relative;
+	top: 1px;
+}
+
+.wenda .kefu,
+.wenda .yh {
+	display: inline-block;
+	width: .25rem;
+	height: .15rem;
+	position: relative;
+	top: .02rem
+}
+
+.wenda .wen {
+	background: url(../../../image/insurance/wen.png) no-repeat;
+	background-size: 100% 100%
+}
+
+.wenda .da {
+	background: url(../../../image/insurance/da.png) no-repeat;
+	background-size: 100% 100%
+}
