@@ -6,8 +6,6 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>保单列表</title>
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/font.css" />
-		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/usage/managemoney/warRanty/warrantyList.css" />
@@ -20,9 +18,9 @@
 					<div class="man-div-title ">
 						<ul>
 							<li orderStatus='' class="li_xuan">全部</li>
-							<li orderStatus='01'>待生效</li>
-							<li orderStatus='02'>保障中</li>
-							<li orderStatus='03'>已领取</li>
+							<li orderStatus='1'>待生效</li>
+							<li orderStatus='2'>保障中</li>
+							<li orderStatus='3'>已领取</li>
 						</ul>
 					</div>
 					<div id='list' class="man-div-body ">
@@ -41,8 +39,8 @@
 											<span class="baozhang" v-html="value.orderStatus"></span>
 										</li>
 										<li>
-											<span v-html="value.shaoer">少儿高发恶性肿瘤险</span>
-											<span v-html="value.chengbao">天安财险承保</span>
+											<span v-html="value.companyName"></span>
+											<span v-html="value.risk_type"></span>
 										</li>
 									</ul>
 									<!--<div class="xian" v-if="value.baozhang!='已领取'"></div>
@@ -51,7 +49,7 @@
 										<ul class="man-div-body-ul_li_div_ul2">
 											<li>
 												<span>保单价值</span>
-												<span v-html="value.accountValue"></span>
+												<span v-html="value.accountValue" ></span>
 											</li>
 											<li>
 												<span>投资本金</span>

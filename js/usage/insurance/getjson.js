@@ -521,3 +521,5 @@ var data1 = {
 		"addList": []
 	}
 }
+
+var data3 = {"userCode":"13800000000","channel":"01","transTime":"2017-08-26 14:15:05","transToken":"","statusCode":"000000","statusMessage":"","returns":{"customerBasic":{"id":8,"userName":"15978132785","password":"8c8d88c9b526683bdbf897ae809d90e4","userAppImage":null,"userImage":null,"name":"苏健敏","idType":"01","idNo":"450403198108311523","provinceCode":"250000","provinceName":"广西","cityCode":"250001","cityName":"南宁","detailAddress":null,"sex":"2","birthday":null,"mobile":"15978132785","email":null,"idAuth":"1","authTime":"2017-08-23 17:07:48","authResource":null,"commissionSwitch":"1","type":"04","inviterId":null,"customerSourceComment":"1","status":"1","leaveDate":null,"leaveRole":null,"riskSupportAbility":null,"isFirst":"1","channelSource":"01","isFirstAuth":"0","lastLoginTime":"2017-08-23 17:07:48","dateCreated":"2017-08-23 09:52:47","createdBy":"system","dateUpdated":"2017-08-23 17:07:48","updatedBy":"system_realName","remark":null}}}

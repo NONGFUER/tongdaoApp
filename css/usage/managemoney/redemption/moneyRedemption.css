@@ -38,7 +38,10 @@
 	background-color: #F2F2F2;
 	color: #333;
 }
-
+.li_height{
+	height: 100%!important;
+	line-height: 100%!important;
+}
 
 /*body—保单样式*/
 
@@ -65,28 +68,48 @@ ul li span {
 	font-size: 15px;
 }
 
-.man-div-body-ul_li_div ul li span:first-child {
+.man-div-body-ul_li_div_ul2 li span:first-child {
+	float: left;
+	width: 35%;
+	text-align: left;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.man-div-body-ul_li_div_ul2 li span:last-child {
+	float: right;
+	width: 65%;
+	text-align: right;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.man-div-body-ul_li_div_ul1 li span:first-child {
 	float: left;
 }
 
-.man-div-body-ul_li_div ul li span:last-child {
+.man-div-body-ul_li_div_ul1 li span:last-child {
 	float: right;
 }
 
 .man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:first-child span:last-child {
-	position:relative;
+	position: relative;
 	top: 14px;
 	color: #878787;
 }
 
-.man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:last-child span{
+.man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:last-child span {
 	font-size: 12px;
 	color: #878787;
 }
-.man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:last-child span:last-child{
+
+.man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:last-child span:last-child {
 	float: left;
 	margin-left: 10px;
 }
+
 
 /*线*/
 
@@ -97,9 +120,11 @@ ul li span {
 
 
 /*ul2样式*/
-.man-div-body-ul_li_div_ul2{
+
+.man-div-body-ul_li_div_ul2 {
 	margin-top: 10px;
 }
+
 .man-div-body-ul_li_div .man-div-body-ul_li_div_ul2 li span:first-child {
 	color: #878787;
 }
@@ -115,35 +140,47 @@ ul li span {
 	background: url(../../../../image/account/myOrder/lajitong.png);
 	background-size: 100%;
 }
+
 .mui-btn-red span {
 	position: relative;
 	top: 15%;
 	color: #FFFFFF;
 }
+
+
 /*保障名称颜色*/
-.bao{
+
+.bao {
 	color: #48A0F0!important;
 }
-.dai{
+
+.dai {
 	color: #F0474A!important;
 }
-.yilingqu{
+
+.yilingqu {
 	color: #FF6E1A!important;
 }
+
+
 /*重写MUI*/
-.mui-table-view-cell:after{
+
+.mui-table-view-cell:after {
 	background: #FFFFFF;
 }
 
+
 /*btn*/
-.man-div-body-ul_li_div_ul3{
+
+.man-div-body-ul_li_div_ul3 {
 	padding-top: 6px;
-	margin-top: 16px;
 	border-top: 1px dotted #E0E0E0;
 }
-.man-div-body-ul_li_div_ul3 li{
+
+.man-div-body-ul_li_div_ul3 li {
 	text-align: center;
 }
+
 .div_btn {
 	text-align: center;
 	font-size: 12px;
@@ -153,4 +190,5 @@ ul li span {
 	width: 50%;
 	color: #48A0F0;
 	border: 1px solid #48A0F0;
+	border-radius: 3px;
 }

@@ -18,6 +18,10 @@
 	height: 27px;
 	line-height: 27px;
 }
+.baodanhao{
+	font-size: 13px;
+	color: #666666!important;
+}
 
 ul li span {
 	color: #333;
@@ -134,7 +138,6 @@ ul li span {
 .div_btn {
 	display: inline-block;
 	height: 50px;
-	padding: 2px 7px 2px 7px;
 	width: 100%;
 	line-height: 50px;
 	color: #FFFFFF;

@@ -16,17 +16,17 @@
 	<body>
 		<div class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
-				<div class="man mui-table-view">
+				<div class="man mui-table-view" id='list'>
 					<div class="man-div-body-ul_li_div mb10">
 						<ul class="man-div-body-ul_li_div_ul1">
 							<li>
-								<span class="heise">安溢保两全保险(一年期)</span>
+								<span class="heise" v-html="Objectlist.hKCalculate.commodityCombinationName"></span>
 							</li>
 							<li class="marb20">
-								<span>保单号:1322727262627272</span>
+								<span class="baodanhao" v-html="'保单号:'+Objectlist.hKCalculate.policyNo"></span>
 							</li>
 							<li class="list_two">
-								<h1>5.40%</h1>
+								<h1 v-html="Objectlist.hKCalculate.yearRate+'%'"></h1>
 							</li>
 							<li>
 								<span>历史年化投资回报率</span>
@@ -39,27 +39,27 @@
 						<ul class="man-div-body-ul">
 							<li>
 								<span>投资本金</span>
-								<span class="chengse">232323.32元</span>
+								<span class="chengse" v-html="Objectlist.hKCalculate.investmentPrem+'元'"></span>
 							</li>
 							<li class="xianli"></li>
 							<li>
 								<span>保单价值</span>
-								<span>3.32元</span>
+								<span v-html="Objectlist.hKCalculate.policyValue+'元'"></span>
 							</li>
 							<li class="xianli"></li>
 							<li>
 								<span>领取手续费</span>
-								<span>3.32元</span>
+								<span v-html="Objectlist.hKCalculate.fee+'元'"></span>
 							</li>
 							<li class="xianli"></li>
 							<li>
 								<span>实际领取金额</span>
-								<span class="lanse">232323.32元</span>
+								<span class="lanse" v-html="Objectlist.hKCalculate.availableMoney+'元'">232323.32元</span>
 							</li>
 							<li class="xianli"></li>
 							<li>
 								<span>下次免费领取时间</span>
-								<span>2017/05/30-2017/06/28</span>
+						<span v-html="Objectlist.hKCalculate.freeDateStart+'-'+Objectlist.hKCalculate.freeDateEnd"></span>
 							</li>
 						</ul>
 					</div>
@@ -70,18 +70,18 @@
 						<ul class="man-div-body-ul">
 							<li>
 								<span>银行名称</span>
-								<span>工商银行</span>
+								<span v-html="Objectlist.hKCalculate.bankName">工商银行</span>
 							</li>
 							<li class="xianli"></li>
 							<li>
 								<span>银行卡号</span>
-								<span>尾号 2333</span>
+								<span class='bank_weihao' v-html="Objectlist.hKCalculate.bankCertificate">尾号 2333</span>
 							</li>
 						</ul>
 					</div>
 					<!--确认赎回-->
 					<div class="man-div-body-ul_li_div_btn">
-						 <div id="huifang" class="div_btn">确认赎回</div>
+						<div id="huifang" class="div_btn">确认赎回</div>
 					</div>
 				</div>
 			</div>

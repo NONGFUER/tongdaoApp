@@ -16,8 +16,7 @@ var data = {
 			"updatedBy": "",
 			"remark": ""
 		}],
-		"CommodityCombinationModuleList": [
-		{
+		"CommodityCombinationModuleList": [{
 				"id": 25,
 				"commodityCombinationId": 4,
 				"moduleType": "01",
@@ -25,21 +24,6 @@ var data = {
 				"moduleName": "承保公司",
 				"subModuleName": "",
 				"modueInfo": "弘康人寿保险股份有限公司",
-				"moduleOrder": 1,
-				"dateCreated": null,
-				"createdBy": "",
-				"dateUpdated": null,
-				"updatedBy": "",
-				"remark": ""
-			},
-			{
-				"id": 32,
-				"commodityCombinationId": 4,
-				"moduleType": "03",
-				"bigModuleName": "详细说明",
-				"moduleName": "产品说明书",
-				"subModuleName": "",
-				"modueInfo": "",
 				"moduleOrder": 1,
 				"dateCreated": null,
 				"createdBy": "",
@@ -63,21 +47,6 @@ var data = {
 				"remark": ""
 			},
 			{
-				"id": 33,
-				"commodityCombinationId": 4,
-				"moduleType": "03",
-				"bigModuleName": "详细说明",
-				"moduleName": "保险条款",
-				"subModuleName": "",
-				"modueInfo": "",
-				"moduleOrder": 2,
-				"dateCreated": null,
-				"createdBy": "",
-				"dateUpdated": null,
-				"updatedBy": "",
-				"remark": ""
-			},
-			{
 				"id": 27,
 				"commodityCombinationId": 4,
 				"moduleType": "01",
@@ -85,21 +54,6 @@ var data = {
 				"moduleName": "购买限制",
 				"subModuleName": "",
 				"modueInfo": "1000元起投，1000元递增",
-				"moduleOrder": 3,
-				"dateCreated": null,
-				"createdBy": "",
-				"dateUpdated": null,
-				"updatedBy": "",
-				"remark": ""
-			},
-			{
-				"id": 34,
-				"commodityCombinationId": 4,
-				"moduleType": "03",
-				"bigModuleName": "详细说明",
-				"moduleName": "投保提示书",
-				"subModuleName": "",
-				"modueInfo": "",
 				"moduleOrder": 3,
 				"dateCreated": null,
 				"createdBy": "",
@@ -151,21 +105,6 @@ var data = {
 				"dateUpdated": null,
 				"updatedBy": "",
 				"remark": ""
-			},
-			{
-				"id": 31,
-				"commodityCombinationId": 4,
-				"moduleType": "01",
-				"bigModuleName": "产品介绍",
-				"moduleName": "购买说明",
-				"subModuleName": "",
-				"modueInfo": "建议持有1年，之后可以免费领取；购买初始费用0.3%",
-				"moduleOrder": 7,
-				"dateCreated": null,
-				"createdBy": "",
-				"dateUpdated": null,
-				"updatedBy": "",
-				"remark": ""
 			}
 		],
 		"commodityInfo": {
@@ -209,7 +148,7 @@ var data = {
 			"createdBy": "",
 			"dateUpdated": null,
 			"updatedBy": "",
-			"remark": "5.4"
+			"remark": "5.40"
 		},
 		"productInfo": {
 			"id": 5,
@@ -245,20 +184,20 @@ var vm = new Vue({
 			commodityCombination: {},
 			productInfo: {},
 		},
+		commodityCombinationlist: {}
 	},
 	mounted() {
 		this.$nextTick(function() {
 			$(function() {
-				
+
 			})
 		})
 	}
 })
 $(function() {
-	var Objectitle = data.returns;
-	var InterValObj; //timer变量，控制时间
-	var count = 60; //间隔函数，1秒执行  
-	var curCount; //当前剩余秒数  
+	vm.Objectitle = data.returns;
+	vm.commodityCombinationlist = data.returns.CommodityCombinationModuleList;
+	console.log(vm.commodityCombinationlist);
 	/*伸缩按钮*/
 	$(".body_title").unbind("tap").bind("tap", function() {
 		console.log($(this).siblings('ul'));
@@ -278,9 +217,11 @@ $(function() {
 		$('.note').hide();
 	})
 })
-
+var InterValObj; //timer变量，控制时间
+var count = 60; //间隔函数，1秒执行  
+var curCount; //当前剩余秒数  
 function sendMessage() {　
-	curCount = count;　　 //设置button效果，开始计时  
+	curCount = count;
 	$(".dianji").addClass("mui-disabled");
 	$(".dianji").html("60");
 	$(".dianji").attr("style", "color:#E0E0E0");

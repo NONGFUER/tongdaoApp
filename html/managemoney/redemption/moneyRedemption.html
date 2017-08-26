@@ -19,31 +19,45 @@
 				<div class="man mui-table-view">
 					<div id='list' class="man-div-body ">
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist">
+							<li class="man-div-body-ul_li mb10" v-for="(value,key) in Objectlist">
 								<div class="man-div-body-ul_li_div mui-slider-handle">
 									<ul class="man-div-body-ul_li_div_ul1">
 										<li>
-											<span v-html="value.baodan"></span>
-											<span class="baozhang" v-html="value.baozhang"></span>
+											<span v-html="value.commdityComName"></span>
+											<span class="baozhang" v-html="value.orderStatus"></span>
 										</li>
 										<li>
 											<span>保单号:</span>
-											<span>123213662622</span>
+											<span v-html="value.policyNo">123213662622</span>
 										</li>
 									</ul>
 									<div class="xian"></div>
 									<ul class="man-div-body-ul_li_div_ul2">
-										<ul class="man-div-body-ul_li_div_ul2">
-											<li v-for="(value,key) in bao">
-												<span v-html="value.name">被保人</span>
-												<span v-html="value.name_value">陈某人</span>
-											</li>
-										</ul>
-										<ul class="man-div-body-ul_li_div_ul3">
-											<li>
-												<div class="div_btn">赎回</div>
-											</li>
-										</ul>
+										<li class="li_height">
+											<ul class="man-div-body-ul_li_div_ul2">
+												<li>
+													<span>保单价值</span>
+													<span v-html="value.investmentPri+'元'"></span>
+												</li>
+												<li>
+													<span>累计收益</span>
+													<span v-html="value.totalProfit+'元'"></span>
+												</li>
+												<li>
+													<span>下次免费领取时间</span>
+													<span v-html="value.freeDateStart+'-'+value.freeDateEnd"></span>
+												</li>
+												<li class="xian" style="line-height: 10px; height: 10px;"></li>
+											</ul>
+										</li>
+										<li class="li_height">
+											<ul class="man-div-body-ul_li_div_ul3">
+												<li>
+													<div class="div_btn" v-bind:orderNo='value.orderNo' v-bind:commodityCommId='value.commodityCommId'>赎回</div>
+												</li>
+											</ul>
+										</li>
+									</ul>
 								</div>
 							</li>
 						</ul>

@@ -1,9 +1,26 @@
 
 $(function(){
     $.setscroll( "bodyMuiScroll" );
-    liveProductInfoRender( data );
+    sendLiveProductInfoRequest();//APP产品模块线下产品详情查询
+    sendCusInsConsultantRequest();//APP产品模块线下产品详情页保险顾问查询
+    sendAddYuyueInfoRequest();//APP产品模块线下产品预约新增
+    sendCustomerAndAgentInfoRequest();
 });
-
+//APP用户及客户经理信息查询
+function sendCustomerAndAgentInfoRequest(){
+    var url = requestUrl.cusAndAgenInfoUrl;
+    var sendJson = {
+        "head" : {
+            "channel" : "01",
+            "userCode" : mobile,
+            "transTime" : $.getTimeStr()
+        },
+        "body" : {
+            "customerId": "8"
+        }
+    }
+    $.reqAjaxs( url, sendJson, cusAndAgenInfoRender ); 
+}
 // 获取线下产品请求方法
 function sendLiveProductInfoRequest(){
     var url = requestUrl.liveProductInfoUrl;
@@ -17,10 +34,82 @@ function sendLiveProductInfoRequest(){
             "commodityCombinationId" : "105"
         }
     }
-    $.reqAjaxsFalse( url, sendJson, liveProductInfoRender );
+    $.reqAjaxs( url, sendJson, liveProductInfoRender );
+}
+// 获取保险顾问信息
+function sendCusInsConsultantRequest(){
+	var url = requestUrl.cusInsConsultantUrl;
+	var sendJson = {
+        "head" : {
+            "channel" : "01",
+            "userCode" : mobile,
+            "transTime" : $.getTimeStr()
+        },
+        "body" : {
+            "customerId" : "8"
+        }
+    }
+    $.reqAjaxs( url, sendJson, cusInsConsultantRender );
+}
+// APP产品模块线下产品预约新增
+function sendAddYuyueInfoRequest(){
+	var url = requestUrl.addYuyueInfoUrl;
+	var sendJson = {
+        "head" : {
+            "channel" : "01",
+            "userCode" : mobile,
+            "transTime" : $.getTimeStr(),
+            "transToken": ""
+        },
+        "body" : {
+            "customerId": "6",
+            "commodityCombinationId": "105",
+            "yuyuePhone": "18749187491",
+            "yuyueName": "月饼"
+        }
+    }
+    $.reqAjaxs( url, sendJson, addYuyueInfoRender );
 }
 /**
- * @function 请求响应的线下产品详情数据
+ * @function 请求响应的产品预约新增数据处理
+ * @param {*} data 
+ */
+function cusAndAgenInfoRender(data){
+    console.log(data);
+}
+/**
+ * @function 请求响应的产品预约新增数据处理
+ * @param {*} data 
+ */
+function addYuyueInfoRender(data){
+    console.log(data);
+    if( data.statusCode == ajaxStatus.success ){
+        var body = data.returns;
+        var yuyueNo  = body.yuyueNo;//获取预约号
+        //alert(yuyueNo);
+       
+    }else{
+        modelAlert( message.requestFail );
+    }
+}
+/**
+ * @function 请求响应的线下产品详情数据处理
+ * @param {*} data 
+ */
+ function cusInsConsultantRender(data){
+    console.log(data);
+    if( data.statusCode == ajaxStatus.success ){
+        var cusInfo = data.returns.customerBasic;
+        var mobile  = cusInfo.mobile;//获取姓名
+        var name    = cusInfo.name;//获取手机号
+        var userImg = cusInfo.userImage;//获取用户头像
+    }else{
+        modelAlert( message.requestFail );
+    }
+    
+ }
+/**
+ * @function 请求响应的线下产品详情数据处理
  * @param {*} data 
  */
 function liveProductInfoRender( data ){

@@ -16,14 +16,14 @@
 	<body>
 		<div class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
-				<div class="man mui-table-view">
+				<div class="man mui-table-view" id='list'>
 					<div class="man-div-body-ul_li_div mb10">
 						<ul class="man-div-body-ul_li_div_ul1">
 							<li class="mb30">
-								<span class="heise">安溢保两全保险(一年期)</span>
+								<span class="heise" v-html="Objectitle.commodityCombination.commodityCombinationName"></span>
 							</li>
 							<li class="list_two">
-								<h1>5.40%</h1>
+								<h1 v-html="Objectitle.commodityCombination.remark+'%'"></h1>
 							</li>
 							<li class="li_body">
 								<span>1000</span>
@@ -59,24 +59,27 @@
 							<div class="xian"></div>
 						</div>
 						<ul class="man-div-body-ul">
+							
 							<li>
 								<span>产品名称</span>
-								<span>安溢保两全保险</span>
+								<span v-html="Objectitle.commodityCombination.commodityCombinationName"></span>
 							</li>
 							<li class="xianli"></li>
 							<li>
 								<span>产品类型</span>
-								<span>两全型</span>
+																<span v-html="Objectitle.commodityInfo.riskType"></span>
 							</li>
 							<li class="xianli"></li>
+							<s v-for="(value,key) in commodityCombinationlist">
 							<li>
-								<span>承保公司</span>
-								<span>弘康人寿保险股份有限公司</span>
+								<span v-html="value.moduleName">承保公司</span>
+								<span v-html="value.modueInfo"></span>	
 							</li>
 							<li class="xianli"></li>
-							<li>
+							</s>
+							<!--<li>
 								<span>销售公司</span>
-								<span>天安百盈保险销售有限公司</span>
+								<span v-html="Objectitle.CommodityCombinationModuleList.modueInfo"></span>
 							</li>
 							<li class="xianli"></li>
 							<li>
@@ -92,7 +95,7 @@
 							<li>
 								<span>风险等级</span>
 								<span>中风险</span>
-							</li>
+							</li>-->
 						</ul>
 					</div>
 					<!--购买说明-->
