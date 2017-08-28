@@ -2,17 +2,47 @@ $(function(){
     $.setscroll("bodyMuiScroll");
     jieshaoToshuomingBind();
     productInfoRender(data1);
+    calOptionsRender(data4);
 });
 //试算条件
-function calOptions(data){
+function calOptionsRender(data){
     console.log(data);
     if( data.statusCode == ajaxStatus.success ){
-
+        var body = data.returns;
+        var calOptionDtos = body.calOptionDtos;
+        for(var i = 0; i < calOptionDtos.length; i++){
+           var calName    = calOptionDtos[i].calName;
+           var calOptions = calOptionDtos[i].calOptions;
+           var calDetails = calOptionDetails(calOptions);
+           var str = "";
+           str += '<div class="d1">';
+           str += '<div class="label">' + calName+ '：</div>';
+           str += '<div class="conter">';
+           str += calDetails;
+           str += '</div>';
+           $(".insurance-choice").append(str);         
+        }
+       
     }else{
-
+        modelAlert( message.requestFail );
     }
 }
+//试算枚举
+function calOptionDetails(calOptions){
+    var optionsLength = calOptions.length;
+    var str = "";
+    if( optionsLength == 1 ){
+        str += calOptions[0].enuContent;
+    }else{
+        str += '<ul class="radio">'
+        for(var i = 0; i < optionsLength; i++){
+            str += '<li>' + calOptions[i].enuContent + '</li>'
+        }
+        str += '</ul>'
+    }
+    return str;
 
+}
 /**
  * @function 请求响应的线上产品详情数据
  * @param {*} data 
