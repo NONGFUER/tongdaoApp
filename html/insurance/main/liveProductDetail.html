@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
     <link rel="stylesheet" href="../../../css/lib/common/base.css">
     <link rel="stylesheet" href="../../../css/lib/common/common.css">
+    <link rel="stylesheet" href="../../../css/lib/common/common.css">
+    <link rel="stylesheet" href="../../../css/usage/insurance/liveProductDetail.css">
 </head>
 
 <body>
@@ -73,41 +75,49 @@
                 </dd>
             </dl> -->
         </div>
-        <div class="contact con whitebackground">          
+        <div class="contact con whitebackground" style="margin-bottom:15px;">          
                 咨询热线<img class="phone"  src="../../../image/insurance/phone.png" > <a class="kefu kefuPhone">4006895505</a><span class="huise">(周一至周五 9:00-18:00)</span>           
         </div>
-        
-        <div class="popup-shadow">
-           <div class="popup-content"> 
-            <div  class="popup-content_title">
-                <div class="sanjiao">
-                    
-                </div>
-                联系信息
+        <div class="insurance-customer whitebackground">
+            <div class="insurance-cutomer_info clearfix">
+                <div class="info-icon"><img src="../../../image/insurance/tou.jpg"></div>
+                <div class="info-content">
+                    <div class="info-content_up">保险顾问：<span class="bigname">刘建峰</span></div>
+                    <div class="info-content_down">手机号码：123456789</div>
+                </div>               
             </div>
-            <div class="popup-content_body">
-                <ul>
-                    <li>
-                        
-                        <label>我的姓名</label><input type="text" placeholder="请输入姓名" maxlength="10" >
-                    </li>
-                    <li>
-                        <label>手机号码</label><input type="text" placeholder="请输入手机号码" maxlength="11">
-                    </li>
-                </ul>
-                <p class="font13 pinfo">客户经理：陈某人 <img src="../../../image/insurance/kefu.png"> 13652291705</p>
-                <p class="font12 greyfont">提交成功后，客户经理稍后会联系您，请保持手机通畅！</p>
+            <div class="clearfix">
+                <div class="phone-button">电话联系我</div>
+                <div class="message-button">短信联系我</div>
             </div>
-            <div class="popup-content_button">提交预约</div>
-
-            </div>
-        </div>
-        
+        </div>        
     </div>
     </div></div>
-    <div class="single-footer blue">
-            预约出单
-    </div>
+    <!-- 预约出单按钮 -->
+    <div class="single-footer blue" id="chudan" >预约出单</div>
+    <!-- 预约弹出框 -->
+    <div class="popup-shadow">
+            <div class="popup-content"> 
+             <div  class="popup-content_title">
+                 <div class="sanjiao" onclick="closeShadow()"> </div>
+                 联系信息
+             </div>
+             <div class="popup-content_body">
+                 <ul>
+                     <li>   
+                         <label>我的姓名</label><input id="name" type="text" placeholder="请输入姓名" maxlength="10" >
+                     </li>
+                     <li>
+                         <label>手机号码</label><input id="mobile" type="text" placeholder="请输入手机号码" maxlength="11">
+                     </li>
+                 </ul>
+                 <p class="font13 pinfo">客户经理：<span id="kehuName">陈某人</span> <img src="../../../image/insurance/kefu.png"> <span id="kehuPhone">13652291705</span></p>
+                 <p class="font12 greyfont">提交成功后，客户经理稍后会联系您，请保持手机通畅！</p>
+             </div>
+             <div class="popup-content_button" id="yuyue">提交预约</div>
+ 
+             </div>
+         </div>
     <script src="../../../js/lib/common/zepto.min.js"></script>
     <script src="../../../js/lib/widget/mui/mui.min.js"></script>
     <script src="../../../js/lib/common/base.js"></script>

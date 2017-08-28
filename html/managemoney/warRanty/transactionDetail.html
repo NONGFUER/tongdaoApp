@@ -6,7 +6,6 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>交易明细</title>
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/font.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
@@ -19,9 +18,9 @@
 				<div class="man mui-table-view">
 					<div class="man-div-title ">
 						<ul>
-							<li class="li_xuan">全部</li>
-							<li>购买</li>
-							<li>领取</li>
+							<li flag='1' class="li_xuan">全部</li>
+							<li flag='2'>购买</li>
+							<li flag='3'>领取</li>
 						</ul>
 					</div>
 					<div id='list' class="man-div-body ">
@@ -30,19 +29,19 @@
 								<div class="man-div-body-ul_li_div mui-slider-handle">
 									<ul class="man-div-body-ul_li_div_ul1">
 										<li>
-											<span class="goumaizhuangtai" v-html="value.title_goumai"></span>
+											<span class="goumaizhuangtai" v-html="value.insureSurrender=='1'?'购买':'领取'"></span>
 											<span class="xianright"></span>
-											<span v-html="value.titel_name">弘康一年期</span>
-											<span class="money" v-html="value.title_money">+3007.61元</span>
+											<span v-html="value.productName"></span>
+											<span class="money" v-html="value.money"></span>
 										</li>
 										<li>
 											<div>
-												<span v-html="value.boyd_dingdan">订单号：</span>
-												<span v-html="value.body_hao">2023272727262627</span></div>
+												<span>订单号：</span>
+												<span v-html="value.orderNo"></span></div>
 											<div>
-												<span v-html="value.body_date">2016/11/02 12:00</span>
+												<span v-html="value.inserTime"></span>
 												<span class="xianright2"></span>
-												<span class="money" v-html="value.body_zhuangtai">核保失败</span>
+												<span class="money" v-html="value.orderStatus"></span>
 											</div>
 										</li>
 									</ul>

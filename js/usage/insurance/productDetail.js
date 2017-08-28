@@ -1,5 +1,6 @@
 $(function(){
     $.setscroll("bodyMuiScroll");
+    jieshaoToshuomingBind();
     productInfoRender(data1);
 });
 /**
@@ -31,8 +32,19 @@ function moduleStr(mapperList){
     }          								
     str += '</dd></dl>';
     if( mapperList.bigModuleName == "产品介绍" ){
-        $(".insurance-tab_content:first").append(str);
+        $(".jieshao").append(str);
     }else if( mapperList.bigModuleName == "详细说明" ){
-        $(".insurance-tab_content:last").append(str);
+        $(".shuoming").append(str);
     }
 }
+//产品介绍 详情说明切换
+function jieshaoToshuomingBind(){
+    $(".insurance-tab").find("li").bind("click", function() {
+        tab($(this),'on1');					
+        $(".insurance-tab_content").hide().eq($(this).index()).show();					
+    })
+}
+function tab(a, flag) {
+	$(a).siblings().removeClass(flag); 
+	$(a).addClass(flag);
+};

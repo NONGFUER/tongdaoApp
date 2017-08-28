@@ -1,0 +1,246 @@
+#card_scroll {}
+
+.card_info {
+	color: #ffffff;
+	background-image: url(../../../../image/common/cardbacground.png);
+	background-position: 50% 50%;
+	font-size: 12px;
+}
+
+.card_up {
+	padding: 20px 0;
+}
+
+.minipng {
+	padding: 0 15px;
+	float: left;
+}
+
+.simple_info {
+	padding: 10px 0 0 0;
+	float: left;
+}
+
+.card_renz {
+	position: absolute;
+	margin-top: 10px;
+	right: 0;
+}
+
+.tou {
+	width: 62px;
+	height: 62px;
+}
+
+.tou img {
+	width: 62px;
+	height: 62px;
+}
+
+.clearfix:after {
+	content: "";
+	display: block;
+	height: 0;
+	visibility: hidden;
+	clear: both;
+}
+
+.name {
+	font-size: 17px;
+}
+
+.card_renz img {
+	width: 99px;
+}
+
+.split {
+	margin: 0 5px;
+}
+
+.card_down {
+	padding: 5px 15px 5px 15px;
+	background: rgba(22, 86, 147, .5);
+}
+
+.code_logo {
+	margin: 5px 15px 0 15px;
+	float: left;
+}
+
+.code_logo img {
+	width: 35px;
+}
+
+.code_info {
+	float: left;
+}
+
+.xiantiao {
+	float: left;
+	width: 1px;
+	height: 30px;
+	border-left: 1px solid #869fc0;
+	margin-right: 14px;
+	margin-top: 5px;
+}
+
+.code_info_up {
+	height: 18px;
+	line-height: 18px;
+}
+
+.code_info_down {
+	height: 18px;
+	line-height: 18px;
+}
+
+.phone img {
+	width: 18px;
+}
+
+.wechat img {
+	width: 18px;
+}
+
+.contact {
+	background: #ffffff;
+	padding: 8px 0;
+	color: #1B6BB8;
+	margin-bottom: 10px;
+}
+
+.contact .phone {
+	padding: 8px 0px;
+	float: left;
+	width: 40%;
+	border: 1px solid #1B6BB8;
+	border-radius: 8px;
+	margin: 0 3.2% 0 6.4%;
+	text-align: center;
+}
+
+.contact .wechat {
+	padding: 8px 0px;
+	float: left;
+	width: 40%;
+	border: 1px solid #1B6BB8;
+	border-radius: 8px;
+	margin: 0 6.4% 0 3.2%;
+	text-align: center;
+}
+
+.phone span,
+.wechat span {
+	margin-left: 20px;
+	font-size: 14px;
+}
+
+.company {
+	background: #FFFFFF;
+	padding: 12px 0px 13px 0px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.company span {
+	font-size: 13px
+}
+
+.company .logo {
+	width: 72px;
+	margin-left: 26px;
+	margin-right: 15px;
+	vertical-align: middle;
+}
+
+.company .arrow {
+	width: 7.5px;
+	margin-left: 20%;
+}
+
+.intro,
+.field {
+	background: #FFFFFF;
+	padding-left: 5.3%;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.intro .titbar,
+.field .titbar {
+	border-bottom: 1px solid #dcdcdc;
+	font-size: 15px;
+	padding: 10px 0;
+}
+
+.titbar img {
+	width: 14px;
+	position: relative;
+	top: -2px;
+}
+
+.introinfo,
+.fieldlist {
+	padding: 12px 0;
+}
+
+.introinfo {
+	font-size: 14px;
+}
+
+.fieldlist .tag {
+	font-size: 15px;
+	width: 29%;
+	float: left;
+	text-align: center;
+	color: #1B6BB8;
+	background: #daeafa;
+	border: 1px solid #54a5f2;
+	padding: 3px 0px;
+	border-radius: 15px;
+	margin: 5px 6.5px;
+}
+
+.button_share {
+	border-radius: 8px;
+	text-align: center;
+	font-size: 16px;
+	width: 92%;
+	background: #1B6BB8;
+	color: #ffffff;
+	margin: 28px auto;
+	padding: 12px;
+}
+
+.edit {
+	color: #fff;
+	float: right;
+	margin-right: 20px;
+}
+
+.popup {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: .14rem;
+	display: none;
+	z-index: 99;
+	background: rgba(0, 0, 0, .7);
+}
+
+.popup_content {
+	margin: 0 auto;
+	margin-top: 180px;
+	width: 72%;
+	background: #fff;
+	border-radius: 7px;
+}
+
+.spanClose {
+	width: 32px;
+	height: 32px;
+	display: block;
+	margin: 30px auto;
+	background: url(../../image/cancerRisk/jwx_close.png);
+	background-size: 100% 100%;
+}

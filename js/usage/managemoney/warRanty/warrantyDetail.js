@@ -46,7 +46,6 @@ $(function() {
 	var url =  base.url +'moneyManage/policyQueryListInfo.do';
 	console.log("页面初始化，发送请求报文--");
 	$.reqAjaxsFalse(url, reqData, policyQueryListInfo);
-	/*vm.Objectitle = data.returns;*/
 	mui('.man-div-body-ul_li_div_btn').on('tap', '#huifang', function() {
 		alert(1);
 		/*接口请求位子*/

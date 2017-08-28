@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 -->
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>我的名片</title>
+		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" href="../../../css/lib/widget/css/common/base.css" />
+		<link rel="stylesheet" href="../../../css/lib/widget/css/common/common.css" />
+		<link rel="stylesheet" href="../../../css/usage/agent/myCard/myCard.css?v=20160615" />
+	</head>
+
+	<body>
+		<div id="card_scroll" class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="card_info">
+					<div class="card_up clearfix">
+						<div class="minipng">
+							<div class="tou">
+								<img src="../../../image/common/tou.png" style="border-radius:100%;" />
+							</div>
+						</div>
+						<div class="simple_info">
+							<div><span class="name" id="name"></span></div>
+							<div class="">
+								<span class="iden"></span><span class="split">|</span>服务区域：<span class="area"></span>
+							</div>
+						</div>
+						<div class="card_renz">
+							<img src="../../../image/agent/renzheng.png" />
+						</div>
+					</div>
+					<div class="card_down clearfix">
+						<div class="code_logo">
+							<img src="../../../image/common/code.png">
+						</div>
+						<div class="xiantiao">
+
+						</div>
+						<div class="code_info">
+							<div class="code_info_up">
+								业务员代码：<span id="agentCode"></span>
+							</div>
+							<div class="code_info_down">
+								执业证编码：<span id="practiceCode"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="contact clearfix">
+					<div class="phone"><img src="../../../image/common/phone.png" /><span>联系我</span></div>
+					<div class="wechat"><img src="../../../image/common/wechat.png" /><span>加微信</span></div>
+				</div>
+				<div class="company">
+					<img src="../../../image/common/logo.png" class="logo" />
+					<span>天安佰盈保险销售有限公司</span>
+					<img src="../../../image/agent/rightArrow.png" class="arrow" />
+
+				</div>
+				<div class="intro">
+					<div class="titbar">
+						<img src="../../../image/common/intro.png">
+						<span>个人介绍</span></div>
+					<div class="introinfo">
+						<pre id="introarea" style="white-space: pre-wrap;word-wrap: break-word;font-family: 'Microsoft YaHei',sans-serif;"></pre>
+					</div>
+				</div>
+				<div class="field">
+					<div class="titbar">
+						<img src="../../../image/common/field.png">
+						<span>擅长领域</span>
+					</div>
+					<div class="fieldlist clearfix">
+						
+					</div>
+				</div>
+				<div class="button_share">
+					立即分享
+				</div>
+
+			</div>
+		</div>
+		<div class="popup">
+			<div class="popup_content">
+				<img alt="" src="../../../image/common/kongbai.png">
+			</div>
+			<span class="spanClose close" onclick="closepop(this);"></span>
+		</div>
+		<script type="text/javascript" src="../../../js/util/zepto.min.js"></script>
+		<script type="text/javascript" src="../../../js/mui/mui.min.js"></script>
+		<script type="text/javascript" src="../../../js/util/base.js"></script>
+		<script type="text/javascript" src="../../../js/util/common.js"></script>
+		<script src="../../js/account/myCard.js?v=341130"></script>
+	</body>
+
+</html>

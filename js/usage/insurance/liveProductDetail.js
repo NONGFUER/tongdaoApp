@@ -1,11 +1,47 @@
 
 $(function(){
     $.setscroll( "bodyMuiScroll" );
-    sendLiveProductInfoRequest();//APP产品模块线下产品详情查询
-    sendCusInsConsultantRequest();//APP产品模块线下产品详情页保险顾问查询
-    sendAddYuyueInfoRequest();//APP产品模块线下产品预约新增
-    sendCustomerAndAgentInfoRequest();
+    yuyueClickBind();
+    liveProductInfoRender(data);
+    var customerId = "6";
+    var ccId = "105";
+    yuyueSubmit( customerId, ccId)
+    // sendLiveProductInfoRequest();//APP产品模块线下产品详情查询
+    // sendCusInsConsultantRequest();//APP产品模块线下产品详情页保险顾问查询
+    // sendAddYuyueInfoRequest();//APP产品模块线下产品预约新增
+    // sendCustomerAndAgentInfoRequest();
 });
+//点击预约出单
+function yuyueClickBind(){
+    $("#chudan").unbind("tap").bind("tap",function(){
+        $(".popup-shadow").css({"opacity":"1","display":"block"});
+    });
+}
+//关闭弹窗
+function closeShadow(){
+    $(".popup-shadow").css({"opacity":"0","display":"none"});
+    $("#name").val("");
+    $("#mobile").val("");
+}
+//点击提交预约
+function yuyueSubmit( cusId, ccId){
+    $("#yuyue").unbind("tap").bind("tap",function(){
+        var phone = $("#mobile").val();
+        var name = $("#name").val();
+        if( $.isNull(name) ){
+            modelAlert( message.nameNull );
+        }else if( tit.regExp.isChinese(name) == false ){
+            modelAlert( message.nameError );
+        }else if( $.isNull(phone) ){
+            modelAlert( message.phoneNull );
+        }else if( tit.regExp.isMobile(phone) == false ){
+            modelAlert( message.phoneError );
+        }else{
+            sendAddYuyueInfoRequest(cusId,ccId,phone,name);
+        }
+        
+    });
+}
 //APP用户及客户经理信息查询
 function sendCustomerAndAgentInfoRequest(){
     var url = requestUrl.cusAndAgenInfoUrl;
@@ -52,7 +88,7 @@ function sendCusInsConsultantRequest(){
     $.reqAjaxs( url, sendJson, cusInsConsultantRender );
 }
 // APP产品模块线下产品预约新增
-function sendAddYuyueInfoRequest(){
+function sendAddYuyueInfoRequest( cusId, ccId, phone, name){
 	var url = requestUrl.addYuyueInfoUrl;
 	var sendJson = {
         "head" : {
@@ -62,10 +98,10 @@ function sendAddYuyueInfoRequest(){
             "transToken": ""
         },
         "body" : {
-            "customerId": "6",
-            "commodityCombinationId": "105",
-            "yuyuePhone": "18749187491",
-            "yuyueName": "月饼"
+            "customerId": cusId,
+            "commodityCombinationId": ccId,
+            "yuyuePhone": phone,
+            "yuyueName": name
         }
     }
     $.reqAjaxs( url, sendJson, addYuyueInfoRender );
@@ -76,6 +112,17 @@ function sendAddYuyueInfoRequest(){
  */
 function cusAndAgenInfoRender(data){
     console.log(data);
+    if( data.statusCode == ajaxStatus.success ){
+        var body = data.returns;
+        var customerBasic = body.customerBasic;
+        var agent         = body.agent;
+        $("#name").val(customerBasic.name);
+        $("#mobile").val(customerBasic.userName);
+        $("#kehuName").val(agent.recommendAgentName);
+        $("#kehuPhone").val(agent.recommendAgentMobile);
+    }else{
+        modelAlert( message.requestFail ); 
+    }
 }
 /**
  * @function 请求响应的产品预约新增数据处理
@@ -87,6 +134,8 @@ function addYuyueInfoRender(data){
         var body = data.returns;
         var yuyueNo  = body.yuyueNo;//获取预约号
         //alert(yuyueNo);
+        closeShadow();
+        modelAlert("预约成功！");
        
     }else{
         modelAlert( message.requestFail );
@@ -147,16 +196,32 @@ function liveProductInfoRender( data ){
 function calChoice( calList ){
     var calName = calList.calName;
     var calDetails = calList.calDetails;
+    var calDetailsStr = detailsRender(calDetails);
     var str = "";
-    str += '<div class="d1">'
-    str += '<div class="label">'+calName+'：</div>'
-    str += '<div class="conter">'
-    for(var i = 0; i < calDetails.length; i++ ){
-        
-    }
-   // str +=   0周岁（出生满28天）至54周岁
+    str += '<div class="d1">';
+    str += '<div class="label">'+calName+'：</div>';
+    str += '<div class="conter">';
+    str += calDetailsStr;
     str += '</div></div>';
     $("#insurance-choice").append(str);
+}
+function detailsRender(calDetails){
+    var str = "";
+    var detailLength = calDetails.length;
+    if(detailLength == 1){
+        str += calDetails[0].enuContent;
+    }else{
+        str += '<ul class="radio">';
+        for(var i = 0; i < detailLength; i++ ){
+            if( i == 0 ){
+                str += '<li class="on">'+calDetails[i].enuContent+'</li>'
+            }else{
+                str += '<li>'+calDetails[i].enuContent+'</li>'
+            }           
+        }
+        str += '</ul>';
+    }   
+    return str;
 }
 /**
  * @function 商品组合模块配置信息列表
