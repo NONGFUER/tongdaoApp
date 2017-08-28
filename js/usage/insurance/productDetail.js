@@ -3,6 +3,16 @@ $(function(){
     jieshaoToshuomingBind();
     productInfoRender(data1);
 });
+//试算条件
+function calOptions(data){
+    console.log(data);
+    if( data.statusCode == ajaxStatus.success ){
+
+    }else{
+
+    }
+}
+
 /**
  * @function 请求响应的线上产品详情数据
  * @param {*} data 
