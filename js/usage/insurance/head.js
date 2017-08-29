@@ -11,7 +11,8 @@ var message = {
     nameError   : "姓名必须为汉字！"
 }
 var requestUrl = {
-    
+	//系统时间
+	getServeTimeUrl      : base.url + 'commonManage/getServiceTime.do',
     //线下产品模块    
     cusAndAgenInfoUrl    : base.url + 'customerBasic/getCustomerAndAgentInfo.do',              // //APP用户及客户经理信息查询@gxj
     liveProductInfoUrl   : base.url + 'offlineCommodityComDetail/getOfflineComComDetail.do',   //(完成)APP产品模块线下产品详情查询 @gxj

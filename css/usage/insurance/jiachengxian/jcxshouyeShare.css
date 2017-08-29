@@ -1,0 +1,254 @@
+body{
+	background-color:#fff;
+}
+#contentHead1,#contentHead2,#contentHead3{
+	margin-top:44px;
+}
+.dingdan{
+	float: left;
+    width: 20%;
+    height: 3.5833rem;
+    padding-right: 5.5%;
+}
+#pageTitle1,#pageTitle2,#pageTitle3{
+	width:56%;
+}
+.dingdanimg{
+	width:20px;
+	float: right;
+}
+/* .banner1{
+	margin-bottom:13px;
+} */
+.shengyu{
+	z-index:99;
+	background-color:#4b5159;
+	opacity:0.7;
+	width:100%;
+	height:17px;
+	margin-bottom:13px;
+	margin-top:-17px;
+}
+.shengyu1{
+	width:50%;
+	float:right;
+	color:#fdc335;
+	font-size:12px;
+	text-align:right;
+	padding-right:4%;
+}
+/* .riskInfo{
+	width:88%;
+	margin:auto;
+	font-size:10px;
+	margin-bottom:19px;
+}
+.firsttd{
+	border-top-left-radius:8px;
+}
+.lasttd{
+	border-bottom-left-radius:8px;
+}
+.riskInfo tr{
+	border-bottom:3.5px solid #fff;
+}
+.riskInfo tr td:nth-child(1){
+	width:17%;
+	border-right:6.5px solid #fff;
+	font-weight:bold;
+	color:#fff;
+	background-color:#f36f39;
+	text-align:center;
+	line-height: 31px
+}
+.riskInfo tr td:nth-child(2){
+	width:78%;
+	color:#333;
+	text-align:center;
+	background-color:#f0f0f0;
+	padding-left:3px;
+	padding-right:3px;
+} */
+.tablepng{
+	width:88%;
+	margin:auto;
+}
+.userInfo{
+	width:80%;
+	margin:auto;
+}
+.userInfoDiv{
+	width:100%;
+	height:35px;
+	line-height:35px;
+	margin-bottom:11px;
+	background-color:#f0f0f0;
+	border-radius:5px;
+}
+/* .userInfoDiv div{
+	float:left;
+} */
+.div1{
+	width:15%;
+	height:35px;
+	float:left;
+}
+.div2{
+	width:85%;
+	height:35px;
+	float:left;
+}
+.nameimg{
+	width:22px;
+	height:22px;
+	margin:auto;
+}
+.IDimg{
+	width:22px;
+	height:18px;
+	margin:auto;
+}
+.mobileimg{
+	width:16px;
+	height:22px;
+	margin:auto;
+}
+.chepaiimg{
+	width:20px;
+	height:16px;
+	margin:auto;
+}
+.mailimg{
+	width:20px;
+	height:14px;
+	margin:auto;
+}
+.userInfoDiv div input{
+	background-color:#f0f0f0;
+	border-left: 1px solid #999;
+	font-size: 14px;
+    padding-left: 12px;
+}
+.queren{
+	width:82%;
+	margin:auto;
+	height:18px;
+	line-height:18px;
+	margin-bottom:30px;
+	text-align:center;
+}
+.kuang{
+	width:12px;
+	height:12px;
+	/* float:left; */
+	margin-right:3px;
+	margin-top: 3px;
+}
+.yiyuedu{
+	/* float:left; */
+	font-size:12px;
+	color:#000;
+}
+.anniumen{
+	position:fixed;
+	z-index:99;
+	width:100%;
+	bottom:0;
+	height: 51px;
+    line-height: 51px;
+    /* padding-top: 11px; */
+    background-color:#f0f0f0;
+}
+.kefu{
+	width:13.5%;
+	border-right:1px solid #666;
+	background-color:#000;
+	opacity: 0.8;
+	float:left;
+}
+.kefuimg{
+	width:18px;
+	margin:auto;
+	height: 26px;
+    line-height: 26px;
+    padding-top: 3px;
+}
+.kegu1{
+	font-size:12px;
+	color:#fff;
+	text-align:center;
+	height: 25px;
+    line-height: 25px;
+}
+.guanzhu{
+	width:40%;
+	background-color:#000;
+	opacity: 0.8;
+	color:#fff;
+	text-align:center;
+	float:left;
+	height: 51px;
+}
+.fuwuhao{
+	font-size:15px;
+	height:30px;
+	line-height:35px;
+	text-align:center;
+}
+.chakan{
+	font-size:12px;
+	height:20px;
+	line-height:15px;
+	text-align:center;
+}
+.toubao{
+	width:46.5%;
+	background-color:#1b6bb8;
+	font-size:18px;
+	color:#fff;
+	text-align:center;
+	float:left;
+	height: 51px;
+	line-height: 51px;
+}
+.success{
+	z-index:1000;
+	width:72%;
+	position:absolute;
+	top:25%;
+	left:14%;
+	background-color:#fff;
+	border-radius:5px;
+}
+.successImg{
+	width:47%;
+	margin:auto;
+	margin-top:20px;
+	margin-bottom:21px;
+}
+.successWord{
+	width:100%;
+	height:15px;
+	line-height:15px;
+	text-align:center;
+	font-size:12px;
+	color:#999;
+	margin-bottom:30px;
+}
+.successAnniu{
+	width:85.8%;
+	margin:auto;
+	height:35px;
+	line-height:35px;
+	text-align:center;
+	font-size:14px;
+	color:#fff;
+	background-color:#1b6bb8;
+	border-radius:5px;
+	margin-bottom:16px;
+}
+.tiaokuan,.xuzhi{
+	color:#1b6bb8;
+}
+
+

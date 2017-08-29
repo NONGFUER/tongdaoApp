@@ -672,7 +672,7 @@ if(data.statusCode == "000000") {
 }
 /*获取服务器时间*/
 function getServiceTime(){
-var url = base.url + "bannerManage/getServiceTime.do";
+var url = requestUrl.getServeTimeUrl;
 var reqData = {
     "head":{
         "channel":"01",

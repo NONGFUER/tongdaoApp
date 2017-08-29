@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+ <!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 -->
+ <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+ <!-- 忽略IOS将页面中的数字识别为电话号码 -->
+ <meta name="format-detection" content="telephone=no" />
+ <!-- 忽略Android平台中对邮箱地址的识别 -->
+ <meta name="format-detection" content="email=no" />
+  <!-- 缓存 -->
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"> 
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<title>保单详情</title>
+<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
+<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.picker.min.css" />
+<link rel="stylesheet" href="../../../css/lib/common/base.css" />
+<link rel="stylesheet" href="../../../css/lib/common/common.css" />
+<link rel="stylesheet" href="../../../css/usage/insurance/jiachengxian/jcxPolicyInfo.css" />
+</head>
+<body>
+	<!-- <header>
+		<div class="h_back">
+			<div class="backindex"><img src="../../images/left.png" /></div>
+		</div>
+		<div class="h_title" id="pageTitle"></div>
+		<div>
+			<div class="dingdanimg"></div>
+		</div>
+	</header> -->
+   	<div id="contentHead" class="mui-scroll-wrapper">
+		<div id="insure_iscroll" class="mui-scroll">
+		<div class="bigTitle">
+				<div class="bigTitleLeft">
+					<p class="riskName">驾乘人员意外伤害保险</p>
+					<p style="font-size:10px;"><span class="baodanhao">保单号：</span><span class="policyNo"></span></p>
+				</div>
+				<div class="bigTitleRight">
+					<img class="zhuangtai" src="">
+				</div>
+			</div>
+			<!--    投保人信息 -->
+			<div class="toubaoren" id="toubaoren">
+				<article class="insureName border-1px-bottom">
+					<div style="width: 50%">
+						<span>投/被保人信息</span>
+					</div>
+				</article>
+				<ul class="TBR">
+					<li class="name border-1px-bottom">
+						<div class="li_title">姓名</div>
+						<div id="TBRName" class="li_value" style="overflow:hidden;"></div>
+					</li>
+					<li class="ID border-1px-bottom">
+						<div class="li_title">身份证号</div>
+						<div id="TBRID" class="li_value"></div>
+					</li>
+					<li class="mobile border-1px-bottom">
+						<div class="li_title">手机号</div>
+						<div id="TBRMobile" class="li_value"></div>
+					</li>
+					<li class="chepai border-1px-bottom">
+						<div class="li_title">车牌号</div>
+						<div id="TBRchepai" class="li_value"></div>
+					</li>
+					<li class="mail border-1px-bottom">
+						<div class="li_title">邮箱</div>
+						<div id="TBRMail" class="li_value"></div>
+					</li>
+				</ul>
+			</div>
+			<!--已发放佣金-->
+			<div class="yongjin">
+				<div class="yongjin_title">已发放佣金</div> 
+				<div class="yongjin_value"></div>
+			</div>
+			<div class="biaoge">
+				<div class="biaogeImg"><img src="../../images/table.png"></div>
+			</div>
+			<!-- <div class="zeren">
+				<div class="leftTitle">保险责任</div>
+				<div class="rightJiantou"><img src="../../images/3left.png"></div>
+			</div> -->
+			<div class="tiaokuan">
+				<div class="leftTitle">保险条款</div>
+				<div class="rightJiantou"><img src="../../images/3left.png"></div>
+			</div>
+			<div class="baodan">
+				<div class="leftTitle">电子保单</div>
+				<div class="rightJiantou"><img src="../../images/3left.png"></div>
+			</div>
+			<div class="fanhui">返回</div>
+		</div>
+	</div>
+</body>
+	<script type="text/javascript" src="../../../js/lib/common/zepto.min.js" ></script>
+    <script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js" ></script>
+    <script type="text/javascript" src="../../../js/lib/common/base.js" ></script>
+    <script type="text/javascript" src="../../../js/lib/common/common.js" ></script>   
+    <script type="text/javascript" src="../../../js/usage/insurance/jiachengxian/jcxPolicyInfo.js" ></script>
+</html>

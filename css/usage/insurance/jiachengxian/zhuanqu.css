@@ -1,0 +1,164 @@
+body{
+	background-color:#f0f0f0;
+}
+.up{
+	background-color:#fff;
+}
+.title{
+	height:39px;
+	width:91.5%;
+	margin:auto;
+	margin-top:44px;
+}
+.jcxtitle{
+	width:50%;
+	height:39px;
+	line-height:39px;
+	font-size:14px;
+	font-weight:bold;
+	color:#000;
+	float:left;
+	text-align:left;
+}
+.shengyu{
+	width:50%;
+	height:39px;
+	line-height:39px;
+	font-size:14px;
+	color:#000;
+	float:left;
+	text-align:right;
+}
+.shengyuNum{
+	color:#fc052e;
+}
+.banner1{
+	width:92%;
+	margin:auto;
+	margin-bottom:16px;
+}
+.buttons{
+	width:92%;
+	margin:auto;
+}
+.clear{
+	margin-bottom:26px;
+}
+.lingqu{
+	width:46.37%;
+	height:35px;
+	line-height:35px;
+	float:left;
+	border:1px solid #888888;
+	text-align:center;
+	font-size:14px;
+	color:#888888;
+	margin-right:7.2%;
+	border-radius:5px;
+}
+.zengsong{
+	width:46.37%;
+	height:35px;
+	line-height:35px;
+	float:left;
+	border:1px solid #888888;
+	text-align:center;
+	font-size:14px;
+	color:#888888;
+	border-radius:5px;
+}
+.jilu{
+	width:26%;
+	height:15px;
+	margin:auto;
+	margin-top:26px;
+	margin-bottom:14px;
+}
+.leftdian{
+	width:10px;
+	height:10px;
+	border-radius:5px;
+	float:left;
+	margin-top: 2px;
+	background-color:#999;
+}
+.jiluWord{
+	width:75%;
+	height:15px;
+	line-height:15px;
+	text-align:center;
+	font-size:14px;
+	color:#999;
+	float:left;
+}
+.rightdian{
+	width:10px;
+	height:10px;
+	border-radius:5px;
+	float:left;
+	margin-top: 2px;
+	background-color:#999;
+}
+.lingqujilu{
+	width:92%;
+	margin:auto;
+}
+.jiluTable{
+	width:100%;
+	font-size:12px;
+}
+tr{
+	border-bottom:3px solid #f0f0f0;
+	background-color:#fff;
+	height:28px;
+	line-height:28px;
+}
+th{
+	background-color:#6ba3fd;
+	color:#fff;
+	height:30px;
+}
+td{
+	text-align:center;
+}
+.topLeft{
+	border-top-left-radius:5px;
+	width:28%;
+}
+.middle{
+	width:29%;
+}
+.topRight{
+	border-top-right-radius:5px;
+	width:42.4%;
+}
+.zhankai{
+	width:100%;
+	background-color:#fff;
+	height:28px;
+	line-height:28px;
+}
+.zhankai1{
+	width:23%;
+	margin:auto;
+	height:28px;
+	line-height:28px;
+}
+.kai{
+	width:80%;
+	text-align:center;
+	float:left;
+	font-size:12px;
+}
+.kaiImg{
+	width:16%;
+	float:left;
+}
+.quanbu{
+	width:100%;
+	text-align:center;
+	font-size:12px;
+	color:#999;
+	margin-top: 5px;
+}
+

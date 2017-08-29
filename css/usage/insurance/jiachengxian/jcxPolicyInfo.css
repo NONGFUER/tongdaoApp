@@ -1,0 +1,123 @@
+body{
+	background-color:#f0f0f0;
+}
+#contentHead{
+	margin-top:44px;
+}
+.bigTitle{
+	width:100%;
+	height:80px;
+	background-color:#fff;
+}
+.bigTitleLeft{
+	width:78%;
+	float:left;
+	padding-top:10px;
+	padding-left:6.67%;
+}
+.riskName{
+	font-size:15px;
+	color:#000;
+	line-height:28px;
+	margin-bottom:0;
+}
+.policyNo{
+	font-size:12px;
+	color:#888;
+	line-height:28px;
+	margin-bottom:0;
+}
+.bigTitleRight{
+	width:22%;
+	float:right;
+	margin-top:20px;
+}
+.zhuangtai{
+	width:65px;
+	height:33px;
+}
+.toubaoren{
+	margin-top:10px;
+	margin-bottom:11px;
+	width:100%;
+	background-color:#fff;
+}
+.insureName{
+	height: 47px;
+    line-height: 47px;
+    padding-left: 6.67%;
+    background-color: #fff;
+    color: #000;
+    font-size:14px;
+}
+.TBR{
+	margin-left:4.5%;
+	width:100%;
+}
+.name,.ID,.mobile,.mail,.chepai{
+	height:47px;
+	line-height:47px;
+	width:100%;
+}
+.li_title{
+	float:left;
+	width:30.23%;
+	font-size:14px;
+	color:#888;
+	padding-left: 3%;
+}
+.li_value{
+	width:58.97%;
+	height:47px;
+	line-height:47px;
+	float:left;
+	color:#000;
+	text-align:right;
+	font-size:14px;
+}
+.biaoge{
+	width:100%;
+	background-color:#fff;
+	padding-top:12px;
+	padding-bottom:8px;
+}
+.biaogeImg{
+	width:91%;
+	margin:auto;
+}
+.zeren,.tiaokuan,.baodan{
+	width:100%;
+	height:45px;
+	line-height:45px;
+	margin-top:10px;
+	margin-bottom:10px;
+	background-color:#fff;
+}
+.leftTitle{
+	width:86%;
+	margin-left:6%;
+	float:left;
+	font-size:15px;
+	color:#000;
+	font-weight:bold;
+}
+.rightJiantou{
+	width:2%;
+	margin-right:6%;
+	float:left;
+}
+.fanhui{
+	width:87.4%;
+	height:41px;
+	line-height:41px;
+	margin:auto;
+	margin-top:24px;
+	margin-bottom:51px;
+	background-color:#1b6bb8;
+	text-align:center;
+	font-size:17px;
+	color:#fff;
+	border-radius:5px;
+}
+
+

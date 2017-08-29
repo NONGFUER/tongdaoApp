@@ -37,7 +37,7 @@ function sendCalOptionsRequest(){
             "transToken": ""
         },
         "body" : {
-            "commodityCombinationId": '11'
+            "commodityCombinationId": '9'//11-商务飞人  9-健康安详
         }
     }
     $.reqAjaxs( url, sendJson, calOptionsRender ); 
@@ -53,7 +53,7 @@ function sendProductInfoRequest(){
             "transToken": ""
         },
         "body" : {
-            "commodityCombinationCode": '00400009',
+            "commodityCombinationCode": '00400009',//
             "cityCode":"220001",
             "type":"04",
             "provinceCode":"220000"
