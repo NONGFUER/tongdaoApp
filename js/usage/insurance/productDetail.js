@@ -1,9 +1,72 @@
 $(function(){
     $.setscroll("bodyMuiScroll");
     jieshaoToshuomingBind();
-    productInfoRender(data1);
-    calOptionsRender(data4);
+    //productInfoRender(data1);
+    sendProductInfoRequest();
+    sendCalOptionsRequest();
+    sendCaldoRequest();
+    //calOptionsRender(data4);
 });
+//
+function sendCaldoRequest(){
+	 var url = requestUrl.calDoUrl;
+	 var sendJson = {
+		"head" : {
+		  "channel" : "01",
+		  "userCode" : mobile,
+		  "transTime" : $.getTimeStr(),
+		  "transToken": ""
+		},
+		"body" : {
+            "commodityCombinationId": "1",
+            "versions": "02",
+            "insuredAge":19,
+            "insuredAmount":500000
+		} 
+     }
+     $.reqAjaxs( url, sendJson, calDoRender ); 
+}
+//根据商品组合id查询保费试算项
+function sendCalOptionsRequest(){
+    var url = requestUrl.calOptionsUrl;
+    var sendJson = {
+        "head" : {
+            "channel" : "01",
+            "userCode" : mobile,
+            "transTime" : $.getTimeStr(),
+            "transToken": ""
+        },
+        "body" : {
+            "commodityCombinationId": '11'
+        }
+    }
+    $.reqAjaxs( url, sendJson, calOptionsRender ); 
+}
+//在线产品详情查询
+function sendProductInfoRequest(){
+    var url = requestUrl.onlineProductInfoUrl;
+    var sendJson = {
+        "head" : {
+            "channel" : "01",
+            "userCode" : mobile,
+            "transTime" : $.getTimeStr(),
+            "transToken": ""
+        },
+        "body" : {
+            "commodityCombinationCode": '00400009',
+            "cityCode":"220001",
+            "type":"04",
+            "provinceCode":"220000"
+        }
+    }
+    $.reqAjaxs( url, sendJson, productInfoRender ); 
+}
+/**
+ * @function 试算
+ */
+function calDoRender(data){
+    console.log(data);
+}
 //试算条件
 function calOptionsRender(data){
     console.log(data);
@@ -53,7 +116,8 @@ function productInfoRender(data){
         var body = data.returns;
         var commodityCombinationModuleMapper = body.commodityCombinationModuleMapper;
         var commodityCombination             = body.commodityCombination;
-
+        $("#commodityCombinationName").text(commodityCombination.commodityCombinationName);
+        $("#companyName").text("");
         for(var i = 0; i < commodityCombinationModuleMapper.length; i++){
             moduleStr(commodityCombinationModuleMapper[i])
         }
@@ -62,15 +126,19 @@ function productInfoRender(data){
     }
 }
 
-function moduleStr(mapperList){
-    var str = "";
-    str += '<dl class="mb10 whitebackground">';
-    str += '<dt class="dt">' + mapperList.moduleName + '</dt>';
-    str += '<dd class="dd">';
-    if( mapperList.moduleType == "02" ){
-        str +=  mapperList.modueInfo;
-    }          								
-    str += '</dd></dl>';
+function moduleStr(mapperList){	
+	var str = "";
+	str += '<dl class="mb10 whitebackground">';
+	str += '<dt class="dt">' + mapperList.moduleName + '</dt>';
+	str += '<dd class="dd">';	
+	if( mapperList.moduleType == "02" ){
+		if( mapperList.moduleName == "保障责任" ){
+			str += tableGener(mapperList.modueInfo);
+		}else{
+			str += mapperList.modueInfo;	
+		}	    
+	}      								
+	    str += '</dd></dl>';  
     if( mapperList.bigModuleName == "产品介绍" ){
         $(".jieshao").append(str);
     }else if( mapperList.bigModuleName == "详细说明" ){
@@ -88,3 +156,22 @@ function tab(a, flag) {
 	$(a).siblings().removeClass(flag); 
 	$(a).addClass(flag);
 };
+//保障责任
+function tableGener(dutyStr){
+	var trCell = dutyStr.split("|");
+	var tableStr = '<table class="gridtable">'
+	for(var k = 0; k < trCell.length; k++){
+		var tdCell = trCell[k].split("-");
+		tableStr += '<tr>'
+		for(var j = 0; j < tdCell.length ; j++){
+			if( k == 0){
+				tableStr += '<th>'+tdCell[j]+'</th>'
+			}else{
+				tableStr += '<td>'+tdCell[j]+'</td>'
+			}					
+		}
+		tableStr += '</tr>'		
+	}
+	tableStr += '</table>'
+	return tableStr;
+}

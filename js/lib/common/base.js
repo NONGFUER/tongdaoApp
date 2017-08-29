@@ -11,7 +11,7 @@ var base = {
 		share_url1: window.location.protocol+"//"+window.location.host+"/tongdaoPlatform/",
 		share_url2: window.location.protocol+"//"+window.location.host+"/tongdaoPlatform/",
 		shareAdimg : "../../imgs/ad/",
-		imagePath : "../../image/", // 图片路径
+		imagePath : "../../../image/", // 图片路径
 };
 var suixinyi = {
 		url : window.location.protocol+"//"+window.location.host+"/tongdaoSxyPlatform/",
@@ -643,7 +643,7 @@ $.prop = function() {
 	ajaxPrevent += "<div class='ajax_prevent_a' style='width: 30%;margin-top: 55%;"
 			+ "margin-left: 35%;text-align: center;background-clip: padding-box;"
 			+ "color: #585858;'>";
-	ajaxPrevent += "<img src='../../../image/common/dh_loading.gif' style='width:100%'></div></div>";
+	ajaxPrevent += "<img src='../../image/dh_loading.gif' style='width:100%'></div></div>";
 	$("body").append(ajaxPrevent);
 	$(".ajax_prevent_a").css("margin-top",(window.innerHeight - $(".ajax_prevent_a").width())/2);
 };
@@ -862,6 +862,7 @@ $.toAjaxs = function(url, dataList, callBack) {
 $.reqAjaxs = function(url, requestData, callBack) {
 	var requestJson = aesEncrypt(JSON.stringify(requestData), secretKey, secretKey);
 	requestJson=URLencodeForBase64(requestJson);
+	console.log(requestJson);
 	$.ajax({
 		url : url,
 		type : 'POST',
@@ -1396,6 +1397,7 @@ function getUrlQueryString(names, urls) {
  * 以下方法一般是基于jquery/zepto和mui框架 $.setscrollarea : 区域滑动方法 $.poppicker : 选择一级联动
  * $.poppicker2 : 选择二级联动 $.poppicker3 : 选择三级联动 $.pulluptoRefresh : 区域上拉加载
  * openDataNowDate : 打开mui日期控件-默认当前日期 openData : 打开mui日期控件-默认当前日期的后一天
+ * openDataCustomized 打开日期控件（自定义起始日期 默认选中日期 结束日期）
  * openDataMonth : 打开mui日期控件（只有月份选择）：默认当前月
  * 
  ******************************************************************************/
@@ -1623,6 +1625,49 @@ function openData(id) {
 	});
 }
 
+/**
+ * <button id='demo' data-options='{"type":"date","value":"2017-03-09","beginYear":2015,"beginMonth":3,"beginDay":2,"endYear":2020}' class="btn mui-btn mui-btn-block">自定义 ...</button>
+ * 打开日期控件（自定义起始日期 默认选中日期 结束日期）： 使用方法：openDataCustomized(id); 此方法依赖组件 mui，请在页面中先引入
+ * mui.min.css、 mui.picker.min.css
+ * mui.min.js、mui.picker.min.js 
+ */
+function openDataCustomized(id) {
+	var result = document.getElementById(id);
+	result.addEventListener('tap', function() {
+		var optionsJson = this.getAttribute('data-options') || '{}';
+		var options = JSON.parse(optionsJson);
+		var id = this.getAttribute('id');
+		/*
+		 * 首次显示时实例化组件
+		 * 示例为了简洁，将 options 放在了按钮的 dom 上
+		 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+		 */
+		var picker = new mui.DtPicker(options);
+		picker.show(function(rs) {
+			/*
+			 * rs.value 拼合后的 value
+			 * rs.text 拼合后的 text
+			 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+			 * rs.m 月，用法同年
+			 * rs.d 日，用法同年
+			 * rs.h 时，用法同年
+			 * rs.i 分（minutes 的第二个字母），用法同年
+			 */
+			result.value = rs.text;
+			/* 
+			 * 返回 false 可以阻止选择框的关闭
+			 * return false;
+			 */
+			/*
+			 * 释放组件资源，释放后将将不能再操作组件
+			 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+			 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+			 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+			 */
+			picker.dispose();
+		});		
+	});		
+}
 /**
  * 打开日期控件（只有月份选择）：默认当前月 使用方法：openDataMonth(id); 此方法依赖组件 mui，请在页面中先引入
  * mui.min.css、 mui.listpicker.css、mui.dtpicker.css
@@ -2451,3 +2496,59 @@ $.toreqAjaxs = function(url, dataList, callBack) {
 		async : true,
 	});
 };
+
+/**--风险评测枚举转换--*/
+function changeLevel(level){
+	if(level.indexOf("a")!=-1){
+		level="（风险评价A类）"
+	}else if(level.indexOf("b")!=-1){
+		level="（风险评价B类）"
+	}else if(level.indexOf("c")!=-1){
+		level="（风险评价C类）"
+	}else if(level.indexOf("d")!=-1){
+		level="（风险评价D类）"
+	}else{
+		level="（风险无等级）"
+	}
+	return level;
+}
+
+/**--渠道代码转渠道名称--*/
+function changeChannel(channel){
+	var url = base.url + "bill/selectChannel.do";
+	var requestData = {
+		"head":{
+			"userCode":"",
+			"transTime":$.getTimeStr(),
+			"channel":"2"
+		},"body":{
+	        "channelCode" : channel
+		}
+	};
+	var requestJson = aesEncrypt(JSON.stringify(requestData), secretKey, secretKey);
+	requestJson=URLencodeForBase64(requestJson);
+	$.ajax({
+		url : url,
+		type : 'POST',
+		data : "jsonKey=" + requestJson,
+		dataType : "json",
+		timeout : 60000,
+		success : function(data) {
+			$(".ajax_prevent").remove();// 去除遮罩
+			channel=data.returns.bxCxChannel.channelName;
+		},
+		error : function(data) {
+			$(".ajax_prevent").remove();// 去除遮罩
+			modelAlert("网络好像开小差了呢，请设置给力一点儿网络吧！");
+		},
+		beforeSend : function(xhr) {
+			$.ajaxPrevent();
+		},
+		async : false,
+	});
+	return channel;
+}
+/**截取年月日***/
+function subTime(timeStr){
+  return timeStr.substring(0,10);
+}

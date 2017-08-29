@@ -10,13 +10,21 @@
 		<!-- 忽略Android平台中对邮箱地址的识别 -->
 		<meta name="format-detection" content="email=no" />
 		<title>选择投保方案</title>
-		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
+	  	<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
 		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.picker.min.css" />
-		<link rel="stylesheet" href="../../../css/lib/common/base.css" />
-		<link rel="stylesheet" href="../../../css/lib/common/common.css" />
-		<link rel="stylesheet" href="../../../css/usage/insurance/car/insuranceCoverage.css?v=20170605"/>
+		<link rel="stylesheet" href="../../../css/usage/insurance/car/base.css" />
+	    <link rel="stylesheet" href="../../../css/usage/insurance/car/insuranceCoverage.css"/>
 	</head>
 	<body>
+	<header>
+		<div class="h_back" id="insureback">
+			<div id="backImg">
+				<img src="../../../image/insurance/car/back.png" />
+			</div>
+		</div>
+		<div class="h_title" id="pageTitle">选择投保方案</div>
+		<div class="h_next"></div>
+	</header>
 	<div class="mainPage mui-scroll-wrapper">
 	  <div class="mui-scroll">
 		<div class="content">
@@ -45,13 +53,13 @@
 			<div>
 				<div id="item1">
 					<!-- 交强险区域 -->
-					<div class="content-title-car border-1px-bottom">
+					<div class="content-title border-1px-bottom">
 						<img class="title-img" src="../../../image/insurance/car/baoxian.png"/>
 						<b>交强险+车船税</b>
 					    <!-- <span class="toubao"><span class="TB-words">投保</span><img id="toubao-img" class="title-img" src="../../imgs/carinsure/insureinfo_roundno.png"></span> -->
 						<div class="toubao">投保</div>
 					</div>
-					<div class="content-title-car JQX-content border-1px-bottom" style="display:none;">
+					<div class="content-title JQX-content border-1px-bottom" style="display:none;">
 						<table class="content-table1">
 						<tr>
 							<td></td>
@@ -65,13 +73,13 @@
 					    </table>
 					</div>
 					<!-- 商业险区域 -->
-					<div class="content-title-car SYX-title border-1px-bottom">
+					<div class="content-title SYX-title border-1px-bottom">
 						<img class="title-img" src="../../../image/insurance/car/shangyexian.png"/>
 						<b>商业险</b>
 						<div class="sytoubao">投保</div>
 						<div id="wenhao" style="width:20%;float: right;"><img class="wenhao" src="../../../image/insurance/car/wenhao1.png"/></div>
 					</div>
-					<div class="content-title-car SYX-content border-1px-bottom" style="display:none;">
+					<div class="content-title SYX-content border-1px-bottom" style="display:none;">
 						<table class="content-table1">
 						<tr>
 							<td></td>
@@ -84,7 +92,7 @@
 					    </table>
 					</div>
 					<!-- 主险区域 -->
-					<!-- <div class="content-title-car mainRisk-title border-1px-bottom">
+					<!-- <div class="content-title mainRisk-title border-1px-bottom">
 						<img class="title-img" src="../../../image/insurance/car/zhuxian.png"/>
 						<span>主险</span>
 					</div> -->
@@ -92,7 +100,7 @@
 						
 					</div>
 					<!-- 附加险区域 -->
-					<!-- <div class="content-title-car FJXcontent border-1px-bottom">
+					<!-- <div class="content-title FJXcontent border-1px-bottom">
 						<img class="title-img" src="../../../image/insurance/car/fujiaxian.png"/>
 						<span>附加险</span>
 					</div> -->
@@ -101,7 +109,7 @@
 					</div>
 					
 					<!-- 专属服务 -->
-					<div class="zsfuTitle content-title-car border-1px-bottom">
+					<div class="zsfuTitle content-title border-1px-bottom">
 						<img class="title-img" src="../../../image/insurance/car/zhuanshufuwu.png"/>
 						<b>专属服务</b>
 						<img class="zsfwxiala" src="../../../image/insurance/car/xiala1.png">
@@ -205,11 +213,11 @@
 	      <div id="restartbj" class="button">确定</div>
 	  </div>
 	</div>
-	<script type="text/javascript" src="../../../js/lib/common/zepto.min.js"></script>
-	<script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js" ></script>
+    <script type="text/javascript" src="../../../js/lib/common/zepto.min.js" ></script>
+    <script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js" ></script>
     <script type="text/javascript" src="../../../js/lib/widget/mui/mui.picker.min.js"></script>
-	<script type="text/javascript" src="../../../js/lib/common/base.js"></script>
-	<script type="text/javascript" src="../../../js/lib/common/common.js"></script>
-	<script type="text/javascript" src="../../../js/usage/insurance/car/insuranceCoverage.js"></script>
+    <script type="text/javascript" src="../../../js/lib/common/base.js" ></script>
+    <script type="text/javascript" src="../../../js/lib/common/common.js" ></script> 
+    <script type="text/javascript" src="../../../js/usage/insurance/car/insuranceCoverage.js" ></script>
 	</body>
 </html>

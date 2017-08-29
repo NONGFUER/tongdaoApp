@@ -1,3 +1,12 @@
+@font-face {
+	font-family: iconfont;
+	src: url(../../../font/font_0nwe5isk2xz5b3xr.eot);
+	src: url(../../../font/font_0nwe5isk2xz5b3xr.eot?#iefix) format('embedded-opentype'), url(../../../font/font_0nwe5isk2xz5b3xr.ttf) format('truetype'), url(../../../font/font_0nwe5isk2xz5b3xr.svg#iconfont) format('svg')
+}
+
+.iconfont {
+	font-family: iconfont
+}
 #bodyMuiScroll {
 	margin-top: 44px;
 }
@@ -64,7 +73,7 @@ dd input[type=text] {
 }
 
 .mui-scroll-wrapper .footer p.on .font1 {
-	background: url(../../image/cancerRisk/dui.png);
+	background: url(../../../image/common/dui.png);
 	background-size: 100% 100%;
 }
 

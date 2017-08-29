@@ -1,3 +1,13 @@
+/*获取数据*/
+var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+	commodityCombinationId = urlParm.commodityCombinationId,
+	userCode = urlParm.userCode,
+	phone = urlParm.insurePhone;
+	$('.phone').html(phoneyin(phone));
+console.log("页面初始化，获取上个页面传值报文--");
+console.log(urlParm);
+var ma = null;
+
 var vm = new Vue({
 	el: '#list',
 	data: {
@@ -26,17 +36,12 @@ var vm = new Vue({
 	}
 })
 $(function() {
-	/*获取数据*/
-	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
-		commodityCombinationId = urlParm.commodityCombinationId;
-	console.log("页面初始化，获取上个页面传值报文--");
-	console.log(urlParm);
 	var reqData = {
 		"body": {
 			"commodityCombinationId": commodityCombinationId.toString()
 		},
 		"head": {
-			"userCode": "2835",
+			"userCode": userCode,
 			"transTime": "2017-08-26",
 			"channel": "01"
 		}
@@ -59,7 +64,28 @@ $(function() {
 	})
 	/*点击确定关闭提交数据*/
 	$(".note-div-btn").unbind("tap").bind("tap", function() {
-		$('.note').hide();
+		if($('#yan').val() != null && $('#yan').val() != "") {
+			if(ma == $('#yan').val()) {
+				$('.note').hide();
+				var policyNo = $(this).attr('policyNo');
+				var orderNo = $(this).attr('orderNo');
+				var insureNo = $(this).attr('insureNo');
+				var param = {
+					"userCode": userCode,
+					"policyNo": policyNo,
+					"orderNo": orderNo,
+					"insureNo": insureNo
+					/*订单编号*/
+				}
+				var jsonStr = UrlEncode(JSON.stringify(param));
+				window.location.href =  base.url + "tongdaoApp/html/managemoney/messageFillout/messageFillout.html?jsonKey=" + jsonStr;
+			} else {
+				mui.alert('验证码错误!');
+			}
+		} else {
+			mui.alert('验证码不能为空!');
+		}
+
 	})
 	/*点击X关发送短信窗口*/
 	$(".note-div_title_right").unbind("tap").bind("tap", function() {
@@ -101,8 +127,6 @@ function goldProductInfo(data) {
 		vm.touzizhouqi.chixu = vm.touzizhouqi[2].modueInfo;
 		vm.goumaishuoming = goumai[0].modueInfo;
 		vm.xiangguanxieyi = xiangguan;
-		console.log(goumai);
-		console.log(vm.touzizhouqi);
 	} else {
 		mui.alert('网络繁忙');
 	}
@@ -118,8 +142,22 @@ function sendMessage() {　
 	$(".dianji").attr("style", "color:#E0E0E0");
 	$(".dianji").html(curCount);
 	InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次  
+	var reqData = {
+		"head": {
+			"userCode": userCode,
+			"transTime": "",
+			"channel": '01',
+			"transToken": ""
+		},
+		"body": {
+			"userName": phone,
+			"type": '103'
+		}
+	};
+	var url = base.url + 'commonMethod/GetRegCode.do';
+	$.reqAjaxsFalse(url, reqData, GetRegCode);
 }
-
+/*验证码倒计时*/
 function SetRemainTime() {
 	if(curCount == 0) {
 		window.clearInterval(InterValObj); //停止计时器  
@@ -130,4 +168,14 @@ function SetRemainTime() {
 		curCount--;
 		$(".dianji").html(curCount);
 	}
+}
+/*发送短信*/
+function GetRegCode(data) {
+	mui.alert(data.statusMessage);
+	ma = data.returns.validateCode;
+}
+/*隐藏手机号中间几位*/
+function phoneyin(phone) {
+	var mphone = phone.substr(0, 3) + '****' + phone.substr(7);
+	return mphone;
 }

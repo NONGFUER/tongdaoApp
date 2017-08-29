@@ -2,7 +2,7 @@ mui.init();
 var vm = new Vue({
 	el: '#list',
 	data: {
-		Objectlist: null,
+		Objectlist: {},
 		bao: null,
 	},
 	mounted() {
@@ -82,9 +82,13 @@ $(function() {
 	})
 	mui('.man-div-body-ul ').on('tap', 'li', function() {
 		var policyNo = $(this).attr('policyNo');
+		var orderNo = $(this).attr('orderNo');
+		var insureNo = $(this).attr('insureNo');
 		var param = {
 			"userCode": userCode,
 			"policyNo": policyNo,
+			"orderNo":orderNo,
+			"insureNo":insureNo
 			/*订单编号*/
 		}
 		var jsonStr = UrlEncode(JSON.stringify(param));
@@ -114,7 +118,3 @@ function chuli() {
 		}
 	})
 }
-
-$(window).load(function() {
-	chuli()
-});

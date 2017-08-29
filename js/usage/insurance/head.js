@@ -13,18 +13,61 @@ var message = {
 var requestUrl = {
     
     //线下产品模块    
-    cusAndAgenInfoUrl    : base.url + 'customerBasic/getCustomerAndAgentInfo.do',              // 
-    liveProductInfoUrl   : base.url + 'offlineCommodityComDetail/getOfflineComComDetail.do',   //(完成)APP产品模块线下产品详情查询
-    commodityListUrl     : base.url + 'commodityCombination/getCommodityList.do',              //APP产品模块商品列表查询
-    commissionInfoUrl    : base.url + 'commodityCombination/getCommodityCommissionInfos.do',   //APP产品模块产品条款佣金比例列表查询
-    cusInsConsultantUrl  : base.url + 'cusInsuranceConsultant/getCusInsuranceConsultant.do',   //（完成）APP产品模块线下产品详情页保险顾问查询
-    addYuyueInfoUrl      : base.url + 'yuyue/addYuyueInfo.do',                                 //（完成）
+    cusAndAgenInfoUrl    : base.url + 'customerBasic/getCustomerAndAgentInfo.do',              // //APP用户及客户经理信息查询@gxj
+    liveProductInfoUrl   : base.url + 'offlineCommodityComDetail/getOfflineComComDetail.do',   //(完成)APP产品模块线下产品详情查询 @gxj
+    commodityListUrl     : base.url + 'commodityCombination/getCommodityList.do',              //APP产品模块商品列表查询 @gxj
+    commissionInfoUrl    : base.url + 'commodityCombination/getCommodityCommissionInfos.do',   //APP产品模块产品条款佣金比例列表查询 @gxj
+    cusInsConsultantUrl  : base.url + 'cusInsuranceConsultant/getCusInsuranceConsultant.do',   //（完成）APP产品模块线下产品详情页保险顾问查询 @gxj
+    addYuyueInfoUrl      : base.url + 'yuyue/addYuyueInfo.do',                                 //（完成）预约新增 @gxj
     //线上产品模块
-    onlineProductInfoUrl : base.url + "product/getOnlineProductDetail.do",
-    calOptions           : base.url + 'cal/getCalOptions.do'
+    onlineProductInfoUrl : base.url + 'product/getOnlineProductDetail.do',
+    calOptionsUrl        : base.url + 'cal/getCalOptions.do',   //根据商品组合id查询保费试算项@chengcheng
+    calDoUrl             : base.url + 'cal/cal.do',             //根据保费试算项进行保费试算@chengcheng
+    //线上投保模块
+    //ecard投保
+    ecardInsure          : base.url + 'ecard/toubao.do',     //投保接口@mjp
+    ecardPay             : base.url + 'ecard/pay.do',      //投保支付@mjp
+    ecardPayBack         : base.url + 'ecard/payBack.do',//投保地区查询@mjp
+
+    
 }
 //全局变量
 //var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
 
-var mobile     = "13800000000"//urlParm.mobile;//用户手机号
-var customerId = "8"//urlParm.customerId;//用户id
+var mobile     = "18900001111";  //urlParm.mobile;//用户手机号
+var customerId = "8";            //urlParm.customerId;//用户id
+var ccId       = "11";             //urlParm.ccId;商品组合id
+var ccCode     = "00400009";             //urlParm.ccCode;商品组合code
+// 18	18900001111				王晓伟
+
+// 1	00400001	天安防癌险（男神版）
+// 2	00400002	天安防癌险（女神版）
+// 3	00400003	天安防癌险（少儿版）
+// 4	00600001	弘康安溢保两全保险
+// 5	00600002	弘康安盈保年金保险
+// 6	00400004	锦绣吉顺
+// 7	00400005	锦程交通意外险
+// 8	00400006	健康佳人（佳丽福）
+// 9	00400007	健康安享
+// 10	00400008	“邻里和睦”家财综合保障计划
+// 11	00400009	商务飞人（精英版）
+// 12	00400010	天安“码上长大”学平险
+// 13	00400011	天安车险
+// 14	00500001	挂号服务费用补偿保险
+// 101	00900001	富德人寿富康宝年金保险
+// 102	00300001	华夏福临门年金保险（2015铂金版）
+// 103	00300002	华夏健康人生重大疾病保险
+// 104	00100001	泰康乐安康终身重大疾病保险
+// 105	00100002	泰康乐行综合意外保障计划
+// 106	00100003	泰康乐鑫两全保险（分红型）
+// 107	00200001	阳光人寿健康保终身恶性肿瘤疾病保险
+// 108	00200002	阳光人寿金喜连连年金保险
+// 109	00200003	阳光人寿康世宁终身重大疾病保险
+// 110	00200004	阳光人寿孝顺保恶性肿瘤疾病保险
+// 111	01000001	恒大恒久健康终身重大疾病保险（2017版）
+// 112	01000002	恒大金财人生保险计划（分红型）
+// 113	01000003	恒大千万护航两全保险产品计划
+// 114	01000004	恒大鑫福
+// 118	004000011	天安防癌险（男神版）
+// 119	004000022	天安防癌险（女神版）
+// 120	004000032	天安防癌险（少儿版）

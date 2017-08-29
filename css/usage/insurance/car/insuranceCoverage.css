@@ -1,10 +1,7 @@
-
+@charset "utf-8";
 .mainPage{
 	width: 100%;
 	margin-top: 44px;
-}
-html{
-	font-size:10px !important;
 }
 .header{
 	
@@ -42,7 +39,7 @@ html{
 	margin-top: 6px;
 }
 /* 标题 */
-.content-title-car{
+.content-title{
 	height: 50px;
 	line-height: 50px;
 	font-size: 14px;

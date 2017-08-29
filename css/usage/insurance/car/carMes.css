@@ -90,8 +90,8 @@
 	color: #fff;
 	text-align: center;
 	background: #1b6bb8;
-	border-radius: 5px;
-	margin-bottom: 15px;
+	border-radius: 0.5rem;
+	margin-bottom: 1.5rem;
 	float: left;
 }
 .confirmbtn{
@@ -103,8 +103,8 @@
 	color: #fff;
 	text-align: center;
 	background: #1b6bb8;
-	border-radius: 5px;
-	margin-bottom: 15px;
+	border-radius: 0.5rem;
+	margin-bottom: 1.5rem;
 }
 
 /*------------------------------------------------------------------------------*/
@@ -124,12 +124,70 @@
 .ownerTable tr:last-child td{
 	border-bottom: none;
 }
-
+/* .mescontainer table tr td:nth-child(1){
+	width:5.5%;
+}
+.mescontainer table tr td:nth-child(2){
+	width:58%;
+	text-align:left;
+}
+.mescontainer table tr td:nth-child(3){
+	width:31.8%;
+	text-align:left;
+}
+.mescontainer table tr td:nth-child(4){
+	width:5.5%;
+}
+.mescontainer table:nth-child(1) td:nth-child(2){
+	width:31.8%;
+}
+.mescontainer table:nth-child(1) td:nth-child(3){
+	width:58%;
+	text-indent:0.625rem;
+}
+.mescontainer table:nth-child(2) td:nth-child(3){
+	text-align:right;
+	border-left:1px solid #ccc;
+	background-color:#f7f7f7;
+	font-size: 14px;
+}
+.mescontainer table:nth-child(2) td:nth-child(4){
+	background-color:#f7f7f7;
+}
+.mescontainer table:nth-child(3) td{
+	border-bottom:none;
+	border-bottom:1px solid #cccccc;
+}
+.mescontainer table:nth-child(3) td:nth-child(2){
+	width:89.8%;
+}
+.mescontainer table:nth-child(3) td:nth-child(3){
+	width:5.5%;
+}
+.mescontainer table input{
+	width: 58%;
+	font-size: 16px;
+	color: #ccc;
+	text-align: right;
+	background-color: #fff;
+	float: right;
+	font-family: "microsoft yahei";
+	margin-right: 8%;
+}
+.mescontainer table:nth-child(3) input{
+	margin-right: 7.5%;
+}
+.mescontainer table:nth-child(1) input{
+	color: #585858;
+}
+.color{
+	color: #585858!important;
+} */
 .linkicon{
-	width: 6px;
+	width: 8px;
 	height: 10px;
 	float:right;
-	margin-top:3px;
+	margin-top:0.3rem;
 }
 .uniticon{
 	float:right;
@@ -138,20 +196,20 @@
 	width:45px;
 	height:27px;
 	float:right;
-	margin-top:1.5px;
-	margin-left:4.5px;
+	margin-top:0.15rem;
+	margin-left:0.45rem;
 }
 .confirmbtn{
 	width: 91.6667%;
-	line-height: 40px; 
+	line-height: 3.75rem; 
 	margin: 0 auto;
-	margin-top:25px;
-	font-size: 15px; /* 54px */
+	margin-top:2.5rem;
+	font-size: 1.5rem; /* 54px */
 	color: #fff;
 	text-align: center;
 	background: #1b6bb8;
-	border-radius: 5px;
-	margin-bottom: 15px;
+	border-radius: 0.5rem;
+	margin-bottom: 1.5rem;
 }
 
 /*--------------------------------车辆具体信息----------------------------------------------*/
@@ -211,27 +269,27 @@
 	color: #585858;
 }
 #specialCarFlag{
-	width:15px;
-	height:15px;
+	width:1.5rem;
+	height:1.5rem;
 	/* float:left; */
-	margin-top:1.5px;
-	margin-left:6.25px;
-	margin-right:6.25px;
+	margin-top:0.15rem;
+	margin-left:0.625rem;
+	margin-right: 0.625rem;
 }
 .litterhelp{
-	margin-top: 8px;
+	margin-top: 0.8rem;
 	float: right;
 	width: 28%!important;
 }
 .litterhelp img{
-	width: 31.25px;
+	width: 3.125rem;
 	margin: 0 auto;
-	margin-bottom: 5px;
+	margin-bottom: 0.5rem;
 	float: right;
-	margin-right: 14px;
+	margin-right: 1.4rem;
 }
 .litterhelp span{
-	font-size: 12.5px;
+	font-size: 1.25rem;
 	color: #585858;
 	font-family: "microsoft yahei";
 	width: 51%;
@@ -245,19 +303,19 @@
 	text-align: center;
 }
 .litterhelp2 img{
-	width: 22.25px;
-	margin: 5px auto;
+	width: 2.225rem;
+	margin: 0.5rem auto;
 	/* margin-bottom: 0.5rem; */
 	float: right;
-	margin-right: 25.625px;
+	margin-right: 2.5625rem;
 }
 .litterhelp2 span{
-	margin-right: 15.625px;
+	margin-right: 1.5625rem;
 	float: right;
-	font-size: 8.4px;
+	font-size: 0.84rem;
 	color: #fff;
 	font-family: "microsoft yahei";
-	margin-top: -34px;
+	margin-top: -3.4rem;
 }
 .shadow{
 	z-index: 999;
@@ -296,20 +354,20 @@
 	position: absolute;
 	left: 3.7%;
 	top: 50%;
-	margin-top: -151px;
+	margin-top: -15.1rem;
 	width: 92.6%;
-	height: 302px;
+	height: 30.2rem;
 	background-color: #fff;
 	z-index: 1111;
-	border-radius:6.25px;
+	border-radius: 0.625rem;
 	color: #585858;
 	display: none;
 }
 .carselectarea h3{
-	font-size: 17px;
+	font-size: 1.75rem;
 	color: #888;
 	line-height:100%;
-	margin: 12px 0 16px 12px;
+	margin: 1.2rem 0 1.6rem 1.2rem;
 	font-weight: normal;
 }
 #carselect_div {
@@ -323,15 +381,15 @@
 }
 .car{
 	width:100%;
-	height:56.25px;
+	height:5.625rem;
 	border:1px solid #888;
-	border-radius:6.25px;
-	margin-top:6.25px;
+	border-radius:0.625rem;
+	margin-top:0.625rem;
 }
 .car.choosed{
 	border-color:#ff5000;
 	background:url(../../images/choosedsign.png) 0 0 no-repeat;
-	background-size:21px 21px;
+	background-size:2.1rem 2.1rem;
 }
 .car div{
 	width:92%;
@@ -339,24 +397,24 @@
 	line-height:100%;
 }
 .car div:first-child{
-	margin-top:10px;
-	margin-bottom:14px;
+	margin-top:1rem;
+	margin-bottom:1.4rem;
 }
 .car div:first-child span{
-	font-size:13px;
-	margin-right:6.25px;
+	font-size:1.33rem;
+	margin-right:0.625rem;
 }
 .car div:last-child span{
-	font-size:13px;
-	margin-right:6.25px;
+	font-size:1.25rem;
+	margin-right:0.625rem;
 }
 .car div:last-child span:last-child{
-	font-size:10px;
-	margin-right:3.125px;
+	font-size:1rem;
+	margin-right:0.3125rem;
 	float:right;
 }
 .car div:last-child span:nth-child(4){
-	font-size:15px;
+	font-size:1.5rem;
 	margin-right:0;
 	color:#ff5000;
 	float:right;
@@ -366,8 +424,8 @@
 	-webkit-flow: row;
 	position: absolute;
 	width: 100%;
-	height: 45px;
-	line-height: 45px;
+	height: 4.5rem;
+	line-height: 4.5rem;
 	bottom: 0%;
 	text-align: center;
 }
@@ -375,7 +433,7 @@
 	height:100%;
 	-webkit-box-flex:1;
 	display:block;
-	font-size:15px;
+	font-size:1.5rem;
 	color:#ff5000;
 }
 .confirmarea span:first-child{
@@ -389,18 +447,18 @@
 	position: fixed;
 	left: 3.7%;
 	top: 50%;
-	margin-top: -64px;
+	margin-top: -6.4rem;
 	z-index: 1111;
 	width: 92.6%;
-	height: 128px;
+	height: 12.8rem;
 	background-color: #fff;
-	border-radius: 6.25px;
+	border-radius: 0.625rem;
 	color: #585858;
 	display: none;
 }
 .hint {
-	font-size: 17px;
-	padding: 20px;
+	font-size: 1.75rem;
+	padding: 2rem;
 	text-align: center;
 }
 .confirmsection {
@@ -408,8 +466,8 @@
 	-webkit-flow: row;
 	position: absolute;
 	width: 100%;
-	height: 45px;
-	line-height: 45px;
+	height: 4.5rem;
+	line-height: 4.5rem;
 	bottom: 0;
 	text-align: center;
 }
@@ -417,7 +475,7 @@
 	height: 100%;
 	-webkit-box-flex: 1;
 	display: block;
-	font-size: 15px;
+	font-size: 1.5rem;
 	color: #ff5000;
 }
 .vehicleselect{
@@ -464,7 +522,7 @@
 .td_sharetypeimg{
     width: 56%;
     margin: 0 auto;
-    margin-bottom: 5px;
+    margin-bottom: 0.5rem;
 }
 
 .title{

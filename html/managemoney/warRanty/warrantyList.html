@@ -25,7 +25,7 @@
 					</div>
 					<div id='list' class="man-div-body ">
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist"   v-bind:policyNo='value.policyNo'>
+							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:policyNo='value.policyNo' v-bind:orderNo='value.orderNo' v-bind:insureNo='value.insureNo'>
 								<div v-if="value.orderStatus=='99'" class="mui-slider-right mui-disabled shanchu">
 									<a class="mui-btn mui-btn-red">
 										<i class="lajitong"></i>
@@ -49,23 +49,23 @@
 										<ul class="man-div-body-ul_li_div_ul2">
 											<li>
 												<span>保单价值</span>
-												<span v-html="value.accountValue" ></span>
+												<span v-html="value.accountValue+'元'" ></span>
 											</li>
 											<li>
 												<span>投资本金</span>
-												<span v-html="value.investmentPri"></span>
+												<span v-html="value.investmentPri+'元'"></span>
 											</li>
 											<li>
 												<span>昨日收益</span>
-												<span v-html="value.yesterdayProfit"></span>
+												<span v-html="value.yesterdayProfit+'元'"></span>
 											</li>
 											<li>
 												<span>累计收益</span>
-												<span v-html="value.totalProfit"></span>
+												<span v-html="value.totalProfit+'元'"></span>
 											</li>
 											<li>
 												<span>初始费用</span>
-												<span v-html="value.initialFee"></span>
+												<span v-html="value.initialFee+'元'"></span>
 											</li>
 											<li>
 												<span>保障时间</span>

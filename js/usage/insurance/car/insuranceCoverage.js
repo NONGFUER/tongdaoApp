@@ -6,7 +6,7 @@ var comparyCode = "00004";// 车险保险公司编号
 var add_risklist = new Array();// 存储页面附加险数
 var bxCxPriserviceArr = null;//
 var jqxFlagg = "1"; // 交强险投保标志 投保:1;不投保:0
-var gfbCxOffer = {};// 报价信息
+var cxOffer = {};// 报价信息
 var forceBeginDate;// 交强险起始日期
 var bizBeginDate;// 商业险起始日期
 
@@ -30,8 +30,7 @@ $(function(){
 	$("#wenhao").unbind("tap").bind("tap",function(){
 		window.location.href="zhinanPage.html"+window.location.search;
 	})
-	/***---页面初始化   通过cxSessionId获取订单详细信息------*/
-	init();
+	
 	
 	//头部返回
 	$(".h_back").unbind("tap").bind("tap",function() {
@@ -51,20 +50,20 @@ $(function(){
 				$(".zsfwxiala").attr("src").lastIndexOf("/") + 1);
 		if(imgName == "xiala1.png"){
 			$(".services").show();
-			$(".zsfwxiala").attr("src","../../images/xiala.png");
+			$(".zsfwxiala").attr("src","../../../image/insurance/car/xiala.png");
 			$(".zsfwxiala").css("width","10px");
 			$(".zsfwxiala").css("height","14px");
 		}else{
 			$(".services").hide();
-			$(".zsfwxiala").attr("src","../../images/xiala1.png");
+			$(".zsfwxiala").attr("src","../../../image/insurance/car/xiala1.png");
 			$(".zsfwxiala").css("width","14px");
 			$(".zsfwxiala").css("height","10px");
 		}
 	});
 	
 	//加载图片
-	$(".vehicleArea_img img").attr("src","../../images/moneybtn.png");
-	$(".policyArea_img img").attr("src","../../images/accurate_icon.png");
+	$(".vehicleArea_img img").attr("src","../../../image/insurance/car/moneybtn.png");
+	$(".policyArea_img img").attr("src","../../../image/insurance/car/accurate_icon.png");
 	
 	/* 给选项卡加当前选项属性active */
 	$(".tab_titles .tab_title_a").unbind("tap").bind("tap",function(){
@@ -74,9 +73,9 @@ $(function(){
 	
 	/* 自由组合版 */
 	$("#ziyou").unbind("tap").bind("tap",function(){
-		$("#zunxiang img").attr("src","../../images/renqi1.png");
-		$("#jizhi img").attr("src","../../images/youhui1.png");
-		$("#ziyou img").attr("src","../../images/siji2.png");
+		$("#zunxiang img").attr("src","../../../image/insurance/car/renqi1.png");
+		$("#jizhi img").attr("src","../../../image/insurance/car/youhui1.png");
+		$("#ziyou img").attr("src","../../../image/insurance/car/siji2.png");
 		
 		$(".sytoubao").show();//商业险投保按钮显示
 		//交强险默认选中
@@ -89,9 +88,9 @@ $(function(){
 	$("#ziyou").trigger("tap");
 	/* 尊享服务版 */
 	$("#zunxiang").unbind("tap").bind("tap",function(){
-		$("#zunxiang img").attr("src","../../images/renqi2.png");
-		$("#jizhi img").attr("src","../../images/youhui1.png");
-		$("#ziyou img").attr("src","../../images/siji1.png");
+		$("#zunxiang img").attr("src","../../../image/insurance/car/renqi2.png");
+		$("#jizhi img").attr("src","../../../image/insurance/car/youhui1.png");
+		$("#ziyou img").attr("src","../../../image/insurance/car/siji1.png");
 		$(".sytoubao").hide();//商业险投保按钮隐藏
 		//交强险默认不选中
 		jqxFlagg = "0";
@@ -106,9 +105,9 @@ $(function(){
 	})
 	/* 极致优惠版 */
 	$("#jizhi").unbind("tap").bind("tap",function(){
-		$("#zunxiang img").attr("src","../../images/renqi1.png");
-		$("#jizhi img").attr("src","../../images/youhui2.png");
-		$("#ziyou img").attr("src","../../images/siji1.png");
+		$("#zunxiang img").attr("src","../../../image/insurance/car/renqi1.png");
+		$("#jizhi img").attr("src","../../../image/insurance/car/youhui2.png");
+		$("#ziyou img").attr("src","../../../image/insurance/car/siji1.png");
 		$(".sytoubao").hide();//商业险投保按钮隐藏
 		//交强险默认不选中
 		jqxFlagg = "0";
@@ -219,22 +218,22 @@ function cheackRiskinfo() {
 //报价接口
 function baojia(){
 	var fujia4choose2 = 0;
-	gfbCxOffer = {};
+	cxOffer = {};
 	
 	// 获取数值
-	gfbCxOffer.businessBegindate = $.getDateStr("0","yyyy-mm-dd",1);//商业险起保日期 取当前日期后一天
+	cxOffer.businessBegindate = $.getDateStr("0","yyyy-mm-dd",1);//商业险起保日期 取当前日期后一天
 
-	gfbCxOffer.companyCode = comparyCode; // 所属保险公司
+	cxOffer.companyCode = comparyCode; // 所属保险公司
 	if (jqxFlagg == "1") {// jqxFlagg; 交强险投保标志 投保:1;不投保:0
-		gfbCxOffer.jqxFlag = "投保"; // 交强险投保标志 投保:1;不投保:0
-		gfbCxOffer.jqxPre = "1"; // 交强险保费
+		cxOffer.jqxFlag = "投保"; // 交强险投保标志 投保:1;不投保:0
+		cxOffer.jqxPre = "1"; // 交强险保费
 	} else {
-		gfbCxOffer.jqxFlag = "不投保"; // 交强险投保标志 投保:1;不投保:0
-		gfbCxOffer.jqxPre = "0"; // 交强险保费
+		cxOffer.jqxFlag = "不投保"; // 交强险投保标志 投保:1;不投保:0
+		cxOffer.jqxPre = "0"; // 交强险保费
 	}
-	gfbCxOffer.jqxBegindate = $.getDateStr("0","yyyy-mm-dd",1);//交强险起保日期 取当前日期后一天
-	gfbCxOffer.sessionid = cxSessionId; // 唯一流水号"15061713313116515688";
-	gfbCxOffer.productId = product_id; // 产品编号 (待定)
+	cxOffer.jqxBegindate = $.getDateStr("0","yyyy-mm-dd",1);//交强险起保日期 取当前日期后一天
+	cxOffer.sessionid = cxSessionId; // 唯一流水号"15061713313116515688";
+	cxOffer.productId = product_id; // 产品编号 (待定)
     if(sytoubaoFlag){//商业险是否投保
 		/**
 		* 获取主险参数数据
@@ -251,16 +250,16 @@ function baojia(){
 			*/
 			if (mainRiskCode == "CarLossCoverage") {
 				// if(picName=="roundyes.png"){
-				gfbCxOffer.carlossFlag = $("#mainEnuContent" + i).val(); // 车辆损失险标志
-				gfbCxOffer.carlossCoverage = $("#mainEnuContent" + i).attr("name"); // 车辆损失险保费
+				cxOffer.carlossFlag = $("#mainEnuContent" + i).val(); // 车辆损失险标志
+				cxOffer.carlossCoverage = $("#mainEnuContent" + i).attr("name"); // 车辆损失险保费
 				if (picName2 == 1) {
-					gfbCxOffer.carlossMpFlag = "投保"; // 车损不计免赔标志
+					cxOffer.carlossMpFlag = "投保"; // 车损不计免赔标志
 					// 1-勾选不计免赔
 					// 0-未勾选不计免赔
-					gfbCxOffer.carlossMpCoverage = "1";
+					cxOffer.carlossMpCoverage = "1";
 				} else {
-					gfbCxOffer.carlossMpFlag = "不投保";
-					gfbCxOffer.carlossMpCoverage = "0";
+					cxOffer.carlossMpFlag = "不投保";
+					cxOffer.carlossMpCoverage = "0";
 				}
 			}
 
@@ -269,17 +268,17 @@ function baojia(){
 			*/
 			if (mainRiskCode == "DriverCoverage") {
 				// if(picName=="roundyes.png"){
-				gfbCxOffer.driverFlag = $("#mainEnuContent" + i).val(); // 司机座位险标志
-				gfbCxOffer.driverCoverage = $("#mainEnuContent" + i).attr("name"); // 司机座位险保费
+				cxOffer.driverFlag = $("#mainEnuContent" + i).val(); // 司机座位险标志
+				cxOffer.driverCoverage = $("#mainEnuContent" + i).attr("name"); // 司机座位险保费
 
 				if (picName2 == 1) {
-					gfbCxOffer.driverMpFlag = "投保"; // 司机座位险不计免赔标志
+					cxOffer.driverMpFlag = "投保"; // 司机座位险不计免赔标志
 					// 1-勾选不计免赔
 					// 0-未勾选不计免赔
-					gfbCxOffer.driverMpCoverage = "1";
+					cxOffer.driverMpCoverage = "1";
 				} else {
-					gfbCxOffer.driverMpFlag = "不投保";
-					gfbCxOffer.driverMpCoverage = "0";
+					cxOffer.driverMpFlag = "不投保";
+					cxOffer.driverMpCoverage = "0";
 				}
 			}
 
@@ -288,14 +287,14 @@ function baojia(){
 			*/
 			if (mainRiskCode == "PassengerCoverage") {
 				// if(picName=="roundyes.png"){
-				gfbCxOffer.passengerFlag = $("#mainEnuContent" + i).val(); // 乘客座位责任险标志
-				gfbCxOffer.passengerCoverage = $("#mainEnuContent" + i).attr("name"); // 乘客座位责任险保费
+				cxOffer.passengerFlag = $("#mainEnuContent" + i).val(); // 乘客座位责任险标志
+				cxOffer.passengerCoverage = $("#mainEnuContent" + i).attr("name"); // 乘客座位责任险保费
 				if (picName2 == 1) {
-					gfbCxOffer.passengerMpFlag = "投保"; // 乘客座位责任险不计免赔标志
-					gfbCxOffer.passengerMpCoverage = "1";
+					cxOffer.passengerMpFlag = "投保"; // 乘客座位责任险不计免赔标志
+					cxOffer.passengerMpCoverage = "1";
 				} else {
-					gfbCxOffer.passengerMpFlag = "不投保";
-					gfbCxOffer.passengerMpCoverage = "0";
+					cxOffer.passengerMpFlag = "不投保";
+					cxOffer.passengerMpCoverage = "0";
 				}
 			}
 
@@ -304,16 +303,16 @@ function baojia(){
 			*/
 			if (mainRiskCode == "TheftCoverage") {
 				// if(picName=="roundyes.png"){
-				gfbCxOffer.theftFlag = $("#mainEnuContent" + i).val(); // 全车盗抢险标志
-				gfbCxOffer.theftCoverage = $("#mainEnuContent" + i).attr("name"); // 全车盗抢险保费
+				cxOffer.theftFlag = $("#mainEnuContent" + i).val(); // 全车盗抢险标志
+				cxOffer.theftCoverage = $("#mainEnuContent" + i).attr("name"); // 全车盗抢险保费
 				if (picName2 == 1) {
-					gfbCxOffer.theftMpFlag = "投保"; // 全车盗抢险不计免赔标志
+					cxOffer.theftMpFlag = "投保"; // 全车盗抢险不计免赔标志
 					// 1-勾选不计免赔
 					// 0-未勾选不计免赔
-					gfbCxOffer.theftMpCoverage = "1";
+					cxOffer.theftMpCoverage = "1";
 				} else {
-					gfbCxOffer.theftMpFlag = "不投保";
-					gfbCxOffer.theftMpCoverage = "0";
+					cxOffer.theftMpFlag = "不投保";
+					cxOffer.theftMpCoverage = "0";
 				}
 			}
 
@@ -322,16 +321,16 @@ function baojia(){
 			*/
 			if (mainRiskCode == "ThirdPartyCoverage") {
 				// if(picName=="roundyes.png"){
-				gfbCxOffer.thirdpartyFlag = $("#mainEnuContent" + i).val(); // 商业第三者责任险标志
-				gfbCxOffer.thirdpartyCoverage = $("#mainEnuContent" + i).attr("name"); // 商业第三者责任险保费
+				cxOffer.thirdpartyFlag = $("#mainEnuContent" + i).val(); // 商业第三者责任险标志
+				cxOffer.thirdpartyCoverage = $("#mainEnuContent" + i).attr("name"); // 商业第三者责任险保费
 				if (picName2 == 1) {
-					gfbCxOffer.thirdpartyMpFlag = "投保"; // 商业第三者责任险不计免赔标志
+					cxOffer.thirdpartyMpFlag = "投保"; // 商业第三者责任险不计免赔标志
 					// 1-勾选不计免赔
 					// 0-未勾选不计免赔
-					gfbCxOffer.thirdpartyMpCoverage = "1";
+					cxOffer.thirdpartyMpCoverage = "1";
 				} else {
-					gfbCxOffer.thirdpartyMpFlag = "不投保";
-					gfbCxOffer.thirdpartyMpCoverage = "0";
+					cxOffer.thirdpartyMpFlag = "不投保";
+					cxOffer.thirdpartyMpCoverage = "0";
 				}
 			}
 		}
@@ -353,8 +352,8 @@ function baojia(){
 			 */
 			if (addRiskCode == "GlassBrokenCoverage") {
 				// if(picName=="roundyes.png"){
-				gfbCxOffer.glassFlag = $("#addEnuContent" + i).val(); // 玻璃破碎险标志
-				gfbCxOffer.glassCoverage = $("#addEnuContent" + i).attr("name"); // 玻璃破碎险保费
+				cxOffer.glassFlag = $("#addEnuContent" + i).val(); // 玻璃破碎险标志
+				cxOffer.glassCoverage = $("#addEnuContent" + i).attr("name"); // 玻璃破碎险保费
 			}
 	
 			/**
@@ -362,16 +361,16 @@ function baojia(){
 			 */
 			if (addRiskCode == "SelfIgniteCoverage") {
 				// if(picName=="roundyes.png"){
-				gfbCxOffer.selfigniteFlag = $("#addEnuContent" + i).val(); // 自燃损失险标志
-				gfbCxOffer.selfigniteCoverage = $("#addEnuContent" + i).attr("name"); // 自燃损失险保费
+				cxOffer.selfigniteFlag = $("#addEnuContent" + i).val(); // 自燃损失险标志
+				cxOffer.selfigniteCoverage = $("#addEnuContent" + i).attr("name"); // 自燃损失险保费
 				if (picName2 == 1) {
-					gfbCxOffer.selfigniteMpFlag = "投保"; // 划痕险不计免赔标志
+					cxOffer.selfigniteMpFlag = "投保"; // 划痕险不计免赔标志
 					// 1-勾选不计免赔
 					// 0-未勾选不计免赔
-					gfbCxOffer.selfigniteMpCoverage = "1";
+					cxOffer.selfigniteMpCoverage = "1";
 				} else {
-					gfbCxOffer.selfigniteMpFlag = "不投保";
-					gfbCxOffer.selfigniteMpCoverage = "0";
+					cxOffer.selfigniteMpFlag = "不投保";
+					cxOffer.selfigniteMpCoverage = "0";
 				}
 			}
 			
@@ -381,20 +380,20 @@ function baojia(){
 			*/
 			if (addRiskCode == "NewEquipmentCoverage") {
 				// if(picName=="roundyes.png"){
-				gfbCxOffer.newEquipmentFlag = $("#addEnuContent" + i).val(); // 新增加设备损失险标志
-				gfbCxOffer.newEquipmentCoverage = $("#addEnuContent" + i).attr("name"); // 新增加设备损失险保费
+				cxOffer.newEquipmentFlag = $("#addEnuContent" + i).val(); // 新增加设备损失险标志
+				cxOffer.newEquipmentCoverage = $("#addEnuContent" + i).attr("name"); // 新增加设备损失险保费
 				if (picName2 == 1) {
-					gfbCxOffer.newEquipmentMpFlag = "投保"; // 新增加设备损失险不计免赔标志
+					cxOffer.newEquipmentMpFlag = "投保"; // 新增加设备损失险不计免赔标志
 					// 1-勾选不计免赔
 					// 0-未勾选不计免赔
-					gfbCxOffer.newequipmentMpCoverage = "1";
+					cxOffer.newEquipmentMpCoverage = "1";
 				} else {
-					gfbCxOffer.newEquipmentMpFlag = "不投保";
-					gfbCxOffer.newequipmentMpCoverage = "0";
+					cxOffer.newEquipmentMpFlag = "不投保";
+					cxOffer.newEquipmentMpCoverage = "0";
 				}
 				
 				if(commodityNo=="0419900101"){
-					if(gfbCxOffer.newEquipmentCoverage != "0"){
+					if(cxOffer.newEquipmentCoverage != "0"){
 						fujia4choose2 += 1;
 					}else{
 						fujia4choose2 -= 1;
@@ -406,11 +405,11 @@ function baojia(){
 			* 指定专修厂险
 			*/
 			if (addRiskCode == "AppointRepairCoverage") {
-				gfbCxOffer.appointrepairFlag = $("#addEnuContent" + i).val(); // 指定专修厂险标志
-				gfbCxOffer.appointrepairCoverage = $("#addEnuContent" + i).attr("name"); // 指定专修厂险保费
+				cxOffer.appointrepairFlag = $("#addEnuContent" + i).val(); // 指定专修厂险标志
+				cxOffer.appointrepairCoverage = $("#addEnuContent" + i).attr("name"); // 指定专修厂险保费
 				
 				if(commodityNo=="0419900101"){
-					if(gfbCxOffer.appointrepairCoverage != "0"){
+					if(cxOffer.appointrepairCoverage != "0"){
 						fujia4choose2 += 1;
 					}else{
 						fujia4choose2 -= 1;
@@ -422,24 +421,24 @@ function baojia(){
 			 * 发动机涉水损失险
 			 */
 			if (addRiskCode == "EngineWadingCoverage") {
-				gfbCxOffer.wadingFlag = $("#addEnuContent" + i).val(); // 涉水险标志
-				gfbCxOffer.wadingCoverage = $("#addEnuContent" + i).attr("name"); // 涉水险保费
+				cxOffer.wadingFlag = $("#addEnuContent" + i).val(); // 涉水险标志
+				cxOffer.wadingCoverage = $("#addEnuContent" + i).attr("name"); // 涉水险保费
 				
 				if(commodityNo=="0419900101"){
-					if(gfbCxOffer.wadingCoverage != "0"){
+					if(cxOffer.wadingCoverage != "0"){
 						fujia4choose2 += 1;
 					}else{
 						fujia4choose2 -= 1;
 					}
 				}
 				if (picName2 == 1) {
-					gfbCxOffer.wadingMpFlag = "投保"; // 划痕险不计免赔标志
+					cxOffer.wadingMpFlag = "投保"; // 划痕险不计免赔标志
 					// 1-勾选不计免赔
 					// 0-未勾选不计免赔
-					gfbCxOffer.wadingMpCoverage = "1";
+					cxOffer.wadingMpCoverage = "1";
 				} else {
-					gfbCxOffer.wadingMpFlag = "不投保";
-					gfbCxOffer.wadingMpCoverage = "0";
+					cxOffer.wadingMpFlag = "不投保";
+					cxOffer.wadingMpCoverage = "0";
 				}
 			}
 	
@@ -448,24 +447,24 @@ function baojia(){
 			 */
 			if (addRiskCode == "MentalDistressCoverage") {
 				// if(picName=="roundyes.png"){
-				gfbCxOffer.mentalDistressFlag = $("#addEnuContent" + i).val(); // 精神损害抚慰金责任险标志
-				gfbCxOffer.mentaldisressCoverage = $("#addEnuContent" + i).attr("name"); // 精神损害抚慰金责任险保费
+				cxOffer.mentaldistressFlag = $("#addEnuContent" + i).val(); // 精神损害抚慰金责任险标志
+				cxOffer.mentaldistressCoverage = $("#addEnuContent" + i).attr("name"); // 精神损害抚慰金责任险保费
 				
 				if(commodityNo=="0419900101"){
-					if(gfbCxOffer.mentaldisressCoverage != "0"){
+					if(cxOffer.mentaldistressCoverage != "0"){
 						fujia4choose2 += 1;
 					}else{
 						fujia4choose2 -= 1;
 					}
 				}
 				if (picName2 == 1) {
-					gfbCxOffer.mentalDistressMpFlag = "投保"; // 划痕险不计免赔标志
+					cxOffer.mentaldistressMpFlag = "投保"; // 划痕险不计免赔标志
 					// 1-勾选不计免赔
 					// 0-未勾选不计免赔
-					gfbCxOffer.mentaldistressMpCoverage = "1";
+					cxOffer.mentaldistressMpCoverage = "1";
 				} else {
-					gfbCxOffer.mentalDistressMpFlag = "不投保";
-					gfbCxOffer.mentaldistressMpCoverage = "0";
+					cxOffer.mentaldistressMpFlag = "不投保";
+					cxOffer.mentaldistressMpCoverage = "0";
 				}
 			}
 			
@@ -474,8 +473,8 @@ function baojia(){
 			 */
 			if (addRiskCode == "NoThirdPartyCoverage") {
 				// if(picName=="roundyes.png"){
-				gfbCxOffer.nothirdpartyFlag = $("#addEnuContent" + i).val(); // 无法找到第三方特约险
-				gfbCxOffer.nothrdpartyCoverage = $("#addEnuContent" + i).attr("name"); // 无法找到第三方特约险
+				cxOffer.nothirdpartyFlag = $("#addEnuContent" + i).val(); // 无法找到第三方特约险
+				cxOffer.nothirdpartyCoverage = $("#addEnuContent" + i).attr("name"); // 无法找到第三方特约险
 			}
 
 			/**
@@ -483,16 +482,16 @@ function baojia(){
 			*/
 			if (addRiskCode == "CarScrachCoverage") {
 				// if(picName=="roundyes.png"){
-				gfbCxOffer.carscrachFlag = $("#addEnuContent" + i).val(); // 车身划痕险标志
-				gfbCxOffer.carscrachCoverage = $("#addEnuContent" + i).attr("name"); // 车身划痕险保费
+				cxOffer.carscrachFlag = $("#addEnuContent" + i).val(); // 车身划痕险标志
+				cxOffer.carscrachCoverage = $("#addEnuContent" + i).attr("name"); // 车身划痕险保费
 				if (picName2 == 1) {
-					gfbCxOffer.carscrachMpFlag = "投保"; // 划痕险不计免赔标志
+					cxOffer.carscrachMpFlag = "投保"; // 划痕险不计免赔标志
 					// 1-勾选不计免赔
 					// 0-未勾选不计免赔
-					gfbCxOffer.carscrachMpCoverage = "1";
+					cxOffer.carscrachMpCoverage = "1";
 				} else {
-					gfbCxOffer.carscrachMpFlag = "不投保";
-					gfbCxOffer.carscrachMpCoverage = "0";
+					cxOffer.carscrachMpFlag = "不投保";
+					cxOffer.carscrachMpCoverage = "0";
 				}
 			}
 			/**
@@ -500,8 +499,8 @@ function baojia(){
 			*/
 			if (addRiskCode == "CarDamagerCoverage") {
 				// if(picName=="roundyes.png"){
-				gfbCxOffer.carDamagerFlag = $("#addEnuContent" + i).val(); // 车身划痕险标志
-				gfbCxOffer.carDamagerCoverage = $("#addEnuContent" + i).attr("name"); // 车身划痕险保费
+				cxOffer.carDamagerFlag = $("#addEnuContent" + i).val(); // 车身划痕险标志
+				cxOffer.carDamagerCoverage = $("#addEnuContent" + i).attr("name"); // 车身划痕险保费
 			}
 			
 		}
@@ -517,7 +516,7 @@ function baojia(){
 			}
 		}
     }else{
-    	if(gfbCxOffer.jqxPre == "0"){//交强险、商业险都未投保
+    	if(cxOffer.jqxPre == "0"){//交强险、商业险都未投保
     		modelAlert("交强险、商业险至少选择一种进行投保！");
 			return false;
     	}
@@ -528,7 +527,7 @@ function baojia(){
 		"sessionId" : cxSessionId, // 唯一流水号
 		"agentCode" : parm.head.userName,
 		"comparyCode" : comparyCode,
-		"gfbCxOffer" : gfbCxOffer,
+		"cxOffer" : cxOffer,
 		"commodityNo" : commodityNo
 		
 	};
@@ -946,7 +945,7 @@ $.addMainInsureContentBack = function(dataParam) {
 				if(commodityNo == "0419900101"){
 					var str3 = "";
 					str3 += "<tr class='choose2'>";
-					str3 += "<td class='border-1px-bottom' colspan='3'><img src='../../images/tishi.png' style='width:14px;height:14px;'>以下4项保险需任选2项或2项以上</td>"
+					str3 += "<td class='border-1px-bottom' colspan='3'><img src='../../../image/insurance/car/tishi.png' style='width:14px;height:14px;'>以下4项保险需任选2项或2项以上</td>"
 					str3 += "</tr>";
 					str += str3;
 					str += str4;
@@ -1050,13 +1049,13 @@ $.addMainInsureContentBack = function(dataParam) {
 			}
 			
 			//加载专属服务
-			if(param.bxCxPriservice != null && param.bxCxPriservice != ""){
-				bxCxPriserviceArr = param.bxCxPriservice;
+			if(param.cxPriservice != null && param.cxPriservice != ""){
+				bxCxPriserviceArr = param.cxPriservice;
 				var zsfwTitleStr="";
 				var zsfuContentStr="";
 				$(".services").html("");
-				for ( var i = 0; i < param.bxCxPriservice.length; i++){
-					zsfwTitleStr += '<div class="zsfwtitle" onclick="intoServicePage('+i+')">'+param.bxCxPriservice[i].serviceTitle+'</div>';
+				for ( var i = 0; i < param.cxPriservice.length; i++){
+					zsfwTitleStr += '<div class="zsfwtitle" onclick="intoServicePage('+i+')">'+param.cxPriservice[i].serviceTitle+'</div>';
 				}
 				zsfwTitleStr += '<div class="clear"></div>';
 			}
@@ -1129,20 +1128,7 @@ function unfoldMes(idarea, idmes, mes2, mes3) {
 				}
 			});
 }
-/***---页面初始化   通过cxSessionId获取订单详细信息------*/
-function init(){
-	var url = base.url + "cx/getAllInfo.do";
-	var data = {
-		"sessionId" : cxSessionId,// 车险投保唯一流水号
-	};
-	$.toAjaxsno(url, data, function(param){
-		param = eval("(" + param + ")");
-	    if (param != null || param != "") {
-	    	  var provinceCode=param.cxInfo.gfbCxOrder.provinceCode;//投保省代码
-	    	  var issueChannel=param.cxInfo.gfbCxOrder.issueChannel;//出单渠道代码
-	    }
-	});
-}
+
 /* 设置滑动区域 */
 $.setscroll = function() {
 	var Scrollheight = window.innerHeight - $("header").height();

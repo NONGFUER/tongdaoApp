@@ -27,7 +27,7 @@
 										</li>
 										<li>
 											<span>保单号:</span>
-											<span v-html="value.policyNo">123213662622</span>
+											<span class="policyNo" v-html="value.policyNo">123213662622</span>
 										</li>
 									</ul>
 									<div class="xian"></div>
@@ -52,7 +52,7 @@
 										<li class="li_height">
 											<ul class="man-div-body-ul_li_div_ul3">
 												<li>
-													<div class="div_btn" v-bind:orderNo='value.orderNo' v-bind:commodityCommId='value.commodityCommId'>赎回</div>
+													<div class="div_btn" v-bind:orderNo='value.orderNo' v-bind:commodityCommId='value.commodityCommId' v-bind:policyNo='value.policyNo' v-bind:insureNo='value.insureNo'>赎回</div>
 												</li>
 											</ul>
 										</li>

@@ -1,25 +1,71 @@
-/*data传值*/
-var data = '';
+/*获取数据*/
+var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+	orderNo = urlParm.body.orderNo,
+	insureNo = urlParm.body.insureNo,
+	commmodityComId = urlParm.body.commmodityComId,
+	policyNo = urlParm.body.policyNo,
+	userCode = urlParm.head.userCode;
 
 var vm = new Vue({
 	el: '#list',
 	data: {
-		Objectlist: null,
+		Objectlist: {},
 		bao: null,
 	},
 	mounted() {
 		this.$nextTick(function() {
 			$(function() {
-				
 
 			})
 		})
 	}
 })
 $(function() {
-	vm.Objectlist = data;
-	mui('.man-div-body-ul_li_div_btn').on('tap','#huifang', function() {
-		mui.alert(2);
-		/*接口请求位子*/
-	})
+	var reqData = {
+		"head": {
+			"channel": "01",
+			"userCode": userCode,
+			"transTime": ""
+		},
+		"body": {
+			"commodityCommId": commmodityComId,
+			"orderNo": orderNo
+		}
+	}
+	var url = base.url + 'moneyManage/redemptionTrial.do';
+	console.log("页面初始化，发送请求报文--");
+	$.reqAjaxsFalse(url, reqData, redemptionTrial);
+	mui('.man-div-body-ul_li_div_btn').on('tap', '#huifang',tuibao)
 })
+
+function redemptionTrial(data) {
+	console.log(data);
+	vm.Objectlist = data.returns.hKCalculate;
+}
+/*退保1*/
+function tuibao() {
+	var reqData = {
+		"body": {
+			"orderNo": orderNo,
+			"insureNo": insureNo,
+			"policyNo": policyNo
+		},
+		"head": {
+			"userCode": userCode,
+			"transTime": "",
+			"channel": "01"
+		}
+	}
+	var url = base.url + 'hkRedemption/getRedemptionConfirmation.do';
+	$.reqAjaxsFalse(url, reqData, getRedemptionConfirmation);
+}
+/*退保2*/
+function getRedemptionConfirmation(data) {
+	if(data.statusCode != '000000') {
+		mui.alert(data.statusMessage);
+	} else {
+		mui.alert(data.statusMessage);
+		mui(".man-div-body-ul_li_div_btn").off("tap", "#huifang", tuibao);
+		$('#huifang').addClass('huisebtn');
+	}
+}

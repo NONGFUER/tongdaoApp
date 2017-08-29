@@ -13,14 +13,21 @@
 	<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"> 
 	<meta HTTP-EQUIV="expires" CONTENT="0">
     <title>车辆信息</title>
-    <link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
+	<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
 	<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.picker.min.css" />
-    <link rel="stylesheet" href="../../../css/lib/common/base.css" />
-    <link rel="stylesheet" href="../../../css/lib/common/common.css" />
+	<link rel="stylesheet" href="../../../css/usage/insurance/car/base.css" />
+	<link rel="stylesheet" href="../../../css/lib/common/common.css" />
     <link rel="stylesheet" href="../../../css/usage/insurance/car/carMes.css"/>
     <link rel="stylesheet" href="../../../css/usage/insurance/car/vehicleModelSelect.css"/>
 </head>
 <body>
+	<header>
+		<div class="h_back"><div class="backindex"><img src="../../../image/insurance/car/back.png"/></div></div>
+		<div class="h_title" id="pageTitle">车辆信息</div>
+		<!-- <div class="h_next">
+		   
+		</div> -->
+	</header>
 	
 	<div id="order_index" class="carMes">
 		<div id="indexpart" class="mui-scroll-wrapper">
@@ -36,25 +43,25 @@
 									<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
 									<div class="mui-slider-item mui-slider-item-duplicate">
 										<a class="banner">
-											<img src="../../../image/banner/carbanner2.png">
+											<img src="../../../image/insurance/car/banner2.png">
 										</a>
 									</div>
 									<!-- 第一张 -->
 									<div class="mui-slider-item">
 										<a href="#">
-											<img src="../../../image/banner/carbanner1.png">
+											<img src="../../../image/insurance/car/banner1.png">
 										</a>
 									</div>
 									<!-- 第二张 -->
 									<div class="mui-slider-item">
 										<a class="banner">
-											<img src="../../../image/banner/carbanner2.png">
+											<img src="../../../image/insurance/car/banner2.png">
 										</a>
 									</div>
 									<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
 									<div class="mui-slider-item mui-slider-item-duplicate">
 										<a href="#">
-											<img src="../../../image/banner/carbanner1.png">
+											<img src="../../../image/insurance/car/banner1.png">
 										</a>
 									</div>
 								</div>
@@ -107,7 +114,7 @@
 								<tr id="plateNumber">
 									<td class="border-1px-bottom"></td>
 									<td class="border-1px-bottom icon"><img class="icon" src="../../../image/insurance/car/chepai.png"></td>
-									<td class="border-1px-bottom" >车牌号码</td>
+									<td class="border-1px-bottom" style="padding-right: 1.05rem;">车牌号码</td>
 									<td>
 										<input type="text" id="plate_number_input" autocomplete="off" style="margin:0;" maxlength="8" value="请输入车牌号码" />
 									</td>
