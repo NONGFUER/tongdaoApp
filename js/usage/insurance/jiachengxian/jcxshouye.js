@@ -78,7 +78,7 @@ $(function(){
 	$.replacePlaceholder($("#chepaiValue"), "请输入车牌号码");
 	$.replacePlaceholder($("#mailValue"), "请输入电子邮箱（选填）");
 	//获取剩余份数
-	$.getShengyu();
+	$.getShengyu('4');
 	//返回
 	$(".h_back1").unbind("tap").bind("tap",function(){
 		window.location.href="zhuanqu.html"+window.location.search;
@@ -148,7 +148,7 @@ $(function(){
 					mail="";
 				}
 				
-				var url=base.share_sxyurl+"insuranceSave/insuranceSaveInfo.do"
+				var url=base.url + "insuranceSave/insuranceSaveInfo.do"
 				var reqData={
 						"head":{
 							"channel": "01",
@@ -160,10 +160,15 @@ $(function(){
 						    "name": name, //投保人姓名
 						    "phone": TBRmobile, //投保人手机号
 						    "sex": sex, //投保人性别
-						    "pwd": ID,  //投保人身份证
-						    "productCode": productCode, //产品编号
-						    "customePhone": mobile , //登录用户手机号
-						    "flag":"1"//1 app  2 分享
+						    "pwd": ID,  //投保人身份证						    
+						    "customePhone": '13852291705' , //登录用户手机号
+						    "inviterPhone": '13852291705',
+						    "flag":"1",//1 app  2 分享
+						    "commodityCombinationId": "7",
+						    "commodityId": "4",
+						    "channelResource": "3",
+						    "customeId":"8",
+						    "buyType":"1"
 						}
 				}
 				$.reqAjaxs(url,reqData,function(data){
@@ -267,15 +272,15 @@ function checkInfo(){
 	checkFlag =  true;
 }
 //获取剩余份数
-$.getShengyu=function(){
-	var url= base.share_sxyurl + "giveInsuranceAll/giveProductCount.do";
+$.getShengyu=function(cId){
+	var url= base.url + "giveInsuranceAll/giveProductCount.do";
 	var reqData = {
 			"head": {
 				    "channel": "01",
 				    "userCode": "2835",
 				    "transTime": ""
 			},"body": {
-				    "productCode": productCode
+				    "comdityId": cId
 			}
 
 	}

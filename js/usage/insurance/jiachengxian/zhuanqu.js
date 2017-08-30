@@ -3,63 +3,21 @@ var productCode="";//产品编码
 var type = "";
 var idAuth = "";
 $(function(){
-	var str = getUrlQueryString("jsonKey");
-	str = UrlDecode(str);
-	parm = JSON.parse(str);
-    mobile=parm.mobile;
-    productCode=parm.productCode;
-   
-	/*mobile="13276690882";
-	productCode="1213";*/
 	/* 设置滑动区域 */
-	$.setscroll();
-	//返回
-	$(".h_back").unbind("tap").bind("tap",function(){
-		if(systemsource == "ios"){
-			objcObject.OpenUrl("back");
-		}else if(systemsource == "android"){
-			android.goBack();
-		}
-	})
+	$.setscroll();		
 	//获取剩余份数
-	$.getShengyu();
+	$.getShengyu('4');
 	//领取
-	 getAppInfo();
-	if(mobile == ""||mobile == undefined){	
-		$(".lingqu").unbind("tap").bind("tap",function(){
-			//alert("1"+" "+mobile);
-			//loginControl();
-		})
-	}else{	
-		//alert(idAuth +" "+type);
-		if(idAuth == "1"){
-			if(type == "2" || type == "3" || type == "4" ){
-				$(".lingqu").css("color","#ff6a00");
-				$(".lingqu").css("border","1px solid #ff6a00");
-				$(".lingqu").unbind("tap").bind("tap",function(){					
-					var parm={};
-			    	parm.mobile=mobile;
-			    	parm.productCode=productCode;
-			    	var jsonStr=UrlEncode(JSON.stringify(parm));
-			    	window.location.href="jcxshouye.html?jsonKey="+jsonStr;
-				})
-			}else if(type == "5"){
-				$(".lingqu").unbind("tap").bind("tap",function(){					
-					
-				})
-			}else{
-				$(".lingqu").unbind("tap").bind("tap",function(){
-					//registerControl();
-				});
-				
-			}			
-		}else{
-			$(".lingqu").unbind("tap").bind("tap",function(){
-			//registerControl();
-			});
-		}
-		
-	}
+	// getAppInfo();	
+		$(".lingqu").css("color","#ff6a00");
+		$(".lingqu").css("border","1px solid #ff6a00");
+		$(".lingqu").unbind("tap").bind("tap",function(){					
+			var parm={};
+			parm.mobile=mobile;
+			parm.productCode=productCode;
+			var jsonStr=UrlEncode(JSON.stringify(parm));
+			window.location.href="jcxshouye.html?jsonKey="+jsonStr;
+		})			
 	
 	//赠送客户
 	if(mobile == ""||mobile == undefined){
@@ -108,16 +66,16 @@ $(function(){
 	//
 })
 //获取剩余份数,领取记录
-$.getShengyu=function(){
-	var url=base.share_sxyurl+"giveInsuranceAll/giveInsurance.do";
+$.getShengyu=function(cId){
+	var url=base.url+"giveInsuranceAll/giveInsurance.do";
 	var reqData={
 			"head":{
 				"channel": "01",
 			    "userCode": "2835",
 			    "transTime": ""
 			},"body":{
-				"phone": mobile,  //手机号
-			    "productCode": productCode   //产品编码
+				"phone": "13852291705",  //手机号
+			    "commmodityId": cId   //产品编码
 			}
 	}
 	$.reqAjaxs(url,reqData,function(data){

@@ -230,7 +230,7 @@ $(function() {
 					if(respData.statusCode=="000000"){
 						parm.body.samebeibao = samebeibao;//1-被保人与车主一致  0-不一致
 						parm.body.sametoubao = sametoubao;//1-投保人与车主一致  0-不一致
-						if(orderStatus=="0201"){
+						if(orderStatus=="01"){
 							$.saveBack(type);//核保
 				         }else{
 				        	 if(type=="pay"){
@@ -700,27 +700,19 @@ $.loadData = function(param) {
 				orderStatus=cxOrder.orderStatus;//车险订单状态
 				tradeNo=cxOrder.tradeno;//请求天安核保接口交易流水号
 				//待支付
-				if (orderStatus == "0202") {
+				if (orderStatus == "05") {
 					payUrl=cxOrder.payUrl;
 				}
 			    // 核保失败
-				if (orderStatus == "0203") {
+				if (orderStatus == "03") {
 					$("#btn_area").hide();
 					$("#hebaoFail_reason_area").show();
 					// 核保失败原因
 					$("#failName").html("核保失败原因");// 核保失败原因
 					$("#hebaoFailInfo").html(cxOrder.refuseReason);// 核保失败原因
 				}
-				// 退保
-				if (orderStatus == "9900") {
-					$("#btn_area").hide();
-					$("#hebaoFail_reason_area").show();
-					// 核保失败原因
-					$("#failName").html("退保原因");// 核保失败原因
-					$("#hebaoFailInfo").html(cxOrder.refuseReason);// 核保失败原因
-				}
 				// 审核中
-				if (orderStatus == "0204") {
+				if (orderStatus == "04") {
 					$("#btn_area").hide();
 					$("#hebaoFail_reason_area").show();
 					// 审核中
@@ -844,7 +836,7 @@ $.saveBack=function(type){
 					refuseReason=param.returns.cxOrder.refuseReason;
 					orderStatus=param.returns.cxOrder.orderStatus;
 					// 核保失败
-					if (orderStatus == "0203") {
+					if (orderStatus == "03") {
 						modelAlert(param.returns.cxOrder.refuseReason);
 						$("#btn_area").hide();
 						$("#hebaoFail_reason_area").show();
@@ -862,7 +854,7 @@ $.saveBack=function(type){
 						$("#hebaoFailInfo").html(refuseReason);// 核保失败原因
 					}
 					// 支付成功
-					if (orderStatus == "0202") {
+					if (orderStatus == "05") {
 						payUrl=param.returns.cxOrder.payUrl;
 						if(type=="pay"){
 							window.location.href =payUrl;
@@ -872,7 +864,7 @@ $.saveBack=function(type){
 					    
 					}
 					// 审核中
-					if (orderStatus == "0204") {
+					if (orderStatus == "04") {
 						modelAlert(refuseReason);
 						$("#btn_area").hide();
 						$("#hebaoFail_reason_area").show();
@@ -891,7 +883,7 @@ $.saveBack=function(type){
 				}
 			});
 		}else{
-			if (orderStatus == "0202") {
+			if (orderStatus == "05") {
 				if(type=="pay"){
 					window.location.href =payUrl;
 				}else{

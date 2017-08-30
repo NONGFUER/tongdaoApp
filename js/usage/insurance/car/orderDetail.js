@@ -131,42 +131,38 @@ $.loadData = function(param) {
 				}
 
 				
-				if (cxorderStatus == "0203") {// “核保失败”状态，显示核保失败原因
+				if (cxorderStatus == "03") {// “核保失败”状态，显示核保失败原因
 					$("#hebaoFail_reason_area").show();
 					// 核保失败原因
 					$("#failName").html("核保失败原因");// 核保失败原因
 					$("#hebaoFailInfo").html(param.cxInfo.cxOrder.refuseReason);// 核保失败原因
-				} else if (cxorderStatus == "0206") {// “支付失败”状态，显示支付失败原因
+				} else if (cxorderStatus == "06") {// “支付失败”状态，显示支付失败原因
 					$("#hebaoFail_reason_area").show();
 					// 支付失败原因
 					$("#failName").html("支付失败原因");// 支付失败原因
 					$("#hebaoFailInfo").html(param.cxInfo.cxOrder.refuseReason);// 支付失败原因
 				}
-				if (cxorderStatus == '0202') {// “核保通过”状态，“去支付”按钮显示
+				if (cxorderStatus == '05') {// “核保通过”状态，“去支付”按钮显示
 					payUrl = param.cxInfo.cxOrder.payUrl;
 					sessionStorage.setItem("payUrl",payUrl);
 					$("#topay_btn_area").show();
 				}
 
-				if(cxorderStatus=="0202"){	
+				if(cxorderStatus=="05"){	
 					$("#orderStatus").html("待支付");	
-				}else if(cxorderStatus=="0203"){	
+				}else if(cxorderStatus=="03"){	
 					$("#orderStatus").html("核保失败");	
-				}else if(cxorderStatus=="0204"){	
+				}else if(cxorderStatus=="04"){	
 					$("#orderStatus").html("核保中");
-				}else if(cxorderStatus=="0205"){	
+				}else if(cxorderStatus=="07"){	
 					$("#orderStatus").html("支付成功");
-				}else if(cxorderStatus=="0206"){
+				}else if(cxorderStatus=="06"){
 					$("#orderStatus").html("支付失败");
-				}else if(cxorderStatus=="0207"){	
+				}else if(cxorderStatus=="10"){	
 					$("#orderStatus").html("承保成功");
-				}else if(cxorderStatus=="0208"){	
-					$("#orderStatus").html("保权变更");
-				}else if(cxorderStatus=="9900"){
-					$("#orderStatus").html("退保");
-				}else if(cxorderStatus=="9999"){
+				}else if(cxorderStatus=="99"){
 					$("#orderStatus").html("已失效");				
-				}else if(cxorderStatus=="0909"){
+				}else if(cxorderStatus=="02"){
 					$("#orderStatus").html("已过期");
 				}
 				// 总保费

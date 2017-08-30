@@ -30,21 +30,21 @@ function init(data,orderStatus){
 	$(".ps_paydingdan").html(GetQueryString("orderNo"));
 	$(".orderTime").html(data.returns.gfbCxOrder.insertTime);
 	var orderStatusName="";
-	if(orderStatus=="0205"){
+	if(orderStatus=="07"){
 		orderStatusName="支付成功";
-	}else if(orderStatus=="0206"){
+	}else if(orderStatus=="06"){
 		orderStatusName="支付失败";
-	}else if(orderStatus=="0207"){
+	}else if(orderStatus=="10"){
 		orderStatusName="承保成功";
 	}
 	$(".orderStatus").html(orderStatusName);
-	if(orderStatus== "0205"||orderStatus== "0207"){
+	if(orderStatus== "07"||orderStatus== "10"){
 		$(".payResult").html("支付成功");
 		$(".orderMoney").html(data.returns.gfbCxOffer.totalPre);
-		$(".ps_payicon img").attr("src","../../images/pay.png");
+		$(".ps_payicon img").attr("src","../../../image/insurance/car/pay.png");
 	}else {
 		$(".payResult").html("支付失败");
-		$(".ps_payicon img").attr("src","../../images/payf.png");
+		$(".ps_payicon img").attr("src","../../../image/insurance/car/payf.png");
 		$(".fee").hide();
 	}
 	issueChannel=data.returns.gfbCxOrder.issueChannel;
@@ -76,7 +76,7 @@ function toInitAjax(){
 			console.log(data);
 			if(data.statusCode=="000000"){
 				 var orderStatus=data.returns.gfbCxOrder.orderStatus;
-				 if(orderStatus!="0202"){
+				 if(orderStatus!="05"){
 					 init(data,orderStatus);
 				 }else{
 					 if(i>=2){

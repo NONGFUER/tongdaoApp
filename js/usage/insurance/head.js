@@ -12,7 +12,7 @@ var message = {
 }
 var requestUrl = {
 	//系统时间
-	getServeTimeUrl      : base.url + 'commonManage/getServiceTime.do',
+	getServeTimeUrl      : base.url + 'communal/getServiceTime.do',
     //线下产品模块    
     cusAndAgenInfoUrl    : base.url + 'customerBasic/getCustomerAndAgentInfo.do',              // //APP用户及客户经理信息查询@gxj
     liveProductInfoUrl   : base.url + 'offlineCommodityComDetail/getOfflineComComDetail.do',   //(完成)APP产品模块线下产品详情查询 @gxj
@@ -35,10 +35,13 @@ var requestUrl = {
 //全局变量
 //var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
 
-var mobile     = "18900001111";  //urlParm.mobile;//用户手机号
-var customerId = "8";            //urlParm.customerId;//用户id
-var ccId       = "11";             //urlParm.ccId;商品组合id
-var ccCode     = "00400009";             //urlParm.ccCode;商品组合code
+var mobile      = "18900001111";  //urlParm.mobile;//用户手机号
+var customerId  = "8";            //urlParm.customerId;//用户id
+var ccId        = "3";             //urlParm.ccId;商品组合id
+var ccCode      = "00400003";      //urlParm.ccCode;商品组合code
+var roleType    = "04";				//urlParm.cityCode用户角色
+var cityCode    = "220001"			//urlParm.cityCode	市代码
+var	provinceCode= "220000"			//	urlParm.provinceCode	省代码
 // 18	18900001111				王晓伟
 
 // 1	00400001	天安防癌险（男神版）

@@ -102,6 +102,9 @@ li:after{
 .greyfont{
 	color:#999;
 }
+.none{
+	display:none;
+}
 /*--------------------------------重写mui部分样式--------------------------*/
 
 input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea {
@@ -260,9 +263,9 @@ p{
     line-height:24px;
     border: 1px solid #999;
     border-radius: 5px;
-    margin-right: .3rem;
+    margin-right: 15px;
 	color: #999;
-	margin-top: 5px;
+	margin-bottom: 5px;
 }
 .insurance-choice .radio .on{
 	color:#ff6e1a;
@@ -460,4 +463,87 @@ p{
 	height: 12px;
 	position: relative;
 	top:-2px;
+}
+/*产品下面投保*/
+.insure_footer {
+	width: 100%;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	z-index: 300;
+	height: 56px;
+	line-height: 56px;
+	color: #fff;
+	font-size: 18px;
+	text-align: center;
+}
+
+.insure_footer .a1,
+.insure_footer .a3 {
+	float: left
+}
+
+.insure_footer .a1 {
+	width: 86%;
+	height: 100%;
+	background: #1b6bb8
+}
+
+.insure_footer .a2 {
+	display: none;
+	height: 100%
+}
+
+.insure_footer .a3 {
+	width: 14%;
+	height: 100%;
+	background: rgba(0, 0, 0, .8);
+	box-sizing: border-box;
+	border-right: 1px solid #4a4a4a
+}
+
+.insure_footer .a3 a {
+	color: #fff
+}
+
+.insure_footer .a3 span {
+	display: block;
+	height: 29px;
+	padding-top: 6px;
+	line-height: 29px;
+	font-size: 24px;
+}
+
+.insure_footer .a3 p {
+	text-align: center;
+	font-size: 16px;
+	line-height: 24px;
+	transform: scale(.84);
+	-webkit-transform: scale(.84);
+	-moz-transform: scanle(.84);
+	color: #fff;
+}
+
+.footer2 .a1,
+.footer2 .a2,
+.footer2 .a3 {
+	float: left
+}
+
+.footer2 .a1 {
+	width: 36%
+}
+
+.footer2 .a2 {
+	width: 50%;
+	background: rgba(0, 0, 0, .8);
+	display: block
+}
+
+.footer2 .a3 {
+	width: 14%;
+	background: rgba(0, 0, 0, .8);
+	display: block;
+	box-sizing: border-box;
+	border-right: 1px solid #4a4a4a
 }

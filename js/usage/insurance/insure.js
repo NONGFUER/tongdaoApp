@@ -842,17 +842,7 @@ if(productCode == PRODUCT_CODE.JKJR){
     //otherCalculation();
 }
 }
-/*根据日期获取年龄*/
-function  ages(str){   
-   var r = str.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);     
-   if(r==null)return   false;     
-   var d= new Date(r[1],r[3]-1,r[4]);     
-   if(d.getFullYear()==r[1]&&(d.getMonth()+1)==r[3]&&d.getDate()==r[4]){   
-      var Y = new Date().getFullYear();   
-      return (Y-r[1])+"";   
-    }   
-      return("输入的日期格式错误！");   
-}
+
 /*姓名，手机号，身份证校验*/
 function insureValidate(insureName,certificateNo,telNo){
 //投保人姓名校验
@@ -886,50 +876,50 @@ if ($.isNull(telNo)) {
 }
 }
 
-function toArticle(){  
-var param={
-        "head":{
-            "mobile":mobile,
-            "switchCommission":"",
-            "pageFrom":path
-        },"body":{
-            "customerId":customerId,
-            "productCode":productCode,
-            "commodityNo":"00419900802"
-        }
-    }
-var jsonStr = UrlEncode(JSON.stringify(param));
-window.location.href = "article.html?jsonKey="+jsonStr;
-}
-function toProductDetail(){
-var sendData = {
-        "head":{
-            "mobile":mobile,
-            "switchCommission":""
-        },
-        "body":{
-            "mobile":mobile,
-            "productCode":productCode,
-            "commodityNo":"00419900802",
-            "customerId":customerId
-        }
-}
-var jsonKey = UrlEncode(JSON.stringify(sendData));
-window.location.href = "productDetail.html?jsonkey="+jsonKey;
-}
-function toXuzhi(){
-var sendData = {
-        "head":{
-            "mobile":mobile,
-            "switchCommission":""
-        },
-        "body":{
-            "mobile":mobile,
-            "productCode":productCode,
-            "commodityNo":"00419900802",
-            "customerId":customerId
-        }
-}
-var jsonKey = UrlEncode(JSON.stringify(sendData));
-window.location.href = "../tiaokuan/changeXuzhi.html?jsonkey="+jsonKey;
-}
+//function toArticle(){  
+//var param={
+//        "head":{
+//            "mobile":mobile,
+//            "switchCommission":"",
+//            "pageFrom":path
+//        },"body":{
+//            "customerId":customerId,
+//            "productCode":productCode,
+//            "commodityNo":"00419900802"
+//        }
+//    }
+//var jsonStr = UrlEncode(JSON.stringify(param));
+//window.location.href = "article.html?jsonKey="+jsonStr;
+//}
+//function toProductDetail(){
+//var sendData = {
+//        "head":{
+//            "mobile":mobile,
+//            "switchCommission":""
+//        },
+//        "body":{
+//            "mobile":mobile,
+//            "productCode":productCode,
+//            "commodityNo":"00419900802",
+//            "customerId":customerId
+//        }
+//}
+//var jsonKey = UrlEncode(JSON.stringify(sendData));
+//window.location.href = "productDetail.html?jsonkey="+jsonKey;
+//}
+//function toXuzhi(){
+//var sendData = {
+//        "head":{
+//            "mobile":mobile,
+//            "switchCommission":""
+//        },
+//        "body":{
+//            "mobile":mobile,
+//            "productCode":productCode,
+//            "commodityNo":"00419900802",
+//            "customerId":customerId
+//        }
+//}
+//var jsonKey = UrlEncode(JSON.stringify(sendData));
+//window.location.href = "../tiaokuan/changeXuzhi.html?jsonkey="+jsonKey;
+//}

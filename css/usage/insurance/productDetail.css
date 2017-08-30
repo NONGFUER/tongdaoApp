@@ -2,6 +2,7 @@
     width: 100%;
     display: -webkit-box;
     display: box;
+    border-bottom:1px solid #ccc;
 }
 .insurance-tab li {
     -webkit-box-flex: 1;
@@ -78,6 +79,7 @@
 .dd{
     font-size: 12px;
     padding: 10px 4%;
+    overflow:hidden;
 }
 .dd p{
     font-size: 12px;
@@ -194,4 +196,32 @@ table.gridtable td {
 	border-style: solid;
 	border-color: #666666;
 	background-color: #ffffff;
+}
+.btn1{
+	display: block;
+    width: 146px;
+    margin-top: 10px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 5px;
+    border: 1px solid #1B6BB8;
+    color: #1B6BB8;
+    text-align: center
+}
+.fl{
+	float:left;
+	display:inline;
+}
+.ri{
+	float:right;
+	display:inline;
+}
+@font-face {
+	font-family: iconfont;
+	src: url(../../../font/font_0nwe5isk2xz5b3xr.eot);
+	src: url(../../../font/font_0nwe5isk2xz5b3xr.eot?#iefix) format('embedded-opentype'), url(../../../font/font_0nwe5isk2xz5b3xr.ttf) format('truetype'), url(../../../font/font_0nwe5isk2xz5b3xr.svg#iconfont) format('svg')
+}
+
+.iconfont {
+	font-family: iconfont
 }

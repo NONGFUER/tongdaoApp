@@ -16,8 +16,6 @@ var base = {
 var suixinyi = {
 		url : window.location.protocol+"//"+window.location.host+"/tongdaoSxyPlatform/",
 }
-document.write("<script language='javascript' src='"+base.url+"tongdaoApp/js/lib/common/aes.js' ></script>");
-document.write("<script language='javascript' src='"+base.url+"tongdaoApp/js/lib/common/pad-iso10126-min.js' ></script>");
 var dic_m = new Map();
 var dic_m1 = new Map();
 if (typeof tit !== 'object') {
@@ -862,6 +860,7 @@ $.toAjaxs = function(url, dataList, callBack) {
 $.reqAjaxs = function(url, requestData, callBack) {
 	var requestJson = aesEncrypt(JSON.stringify(requestData), secretKey, secretKey);
 	requestJson=URLencodeForBase64(requestJson);
+	console.log(requestJson);
 	$.ajax({
 		url : url,
 		type : 'POST',
