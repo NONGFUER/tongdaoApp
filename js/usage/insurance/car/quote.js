@@ -739,11 +739,11 @@ $.loadData = function(param) {
 						$.toAjaxs(url, data, function(param){
 							param = eval("(" + param + ")");
 							if (param.status.statusCode == "000000") {
-								addressInfo.province = param.gfbDistribution.province;
-								addressInfo.address = param.gfbDistribution.address;
+								addressInfo.province = param.cxDistribution.province;
+								addressInfo.address = param.cxDistribution.address;
 								if (addressInfo != "" && addressInfo != null) {//该用户有默认地址
-									$("#sjrName").html(param.gfbDistribution.receivername);
-									$("#sjrPhone").html(param.gfbDistribution.receiverphoneno);
+									$("#sjrName").html(param.cxDistribution.receivername);
+									$("#sjrPhone").html(param.cxDistribution.receiverphoneno);
 									$("#addresseeprovince").html(addressInfo.province.replace(new RegExp(" ","g"),""));
 									$("#psAddress").html(addressInfo.address);
 									$(".addressInfo").show();

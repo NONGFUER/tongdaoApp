@@ -245,3 +245,16 @@ $.reqAjaxsFalse = function(url, requestData, callBack) {
 mui('.mui-scroll-wrapper').scroll({
 	deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
 });
+//设置头部
+function setTitleMethod(back,tittle,type){
+	if(systemsource == "ios"){
+		var titleParams={
+				"back":back,
+				"tittle":tittle,
+				"type":type			    
+		}
+		objcObject.setTittle(titleParams)
+	}else if(systemsource == "android"){
+		android.setTittle(back,tittle,type);
+	}
+}

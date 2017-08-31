@@ -40,7 +40,7 @@ $(function() {
 		purchaseDate = $("#vehicle_registration_date").val();
 		startDate=showTime(1);//当前日期后一天作投保日期
 		/*startDate = $("#startDate").val();*/
-		var searchText = $("#searchtext").val();
+		var searchText = $("#searchtext").val().toUpperCase();
 		if ($.isNull(searchText) || searchText == "请输入关键字点击查询") {
 			modelAlert("请输入查询关键字！");
 		} else {

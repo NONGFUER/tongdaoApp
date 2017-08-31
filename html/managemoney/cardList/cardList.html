@@ -15,85 +15,13 @@
 	<body>
 		<div class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
-				<div class="man mui-table-view">
+				<div class="man mui-table-view" id='list'> 
 					<div class="b"></div>
-					<div class="banklist clearfix tui">
+					<div class="banklist clearfix tui"  v-for="(value,key) in Objectitle" v-bind:bankName='value.bankName' v-bind:commodityId='value.commodityId' v-bind:bankCode='value.bankCode' v-bind:dayLimit='value.dayLimit'>
 						<div class="banklogo"><img src="../../../image/managemoney/productDetails/ICBC.png"></div>
 						<div class="bankdetail">
-							<div class="bank"> <span class="bankname">广发银行</span> <span class="cardtype">储蓄卡</span></div>
-							<div class="limit">单笔限额5万，日累计限额500万</div>
-						</div>
-						<div></div>
-					</div>
-					<div class="banklist clearfix">
-						<div class="banklogo"><img src="../../../image/managemoney/productDetails/ICBC.png"></div>
-						<div class="bankdetail">
-							<div class="bank"> <span class="bankname">广发银行</span> <span class="cardtype">储蓄卡</span></div>
-							<div class="limit">单笔限额5万，日累计限额500万</div>
-						</div>
-						<div></div>
-					</div>
-					<div class="banklist clearfix">
-						<div class="banklogo"><img src="../../../image/managemoney/productDetails/ICBC.png"></div>
-						<div class="bankdetail">
-							<div class="bank"> <span class="bankname">广发银行</span> <span class="cardtype">储蓄卡</span></div>
-							<div class="limit">单笔限额5万，日累计限额500万</div>
-						</div>
-						<div></div>
-					</div>
-					<div class="banklist clearfix">
-						<div class="banklogo"><img src="../../../image/managemoney/productDetails/ICBC.png"></div>
-						<div class="bankdetail">
-							<div class="bank"> <span class="bankname">广发银行</span> <span class="cardtype">储蓄卡</span></div>
-							<div class="limit">单笔限额5万，日累计限额500万</div>
-						</div>
-						<div></div>
-					</div>
-					<div class="banklist clearfix">
-						<div class="banklogo"><img src="../../../image/managemoney/productDetails/ICBC.png"></div>
-						<div class="bankdetail">
-							<div class="bank"> <span class="bankname">广发银行</span> <span class="cardtype">储蓄卡</span></div>
-							<div class="limit">单笔限额5万，日累计限额500万</div>
-						</div>
-						<div></div>
-					</div>
-					<div class="banklist clearfix">
-						<div class="banklogo"><img src="../../../image/managemoney/productDetails/ICBC.png"></div>
-						<div class="bankdetail">
-							<div class="bank"> <span class="bankname">广发银行</span> <span class="cardtype">储蓄卡</span></div>
-							<div class="limit">单笔限额5万，日累计限额500万</div>
-						</div>
-						<div></div>
-					</div>
-					<div class="banklist clearfix">
-						<div class="banklogo"><img src="../../../image/managemoney/productDetails/ICBC.png"></div>
-						<div class="bankdetail">
-							<div class="bank"> <span class="bankname">广发银行</span> <span class="cardtype">储蓄卡</span></div>
-							<div class="limit">单笔限额5万，日累计限额500万</div>
-						</div>
-						<div></div>
-					</div>
-					<div class="banklist clearfix">
-						<div class="banklogo"><img src="../../../image/managemoney/productDetails/ICBC.png"></div>
-						<div class="bankdetail">
-							<div class="bank"> <span class="bankname">广发银行</span> <span class="cardtype">储蓄卡</span></div>
-							<div class="limit">单笔限额5万，日累计限额500万</div>
-						</div>
-						<div></div>
-					</div>
-					<div class="banklist clearfix">
-						<div class="banklogo"><img src="../../../image/managemoney/productDetails/ICBC.png"></div>
-						<div class="bankdetail">
-							<div class="bank"> <span class="bankname">广发银行</span> <span class="cardtype">储蓄卡</span></div>
-							<div class="limit">单笔限额5万，日累计限额500万</div>
-						</div>
-						<div></div>
-					</div>
-					<div class="banklist clearfix">
-						<div class="banklogo"><img src="../../../image/managemoney/productDetails/ICBC.png"></div>
-						<div class="bankdetail">
-							<div class="bank"> <span class="bankname">广发银行</span> <span class="cardtype">储蓄卡</span></div>
-							<div class="limit">单笔限额5万，日累计限额500万</div>
+							<div class="bank"> <span class="bankname" v-html="value.bankName">广发银行</span> <span class="cardtype" v-html="">储蓄卡</span></div>
+							<div class="limit" v-html="'单笔限额'+value.singleLimit+'，日累计限额'+value.dayLimit"></div>
 						</div>
 						<div></div>
 					</div>

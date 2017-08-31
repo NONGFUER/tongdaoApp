@@ -1,6 +1,7 @@
 // 全局常量
 var ajaxStatus = {
-    success : "000000"
+    success : "000000",
+    relogin : "123456"
 } 
 
 var message = {
@@ -33,15 +34,23 @@ var requestUrl = {
     
 }
 //全局变量
-//var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
+var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
 
-var mobile      = "18900001111";  //urlParm.mobile;//用户手机号
-var customerId  = "8";            //urlParm.customerId;//用户id
-var ccId        = "3";             //urlParm.ccId;商品组合id
-var ccCode      = "00400003";      //urlParm.ccCode;商品组合code
-var roleType    = "04";				//urlParm.cityCode用户角色
-var cityCode    = "220001"			//urlParm.cityCode	市代码
-var	provinceCode= "220000"			//	urlParm.provinceCode	省代码
+var mobile      = urlParm.mobile;                //"18900001111";  //urlParm.mobile;//用户手机号
+var customerId  = urlParm.customerId;            //"8";            //urlParm.customerId;//用户id
+var name		= urlParm.name;					 //姓名
+var idAuth		= urlParm.idAuth;				 //是否实名
+var idNo		= urlParm.idNo;					 //身份证号
+var roleType    = urlParm.roleType;              //"04";				//urlParm.roleType用户角色
+var transToken  = urlParm.transToken;			 //
+var ccId        = urlParm.ccId;                  //"3";             //urlParm.ccId;商品组合id
+var ccCode      = urlParm.ccCode;                //"00400003";      //urlParm.ccCode;商品组合code
+var cCode       = urlParm.cCode;				 //
+var cId			= urlParm.cId;					 //
+var cityCode    = urlParm.cityCode;              //"220001"			//urlParm.cityCode	市代码
+var	provinceCode= urlParm.provinceCode;          //"220000"			//	urlParm.provinceCode	省代码
+
+
 // 18	18900001111				王晓伟
 
 // 1	00400001	天安防癌险（男神版）

@@ -3,11 +3,11 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	commodityCombinationId = urlParm.commodityCombinationId,
 	userCode = urlParm.userCode,
 	phone = urlParm.insurePhone;
-	$('.phone').html(phoneyin(phone));
+$('.phone').html(phoneyin(phone));
 console.log("页面初始化，获取上个页面传值报文--");
 console.log(urlParm);
 var ma = null;
-
+var riskSupportAbility = "";
 var vm = new Vue({
 	el: '#list',
 	data: {
@@ -42,7 +42,7 @@ $(function() {
 		},
 		"head": {
 			"userCode": userCode,
-			"transTime": "2017-08-26",
+			"transTime": "",
 			"channel": "01"
 		}
 	};
@@ -56,42 +56,36 @@ $(function() {
 	})
 	/*点击购买弹出发送短信框*/
 	$("#huifang").unbind("tap").bind("tap", function() {
-		$('.note').show();
-	})
-	/*发送短信*/
-	$(".dianji").unbind("tap").bind("tap", function() {
-		sendMessage();
-	})
-	/*点击确定关闭提交数据*/
-	$(".note-div-btn").unbind("tap").bind("tap", function() {
-		if($('#yan').val() != null && $('#yan').val() != "") {
-			if(ma == $('#yan').val()) {
-				$('.note').hide();
-				var policyNo = $(this).attr('policyNo');
-				var orderNo = $(this).attr('orderNo');
-				var insureNo = $(this).attr('insureNo');
-				var param = {
-					"userCode": userCode,
-					"policyNo": policyNo,
-					"orderNo": orderNo,
-					"insureNo": insureNo
-					/*订单编号*/
-				}
-				var jsonStr = UrlEncode(JSON.stringify(param));
-				window.location.href =  base.url + "tongdaoApp/html/managemoney/messageFillout/messageFillout.html?jsonKey=" + jsonStr;
-			} else {
-				mui.alert('验证码错误!');
+		var reqData = {
+			"body": {
+				"userPhone": phone
+			},
+			"head": {
+				"userCode": userCode,
+				"transTime": "",
+				"channel": "01"
 			}
-		} else {
-			mui.alert('验证码不能为空!');
 		}
-
+		var url = base.url + 'investmentLinkedInsurance/getRiskAble.do';
+		$.reqAjaxsFalse(url, reqData, getRiskAble);
 	})
-	/*点击X关发送短信窗口*/
-	$(".note-div_title_right").unbind("tap").bind("tap", function() {
-		$('.note').hide();
+	$(".cancle").unbind("tap").bind("tap", function() {
+		$('#shadow').hide();
 	})
 })
+/*购买*/
+function buy() {	
+	var sendData = {
+		"riskSupportAbility": $('.retest').attr('testType'),
+		"insurePhone": phone,
+		"userCode": userCode,
+		"commodityCombinationId": commodityCombinationId.toString(),
+		"testType": $('.retest').attr('testType')
+	}
+	var jsonStr = JSON.stringify(sendData);
+	jsonStr = UrlEncode(jsonStr);
+	window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/messageFillout.html?jsonKey=" + jsonStr;
+}
 
 function goldProductInfo(data) {
 	console.log(data);
@@ -130,49 +124,31 @@ function goldProductInfo(data) {
 	} else {
 		mui.alert('网络繁忙');
 	}
-
 }
-var InterValObj; //timer变量，控制时间
-var count = 60; //间隔函数，1秒执行  
-var curCount; //当前剩余秒数  
-function sendMessage() {　
-	curCount = count;
-	$(".dianji").addClass("mui-disabled");
-	$(".dianji").html("60");
-	$(".dianji").attr("style", "color:#E0E0E0");
-	$(".dianji").html(curCount);
-	InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次  
-	var reqData = {
-		"head": {
-			"userCode": userCode,
-			"transTime": "",
-			"channel": '01',
-			"transToken": ""
-		},
-		"body": {
-			"userName": phone,
-			"type": '103'
+/*风险评估*/
+function getRiskAble(data) {
+	console.log(data);
+	if(data.returns.isRisk == "0") {
+		$('#shadow').show();
+		$('.retest').attr('testType',data.returns.riskble);
+	} else if(data.returns.isRisk == "1") {
+		var sendData = {
+			"head": {
+				"riskSupportAbility": riskSupportAbility
+			},
+			"body": {
+				"returnflag": "",
+				"testType": "",
+				"mobile": phone,
+				"customerId": commodityCombinationId.toString(),
+				"productCode": userCode
+			}
 		}
-	};
-	var url = base.url + 'commonMethod/GetRegCode.do';
-	$.reqAjaxsFalse(url, reqData, GetRegCode);
-}
-/*验证码倒计时*/
-function SetRemainTime() {
-	if(curCount == 0) {
-		window.clearInterval(InterValObj); //停止计时器  
-		$(".dianji").removeClass("mui-disabled"); //启用按钮  
-		$(".dianji").attr("style", "color:#333");
-		$(".dianji").html("获取验证码");
-	} else {
-		curCount--;
-		$(".dianji").html(curCount);
+		var jsonStr = UrlEncode(JSON.stringify(sendData));
+		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/riskQuestion.html?jsonKey=" + jsonStr;
+	} else if(data.returns.isRisk == "2") {
+		mui.alert(data.statusMessage)
 	}
-}
-/*发送短信*/
-function GetRegCode(data) {
-	mui.alert(data.statusMessage);
-	ma = data.returns.validateCode;
 }
 /*隐藏手机号中间几位*/
 function phoneyin(phone) {

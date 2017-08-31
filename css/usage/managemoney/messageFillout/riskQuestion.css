@@ -1,0 +1,180 @@
+@CHARSET "UTF-8";
+body{
+	background:url('../../../../image/managemoney/messageFillout/rist-background.jpg') no-repeat;
+	background-size:100%;
+}
+#indexpart{
+	/* margin-top:44px; */
+}
+.indexcontent{
+	margin-top:20px;
+	color:#1b6bb8;
+}
+.questionDetail{
+	width:100%;
+	padding-top:20px;
+	padding-left:8%;
+	display:none;
+}
+.question-progress{
+	width: 100%;
+    text-align: right;
+    padding-right: 30px;
+    margin-bottom: 10px;
+    display:none;
+}
+.question-progress div{
+	float:right;
+	display:inline;
+}
+.question-progress hr{
+	width: 16%;
+    height: 1px;
+    float: right;
+    margin-top: 10px;
+    margin-right:10px;
+    background: #1b6bb8;
+}
+.questionTitle{
+	line-height: 24px;
+	margin-right: 20px;
+}
+
+.question-unite{
+	width:30%;
+	height:34px;
+	background:#1b6bb8;
+	border-radius:10px;
+	text-align:center;
+	line-height:34px;
+	font-size:14px;
+	color:#fff;
+	float:left;
+	margin-left: 14%;
+}
+.submit,.lastQuestion{
+	display:none;
+}
+
+.buttonLine{
+	width: 100%;
+	height:34px;
+    margin:30px 0px;
+    display:none;
+}
+/* 答题选项 */
+.blockQuestion ul{
+	padding-top:10px;
+}
+.questionlist{
+	width: 100%;
+    line-height: 26px;
+    margin-top: 10px;
+}
+
+.questionimg div{
+	display:none;
+}
+.answerCode{
+	margin-right: 12px;
+}
+.answer{
+	width: 73%;
+    font-size: 16px;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #1b6bb8;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+}
+.block1,.block2,.block3,.block4,.block5,.block6,.block7,.block8,.block9{
+	display:none;
+}
+.questionimg{
+	float: left;
+    width: 10%;
+    height: 30px;
+    margin-top: 2px;
+}
+
+.questionimg img{
+	width:18px;
+}
+.answertitle{
+	float:left;
+	margin-top:4px;
+}
+
+/* 风险测评 介绍页 */
+.risk-introducey{
+	/* margin-top:44px; */
+	display:none;
+}
+.risk-introduce-title{
+	display:none;
+}
+.resultTitle{
+	width:100%;
+}
+.resuleSpan{
+	font-size:16px;
+	color:#000;
+	text-align:center;
+}
+.resultType{
+	width:72%;
+	height:145px;
+	margin:0 auto;
+	background:url('../../../../image/managemoney/messageFillout/risk-result.png')no-repeat;
+	background-size:100%;
+	margin-top:20px;
+}
+.testType{
+	font-size:47px;
+	color:#f5692c;
+	text-align:center;
+	display:block;
+	padding-top:18%;
+}
+.risk-declare p{
+	font-size:15px;
+	color:#1b6bb8;
+}
+.risk-declare{
+	padding:0px 20px;
+	line-height:24px;
+}
+.risk-declare p{
+	margin-bottom:0px;
+}
+.declareP{
+	text-indent:20px;
+}
+.risk-introduce{
+	position:relative;
+}
+
+.declare-button{
+	width:90%;
+	height:40px;
+	line-height:40px;
+	color:#fff;
+	font-size:18px;
+	text-align:center;
+	background:#3f93e4;
+	border-radius:8px;
+	margin: 0 auto;
+	margin-top:20px;
+	margin-bottom:10px;
+}
+.declare-button img{
+	width:10px;
+	margin-left:10px;
+	margin-bottom:3px;
+}
+
+
+
+
+
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 -->
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>评测结果</title>
+		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" href="../../../css/lib/common/base.css" />
+		<link rel="stylesheet" href="../../../css/lib/common/common.css" />
+		<link rel="stylesheet" href="../../../css/usage/managemoney/messageFillout/riskResult.css" />
+	</head>
+
+	<body class="bodybackground">
+		<!-- <header>
+		<div class="h_back"><div><img src="../../imgs/public/dh_back.png"/></div></div>
+		<div class="h_title" id="pageTitle">评测结果</div>
+		<div class="h_next"></div>
+	</header> -->
+
+		<div id="indexpart" class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="resultTitle"></div>
+				<div class="resuleSpan">当前您的风险承受能力</div>
+				<div class="resultType">
+					<span class="testType"></span>
+				</div>
+				<div class="result-buttons button-return">放弃购买</div>
+				<div class="result-buttons button-again">继续购买</div>
+			</div>
+		</div>
+		<div id="shadow" class="shadow" style="display:none;">
+			<div class="tip">
+				<div class="tiphead">
+					<p>温馨提示</p>
+					<!-- <img src="../../image/delete.png" class="cancleimg"> -->
+				</div>
+				<div class="tipbody">
+					<p>我已完成投资风险承受能力测试，并已明白产品所需承担的风险高于投资风险承受评估建议的风险承受能力，根据本人意愿，仍然愿意继续购买。</p>
+				</div>
+				<div class="tipfoot">
+					<div class="cancle">放弃购买</div>
+					<div class="retest">继续购买</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../js/lib/common/zepto.min.js"></script>
+	<script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js"></script>
+	<script type="text/javascript" src="../../../js/lib/common/base.js"></script>
+	<script type="text/javascript" src="../../../js/lib/common/common.js"></script>
+	<script type="text/javascript" src="../../../js/usage/managemoney/messageFillout/riskResult.js"></script>
+
+</html>

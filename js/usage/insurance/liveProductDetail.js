@@ -1,12 +1,20 @@
 
 $(function(){
+	//setTitleMethod("1","产品详情","0")
     $.setscroll( "bodyMuiScroll" );
-    yuyueClickBind();
-    liveProductInfoRender(data);
-    var customerId = "6";
-    var ccId = "105";
-    yuyueSubmit( customerId, ccId)
-    // sendLiveProductInfoRequest();//APP产品模块线下产品详情查询
+    sendCustomerAndAgentInfoRequest( customerId );
+    $("#mobile").val(mobile);
+    $("#name").val(name);
+    //点击预约出单
+    yuyueClickBind();	
+    //点击确定按钮
+    yuyueSubmit( customerId, ccId);		   
+    sendLiveProductInfoRequest(ccId)	//APP产品模块线下产品详情查询
+    if( roleType == "02" || roleType == "06" ){					//如果是代理人
+    	$(".insurance-customer").removeClass("none");
+    	$(".single-footer").removeClass("yincang");
+    	sendCusInsConsultantRequest();
+    }
     // sendCusInsConsultantRequest();//APP产品模块线下产品详情页保险顾问查询
     // sendAddYuyueInfoRequest();//APP产品模块线下产品预约新增
     // sendCustomerAndAgentInfoRequest();
@@ -20,8 +28,8 @@ function yuyueClickBind(){
 //关闭弹窗
 function closeShadow(){
     $(".popup-shadow").css({"opacity":"0","display":"none"});
-    $("#name").val("");
-    $("#mobile").val("");
+    $("#name").val(name);
+    $("#mobile").val(mobile);
 }
 //点击提交预约
 function yuyueSubmit( cusId, ccId){
@@ -43,31 +51,33 @@ function yuyueSubmit( cusId, ccId){
     });
 }
 //APP用户及客户经理信息查询
-function sendCustomerAndAgentInfoRequest(){
+function sendCustomerAndAgentInfoRequest(cusId){
     var url = requestUrl.cusAndAgenInfoUrl;
     var sendJson = {
         "head" : {
             "channel" : "01",
             "userCode" : mobile,
-            "transTime" : $.getTimeStr()
+            "transTime" : $.getTimeStr(),
+            "transToken" :transToken
         },
         "body" : {
-            "customerId": "8"
+            "customerId": cusId
         }
     }
     $.reqAjaxs( url, sendJson, cusAndAgenInfoRender ); 
 }
 // 获取线下产品请求方法
-function sendLiveProductInfoRequest(){
+function sendLiveProductInfoRequest(ccId){
     var url = requestUrl.liveProductInfoUrl;
     var sendJson = {
         "head" : {
             "channel" : "01",
             "userCode" : mobile,
-            "transTime" : $.getTimeStr()
+            "transTime" : $.getTimeStr(),
+            "transToken": transToken
         },
         "body" : {
-            "commodityCombinationId" : "105"
+            "commodityCombinationId" : ccId
         }
     }
     $.reqAjaxs( url, sendJson, liveProductInfoRender );
@@ -79,7 +89,8 @@ function sendCusInsConsultantRequest(){
         "head" : {
             "channel" : "01",
             "userCode" : mobile,
-            "transTime" : $.getTimeStr()
+            "transTime" : $.getTimeStr(),
+            "transToken" :transToken
         },
         "body" : {
             "customerId" : "8"
@@ -95,7 +106,7 @@ function sendAddYuyueInfoRequest( cusId, ccId, phone, name){
             "channel" : "01",
             "userCode" : mobile,
             "transTime" : $.getTimeStr(),
-            "transToken": ""
+            "transToken": transToken
         },
         "body" : {
             "customerId": cusId,
@@ -118,11 +129,17 @@ function cusAndAgenInfoRender(data){
         var agent         = body.agent;
         $("#name").val(customerBasic.name);
         $("#mobile").val(customerBasic.userName);
-        $("#kehuName").val(agent.recommendAgentName);
-        $("#kehuPhone").val(agent.recommendAgentMobile);
+        $("#kehuName").text(agent.recommendAgentName);
+        $("#kehuPhone").text(agent.recommendAgentMobile);
+    }else if( data.statusCode == ajaxStatus.relogin ){
+        modelAlert( data.statusMessage, "", toLogin ); 
     }else{
-        modelAlert( message.requestFail ); 
+    	modelAlert( data.statusMessage );
     }
+}
+function toLogin(){
+	alert("跳转中。。。");
+	//loginControl();	
 }
 /**
  * @function 请求响应的产品预约新增数据处理
@@ -137,8 +154,10 @@ function addYuyueInfoRender(data){
         closeShadow();
         modelAlert("预约成功！");
        
+    }else if( data.statusCode == ajaxStatus.relogin ){
+        modelAlert( data.statusMessage, "", toLogin ); 
     }else{
-        modelAlert( message.requestFail );
+    	modelAlert( data.statusMessage );
     }
 }
 /**
@@ -152,8 +171,10 @@ function addYuyueInfoRender(data){
         var mobile  = cusInfo.mobile;//获取姓名
         var name    = cusInfo.name;//获取手机号
         var userImg = cusInfo.userImage;//获取用户头像
+    }else if( data.statusCode == ajaxStatus.relogin ){
+        modelAlert( data.statusMessage, "", toLogin ); 
     }else{
-        modelAlert( message.requestFail );
+    	modelAlert( data.statusMessage );
     }
     
  }
@@ -186,8 +207,10 @@ function liveProductInfoRender( data ){
         }
         clauseModuleStr(commodityClauseList);   //添加保险条款列表
 
+    }else if( data.statusCode == ajaxStatus.relogin ){
+        modelAlert( data.statusMessage, "", toLogin ); 
     }else{
-        modelAlert( message.requestFail );
+    	modelAlert( data.statusMessage );
     }
 }
 /**

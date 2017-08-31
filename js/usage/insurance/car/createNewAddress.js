@@ -125,7 +125,12 @@ $(function() {
   };
  
 
-
+//保单配送地址选择模块初始化
+ $.loadDisAddress = function() {
+  	$("#recognizee_city_input").bind("tap",function() {
+  		$.poppicker3("recognizee_city_input", cityData3, "input");
+  	});
+  };
 function saveInfo() {
 	cxDistribution.id = addressId;
 	cxDistribution.companycode = "000";
