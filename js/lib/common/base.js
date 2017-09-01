@@ -2519,7 +2519,7 @@ function changeChannel(channel){
 		"head":{
 			"userCode":"",
 			"transTime":$.getTimeStr(),
-			"channel":"2"
+			"channel":"3"
 		},"body":{
 	        "channelCode" : channel
 		}

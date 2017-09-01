@@ -30,9 +30,10 @@ var vm = new Vue({
 					var insureNo = $(this).attr('insureNo');
 					var reqData = {
 						"head": {
+							"userCode": userCode,
 							"channel": "01",
-							"userCode": "2835",
-							"transTime": ""
+							"transTime": $.getTimeStr(),
+							"transToken": transToken
 						},
 						"body": {
 							"orderNo": orderNo,
@@ -50,20 +51,27 @@ var vm = new Vue({
 })
 $(function() {
 	/*获取数据*/
-	var userCode = '2835';
+	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+		userCode = urlParm.userCode,
+		title=urlParm.title,
+		commdityCommId=urlParm.commdityCommId,
+		customerId=urlParm.customerId,
+		transToken=urlParm.transToken;
 	var reqData = {
 		"body": {
-			"commdityCommId": "4",
-			"customerId": "3"
+			"commdityCommId": commdityCommId,
+			"customerId": customerId
 		},
 		"head": {
-			"userCode": "2835",
-			"transTime": "",
-			"channel": "01"
+			"userCode": userCode,
+			"channel": "01",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
 		}
 	}
 	var url = base.url + 'moneyManage/redemptionList.do';
 	console.log("页面初始化，发送请求报文--");
+	console.log(urlParm);
 	$.reqAjaxsFalse(url, reqData, redemptionList);
 	console.log(vm.Objectlist);
 })
@@ -86,6 +94,7 @@ function getRedemption(data) {
 			"orderNo": orderNo,
 			"policyNo": policyNo,
 			"insureNo": insureNo,
+			"title":title,
 			"commodityCommId": commodityCommId
 		}
 		var jsonStr = UrlEncode(JSON.stringify(reqData));

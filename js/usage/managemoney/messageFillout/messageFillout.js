@@ -6,11 +6,16 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	bankName = urlParm.bankName,
 	commodityId = urlParm.commodityId,
 	bankCode = urlParm.bankCode,
-	commodityId = '7',
+	customerId=urlParm.customerId,
 	bankMaxMoney = urlParm.dayLimit,
+	transToken = urlParm.transToken,
 	invMobie = '13333333333', //引荐人手机号
 	riskSupportAbility = urlParm.riskSupportAbility, //类型
-	testType = toRiskType(riskSupportAbility); //类型
+	title = urlParm.title;
+if(title == null || title == "") {
+	title = urlParm.titles;
+}
+testType = toRiskType(riskSupportAbility); //类型
 if(bankCode != null && bankCode != "") {
 	$('.bank').attr('bankCode', bankCode);
 }
@@ -51,16 +56,16 @@ var vm = new Vue({
 })
 
 $(function() {
-
 	var reqData = {
 		"head": {
+			"userCode": userCode,
 			"channel": "01",
-			"userCode": "2835",
-			"transTime": ""
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
 		},
 		"body": {
 			"commodityCombinationId": commodityCombinationId,
-			"customerId": "3"
+			"customerId": customerId
 		}
 	}
 
@@ -68,97 +73,102 @@ $(function() {
 	$.reqAjaxsFalse(url, reqData, getInsureInfo);
 	/*点击购买弹出发送短信框*/
 	$("#huifang").unbind("tap").bind("tap", function() {
-
-		var chengshi = $('#chengshi').html();
-		var datawhere = $('#chengshi').attr('data-where');
-		var dizhi = $('#dizhi').val();
-		var email = $('#email').val();
-		var yinhang = $('#yinhangka').val();
-		bankName = $('.bank').html();
-		var dui = true;
-		if(chengshi == '请选择') {
-			mui.alert("请选择地区");
-			dui = false;
-		} else if(datawhere == "" || datawhere == null) {
-			mui.alert("请填写完整地区");
-			dui = false;
-		} else if(dizhi == "" || dizhi == null || dizhi.length < 8) {
-			mui.alert("请填写详细地址");
-			dui = false;
-		} else if(tit.regExp.isEmail(email) == false) {
-			mui.alert("请填写正确的电子邮箱");
-			dui = false;
-		} else if(bankName == null || bankName == "") {
-			mui.alert("请选择银行");
-			dui = false;
-		} else if(yinhang == null || yinhang == "") {
-			mui.alert("请填写银行卡号");
-			dui = false;
-		} else if(bankName == null || bankName == "") {
-			mui.alert("请选择银行");
-			dui = false;
-		}
-		if(dui) {
-			var dizhi = $('#dizhi').val(),
-				email = $('#email').val();
-			var where = $("#chengshi").html();
-			where = where.split(" ");
-			if(where == "请选择所在城市") {
-				where = ""
+		var huiclass = $('#huifang').attr('class')
+		if(huiclass == 'div_btn') {
+			var chengshi = $('#chengshi').html();
+			var datawhere = $('#chengshi').attr('data-where');
+			var dizhi = $('#dizhi').val();
+			var email = $('#email').val();
+			var yinhang = $('#yinhangka').val();
+			bankName = $('.bank').html();
+			var dui = true;
+			if(chengshi == '请选择') {
+				mui.alert("请选择地区");
+				dui = false;
+			} else if(datawhere == "" || datawhere == null) {
+				mui.alert("请填写完整地区");
+				dui = false;
+			} else if(dizhi == "" || dizhi == null || dizhi.length < 8) {
+				mui.alert("请填写详细地址");
+				dui = false;
+			} else if(tit.regExp.isEmail(email) == false) {
+				mui.alert("请填写正确的电子邮箱");
+				dui = false;
+			} else if(bankName == null || bankName == "") {
+				mui.alert("请选择银行");
+				dui = false;
+			} else if(yinhang == null || yinhang == "") {
+				mui.alert("请填写银行卡号");
+				dui = false;
+			} else if(bankName == null || bankName == "") {
+				mui.alert("请选择银行");
+				dui = false;
 			}
-			var whereCode = $("#chengshi").attr("data-where");
-			whereCode = whereCode.split(",");
-			buyPrem = $('#money').html().split('.');
-			var startPrem = Number(buyPrem[0]) * Number(vm.feilvshuzi);
-			/*vm.Objectitle.insureInfo.insureIdNO = '420625199202080010';*/
-			beiName = vm.Objectitle.insureInfo.insureName;
-			var redata = {
-				"head": {
-					"channel": "01",
-					"userCode": "2835",
-					"transTime": ""
-				},
-				"body": {
-					"insuranceNum": $('#goumai').html(),
-					"startPrem": startPrem + "",
-					"bankCode": $('.bank').attr('bankCode'),
-					"buyPrem": buyPrem[0],
-					"cardNo": $('#yinhangka').val(),
-					"bankName": bankName,
-					"commodityCombinationId": commodityCombinationId,
-					"commodityId": commodityId,
-					"touName": beiName,
-					"touPwd": vm.Objectitle.insureInfo.insureIdNO,
-					"touPhone": vm.Objectitle.insureInfo.insurePhone,
-					"touSex": $.getSexHong(vm.Objectitle.insureInfo.insureIdNO) + "",
-					"touProvince": where[0], //投保人所属地区的省名称
-					"touCity": where[1], //投保人所属地区的市名称
-					"touArea": where[2], //投保人所属地区的区名称
-					"touProvinceCode": whereCode[0], //投保人所属地区的省代码
-					"touCityCode": whereCode[1], //投保人所属地区的市代码
-					"touAreaCode": whereCode[2], //投保人所属地区的区代码
-					"touAddress": dizhi, //投保人地址"开福区德雅路109号"
-					"touEmail": email, //投保人电子邮箱
-					"beiName": beiName, //被投保人姓名
-					"beiPwd": vm.Objectitle.insureInfo.insureIdNO, //被投保人身份证
-					"beiPhone": vm.Objectitle.insureInfo.insurePhone, //被投保人手机号
-					"beiSex": $.getSexHong(vm.Objectitle.insureInfo.insureIdNO) + "", //性别
-					"beiProvince": where[0], //被投保人所属地区的省名称
-					"beiCity": where[1], //被投保人所属地区的市名称
-					"beiArea": where[2], //被投保人所属地区的区名称
-					"beiProvinceCode": whereCode[0], //被投保人所属地区的省代码
-					"beiCityCode": whereCode[1], //被投保人所属地区的省代码
-					"beiAreaCode": whereCode[2], //被投保人所属地区的省代码				
-					"beiAddress": dizhi, //被投保人地址
-					"beiEmail": email, //被投保人电子邮箱 	
-					"bankMaxMoney": bankMaxMoney + "", //银行最大金额
-					"invitePhone": invMobie, //引荐人手机号
-					"inFlag": "1",//来源渠道
-					"buyType":'1',//1直接购买，2分享购买
+			if(dui) {
+				var dizhi = $('#dizhi').val(),
+					email = $('#email').val();
+				var where = $("#chengshi").html();
+				where = where.split(" ");
+				if(where == "请选择所在城市") {
+					where = ""
 				}
-			};
-			var url = base.url + 'hkunderwrit/saveOrder.do';
-			$.reqAjaxsFalse(url, redata, saveOrder);
+				var whereCode = $("#chengshi").attr("data-where");
+				whereCode = whereCode.split(",");
+				buyPrem = $('#money').html().split('.');
+				var startPrem = Number(buyPrem[0]) * Number(vm.feilvshuzi);
+				/*vm.Objectitle.insureInfo.insureIdNO = '420625199202080010';*/
+				beiName = vm.Objectitle.insureInfo.insureName;
+				var redata = {
+					"head": {
+						"userCode": userCode,
+						"channel": "01",
+						"transTime": $.getTimeStr(),
+						"transToken": transToken
+					},
+					"body": {
+						"insuranceNum": $('#goumai').html(),
+						"startPrem": startPrem + "",
+						"bankCode": $('.bank').attr('bankCode'),
+						"buyPrem": buyPrem[0],
+						"cardNo": $('#yinhangka').val(),
+						"bankName": bankName,
+						"commodityCombinationId": commodityCombinationId,
+						"commodityId": commodityId,
+						"touName": beiName,
+						"touPwd": vm.Objectitle.insureInfo.insureIdNO,
+						"touPhone": vm.Objectitle.insureInfo.insurePhone,
+						"touSex": $.getSexHong(vm.Objectitle.insureInfo.insureIdNO) + "",
+						"touProvince": where[0], //投保人所属地区的省名称
+						"touCity": where[1], //投保人所属地区的市名称
+						"touArea": where[2], //投保人所属地区的区名称
+						"touProvinceCode": whereCode[0], //投保人所属地区的省代码
+						"touCityCode": whereCode[1], //投保人所属地区的市代码
+						"touAreaCode": whereCode[2], //投保人所属地区的区代码
+						"touAddress": dizhi, //投保人地址"开福区德雅路109号"
+						"touEmail": email, //投保人电子邮箱
+						"beiName": beiName, //被投保人姓名
+						"beiPwd": vm.Objectitle.insureInfo.insureIdNO, //被投保人身份证
+						"beiPhone": vm.Objectitle.insureInfo.insurePhone, //被投保人手机号
+						"beiSex": $.getSexHong(vm.Objectitle.insureInfo.insureIdNO) + "", //性别
+						"beiProvince": where[0], //被投保人所属地区的省名称
+						"beiCity": where[1], //被投保人所属地区的市名称
+						"beiArea": where[2], //被投保人所属地区的区名称
+						"beiProvinceCode": whereCode[0], //被投保人所属地区的省代码
+						"beiCityCode": whereCode[1], //被投保人所属地区的省代码
+						"beiAreaCode": whereCode[2], //被投保人所属地区的省代码				
+						"beiAddress": dizhi, //被投保人地址
+						"beiEmail": email, //被投保人电子邮箱 	
+						"bankMaxMoney": bankMaxMoney + "", //银行最大金额
+						"invitePhone": invMobie, //引荐人手机号
+						"inFlag": "1", //来源渠道
+						"buyType": '1', //1直接购买，2分享购买
+					}
+				};
+				var url = base.url + 'hkunderwrit/saveOrder.do';
+				$.reqAjaxsFalse(url, redata, saveOrder);
+			}
+		} else {
+			mui.alert('请勾选已阅读协议');
 		}
 	})
 	/*发送短信*/
@@ -191,11 +201,12 @@ $(function() {
 		}
 		vm.bankCode = $('.bank').attr('bankCode');
 		bankMaxMoney = vm.Objectitle.insureInfo.dayLimit;
-		if(bankName!=null&&bankName!=""){
-			vm.bankname=bankName;
-		}else{
-			vm.bankname=vm.Objectitle.insureInfo.bankName;
+		if(bankName != null && bankName != "") {
+			vm.bankname = bankName;
+		} else {
+			vm.bankname = vm.Objectitle.insureInfo.bankName;
 		}
+
 		/*点击+-*/
 		$(".up").unbind("tap").bind("tap", function() {
 			var fenshu = $('.fenshu_input').children('input').val();
@@ -229,7 +240,6 @@ $(function() {
 			$('#money').html(money + '元');
 			$('#mymoney').html(mymoney);
 		})
-
 	}
 	getProvinceReq();
 	var InterValObj; //timer变量，控制时间
@@ -245,9 +255,9 @@ $(function() {
 		var reqData = {
 			"head": {
 				"userCode": userCode,
-				"transTime": "",
-				"channel": '01',
-				"transToken": ""
+				"channel": "01",
+				"transTime": $.getTimeStr(),
+				"transToken": transToken
 			},
 			"body": {
 				"userName": phone,
@@ -295,6 +305,8 @@ $(function() {
 			"commodityCombinationId": commodityCombinationId,
 			"insurePhone": phone,
 			"riskSupportAbility": riskSupportAbility,
+			"title": '银行卡信息',
+			"titles": vm.Objectitle.insureInfo.comComName
 		}
 		var jsonStr = UrlEncode(JSON.stringify(param));
 		window.location.href = "../cardList/cardList.html?jsonKey=" + jsonStr;
@@ -304,9 +316,9 @@ $(function() {
 		var reqData = {
 			"head": {
 				"userCode": userCode,
-				"transTime": "",
-				"channel": '01',
-				"transToken": ""
+				"channel": "01",
+				"transTime": $.getTimeStr(),
+				"transToken": transToken
 			}
 		};
 		var url = base.url + 'investmentLinkedInsurance/getSelection.do';
@@ -346,6 +358,7 @@ $(".note-div_title_right").unbind("tap").bind("tap", function() {
 function saveOrder(data) {
 	console.log(data);
 	console.log(data.statusCode);
+
 	if(data.statusCode == '000000') {
 		orderNo = data.returns.OrderNo;
 		insureNo = data.returns.ProposalNo;
@@ -361,9 +374,10 @@ function saveOrder(data) {
 				if(ma == $('#yan').val()) {
 					var reqData = {
 						"head": {
+							"userCode": userCode,
 							"channel": "01",
-							"userCode": "2835",
-							"transTime": ""
+							"transTime": $.getTimeStr(),
+							"transToken": transToken
 						},
 						"body": {
 							"bankCode": $('.bank').attr('bankCode'),
@@ -407,7 +421,9 @@ $("#risktype").unbind("tap").bind("tap", function() {
 			"mobile": phone,
 			"customerId": commodityCombinationId,
 			"productCode": userCode
-		}
+		},
+		'title': '风险评估',
+		"titles": vm.Objectitle.insureInfo.comComName,
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
 	window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/riskQuestion.html?jsonKey=" + jsonStr;
@@ -440,4 +456,15 @@ function toRiskType(tempScore) {
 		tp = "进取型";
 	}
 	return tp;
+}
+
+function backlast() {
+	var sendData = {
+		"userCode": phone,
+		"insurePhone": phone,
+		"commodityCombinationId": commodityCombinationId,
+		"title": title
+	};
+	var jsonStr = UrlEncode(JSON.stringify(sendData));
+	window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
 }

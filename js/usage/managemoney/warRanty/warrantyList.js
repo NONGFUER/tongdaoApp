@@ -24,23 +24,29 @@ var vm = new Vue({
 })
 $(function() {
 	/*获取数据*/
-	var userCode = '2835';
+	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+		userCode = urlParm.userCode,
+		commodityComId = urlParm.commodityComId,
+		transToken=urlParm.transToken,
+		customerId = urlParm.customerId;
 	var reqData = {
 		"head": {
-			"channel": "01",
 			"userCode": userCode,
-			"transTime": ""
+			"channel": "01",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
 		},
 		"body": {
-			"commodityComId": "4",
+			"commodityComId": commodityComId,
 			"flag": "",
 			"pageNo": "1",
 			"pageSize": "10",
-			"customerId": "3"
+			"customerId":customerId
 		}
 	}
 	var url = base.url + 'moneyManage/policyQueryList.do';
 	console.log("页面初始化，发送请求报文--");
+	console.log(urlParm);
 	$.reqAjaxsFalse(url, reqData, policyQueryListInfo);
 	mui('.man-div-title ul').on('tap', 'li', function() {
 		$('.man-div-title ul').children('li').removeClass('li_xuan');
@@ -49,16 +55,17 @@ $(function() {
 		/*获取数据*/
 		var reqData = {
 			"head": {
+				"userCode": userCode,
 				"channel": "01",
-				"userCode": "2835",
-				"transTime": ""
+				"transTime": $.getTimeStr(),
+				"transToken": transToken
 			},
 			"body": {
-				"commodityComId": "4",
+				"commodityComId": commodityComId,
 				"flag": orderStatus,
 				"pageNo": "1",
 				"pageSize": "10",
-				"customerId": "3"
+				"customerId": customerId
 			}
 		}
 		var url = base.url + 'moneyManage/policyQueryList.do';
@@ -87,8 +94,10 @@ $(function() {
 		var param = {
 			"userCode": userCode,
 			"policyNo": policyNo,
-			"orderNo":orderNo,
-			"insureNo":insureNo
+			"orderNo": orderNo,
+			"insureNo": insureNo,
+			"commodityComId": commodityComId,
+			"title": $(this).children('.man-div-body-ul_li_div_ul1').children('.commdityComName').html(),
 			/*订单编号*/
 		}
 		var jsonStr = UrlEncode(JSON.stringify(param));
@@ -117,4 +126,34 @@ function chuli() {
 			$(this).html('已失效');
 		}
 	})
+}
+/*登录失效*/
+function lognCont() {
+	loginControl();
+}
+
+function backlast() {
+	sysback();
+}
+
+function mylist(data) {
+	var reqData = {
+		"head": {
+			"userCode": userCode,
+			"channel": "01",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
+		},
+		"body": {
+			"commodityComId": data,
+			"flag": "",
+			"pageNo": "1",
+			"pageSize": "10",
+			"customerId":customerId
+		}
+	}
+	var url = base.url + 'moneyManage/policyQueryList.do';
+	console.log("页面初始化，发送请求报文--");
+	console.log(urlParm);
+	$.reqAjaxsFalse(url, reqData, policyQueryListInfo);
 }

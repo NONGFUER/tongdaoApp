@@ -186,7 +186,7 @@ $(function() {
 					'head':{
 						'userCode': '',
 						'transTime':$.getTimeStr(),
-						'channel':'1'
+						'channel':'3'
 					},'body':{
 						"addressInsuredDto":{
 							"sessionid":cxSessionId,
@@ -278,7 +278,7 @@ function baojia(){
 		'head':{
 			'userCode': '',
 			'transTime':$.getTimeStr(),
-			'channel':'1'
+			'channel':'3'
 		},'body':{
 			"quoteInfo":{
 				"sessionId":cxSessionId,

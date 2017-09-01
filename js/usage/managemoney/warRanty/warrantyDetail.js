@@ -4,6 +4,9 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	policyNo = urlParm.policyNo,
 	insureNo = urlParm.insureNo,
+	transToken=urlParm.transToken,
+	commodityComId = urlParm.commodityComId,
+	title = urlParm.title,
 	orderNo = urlParm.orderNo;
 var vm = new Vue({
 	el: '#list',
@@ -37,9 +40,10 @@ $(function() {
 	console.log(urlParm);
 	var reqData = {
 		"head": {
-			"channel": "01",
 			"userCode": userCode,
-			"transTime": ""
+			"channel": "01",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
 		},
 		"body": {
 			"policyNo": policyNo
@@ -62,7 +66,7 @@ $(function() {
 		var reqData = {
 			"commodityCombinationId": commodityCombinationId,
 			"userCode": userCode,
-			"insurePhone":vm.Objectitle.bxPolicyFinance.insurePhone
+			"insurePhone": vm.Objectitle.bxPolicyFinance.insurePhone
 		}
 		var jsonStr = UrlEncode(JSON.stringify(reqData));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
@@ -84,13 +88,14 @@ function getRedemption(data) {
 				"orderNo": data.returns.redemptionDto.orderNo,
 				"insureNo": insureNo,
 				"policyNo": data.returns.redemptionDto.policyNo,
-				"commmodityComId":data.returns.redemptionDto.commmodityComId
+				"commmodityComId": data.returns.redemptionDto.commmodityComId
 			},
 			"head": {
 				"userCode": data.userCode,
 				"transTime": "",
 				"channel": "01"
-			}
+			},
+			"title": title,
 		}
 		var jsonStr = UrlEncode(JSON.stringify(reqData));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/policyCancellation.html?jsonKey=" + jsonStr;
@@ -107,6 +112,7 @@ function phoneyin(phone) {
 	var mphone = phone.substr(0, 3) + '****' + phone.substr(7);
 	return mphone;
 }
+
 function chuli() {
 	if($('.baozhang').html() == '01') {
 		$('.baozhang').html('待生效')
@@ -124,9 +130,10 @@ function chuli() {
 			var url = base.url + 'hkRedemption/getRedemption.do';
 			var reqData = {
 				"head": {
+					"userCode": userCode,
 					"channel": "01",
-					"userCode": "2835",
-					"transTime": ""
+					"transTime": $.getTimeStr(),
+					"transToken": transToken
 				},
 				"body": {
 					"orderNo": orderNo,
@@ -139,4 +146,17 @@ function chuli() {
 	}
 	bankweihao();
 	$('.phoneyin').html(phoneyin($('.phoneyin').html()));
+}
+
+function backlast() {
+	var sendData = {
+		"userCode": userCode,
+		"commodityComId": commodityComId,
+		"flag": '',
+		"pageNo": '',
+		"transToken": transToken,
+		"title": '保单列表'
+	};
+	var jsonStr = UrlEncode(JSON.stringify(sendData));
+	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyList.html?jsonKey=" + jsonStr;
 }

@@ -4,6 +4,8 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	insureNo = urlParm.body.insureNo,
 	commmodityComId = urlParm.body.commmodityComId,
 	policyNo = urlParm.body.policyNo,
+	transToken = urlParm.transToken,
+	title = urlParm.title,
 	userCode = urlParm.head.userCode;
 
 var vm = new Vue({
@@ -23,9 +25,10 @@ var vm = new Vue({
 $(function() {
 	var reqData = {
 		"head": {
-			"channel": "01",
 			"userCode": userCode,
-			"transTime": ""
+			"channel": "01",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
 		},
 		"body": {
 			"commodityCommId": commmodityComId,
@@ -35,7 +38,7 @@ $(function() {
 	var url = base.url + 'moneyManage/redemptionTrial.do';
 	console.log("页面初始化，发送请求报文--");
 	$.reqAjaxsFalse(url, reqData, redemptionTrial);
-	mui('.man-div-body-ul_li_div_btn').on('tap', '#huifang',tuibao)
+	mui('.man-div-body-ul_li_div_btn').on('tap', '#huifang', tuibao)
 })
 
 function redemptionTrial(data) {
@@ -52,8 +55,9 @@ function tuibao() {
 		},
 		"head": {
 			"userCode": userCode,
-			"transTime": "",
-			"channel": "01"
+			"channel": "01",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
 		}
 	}
 	var url = base.url + 'hkRedemption/getRedemptionConfirmation.do';
@@ -68,4 +72,19 @@ function getRedemptionConfirmation(data) {
 		mui(".man-div-body-ul_li_div_btn").off("tap", "#huifang", tuibao);
 		$('#huifang').addClass('huisebtn');
 	}
+}
+/*返回*/
+function backlast() {
+	var sendData = {
+		"userCode": userCode,
+		"channel": "01",
+		"transTime": $.getTimeStr(),
+		"transToken": transToken,
+		"orderNo": orderNo,
+		"policyNo": policyNo,
+		"insureNo": insureNo,
+		"title": title,
+	};
+	var jsonStr = UrlEncode(JSON.stringify(sendData));
+	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
 }

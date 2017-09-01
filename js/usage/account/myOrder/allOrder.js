@@ -1,9 +1,11 @@
-var data = '{"body": [{"baodan": "保单号: 8888888888888888","baozhang": "已关闭","shaoer": "少儿高发恶性肿瘤险","chengbao":"天安财险承保","name_bei":"被保人","name_value":"陈某人","name_fei":"保费","value_fei":"1000.00元","name_data":"保险期间","value_data":"2017/05/24-2019/05/24"},{"baodan": "保单号: 8888888888888888","baozhang": "已关闭","shaoer": "少儿高发恶性肿瘤险","chengbao":"天安财险承保","name_bei":"被保人","name_value":"陈某人","name_fei":"保费","value_fei":"1000.00元","name_data":"保险期间","value_data":"2017/05/24-2019/05/24"},{"baodan": "保单号: 8888888888888888","baozhang": "待支付","shaoer": "少儿高发恶性肿瘤险","chengbao":"天安财险承保","name_bei":"被保人","name_value":"陈某人","name_fei":"保费","value_fei":"1000.00元","name_data":"保险期间","value_data":"2017/05/24-2019/05/24"},{"baodan": "保单号: 8888888888888888","baozhang": "已支付","shaoer": "少儿高发恶性肿瘤险","chengbao":"天安财险承保","name_bei":"被保人","name_value":"陈某人","name_fei":"保费","value_fei":"1000.00元","name_data":"保险期间","value_data":"2017/05/24-2019/05/24"},{"baodan": "保单号: 8888888888888888","baozhang": "已支付","shaoer": "少儿高发恶性肿瘤险","chengbao":"天安财险承保","name_bei":"被保人","name_value":"陈某人","name_fei":"保费","value_fei":"1000.00元","name_data":"保险期间","value_data":"2017/05/24-2019/05/24"}]}';
-
-function strToJson(str) {
-	var json = eval('(' + str + ')');
-	return json;
-}
+/*获取数据*/
+/*var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+	userCode = urlParm.userCode,
+	commodityComId = urlParm.commodityComId,
+	customerPhone = urlParm.customerPhone,
+	roleType = urlParm.roleType,
+	transToken = urlParm.transToken,
+	customerId = urlParm.customerId;*/
 var vm = new Vue({
 	el: '#list',
 	data: {
@@ -26,7 +28,24 @@ var vm = new Vue({
 	}
 })
 $(function() {
-	vm.Objectlist = strToJson(data).body;
+	var reqData = {
+		"body": {
+			"userCode": "13888888888",
+			"channel":"",
+			"transToken": ""
+
+		},
+		"head": {
+			"channel": "01",
+			"userCode": "",
+			"transTime": "",
+			"transToken": ""
+		}
+	}
+	var url = base.url + 'personal/getOrderList.do';
+	console.log("页面初始化，发送请求报文--");
+	/*console.log(urlParm);*/
+	$.reqAjaxsFalse(url, reqData, getOrderList);
 	mui('#list').on('tap', '.mui-btn', function() {
 		var elem = this;
 		var li = elem.parentNode.parentNode;
@@ -42,3 +61,7 @@ $(function() {
 	})
 
 })
+function getOrderList(data){
+	console.log(data);
+	vm.Objectlist = data;
+}

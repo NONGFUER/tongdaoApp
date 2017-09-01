@@ -1,96 +1,50 @@
-/*全局常量*/
-var REQUEST_URL = {
-    "INSURE_URL" : base.url + "ecard/toubao.do",
-    "PAY_URL"    : base.url + "ecard/pay.do",
-    "FEECITY_URL": base.url + "ecard/selectDefaulInsuredArea.do",
-    // "PROVIN_URL" : base.url + "ecard/selectOrgProvince.do",
-    "CITY_URL"   : base.url + "ecard/selectAreaByParams.do"
-}
-var CERTIFICATENO_LENGTH = 18;
-var PRODUCT_CODE ={
-    "JKJR" : "00400009",	//健康佳人
-    "JKAX" : "00400010",	//健康安享
-    "QCWY" : "00400008",	//全车无忧
-    "LLHM" : "00400011",	//邻里和睦
-    "JXJS" : "00400007",	//锦绣吉顺
-    "SWFR" : "00400012",	//商务飞人
-    "XPXSX": "00400013",    //码上长大(省心版)
-    "XPXAX": "00400014",    //码上长大(省心版)
-}
-
-/*全局变量*/
-//上个页面收的参数
-var urlParm     = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
-var mobile      = urlParm.mobile,
-productCode = urlParm.productCode,
-customerId  = urlParm.customerId,
-duty        = urlParm.duty,
-productName = urlParm.productName,
-premCal     = urlParm.prem,
-peices      = urlParm.pieces;
-var holder      = urlParm.holder;
-var insuredAmount = "";
-//试算条件
-var ageCal = "";
-var genderCal = "";
-var premiunCal = "5000000";
-var now = "";
-var path = window.location.pathname.split("/").pop();
-var pathName = window.location.pathname.split("/").pop().split(".")[0];
-if(productCode == PRODUCT_CODE.JKJR){
-$(".zhiye").show();
-}else if(productCode == PRODUCT_CODE.QCWY){
-$(".zhiye").show();
-$(".Field").show();
-}else if(productCode == PRODUCT_CODE.JXJS){
-$(".zhiye").show();
-}else if(productCode == PRODUCT_CODE.LLHM){
-$(".llhmAddress").show();
+if(ccId == COMMODITYCOMBINE_ID.JKJR){
+	$(".zhiye").show();$(".diqu").show();
+}else if(ccId == COMMODITYCOMBINE_ID.QCWY){
+	$(".zhiye").show();
+	$(".Field").show();$(".diqu").show();
+}else if(ccId == COMMODITYCOMBINE_ID.JXJS){
+	$(".zhiye").show();$(".diqu").show();
+}else if(ccId == COMMODITYCOMBINE_ID.LLHM){
+	$(".llhmAddress").show();$(".diqu").show();
+}else if(ccId == COMMODITYCOMBINE_ID.JKAX){
+	$(".diqu").show();
+}else if(ccId == COMMODITYCOMBINE_ID.SWFR){
+	$(".diqu").show();
 }
 $(function(){
-sendFeeCityRequest();
-//getServiceTime();
-$(".duty").html(tableGener(duty));
-$("#insuranceName").val(productName);
-$("#jwx_foot_price").html("价格：￥"+premCal);
-if(holder){		
-    var insuIden  = holder.insureIdentitycard;		
-    var insuName  = holder.insureName;
-    var insuPhone = holder.insurePhone;
-    var insuSex   = $.getSex(insuIden) == 1 ? "男" :"女";
-    var	insuBirth = $.getBirthDay(insuIden);
-    $("#insureName").val(insuName);				//投保人姓名
-    $("#certificateNo").val(insuIden);			//证件号码
-    $("#telNo").val(insuPhone);					//手机号码
-    $("#gender").val(insuSex);
-    $("#birthDate").val(insuBirth);
-    ageCal = $.getAge($.getBirthDay(insuIden),now);
-    genderCal = $.getSex(insuIden) + "";
-    productCalculate(productCode);
-}
+	if( ccId != "1" && ccId != "2" && ccId != "3"){//除防癌险之外的ecard，会调默认城市
+		//sendFeeCityRequest( customerId, ccId );
+		sendFeeCityRequest( "14", "6" );
+	}
+	getServiceTime();
+	//$(".duty").html(tableGener(duty));
+	$("#insuranceName").val(cName);
+	$("#jwx_foot_price").html("价格：￥"+cPrem);
+
     
-//监控投保人身份证
-$(document).on("input propertychange","#certificateNo",function(e){
-    if(this.value.length == CERTIFICATENO_LENGTH){
-        if ($.checkIdCard(this.value.toLocaleUpperCase()) != 0) {
-            modelAlert("请输入合法的投保人身份证号！");
-            this.value = "";
-            return false;
-        }else{
-            var gender = $.getSex(this.value) == 1 ? "男" :"女";
-            $("#gender").val(gender);
-            $("#birthDate").val($.getBirthDay(this.value));
-            if($("#isSame").hasClass("on")){
-                ageCal = $.getAge($.getBirthDay(this.value),now);
-                genderCal = $.getSex(this.value) + "";
-                productCalculate(productCode);
-            }
-        }			
-    }else{
-        $("#gender").val("");
-        $("#birthDate").val("");
-    }		
-});	
+	//监控投保人身份证
+	$(document).on("input propertychange","#certificateNo",function(e){
+	    if(this.value.length == CERTIFICATENO_LENGTH){
+	        if ($.checkIdCard(this.value.toLocaleUpperCase()) != 0) {
+	            modelAlert("请输入合法的投保人身份证号！");
+	            this.value = "";
+	            return false;
+	        }else{
+	            var gender = $.getSex(this.value) == 1 ? "男" :"女";
+	            $("#gender").val(gender);
+	            $("#birthDate").val($.getBirthDay(this.value));
+	            if($("#isSame").hasClass("on")){
+	                ageCal = $.getAge($.getBirthDay(this.value),now);
+	                genderCal = $.getSex(this.value) + "";
+	                //productCalculate(productCode);
+	            }
+	        }			
+	    }else{
+	        $("#gender").val("");
+	        $("#birthDate").val("");
+	    }		
+	});	
 //监控被保人身份证号
 $(document).on("input propertychange","#recogCertificateNo",function(e){
     if(this.value.length == CERTIFICATENO_LENGTH){
@@ -104,7 +58,7 @@ $(document).on("input propertychange","#recogCertificateNo",function(e){
             $("#recogBirthDate").val($.getBirthDay(this.value));
             ageCal = $.getAge($.getBirthDay(this.value),now);
             genderCal = $.getSex(this.value) + "";
-            productCalculate(productCode);
+            //productCalculate(productCode);
         }
     }else{
         $("#recogGender").val("");
@@ -166,7 +120,7 @@ $("#chooseicon,.xinche").unbind("tap").bind("tap",function(){
         document.getElementById("FieldAI").readOnly=false;
     }else{
         $("#chooseicon").addClass("on");
-        $("#chooseicon").attr("src","../../image/gouxuankuang1.png");
+        $("#chooseicon").attr("src","../../../image/common/gouxuankuang1.png");
         $(".xinche").css("color","#1b6bb8");
         $("#FieldAI").val(" ");
         document.getElementById("FieldAI").readOnly=true;
@@ -176,7 +130,7 @@ $("#chooseicon,.xinche").unbind("tap").bind("tap",function(){
 $("#isSame").unbind("tap").bind("tap",function(){
     if($(this).hasClass("on")){
         $(this).removeClass("on");
-        $(this).find("img").attr("src","../../image/cancerRisk/meigou.png");
+        $(this).find("img").attr("src","../../../image/common/meigou.png");
         $(".beiNone").show(1000);
     }else{
         var sameName    = $.trim($("#insureName").val());		//投保人姓名
@@ -192,7 +146,7 @@ $("#isSame").unbind("tap").bind("tap",function(){
         
         ageCal = $.getAge($.getBirthDay(sameNo),now);
         genderCal = $.getSex(sameNo) + "";
-        productCalculate(productCode);
+        //productCalculate(productCode);
     }
 });
 //跳转到保险条款页面
@@ -254,7 +208,7 @@ if($(".isSame").hasClass("on")){
     var recogTelNo	  = telNo;//$.trim($("#recogTelNo").val());	//被保人手机号	
 }
 
-if(productCode == PRODUCT_CODE.JKJR || productCode == PRODUCT_CODE.QCWY || productCode == PRODUCT_CODE.JXJS){
+if(cId == COMMODITY_ID.JKJR || cId == COMMODITY_ID.QCWY || cId == COMMODITY_ID.JXJS){
     var profession = $("#profession").attr("data-value");	//承保职业
 }else{
     var profession = "1";	//承保职业
@@ -290,20 +244,23 @@ if ($.isNull(telNo)) {
     return false;
 }
 //投保地区校验
-if($.isNull(provinceCode)){
-    modelAlert("投保地区省份不能为空！");
-    return false;
+if( ccId != "1" && ccId != "2" && ccId != "3"){
+	if($.isNull(provinceCode)){
+		modelAlert("投保地区省份不能为空！");
+		return false;
+	}
+	//投保地区校验
+	if($.isNull(cityCode)){
+	    modelAlert("投保地区市区不能为空！");
+	    return false;
+	}
+	// 投保人地址校验
+	if($.isNull(address)){
+	    modelAlert("投保人地址不能为空！");
+	    return false;
+	}
 }
-//投保地区校验
-if($.isNull(cityCode)){
-    modelAlert("投保地区市区不能为空！");
-    return false;
-}
-// 投保人地址校验
-if($.isNull(address)){
-    modelAlert("投保人地址不能为空！");
-    return false;
-}
+
 // 与投保人关系校验
 if($.isNull(relation)){
     modelAlert("与投保人关系不能为空！");
@@ -325,7 +282,7 @@ if ($.isNull(recogCertiNo)) {
     modelAlert("请输入合法的被保人身份证号！");
     return false;
 }else{
-    if(productCode == PRODUCT_CODE.JKJR){
+    if(cId == COMMODITY_ID.JKJR){
         if($.getSex(recogCertiNo) != 2){
             modelAlert("该被保人性别与规则不符！");
             return false;
@@ -334,27 +291,27 @@ if ($.isNull(recogCertiNo)) {
             modelAlert("该被保人年龄与规则不符！");
             return false;
         }
-    }else if(productCode == PRODUCT_CODE.JKAX){
+    }else if(cId == COMMODITY_ID.JKAX){
         if($.getAge($.getBirthDay(recogCertiNo),now) < 18 || $.getAge($.getBirthDay(recogCertiNo),now) > 55 ){//18~55
             modelAlert("该被保人年龄与规则不符！");
             return false;
         }
-    }else if(productCode == PRODUCT_CODE.QCWY){
+    }else if(cId == COMMODITY_ID.QCWY){
         if($.getAge($.getBirthDay(recogCertiNo),now) < 16 || $.getAge($.getBirthDay(recogCertiNo),now) > 65 ){//16~65
             modelAlert("该被保人年龄与规则不符！");
             return false;
         }
-    }else if(productCode == PRODUCT_CODE.LLHM){
+    }else if(cId == COMMODITY_ID.LLHM){
         if($.getAge($.getBirthDay(recogCertiNo),now) < 16 || $.getAge($.getBirthDay(recogCertiNo),now) > 65 ){//16~65
             modelAlert("该被保人年龄与规则不符！");
             return false;
         }
-    }else if(productCode == PRODUCT_CODE.JXJS){
+    }else if(cId == COMMODITY_ID.JXJS){
         if($.getAge($.getBirthDay(recogCertiNo),now) < 16 || $.getAge($.getBirthDay(recogCertiNo)) > 65 ){//16~65
             modelAlert("该被保人年龄与规则不符！");
             return false;
         }
-    }else if(productCode == PRODUCT_CODE.SWFR){
+    }else if(cId == COMMODITY_ID.SWFR){
         if($.getAge($.getBirthDay(recogCertiNo),now) > 75 ||$.getAge($.getBirthDay(recogCertiNo),now) < 0 ){//0~75
             modelAlert("该被保人年龄与规则不符！");
             return false;
@@ -374,17 +331,17 @@ if($.isNull(profession)){
     modelAlert("被保人承保职业不能为空！");
     return false;
 }else{
-    if(productCode == PRODUCT_CODE.JKJR){		//1~3
+    if(cId == COMMODITY_ID.JKJR){		//1~3
         if( profession>3  ){
             modelAlert("该被保人承保职业与规则不符！");
             return false;
         }
-    }else if(productCode == PRODUCT_CODE.QCWY){//1~4
+    }else if(cId == COMMODITY_ID.QCWY){//1~4
         if( profession>4  ){//16~65
             modelAlert("该被保人承保职业与规则不符！");
             return false;
         }
-    }else if(productCode == PRODUCT_CODE.JXJS){//1~4
+    }else if(cId == COMMODITY_ID.JXJS){//1~4
         if( profession>4  ){//16~65
             modelAlert("该被保人承保职业与规则不符！");
             return false;
@@ -393,7 +350,7 @@ if($.isNull(profession)){
         
     }
 }
-if( productCode == PRODUCT_CODE.QCWY ){
+if( cId == COMMODITY_ID.QCWY ){
     if($.isNull(FieldAJ)){
         modelAlert("请输入车架号！");
         return false;
@@ -417,7 +374,7 @@ if( productCode == PRODUCT_CODE.QCWY ){
         modelAlert("核定座位数不能为空！");
         return false;
     }
-}else if( productCode == PRODUCT_CODE.LLHM ){
+}else if( cId == COMMODITY_ID.LLHM ){
     if($.isNull(FieldAA)){
         modelAlert("房屋坐落地址不能为空！");
         return false;
@@ -446,43 +403,48 @@ formData.recogTelNo  	= recogTelNo;
 return formData;
 }
 //customerId查询落地城市
-function sendFeeCityRequest(){
-var url = REQUEST_URL.FEECITY_URL;
-var reqData = {
-        "head":{
-            "channel"  :"01",
-            "userCode" :mobile,
-            "transTime":$.getTimeStr()
-        },
-        "body":{
-            "customerId":"14",//customerId,//773  198980 250
-            "commodityCombinationId" : '6' //
-        }
-}
-$.reqAjaxs(url,reqData,feeCityReponse);
+function sendFeeCityRequest( cusId, ccId){
+	var url = requestUrl.defalultArea;
+	var reqData = {
+	        "head":{
+	            "channel"  :"01",
+	            "userCode" :mobile,
+	            "transTime":$.getTimeStr()
+	        },
+	        "body":{
+	            "customerId":cusId,//customerId,//773  198980 250
+	            "commodityCombinationId" : ccId //
+	        }
+	}
+	$.reqAjaxs(url,reqData,feeCityReponse);
 }
 //落地城市返回
 function feeCityReponse(data){
 console.log(data);
 if(data.statusCode == "000000"){
 	var body = data.returns;
-	var ccsa = body.commodityCombinationSaleArea;
-	if( ccsa && ccsa.length != 0 ){
-		if( ccsa.length == 1 ){
-			var cityCode     = ccsa["0"].cityCode;
-			var cityName 	 = ccsa["0"].cityName;
-			var provinceCode = ccsa["0"].provinceCode;
-			var provinceName = ccsa["0"].provinceName;
-			$("#orgCityCode").text(cityName);				//城市名称
-			$("#orgProvinceCode").text(provinceName);		//省名称
-			$("#orgCityCode").attr("name",cityCode);		//城市代码
-			$("#orgProvinceCode").attr("name",provinceCode);//省代码
-			$("#address").val(cityName);
-			sendCityRequest( provinceCode, cityCode );
-		}else if( ccsa.length > 1 ){
-			var provinceCode = ccsa["0"].provinceCode;
-			var provinceName = ccsa["0"].provinceName;
-		}
+	var lsf = body.landingServiceFee;
+	if( lsf && lsf.length != 0 ){		
+			var orgCityCode     = lsf.orgCityCode;
+			var orgCityName 	= lsf.orgCityName;
+			var orgProvinceCode = lsf.orgProvinceCode;
+			var orgProvinceName = lsf.orgProvinceName;
+			var agentCode	    = lsf.intermediaryCode;
+            var teamCode	    = lsf.teamCode;	
+            var certiNo			= lsf.agentCode;
+            var businessSource  = lsf.yewuSource;
+            var agentName		= lsf.agnetName;			
+			$("#orgCityCode").text(orgCityName);
+			$("#orgProvinceCode").text(orgProvinceName);
+			$("#address").val(orgCityName);					//0822将地址定死
+			$("#orgCityCode").attr("name",orgCityCode);
+			$("#orgProvinceCode").attr("name",orgProvinceCode);
+			$("#orgCityCode").attr("agentCode",agentCode);
+			$("#orgCityCode").attr("teamCode",teamCode);
+			$("#orgCityCode").attr("certiNo",certiNo);
+			$("#orgCityCode").attr("businessSource",businessSource);
+			$("#orgCityCode").attr("agentName",agentName);
+			sendCityRequest( "", "" );		
 	}else{
 		
 	}
@@ -530,106 +492,168 @@ if(data.statusCode == "000000"){
 
 //落地市
 function sendCityRequest(provinceCode,cityCode){
-var url = REQUEST_URL.CITY_URL;
-var reqData = {
-        "head":{
-            "channel"  :"01",
-            "userCode" :mobile,
-            "transTime":$.getTimeStr()
-        },
-        "body":{
-            "orgProvinceCode":provinceCode,
-            "commodityCombinationId": '6',//commodityCombinationId,
-            "cityCode" : cityCode
-        }
+	var url = requestUrl.chooseArea;
+	var reqData = {
+	        "head":{
+	            "channel"  :"01",
+	            "userCode" :mobile,
+	            "transTime":$.getTimeStr()
+	        },
+	        "body":{
+	            "provinceCode":provinceCode,
+	            "commodityCombinationId": '6',//commodityCombinationId,
+	            "cityCode" : cityCode
+	        }
+	}
+	if( provinceCode == "" && cityCode == "" ){
+		$.reqAjaxs(url,reqData,provinceReponse);
+	}else if( provinceCode != "" && cityCode == "" ){
+		$.reqAjaxs(url,reqData,cityReponse);
+	}else if( provinceCode != "" && cityCode != "" ){
+		$.reqAjaxs(url,reqData,getAllReponse);		
+	}
+
 }
-$.reqAjaxs(url,reqData,cityReponse);
+//落地省份响应
+function provinceReponse(data){
+	if(data.statusCode == "000000"){
+		$(".orgProvinceCode").unbind("tap").bind("tap",function(){
+			var selectPicker2 = new mui.PopPicker();
+			var ccsa = data.returns.commodityCombinationSaleAreas;
+			var popArray = [];
+			for( var i = 0; i < ccsa.length; i++ ){
+				var item ={ 
+						"text":ccsa[i].provinceName,
+						"value":ccsa[i].provinceCode
+						}
+				popArray.push(item);
+			}
+			selectPicker2.setData(popArray);
+			selectPicker2.show(function(item){
+				$("#orgProvinceCode").text(item[0].text);
+				$("#orgProvinceCode").attr("name",item[0].value);
+				$("#orgCityCode").text("请选择");
+				$("#orgCityCode").attr("name","");	
+				provinceCode = item[0].value;
+				sendCityRequest(item[0].value,"");
+			});
+		});		
+	}
 }
 function cityReponse(data){
-if(data.statusCode == "000000"){
-    console.log(data);
-    $("#orgCityCode").unbind("tap").bind("tap",function(){
-        var selectPicker3 = new mui.PopPicker();
-        var bxLandingServiceFees = data.returns.bxLandingServiceFees;
-        var cityArray = [];
-        for( var i = 0; i < bxLandingServiceFees.length; i++ ){
-            var item ={ 
-                    "text":bxLandingServiceFees[i].orgCityName,
-                    "value":bxLandingServiceFees[i].orgCityCode,
-                    "agentCode":bxLandingServiceFees[i].intermediaryCode,//中介代码
-                    "teamCode":bxLandingServiceFees[i].teamCode,//团队代码
-                    "certiNo":bxLandingServiceFees[i].agentCode,
-                    "businessSource":bxLandingServiceFees[i].yewuSource,
-                    "agentName":bxLandingServiceFees[i].agnetName
-                    }
-            cityArray.push(item);
-        }
-        selectPicker3.setData(cityArray);
-        selectPicker3.show(function(item){
-            $("#orgCityCode").text(item[0].text);
-            $("#orgCityCode").attr("name",item[0].value);
-            $("#orgCityCode").attr("agentCode",item[0].agentCode);
-            $("#orgCityCode").attr("teamCode",item[0].teamCode);
-            $("#orgCityCode").attr("certiNo",item[0].certiNo);
-            $("#orgCityCode").attr("businessSource",item[0].businessSource);
-            $("#orgCityCode").attr("agentName",item[0].agentName);
-        });
-    });
-}else{
-    
+	if(data.statusCode == "000000"){
+	    console.log(data);
+	    $("#orgCityCode").unbind("tap").bind("tap",function(){
+	        var selectPicker3 = new mui.PopPicker();
+	        var ccsa = data.returns.commodityCombinationSaleAreas;
+	        var cityArray = [];
+	        for( var i = 0; i < ccsa.length; i++ ){
+	            var item ={ 
+	                    "text":ccsa[i].cityName,
+	                    "value":ccsa[i].cityCode,
+	                    "agentCode":ccsa[i].intermediaryCode,//中介代码
+	                    "teamCode":ccsa[i].teamCode,//团队代码
+	                    "certiNo":ccsa[i].agentCode,
+	                    "businessSource":ccsa[i].yewuSource,
+	                    "agentName":ccsa[i].agnetName
+	                    }
+	            cityArray.push(item);
+	        }
+	        selectPicker3.setData(cityArray);
+	        selectPicker3.show(function(item){
+	            $("#orgCityCode").text(item[0].text);
+	            $("#orgCityCode").attr("name",item[0].value);           
+	            cityCode = item[0].value;
+	            sendCityRequest( provinceCode, item[0].value);
+	            selectPicker3.dispose();
+	        });
+	    });
+	}else{
+	    
+	}
 }
+function getAllReponse(data){
+	if(data.statusCode == "000000"){
+		 var lsf = data.returns.landingServiceFee;
+		 var agentCode	    = lsf.intermediaryCode;
+         var teamCode	    = lsf.teamCode;	
+         var certiNo			= lsf.agentCode;
+         var businessSource  = lsf.yewuSource;
+         var agentName		= lsf.agnetName;
+		 $("#orgCityCode").attr("agentCode",agentCode);
+		 $("#orgCityCode").attr("teamCode",teamCode);
+		 $("#orgCityCode").attr("certiNo",certiNo);
+		 $("#orgCityCode").attr("businessSource",businessSource);
+		 $("#orgCityCode").attr("agentName",agentName);
+	}else{
+		
+	}
 }
 //投保请求
 /*投保方法*/
 function sendInsureRequest(){
 if(!$("#word").hasClass("on")){return false;}
-var url = REQUEST_URL.INSURE_URL;
+
+
 var formData = getFormData();
 if(!formData){return false;}
 var reqData = {
     "head":{
         "channel"  :"01",
         "userCode" :mobile,
-        "transTime":$.getTimeStr()
+        "transTime":$.getTimeStr(),
+        "transToken":transToken
     },
     "body":{
-        "bxOrder":{
-            "productId" :productCode,
-            "insureName":formData.insureName,
-            "customerId":customerId,
-            "insurePhone":formData.telNo,
-            "insureIdentitycard": formData.certificateNo,				
-            "coverage":insuredAmount+"",
-            "inviterPhone":mobile,
-            "insureAddress":formData.address,
-            "totalPieces":parseInt(peices),
-            "channelResource":'3'// '渠道来源,1-微信公众号，2-分享进入，3-App',	
+        "shortRiskorder":{
+        	"commodityCombinationId" : ccId,
+        	"commodityId"            : cId,
+            "insureName"			 : formData.insureName,
+            "customerId"             : customerId,
+            "insurePhone"            : formData.telNo,
+            "insureIdentitycard"     : formData.certificateNo,				
+            "coverage"               : "500000",
+            "inviterPhone"           : mobile,
+            "insureAddress"          : formData.address,
+            "totalPieces"            : "1",//parseInt(peices),
+            "channelResource"        : '3'// '渠道来源,1-微信公众号，2-分享进入，3-App',	
         },
-        "bxInsured":{
-            "apRelation" : formData.relation,
-            "insuredname": formData.recogName,
-            "insuredidno": formData.recogCertiNo,
-            "insuredmobile":formData.recogTelNo
-        },
-        "belongORGCode":formData.agentName,
-        "agentCode":formData.agentCode,
-        "teamCode":formData.teamCode,
-        "certiNo":formData.certiNo,
-        "businessSource":formData.businessSource
-        
+        "shortRiskInsured":{
+            "apRelation"  			 : formData.relation,
+            "insuredname"            : formData.recogName,
+            "insuredidno"            : formData.recogCertiNo,
+            "insuredmobile"          : formData.recogTelNo
+        }
     }
 }
-if( productCode == PRODUCT_CODE.LLHM ){
-    reqData.body.FieldAA = formData.FieldAA;
-}else if( productCode == PRODUCT_CODE.QCWY ){
-    reqData.body.FieldAJ = formData.FieldAJ;
-    reqData.body.FieldAI = formData.FieldAI;
-    reqData.body.FieldAN = formData.FieldAN;
-}
-console.log("====== 请求数据 ======");
-console.log(reqData);
-console.log("... ... ...");
-$.toreqAjaxs(url,reqData,insureReponse);
+	if(ccId != "1" && ccId != "2" && ccId != "3"){
+		reqData.body.customerId    = customerId;
+		reqData.body.belongORGCode = formData.agentName;
+		reqData.body.agentCode     = formData.agentCode;
+		reqData.body.teamCode      = formData.teamCode;
+		reqData.body.certiNo       = formData.certiNo;
+		reqData.body.businessSource= formData.businessSource;
+	}else{
+		reqData.body.versions = "01";
+	}
+	if( cId == COMMODITY_ID.LLHM ){
+		reqData.body.FieldAA = formData.FieldAA;
+	}else if( cId == COMMODITY_ID.QCWY ){
+		reqData.body.FieldAJ = formData.FieldAJ;
+		reqData.body.FieldAI = formData.FieldAI;
+		reqData.body.FieldAN = formData.FieldAN;
+	}
+	console.log("====== 请求数据 ======");
+	console.log(reqData);
+	console.log("... ... ...");
+	if( ccId != "1" && ccId != "2" && ccId != "3"){
+		var url = requestUrl.ecardInsure;
+		$.reqAjaxs(url,reqData,insureReponse);
+	}else{
+		var url = requestUrl.cancerInsure;
+		$.toreqAjaxs(url,reqData,insureReponse);
+	}
+	
 
 }
 /*投保返回，调用支付接口*/
@@ -647,18 +671,27 @@ if(data.statusCode == "000000"){
 }
 /*支付接口*/
 function payRequest(serialNo){
-var url = REQUEST_URL.PAY_URL;
-var reqData = {
-    "head":{
-        "channel":"01",
-        "userCode":mobile,
-        "transTime":$.getTimeStr()
-    },"body":{
-        "serialNo":serialNo,
-        "payType" :"7"
-    }
-}
-$.toAjaxs(url,reqData,payReturnReponse);
+	if( ccId != "1" && ccId != "2" && ccId != "3"){
+		var url = requestUrl.ecardPay;
+	}else{
+		var url = requestUrl.cancerPay;
+	}
+	var reqData = {
+	    "head":{
+	        "channel":"01",
+	        "userCode":mobile,
+	        "transTime":$.getTimeStr()
+	    },"body":{
+	        "serialNo":serialNo,
+	        //"payType" :"7"
+	    }
+	}
+	if( ccId != "1" && ccId != "2" && ccId != "3"){
+		reqData.body.payType = "7";
+	}else{
+		reqData.body.orderResource = "3";
+	}	
+	$.toAjaxs(url,reqData,payReturnReponse);
 }
 //支付回调
 function payReturnReponse(data){
@@ -815,26 +848,26 @@ function priceRender(data){
 }
 //根据不同的产品试算不同的
 function productCalculate(productCode){
-if(productCode == PRODUCT_CODE.JKJR){
+if(productCode == COMMODITY_ID.JKJR){
     if(ageCal >= 16 && ageCal <= 55 ){
         jkjrCalculation(ageCal);
     }else{
         modelAlert("该被保人年龄与规则不符！");
         return false;
     }		
-}else if(productCode == PRODUCT_CODE.JKAX){
+}else if(productCode == COMMODITY_ID.JKAX){
     if(ageCal >= 18 && ageCal <= 55 ){
         jkaxCalculation(ageCal,genderCal)
     }else{
         modelAlert("该被保人年龄与规则不符！");
         return false;
     }			
-}else if(productCode == PRODUCT_CODE.SWFR){
+}else if(productCode == COMMODITY_ID.SWFR){
     swfrCalculation(premiunCal);
-}else if(productCode == PRODUCT_CODE.QCWY){
+}else if(productCode == COMMODITY_ID.QCWY){
     otherCalculation();
     //qcwyCalculation(num);
-}else if(productCode == PRODUCT_CODE.JXJS){
+}else if(productCode == COMMODITY_ID.JXJS){
     otherCalculation();
     //jxjsCalculation(num);
 }else{

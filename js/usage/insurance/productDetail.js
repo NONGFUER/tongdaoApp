@@ -85,6 +85,7 @@ function sendProductInfoRequest(ccCode,cityCode,provinceCode,type){
  */
 function calDoRender(data){
     console.log(data);
+    cPrem = data.returns.premiun;
     $("#jwx_foot_price").text("价格：￥" + data.returns.premiun);
 }
 //试算条件
@@ -138,7 +139,7 @@ function calOptionDetails(calOptions){
        if( calOptions[i].isDefalut == "1" ){   	   
     	   str += '<li class="on" data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
        }else{
-        	str += '<li data-value="' + calOptions[i].enuCode + '">' + calOptions[i].enuContent + '</li>'
+           str += '<li data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
        }
     }
     str += '</ul>'   
@@ -155,9 +156,11 @@ function productInfoRender(data){
         var commodityCombinationModuleMapper = body.commodityCombinationModuleMapper;
         var commodityCombination             = body.commodityCombination;
         var companyProfile 					 = body.companyProfile;
-        cId = body.CommodityInfo[0].id;
+        cId   = body.CommodityInfo[0].id;
+        cName = body.CommodityInfo[0].commodityName;
+        ccName = commodityCombination.commodityCombinationName;
         $(".banner-img").attr("src",commodityCombination.banner);
-        $("#commodityCombinationName").text(commodityCombination.commodityCombinationName);
+        $("#commodityCombinationName").text(ccName);
         $("#companyName").text(companyProfile.companyName);
         for(var i = 0; i < commodityCombinationModuleMapper.length; i++){
             moduleStr(commodityCombinationModuleMapper[i])
@@ -334,13 +337,16 @@ function buyBind(){
 	});	
 }
 function toInsure(){
-	if($("div[name='versions']")){
-		cId = $("div[name='versions']").find(".on").attr("data-cid")
-		alert(cId);
+	if($("div[name='versions']").length != 0){
+		cId = $("div[name='versions']").find(".on").attr("data-cid");
+		cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
+		alert(cId+":"+cName);
 	}
-	var param ={
-			cid : cId
-	}
-	var jsonStr = UrlEncode(JSON.stringify(param));
+	title = "投保"
+	urlParm.cId = cId;
+	urlParm.cName = cName;
+	urlParm.cPrem = cPrem;
+	urlParm.title = title; 
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = "insure.html?jsonKey="+jsonStr;
 }

@@ -2,8 +2,11 @@
  * 
  */
 var testType;
+var titles = "";
+var transToken="";
 $(function() {
 	//	url传值解密过程
+
 	var urlstr = getUrlQueryString('jsonKey');
 	urlstr = UrlDecode(urlstr);
 	parm = JSON.parse(urlstr);
@@ -12,6 +15,8 @@ $(function() {
 	mobile = parm.body.mobile;
 	productCode = parm.body.productCode;
 	customerId = parm.body.customerId;
+	transToken=parm.transToken;
+	titles = parm.titles;
 	//初始化
 	$.init();
 	//头部返回按钮
@@ -64,9 +69,11 @@ function product() {
 		},
 		"head": {
 			"userCode": productCode,
-			"transTime": "",
-			"channel": "01"
-		}
+			"channel": "01",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
+		},
+		"title": titles,
 	}
 	var url = base.url + 'investmentLinkedInsurance/saveRiskAble.do';
 	$.reqAjaxsFalse(url, reqData, saveRiskAbles);
@@ -77,6 +84,7 @@ function product() {
 				"insurePhone": mobile,
 				"commodityCombinationId": customerId,
 				"userCode": productCode,
+				"title": titles,
 			}
 			var jsonStr = JSON.stringify(sendData);
 			jsonStr = UrlEncode(jsonStr);
@@ -93,8 +101,9 @@ function buy() {
 		},
 		"head": {
 			"userCode": productCode,
-			"transTime": "",
-			"channel": "01"
+			"channel": "01",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
 		}
 	}
 	var url = base.url + 'investmentLinkedInsurance/saveRiskAble.do';
@@ -107,7 +116,8 @@ function buy() {
 				"insurePhone": mobile,
 				"userCode": productCode,
 				"commodityCombinationId": customerId,
-				"testType": $('.testType').html()
+				"testType": $('.testType').html(),
+				'title': titles,
 			}
 			var jsonStr = JSON.stringify(sendData);
 			jsonStr = UrlEncode(jsonStr);

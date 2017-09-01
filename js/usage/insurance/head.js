@@ -1,4 +1,38 @@
 // 全局常量
+/*全局常量*/
+var CERTIFICATENO_LENGTH = 18;
+var COMMODITYCOMBINE_ID ={
+		"MCAN" : "1",
+		"PMCAN": "1",
+		"FCAN" : "2",
+		"PFCAN": "2",
+		"BCAN" : "3",
+		"PBCAN": "3",
+		"JXJS" : "6",	//锦绣吉顺
+	    "QCWY" : "7",	//全车无忧
+	    "JKJR" : "8",	//健康佳人
+	    "JKAX" : "9",	//健康安享
+	    "LLHM" : "10",	//邻里和睦	    
+	    "SWFR" : "11",	//商务飞人
+	    "XPXSX": "12",   //码上长大(省心版)
+	    "XPXAX": "12"    //码上长大(省心版)
+	}
+var COMMODITY_ID ={
+		"MCAN" : "1",
+		"PMCAN": "2",
+		"FCAN" : "3",
+		"PFCAN": "4",
+		"BCAN" : "5",
+		"PBCAN": "6",
+		"JXJS" : "9",	//锦绣吉顺
+	    "QCWY" : "10",	//全车无忧
+	    "JKJR" : "11",	//健康佳人
+	    "JKAX" : "12",	//健康安享
+	    "LLHM" : "13",	//邻里和睦	    
+	    "SWFR" : "14",	//商务飞人
+	    "XPXSX": "15",    //码上长大(省心版)
+	    "XPXAX": "16"    //码上长大(安心版)
+	}
 var ajaxStatus = {
     success : "000000",
     relogin : "123456"
@@ -28,8 +62,14 @@ var requestUrl = {
     //线上投保模块
     //ecard投保
     ecardInsure          : base.url + 'ecard/toubao.do',     //投保接口@mjp
-    ecardPay             : base.url + 'ecard/pay.do',      //投保支付@mjp
-    ecardPayBack         : base.url + 'ecard/payBack.do',//投保地区查询@mjp
+    ecardPay             : base.url + 'ecard/pay.do',        //投保支付@mjp
+    ecardPayBack         : base.url + 'ecard/payBack.do',    //投保地区查询@mjp
+    defalultArea  		 : base.url + "ecard/selectDefaulInsuredArea.do",  //@mjp  默认地区
+    chooseArea			 : base.url + "ecard/selectAreaByParams.do",		//@mjp 选择地区
+    //防癌险投保
+    cancerInsure         : base.url + 'cancerRisk/toubao.do',     //防癌险投保接口@cc
+    cancerPay            : base.url + 'cancerRisk/pay.do',      //防癌险支付@cc
+    cancerPayBack        : base.url + 'cancerRisk/payBack.do',//投保地区查询@cc
 
     
 }
@@ -42,15 +82,19 @@ var name		= urlParm.name;					 //姓名
 var idAuth		= urlParm.idAuth;				 //是否实名
 var idNo		= urlParm.idNo;					 //身份证号
 var roleType    = urlParm.roleType;              //"04";				//urlParm.roleType用户角色
-var transToken  = urlParm.transToken;			 //
+var transToken  = "40d1ef064f3259d6501dc15e69fb8d1c"//urlParm.transToken;			 //
 var ccId        = urlParm.ccId;                  //"3";             //urlParm.ccId;商品组合id
 var ccCode      = urlParm.ccCode;                //"00400003";      //urlParm.ccCode;商品组合code
 var cCode       = urlParm.cCode;				 //
-var cId			= urlParm.cId;					 //
+var cId			= urlParm.cId + "";					 //
 var cityCode    = urlParm.cityCode;              //"220001"			//urlParm.cityCode	市代码
 var	provinceCode= urlParm.provinceCode;          //"220000"			//	urlParm.provinceCode	省代码
-
-
+var cName = urlParm.cName ? urlParm.cName : "";
+var ccName = urlParm.ccName ? urlParm.ccName : "";
+var cPrem = urlParm.cPrem ? urlParm.cPrem : "";
+var title = "";
+var leftIco = "";
+var rightIco = "";
 // 18	18900001111				王晓伟
 
 // 1	00400001	天安防癌险（男神版）

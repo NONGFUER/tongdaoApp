@@ -10,16 +10,24 @@ var riskSupportAbility = "";
 var mobile = "";
 var productCode = "";
 var customerId = "";
+var titles = "";
+var title = "";
+var transToken="";
 $(function() {
+
 	//	url传值解密过程
 	var urlstr = getUrlQueryString('jsonKey');
 	urlstr = UrlDecode(urlstr);
 	parm = JSON.parse(urlstr);
 	mobile = parm.body.mobile;
+	transToken=parm.transToken;
 	customerId = parm.body.customerId;
 	productCode = parm.body.productCode;
+	titles = parm.titles;
+	title = parm.title;
 	/*初始化页面*/
 	$.init();
+
 });
 /*初始化页面*/
 $.init = function() {
@@ -27,6 +35,7 @@ $.init = function() {
 		$(".risk-introduce-title").show();
 		if($.isNull(parm.head.riskSupportAbility)) { //riskSupportAbility为空时，表示为初次测评
 			if(!($.isNull(parm.body.testType))) { //testType不为空时，首页显示测评类型，类型值非壳所传
+
 				$(".testType").html(parm.body.testType);
 				$(".indexcontent").css("margin-top", "20px");
 				$(".risk-introducey,.risk-introduce-title").show();
@@ -34,6 +43,7 @@ $.init = function() {
 				$("#indexpart").css("margin-top", topheight + "px");
 				$.setscroll2();
 			} else { // testType为空，首页不显示测评类型
+
 				$(".indexcontent,.declare-button").css("margin-top", "60px");
 				$(".declare-button span").text("立即测评");
 				$(".risk-introducey").show();
@@ -54,6 +64,7 @@ $.init = function() {
 			$("#indexpart").css("margin-top", topheight + "px");
 			$.setscroll2();
 		}
+
 		/*加载数据*/
 		$.detailinit();
 	} else { //returnflag非空时，显示题目
@@ -127,13 +138,15 @@ $.detailinit = function() {
 		"head": {
 			"channel": "01",
 			"userCode": productCode,
-			"transTime": ""
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
 		},
 		"body": {
 
 		}
 	}
 	$.reqAjaxs(url, data, $.detailinitCallBack);
+
 }
 $.detailinitCallBack = function(data) {
 	console.log(data);
@@ -464,8 +477,9 @@ $.submitData = function() {
 		},
 		"head": {
 			"userCode": productCode,
-			"transTime": "",
-			"channel": "01"
+			"channel": "01",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
 		}
 	};
 	$.reqAjaxs(url, data, $.submitDataCallBack);
@@ -482,7 +496,9 @@ $.submitDataCallBack = function(param) {
 				"mobile": mobile,
 				"customerId": customerId,
 				"productCode": productCode
-			}
+			},
+			"title": '评估结果',
+			"titles": titles,
 		};
 		var jsonStr = JSON.stringify(jsonObj);
 		jsonStr = UrlEncode(jsonStr);
@@ -533,21 +549,22 @@ function toRiskType(tempScore) {
 	}
 	return testType1;
 }
+
 function tps(tempScore) {
-	var tp="";
-	if(tempScore =='1') {
+	var tp = "";
+	if(tempScore == '1') {
 		//保守型
 		tp = "保守型";
-	} else if(tempScore=='2') {
+	} else if(tempScore == '2') {
 		//稳健型
 		tp = "稳健型";
-	} else if(tempScore=="3") {
+	} else if(tempScore == "3") {
 		//平衡型
 		tp = "平衡型";
-	} else if(tempScore== '4') {
+	} else if(tempScore == '4') {
 		//积极型
 		tp = "积极型";
-	} else if(tempScore== "5") {
+	} else if(tempScore == "5") {
 		//进取型
 		tp = "进取型";
 	}

@@ -2,7 +2,7 @@ var vm = new Vue({
 	el: '#list',
 	data: {
 		Objectlist: {
-			hKCalculate:{},
+			hKCalculate: {},
 		},
 	},
 	mounted() {
@@ -17,6 +17,8 @@ $(function() {
 	/*获取数据*/
 	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 		commodityCommId = urlParm.commodityCommId,
+		title=urlParm.title,
+		transToken = urlParm.transToken,
 		orderNo = urlParm.orderNo;
 	console.log("页面初始化，获取上个页面传值报文--");
 	console.log(urlParm);
@@ -31,14 +33,15 @@ $(function() {
 			"orderNo": orderNo
 		}
 	}
-	var url = base.url +'moneyManage/redemptionTrial.do';
+	var url = base.url + 'moneyManage/redemptionTrial.do';
 	$.reqAjaxsFalse(url, reqData, redemptionTrial);
 	mui('.man-div-body-ul_li_div_btn').on('tap', '#huifang', function() {
 		mui.alert('赎回成功');
 		/*接口请求位子*/
 	})
 })
-function redemptionTrial(data){
+
+function redemptionTrial(data) {
 	console.log(data);
 	vm.Objectlist = data.returns;
 }
@@ -47,4 +50,18 @@ function bankweihao() {
 	var banke = $('.bank_weihao').html();
 	banke = banke.substr(banke.length - 4);
 	$('.bank_weihao').html('尾号 ' + banke);
+}
+/*返回*/
+function backlast() {
+	var sendData = {
+		"commdityCommId": commdityCommId,
+		"customerId": customerId,
+		"userCode": userCode,
+		"channel": "01",
+		"transTime": $.getTimeStr(),
+		"transToken": transToken,
+		"title":title
+	};
+	var jsonStr = UrlEncode(JSON.stringify(sendData));
+	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
 }

@@ -23,19 +23,23 @@ var vm = new Vue({
 })
 $(function() {
 	/*获取数据*/
-	//	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
-	//		userCode = urlParm.userCode,
-	//		policyNo = urlParm.policyNo;
+	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+		userCode = urlParm.userCode,
+		transToken=urlParm.transToken,
+		customerId=urlParm.customerId,
+		commodityCommId=urlParm.commodityCommId,
+		policyNo = urlParm.policyNo;
 	console.log("页面初始化，获取上个页面传值报文--");
 	var reqData = {
 		"head": {
+			"userCode": userCode,
 			"channel": "01",
-			"userCode": "2835",
-			"transTime": ""
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
 		},
 		"body": {
-			"customerId": "3",
-			"commodityCommId": "4",
+			"customerId": customerId,
+			"commodityCommId": commodityCommId,
 			"flag": "1"
 		}
 	}
@@ -48,13 +52,14 @@ $(function() {
 		var flag = $(this).attr('flag');
 		var reqData = {
 			"head": {
+				"userCode": userCode,
 				"channel": "01",
-				"userCode": "2835",
-				"transTime": ""
+				"transTime": $.getTimeStr(),
+				"transToken": transToken
 			},
 			"body": {
-				"customerId": "3",
-				"commodityCommId": "4",
+				"customerId": customerId,
+				"commodityCommId": commodityCommId,
 				"flag": flag
 			}
 		}
@@ -87,7 +92,7 @@ function chuli() {
 					$(this).html('核保成功');
 					$(this).addClass('lanse');
 					$(this).parent().parent('li').prev().children('.money').addClass('lanse');
-				}else if($(this).html() == '04') {
+				} else if($(this).html() == '04') {
 					$(this).html('待生效');
 					$(this).addClass('lanse');
 					$(this).parent().parent('li').prev().children('.money').addClass('lanse');

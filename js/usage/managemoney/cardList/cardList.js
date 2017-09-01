@@ -3,7 +3,9 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	commodityCombinationId = urlParm.commodityCombinationId,
 	userCode = urlParm.userCode,
 	insurePhone = urlParm.insurePhone,
+	titles=urlParm.titles,
 	riskSupportAbility = urlParm.riskSupportAbility;
+	
 var vm = new Vue({
 	el: '#list',
 	data: {
@@ -15,7 +17,6 @@ var vm = new Vue({
 		this.$nextTick(function() {
 			$(function() {
 				$(".banklist").unbind("tap").bind("tap", function() {
-					console.log(1);
 					var commodityId=$(this).attr('commodityid');
 					var bankName = $(this).attr('bankName');
 					var bankCode = $(this).attr('bankCode');
@@ -28,7 +29,8 @@ var vm = new Vue({
 						"bankName": bankName,
 						"bankCode":bankCode,
 						"dayLimit":dayLimit,
-						"commodityId":commodityId
+						"commodityId":commodityId,
+						"title":titles,
 					}
 					var jsonStr = UrlEncode(JSON.stringify(param));
 					window.location.href = "../messageFillout/messageFillout.html?jsonKey=" + jsonStr;

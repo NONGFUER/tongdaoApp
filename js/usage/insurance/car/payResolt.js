@@ -59,7 +59,7 @@ function toInitAjax(){
 			"head":{
 				"userCode":"",
 				"transTime":$.getTimeStr(),
-				"channel":"1"
+				"channel":"3"
 			},"body":{
 				"orderNo":orderNo,
 			}
