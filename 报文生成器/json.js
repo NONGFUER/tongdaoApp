@@ -79,20 +79,19 @@ var reqData1 = {
         }
 }
 var ff = {"head":{"channel":"01","userCode":"18900001111","transTime":"2017-09-01 16:3:55"},"body":{"orgProvinceCode":"110000","commodityCombinationId":"6","cityCode":""}}
-var requestJson = aesEncrypt(JSON.stringify(reqDataq), secretKey, secretKey);
-	requestJson=URLencodeForBase64(requestJson);
+
 	var url = 'http://localhost:8080/tongdaoPlatform/ecard/toubao.do?jsonKey='
 	console.log(url+""+requestJson);
 document.write(url+requestJson);
 var sendData = {
-		"mobile":"18900001111",
-		"customerId":"18",
+		"mobile":"13888888888",
+		"customerId":"816",
 		"name":"王晓伟",
 		"idNo":"150404198210221124",
 		"idAuth":"1",
 		"roleType":"04",
-		"transToken":"40d1ef064f3259d6501dc15e69fb8d1c",
-		"ccId":"12",
+		"transToken":"701f3e80f2f0d22f9109c68770366dfe",
+		"ccId":"9",
 		"ccCode":"00400007",
 		"cId":"",
 		"cCode":"",
@@ -100,5 +99,88 @@ var sendData = {
 		"provinceCode":"130000"
 	}
 	var jsonKey = UrlEncode(JSON.stringify(sendData));
-	console.log("jsonKey="+jsonKey);
+	console.log("产品：jsonKey="+jsonKey);
 	
+	
+	////////////////////////////////////////////////////////
+	var urlA = 'http://localhost:8080/tongdaoPlatform/agent/question.do?jsonKey=';
+	var sendJson = {
+			"head":{
+	            "channel"  :"01",
+	            "userCode" :"13852291705",
+	            "transTime":"",
+	            "transToken":""
+	        },
+	        "body":{
+	            
+	        }	
+	}
+		
+		
+	var requestJson = aesEncrypt(JSON.stringify(sendJson), secretKey, secretKey);
+	requestJson=URLencodeForBase64(requestJson);
+	console.log("获取代理人考试题目");
+	console.log(urlA+""+requestJson);
+	
+	
+	
+	/////////////////////////////////////////////////////////////
+	var urlB = 'http://localhost:8080/tongdaoPlatform/bank/bankList.do?jsonKey=';
+	var sendJsonB = {
+			"head":{
+	            "channel"  :"01",
+	            "userCode" :"13852291705",
+	            "transTime":"",
+	            "transToken":""
+	        },
+	        "body":{
+	            
+	        }	
+	}
+		
+		
+	var requestJsonB = aesEncrypt(JSON.stringify(sendJsonB), secretKey, secretKey);
+	requestJsonB=URLencodeForBase64(requestJsonB);
+	console.log("获取银行：");
+	console.log(urlB+""+requestJsonB);
+	////////////////////////////////////////////////////////////////////////////////////agent/isWhite.do
+	var urlC = 'http://localhost:8080/tongdaoPlatform/agent/isWhite.do?jsonKey=';
+	var sendJsonC = {
+			"head":{
+	            "channel"  :"01",
+	            "userCode" :"13852291705",
+	            "transTime":"",
+	            "transToken":"b16e2692964b9887e1133604a11cc1cc"
+	        },
+	        "body":{
+	        	"recommendId": "016330B0051",
+	        	"customerId":"812"
+	        }	
+	}
+		
+		
+	var requestJsonC = aesEncrypt(JSON.stringify(sendJsonC), secretKey, secretKey);
+	requestJsonC=URLencodeForBase64(requestJsonC);
+	console.log("获取银行：");
+	console.log(urlC+""+requestJsonC);
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	var urlD = 'http://localhost:8080/tongdaoPlatform/agent/agentQuery.do?jsonKey=';
+	var sendJsonD = {
+			"head":{
+				"channel": "01",
+		        "userCode": "13852291705",
+		        "transTime": $.getTimeStr(),
+		        "transToken":"b16e2692964b9887e1133604a11cc1cc"
+			},
+			"body":{
+				"customerId" : "812",
+				"type"		 : "1"
+			}
+	}
+		
+		
+	var requestJsonD = aesEncrypt(JSON.stringify(sendJsonD), secretKey, secretKey);
+	requestJsonD=URLencodeForBase64(requestJsonD);
+	console.log("查询：");
+	console.log(urlD+""+requestJsonD);

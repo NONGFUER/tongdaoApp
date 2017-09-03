@@ -1,33 +1,9 @@
-var parm = "";
-var openId = "";
-var name = "";
-var ID = "";
-var phone = "";
 var answerList = new Array();
 
 $(function(){
-	var str = getUrlQueryString("jsonKey");
-	str = UrlDecode(str);
-	parm = JSON.parse(str);	
-	/*var parm={
-			"phone":"13852291705"
-	}*/
-	openId = parm.openId;
-	name = parm.name;
-	ID = parm.ID;
-	phone = parm.phone;
 	$.init();
-
-	//点击返回图标，返回上一页面
-	$(".backindex").unbind("tap").bind("tap",function(){
-		//openUrl('backApply');//调壳方法
-		window.location.href = 'agentapply.html';
-	})
-	
 	//弹出框
-	$(".cancle").unbind("tap").bind("tap",function(){
-		//$(".shadow").hide();
-		//openUrl('backApply');//调壳方法
+	$(".cancle").unbind("tap").bind("tap",function(){		
 		window.location.href = 'agentapply.html';
 	})
 	$(".retest").unbind("tap").bind("tap",function(){
@@ -37,19 +13,18 @@ $(function(){
 	$(".sure").unbind("tap").bind("tap",function(){
 		$(".shadowpass").hide();
 		$.saveAnswer(answerList);
-	})
-	
-	
+	})		
 	$.setscroll();	
 })
 
 $.init = function(){
-	var url = base.url + "identificationControl/question.do";
+	var url = base.url + "agent/question.do";
 	var reqData = {
 			"head": {
 		        "channel": "01",
-		        "userCode": phone,
-		        "transTime": " "
+		        "userCode": "13852291705",
+		        "transTime": " ",
+		        "transToken":""
 		    },"body": {}
 		}
 	$.reqAjaxs(url,reqData,$.infoCallBack);
@@ -66,14 +41,14 @@ $.infoCallBack=function(data){
 		for(i=0;i<questionNum;i++){
 			var num = i+1;
 			var j=0;
-			var optionNum = parm.questionList[i].bxOptionInfo.length;
+			var optionNum = parm.questionList[i].entities.length;
 			str += '<div class="kaoti clear"><span>'+num+'、</span>';
 			str += '<span>'+parm.questionList[i].questionInfo+'</span>';
 			str += '<div class="xuanxiang">';
 			for(j=0;j<optionNum;j++){
 				str += '<div class="option">';
 				str += '<img src="../../image/chooseno.png" class="chooseImg"/>';
-				str += '<span class="optionShow">'+parm.questionList[i].bxOptionInfo[j].optionShow+'</span><span>、'+parm.questionList[i].bxOptionInfo[j].optionInfo+'</span></div>';
+				str += '<span class="optionShow">'+parm.questionList[i].entities[j].optionShow+'</span><span>、'+parm.questionList[i].entities[j].optionInfo+'</span></div>';
 			}
 				str += '</div>';
 			str += '<div class="questionCode" style="display:none;">'+parm.questionList[i].questionCode+'</div>';
@@ -160,32 +135,30 @@ $.getAnswer = function(){
 	}
 	console.log(answerList);
 }
+
 //通过考试时，保存用户答案到后台
 $.saveAnswer = function(data){
-	url = base.url + "identificationControl/saveQuestion.do";
+	url = base.url + "agent/saveQuestion.do";
 	var reqData = {
 			"head": {
 			     "channel": "01",
-			     "userCode": phone,
-			     "transTime": ""
+			     "userCode": mobile,
+			     "transTime": "",
+			     "transToken":transToken
 			 },
 			 "body": {
-			     "questionList": data
+			     "questionList": data,
+			     "customerId"  :customerId,
+			     "mobile":mobile
 			 }
 	}
 	$.reqAjaxs(url,reqData,$.saveAnswerCallBack);
 }
+
 $.saveAnswerCallBack = function(data){
 	console.log(data);
-	if(data.statusCode == "000000"){
-		var sendData = {				
-				"name":name,
-				"phone":phone,
-				"ID":ID,
-				"flag":"2",
-				"verfyState":"01"
-		}
-		var jsonStr = UrlEncode(JSON.stringify(sendData));
+	if(data.statusCode == "000000"){		
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href="agentInfoRegister.html?jsonKey="+jsonStr;
 	}else{
 		modelAlert("保存答题信息失败！");

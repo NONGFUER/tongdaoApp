@@ -6,7 +6,8 @@
 var secretKey = "t171420100302rsa";
 var actionStartTime;//浏览页面的埋点时间
 var base = {
-		url : window.location.protocol+"//"+window.location.host+"/tongdaoPlatform/",
+		//url : window.location.protocol+"//"+window.location.host+"/tongdaoPlatform/",
+		url : window.location.protocol+"//"+window.location.host+"/",
 		urlsxy : window.location.protocol+"//"+window.location.host+"/tongdaoSxyPlatform/",
 		share_url1: window.location.protocol+"//"+window.location.host+"/tongdaoPlatform/",
 		share_url2: window.location.protocol+"//"+window.location.host+"/tongdaoPlatform/",

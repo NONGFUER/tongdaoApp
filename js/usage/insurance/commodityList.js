@@ -3,7 +3,7 @@ $(function(){
     sendCommodityListRequest();//APP产品模块线下产品详情查询
 });
 
-function sendCommodityListRequest(){
+function sendCommodityListRequest(ccId){
     var url = requestUrl.commodityListUrl;
     var sendJson = {
         "head" : {
@@ -12,7 +12,7 @@ function sendCommodityListRequest(){
             "transTime" : $.getTimeStr()
         },
         "body" : {
-            "commodityCombinationId": "105"
+            "commodityCombinationId": ccId
         }
     }
     $.reqAjaxs( url, sendJson, commodityListRender );
@@ -25,7 +25,7 @@ function commodityListRender(data){
        modelAlert( message.requestFail );
     }
 }
-function sendCommissionInfoRequest(){
+function sendCommissionInfoRequest(provinceCode,cityCode,commodityId,roleType){
     var url = requestUrl.commissionInfoUrl;
     var sendJson = {
         "head" : {
@@ -36,7 +36,8 @@ function sendCommissionInfoRequest(){
         "body" : {
             "provinceCode": "320000",
             "cityCode": "320012",
-            "commodityId": "118"
+            "commodityId": "118",
+            "roleType":roleType
         }
     }
     $.reqAjaxs( url, sendJson, commissionInfoRender );
