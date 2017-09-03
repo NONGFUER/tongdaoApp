@@ -2,28 +2,31 @@
 var calChoices = []; 
 var calNames	= [];
 var choiceEdit = [];
+var listArray = [];
 var lowAge = "";
 var upAge = "";
 $(function(){
     $.setscroll("bodyMuiScroll");
     buyBind();
     jieshaoToshuomingBind();		//介绍和产品详情间的切换
-    //productInfoRender(data1);
     //在线产品详情查询(ccCode,cityCode,provinceCode,type)  商品组合code,城市代码code,省code,用户角色
     sendProductInfoRequest( ccCode, cityCode, provinceCode, roleType );	
     //根据商品组合id查询保费试算项 (ccId)           商品组合Id
-    sendCalOptionsRequest( ccId );       
+    sendCalOptionsRequest( ccId );
+    //对date类型试算项的初始化（绑定初始值和试算动作）
 	getServiceTime()
 	addChoice();
 	for( var i = 0; i < calChoices.length; i++ ){
     	choiceBind( calNames[i] );
     }
+	listChoiceBind();
 	console.log(calChoices);
 	console.log(choiceEdit);
     //根据保费试算项进行保费试算
     sendCaldoRequest( ccId );
     //calOptionsRender(data4);
 });
+
 //根据保费试算项进行保费试算
 function sendCaldoRequest(ccId){
 	 var url = requestUrl.calDoUrl;
@@ -45,6 +48,7 @@ function sendCaldoRequest(ccId){
 	 }
      $.reqAjaxsFalse( url, sendJson, calDoRender ); 
 }
+
 //根据商品组合id查询保费试算项
 function sendCalOptionsRequest(ccId){
     var url = requestUrl.calOptionsUrl;
@@ -61,6 +65,7 @@ function sendCalOptionsRequest(ccId){
     }
     $.reqAjaxsFalse( url, sendJson, calOptionsRender ); 
 }
+
 //在线产品详情查询
 function sendProductInfoRequest(ccCode,cityCode,provinceCode,type){
     var url = requestUrl.onlineProductInfoUrl;
@@ -80,6 +85,7 @@ function sendProductInfoRequest(ccCode,cityCode,provinceCode,type){
     }
     $.reqAjaxs( url, sendJson, productInfoRender ); 
 }
+
 /**
  * @function 试算
  */
@@ -88,6 +94,7 @@ function calDoRender(data){
     cPrem = data.returns.premiun;
     $("#jwx_foot_price").text("价格：￥" + data.returns.premiun);
 }
+
 //试算条件
 function calOptionsRender(data){
     console.log(data);
@@ -101,8 +108,8 @@ function calOptionsRender(data){
            var isCal	  = calOptionDtos[i].isCal;
            var showType   = calOptionDtos[i].showType;
            var calOptions = calOptionDtos[i].calOptions;
-           var calDetails = calOptionDetails(calOptions,calCode);
-           //addChoice( isCal, calCode );//将试算条件放入试算组 
+           var calDetails = calOptionDetails(calOptions,calCode);//针对listArea拼接
+           var listChoice = listChioceDetails(calOptions);//针对list,拼接          
            upAndLowDate( calCode, calOptions );
            var str = "";
            if( isCal == "1" ){      	   
@@ -113,29 +120,30 @@ function calOptionsRender(data){
            }          
            str += '<div class="label">' + calName+ '：</div>';
            str += '<div class="conter" id="' + calCode + '">';
-           if( showType == 'date'){
-        	   
+           if( showType == 'date'){        	   
         	   str += '<input id="birthdate" type="text" readonly="readonly">';
            }else if( showType == 'listArea' ){
         	   str += calDetails;
            }else if( showType == 'label' ){
-        	   str += calOptions[0].enuContent
-           }           
+        	   str += calOptions[0].enuContent;
+           }else if( showType == 'list' ){
+        	   str += listChoice;
+           }        
            str += '</div>';
            $(".insurance-choice").append(str);         
-        }
-        
+        }        
     }else{
         modelAlert( message.requestFail );
     }
 }
-//试算枚举
+
+//针对listArea试算枚举
+//渲染规则 ：遍历listArea类型枚举，给默认值加加on
 function calOptionDetails(calOptions){
     var optionsLength = calOptions.length;
     var str = "";
     str += '<ul class="radio" >'
     for(var i = 0; i < optionsLength; i++){
-    	//addChoiceValue(calOptions[i].isCal, calOptions[i].isDefalut, calOptions[i].enuCode );
        if( calOptions[i].isDefalut == "1" ){   	   
     	   str += '<li class="on" data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
        }else{
@@ -145,6 +153,88 @@ function calOptionDetails(calOptions){
     str += '</ul>'   
     return str;
 }
+
+//针对list试算枚举
+//渲染规则：长度为1的无法点击，大于1的点击选择值
+function listChioceDetails(calOptions){
+	var optionsLength = calOptions.length;
+	if( optionsLength == 1){
+		var str = '<input id="textButton" data-value="' + calOptions[0].enuCode + '"  type="text" value="'+ calOptions[0].enuContent +'" readonly="readonly">';
+	}else if( optionsLength > 1){
+		var str = '<input id="listButton" data-value="' + calOptions[0].enuCode + '"  type="text" value="'+ calOptions[0].enuContent +'" readonly="readonly">';
+		for( var i = 0; i < optionsLength; i++ ){
+			var item = { text:calOptions[i].enuContent, value:calOptions[i].enuCode };
+			listArray.push(item);
+		}
+	}else{
+		
+	}
+	 return str;
+}
+
+//往试算组里面加条件
+//规则：（试算项会被标记biCal）
+function addChoice(){
+	calChoices = [];
+	$(".biCal").each(function(index,obj){
+		var chioceName  = $(this).attr("name");//试算条件名
+		calChoices.push(chioceName);
+		calNames.push(chioceName);		
+		var chioceValue =  $(this).attr("data-value");  //试算值				
+		var calObj = {
+				name  : chioceName,
+				value : chioceValue
+		}
+		choiceEdit.push(calObj);
+		calChoices.push(chioceValue);
+		console.log(calChoices);
+	});
+}
+
+//往试算组里面加条件值
+function addChoiceValue( flag,flag1, chioceValue){
+	if( flag == "1" && flag1 == "1" ){
+		calChoices.push( chioceValue )
+	}
+}
+
+//绑定listArea不同条件项的枚举选项
+function choiceBind( calName ){
+	$("#"+calName).find("li").bind("tap",function(){
+		tab($(this),"on");
+		var choiceValue = $(this).attr("data-value");
+		$('div[name='+calName+']').attr("data-value",choiceValue);
+		addChoice();
+		console.log(calName +":"+$(this).attr("data-value"));//
+		sendCaldoRequest( ccId );
+	});
+}
+
+//绑定list选项
+function listChoiceBind(  ){
+	$("#listButton").bind("tap",function(){
+		var sp = new mui.PopPicker();
+		sp.setData(listArray);
+		sp.show(function(item){
+			$("#listButton").val(item[0].text);
+			$("#listButton").attr("data-value",item[0].value);
+			$('div[name="pieces"]').attr('data-value',item[0].value);
+			addChoice();
+			sendCaldoRequest(ccId);
+		});
+		
+	});
+}
+
+//取得insuredAge年龄的最大最小值
+//用于确定年龄选择器的范围值
+function upAndLowDate( code, options){
+	if( code == "insuredAge"){
+		lowAge = parseInt(options[0].enuContent);
+		upAge  = parseInt(options[1].enuContent);
+	}
+}
+
 /**
  * @function 请求响应的线上产品详情数据
  * @param {*} data 
@@ -159,11 +249,11 @@ function productInfoRender(data){
         cId   = body.CommodityInfo[0].id;
         cName = body.CommodityInfo[0].commodityName;
         ccName = commodityCombination.commodityCombinationName;
-        $(".banner-img").attr("src",commodityCombination.banner);
-        $("#commodityCombinationName").text(ccName);
-        $("#companyName").text(companyProfile.companyName);
+        $(".banner-img").attr("src",commodityCombination.banner);		//渲染图片
+        $("#commodityCombinationName").text(ccName);					//渲染商品组合名
+        $("#companyName").text(companyProfile.companyName);				//渲染保险公司名字
         for(var i = 0; i < commodityCombinationModuleMapper.length; i++){
-            moduleStr(commodityCombinationModuleMapper[i])
+            moduleStr(commodityCombinationModuleMapper[i])				//渲染产品介绍和产品说明
         }
     }else{
         modelAlert( message.requestFail );
@@ -196,6 +286,7 @@ function moduleStr(mapperList){
         $(".shuoming").append(str);
     }
 }
+
 //产品介绍 详情说明切换
 function jieshaoToshuomingBind(){
     $(".insurance-tab").find("li").bind("click", function() {
@@ -203,10 +294,13 @@ function jieshaoToshuomingBind(){
         $(".insurance-tab_content").hide().eq($(this).index()).show();					
     })
 }
+
+//
 function tab(a, flag) {
 	$(a).siblings().removeClass(flag); 
 	$(a).addClass(flag);
 };
+
 //保障责任
 function tableGener(dutyStr){
 	var trCell = dutyStr.split("|");
@@ -226,49 +320,11 @@ function tableGener(dutyStr){
 	tableStr += '</table>'
 	return tableStr;
 }
-//往试算组里面加条件
-function addChoice(){
-	calChoices = [];
-	$(".biCal").each(function(index,obj){
-		var chioceName  = $(this).attr("name");//试算条件名
-		calChoices.push(chioceName);
-		calNames.push(chioceName);
-		if( chioceName == "insuredAge"){
-			var chioceValue =  $(this).attr("data-value");
-		}else{
-			var chioceValue = $(this).find('.on').attr("data-value");//试算值
-		}
-		var calObj = {
-				name  : chioceName,
-				value : chioceValue
-		}
-		choiceEdit.push(calObj);
-		calChoices.push(chioceValue);
-	});
-} 
-//往试算组里面加条件值
-function addChoiceValue( flag,flag1, chioceValue){
-	if( flag == "1" && flag1 == "1" ){
-		calChoices.push( chioceValue )
-	}
-}
-//绑定不同条件项的枚举选项
-function choiceBind( calName ){
-	$("#"+calName).find("li").bind("tap",function(){
-		tab($(this),"on");
-		addChoice();
-		console.log(calName +":"+$(this).attr("data-value"));//
-		sendCaldoRequest( ccId );
-	});
-}
-//取得最大最小值
-function upAndLowDate( code, options){
-	if( code == "insuredAge"){
-		lowAge = parseInt(options[0].enuContent);
-		upAge  = parseInt(options[1].enuContent);
-	}
-}
-/**获取服务器时间*/
+
+/**
+ * 对date类型试算项的初始化（绑定初始值和试算动作）
+ * 
+ * */
 function getServiceTime(){
 	var url = requestUrl.getServeTimeUrl;
 	var reqData = {
@@ -280,6 +336,7 @@ function getServiceTime(){
 	}	
 	$.reqAjaxsFalse( url, reqData, timeRender );
 }
+
 //初始化时间控件
 function timeRender(data){
     if(data.statusCode == "000000") {
@@ -291,7 +348,6 @@ function timeRender(data){
     		currentTime.setFullYear(currentTime.getFullYear()-lowAge, currentTime.getMonth(), currentTime.getDate());
     	}
     	currTime.setFullYear(currTime.getFullYear()-upAge+1, currTime.getMonth(), currTime.getDate()+1);//55周岁    	
-    	//currentTime.setFullYear(currentTime.getFullYear()-0, currentTime.getMonth(), currentTime.getDate()-30);//18周岁
     	var year = currTime.getFullYear(),month= currTime.getMonth()+1,day = currTime.getDate();
     	defaultTime=$.getTimeStr2(currentTime);
     	var endYear = currentTime.getFullYear(),endMonth = currentTime.getMonth()+1,endDay = currentTime.getDate();
@@ -300,14 +356,12 @@ function timeRender(data){
     	var age = $.getAge(defaultTime);
 		console.log(":" + age);
 		$("div[name='insuredAge']").attr("data-value",age);
-//    	//premiumCalculation();
-//    	var homeAge = ages(defaultTime);//
-//    	jkaxCalculation(homeAge,"1");
     	changeDate("birthdate");
     }else {
 	   modelAlert(data.statusMessage);
 	}
 }
+
 /**---出生日期 时间控件---*/
 function changeDate(id){
 	var result = document.getElementById(id);
@@ -321,9 +375,7 @@ function changeDate(id){
 				result.value = rs.text;
 				var age = $.getAge(rs.text);
 				console.log(id + ":" + age);
-				$("div[name='insuredAge']").attr("data-value",age);
-				//console.log($.getAge(rs.text));
-				//
+				$("div[name='insuredAge']").attr("data-value",age);				
 				addChoice();
 				sendCaldoRequest( ccId );
 				picker.dispose();
@@ -331,11 +383,13 @@ function changeDate(id){
 		});	
 	}	
 }
+
 function buyBind(){
 	$("#toubao").unbind('tap').bind('tap',function(){
 		toInsure();
 	});	
 }
+
 function toInsure(){
 	if($("div[name='versions']").length != 0){
 		cId = $("div[name='versions']").find(".on").attr("data-cid");
@@ -346,7 +400,10 @@ function toInsure(){
 	urlParm.cId = cId;
 	urlParm.cName = cName;
 	urlParm.cPrem = cPrem;
-	urlParm.title = title; 
+	urlParm.title = title;
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.calChoices = calChoices;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = "insure.html?jsonKey="+jsonStr;
 }
