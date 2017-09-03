@@ -571,7 +571,7 @@ function sendInsureRequest(){
 	            "coverage"               : "500000",
 	            "inviterPhone"           : mobile,
 	            "insureAddress"          : formData.address,
-	            "totalPieces"            : "1",//parseInt(peices),
+	            "totalPieces"            : cPieces,//parseInt(peices),
 	            "channelResource"        : '3'// '渠道来源,1-微信公众号，2-分享进入，3-App',	
 	        },
 	        "shortRiskInsured":{

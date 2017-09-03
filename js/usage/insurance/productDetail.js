@@ -404,6 +404,7 @@ function toInsure(){
 	urlParm.leftIco = "1";
 	urlParm.rightIco = "0";
 	urlParm.calChoices = calChoices;
+	urlParm.cPieces = cPieces;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = "insure.html?jsonKey="+jsonStr;
 }
