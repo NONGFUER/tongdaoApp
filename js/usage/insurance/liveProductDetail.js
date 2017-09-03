@@ -2,7 +2,7 @@
 $(function(){
 	//setTitleMethod("1","产品详情","0")
     $.setscroll( "bodyMuiScroll" );
-    sendCustomerAndAgentInfoRequest( customerId );
+    sendCustomerAndAgentInfoRequest( customerId, provinceCode, cityCode, roleType );
     $("#mobile").val(mobile);
     $("#name").val(name);
     //点击预约出单
@@ -67,7 +67,7 @@ function sendCustomerAndAgentInfoRequest(cusId){
     $.reqAjaxs( url, sendJson, cusAndAgenInfoRender ); 
 }
 // 获取线下产品请求方法
-function sendLiveProductInfoRequest(ccId){
+function sendLiveProductInfoRequest(ccId,provinceCode,cityCode,roleType){
     var url = requestUrl.liveProductInfoUrl;
     var sendJson = {
         "head" : {
@@ -77,7 +77,10 @@ function sendLiveProductInfoRequest(ccId){
             "transToken": transToken
         },
         "body" : {
-            "commodityCombinationId" : ccId
+        	"provinceCode"			 : provinceCode,
+        	"cityCode"				 : cityCode,
+            "commodityCombinationId" : ccId,
+            "roleType"				 : roleType
         }
     }
     $.reqAjaxs( url, sendJson, liveProductInfoRender );
