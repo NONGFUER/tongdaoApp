@@ -96,6 +96,7 @@ $(function() {
 			"policyNo": policyNo,
 			"orderNo": orderNo,
 			"insureNo": insureNo,
+			"customerId": customerId,
 			"commodityComId": commodityComId,
 			"title": $(this).children('.man-div-body-ul_li_div_ul1').children('.commdityComName').html(),
 			/*订单编号*/

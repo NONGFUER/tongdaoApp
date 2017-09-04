@@ -76,12 +76,7 @@ $(function() {
 	openDicMuiList("policyholder_nation_input", "bx_nation", " ", true);
 	/**--返回--*/
 	$(".h_back").unbind("tap").bind("tap",function() {
-		if(parm.body.fromBaojia!="quote"){
-			window.location.href="insuranceCoverage.html"+window.location.search;
-		}else{//返回重新报价页面
-			window.location.href="quotationDetail.html"+window.location.search;
-		}
-		
+		backlast()
 	});
 	
 	/**-----核保失败返回----*/
@@ -134,11 +129,17 @@ $(function() {
 	
 	/**-------查看报价详情---------*/
 	$(".priceTable").on("tap",function(){
-		window.location.href="baojiaInfo.html"+window.location.search;
+		parm.title="报价详情";
+		var jsonStr = JSON.stringify(parm);
+		jsonStr = UrlEncode(jsonStr);
+		window.location.href = "baojiaInfo.html?jsonKey=" + jsonStr;
 	});
 	/**-------查看配送地址---------*/
 	$("#addressHead").on("tap",function(){
-		window.location.href="policyDeliveryAddress.html"+window.location.search;
+		parm.title="选择收货地址";
+		var jsonStr = JSON.stringify(parm);
+		jsonStr = UrlEncode(jsonStr);
+		window.location.href = "policyDeliveryAddress.html?jsonKey=" + jsonStr;
 	});
 	/**--点击"下一步"邮寄地址与投被保人信息入库******/
 	$(".confirmbtn").on("tap",function(){
@@ -184,9 +185,10 @@ $(function() {
 			    var url = base.url+'/tdcx/saveAddressInsured.do';
 				var data = {
 					'head':{
-						'userCode': '',
+						'userCode': parm.customerId,
 						'transTime':$.getTimeStr(),
-						'channel':'3'
+						'channel':'3',
+						"transToken":parm.transToken
 					},'body':{
 						"addressInsuredDto":{
 							"sessionid":cxSessionId,
@@ -241,6 +243,10 @@ $(function() {
 				        	 
 						 }
 						
+					}else if(respData.statusCode=="123456"){
+						modelAlert(respData.statusMessage,function(){
+							loginControl();
+						});
 					}else{
 						modelAlert(respData.statusMessage);
 					}
@@ -616,22 +622,20 @@ function unBindblurCheackRecognizee() {
 function iframe(){
 	/**--保险条款跳转---*/
 	$("#insurance_statement").on("tap",function(){
-		$("#quoteIframe").attr("src","insuranceTerms.html").show();
-		$(".quoteArticle").hide();
+		parm.title="保险条款";
+		var jsonStr = JSON.stringify(parm);
+		jsonStr = UrlEncode(jsonStr);
+		window.location.href = "insuranceTerms.html?jsonKey=" + jsonStr;
 	});
 	/**--投保须知跳转---*/
 	$("#insurance_declaration").on("tap",function(){
-		$("#quoteIframe").attr("src","notice.html").show();
-		$(".quoteArticle").hide();
+		parm.title="投保须知";
+		var jsonStr = JSON.stringify(parm);
+		jsonStr = UrlEncode(jsonStr);
+		window.location.href = "notice.html?jsonKey=" + jsonStr;
 	});
 }
 
-//关闭iframe
-function ifremhide() {
-	$("#quoteIframe").attr("src", " ");
-	$(".quoteArticle").show();
-	$("#quoteIframe").hide();
-}
 
 
 
@@ -732,7 +736,7 @@ $.loadData = function(param) {
 					if(param.cxInfo.cxOrder.sjrName==""){//该订单未录入邮寄信息
 						// 查询默认地址
 						var data = {
-							"userName" : parm.head.userName,
+							"userName" : parm.mobile,
 							"companycode" : "000"
 						};
 						var url = base.url + "distribution/getDistributionOne.do";
@@ -825,7 +829,7 @@ $.saveBack=function(type){
 		var url = base.url + "vi/orderConfirm.do";
 		var data = {
 			"sessionId" : cxSessionId,// 车险投保唯一流水号
-			"source" : parm.head.source,  //调用微信的来源
+			"source" : parm.source,  //调用微信的来源
 			"tradeNo":tradeNo,
 			"times":times,
 			"transTime":$.getTimeStr(),
@@ -893,4 +897,20 @@ $.saveBack=function(type){
 				modelAlert(refuseReason);
 			}
 		}
+}
+
+
+
+function backlast(){//返回上一页
+	if(parm.body.fromBaojia!="quote"){
+		parm.title="请选择投保方案";
+		var jsonStr = JSON.stringify(parm);
+		jsonStr = UrlEncode(jsonStr);
+		window.location.href="insuranceCoverage.html?jsonKey=" + jsonStr;
+	}else{//返回重新报价页面
+		parm.title="出单详情";
+		var jsonStr = JSON.stringify(parm);
+		jsonStr = UrlEncode(jsonStr);
+		window.location.href="quotationDetail.html?jsonKey=" + jsonStr;
+	}
 }

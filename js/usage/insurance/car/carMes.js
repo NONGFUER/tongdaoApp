@@ -20,47 +20,39 @@ var cxOffer = {};// 报价信息
 var inforCar ={};  //向下一个页面传参数的实体
 var parm;
 var cxSessionId;
-var fgFlag="";//费改地区  1：是费改地区   0：不是费改地区
 var carPlate="";//车牌
 var type = "";
 var idAuth = "";
+var mobile
 $(function() {
 	var str = window.location.search;
 	str = str.substr(9, str.length);
 	str = UrlDecode(str);
 	parm = JSON.parse(str);
 	console.log(parm)
-	var userName = parm.mobile;
-	if(parm.body!=null){
-		cxSessionId=parm.body.cxSessionId
-	}else{
-		parm = {
-				"head":{
-					"userName":userName,
-					"openId":"",
-					"source":"3",//App渠道
-					"fgFlag":"1",
-				},"body":{}
-			};
-	}
-	
+	var mobile = parm.mobile;
+	parm.source="3";//App渠道
+	parm.leftIco="1";
+	parm.rightIco="0";
+	parm.title="车险指南";
 	/**首页banner跳转***/
 	$(".banner").attr("href","carInfo.html?jsonStr="+UrlEncode(JSON.stringify(parm)));
 	
-	if(!$.isNull(parm.body.inforCar) && parm.body.inforCar != undefined){
-		addCarInfo();
+	if(!$.isNull(parm.body) && parm.body!= undefined){
+		cxSessionId=parm.body.cxSessionId
 		// 获取车辆信息
 		$.loadCarInfoed();
 	}else{
-		if(parm.head.userName != ""&&parm.head.userName!=undefined){
+		if(mobile != ""&&mobile!=undefined){
+			parm.body={};
 			var url = base.url + "vi/selectHistoryInfo.do";
 			var resData = {
 				"head":{
 					"userCode":"",
 					"transTime":$.getTimeStr(),
-					"channel":"2"
+					"channel":"3"
 				},"body":{
-			        "userName" : parm.head.userName
+			        "userName" : mobile
 				}
 			};
 			$.reqAjaxs(url, resData, function(data){
@@ -197,43 +189,9 @@ $(function() {
     });
     //返回
 	$(".h_back").unbind("tap").bind("tap",function() {
-		$("#indexpart_scroll").css("transform","translate3d(0px, 0px, 0px)")
-		if (pageflag == 0) {
-			if(systemsource == "ios"){
-				objcObject.OpenUrl("back");
-			}else if(systemsource == "android"){
-				android.goBack();
-			}
-        } else if (pageflag == 1) {
-        	$(".lastPart").hide();//车辆详细信息显示
-        	$(".firstPart").show("fast");//车辆投保地区显示
-			pageflag = 0;
-		}else{
-			$("#pageTitle").html("车辆信息");
-			$(".vehicleInfo").hide();
-			$(".carMes").show();
-			pageflag = 1;
-		}
+		backlast();
 	});
 
-	//我的订单
-	$("#myOrder").bind("tap",function() {
-		if(parm.head.userName == ""||parm.head.userName == undefined){		
-			loginControl();
-			return false;
-		}else{
-			if(idAuth != "1"){
-				registerControl();
-				return false;
-			}
-		}
-		var backParam={
-			"mobile": parm.head.userName  
-	   }
-	   var jsonStr = JSON.stringify(backParam);
-	   jsonStr = UrlEncode(jsonStr);
-	   window.location.href = "policyManagement.html?jsonKey=" + jsonStr;
-	});
 	/** ************************车主信息********************************* */
 	$("#issueChannel").val( "请选择渠道").css("color","#888");
 	$("#car_sheng").val( "请选择省份").css("color","#888");
@@ -285,6 +243,7 @@ $(function() {
 	})
 	// 车辆注册日期调用日期控件
 	$("#vehicle_registration_date_select").unbind("tap").bind("tap",function() {
+		 $("input").blur();
 		  var vehicle_registration_date = $("#vehicle_registration_date").val();
 		  if (vehicle_registration_date == "请选择注册日期") {
 			  vehicle_registration_date = "";
@@ -356,15 +315,15 @@ $(function() {
 
 	// 车辆基本信息确认按钮
 	$("#confirm1").unbind("tap").bind("tap",function() {
-		if(parm.head.userName == ""||parm.head.userName==undefined){		
-			loginControl();
-			return false;
-		}else{
-			if(idAuth != "1"){
-				registerControl();
-				return false;
-			}
-		}
+//		if(parm.head.userName == ""||parm.head.userName==undefined){		
+//			loginControl();
+//			return false;
+//		}else{
+//			if(idAuth != "1"){
+//				registerControl();
+//				return false;
+//			}
+//		}
        $("#plate_number_input").val($("#plate_number_input").val().toUpperCase());//车牌小写转大写
 		// 解绑实时检查车主信息
 		unBindblurCheackOwner();
@@ -392,11 +351,12 @@ $(function() {
 				var cxInfoDTO = {
 					"productId" : "", // 产品编号
 					"sessionId" : "", // 唯一流水号
-					"agentCode" : parm.head.userName,
-					"openId":parm.head.openId,
+					"agentCode" : mobile,
 					"comparyCode" : comparyCode,
 					"cxOrder" : cxOrder,
-					"orderChannel":parm.head.source//渠道
+					"orderChannel":parm.source,//渠道
+					"transToken":parm.transToken,
+					"customerId":parm.customerId
 				};
 				var url = base.url + "vi/saveCxInfoOne.do";
 				var data = {
@@ -425,6 +385,12 @@ $(function() {
 						}
 						$(".firstPart").hide();//车辆投保地区隐藏
 						$(".lastPart").show("fast");//车辆详细信息显示
+					}else if(paramList.status.statusCode == "123456"){
+						modelAlert(paramList.status.statusMessage,function(){
+							 loginControl();
+						});
+					}else{
+						modelAlert(paramList.status.statusMessage);
 					}
 				});
 				  
@@ -448,7 +414,7 @@ $(function() {
 		//校验品牌型号查询的所有字段
 		carinfoCheack();
 		if (carinfoCheakFlag == true){
-			$("#pageTitle").html("品牌型号选择");
+			changeTitle("品牌型号选择")
 			$(".carMes").hide();
 			$("#maindiv").hide();
 			$(".vehicleInfo").show();
@@ -560,14 +526,12 @@ $(function() {
 			}
 			var carinfoMes={
 				"vehicleModelData":vehicleModelData,
-				"cdPrivinceFlag":parm.body.cdPrivinceFlag//出单省市标志
 			}
 			carinfoMes=UrlEncode(JSON.stringify(carinfoMes));
 			var cxInfoDTO = {
 				"productId" : "", // 产品编号
 				"sessionId" : parm.body.cxSessionId, // 唯一流水号
-				"agentCode" : parm.head.userName,
-				"openId":parm.head.openId,
+				"agentCode" : mobile,
 				"comparyCode" : comparyCode,
 				"cxCarMessage" : cxCarMessage,
 				"cxOffer":cxOffer,
@@ -595,12 +559,12 @@ $(function() {
 				parm.body.cxSessionId = paramList.sessionId;
 				parm.body.businessBegindate = $("#startDate").val();
 				parm.body.forceBeginDate = $("#startDate").val();
-				//费改标识
-				parm.head.fgFlag=fgFlag;
+			
 				inforCar.shengCode = $("#car_sheng").attr("name");
 				inforCar.shengName = $("#car_sheng").val();
 				inforCar.cityName = $("#car_shi").val();
 				inforCar.vehicleModelData = vehicleModelData;
+				parm.title="选择投保方案";
 				parm.body.inforCar = inforCar;
 				parm.body.cityCode = citynum;
 				parm.body.pagesflag = "carinfo"; //标记是回到车辆详情
@@ -610,6 +574,10 @@ $(function() {
 				jsonStr = UrlEncode(jsonStr);
 				var nextPageUrl = "insuranceCoverage.html?jsonStr="+ jsonStr;
 				window.location.href = nextPageUrl;
+			}else if(paramList.status.statusCode == "123456"){
+				modelAlert(paramList.status.statusMessage,function(){
+					 loginControl();
+				});
 			} else {
 				modelAlert("提交失败！" + paramList.status.statusMessage);
 			}
@@ -1254,7 +1222,6 @@ $.loadData = function(param) {
 							doc.getElementById("plate_number_input").value = shiList[num].cityPlate;
 							doc.getElementById("plate_number_input").style.color = "#585858";
 							doc.getElementById("plate_number_input").name = "";
-							fgFlag= shiList[num].fgFlag;
 						}
 						carPlate=shiList[num].cityPlate;
 						citynum = shiList[num].id;
@@ -1324,6 +1291,7 @@ $.addInfo = function(param){
 		if (param.status.statusCode == "000000") {
 			if (param.cxInfo != null) {
 				if(param.cxInfo.cxOrder != null){
+					vehicleModelData=JSON.parse(UrlDecode(param.cxInfo.cxOrder.vehiclemodeldata)).vehicleModelData;
 					var channelCode=param.cxInfo.cxOrder.issueChannel;
 					var channelName=changeChannel(channelCode);
 					$("#issueChannel").attr("channelCode",channelCode).val(channelName);
@@ -1452,28 +1420,6 @@ $.addInfo = function(param){
 	}
 }
 
-//从下个页面传的参数
-function addCarInfo(){
-	var paramList = parm.body.inforCar;
-	var shengCode = null;
-	var cityName = null;
-	var shengName = null;
-	vehicleModelData = null;
-	if(!$.isNull(paramList) && !$.isNull(paramList.vehicleModelData)){
-		vehicleModelData = paramList.vehicleModelData
-	}
-	if(!$.isNull(paramList.shengCode)){
-		shengCode = paramList.shengCode;
-		$("#car_sheng").attr("name",shengCode);
-	}
-	if(!$.isNull(paramList.shengName)){
-		shengName = paramList.shengName;
-	}
-	if(!$.isNull(paramList.cityName)){
-		cityName = paramList.shengCode;
-		$("#car_shi").attr("name",cityName);
-	}
-}
 /**
  * 数字Check
  * 
@@ -1557,4 +1503,27 @@ function getAppInfo(){
 //			}
 //		});
 //	}
+}
+
+
+
+
+function backlast(){//返回上一页
+	$("#indexpart_scroll").css("transform","translate3d(0px, 0px, 0px)")
+	if (pageflag == 0) {
+		if(systemsource == "ios"){
+			objcObject.OpenUrl("back");
+		}else if(systemsource == "android"){
+			android.goBack();
+		}
+    } else if (pageflag == 1) {
+    	$(".lastPart").hide();//车辆详细信息显示
+    	$(".firstPart").show("fast");//车辆投保地区显示
+		pageflag = 0;
+	}else{
+		changeTitle("车辆信息");
+		$(".vehicleInfo").hide();
+		$(".carMes").show();
+		pageflag = 1;
+	}
 }

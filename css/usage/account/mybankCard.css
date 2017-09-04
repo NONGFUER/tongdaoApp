@@ -1,0 +1,19 @@
+.mybank-ul{
+	padding: 0 20px 0 20px;
+	background-color: #FFFFFF;
+}
+.mybank-ul li{
+	overflow: hidden;
+    clear: both;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #EBEBEB;
+    font-size: 11.5px;
+    color: #666666;
+}
+.mybank-ul li span:first-child{
+  float: left;
+}
+.mybank-ul li span:last-child{
+	 float: right;
+}

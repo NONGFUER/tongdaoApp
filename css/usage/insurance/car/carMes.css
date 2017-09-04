@@ -5,7 +5,6 @@
 }
 #order_index {
 	position: relative;
-	margin-top:44px;
 }
 #indexpart {
 	position:relative;
@@ -572,23 +571,3 @@
     text-align: center;
 }
 
-/* .mui-btn-blue, .mui-btn-primary, input[type=submit]{
-	border:1px solid #277eeb;
-	background-color:#277eeb
-}
-.mui-poppicker-header, .mui-btn{
-	font-size:10pt;
-}
-.mui-poppicker-btn-cancel{
-	color:#277eeb;
-	border:0;
-	background-color:#555557;
-	font-size:15px;
-}
-
-.mui-poppicker{
-	background-color:#555557;
-}
-.mui-picker{
-	background-color:#d1d5db;
-} */

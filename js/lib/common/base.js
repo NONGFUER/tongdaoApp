@@ -6,8 +6,7 @@
 var secretKey = "t171420100302rsa";
 var actionStartTime;//浏览页面的埋点时间
 var base = {
-		//url : window.location.protocol+"//"+window.location.host+"/tongdaoPlatform/",
-		url : window.location.protocol+"//"+window.location.host+"/",
+		url : window.location.protocol+"//"+window.location.host+"/tongdaoPlatform/",
 		urlsxy : window.location.protocol+"//"+window.location.host+"/tongdaoSxyPlatform/",
 		share_url1: window.location.protocol+"//"+window.location.host+"/tongdaoPlatform/",
 		share_url2: window.location.protocol+"//"+window.location.host+"/tongdaoPlatform/",
@@ -627,7 +626,7 @@ $.ajaxPrevent = function() {
 	// 创建遮罩
 	var ajaxPrevent = "";
 	ajaxPrevent += "<div class='ajax_prevent' style='position: fixed;width: 100%;height: 100%;top: 0;"
-			+ "left: 0;z-index: 1000;background:rgba(0,0,0,0)'>";
+			+ "left: 0;z-index: 999;background:rgba(0,0,0,0)'>";
 	ajaxPrevent += "<div class='ajax_prevent_a' style='width: 30%;margin-top: 55%;"
 			+ "margin-left: 35%;text-align: center;background-clip: padding-box;"
 			+ "color: #585858;'>";
@@ -1583,9 +1582,6 @@ function openDataNowDate(id) {
 	pickers[id] = pickers[id] || new mui.DtPicker(options);
 	pickers[id].show(function(rs) {
 		result.value = rs.text;
-		if(id=="vehicle_registration_date"){
-			document.getElementById("purchaseDate").value = rs.text
-		}
 		pickers[id].dispose();// 释放组件资源
 
 	});

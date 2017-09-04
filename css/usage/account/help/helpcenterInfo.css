@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+ /*头部样式*/
+#header{
+	background-color: #1b6bb8;
+    height: 44px;
+    line-height:44px;
+}
+.mui-action-back, .mui-title {
+    color: #fff;
+}
+#helpcenterInfo{
+	margin-top: 3.5833rem;
+}
+/**输入样式输入**/
+.helpcenterinfo{
+	width: 100%;
+	margin-top:10px;
+}
+.helpcenter_enter{
+	width:100%;
+}
+.helplist{
+	width: 50%;
+    height: 58px;
+    line-height: 58px;
+    background-color: #fff;
+    padding-left:8%;
+    color:#333;
+    font-size:16px;
+}
+.border-br{
+    float: left;
+	border-right:1px #ccc solid;
+	border-bottom:1px #ccc solid;
+}
+.border-bottom{
+    float: right;
+	border-bottom:1px #ccc solid;
+}
+.helpimg{
+	width:12%;
+	margin-right:12px;
+	display:inline-block;
+	position:relative;
+	bottom:1px;
+}

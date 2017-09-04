@@ -51,6 +51,7 @@ $(function() {
 	$(".ul_left img").attr("src",base.imagePath + "carinsure/moneybtn.png");
 	// 查看详细投保信息
 	$("#see_details").unbind("tap").bind("tap",function() {
+		parm.title="投保信息";
 		parm.body.orderNos = orderNos;
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr); // 加密过后的操作

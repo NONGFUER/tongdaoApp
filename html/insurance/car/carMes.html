@@ -24,17 +24,11 @@
 	<header>
 		<div class="h_back"><div class="backindex"><img src="../../../image/insurance/car/back.png"/></div></div>
 		<div class="h_title" id="pageTitle">车辆信息</div>
-		<!-- <div class="h_next">
-		   
-		</div> -->
 	</header>
 	
 	<div id="order_index" class="carMes">
 		<div id="indexpart" class="mui-scroll-wrapper">
 			<div id="indexpart_scroll" class="mui-scroll">
-			    <div class="backload" style="position: absolute;width:100%;width:100%;height:100%;z-index: 1000;background: #f7f7f7;">
-			        <img src="../../../image/common/dh_loading.gif" style="width:30%;margin-top: 62%;margin-left: 35%;"/>
-			    </div>
 			    <div class="firstPart">
 						<!-- 车辆基本信息 style="display:none" -->
 						<div class="mescontainer border-1px-bottom border-1px-top">
@@ -375,9 +369,11 @@
 	 	<img style="height:30px;width:30px;margin-top: 20px;" src="../../../image/insurance/car/chahao.png">
 	 	
 	 </div>
-
-	<iframe id="vehicleselect" class="vehicleselect">
-	</iframe>
+	 
+	 <!-- 遮罩 -->
+	 <div class="backload" style="position: absolute;width:100%;height:100%;top:0;z-index: 1000;background: #f7f7f7;">
+        <img src="../../../image/common/dh_loading.gif" style="width:30%;margin-top: 62%;margin-left: 35%;"/>
+    </div>
 </body>
     <script type="text/javascript" src="../../../js/lib/common/zepto.min.js" ></script>
     <script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js" ></script>

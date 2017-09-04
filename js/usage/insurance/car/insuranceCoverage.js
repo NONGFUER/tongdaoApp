@@ -17,6 +17,7 @@ var sytoubaoFlag=true;
 var checkFlag="";//校验类别 0:交强，1:商业
 var querySequenceNo="";//商业险投保查询码
 var queryCheckCode="";//商业险投保 验证码图片的base64字符串
+var cxPriserviceFlag="0";
 $(function(){
 	var str = window.location.search;
 	str = str.substr(9, str.length);
@@ -28,20 +29,16 @@ $(function(){
 	$("#jiaoqiangBdate").val(parm.body.forceBeginDate);
 	//点问号，进入指南页
 	$("#wenhao").unbind("tap").bind("tap",function(){
-		window.location.href="zhinanPage.html"+window.location.search;
+		parm.title="如何购买车险";
+		var jsonStr = JSON.stringify(parm);
+		jsonStr = UrlEncode(jsonStr);
+		window.location.href="zhinanPage.html?jsonKey=" + jsonStr;
 	})
 	
 	
 	//头部返回
 	$(".h_back").unbind("tap").bind("tap",function() {
-		if(parm.body.fromBaojia!="Y"){
-			parm.body.cxSessionId = cxSessionId;
-			var jsonStr = JSON.stringify(parm);
-			jsonStr = UrlEncode(jsonStr);
-			window.location.href = "carMes.html?jsonStr=" + jsonStr;
-		}else{
-			window.location.href = "quotationDetail.html"+window.location.search;
-		}
+		backlast()
 	});
 	
 	
@@ -522,10 +519,12 @@ function baojia(){
     	}
     }
 	var cxInfoDTO = {
-		"fgFlag" : parm.head.fgFlag,// 是否费改地区
+	    "customerId":parm.customerId,
+	    "transToken":parm.transToken,
+	    "orderChannel":"3",
 		"productId" : product_id, // 产品编号
 		"sessionId" : cxSessionId, // 唯一流水号
-		"agentCode" : parm.head.userName,
+		"agentCode" : parm.mobile,
 		"comparyCode" : comparyCode,
 		"cxOffer" : cxOffer,
 		"commodityNo" : commodityNo
@@ -571,6 +570,7 @@ $.submitCallBack = function(paramList) {
 		$("#querySequenceNo").val("");
 		$(".baojiaDialog,#dialog").show();
 	}else if (paramList.statusCode == "000000"||paramList.statusCode == "999999") {
+		parm.title="精确报价";
 		if(paramList.statusCode == "999999"){//变更套餐提示
 			modelAlert(paramList.statusMessage,null,function(){
 				if(paramList.returns.isBefore=="1"){//重复投保  脱保
@@ -617,7 +617,11 @@ $.submitCallBack = function(paramList) {
 				window.location.href = "quote.html?jsonStr=" + jsonStr;
 			}
 		}
-	} else {
+	}else if(paramList.statusCode == "123456"){
+		modelAlert(paramList.statusMessage,function(){
+			 loginControl();
+		});
+	}else {
 		checkFlag="";//校验类别0:交强，1:商业
 		querySequenceNo="";//商业险投保查询码
 		queryCheckCode="";//商业险投保 验证码图片的base64字符串
@@ -984,19 +988,15 @@ $.addMainInsureContentBack = function(dataParam) {
 												if (items[0].text == "不投保" || items[0].text == "不可投保") {
 													doc.getElementById("addEnuContent" + w).className="nochooserisk";
 													doc.getElementById("deductible" + w).className="nochoosebjmp";
-													//doc.getElementById("choosepolicydeductible" + w).style.color = "#ccc";
 												}else{
 													doc.getElementById("addEnuContent" + w).className="chooserisk";
 													doc.getElementById("deductible" + w).className="choosebjmp";
-													//doc.getElementById("choosepolicydeductible" + w).style.color = "#5bb5e7";
 												}
 											}else{
 												if (items[0].text == "不投保" || items[0].text == "不可投保") {
 													doc.getElementById("addEnuContent" + w).className="nochooserisk";
-													//doc.getElementById("choosepolicydeductible" + w).style.color = "#ccc";
 												}else{
 													doc.getElementById("addEnuContent" + w).className="chooserisk";
-													//doc.getElementById("choosepolicydeductible" + w).style.color = "#5bb5e7";
 												}
 											}
 										}else{//尊享版
@@ -1004,19 +1004,15 @@ $.addMainInsureContentBack = function(dataParam) {
 												if (items[0].text == "不投保" || items[0].text == "不可投保") {
 													doc.getElementById("addEnuContent" + w).className="nochooserisk";
 													doc.getElementById("deductible" + w).className="nochoosebjmp";
-													//doc.getElementById("choosepolicydeductible" + w).style.color = "#ccc";
 												}else{
 													doc.getElementById("addEnuContent" + w).className="chooserisk";
 													doc.getElementById("deductible" + w).className="choosebjmp";
-													//doc.getElementById("choosepolicydeductible" + w).style.color = "#5bb5e7";
 												}
 											}else{
 												if (items[0].text == "不投保" || items[0].text == "不可投保") {
 													doc.getElementById("addEnuContent" + w).className="nochooserisk";
-													//doc.getElementById("choosepolicydeductible" + w).style.color = "#ccc";
 												}else{
 													doc.getElementById("addEnuContent" + w).className="chooserisk";
-													//doc.getElementById("choosepolicydeductible" + w).style.color = "#5bb5e7";
 												}
 											}
 											
@@ -1077,19 +1073,9 @@ function intoServicePage(n){
 	var serviceStr = "";
 	$("#title").html(bxCxPriserviceArr[n].serviceTitle);
 	$("#inner").html(bxCxPriserviceArr[n].serviceInfo);
-	$(".h_title").html("专属服务");
+	changeTitle("专属服务");
 	$(".servicePage").show();
-	$(".h_back").unbind("tap").bind("tap",function(){
-		$(".h_title").html("保障范围");
-		$(".mainPage").show();
-		$(".servicePage").hide();
-		$(".h_back").unbind("tap").bind("tap",function(){
-			parm.body.cxSessionId = cxSessionId;
-			var jsonStr = JSON.stringify(parm);
-			jsonStr = UrlEncode(jsonStr);
-			window.location.href = "carMes.html?jsonStr=" + jsonStr;
-		});
-	});
+	cxPriserviceFlag="1"
 	$(".mainPage").hide();
 }
 //获得下一年在这一天的日期
@@ -1138,4 +1124,28 @@ $.setscroll = function() {
 	mui("#accprice_index").scroll();
 	$("#order_index").height(Scrollheight);
 	mui("#order_index").scroll();
+};
+
+
+
+function backlast(){//返回上一页
+	if(cxPriserviceFlag=="1"){//显示专属服务
+		$(".mainPage").show();
+		$(".servicePage").hide();
+		changeTitle("选择投保方案");
+		cxPriserviceFlag="0";
+	}else if(cxPriserviceFlag=="0"){
+		if(parm.body.fromBaojia!="Y"){
+			parm.body.cxSessionId = cxSessionId;
+			parm.title="车辆信息";
+			var jsonStr = JSON.stringify(parm);
+			jsonStr = UrlEncode(jsonStr);
+			window.location.href = "carMes.html?jsonKey=" + jsonStr;
+		}else{
+			parm.title="车辆信息";
+			var jsonStr = JSON.stringify(parm);
+			jsonStr = UrlEncode(jsonStr);
+			window.location.href = "quotationDetail.html?jsonKey=" + jsonStr;
+		}
+	}
 };

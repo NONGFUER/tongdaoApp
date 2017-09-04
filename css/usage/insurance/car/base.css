@@ -345,6 +345,7 @@ header{
     height: 44px;
     line-height: 44px;
     background-color: #1b6bb8;
+     display:none; 
 }
 header .h_back {
     float: left;

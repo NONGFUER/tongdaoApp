@@ -3,6 +3,7 @@ var ageCal = "";
 var genderCal = "";
 
 $(function(){
+	formItemControl( ccId )
 	if( ccId != "1" && ccId != "2" && ccId != "3"){//除防癌险之外的ecard，会调默认投保地区接口
 		sendFeeCityRequest( customerId, ccId );
 	}
@@ -569,7 +570,7 @@ function sendInsureRequest(){
 	            "insurePhone"            : formData.telNo,
 	            "insureIdentitycard"     : formData.certificateNo,				
 	            "coverage"               : "500000",
-	            "inviterPhone"           : mobile,
+	            "invitrerPhone"           : mobile,
 	            "insureAddress"          : formData.address,
 	            "totalPieces"            : cPieces,//parseInt(peices),
 	            "channelResource"        : '3'// '渠道来源,1-微信公众号，2-分享进入，3-App',	
@@ -712,11 +713,15 @@ function tableGener(dutyStr){
 function productCalculate(ccId, age, gender ){
 	var ageFlag = calChoices.indexOf('insuredAge');
 	var genderFlag = calChoices.indexOf('gender');
+	var piecesFlag = calChoices.indexOf('pieces');
 	if( ageFlag != -1){
 		calChoices[ageFlag+1] = age;
 	}
 	if( genderFlag != -1 ){
 		calChoices[genderFlag+1] = gender;
+	}
+	if( piecesFlag != -1 ){
+		cPieces = calChoices[piecesFlag+1]
 	}
 	sendCaldoRequest(ccId);
 }
@@ -749,6 +754,7 @@ function sendCaldoRequest(ccId){
 function calDoRender(data){
     console.log(data);
     cPrem = data.returns.premiun;
+    coverage = data.returns.insuredAmount;
     $("#jwx_foot_price").text("价格：￥" + data.returns.premiun);
 }
 
@@ -803,7 +809,11 @@ function formItemControl( ccId ){
 		$(".diqu").show();
 	}	
 }
-
+function backlast(){
+	urlParm.title = '产品详情';
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = 'productDetail.html?jsonKey='+jsonStr;
+};
 //function toArticle(){  
 //var param={
 //        "head":{

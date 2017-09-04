@@ -33,6 +33,22 @@ var COMMODITY_ID ={
 	    "XPXSX": "15",    //码上长大(省心版)
 	    "XPXAX": "16"    //码上长大(安心版)
 	}
+var PRODUCT_SHARE = {
+		"JKJR" : '健康佳人女性专属肿瘤保-100万保额，确诊直赔30万，含高额住院津贴，意外医疗保障',//健康佳人
+		"JKAX" : '健康安享重疾险-100万保额，30种重疾，60天超短等待期',							//健康安享
+		"QCWY" : '全车无忧驾乘意外险-50万保额，为您提供驾乘人员安全的全面保障！',				//全车无忧
+		"LLHM" : '“邻里和睦”家财综合保障计划-200万保额，家财综合保障计划全面守护您的家',		//邻里和睦
+		"JXJS" : '锦绣吉顺综合意外险-18万保额，每天不到3毛钱，为您提供全面意外伤害保障',		//锦绣吉顺
+		"SWFR" : '商务飞人航空意外险-500万元保额，1年无限次飞行，不限国内或国际航班'			//商务飞人		
+}
+var PRODUCT_PICURL ={
+		"JKJR" : base.url + "tongdaoApp/page/image/ecard/jkjr.png",	//健康佳人
+		"JKAX" : base.url + "tongdaoApp/page/image/ecard/jkax.png",	//健康安享
+		"QCWY" : base.url + "tongdaoApp/page/image/ecard/qcwy.png",	//全车无忧
+		"LLHM" : base.url + "tongdaoApp/page/image/ecard/llhm.png",	//邻里和睦
+		"JXJS" : base.url + "tongdaoApp/page/image/ecard/jxjs.png",	//锦绣吉顺
+		"SWFR" : base.url + "tongdaoApp/page/image/ecard/swfr.png"	//商务飞人
+}
 var ajaxStatus = {
     success : "000000",
     relogin : "123456"
@@ -130,3 +146,40 @@ var rightIco = "";
 // 118	004000011	天安防癌险（男神版）
 // 119	004000022	天安防癌险（女神版）
 // 120	004000032	天安防癌险（少儿版）
+//根据不同的产品获取分享信息
+function getProductSharePic(productCode){
+	var picUrl = "";
+	if( productCode == COMMODITYCOMBINE_ID.JKJR ){
+		picUrl = PRODUCT_PICURL.JKJR;
+	}else if( productCode == COMMODITYCOMBINE_ID.JKAX ){
+		picUrl = PRODUCT_PICURL.JKAX;
+	}else if( productCode == COMMODITYCOMBINE_ID.LLHM ){
+		picUrl = PRODUCT_PICURL.LLHM;
+	}else if( productCode == COMMODITYCOMBINE_ID.QCWY ){
+		picUrl = PRODUCT_PICURL.QCWY;
+	}else if( productCode == COMMODITYCOMBINE_ID.JXJS ){
+		picUrl = PRODUCT_PICURL.JXJS;
+	}else if( productCode == COMMODITYCOMBINE_ID.SWFR ){
+		picUrl = PRODUCT_PICURL.SWFR;
+	}	
+	return picUrl;
+}
+//根据不同的产品获取分享信息
+function getProductShare(productCode){
+	var shareContent = "";
+	if( productCode == COMMODITYCOMBINE_ID.JKJR ){
+		shareContent = PRODUCT_SHARE.JKJR;
+	}else if( productCode == COMMODITYCOMBINE_ID.JKAX ){
+		shareContent = PRODUCT_SHARE.JKAX;
+	}else if( productCode == COMMODITYCOMBINE_ID.LLHM ){
+		shareContent = PRODUCT_SHARE.LLHM;
+	}else if( productCode == COMMODITYCOMBINE_ID.QCWY ){
+		shareContent = PRODUCT_SHARE.QCWY;
+	}else if( productCode == COMMODITYCOMBINE_ID.JXJS ){
+		shareContent = PRODUCT_SHARE.JXJS;
+	}else if( productCode == COMMODITYCOMBINE_ID.SWFR ){
+		shareContent = PRODUCT_SHARE.SWFR;
+	}
+	var shareList = shareContent.split("-");
+	return shareList;
+}

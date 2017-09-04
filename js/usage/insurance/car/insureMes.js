@@ -5,6 +5,7 @@ var isShowBtn = ""; //操作显示标志  1-未提交  3-核保通过  7-已承�
 var myScroll;
 var orderPrams = "";
 var producingarea;//车型产地  进口车、合资车、国产车 
+var cxPriserviceFlag="0";
 $(function() {
 
 	/*设置滑动区域*/
@@ -33,7 +34,7 @@ $(function() {
 	unfoldMes("#zsfw", "#chunk");
 
 	$(".h_back").unbind("tap").bind("tap", function() {
-		window.history.back();
+		backlast()
 	});
 
 });
@@ -92,7 +93,8 @@ $.addPriceContent = function(param) {
 			$("#indexarea").hide();
 
 			$.showzs($(this).attr("name"), $(this).data('txt'));
-
+			changeTitle("专属服务");
+			cxPriserviceFlag="1";
 		});
 		//车型产地  进口车、合资车、国产车
 		producingarea=param.cxInfo.cxCarMessage.producingarea;
@@ -279,12 +281,12 @@ $.setscroll = function() {
 };
 $.showzs = function(x, y) {
 	var st = "";
-	st += "<header id = 'titHead' class = 'titHead'> ";
+/*	st += "<header id = 'titHead' class = 'titHead'> ";
 	st += "<div class='h_back backShow'>";
 	st += "<div class='backindex'><img src='../../../image/insurance/car/back.png' /></div>";
 	st += "</div>";
 	st += "<div class='h_title' id='pageTitle'>专属服务</div>";
-	st += "</header>";
+	st += "</header>";*/
 	st += "<div id='order_index' class='mui-scroll-wrapper order_index'>";
 	st += "<div id='insure_iscroll' class='mui-scroll'>";
 	st += "<div id='title'>";
@@ -297,7 +299,6 @@ $.showzs = function(x, y) {
 	st += "</div>";
 
 	$("body").append(st);
-	bk();
 	$.setscroll2();
 }
 
@@ -332,3 +333,35 @@ $.setscroll2 = function() {
 	$("#order_index").height(Scrollheight);
 	mui("#order_index").scroll();
 };
+
+
+
+function backlast(){
+	if(cxPriserviceFlag=="0"){
+		window.history.back();
+	}else{
+		$(".titHead").hide();
+		$(".order_index").hide();
+		$("#policyholder").show();
+		$("#policyholderarea").show();
+		$("#insurant").show();
+		$("#insurantarea").show();
+		$("#carMes").show();
+		$("#carMesarea").show();
+		$("#ccsui").show();
+		$("#im_jqxDateArea").show();
+		$("#jqxPolnoArea").show();
+		$("#TCIarea").show();
+		$("#policycontent").show();
+		$("#vci").show();
+		$("#busPolnoArea").show();
+		$("#VCIarea").show();
+		$("#zsfw").show();
+		$("#zs-info").show();
+		$("#original").show();
+		$("#indexarea").show();
+		cxPriserviceFlag="0";
+		changeTitle("投保信息");
+	}
+	
+}

@@ -3,9 +3,15 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	commodityCombinationId = urlParm.commodityCombinationId,
 	userCode = urlParm.userCode,
 	insurePhone = urlParm.insurePhone,
-	titles=urlParm.titles,
+	titles = urlParm.titles,
+	title=urlParm.title,
+	channel=urlParm.channel,
+	transTime=urlParm.transTime,
+	transToken=urlParm.transToken,
+	customerId=urlParm.customerId,
+	commodityId=urlParm.commodityId,
 	riskSupportAbility = urlParm.riskSupportAbility;
-	
+
 var vm = new Vue({
 	el: '#list',
 	data: {
@@ -17,20 +23,22 @@ var vm = new Vue({
 		this.$nextTick(function() {
 			$(function() {
 				$(".banklist").unbind("tap").bind("tap", function() {
-					var commodityId=$(this).attr('commodityid');
+					var commodityId = $(this).attr('commodityid');
 					var bankName = $(this).attr('bankName');
 					var bankCode = $(this).attr('bankCode');
 					var dayLimit = $(this).attr('dayLimit');
 					var param = {
-						"userCode": userCode,
-						"commodityCombinationId": commodityCombinationId,
-						"insurePhone": insurePhone,
-						"riskSupportAbility": riskSupportAbility,
-						"bankName": bankName,
-						"bankCode":bankCode,
-						"dayLimit":dayLimit,
-						"commodityId":commodityId,
-						"title":titles,
+							"userCode": userCode,
+							"channel": "01",
+							"transTime": $.getTimeStr(),
+							"transToken": transToken,
+							"commodityCombinationId": commodityCombinationId,
+							"customerId": customerId,
+							"commodityId": commodityId,
+							"bankCode":bankCode,
+							"dayLimit":dayLimit,
+							"title":titles,
+							"bankName":bankName,
 					}
 					var jsonStr = UrlEncode(JSON.stringify(param));
 					window.location.href = "../messageFillout/messageFillout.html?jsonKey=" + jsonStr;
@@ -55,6 +63,7 @@ $(function() {
 	var url = base.url + 'investmentLinkedInsurance/getBank.do';
 	$.reqAjaxsFalse(url, reqData, getBank);
 })
+
 function getBank(data) {
 	vm.Objectitle = data.returns.list;
 	console.log(vm.Objectitle)

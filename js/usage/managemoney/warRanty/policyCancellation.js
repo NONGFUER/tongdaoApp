@@ -6,6 +6,7 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	policyNo = urlParm.body.policyNo,
 	transToken = urlParm.transToken,
 	title = urlParm.title,
+	customerId = urlParm.customerId,
 	userCode = urlParm.head.userCode;
 
 var vm = new Vue({
@@ -32,7 +33,8 @@ $(function() {
 		},
 		"body": {
 			"commodityCommId": commmodityComId,
-			"orderNo": orderNo
+			"orderNo": orderNo,
+			"customerId": customerId
 		}
 	}
 	var url = base.url + 'moneyManage/redemptionTrial.do';
@@ -51,7 +53,8 @@ function tuibao() {
 		"body": {
 			"orderNo": orderNo,
 			"insureNo": insureNo,
-			"policyNo": policyNo
+			"policyNo": policyNo,
+			"customerId": customerId
 		},
 		"head": {
 			"userCode": userCode,
@@ -83,6 +86,7 @@ function backlast() {
 		"orderNo": orderNo,
 		"policyNo": policyNo,
 		"insureNo": insureNo,
+		"customerId": customerId,
 		"title": title,
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));

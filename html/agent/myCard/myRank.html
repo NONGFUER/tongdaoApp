@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 -->
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>英雄榜</title>
+		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" href="../../../css/lib/commons/base.css" />
+		<link rel="stylesheet" href="../../../css/lib/commons/common.css" />
+		<link rel="stylesheet" href="../../../css/usage/account/myRank.css?v=20160603" />
+	</head>
+
+	<body>
+		<div id="rank_scroll" class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="rank_info">
+					<div>
+						<div class="rankImg"><img src="../../../image/account/kongbai.png"></div>
+					</div>
+					<div class="rank_message">
+						<img class="leftImg" src="../../../image/account/left.png"><span class="message on" id="message"></span><img class="rightImg" src="../../../image/account/right.png">
+					</div>
+					<ul class="rank_record clearfix">
+						<li class="count" id="count"></li>
+						<li>
+							<div class="prem" id="prem"></div>
+						</li>
+					</ul>
+				</div>
+				<div class="rank_content">
+					<ul class="rank_tab clearfix">
+						<li class="on">当月50强</li>
+						<li>当年50强</li>
+					</ul>
+					<div class="rank_list" id="monthRank">
+						<!--当月50强列表  -->
+					</div>
+					<div class="monthMore dui">点击加载更多</div>
+					<div class="rank_list none" id="yearRank">
+						<!--当年50强列表  -->
+					</div>
+					<div class="yearMore none dui">点击加载更多</div>
+				</div>
+				<div class="brank">每晚3点更新前日排名，若保费金额相同，出单数少者排前</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../../js/lib/common/zepto.min.js"></script>
+		<script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js"></script>
+		<script type="text/javascript" src="../../../js/lib/common/base.js"></script>
+		<script type="text/javascript" src="../../../js/lib/common/common.js"></script>
+		<script src="../../js/account/myRank.js?v=201206021"></script>
+	</body>
+
+</html>

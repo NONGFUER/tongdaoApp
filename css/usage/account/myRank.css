@@ -1,0 +1,119 @@
+#rank_scroll{
+
+}
+.rank_content{
+	background: #FFFFFF;
+}
+.rank_info{
+	background: #FFFFFF;
+}
+.rank_record{
+	padding: 0 16px;
+}
+.rank_record li{
+	width: 50%;
+	float: left;
+	text-align: left;
+	padding: 8px 0;
+	font-size: 14px;
+	letter-spacing:1px;
+}
+.rank_tab{
+	border-bottom: 1px solid #CCCCCC;
+}
+.rank_tab li{
+	width: 50%;
+	float: left;
+	text-align: center;
+	padding: 8px 0;
+	font-size: 14px;
+}
+.rank_tab .on{
+	color: #1B6BB8;
+	border-bottom: 3px solid #1B6BB8;
+}
+.clearfix:after {
+	content:"";
+	display:block;
+	height:0;
+	visibility:hidden;
+	clear:both;
+}
+.rank_bar{
+	padding: 10px 10px;
+	border-bottom: 1px solid #CCCCCC;
+}
+.rank_bar div{
+	float: left;
+	text-align: center;
+	font-size: 12px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+   	white-space: nowrap;
+}
+.rank_bar .rank_no{
+	width:8% ;
+	font-weight: bold;
+}
+.rank_bar .rank_name{
+	width:30% ;
+}
+.rank_bar .rank_city{
+	width:30% ;
+}
+.rank_bar .rank_money{
+	width:30% ;
+}
+.none{
+	display:none;
+}
+.rankImg{
+	width:44%;
+	margin:0 auto;
+	padding: 10px 0;
+}
+.rightImg{
+	width:22%;
+}
+.leftImg{
+	width:22%;
+}
+.message{
+	font-size:14px;
+	color:#cccccc;
+	font-weight:bold;
+	margin: 0 6px;
+}
+.rank_message{
+	width:90%;
+	margin:0 auto;
+	text-align:center;
+	
+}
+.rank_message .on{
+    color:#ffc800;
+}
+.prem{
+	border-left:1px solid black;
+	padding-left:10px
+}
+.rank_no img{
+	width:20px;
+}
+.aftertwo,
+.aftertwoyear{	
+	display:none;
+}
+.brank{
+	font-size:11px;
+	text-align:center;
+	color:#999999;
+	background:#fff;
+}
+.monthMore,
+.yearMore{
+	font-size:11px;
+	text-align:center;
+	background:#fff;
+	padding:8px 0;
+}

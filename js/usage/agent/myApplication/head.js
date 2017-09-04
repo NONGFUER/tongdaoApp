@@ -1,12 +1,12 @@
-//var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
-var customerId = "812";//urlParm.customerId;
-var mobile     = "13852291705";//urlParm.mobile;
-var transToken = "b16e2692964b9887e1133604a11cc1cc";//urlParm.transToken;
-var idNo	   = "32068119940124621X";//urlParm.idNo;
-var name	   = "吴赛杰";//urlParm.name;
-var base = {
-		url : "http://td-sit.ta-by.com/tongdaoPlatform/"
-}
+var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
+var customerId = urlParm.customerId;//"812";//
+var mobile     = urlParm.mobile; //"13852291705";//
+var transToken = urlParm.transToken;//"b16e2692964b9887e1133604a11cc1cc";//
+var idNo	   = urlParm.idNo;//"32068119940124621X";//
+var name	   = urlParm.name;    //"吴赛杰";//
+//var base = {
+//		url : "http://td-sit.ta-by.com/tongdaoPlatform/"
+//}
 var requestUrl = {
 		saveInfoUrl  : base.url + 'agent/saveAgent.do',   //@zkl 保存代理人信息
 		queryInfoUrl : base.url + 'agent/agentQuery.do',   //@zkl 代理人信息查询

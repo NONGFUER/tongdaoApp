@@ -161,7 +161,7 @@ $.saveAnswerCallBack = function(data){
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href="agentInfoRegister.html?jsonKey="+jsonStr;
 	}else{
-		modelAlert("保存答题信息失败！");
+		modelAlert(data.statusMessage);
 		return false;
 	}
 	

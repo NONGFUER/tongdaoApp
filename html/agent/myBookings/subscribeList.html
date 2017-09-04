@@ -15,19 +15,19 @@
 		<div class="mui-content mui-scroll-wrapper" id='list'>
 			<div class="mui-scroll">
 				<ul class="mui-table-view man">
-					<li class="mui-media man-li" v-for="(value, key) in objectlist" v-bind:pid='value.pid'>
+					<li class="mui-media man-li" v-for="(value, key) in objectlist" v-bind:yuyueNo='value.yuyueNo' v-bind:customerId='value.customerId' v-bind:commodityCombinationId='value.commodityCombinationId' v-bind:yuyuePhone='value.yuyuePhone' v-bind:yuyueName='value.yuyueName'>
 						<div class="man-li_title">
-							<h3 class="h3-list_title" v-html="value.title">【10年交】华夏健康人生重大疾病保险</h3>
+							<h3 class="h3-list_title" v-html="value.commodityCombinationName" >【10年交】华夏健康人生重大疾病保险</h3>
 						</div>
 						<div class="man-li_body clear">
 							<div class="man-li_body_div1">
 								<div class="left">
-									<span class="span-list_body " v-html="">预约人员:</span>
-									<span class="span-list_body vlaue_name">罗娟</span>
+									<span class="span-list_body ">预约人员:</span>
+									<span class="span-list_body vlaue_name" v-html="value.yuyueName">罗娟</span>
 								</div>
 								<div class="right">
-									<span class="span-list_body " v-html="">服务人员:</span>
-									<span class="span-list_body vlaue_name" v-html="">王伟</span>
+									<span class="span-list_body ">服务人员:</span>
+									<span class="span-list_body vlaue_name" v-html="value.serverName">王伟</span>
 								</div>
 
 							</div>
@@ -36,8 +36,8 @@
 							</div>
 						</div>
 						<div class="man-li_body clear">
-							<span class="span-list_body " v-html="">提交日期:</span>
-							<span class="span-list_body vlaue_name" v-html="">2017-8-16 10:28:12</span>
+							<span class="span-list_body">提交日期:</span>
+							<span class="span-list_body vlaue_name" v-html="value.insertTime">2017-8-16 10:28:12</span>
 						</div>
 					</li>
 

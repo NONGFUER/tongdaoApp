@@ -29,15 +29,12 @@ $(function() {
 	loadAddressList();
 	// 返回操作
 	$(".h_back").unbind("tap").bind("tap",function() {
-		var jsonStr = JSON.stringify(parm);
-		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-		window.location.href = "quote.html?jsonStr=" + jsonStr;
+		backlast()
 	});
 
 	// 新建地址
 	$("#submitorder").unbind("tap").bind("tap",function() {
-		var addinfo = "b";
-		parm.body.addinfo=addinfo;
+		parm.title="添加收货地址";
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
 		window.location.href = "createNewAddress.html?jsonStr=" + jsonStr;
@@ -46,7 +43,7 @@ $(function() {
 // 加载已有地址
 function loadAddressList() {
 	var data = {
-		"userName" : parm.head.userName,
+		"userName" : parm.mobile,
 		"companycode" : "0004"
 	};
 	var url = base.url + "distribution/getDistribution.shtml";
@@ -93,14 +90,6 @@ $.loadAddress = function(param) {
                     str += "<div class='clear'></div>";
 					str += "</div>";
 
-					// 已经选中的将选中图标显示
-//					if (currentAddressId == recAddressId) {// 已选中
-//						str += "<div class='policy_li_choose' style='width: 7%;float:left;margin-top:3.6rem;padding-right: 1%;'>"
-//								+ "<img alt='chooseImage' src='../../../image/insurance/car/chooseYes.png'></div>";
-//					} else {
-//						str += "<div class='policy_li_choose' style='display:none; width: 8%;float:left;margin-top:3.6rem;padding-right: 2%;'>"
-//								+ "<img alt='chooseImage' src='../../../image/insurance/car/chooseYes.png'></div>";
-//					}
 					//第二行：姓名与手机号
 					str += "<div class='policyAdress_info'>"
 						str += "<div class='policy_li_left border-1px-bottom' onclick='selectedAddress("
@@ -119,20 +108,8 @@ $.loadAddress = function(param) {
 								+ "' class='receiverPhone'>"
 								+ receiverphoneno + "</span></div></div>";
 	                    str += "<div class='clear'></div>";
-//						str += "<div class=policy_left_bottom>";
 						 //是否设置为默认
 											
-//						 if( defaultflag == 2){
-//						 str += "<div class='address_default'>默认</div>";
-//						 }else{
-//						 str += "<div class='address_default' style='display:none'>默认</div>";
-//						 }
-//						str += "<span title='" + paramstr.province + "' title1='"
-//								+ paramstr.city + "' title2='" + paramstr.town
-//								+ "' title3='" + paramstr.address
-//								+ "' id='receiverAddress" + j
-//								+ "' class='receiverAddress'>" + reccityInfo + recaddress
-//								+ "</span></div></div>";
 	                    str += "</div>";
 					// onclick 就是这一条的事件
 	                //第三行：地址
@@ -140,28 +117,11 @@ $.loadAddress = function(param) {
 					str += "<div class='policy_li_left' onclick='selectedAddress("
 							+ j + ")'; >";
 
-//					str += "<div class='policy_left_top'><div class='div_receiver_name'><span id='receiverName"
-//							+ j
-//							+ "' class='receiverName'>"
-//							+ receivername
-//							+ "</span>"
-//							+ "<input type='hidden' class='currentId' value="
-//							+ recAddressId + "></div>";
-//
-//					str += "<div class='div_receiver_phone'><span id='receiverPhone"
-//							+ j
-//							+ "' class='receiverPhone'>"
-//							+ receiverphoneno + "</span></div></div>";
                     str += "<div class='clear'></div>";
                   
 					str += "<div class=policy_left_bottom>";
 					 //是否设置为默认
 										
-//					 if( defaultflag == 2){
-//					 str += "<div class='address_default'>默认</div>";
-//					 }else{
-//					 str += "<div class='address_default' style='display:none'>默认</div>";
-//					 }
 					str += "<span title='" + paramstr.province + "' title1='"
 							+ paramstr.city + "' title2='" + paramstr.town
 							+ "' title3='" + paramstr.address
@@ -169,11 +129,6 @@ $.loadAddress = function(param) {
 							+ "' class='receiverAddress'>" + reccityInfo + recaddress
 							+ "</span></div></div>";
                     str += "</div>";
-//                    str += "<div class='policyAdress_modify'>";
-//                    str += "<div class='policyAdress_option toEdit'><input type='hidden' id='toEdit' value='"+j+"'><div class='modifyimg'><img src='../../../image/insurance/car/car_modifybtn.png'/></div><span>修改</span>";
-//                    str += "</div>"
-//                    str += "<div class='policyAdress_option toDelete'><input type='hidden' value='"+ recAddressId +"'><div class='deleteIcon'><img src='../../../image/insurance/car/car_delete.png'/></div><span>删除</span></div>";
-//					str += "</div>";
 					str += "<div class='clear'></div>";
                     str += "</li>";
 				}
@@ -195,6 +150,7 @@ $.loadAddress = function(param) {
 // 编辑按钮
 function toEdit() {
 	$(".toEdit").unbind("tap").bind("tap",function() {
+		parm.title="修改收货地址";
 		var num = $(this).find("input").val();
 		var addressInfo = paramstrarr[num];// 存放收件人信息
 		parm.body.addressInfo=addressInfo;
@@ -234,28 +190,17 @@ $.updeletedataback = function(param) {
 	
 };
 
-//回调函数跳转页面
-function updelePage(){
-	//刷新当前页面
-	document.location.reload();
-}
 
 // 选择收件地址
 function selectedAddress(num) {
+	parm.title="精确报价";
 	gfbDistribution = paramstrarr[num];
-	
 	parm.body.gfbDistribution = gfbDistribution;
 	var jsonStr = JSON.stringify(parm);
 	jsonStr = UrlEncode(jsonStr); // 加密过后的操作
 	window.location.href = "quote.html?jsonStr=" + jsonStr;
 }
 
-$.callback = function() {
-	parm.body.gfbDistribution = gfbDistribution;
-	var jsonStr = JSON.stringify(parm);
-	jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-	window.location.href = "quote.html?jsonStr=" + jsonStr;
-};
 
 /* 设置滑动区域 */
 $.setscroll = function() {
@@ -263,3 +208,9 @@ $.setscroll = function() {
 	$("#insure_index").height(Scrollheight);
 	mui("#insure_index").scroll();
 };
+
+
+
+function backlast(){//返回上一页
+	window.history.back();
+}

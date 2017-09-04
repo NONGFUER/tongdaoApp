@@ -53,10 +53,10 @@ $(function() {
 	/*获取数据*/
 	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 		userCode = urlParm.userCode,
-		title=urlParm.title,
-		commdityCommId=urlParm.commdityCommId,
-		customerId=urlParm.customerId,
-		transToken=urlParm.transToken;
+		title = urlParm.title,
+		commdityCommId = urlParm.commdityCommId,
+		customerId = urlParm.customerId,
+		transToken = urlParm.transToken;
 	var reqData = {
 		"body": {
 			"commdityCommId": commdityCommId,
@@ -94,7 +94,8 @@ function getRedemption(data) {
 			"orderNo": orderNo,
 			"policyNo": policyNo,
 			"insureNo": insureNo,
-			"title":title,
+			"title": title,
+			"customerId": customerId,
 			"commodityCommId": commodityCommId
 		}
 		var jsonStr = UrlEncode(JSON.stringify(reqData));

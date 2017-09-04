@@ -12,7 +12,8 @@ var productCode = "";
 var customerId = "";
 var titles = "";
 var title = "";
-var transToken="";
+var commodityId="";
+var transToken = "";
 $(function() {
 
 	//	url传值解密过程
@@ -20,9 +21,10 @@ $(function() {
 	urlstr = UrlDecode(urlstr);
 	parm = JSON.parse(urlstr);
 	mobile = parm.body.mobile;
-	transToken=parm.transToken;
+	transToken = parm.head.transToken;
 	customerId = parm.body.customerId;
 	productCode = parm.body.productCode;
+	commodityId=parm.body.commodityId;
 	titles = parm.titles;
 	title = parm.title;
 	/*初始化页面*/
@@ -142,7 +144,7 @@ $.detailinit = function() {
 			"transToken": transToken
 		},
 		"body": {
-
+			"customerId": customerId
 		}
 	}
 	$.reqAjaxs(url, data, $.detailinitCallBack);
@@ -473,6 +475,7 @@ $.submitData = function() {
 	var data = {
 		"body": {
 			"userName": mobile,
+			"customerId": customerId,
 			"resultRisk": resultRisk
 		},
 		"head": {
@@ -489,13 +492,14 @@ $.submitDataCallBack = function(param) {
 	if(param.statusCode == "000000") {
 		var jsonObj = {
 			"head": {
-
+				"transToken":transToken
 			},
 			"body": {
 				"testType": resultRisk,
 				"mobile": mobile,
 				"customerId": customerId,
-				"productCode": productCode
+				"productCode": productCode,
+				"commodityId":commodityId
 			},
 			"title": '评估结果',
 			"titles": titles,

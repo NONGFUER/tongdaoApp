@@ -1,6 +1,6 @@
 $(function(){
 	$(".h_back").unbind("tap").bind("tap",function(){
-		window.parent.ifremhide();
+		backlast()
 	});
 
 	/*设置滑动区域*/
@@ -13,3 +13,8 @@ $.setscroll = function(){
 	$("#noticecontent").height(Scrollheight+"px");
 	mui("#noticecontent").scroll();
 };
+
+
+function backlast(){//返回上一页
+	window.history.back();
+}

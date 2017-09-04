@@ -2,8 +2,8 @@
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	commodityCombinationId = urlParm.commodityCombinationId,
 	userCode = urlParm.userCode,
-	transToken=urlParm.transToken,
-	customerId=urlParm.customerId,
+	transToken = urlParm.transToken,
+	customerId = urlParm.customerId,
 	phone = urlParm.insurePhone;
 $('.phone').html(phoneyin(phone));
 console.log("页面初始化，获取上个页面传值报文--");
@@ -40,7 +40,8 @@ var vm = new Vue({
 $(function() {
 	var reqData = {
 		"body": {
-			"commodityCombinationId": commodityCombinationId
+			"commodityCombinationId": commodityCombinationId,
+			"customerId": customerId,
 		},
 		"head": {
 			"userCode": userCode,
@@ -61,6 +62,7 @@ $(function() {
 		var reqData = {
 			"body": {
 				"userPhone": phone,
+				"customerId": customerId,
 			},
 			"head": {
 				"userCode": userCode,
@@ -82,8 +84,10 @@ function buy() {
 		"riskSupportAbility": $('.retest').attr('testType'),
 		"insurePhone": phone,
 		"userCode": userCode,
-		"customerId":customerId,
+		"customerId": customerId,
+		"transToken": transToken,
 		"commodityCombinationId": commodityCombinationId,
+		"commodityId": vm.Objectitle.commodityInfo.id+"",
 		"testType": $('.retest').attr('testType'),
 		"title": vm.Objectitle.commodityCombination.commodityCombinationName,
 	}
@@ -144,13 +148,15 @@ function getRiskAble(data) {
 		} else if(data.returns.isRisk == "1") {
 			var sendData = {
 				"head": {
-					"riskSupportAbility": riskSupportAbility
+					"riskSupportAbility": riskSupportAbility,
+					"transToken": transToken
 				},
 				"body": {
 					"returnflag": "",
 					"testType": "",
 					"mobile": phone,
 					"customerId": customerId,
+					"commodityId": vm.Objectitle.commodityInfo.id+"",
 					"productCode": userCode
 				},
 				"title": '风险评估 ',

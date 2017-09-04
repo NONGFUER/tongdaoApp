@@ -10,7 +10,7 @@ $(function(){
     buyBind();
     jieshaoToshuomingBind();		//介绍和产品详情间的切换
     //在线产品详情查询(ccCode,cityCode,provinceCode,type)  商品组合code,城市代码code,省code,用户角色
-    sendProductInfoRequest( ccCode, cityCode, provinceCode, roleType );	
+    sendProductInfoRequest( ccId, cityCode, provinceCode, roleType );	
     //根据商品组合id查询保费试算项 (ccId)           商品组合Id
     sendCalOptionsRequest( ccId );
     //对date类型试算项的初始化（绑定初始值和试算动作）
@@ -67,7 +67,7 @@ function sendCalOptionsRequest(ccId){
 }
 
 //在线产品详情查询
-function sendProductInfoRequest(ccCode,cityCode,provinceCode,type){
+function sendProductInfoRequest(ccId,cityCode,provinceCode,type){
     var url = requestUrl.onlineProductInfoUrl;
     var sendJson = {
         "head" : {
@@ -77,7 +77,7 @@ function sendProductInfoRequest(ccCode,cityCode,provinceCode,type){
             "transToken": ""
         },
         "body" : {
-            "commodityCombinationCode": ccCode,//
+            "commodityCombinationId": ccId,//
             "cityCode":cityCode,//"220001",
             "type":type,//"04",
             "provinceCode":provinceCode//"220000"
@@ -107,34 +107,49 @@ function calOptionsRender(data){
            var calCode    = calOptionDtos[i].calCode;
            var isCal	  = calOptionDtos[i].isCal;
            var showType   = calOptionDtos[i].showType;
-           var calOptions = calOptionDtos[i].calOptions;
-           var calDetails = calOptionDetails(calOptions,calCode);//针对listArea拼接
-           var listChoice = listChioceDetails(calOptions);//针对list,拼接          
+           var calOptions = calOptionDtos[i].calOptions;       
            upAndLowDate( calCode, calOptions );
            var str = "";
            if( isCal == "1" ){      	   
         	   str += '<div class="d1 biCal" id="cal'+j+'" name="'+calCode+'">';
         	   j++
            }else{
-        	   str += '<div class="d1">';
+        	   str += '<div class="d1" name="'+calCode+'">';
            }          
            str += '<div class="label">' + calName+ '：</div>';
            str += '<div class="conter" id="' + calCode + '">';
-           if( showType == 'date'){        	   
-        	   str += '<input id="birthdate" type="text" readonly="readonly">';
-           }else if( showType == 'listArea' ){
-        	   str += calDetails;
-           }else if( showType == 'label' ){
-        	   str += calOptions[0].enuContent;
-           }else if( showType == 'list' ){
-        	   str += listChoice;
-           }        
+           //str += tempStr;
+//           if( showType == 'date'){        	   
+//        	   str += '<input id="birthdate" type="text" readonly="readonly">';
+//           }else if( showType == 'listArea' ){
+//        	   str += calDetails;
+//           }else if( showType == 'label' ){
+//        	   str += calOptions[0].enuContent;
+//           }else if( showType == 'list' ){
+//        	   str += listChoice;
+//           }        
            str += '</div>';
-           $(".insurance-choice").append(str);         
+           $(".insurance-choice").append(str); 
+           appendStr(showType,calOptions,calCode);
         }        
     }else{
         modelAlert( message.requestFail );
     }
+}
+//为了解决默认加载是蒜香问题
+function appendStr(showType,calOptions,calCode){
+	 var calDetails = calOptionDetails(calOptions,calCode);//针对listArea拼接
+     var listChoice = listChioceDetails(calOptions);//针对list,拼接          
+	if( showType == 'date'){        	   
+ 	  var str = '<input id="birthdate" type="text" readonly="readonly">';
+    }else if( showType == 'listArea' ){
+ 	  var str = calDetails;
+    }else if( showType == 'label' ){
+ 	  var str = calOptions[0].enuContent;
+    }else if( showType == 'list' ){
+ 	  var str = listChoice;
+    } 
+	$('div[name='+calCode+'] .conter').append(str);
 }
 
 //针对listArea试算枚举
@@ -146,6 +161,7 @@ function calOptionDetails(calOptions){
     for(var i = 0; i < optionsLength; i++){
        if( calOptions[i].isDefalut == "1" ){   	   
     	   str += '<li class="on" data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
+    	   $('div[name='+calOptions[0].calCode+']').attr("data-value",calOptions[i].enuCode);
        }else{
            str += '<li data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
        }
@@ -160,8 +176,10 @@ function listChioceDetails(calOptions){
 	var optionsLength = calOptions.length;
 	if( optionsLength == 1){
 		var str = '<input id="textButton" data-value="' + calOptions[0].enuCode + '"  type="text" value="'+ calOptions[0].enuContent +'" readonly="readonly">';
+		$('div[name='+calOptions[0].calCode+']').attr("data-value",calOptions[0].enuCode);
 	}else if( optionsLength > 1){
 		var str = '<input id="listButton" data-value="' + calOptions[0].enuCode + '"  type="text" value="'+ calOptions[0].enuContent +'" readonly="readonly">';
+		$('div[name='+calOptions[0].calCode+']').attr("data-value",calOptions[0].enuCode);
 		for( var i = 0; i < optionsLength; i++ ){
 			var item = { text:calOptions[i].enuContent, value:calOptions[i].enuCode };
 			listArray.push(item);
@@ -403,8 +421,19 @@ function toInsure(){
 	urlParm.title = title;
 	urlParm.leftIco = "1";
 	urlParm.rightIco = "0";
+	urlParm.downIco = "0"
 	urlParm.calChoices = calChoices;
 	urlParm.cPieces = cPieces;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = "insure.html?jsonKey="+jsonStr;
 }
+
+function shareHandle(){
+	var shareList = getProductShare(ccId);
+	var title = shareList[0] ;
+	var desc  = shareList[1] ;
+	var jsonKey = UrlEncode(JSON.stringify(sendData));
+	var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId;
+	var picUrl = base.url+"App/images/tongdaoic.png";
+	shareMethod(shareurl,title,desc,"baodan",picUrl);		
+};

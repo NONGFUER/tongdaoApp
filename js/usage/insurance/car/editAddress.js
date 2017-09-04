@@ -1,6 +1,4 @@
-var currentAddressId = "";// 当前页面的收件人地址 的 ID
 var receiverInfo = ""; // 收件人信息
-// var editAddressInfo = myapi().getGlobal("commonalitPulic"); // 收件人信息
 var bdpFlagg = "0"; // 是否为默认；2是0否
 var cxDistribution = {};
 var parm;
@@ -9,7 +7,6 @@ $(function() {
 	str = str.substr(9, str.length);
 	str = UrlDecode(str);
 	parm = JSON.parse(str);
-	currentAddressId = parm.body.addressId;
 	receiverInfo = parm.body.addressInfo;
 	//默认地址选择操作
 	$.deFlagSelect();
@@ -17,9 +14,7 @@ $(function() {
 	fillBlanks(receiverInfo);
 	// 返回操作
 	$(".h_back").on("tap",function() {
-		var jsonStr = JSON.stringify(parm);
-		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-		window.location.href = "policyDeliveryAddress.html?jsonStr=" + jsonStr;
+		backlast();
 	});
 	// 手机号码校验
 	$("#recipient_phone_input2").blur(function() {
@@ -143,7 +138,7 @@ function updateData() {
 	}
 	// 取值
 	cxDistribution.id = $("#policyid").val();
-	cxDistribution.username = parm.head.userName;
+	cxDistribution.username = parm.mobile;
 	cxDistribution.receivername = $("#recipient_name_input2").val(); // 收件人姓名
 	cxDistribution.receiverphoneno = $("#recipient_phone_input2").val(); // 收件人手机号
 	cxDistribution.address = $("#recipient_address_input2").val(); // 具体收件地址
@@ -174,9 +169,7 @@ $.updeletedataback = function(param) {
 };
 //回调函数跳转页面
 function updelePage(){
-	var jsonStr = JSON.stringify(parm);
-	jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-	window.location.href = "policyDeliveryAddress.html?jsonStr=" + jsonStr;
+	window.history.back();
 }
 
 
@@ -186,3 +179,9 @@ $.setscroll = function() {
 	$("#insure_index").height(Scrollheight);
 	mui("#insure_index").scroll();
 };
+
+
+
+function backlast(){//返回上一页
+	window.history.back();
+}

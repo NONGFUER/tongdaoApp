@@ -8,7 +8,6 @@ header {
 .searcharea{
 	width: 100%;
 	background-color: #ebebeb;
-	margin-top: 44px;
 }
 
 .inputCssdiv{
@@ -53,7 +52,7 @@ header {
 }
 .wrapper {
 	width: 100%;
-	top: 138px;
+	top: 94px;
 	position: absolute;
 }
 .divWrapper {

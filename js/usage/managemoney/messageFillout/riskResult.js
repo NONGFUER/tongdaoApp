@@ -3,7 +3,8 @@
  */
 var testType;
 var titles = "";
-var transToken="";
+var transToken = "";
+var commodityId="";
 $(function() {
 	//	url传值解密过程
 
@@ -15,7 +16,8 @@ $(function() {
 	mobile = parm.body.mobile;
 	productCode = parm.body.productCode;
 	customerId = parm.body.customerId;
-	transToken=parm.transToken;
+	commodityId =parm.body.commodityId;
+	transToken = parm.head.transToken;
 	titles = parm.titles;
 	//初始化
 	$.init();
@@ -65,7 +67,8 @@ function product() {
 	var reqData = {
 		"body": {
 			"userPhone": mobile,
-			"resultRisk": testType
+			"resultRisk": testType,
+			"customerId": customerId
 		},
 		"head": {
 			"userCode": productCode,
@@ -82,6 +85,7 @@ function product() {
 		if(data.statusCode == '000000') {
 			var sendData = {
 				"insurePhone": mobile,
+				"customerId": customerId,
 				"commodityCombinationId": customerId,
 				"userCode": productCode,
 				"title": titles,
@@ -97,7 +101,8 @@ function buy() {
 	var reqData = {
 		"body": {
 			"userPhone": mobile,
-			"resultRisk": "1"
+			"resultRisk": "1",
+			"customerId": customerId,
 		},
 		"head": {
 			"userCode": productCode,
@@ -115,8 +120,11 @@ function buy() {
 				"riskSupportAbility": testType,
 				"insurePhone": mobile,
 				"userCode": productCode,
+				"customerId": customerId,
 				"commodityCombinationId": customerId,
+				"commodityId":commodityId,
 				"testType": $('.testType').html(),
+				"transToken":transToken,
 				'title': titles,
 			}
 			var jsonStr = JSON.stringify(sendData);

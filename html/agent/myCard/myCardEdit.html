@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 -->
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>我的名片编辑</title>
+		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.picker.min.css" />
+		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.poppicker.css" />
+		<link rel="stylesheet" href="../../../css/lib/commons/base.css" />
+		<link rel="stylesheet" href="../../../css/lib/commons/common.css" />
+		<link rel="stylesheet" href="../../../css/usage/account/myCardEdit.css?v=20160604" />
+	</head>
+
+	<body>
+		<div id="card_scroll" class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="card_info">
+					<div class="card_up clearfix">
+						<div class="minipng">
+							<div class="tou">
+								<img src="../../../image/account/tou.png" style="border-radius:100%;" />
+							</div>
+						</div>
+						<div class="simple_info">
+							<div><span class="name" id="name"></span></div>
+							<div class="">
+								<span class="iden"></span><span class="split">|</span>服务区域：<span class="area"></span>
+							</div>
+						</div>
+						<div class="card_renz">
+							<img src="../../../image/account/baojianhui.png" />
+						</div>
+					</div>
+					<div class="card_down clearfix">
+						<div class="code_logo">
+							<img src="../../../image/account/code.png">
+						</div>
+						<div class="xiantiao">
+
+						</div>
+						<div class="code_info">
+							<div class="code_info_up">
+								业务员代码：<span id="agentCode"></span>
+							</div>
+							<div class="code_info_down">
+								执业证编码：<span id="practiceCode"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="contact clearfix">
+					<div class="phone">
+						<div class="phone_left"><img src="../../../image/account/phone.png" /><span>联系方式</span></div>
+						<div class="phone_right">
+							<input id="cardphone" type="text" value="" maxlength="11">
+						</div>
+					</div>
+					<div class="wechat">
+						<div class="wechat_left"><img src="../../../image/account/wechat.png" /><span>我的微信二维码</span></div>
+						<div class="wechat_right">
+							<span>如何获取二维码</span><img src="../../../image/account/wen.png">
+						</div>
+					</div>
+					<div class="erweima">
+						<!-- <input accept="image/*" type="file"/>	 -->
+						<div class="erweima_img" id="erweima_img"><img alt="" src="../../../image/account/add.png"></div>
+						<div class="erweima_commit">提交</div>
+					</div>
+				</div>
+				<div class="company">
+					<img src="../../../image/account/logo.png" class="logo" />
+					<span>天安佰盈保险销售有限公司</span>
+					<img src="../../../image/account/rightArrow.png" class="arrow" />
+
+				</div>
+				<div class="intro">
+					<div class="titbar">
+						<img src="../../../image/account/intro.png">
+						<span>个人介绍</span></div>
+					<div class="introinfo">
+						<textarea id="introarea" rows="5" maxlength="100" placeholder="请编辑您的个人介绍，您还可以输入100字"></textarea>
+					</div>
+				</div>
+				<div class="field marginBottom">
+					<div class="titbar">
+						<img src="../../../image/account/field.png">
+						<span>擅长领域</span>
+					</div>
+					<div class="fieldlist clearfix">
+						<!-- <div class="tag">
+							重疾险1
+							<sup ><img alt="" src="../../../image/account/delete.png"></sup>
+						</div>
+						<div class="tag">
+							理财险2
+							<sup ><img alt="" src="../../../image/account/delete.png"></sup>
+						</div>
+						<div class="tag">
+							人寿险3
+							<sup ><img alt="" src="../../../image/account/delete.png"></sup>
+						</div>
+						<div class="tag">
+							车辆险4
+							<sup ><img alt="" src="../../../image/account/delete.png"></sup>
+						</div>
+						<div class="tag">
+							家财险5
+							<sup ><img alt="" src="../../../image/account/delete.png"></sup>
+						</div>
+						<div class="tag">
+							重疾险6
+							<sup ><img alt="" src="../../../image/account/delete.png"></sup>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../../js/lib/common/zepto.min.js"></script>
+		<script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js"></script>
+		<script type="text/javascript" src="../../../js/lib/widget/mui/mui.picker.min.js"></script>
+		<script type="text/javascript" src="../../../js/lib/widget/mui/mui.poppicker.js"></script>
+		<script type="text/javascript" src="../../../js/lib/common/base.js"></script>
+		<script type="text/javascript" src="../../../js/lib/common/common.js"></script>
+		<script src="../../js/account/myCardEdit.js?v=8"></script>-->
+	</body>
+
+</html>

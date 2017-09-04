@@ -6,7 +6,7 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	bankName = urlParm.bankName,
 	commodityId = urlParm.commodityId,
 	bankCode = urlParm.bankCode,
-	customerId=urlParm.customerId,
+	customerId = urlParm.customerId,
 	bankMaxMoney = urlParm.dayLimit,
 	transToken = urlParm.transToken,
 	invMobie = '13333333333', //引荐人手机号
@@ -45,6 +45,7 @@ var vm = new Vue({
 		phone: {}, //手机号
 		bankCode: {}, //银行代码
 		bankname: {},
+		comComName:{},
 	},
 	mounted() {
 		this.$nextTick(function() {
@@ -65,7 +66,8 @@ $(function() {
 		},
 		"body": {
 			"commodityCombinationId": commodityCombinationId,
-			"customerId": customerId
+			"customerId": customerId,
+			"commodityId": commodityId,
 		}
 	}
 
@@ -162,6 +164,7 @@ $(function() {
 						"invitePhone": invMobie, //引荐人手机号
 						"inFlag": "1", //来源渠道
 						"buyType": '1', //1直接购买，2分享购买
+						"customerId": customerId,
 					}
 				};
 				var url = base.url + 'hkunderwrit/saveOrder.do';
@@ -181,6 +184,7 @@ $(function() {
 		vm.Objectitle = data.returns;
 		console.log(vm.Objectitle);
 		vm.feilv = '本产品初始费用' + Number(vm.Objectitle.insureInfo.firstRate) * 100 + '%,进入账户金额';
+		vm.comComName=title;
 		vm.feilvshuzi = Number(vm.Objectitle.insureInfo.firstRate);
 		vm.Objectitle = data.returns;
 		vm.mymoney = intToFloat(Number(vm.Objectitle.insureInfo.upPrice) - (Number(vm.Objectitle.insureInfo.upPrice) * Number(vm.Objectitle.insureInfo.firstRate))); /*进入账户金额*/
@@ -201,12 +205,14 @@ $(function() {
 		}
 		vm.bankCode = $('.bank').attr('bankCode');
 		bankMaxMoney = vm.Objectitle.insureInfo.dayLimit;
+		if(vm.Objectitle.insureInfo.bankname != null && vm.Objectitle.insureInfo.bankname != "") {
+			vm.bankname = vm.Objectitle.insureInfo.bankname;
+		} else {
+			vm.bankname = '请选择开户行';
+		}
 		if(bankName != null && bankName != "") {
 			vm.bankname = bankName;
-		} else {
-			vm.bankname = vm.Objectitle.insureInfo.bankName;
 		}
-
 		/*点击+-*/
 		$(".up").unbind("tap").bind("tap", function() {
 			var fenshu = $('.fenshu_input').children('input').val();
@@ -261,7 +267,8 @@ $(function() {
 			},
 			"body": {
 				"userName": phone,
-				"type": '103'
+				"type": '103',
+				"customerId": customerId,
 			}
 		};
 		var url = base.url + 'commonMethod/GetRegCode.do';
@@ -291,7 +298,7 @@ $(function() {
 	}
 	/*隐藏身份证中间几位*/
 	function shenfen(shenfen) {
-		var mphone = phone.substr(0, 3) + '**************' + phone.substr(4);
+		var mphone = shenfen.substr(0, 3) + '**************' + shenfen.substr(-4);
 		return mphone;
 	}
 	/*保留二位小数*/
@@ -306,7 +313,12 @@ $(function() {
 			"insurePhone": phone,
 			"riskSupportAbility": riskSupportAbility,
 			"title": '银行卡信息',
-			"titles": vm.Objectitle.insureInfo.comComName
+			"titles": vm.comComName,
+			"channel": "01",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken,
+			"customerId": customerId,
+			"commodityId": commodityId,
 		}
 		var jsonStr = UrlEncode(JSON.stringify(param));
 		window.location.href = "../cardList/cardList.html?jsonKey=" + jsonStr;
@@ -319,6 +331,9 @@ $(function() {
 				"channel": "01",
 				"transTime": $.getTimeStr(),
 				"transToken": transToken
+			},
+			"body": {
+				"customerId": customerId,
 			}
 		};
 		var url = base.url + 'investmentLinkedInsurance/getSelection.do';
@@ -386,7 +401,8 @@ function saveOrder(data) {
 							"orderNo": orderNo,
 							"insureNo": insureNo,
 							"payAmount": buyPrem[0],
-							"productFlag": "02"
+							"productFlag": "02",
+							"customerId": customerId,
 						}
 					}
 					var url = base.url + 'hkunderwrit/getinsure.do';
@@ -413,6 +429,7 @@ $("#risktype").unbind("tap").bind("tap", function() {
 			"channel": "01",
 			"userCode": "2835",
 			"transTime": "",
+			"transToken": transToken,
 			"riskSupportAbility": riskSupportAbility
 		},
 		"body": {
@@ -423,7 +440,7 @@ $("#risktype").unbind("tap").bind("tap", function() {
 			"productCode": userCode
 		},
 		'title': '风险评估',
-		"titles": vm.Objectitle.insureInfo.comComName,
+		"titles": vm.comComName,
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
 	window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/riskQuestion.html?jsonKey=" + jsonStr;

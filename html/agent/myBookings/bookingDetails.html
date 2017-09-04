@@ -6,8 +6,6 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>预约详细</title>
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/font.css" />
-		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/usage/agent/myBookings/bookingDetails.css" />
@@ -33,11 +31,11 @@
 						<ul>
 							<li>
 								<span class="li_name">预约人姓名:</span>
-								<span class="li_value">李晓聪</span>
+								<span class="li_value" v-html="objectlist.yuyueOrderinfo.yuyueName">李晓聪</span>
 							</li>
 							<li>
 								<span class="li_name">预约人电话:</span>
-								<span class="li_value">13333333333</span>
+								<span class="li_value" v-html="objectlist.yuyueOrderinfo.yuyuePhone">13333333333</span>
 							</li>
 							<li>
 								<span class="li_name">温馨提示:</span>
@@ -52,19 +50,19 @@
 						<ul>
 							<li>
 								<span class="li_name">预约产品:</span>
-								<span class="li_value">[趸交]天安人寿健康尊享住院费用医疗保险</span>
+								<span class="li_value" v-html="objectlist.yuyueOrderinfo.commodityCombinationName">[趸交]天安人寿健康尊享住院费用医疗保险</span>
 							</li>
 							<li>
 								<span class="li_name">承保年龄:</span>
-								<span class="li_value">28周岁,最高续保到100岁28周岁</span>
+								<span class="li_value" v-html="objectlist.yuyueOrderinfo.insuredAge">28周岁,最高续保到100岁28周岁</span>
 							</li>
 							<li>
 								<span class="li_name">保障期限:</span>
-								<span class="li_value">一年</span>
+								<span class="li_value" v-html="objectlist.yuyueOrderinfo.insuredDuration">一年</span>
 							</li>
 							<li>
 								<span class="li_name">产品特色:</span>
-								<span class="">保障高、覆盖广、年龄宽、价格低</span>
+								<span class="" v-html="objectlist.yuyueOrderinfo.insuredInfo">保障高、覆盖广、年龄宽、价格低</span>
 							</li>
 						</ul>
 					</div>

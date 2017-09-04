@@ -17,7 +17,7 @@ $(function() {
 	/*获取数据*/
 	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 		commodityCommId = urlParm.commodityCommId,
-		title=urlParm.title,
+		title = urlParm.title,
 		transToken = urlParm.transToken,
 		orderNo = urlParm.orderNo;
 	console.log("页面初始化，获取上个页面传值报文--");
@@ -59,8 +59,9 @@ function backlast() {
 		"userCode": userCode,
 		"channel": "01",
 		"transTime": $.getTimeStr(),
+		"customerId": customerId,
 		"transToken": transToken,
-		"title":title
+		"title": title
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
 	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;

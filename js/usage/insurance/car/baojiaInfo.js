@@ -14,13 +14,12 @@ $(function(){
 	
 	/**--返回--*/
 	$(".h_back,.backDown").unbind("tap").bind("tap",function() {
-		window.location.href="quote.html"+window.location.search;
+		backlast();
 	});
 })
 $.loadData=function(param){
 	param = eval("(" + param + ")");
     if (param != null || param != "") {
-		console.log(param)
 		if (param.status.statusCode == "000000") {
 			if (param.cxInfo != null) {
 				// 总保费
@@ -141,4 +140,6 @@ $.loadData=function(param){
 	}
 }
 
-
+function backlast(){//返回上一页
+	window.history.back();
+}

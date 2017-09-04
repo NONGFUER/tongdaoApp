@@ -4,8 +4,9 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	policyNo = urlParm.policyNo,
 	insureNo = urlParm.insureNo,
-	transToken=urlParm.transToken,
+	transToken = urlParm.transToken,
 	commodityComId = urlParm.commodityComId,
+	customerId = urlParm.customerId,
 	title = urlParm.title,
 	orderNo = urlParm.orderNo;
 var vm = new Vue({
@@ -46,7 +47,8 @@ $(function() {
 			"transToken": transToken
 		},
 		"body": {
-			"policyNo": policyNo
+			"policyNo": policyNo,
+			"customerId": customerId
 		}
 	}
 	var url = base.url + 'moneyManage/policyQueryListInfo.do';
@@ -66,6 +68,7 @@ $(function() {
 		var reqData = {
 			"commodityCombinationId": commodityCombinationId,
 			"userCode": userCode,
+			"customerId": customerId,
 			"insurePhone": vm.Objectitle.bxPolicyFinance.insurePhone
 		}
 		var jsonStr = UrlEncode(JSON.stringify(reqData));
@@ -88,6 +91,7 @@ function getRedemption(data) {
 				"orderNo": data.returns.redemptionDto.orderNo,
 				"insureNo": insureNo,
 				"policyNo": data.returns.redemptionDto.policyNo,
+				"customerId": customerId,
 				"commmodityComId": data.returns.redemptionDto.commmodityComId
 			},
 			"head": {
@@ -138,7 +142,8 @@ function chuli() {
 				"body": {
 					"orderNo": orderNo,
 					"policyNo": policyNo,
-					"insureNo": insureNo
+					"insureNo": insureNo,
+					"customerId": customerId
 				}
 			}
 			$.reqAjaxsFalse(url, reqData, getRedemption);
@@ -154,6 +159,7 @@ function backlast() {
 		"commodityComId": commodityComId,
 		"flag": '',
 		"pageNo": '',
+		"customerId": customerId,
 		"transToken": transToken,
 		"title": '保单列表'
 	};

@@ -37,6 +37,9 @@ $(function() {
 
 	// 点击立即投保
 	$(".confirmbtn").unbind("tap").bind("tap",function() {
+		parm.title="精确报价";
+		parm.leftIco="1";
+		parm.rightIco="0";
 		parm.body.fromFlag = "1";
 		parm.body.fromBaojia="quote";
 		var jsonStr = JSON.stringify(parm);
@@ -45,6 +48,9 @@ $(function() {
 	});
 	// 重新报价
 	$(".quotationbtn").unbind("tap").bind("tap",function() {
+		parm.title="选择投保方案";
+		parm.leftIco="0";
+		parm.rightIco="0";
 		parm.body.businessBegindate=$("#busBeginDate").html();
 		parm.body.forceBeginDate=$("#busBeginDate").html();
 		sessionStorage.setItem("tradeNo",tradeNo);

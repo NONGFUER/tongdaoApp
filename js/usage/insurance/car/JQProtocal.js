@@ -4,7 +4,7 @@ $(function(){
 	$.setscroll();
 	/*返回上一页*/
 	$(".shiming_back").unbind("tap").bind("tap",function(){
-		window.location.href="insuranceTerms.html";
+		backlast();
 	});
 	
 });
@@ -14,3 +14,9 @@ $.setscroll = function(){
 	$("#inpartmain").height(Scrollheight+"px");
 	mui("#inpartmain").scroll();
 };
+
+
+
+function backlast(){//返回上一页
+	window.history.back();
+}

@@ -1,12 +1,8 @@
-var province = "0";// province值为上级的代码，province=0时取全部省
-var rankFlag = 0;// 省市县级别标志 0-省 1-市 2-县
 var bdpFlagg = "0"; // 是否为默认；2是0否
 var addressId = "";
 var daifuFlag = "";
-var currentAddressId = ""; // 当前页面的收件人地址 的 ID
 // 取值
 var cxDistribution = {};
-var fromFlag = "";
 var parm;
 $(function() {
 	/* 设置滑动区域 */
@@ -16,17 +12,14 @@ $(function() {
 	str = UrlDecode(str);
 	parm = JSON.parse(str);
 	daifuFlag = parm.body.addinfo;
-	currentAddressId = parm.body.addressId;
 	$("#recognizee_city_input").val(parm.body.inforCar.shengName+" "+parm.body.inforCar.cityName);
-	// 保單配送地址的操作
+	// 省市选择
 	 $.loadDisAddress();
 	//默认地址选择操作
 	  $.deFlagSelect();
 	// 返回按钮的操作
 	$(".h_back").unbind("tap").bind("tap", function() {
-			var jsonStr = JSON.stringify(parm);
-			jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-			window.location.href = "policyDeliveryAddress.html?jsonStr=" + jsonStr;
+		backlast()
 	});
 
 	// 输入框获得焦点时，清空提示内容
@@ -132,9 +125,8 @@ $(function() {
   	});
   };
 function saveInfo() {
-	cxDistribution.id = addressId;
 	cxDistribution.companycode = "000";
-	cxDistribution.username = parm.head.userName;
+	cxDistribution.username = parm.mobile;
 	cxDistribution.receivername = $("#recipient_name_input").val(); // 收件人姓名
 	cxDistribution.receiverphoneno = $("#recipient_phone_input").val(); // 收件人手机号
 	cxDistribution.address = $("#recipient_address_input").val(); // 具体收件地址
@@ -151,8 +143,6 @@ function saveInfo() {
 $.newCreateback = function(param) {
 	var data = JSON.parse(param);
 	if (data.status.statusCode == "000000") {
-		// 跳转页面前提示保存成功
-		daifuFlag='a';
 		modelAlert(data.status.statusMessage,"",newCreateAdress);
 	} else {
 		modelAlert(data.status.statusMessage);
@@ -160,10 +150,7 @@ $.newCreateback = function(param) {
 };
 //回调跳转到下一个页面
 function newCreateAdress(){
-	var backUrl = "policyDeliveryAddress.html";
-	var jsonStr = JSON.stringify(parm);
-	jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-	window.location.href = backUrl + "?" + "jsonStr=" + jsonStr;
+	window.history.back();
 }
 
 /* 设置滑动区域 */
@@ -172,3 +159,9 @@ $.setscroll = function() {
 	$("#insure_index").height(Scrollheight);
 	mui("#insure_index").scroll();
 };
+
+
+
+function backlast(){//返回上一页
+	window.history.back();
+}

@@ -1,7 +1,11 @@
 $(function() {
 	/*--------------返回-----------*/
-	$(".mui-action-back,.backButtom").unbind("tap").bind("tap",function() {
+	$(".backButtom").unbind("tap").bind("tap",function() {
 		window.history.back();
-		return false;
 	});
 });
+
+
+function backlast(){//返回上一页
+	window.history.back();
+}
