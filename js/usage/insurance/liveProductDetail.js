@@ -15,6 +15,7 @@ $(function(){
     	$(".single-footer").removeClass("yincang");
     	sendCusInsConsultantRequest();
     }
+    showRight();
     // sendCusInsConsultantRequest();//APP产品模块线下产品详情页保险顾问查询
     // sendAddYuyueInfoRequest();//APP产品模块线下产品预约新增
     // sendCustomerAndAgentInfoRequest();
@@ -297,4 +298,7 @@ function clauseModuleStr( clauseModuleList ){
 function download(obj){
     var downloadUrl = $(obj).attr("data-url");
     window.location.href = downloadUrl;
+}
+function backlast(){
+	sysback();
 }

@@ -1,17 +1,5 @@
-var mobile="";//电话号码
-var productCode="";//产品编码
-var kuang="";//底部条款框的图片名字
-$(function(){
-	var str = getUrlQueryString("jsonKey");
-	str = UrlDecode(str);
-	parm = JSON.parse(str);
-    mobile=parm.mobile;
-    productCode=parm.productCode;
-    /*mobile="15721114668";
-	productCode="00519900603";*/
-	
+$(function(){		
     window.onresize = function () {
-
         var h = $(window).height();
         //console.log(h+','+window.screen.availHeight)
         var u = navigator.userAgent;
@@ -78,7 +66,7 @@ $(function(){
 	$.replacePlaceholder($("#chepaiValue"), "请输入车牌号码");
 	$.replacePlaceholder($("#mailValue"), "请输入电子邮箱（选填）");
 	//获取剩余份数
-	$.getShengyu('4');
+	$.getShengyu(cId);
 	//返回
 	$(".h_back1").unbind("tap").bind("tap",function(){
 		window.location.href="zhuanqu.html"+window.location.search;
@@ -104,23 +92,23 @@ $(function(){
 	})
 	//赠送客户
 	$(".zengsong").on("tap",function(){
-		var parm={};
-		parm.mobile=mobile;
-		parm.productCode=productCode;
-		var jsonStr=UrlEncode(JSON.stringify(parm));
-    	if(systemsource == "ios"){
-    		var shareParam={
-    				url:base.url+"App/html/jiachengxian/jcxshouyeShare.html?jsonKey="+jsonStr,
-    				flag:"2",
-    				title:"免费领取20万驾乘意外险",
-    				desc:"驾车乘车都能保，20万保额免费送！",
-    				descQuan:"免费领取20万驾乘意外险，驾车乘车都能保！",
-    				picUrl:"http://td-sit.ta-by.com/tongdaoPlatform/App/images/jiachenxianfenx.png"
-    		}
-			objcObject.share(shareParam);
-		}else if(systemsource == "android"){
-			android.JsShareBy("4","免费领取20万驾乘意外险","驾车乘车都能保，20万保额免费送！","免费领取20万驾乘意外险，驾车乘车都能保！",base.url+"App/html/jiachengxian/jcxshouyeShare.html?jsonKey="+jsonStr);
-		}
+//		var parm={};
+//		parm.mobile=mobile;
+//		parm.productCode=productCode;
+//		var jsonStr=UrlEncode(JSON.stringify(parm));
+//    	if(systemsource == "ios"){
+//    		var shareParam={
+//    				url:base.url+"App/html/jiachengxian/jcxshouyeShare.html?jsonKey="+jsonStr,
+//    				flag:"2",
+//    				title:"免费领取20万驾乘意外险",
+//    				desc:"驾车乘车都能保，20万保额免费送！",
+//    				descQuan:"免费领取20万驾乘意外险，驾车乘车都能保！",
+//    				picUrl:"http://td-sit.ta-by.com/tongdaoPlatform/App/images/jiachenxianfenx.png"
+//    		}
+//			objcObject.share(shareParam);
+//		}else if(systemsource == "android"){
+//			android.JsShareBy("4","免费领取20万驾乘意外险","驾车乘车都能保，20万保额免费送！","免费领取20万驾乘意外险，驾车乘车都能保！",base.url+"App/html/jiachengxian/jcxshouyeShare.html?jsonKey="+jsonStr);
+//		}
     });
 	//投保
 	$(".toubao").unbind("tap").bind("tap",function(){
@@ -161,13 +149,13 @@ $(function(){
 						    "phone": TBRmobile, //投保人手机号
 						    "sex": sex, //投保人性别
 						    "pwd": ID,  //投保人身份证						    
-						    "customePhone": '13852291705' , //登录用户手机号
-						    "inviterPhone": '13852291705',
+						    "customePhone": mobile , //登录用户手机号
+						    "inviterPhone": mobile,
 						    "flag":"1",//1 app  2 分享
-						    "commodityCombinationId": "7",
-						    "commodityId": "4",
+						    "commodityCombinationId": ccId,
+						    "commodityId": cId,
 						    "channelResource": "3",
-						    "customeId":"8",
+						    "customeId":customerId,
 						    "buyType":"1"
 						}
 				}
@@ -277,7 +265,7 @@ $.getShengyu=function(cId){
 	var reqData = {
 			"head": {
 				    "channel": "01",
-				    "userCode": "2835",
+				    "userCode": mobile,
 				    "transTime": ""
 			},"body": {
 				    "comdityId": cId
@@ -341,6 +329,13 @@ $.setscroll3 = function() {
 	mui("#contentHead3").scroll();
 };
 
-
+function backlast(){
+	urlParm.title = '驾乘无忧';
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "1";
+	urlParm.downIco = "0"
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = "jcxshouye.html?jsonKey="+jsonStr;
+}
 
 

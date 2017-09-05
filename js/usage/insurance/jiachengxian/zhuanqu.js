@@ -6,7 +6,7 @@ $(function(){
 	/* 设置滑动区域 */
 	$.setscroll();		
 	//获取剩余份数
-	$.getShengyu('4');
+	$.getShengyu(cId);
 	//领取
 	// getAppInfo();	
 		$(".lingqu").css("color","#ff6a00");
@@ -71,10 +71,10 @@ $.getShengyu=function(cId){
 	var reqData={
 			"head":{
 				"channel": "01",
-			    "userCode": "2835",
+			    "userCode": mobile,
 			    "transTime": ""
 			},"body":{
-				"phone": "13852291705",  //手机号
+				"phone": mobile,  //手机号
 			    "commmodityId": cId   //产品编码
 			}
 	}
@@ -162,9 +162,7 @@ $.getShengyu=function(cId){
 			}
 		}else{
 			modelAlert(data.statusMessage);
-		}
-		
-		
+		}				
 	})
 }
 $.setscroll = function() {
@@ -172,21 +170,6 @@ $.setscroll = function() {
 	$("#contentHead").height(Scrollheight);
 	mui("#contentHead").scroll();
 };
-function getAppInfo(){
-	var url=base.url+"appUser/getCurrentUserInfo.do";
-	var reqData={
-			"head":{
-				
-			},
-			"body":{
-				"userName": mobile  //手机号
-			}		
-	}
-	$.reqAjaxsFalse(url,reqData,getStatus)
-}
-function getStatus(data){
-	if(data.statusCode == "000000"){
-	type = data.returns.cutomerBasic.type;		//
-	idAuth = data.returns.cutomerBasic.idAuth; //
-	}
+function backlast(){
+	sysback();
 }
