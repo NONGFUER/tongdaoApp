@@ -277,3 +277,18 @@ function showRightIcon(){
 		android.showRight();
 	}
 }
+
+function isLogin(roletype,method){
+	if(roletype == "00" || roletype == ""){
+		method();
+	}else{
+		loginControl();
+	}
+}
+function isLoginWechat(roletype,method,openid,fromtype){
+	if(roletype == "00" || roletype == ""){
+		method();
+	}else{
+		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?fromtype="+ fromtype +"&openid="+openid;
+	}
+}

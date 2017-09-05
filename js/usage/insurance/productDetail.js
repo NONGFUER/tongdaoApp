@@ -412,7 +412,8 @@ function changeDate(id){
 
 function buyBind(){
 	$("#toubao").unbind('tap').bind('tap',function(){
-		toInsure();
+		isLogin(roleType,toInsure)
+		//toInsure();
 	});	
 }
 

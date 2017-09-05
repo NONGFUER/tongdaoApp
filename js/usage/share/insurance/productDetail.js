@@ -404,7 +404,8 @@ function changeDate(id){
 
 function buyBind(){
 	$("#toubao").unbind('tap').bind('tap',function(){
-		toInsure();
+		isLoginWechat(roleType,toInsure,openid,"online")
+		//toInsure();
 	});	
 }
 
@@ -437,8 +438,3 @@ function shareHandle(){
 	shareMethod(shareurl,title,desc,"baodan",picUrl);		
 };
 
-function isLogin(roletype){
-	if(roletype == "00" || roletype){
-		
-	}
-}

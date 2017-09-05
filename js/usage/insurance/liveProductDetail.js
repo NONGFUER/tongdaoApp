@@ -218,7 +218,7 @@ function liveProductInfoRender( data ){
     }
 }
 /**
- * @function 试算条件展示
+ * @function 试算条件展示 
  */
 function calChoice( calList ){
     var calName = calList.calName;
