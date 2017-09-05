@@ -278,6 +278,11 @@ function getFormData(){
 	            modelAlert("该被保人性别与规则不符！");
 	            return false;
 	        }
+		}else if(cId == COMMODITY_ID.MCAN || cId == COMMODITY_ID.PMCAN){
+			if($.getSex(recogCertiNo) != 1){
+	            modelAlert("该被保人性别与规则不符！");
+	            return false;
+	        }
 		}else if(cId == COMMODITY_ID.JKJR){
 	        if($.getSex(recogCertiNo) != 2){
 	            modelAlert("该被保人性别与规则不符！");
