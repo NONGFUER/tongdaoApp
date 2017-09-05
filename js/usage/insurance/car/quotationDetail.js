@@ -44,7 +44,7 @@ $(function() {
 		parm.body.fromBaojia="quote";
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-		window.location.href = "quote.html?jsonStr=" + jsonStr;
+		window.location.href = "quote.html?jsonKey=" + jsonStr;
 	});
 	// 重新报价
 	$(".quotationbtn").unbind("tap").bind("tap",function() {
@@ -60,7 +60,7 @@ $(function() {
 		parm.body.fromBaojia="Y";
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-		window.location.href = "insuranceCoverage.html?jsonStr=" + jsonStr;
+		window.location.href = "insuranceCoverage.html?jsonKey=" + jsonStr;
 	});
 });
 function init(){

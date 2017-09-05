@@ -215,5 +215,12 @@
 			$(".h_back").bind("tap",function(){
 				window.location.href = base.url + 'addimg.html'				
 			});
+			$(".mui-action-back").on("tap",function(){
+				if(systemsource == "ios"){
+					objcObject.OpenUrl("back");
+				}else if(systemsource == "android"){
+					android.goBack();
+				}
+			});	
 		</script>
 </html>

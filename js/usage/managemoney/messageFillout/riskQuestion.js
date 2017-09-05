@@ -12,7 +12,7 @@ var productCode = "";
 var customerId = "";
 var titles = "";
 var title = "";
-var commodityId="";
+var commodityId = "";
 var transToken = "";
 $(function() {
 
@@ -24,7 +24,7 @@ $(function() {
 	transToken = parm.head.transToken;
 	customerId = parm.body.customerId;
 	productCode = parm.body.productCode;
-	commodityId=parm.body.commodityId;
+	commodityId = parm.body.commodityId;
 	titles = parm.titles;
 	title = parm.title;
 	/*初始化页面*/
@@ -492,17 +492,20 @@ $.submitDataCallBack = function(param) {
 	if(param.statusCode == "000000") {
 		var jsonObj = {
 			"head": {
-				"transToken":transToken
+				"transToken": transToken
 			},
 			"body": {
 				"testType": resultRisk,
 				"mobile": mobile,
 				"customerId": customerId,
 				"productCode": productCode,
-				"commodityId":commodityId
+				"commodityId": commodityId
 			},
 			"title": '评估结果',
 			"titles": titles,
+			"leftIco": '0',
+			"rightIco": '0',
+			"downIco": '0',
 		};
 		var jsonStr = JSON.stringify(jsonObj);
 		jsonStr = UrlEncode(jsonStr);

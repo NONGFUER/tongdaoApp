@@ -123,7 +123,8 @@ function shareMethod(shareurl, title, desc, flag, picUrl) {
 		}
 		objcObject.share(shareParams)
 	} else if(systemsource == "android") {
-		android.JsShareByCopy("3", flag, title, desc, desc, shareurl);
+		//android.JsShareByCopy("3", flag, title, desc, desc, shareurl);
+		android.JsShareByCopy2("flag_eCard", picUrl, title, desc, desc, shareurl);
 	}
 }
 //eCard 壳上分享方法
@@ -266,5 +267,13 @@ function changeTitle(title){
 		objcObject.changeTitle(title)
 	}else if(systemsource == "android"){
 		android.changeTitle(tittle);
+	}
+}
+//控制头部右边按钮的显示
+function showRightIcon(){
+	if(systemsource == "ios"){
+		objcObject.showRight()
+	}else if(systemsource == "android"){
+		android.showRight();
 	}
 }

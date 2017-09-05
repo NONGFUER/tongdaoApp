@@ -11,93 +11,69 @@
 		<meta name="format-detection" content="email=no" />
 		<title>团队管理</title>
 		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
-		<link rel="stylesheet" href="../../../css/lib/widget/mui.picker.min.css" />
+		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.picker.min.css" />
 		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.poppicker.css" />
-		<link rel="stylesheet" href="../../../css/lib/widget/css/common/base.css" />
-		<link rel="stylesheet" href="../../../css/lib/widget/css/common/common.css" />
+		<link rel="stylesheet" href="../../../css/lib/commons/base.css" />
+		<link rel="stylesheet" href="../../../css/lib/commons/common.css" />
 		<link rel="stylesheet" href="../../../css/usage/agent/teamManange/teamManange.css?s=20170410" />
 	</head>
 
 	<body>
 		<div id="order_index" class="mui-scroll-wrapper">
-			<div id="insure_iscroll" class="mui-scroll" id='list'>
+			<div id="insure_iscroll" class="mui-scroll">
 				<div class="tm-total">
 					<div class="tm-half bdright">
-						<div class="tm-half-up"><span id="teamCount">0</span></div>
+						<div class="tm-half-up"><span id="teamCount" v-html="tuanduinumber">0</span></div>
 						<div class="tm-half-down">团队人员</div>
 					</div>
 					<div class="tm-half">
-						<div class="tm-half-up"><span id="teamAmount">0</span></div>
+						<div class="tm-half-up"><span id="teamAmount" v-html="zongmoney">0</span></div>
 						<div class="tm-half-down">保费总额(万元)</div>
 					</div>
 				</div>
 				<div class="personList">
-					<!--<div id="noRecord" class="noRecord"><div class="noRecordimg"><img src="../../image/gzpt_noRecord.png"></div><div class="noRecordfont">没有相关记录</div></div>-->
-					<div class="content-wrap">
-						<div class="tm-title">
-							<div class="tm-title-wrap">
-								<span class="personName blueColor">团队</span>
-								<div class="policyDetail" onclick=toUrl( '+data.returns[i].agentId+')>出单详情</div>
-							</div>
-						</div>
-						<div class="tm-body">
-							<div class="tm-body-wrap">
-								<div class="tm-split tm-split-1">
-									<div class="info-up">200.00</div>
-									<div class="info-down">当月出单</div>
-								</div>
-								<div class="tm-split tm-split-2">
-									<div class="info-up">200.00</div>
-									<div class="info-down">当月保费(万元)</div>
-								</div>
-								<div class="tm-split tm-split-3">
-									<div class="info-up">20000</div>
-									<div class="info-down">累积保费(万元)</div>
-								</div>
-							</div>
-						</div>
-						<div class="tm-footer">
-							<div class="tm-date">最近出单日期:<span>2017/02/02</span></div>
-						</div>
+					<div id="noRecord" style="display: none;" class="noRecord">
+						<div class="noRecordimg"><img src="../../../image/agent/gzpt_noRecord.png"></div>
+						<div class="noRecordfont">没有相关记录</div>
 					</div>
-					<div class="content-wrap">
+					<div class="content-wrap" v-for="(value,key) in objectlist">
 						<div class="tm-title">
 							<div class="tm-title-wrap">
-								<span class="personName blueColor">团队</span>
-								<div class="policyDetail" onclick=toUrl( '+data.returns[i].agentId+')>出单详情</div>
+								<span class="personName blueColor" v-html="value.name">团队</span>
+								<div class="policyDetail" v-bind:customerId='value.customerId'>出单详情</div>
 							</div>
 						</div>
 						<div class="tm-body">
 							<div class="tm-body-wrap">
 								<div class="tm-split tm-split-1">
-									<div class="info-up">200.00</div>
+									<div class="info-up" v-html="value.monthCount">200.00</div>
 									<div class="info-down">当月出单</div>
 								</div>
 								<div class="tm-split tm-split-2">
-									<div class="info-up">200.00</div>
+									<div class="info-up" v-html="value.monthAmount">200.00</div>
 									<div class="info-down">当月保费(万元)</div>
 								</div>
 								<div class="tm-split tm-split-3">
-									<div class="info-up">20000</div>
+									<div class="info-up" v-html="value.allAmount">20000</div>
 									<div class="info-down">累积保费(万元)</div>
 								</div>
 							</div>
 						</div>
 						<div class="tm-footer">
-							<div class="tm-date">最近出单日期:<span>2017/02/02</span></div>
+							<div class="tm-date">最近出单日期:<span v-html="value.recentDate">2017/02/02</span></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<script src="../../../js/lib/common/zepto.min.js"></script>
-		<script src="../../../js/lib/common/base.js"></script>
-		<script src="../../../js/lib/common/common.js"></script>
 		<script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js"></script>
 		<script type="text/javascript" src="../../../js/lib/widget/mui/mui.picker.min.js"></script>
 		<script type="text/javascript" src="../../../js/lib/widget/mui/mui.poppicker.js"></script>
+		<script src="../../../js/lib/common/base.js"></script>
+		<script src="../../../js/lib/common/common.js"></script>
 		<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
-		<script src="../../js/users/teamManange.js?s=20161221"></script>
+		<script src="../../../js/usage/agent/teamManange/teamManange.js"></script>
 	</body>
 
 </html>

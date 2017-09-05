@@ -21,50 +21,21 @@ var vm = new Vue({
 		}
 	}
 })
+var userCode = "",
+	transToken = "",
+	customerId = "",
+	commodityCommId = "",
+	policyNo="";
 $(function() {
 	/*获取数据*/
-	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
-		userCode = urlParm.userCode,
-		transToken=urlParm.transToken,
-		customerId=urlParm.customerId,
-		commodityCommId=urlParm.commodityCommId,
+	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
+		userCode = urlParm.userCode;
+		transToken = urlParm.transToken;
+		customerId = urlParm.customerId;
+		commodityCommId = urlParm.commodityComId;
 		policyNo = urlParm.policyNo;
 	console.log("页面初始化，获取上个页面传值报文--");
-	var reqData = {
-		"head": {
-			"userCode": userCode,
-			"channel": "01",
-			"transTime": $.getTimeStr(),
-			"transToken": transToken
-		},
-		"body": {
-			"customerId": customerId,
-			"commodityCommId": commodityCommId,
-			"flag": "1"
-		}
-	}
-	var url = base.url + 'moneyManage/policyDetail.do';
-	console.log("页面初始化，发送请求报文--");
-	$.reqAjaxsFalse(url, reqData, policyDetail);
-	mui('.man-div-title ul').on('tap', 'li', function() {
-		$('.man-div-title ul').children('li').removeClass('li_xuan');
-		$(this).addClass('li_xuan');
-		var flag = $(this).attr('flag');
-		var reqData = {
-			"head": {
-				"userCode": userCode,
-				"channel": "01",
-				"transTime": $.getTimeStr(),
-				"transToken": transToken
-			},
-			"body": {
-				"customerId": customerId,
-				"commodityCommId": commodityCommId,
-				"flag": flag
-			}
-		}
-		$.reqAjaxsFalse(url, reqData, policyDetail);
-	})
+	list(userCode, transToken, customerId, commodityCommId, '1');
 })
 
 function policyDetail(data) {
@@ -135,5 +106,37 @@ function chuli() {
 				}
 			})
 		}
+	})
+}
+
+function mylist(userCode, transToken, customerId, commodityCommId, flag) {
+	list(userCode, transToken, customerId, commodityCommId, flag);
+}
+
+function list(userCode, transToken, customerId, commodityCommId, flag) {
+	userCode = userCode;
+	transToken = transToken;
+	customerId = customerId;
+	commodityCommId = commodityCommId;
+	flag = flag;
+	var reqData = {
+		"head": {
+			"userCode": userCode,
+			"channel": "01",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
+		},
+		"body": {
+			"customerId": customerId,
+			"commodityCommId": commodityCommId,
+			"flag": flag
+		}
+	}
+	$.reqAjaxsFalse(url, reqData, policyDetail);
+	mui('.man-div-title ul').on('tap', 'li', function() {
+		$('.man-div-title ul').children('li').removeClass('li_xuan');
+		$(this).addClass('li_xuan');
+		var flag = $(this).attr('flag');
+		list(userCode, transToken, customerId, commodityCommId, flag);
 	})
 }

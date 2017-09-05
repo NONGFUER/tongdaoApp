@@ -11,9 +11,9 @@
 		<meta name="format-detection" content="email=no" />
 		<title>我的名片</title>
 		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
-		<link rel="stylesheet" href="../../../css/lib/widget/css/common/base.css" />
-		<link rel="stylesheet" href="../../../css/lib/widget/css/common/common.css" />
-		<link rel="stylesheet" href="../../../css/usage/agent/myCard/myCard.css?v=20160615" />
+		<link rel="stylesheet" href="../../../css/lib/commons/base.css" />
+		<link rel="stylesheet" href="../../../css/lib/commons/common.css" />
+		<link rel="stylesheet" href="../../../css/usage/account/myCard.css?v=20160615" />
 	</head>
 
 	<body>
@@ -27,9 +27,9 @@
 							</div>
 						</div>
 						<div class="simple_info">
-							<div><span class="name" id="name"></span></div>
+							<div><span class="name" id="name" v-html="mingpian.name">姓名</span></div>
 							<div class="">
-								<span class="iden"></span><span class="split">|</span>服务区域：<span class="area"></span>
+								<span class="iden"></span><span class="split">|</span>服务区域：<span class="area" v-html="dizhi"></span>
 							</div>
 						</div>
 						<div class="card_renz">
@@ -45,17 +45,17 @@
 						</div>
 						<div class="code_info">
 							<div class="code_info_up">
-								业务员代码：<span id="agentCode"></span>
+								业务员代码：<span id="agentCode" v-html="mingpian.agentCode"></span>
 							</div>
 							<div class="code_info_down">
-								执业证编码：<span id="practiceCode"></span>
+								执业证编码：<span id="practiceCode" v-html="mingpian.practiceCode"></span>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="contact clearfix">
-					<div class="phone"><img src="../../../image/common/phone.png" /><span>联系我</span></div>
-					<div class="wechat"><img src="../../../image/common/wechat.png" /><span>加微信</span></div>
+					<div class="phone" v-bind:phone='phone'><img src="../../../image/common/phone.png" /><span v-bind:phone="mingpian.postcardPhone">联系我</span></div>
+					<div class="wechat" v-bind:weixin='weixin'><img src="../../../image/common/wechat.png" /><span v-bind:img='mingpian.postcardWxImage'>加微信</span></div>
 				</div>
 				<div class="company">
 					<img src="../../../image/common/logo.png" class="logo" />
@@ -68,7 +68,7 @@
 						<img src="../../../image/common/intro.png">
 						<span>个人介绍</span></div>
 					<div class="introinfo">
-						<pre id="introarea" style="white-space: pre-wrap;word-wrap: break-word;font-family: 'Microsoft YaHei',sans-serif;"></pre>
+						<pre id="introarea" style="white-space: pre-wrap;word-wrap: break-word;font-family: 'Microsoft YaHei',sans-serif;" v-html="jiesao"></pre>
 					</div>
 				</div>
 				<div class="field">
@@ -76,8 +76,12 @@
 						<img src="../../../image/common/field.png">
 						<span>擅长领域</span>
 					</div>
-					<div class="fieldlist clearfix">
-						
+					<div class="fieldlist clearfix shanchang" v-html="shanchang">
+						<!--<span>重急症</span>
+						<span>重急症</span>
+						<span>重急症</span>
+						<span>重急症</span>
+						<span>重急症</span>-->
 					</div>
 				</div>
 				<div class="button_share">
@@ -88,7 +92,7 @@
 		</div>
 		<div class="popup">
 			<div class="popup_content">
-				<img alt="" src="../../../image/common/kongbai.png">
+				<img alt="" v-bind:src="weixin">
 			</div>
 			<span class="spanClose close" onclick="closepop(this);"></span>
 		</div>
@@ -96,7 +100,8 @@
 		<script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js"></script>
 		<script type="text/javascript" src="../../../js/lib/common/base.js"></script>
 		<script type="text/javascript" src="../../../js/lib/common/common.js"></script>
-		<script src="../../js/account/myCard.js?v=341130"></script>
+		<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
+		<script src="../../../js/usage/agent/myCard/myCard.js"></script>
 	</body>
 
 </html>

@@ -24,10 +24,11 @@ var vm = new Vue({
 				})
 				$(".div_btn").unbind("tap").bind("tap", function() {
 					var url = base.url + 'hkRedemption/getRedemption.do';
-					var commodityCommId = $(this).attr('commodityCommId');
-					var orderNo = $(this).attr('orderNo');
-					var policyNo = $(this).attr("policyNo");
-					var insureNo = $(this).attr('insureNo');
+					commodityCommId = $(this).attr('commoditycommid');
+					orderNo = $(this).attr('orderno');
+					policyNo = $(this).attr("policyno");
+					insureNo = $(this).attr('insureno');
+				
 					var reqData = {
 						"head": {
 							"userCode": userCode,
@@ -49,14 +50,56 @@ var vm = new Vue({
 		})
 	}
 })
+var userCode = "",
+	title = "",
+	commdityCommId = "",
+	customerId = "",
+	transToken = "";
 $(function() {
 	/*获取数据*/
-	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
-		userCode = urlParm.userCode,
-		title = urlParm.title,
-		commdityCommId = urlParm.commdityCommId,
-		customerId = urlParm.customerId,
-		transToken = urlParm.transToken;
+	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
+	userCode = urlParm.userCode;
+	title = urlParm.title;
+	commdityCommId = urlParm.commodityComId;
+
+	customerId = urlParm.customerId;
+	transToken = urlParm.transToken;
+	list(userCode, transToken, commdityCommId, customerId);
+})
+
+function redemptionList(data) {
+	console.log(data);
+	vm.Objectlist = data.returns.list;
+}
+
+function getRedemption(data) {
+	console.log(data);
+	if(data.statusCode != '000000') {
+		mui.alert(data.statusMessage);
+	} else {
+//		var commodityCommId = $(this).attr('commoditycommid');
+//		orderNo = $(this).attr('orderno');
+//		policyNo = $(this).attr("policyno");
+//		insureNo = $(this).attr('insureno');
+
+		var reqData = {
+			"orderNo": orderNo,
+			"policyNo": policyNo,
+			"insureNo": insureNo,
+			"title": title,
+			"customerId": customerId,
+			"commodityCommId": commodityCommId
+		}
+		var jsonStr = UrlEncode(JSON.stringify(reqData));
+		window.location.href = "policyRedemption.html?jsonKey=" + jsonStr;
+	}
+}
+
+function mylist(userCode, transToken, commdityCommId, customerId) {
+	list(userCode, transToken, commdityCommId, customerId);
+}
+
+function list(userCode, transToken, commdityCommId, customerId) {
 	var reqData = {
 		"body": {
 			"commdityCommId": commdityCommId,
@@ -70,35 +113,5 @@ $(function() {
 		}
 	}
 	var url = base.url + 'moneyManage/redemptionList.do';
-	console.log("页面初始化，发送请求报文--");
-	console.log(urlParm);
 	$.reqAjaxsFalse(url, reqData, redemptionList);
-	console.log(vm.Objectlist);
-})
-
-function redemptionList(data) {
-	console.log(data);
-	vm.Objectlist = data.returns.list;
-}
-
-function getRedemption(data) {
-	console.log(data);
-	if(data.statusCode != '000000') {
-		mui.alert(data.statusMessage);
-	} else {
-		var commodityCommId = $(this).attr('commodityCommId');
-		var orderNo = $(this).attr('orderNo');
-		var policyNo = $(this).attr("policyNo");
-		var insureNo = $(this).attr('insureNo');
-		var reqData = {
-			"orderNo": orderNo,
-			"policyNo": policyNo,
-			"insureNo": insureNo,
-			"title": title,
-			"customerId": customerId,
-			"commodityCommId": commodityCommId
-		}
-		var jsonStr = UrlEncode(JSON.stringify(reqData));
-		window.location.href = "policyRedemption.html?jsonKey=" + jsonStr;
-	}
 }

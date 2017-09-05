@@ -37,7 +37,7 @@ $(function() {
 		parm.title="添加收货地址";
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-		window.location.href = "createNewAddress.html?jsonStr=" + jsonStr;
+		window.location.href = "createNewAddress.html?jsonKey=" + jsonStr;
 	});
 });
 // 加载已有地址
@@ -157,7 +157,7 @@ function toEdit() {
 		parm.body.addressId=currentAddressId;
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-		window.location.href = "editAddress.html?jsonStr=" + jsonStr;
+		window.location.href = "editAddress.html?jsonKey=" + jsonStr;
 	})
 }
 
@@ -198,7 +198,7 @@ function selectedAddress(num) {
 	parm.body.gfbDistribution = gfbDistribution;
 	var jsonStr = JSON.stringify(parm);
 	jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-	window.location.href = "quote.html?jsonStr=" + jsonStr;
+	window.location.href = "quote.html?jsonKey=" + jsonStr;
 }
 
 

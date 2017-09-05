@@ -126,8 +126,46 @@ function chuli() {
 		$('.baozhang').html('已领取')
 		$('#lingqu').off('tap', '#lingqu');
 		$('#lingqu').addClass('huisebtn');
+	} else if($('.baozhang').html() == '04') {
+		$('.baozhang').html('核保中');
+		$('#lingqu').off('tap', '#lingqu');
+		$('#lingqu').addClass('huisebtn');
+	} else if($('.baozhang').html() == '05') {
+		$('#lingqu').off('tap', '#lingqu');
+		$('#lingqu').addClass('huisebtn');
+		$('.baozhang').html('核保成功');
+	} else if($('.baozhang').html() == '06') {
+		$('#lingqu').off('tap', '#lingqu');
+		$('#lingqu').addClass('huisebtn');
+		$('.baozhang').html('支付失败');
+	} else if($('.baozhang').html() == '07') {
+		$('#lingqu').off('tap', '#lingqu');
+		$('#lingqu').addClass('huisebtn');
+		$('.baozhang').html('支付成功');
+	} else if($('.baozhang').html() == '08') {
+		$('#lingqu').off('tap', '#lingqu');
+		$('#lingqu').addClass('huisebtn');
+		$('.baozhang').html('承保处理中');
+	} else if($('.baozhang').html() == '09') {
+		$('#lingqu').off('tap', '#lingqu');
+		$('#lingqu').addClass('huisebtn');
+		$('.baozhang').html('待生效');
+	} else if($('.baozhang').html() == '10') {
+		$('#lingqu').off('tap', '#lingqu');
+		$('#lingqu').addClass('huisebtn');
+		$('.baozhang').html('承保成功');
+	} else if($('.baozhang').html() == '11') {
+		$('#lingqu').off('tap', '#lingqu');
+		$('#lingqu').addClass('huisebtn');
+		$('.baozhang').html('承保失败');
+	} else if($('.baozhang').html() == '12') {
+		$('#lingqu').off('tap', '#lingqu');
+		$('#lingqu').addClass('huisebtn');
+		$('.baozhang').html('已退保');
 	} else if($('.baozhang').html() == '99') {
-		$('.baozhang').html('已失效')
+		$('#lingqu').off('tap', '#lingqu');
+		$('#lingqu').addClass('huisebtn');
+		$('.baozhang').html('已失效');
 	}
 	if($('.baozhang').html() != '03' && $('.baozhang').html() != '已领取') {
 		mui('.man-div-body-ul_li_div_btn').on('tap', '#lingqu', function() {
@@ -161,7 +199,10 @@ function backlast() {
 		"pageNo": '',
 		"customerId": customerId,
 		"transToken": transToken,
-		"title": '保单列表'
+		"title": '保单列表',
+		"leftIco": '1',
+		"rightIco": '0',
+		"downIco": '1',
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
 	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyList.html?jsonKey=" + jsonStr;

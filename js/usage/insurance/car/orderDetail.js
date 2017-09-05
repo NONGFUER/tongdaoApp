@@ -55,7 +55,7 @@ $(function() {
 		parm.body.orderNos = orderNos;
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-		window.location.href = "insureMes.html?jsonStr=" + jsonStr;
+		window.location.href = "insureMes.html?jsonKey=" + jsonStr;
 	});
 	// 去支付按钮
 	$("#pay").unbind("tap").bind("tap",function() {

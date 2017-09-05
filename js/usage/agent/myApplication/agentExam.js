@@ -157,7 +157,11 @@ $.saveAnswer = function(data){
 
 $.saveAnswerCallBack = function(data){
 	console.log(data);
-	if(data.statusCode == "000000"){		
+	if(data.statusCode == "000000"){
+		urlParm.title = "代理人信息登记";
+		urlParm.leftIco = "1";
+		urlParm.rightIco = "0";
+		urlParm.downIco = "0"
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href="agentInfoRegister.html?jsonKey="+jsonStr;
 	}else{
@@ -177,4 +181,6 @@ $.setscroll = function() {
 	mui("#indexpart").scroll();
 };
 
-
+function backlast(){
+	sysback();
+}

@@ -578,20 +578,20 @@ $.submitCallBack = function(paramList) {
 						parm.body.fromFlag = "1";
 						var jsonStr = JSON.stringify(parm);
 						jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-						window.location.href = "quote.html?jsonStr=" + jsonStr;
+						window.location.href = "quote.html?jsonKey=" + jsonStr;
 					});
 				}else if(paramList.returns.isBefore=="2"){
 					modelAlert("您好，您的爱车无上一保单结束时间记录，请仔细核实起保时间，防止发生车辆脱保。",null,function(){
 						parm.body.fromFlag = "1";
 						var jsonStr = JSON.stringify(parm);
 						jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-						window.location.href = "quote.html?jsonStr=" + jsonStr;
+						window.location.href = "quote.html?jsonKey=" + jsonStr;
 					});
 				}else{
 					parm.body.fromFlag = "1";
 					var jsonStr = JSON.stringify(parm);
 					jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-					window.location.href = "quote.html?jsonStr=" + jsonStr;
+					window.location.href = "quote.html?jsonKey=" + jsonStr;
 				}
 			});
 			
@@ -601,20 +601,20 @@ $.submitCallBack = function(paramList) {
 					parm.body.fromFlag = "1";
 					var jsonStr = JSON.stringify(parm);
 					jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-					window.location.href = "quote.html?jsonStr=" + jsonStr;
+					window.location.href = "quote.html?jsonKey=" + jsonStr;
 				});
 			}else if(paramList.returns.isBefore=="2"){
 				modelAlert("您好，您的爱车无上一保单结束时间记录，请仔细核实起保时间，防止发生车辆脱保。",null,function(){
 					parm.body.fromFlag = "1";
 					var jsonStr = JSON.stringify(parm);
 					jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-					window.location.href = "quote.html?jsonStr=" + jsonStr;
+					window.location.href = "quote.html?jsonKey=" + jsonStr;
 				});
 			}else{
 				parm.body.fromFlag = "1";
 				var jsonStr = JSON.stringify(parm);
 				jsonStr = UrlEncode(jsonStr); // 加密过后的操作
-				window.location.href = "quote.html?jsonStr=" + jsonStr;
+				window.location.href = "quote.html?jsonKey=" + jsonStr;
 			}
 		}
 	}else if(paramList.statusCode == "123456"){

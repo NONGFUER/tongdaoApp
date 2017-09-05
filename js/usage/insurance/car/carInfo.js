@@ -17,7 +17,7 @@ function backlast(){//返回上一页
 		parm.body.pagesflag="1";
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr);
-		window.location.href = "carMes.html?jsonStr="+ jsonStr;
+		window.location.href = "carMes.html?jsonKey="+ jsonStr;
 	}else{
 		
 		var str = window.location.search;
@@ -26,6 +26,6 @@ function backlast(){//返回上一页
 		parm = JSON.parse(str);
 		parm.title="车险信息";
 		jsonStr = UrlEncode(jsonStr);
-		window.location.href = "carMes.html?jsonStr="+ jsonStr;
+		window.location.href = "carMes.html?jsonKey="+ jsonStr;
 	}
 }

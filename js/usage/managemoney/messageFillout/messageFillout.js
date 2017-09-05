@@ -2,7 +2,7 @@
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	commodityCombinationId = urlParm.commodityCombinationId,
 	userCode = urlParm.userCode,
-	phone = urlParm.insurePhone,
+	phone = urlParm.userCode,
 	bankName = urlParm.bankName,
 	commodityId = urlParm.commodityId,
 	bankCode = urlParm.bankCode,
@@ -11,6 +11,7 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	transToken = urlParm.transToken,
 	invMobie = '13333333333', //引荐人手机号
 	riskSupportAbility = urlParm.riskSupportAbility, //类型
+
 	title = urlParm.title;
 if(title == null || title == "") {
 	title = urlParm.titles;
@@ -45,7 +46,7 @@ var vm = new Vue({
 		phone: {}, //手机号
 		bankCode: {}, //银行代码
 		bankname: {},
-		comComName:{},
+		comComName: {},
 	},
 	mounted() {
 		this.$nextTick(function() {
@@ -184,7 +185,7 @@ $(function() {
 		vm.Objectitle = data.returns;
 		console.log(vm.Objectitle);
 		vm.feilv = '本产品初始费用' + Number(vm.Objectitle.insureInfo.firstRate) * 100 + '%,进入账户金额';
-		vm.comComName=title;
+		vm.comComName = title;
 		vm.feilvshuzi = Number(vm.Objectitle.insureInfo.firstRate);
 		vm.Objectitle = data.returns;
 		vm.mymoney = intToFloat(Number(vm.Objectitle.insureInfo.upPrice) - (Number(vm.Objectitle.insureInfo.upPrice) * Number(vm.Objectitle.insureInfo.firstRate))); /*进入账户金额*/
@@ -204,7 +205,9 @@ $(function() {
 			vm.phone = '';
 		}
 		vm.bankCode = $('.bank').attr('bankCode');
-		bankMaxMoney = vm.Objectitle.insureInfo.dayLimit;
+		if(vm.Objectitle.insureInfo.dayLimit != null && vm.Objectitle.insureInfo.dayLimit != "") {
+			bankMaxMoney = vm.Objectitle.insureInfo.dayLimit;
+		}
 		if(vm.Objectitle.insureInfo.bankname != null && vm.Objectitle.insureInfo.bankname != "") {
 			vm.bankname = vm.Objectitle.insureInfo.bankname;
 		} else {
@@ -268,7 +271,6 @@ $(function() {
 			"body": {
 				"userName": phone,
 				"type": '103',
-				"customerId": customerId,
 			}
 		};
 		var url = base.url + 'commonMethod/GetRegCode.do';
@@ -386,34 +388,33 @@ function saveOrder(data) {
 		/*触发短信接口*/
 		$(".note-div-btn").unbind("tap").bind("tap", function() {
 			if($('#yan').val() != null && $('#yan').val() != "") {
-				if(ma == $('#yan').val()) {
-					var reqData = {
-						"head": {
-							"userCode": userCode,
-							"channel": "01",
-							"transTime": $.getTimeStr(),
-							"transToken": transToken
-						},
-						"body": {
-							"bankCode": $('.bank').attr('bankCode'),
-							"holderName": beiName,
-							"cardNo": $('#yinhangka').val(),
-							"orderNo": orderNo,
-							"insureNo": insureNo,
-							"payAmount": buyPrem[0],
-							"productFlag": "02",
-							"customerId": customerId,
-						}
+		if(ma == $('#yan').val()) {
+				var reqData = {
+					"head": {
+						"userCode": userCode,
+						"channel": "01",
+						"transTime": $.getTimeStr(),
+						"transToken": transToken
+					},
+					"body": {
+						"bankCode": $('.bank').attr('bankCode'),
+						"holderName": beiName,
+						"cardNo": $('#yinhangka').val(),
+						"orderNo": orderNo,
+						"insureNo": insureNo,
+						"payAmount": buyPrem[0],
+						"productFlag": "02",
+						"customerId": customerId,
 					}
-					var url = base.url + 'hkunderwrit/getinsure.do';
-					$.reqAjaxsFalse(url, reqData, getinsure);
+				}
+				var url = base.url + 'hkunderwrit/getinsure.do';
+				$.reqAjaxsFalse(url, reqData, getinsure);
 				} else {
 					mui.alert('验证码错误!');
 				}
 			} else {
 				mui.alert('验证码不能为空!');
 			}
-
 		})
 	} else {
 		mui.alert(data.statusMessage);
@@ -422,6 +423,8 @@ function saveOrder(data) {
 
 function getinsure(data) {
 	console.log(data);
+	$('.note').hide();
+	modelAlert(data.statusMessage,"",sysback);
 }
 $("#risktype").unbind("tap").bind("tap", function() {
 	var sendData = {
@@ -480,7 +483,10 @@ function backlast() {
 		"userCode": phone,
 		"insurePhone": phone,
 		"commodityCombinationId": commodityCombinationId,
-		"title": title
+		"title": title,
+		"leftIco":'1',
+		"rightIco":'0',
+		"downIco":'0',
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
 	window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;

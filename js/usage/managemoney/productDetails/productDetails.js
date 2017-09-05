@@ -87,9 +87,12 @@ function buy() {
 		"customerId": customerId,
 		"transToken": transToken,
 		"commodityCombinationId": commodityCombinationId,
-		"commodityId": vm.Objectitle.commodityInfo.id+"",
+		"commodityId": vm.Objectitle.commodityInfo.id + "",
 		"testType": $('.retest').attr('testType'),
 		"title": vm.Objectitle.commodityCombination.commodityCombinationName,
+		"leftIco": '1',
+		"rightIco": '0',
+		"downIco": '0',
 	}
 	var jsonStr = JSON.stringify(sendData);
 	jsonStr = UrlEncode(jsonStr);
@@ -156,11 +159,14 @@ function getRiskAble(data) {
 					"testType": "",
 					"mobile": phone,
 					"customerId": customerId,
-					"commodityId": vm.Objectitle.commodityInfo.id+"",
+					"commodityId": vm.Objectitle.commodityInfo.id + "",
 					"productCode": userCode
 				},
 				"title": '风险评估 ',
 				"titles": vm.Objectitle.commodityCombination.commodityCombinationName,
+				"leftIco": '0',
+				"rightIco": '0',
+				"downIco": '0',
 			}
 			var jsonStr = UrlEncode(JSON.stringify(sendData));
 			window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/riskQuestion.html?jsonKey=" + jsonStr;

@@ -22,58 +22,18 @@ var vm = new Vue({
 		}
 	}
 })
+var userCode = "",
+	commodityComId = "",
+	transToken = "",
+	customerId = "";
 $(function() {
 	/*获取数据*/
-	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
-		userCode = urlParm.userCode,
-		commodityComId = urlParm.commodityComId,
-		transToken=urlParm.transToken,
-		customerId = urlParm.customerId;
-	var reqData = {
-		"head": {
-			"userCode": userCode,
-			"channel": "01",
-			"transTime": $.getTimeStr(),
-			"transToken": transToken
-		},
-		"body": {
-			"commodityComId": commodityComId,
-			"flag": "",
-			"pageNo": "1",
-			"pageSize": "10",
-			"customerId":customerId
-		}
-	}
-	var url = base.url + 'moneyManage/policyQueryList.do';
-	console.log("页面初始化，发送请求报文--");
-	console.log(urlParm);
-	$.reqAjaxsFalse(url, reqData, policyQueryListInfo);
-	mui('.man-div-title ul').on('tap', 'li', function() {
-		$('.man-div-title ul').children('li').removeClass('li_xuan');
-		$(this).addClass('li_xuan');
-		var orderStatus = $(this).attr('orderStatus');
-		/*获取数据*/
-		var reqData = {
-			"head": {
-				"userCode": userCode,
-				"channel": "01",
-				"transTime": $.getTimeStr(),
-				"transToken": transToken
-			},
-			"body": {
-				"commodityComId": commodityComId,
-				"flag": orderStatus,
-				"pageNo": "1",
-				"pageSize": "10",
-				"customerId": customerId
-			}
-		}
-		var url = base.url + 'moneyManage/policyQueryList.do';
-		console.log("根据选择获取数据");
-		console.log(orderStatus);
-		$.reqAjaxsFalse(url, reqData, policyQueryListInfo);
-
-	})
+	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
+	userCode = urlParm.userCode;
+	commodityComId = urlParm.commodityComId;
+	transToken = urlParm.transToken;
+	customerId = urlParm.customerId;
+	list(userCode, transToken, customerId, commodityComId, "")
 	mui('#list').on('tap', '.mui-btn', function() {
 		var elem = this;
 		var li = elem.parentNode.parentNode;
@@ -98,6 +58,9 @@ $(function() {
 			"insureNo": insureNo,
 			"customerId": customerId,
 			"commodityComId": commodityComId,
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '0',
 			"title": $(this).children('.man-div-body-ul_li_div_ul1').children('.commdityComName').html(),
 			/*订单编号*/
 		}
@@ -122,6 +85,33 @@ function chuli() {
 		} else if($(this).html() == '03') {
 			$(this).attr('class', 'baozhang yilingqu');
 			$(this).html('已领取');
+		} else if($(this).html() == '04') {
+			$(this).attr('class', 'baozhang yilingqu');
+			$(this).html('核保中');
+		} else if($(this).html() == '05') {
+			$(this).attr('class', 'baozhang bao');
+			$(this).html('核保成功');
+		} else if($(this).html() == '06') {
+			$(this).attr('class', 'baozhang');
+			$(this).html('支付失败');
+		} else if($(this).html() == '07') {
+			$(this).attr('class', 'baozhang bao');
+			$(this).html('支付成功');
+		} else if($(this).html() == '08') {
+			$(this).attr('class', 'baozhang bao');
+			$(this).html('承保处理中');
+		} else if($(this).html() == '09') {
+			$(this).attr('class', 'baozhang dai');
+			$(this).html('待生效');
+		} else if($(this).html() == '10') {
+			$(this).attr('class', 'baozhang bao');
+			$(this).html('承保成功');
+		} else if($(this).html() == '11') {
+			$(this).attr('class', 'baozhang');
+			$(this).html('承保失败');
+		} else if($(this).html() == '12') {
+			$(this).attr('class', 'baozhang');
+			$(this).html('已退保');
 		} else if($(this).html() == '99') {
 			$(this).attr('class', 'baozhang');
 			$(this).html('已失效');
@@ -137,7 +127,22 @@ function backlast() {
 	sysback();
 }
 
-function mylist(data) {
+function mylist(userCode, transToken, customerId, commodityComId, flag) {
+	userCode = userCode;
+	transToken = transToken;
+	customerId = customerId;
+	commodityComId = commodityComId;
+	list(userCode, transToken, customerId, commodityComId, flag);
+	mui('.man-div-title ul').on('tap', 'li', function() {
+		$('.man-div-title ul').children('li').removeClass('li_xuan');
+		$(this).addClass('li_xuan');
+		var flag = $(this).attr('orderStatus');
+		/*获取数据*/
+		list(userCode, transToken, customerId, commodityComId, flag);
+	})
+}
+
+function list(userCode, transToken, customerId, commodityComId, flag) {
 	var reqData = {
 		"head": {
 			"userCode": userCode,
@@ -146,15 +151,21 @@ function mylist(data) {
 			"transToken": transToken
 		},
 		"body": {
-			"commodityComId": data,
-			"flag": "",
+			"commodityComId": commodityComId,
+			"flag": flag,
 			"pageNo": "1",
 			"pageSize": "10",
-			"customerId":customerId
+			"customerId": customerId
 		}
 	}
 	var url = base.url + 'moneyManage/policyQueryList.do';
 	console.log("页面初始化，发送请求报文--");
-	console.log(urlParm);
 	$.reqAjaxsFalse(url, reqData, policyQueryListInfo);
 }
+mui('.man-div-title ul').on('tap', 'li', function() {
+	$('.man-div-title ul').children('li').removeClass('li_xuan');
+	$(this).addClass('li_xuan');
+	var flag = $(this).attr('orderStatus');
+	/*获取数据*/
+	list(userCode, transToken, customerId, commodityComId, flag);
+})

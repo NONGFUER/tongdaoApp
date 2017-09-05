@@ -140,17 +140,8 @@ function isWhiteCallBack( data ){
 		$("#agentArea").attr( "data-provicecode", reComProvinceCode );
 		$("#agentArea").attr( "data-citycode", reComCityCode );
 				
-	}else if(data.statusCode == "000001"){
-		modelAlert("该推荐人非佰盈客户经理，请重新输入！");
-		$("#agentArea").attr( "data-agentid", "" );		
-		$("#agentArea").val("");
-		$("#agentArea").attr( "data-provicename", "" );
-		$("#agentArea").attr( "data-cityname", "" );
-		$("#agentArea").attr( "data-provicecode", "" );
-		$("#agentArea").attr( "data-citycode", "" );
-		return false;
 	}else{
-		modelAlert("根据推荐人工号获取入职地区错误！");
+		modelAlert(data.statusMessage);
 		$("#agentArea").attr( "data-agentid", "" );		
 		$("#agentArea").val("");
 		$("#agentArea").attr( "data-provicename", "" );
@@ -436,4 +427,8 @@ function getFormData(){
 	formData.agentBankSname = agentBankSname; 	//开户行名称
 	formData.agentAccount   = agentAccount  	//银行卡号	
 	return formData;
+}
+
+function backlast(){
+	sysback();
 }

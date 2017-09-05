@@ -36,7 +36,7 @@ $(function() {
 	parm.rightIco="0";
 	parm.title="车险指南";
 	/**首页banner跳转***/
-	$(".banner").attr("href","carInfo.html?jsonStr="+UrlEncode(JSON.stringify(parm)));
+	$(".banner").attr("href","carInfo.html?jsonKey="+UrlEncode(JSON.stringify(parm)));
 	
 	if(!$.isNull(parm.body) && parm.body!= undefined){
 		cxSessionId=parm.body.cxSessionId
@@ -572,7 +572,7 @@ $(function() {
 				parm.body.producingarea=cxCarMessage.producingarea;//车型产地  进口车、合资车、国产车
 				var jsonStr = JSON.stringify(parm);
 				jsonStr = UrlEncode(jsonStr);
-				var nextPageUrl = "insuranceCoverage.html?jsonStr="+ jsonStr;
+				var nextPageUrl = "insuranceCoverage.html?jsonKey="+ jsonStr;
 				window.location.href = nextPageUrl;
 			}else if(paramList.status.statusCode == "123456"){
 				modelAlert(paramList.status.statusMessage,function(){

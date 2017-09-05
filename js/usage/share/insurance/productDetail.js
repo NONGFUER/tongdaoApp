@@ -25,14 +25,6 @@ $(function(){
     //根据保费试算项进行保费试算
     sendCaldoRequest( ccId );
     //calOptionsRender(data4);
-    showRightIcon();
-    /**拨打电话*/
-	$(".kefu").unbind("tap").bind("tap",function(){
-    	callService("4006895505",".kefuPhone");
-    })
-    $(".rexian").unbind("tap").bind("tap",function(){
-    	callService("95505",".rexian");
-    })
 });
 
 //根据保费试算项进行保费试算
@@ -444,6 +436,9 @@ function shareHandle(){
 	var picUrl = getProductSharePic(ccId);
 	shareMethod(shareurl,title,desc,"baodan",picUrl);		
 };
-function backlast(){
-	sysback();
+
+function isLogin(roletype){
+	if(roletype == "00" || roletype){
+		
+	}
 }

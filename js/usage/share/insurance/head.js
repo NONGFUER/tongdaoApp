@@ -75,7 +75,17 @@ var requestUrl = {
     
 }
 //全局变量
-var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
+var urlParm = {};
+	urlParm.openid = getUrlQueryString("openid");
+	urlParm.roleType = getUrlQueryString("roletype");
+	urlParm.shareMobile = getUrlQueryString("roletype");
+	urlParm.shareCusId = getUrlQueryString("shareCusId");
+	urlParm.provinceCode = getUrlQueryString("provinceCode");
+	urlParm.cityCode = getUrlQueryString("cityCode");
+	urlParm.ccId = getUrlQueryString("ccId");
+	urlParm.customerId = getUrlQueryString("customerId");
+	urlParm.shareFlag = getUrlQueryString("shareFlag");
+	urlParm.mobile = getUrlQueryString("mobile");
 
 var mobile      = urlParm.mobile;                //"18900001111";  //urlParm.mobile;//用户手机号
 var customerId  = urlParm.customerId;            //"8";            //urlParm.customerId;//用户id
