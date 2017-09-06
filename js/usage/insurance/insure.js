@@ -621,7 +621,11 @@ function insureReponse(data){
 	console.log(data);
 	console.log("--- --- ---");
 	if(data.statusCode == "000000"){
-	    var serialNo = data.returns.bxOrder.orderNo;//获取序列号
+		if(ccId != "1" && ccId != "2" && ccId != "3"){
+			var serialNo = data.returns.shortRiskOrder.yuyueId;
+		}else{
+			 var serialNo = data.returns.bxOrder.yuyueId;//获取序列号
+		}	   
 	    payRequest(serialNo)//核保成功,调支付接口
 	}else{
 	    modelAlert(data.statusMessage);
@@ -648,7 +652,7 @@ function payRequest(serialNo){
 	if( ccId != "1" && ccId != "2" && ccId != "3"){
 		reqData.body.payType = "7";
 	}else{
-		reqData.body.orderResource = "3";
+		reqData.body.orderResource = "5";
 	}	
 	$.toAjaxs(url,reqData,payReturnReponse);
 }

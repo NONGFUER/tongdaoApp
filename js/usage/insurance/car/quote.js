@@ -238,7 +238,7 @@ $(function() {
 				        	 if(type=="pay"){
 				        		 window.location.href=payUrl
 				        	 }else{
-				        		 shareMethod(cxSessionId);//壳上分享方法	
+				        		 cxShareMethod(cxSessionId);//壳上分享方法	
 				        	 }
 				        	 
 						 }
@@ -863,7 +863,7 @@ $.saveBack=function(type){
 						if(type=="pay"){
 							window.location.href =payUrl;
 						}else{
-							shareMethod(cxSessionId);//壳上分享方法	
+							cxShareMethod(cxSessionId);//壳上分享方法	
 						}
 					    
 					}
@@ -891,7 +891,7 @@ $.saveBack=function(type){
 				if(type=="pay"){
 					window.location.href =payUrl;
 				}else{
-					shareMethod(cxSessionId);//壳上分享方法	
+					cxShareMethod(cxSessionId);//壳上分享方法	
 				}
 			}else{
 				modelAlert(refuseReason);

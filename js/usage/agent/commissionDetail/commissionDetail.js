@@ -43,6 +43,7 @@ $.getCommission = function() {
 		},
 		"body": {
 			"loggingCustomerId": customerId,
+			'insuredId': customerId,
 			"date": datetimes(),
 		}
 	}
@@ -58,7 +59,6 @@ $.getCommission = function() {
 			} else {
 				modelAlert(data.status_message);
 			}
-
 		});
 }
 /**
@@ -76,6 +76,7 @@ $.getYearandMonth = function() {
 		},
 		"body": {
 			"loggingCustomerId": customerId,
+			'insuredId': customerId,
 			"date": datetimes(),
 		}
 	}
@@ -83,7 +84,7 @@ $.getYearandMonth = function() {
 	$.reqAjaxsFalse(url, reqData,
 		function(data) {
 			if(data.status_code == '000000') {
-				var dateLongList = data.returns.bxNewCommissionCollects;
+				var dateLongList = data.returns.commissionCollectPolicRg;
 				if(dateLongList && dateLongList.length != 0) {
 					var lastYear = dateLongList[0].tjYears;
 					var lastMonth = dateLongList[0].tjMonth;
@@ -114,7 +115,7 @@ $.getYearandMonth = function() {
 						});
 					});
 				}
-			}else{
+			} else {
 				modelAlert(data.status_message)
 			}
 		});
@@ -124,27 +125,34 @@ $.getYearandMonth = function() {
  * 
  */
 $.getLastCommission = function(year, month) {
-	var url = base.url + "commission/selectLastCommission.do"
+	var url = base.url + "agent/getMyCommission.do"
+	var date= year+'-'+month;
 	var reqData = {
-		"head": {},
+		"head": {
+			"channel": "01",
+			"userCode": userCode,
+			"transTime": "",
+			"transToken": transToken
+		},
 		"body": {
-			"agentId": agentId,
-			"years": year,
-			"months": month
+			"loggingCustomerId": customerId,
+			'insuredId': customerId,
+			"date": date,
 		}
 	}
 	$.reqAjaxsFalse(url, reqData,
 		function(data) {
-			if(data.statusCode == '000000') {
+			console.log(data);
+			if(data.status_code == '000000') {
 				if(!$.isEmptyObject(data.returns)) {
-					code = data.returns.bxNewCommissionCollect.insuredCode;
+					code = data.returns.commissionCollectPolicRg.insuredCode;
 				} else {
 					//code = "";
 				}
-				if(data.returns.bxNewCommissionCollect) {
-					$('#originalCommissionTotal').text(toDecimal2(data.returns.bxNewCommissionCollect.originalCommissionTotal))
-					$('#actualCommissionTotal').text(toDecimal2(data.returns.bxNewCommissionCollect.actualCommissionTotal ? data.returns.bxNewCommissionCollect.actualCommissionTotal : 0))
-					$('#taxesTotal').text(toDecimal2(data.returns.bxNewCommissionCollect.taxesTotal ? data.returns.bxNewCommissionCollect.taxesTotal : 0))
+				if(data.returns.commissionCollectPolicRg) {
+					$('#originalCommissionTotal').text(toDecimal2(data.returns.commissionCollectPolicRg.originalCommissionTotal))
+					$('#actualCommissionTotal').text(toDecimal2(data.returns.commissionCollectPolicRg.actualCommissionTotal ? data.returns.commissionCollectPolicRg.actualCommissionTotal : 0))
+					$('#taxesTotal').text(toDecimal2(data.returns.commissionCollectPolicRg.taxesTotal ? data.returns.commissionCollectPolicRg.taxesTotal : 0))
 				} else {
 					$('#originalCommissionTotal').text("--.--")
 					$('#actualCommissionTotal').text("--.--")

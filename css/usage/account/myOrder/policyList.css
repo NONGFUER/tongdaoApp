@@ -69,8 +69,42 @@ ul li span {
 	float: left;
 }
 
+.man-div-body-ul_li_div ul li:first-child span:first-child {
+	/*账户我的保单页面限制长度保单号*/
+	width: 80%;
+	height: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.man-div-body-ul_li_div ul li:last-child span:first-child {
+	/*账户我的保单页面限制长度保单号*/
+	width: 70%;
+	height: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .man-div-body-ul_li_div ul li span:last-child {
 	float: right;
+}
+
+.man-div-body-ul_li_div ul li:first-child span:last-child {
+	width: 20%;
+	height: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: right;
+}
+.man-div-body-ul_li_div ul li:last-child span:last-child {
+	width: 30%;
+	height: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: right;
 }
 
 .man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:first-child span:last-child {
@@ -107,14 +141,17 @@ ul li span {
 	background: url(../../../../image/account/myOrder/lajitong.png);
 	background-size: 100%;
 }
+
 .mui-btn-red span {
 	position: relative;
 	top: 15%;
 	color: #FFFFFF;
 }
-.dai{
+
+.dai {
 	color: #F0474A!important;
 }
-.bao{
+
+.bao {
 	color: #48A0F0!important;
 }

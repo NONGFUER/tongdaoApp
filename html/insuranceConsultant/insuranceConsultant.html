@@ -12,60 +12,35 @@
 	</head>
 
 	<body>
-		<div class="mui-content mui-scroll-wrapper">
+		<div class="mui-content mui-scroll-wrapper" id="list">
 			<div class="mui-scroll">
 				<div class="man mui-table-view">
-					<div id='list' class="man-div-body ">
+					<div class="man-div-body ">
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-li mb10">
+							<li class="man-div-body-li mb10" v-for="(value,key) in Objectitle">
+								<i class="xuan"></i>
 								<span class="first">
-									<img class="imgzhao" src=""/>
+									<img class="imgzhao"  v-bind:src="value.userAppImage==''?value.userAppImage:'../../image/insuranceConsultant/1.png'">
 									<span class="renzheng">
 										权威认证
 									</span>
 								</span>
 								<span class="last mgr15">
 									<ul>
-										<li>陈某人</li>
-										<li class='guwen mb10'>
-											<span>保险顾问</span>
+									<li v-html="value.name">陈某人</li>
+													<li class='guwen mb10'>
+														<span>保险顾问</span>
 								<span class="heng"></span>
 								<span>服务区域:</span>
-								<span>乌鲁木齐</span>
+								<span v-html="value.postcardField">乌鲁木齐</span>
 							</li>
 							<li class='huise'>
 								<span>手机号码：</span>
-								<span>12345678902202</span>
+								<span v-html="value.postcardPhone">12345678902202</span>
 							</li>
 							<li class='huise'> <span>业务员代码：</span>
-								<span>1234567eqwe8902202</span>
+								<span v-html="value.agentCode">1234567eqwe8902202</span>
 							</li>
-						</ul>
-						</span>
-						</li>
-						<li class="man-div-body-li mb10">
-							<span class="first">
-									<img class="imgzhao" src=""/>
-									<span class="renzheng">
-										权威认证
-									</span>
-							</span>
-							<span class="last mgr15">
-									<ul>
-										<li>陈某人</li>
-										<li class='guwen mb10'>
-											<span>保险顾问</span>
-							<span class="heng"></span>
-							<span>服务区域:</span>
-							<span>乌鲁木齐</span>
-						</li>
-						<li class='huise'>
-							<span>手机号码：</span>
-							<span>12345678902202</span>
-						</li>
-						<li class='huise'> <span>业务员代码：</span>
-							<span>1234567eqwe8902202</span>
-						</li>
 						</ul>
 						</span>
 						</li>
@@ -75,12 +50,12 @@
 						<div class="tianjia"><span class="jia">+</span>添加保险顾问</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 		<div class="note">
 			<div class="note-div">
 				<div class="note-div_title">
+					<div class="title">添加保险顾问</div>
 					<div class="note-div_title_right"></div>
 				</div>
 				<div class="note-div_body">
@@ -88,7 +63,7 @@
 						<ul>
 							<li>
 								<span>
-									<input id='yan' type="text" name="" id="" value="" placeholder="请输入手机号" />
+									<input id='yan' type="text" name=""  value="" placeholder="请输入手机号"  maxlength='11' />
 								</span>
 							</li>
 						</ul>
@@ -99,7 +74,7 @@
 							<div class="note-div-btn">
 								确定
 							</div>
-							
+
 						</div>
 					</div>
 				</div>

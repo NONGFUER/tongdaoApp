@@ -17,7 +17,7 @@
 				<div class="man mui-table-view">
 					<div id='list' class="man-div-body ">
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li mui-table-view-cell">
+							<!-- <li class="man-div-body-ul_li mui-table-view-cell">
 								<div class="mui-slider-right mui-disabled shanchu">
 									<a class="mui-btn blue">
 										<i class="bianji">
@@ -58,13 +58,13 @@
 										</li>
 									</ul>
 								</div>
-							</li>
+							</li>  -->
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="note">
+		<div class="note" id="addholder">
 			<div class="note-div">
 				<div class="note-div_title">
 					<div class="title">新增常用保险人</div>
@@ -104,10 +104,76 @@
 								<input type="text" id="addEmail" placeholder="请输入邮箱">
 							</div>
 						</div>
+						<div class="bar clearfix">
+							<div class="label_icon fl">
+								<div class="imgContent ema"><img src="../../image/useApplicant/email.png"></div>
+							</div>
+							<div class="inputContent ri">
+								<input type="text" id="addAddress" placeholder="请输入地址">
+							</div>
+						</div>
 					</div>
 					<div class="popfooter">
 						<div id="addBtn" class="confirmButton">
 							添加
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="note" id="editholder">
+			<div class="note-div">
+				<div class="note-div_title">
+					<div class="title">编辑常用保险人</div>
+					<div class="note-div_title_right"></div>
+				</div>
+				<div class="note-div_body">
+					<div class="popcontent">
+					<input type="hidden"  id="updateId"  />
+						<div class="bar clearfix">
+							<div class="label_icon fl">
+								<div class="imgContent"><img src="../../image/useApplicant/name.png"></div>
+							</div>
+							<div class="inputContent ri">
+								<input type="text" id="editName" placeholder="请输入姓名">
+							</div>
+						</div>
+						<div class="bar clearfix">
+							<div class="label_icon fl">
+								<div class="imgContent ph"><img src="../../image/useApplicant/phone.png"></div>
+							</div>
+							<div class="inputContent ri">
+								<input type="text" id="editPhone" placeholder="请输入手机号" maxlength="11">
+							</div>
+						</div>
+						<div class="bar clearfix">
+							<div class="label_icon fl">
+								<div class="imgContent iden"><img src="../../image/useApplicant/shenfenzheng.png"></div>
+							</div>
+							<div class="inputContent ri">
+								<input type="text" id="editIdNo" placeholder="请输入身份证号" maxlength="18">
+							</div>
+						</div>
+						<div class="bar clearfix">
+							<div class="label_icon fl">
+								<div class="imgContent ema"><img src="../../image/useApplicant/email.png"></div>
+							</div>
+							<div class="inputContent ri">
+								<input type="text" id="editEmail" placeholder="请输入邮箱">
+							</div>
+						</div>
+						<div class="bar clearfix">
+							<div class="label_icon fl">
+								<div class="imgContent ema"><img src="../../image/useApplicant/email.png"></div>
+							</div>
+							<div class="inputContent ri">
+								<input type="text" id="editAddress" placeholder="请输入地址">
+							</div>
+						</div>
+					</div>
+					<div class="popfooter">
+						<div id="updateBtn" class="confirmButton">
+							保存
 						</div>
 					</div>
 				</div>

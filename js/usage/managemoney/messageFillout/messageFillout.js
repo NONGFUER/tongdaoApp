@@ -1,18 +1,21 @@
 /*获取数据*/
-var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
 	commodityCombinationId = urlParm.commodityCombinationId,
+//	alert(commodityCombinationId);
 	userCode = urlParm.userCode,
 	phone = urlParm.userCode,
 	bankName = urlParm.bankName,
 	commodityId = urlParm.commodityId,
+//	alert(commodityId);
 	bankCode = urlParm.bankCode,
 	customerId = urlParm.customerId,
 	bankMaxMoney = urlParm.dayLimit,
 	transToken = urlParm.transToken,
 	invMobie = '13333333333', //引荐人手机号
 	riskSupportAbility = urlParm.riskSupportAbility, //类型
-
+	pieces = urlParm.pieces,
 	title = urlParm.title;
+
 if(title == null || title == "") {
 	title = urlParm.titles;
 }
@@ -56,7 +59,11 @@ var vm = new Vue({
 		})
 	}
 })
-
+if(pieces){
+	$("#goumai").val(pieces);
+	$('#mymoney').html(997*pieces);
+	$("#money").html(1000*pieces);
+}
 $(function() {
 	var reqData = {
 		"head": {
@@ -129,7 +136,7 @@ $(function() {
 						"transToken": transToken
 					},
 					"body": {
-						"insuranceNum": $('#goumai').html(),
+						"insuranceNum": $('#goumai').val(),
 						"startPrem": startPrem + "",
 						"bankCode": $('.bank').attr('bankCode'),
 						"buyPrem": buyPrem[0],
@@ -184,15 +191,24 @@ $(function() {
 		console.log(data);
 		vm.Objectitle = data.returns;
 		console.log(vm.Objectitle);
+		
 		vm.feilv = '本产品初始费用' + Number(vm.Objectitle.insureInfo.firstRate) * 100 + '%,进入账户金额';
 		vm.comComName = title;
 		vm.feilvshuzi = Number(vm.Objectitle.insureInfo.firstRate);
 		vm.Objectitle = data.returns;
-		vm.mymoney = intToFloat(Number(vm.Objectitle.insureInfo.upPrice) - (Number(vm.Objectitle.insureInfo.upPrice) * Number(vm.Objectitle.insureInfo.firstRate))); /*进入账户金额*/
-		console.log(vm.mymoney);
-		vm.startPiece = intToFloat(vm.Objectitle.insureInfo.upPrice);
+		if(pieces){
+			vm.mymoney = intToFloat(997*pieces);			
+			vm.startPiece = intToFloat(1000*pieces);
+		}else{
+			vm.mymoney = intToFloat(Number(vm.Objectitle.insureInfo.upPrice) - (Number(vm.Objectitle.insureInfo.upPrice) * Number(vm.Objectitle.insureInfo.firstRate))); /*进入账户金额*/			
+			vm.startPiece = intToFloat(vm.Objectitle.insureInfo.upPrice);
+		}
 		vm.startPiecechushi = intToFloat(vm.Objectitle.insureInfo.upPrice);
+		console.log(vm.mymoney);
+		
+		
 		vm.CommodityCombinationModuleList = data.returns.CommodityCombinationModuleList;
+		
 		vm.fenshu = vm.Objectitle.insureInfo.salesNum;
 		if(vm.Objectitle.insureInfo.insureIdNO != null && vm.Objectitle.insureInfo.insureIdNO != "") {
 			vm.shenfenzheng = shenfen(vm.Objectitle.insureInfo.insureIdNO);
@@ -208,14 +224,16 @@ $(function() {
 		if(vm.Objectitle.insureInfo.dayLimit != null && vm.Objectitle.insureInfo.dayLimit != "") {
 			bankMaxMoney = vm.Objectitle.insureInfo.dayLimit;
 		}
-		if(vm.Objectitle.insureInfo.bankname != null && vm.Objectitle.insureInfo.bankname != "") {
-			vm.bankname = vm.Objectitle.insureInfo.bankname;
+		if(vm.Objectitle.insureInfo.bankName != null && vm.Objectitle.insureInfo.bankName != "") {
+			
+			vm.bankname = vm.Objectitle.insureInfo.bankName;
 		} else {
 			vm.bankname = '请选择开户行';
 		}
 		if(bankName != null && bankName != "") {
 			vm.bankname = bankName;
 		}
+		$("#money").html(1000*pieces);
 		/*点击+-*/
 		$(".up").unbind("tap").bind("tap", function() {
 			var fenshu = $('.fenshu_input').children('input').val();
@@ -321,6 +339,7 @@ $(function() {
 			"transToken": transToken,
 			"customerId": customerId,
 			"commodityId": commodityId,
+			"pieces":$("#goumai").val()
 		}
 		var jsonStr = UrlEncode(JSON.stringify(param));
 		window.location.href = "../cardList/cardList.html?jsonKey=" + jsonStr;

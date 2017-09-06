@@ -47,7 +47,7 @@ $.infoCallBack=function(data){
 			str += '<div class="xuanxiang">';
 			for(j=0;j<optionNum;j++){
 				str += '<div class="option">';
-				str += '<img src="../../image/chooseno.png" class="chooseImg"/>';
+				str += '<img src="../../../image/agent/chooseno.png" class="chooseImg"/>';
 				str += '<span class="optionShow">'+parm.questionList[i].entities[j].optionShow+'</span><span>、'+parm.questionList[i].entities[j].optionInfo+'</span></div>';
 			}
 				str += '</div>';
@@ -90,12 +90,12 @@ $.infoCallBack=function(data){
 		$(".option").unbind("tap").bind("tap",function(){
 			var picName = $(this).find("img").attr("src").substring($(this).find("img").attr("src").lastIndexOf("/")+1);
 			if(picName == "chooseno.png"){
-				$(this).parent().find(".option img").attr("src","../../image/chooseno.png");
+				$(this).parent().find(".option img").attr("src","../../../image/agent/chooseno.png");
 				$(this).parent().find(".option").css("color","#d2d2d2");
-				$(this).find("img").attr("src","../../image/chooseyes.png");
+				$(this).find("img").attr("src","../../../image/agent/chooseyes.png");
 				$(this).css("color","#1b6bb8");
 			}else{
-				$(this).find("img").attr("src","../../image/chooseno.png");
+				$(this).find("img").attr("src","../../../image/agent/chooseno.png");
 				$(this).css("color","#d2d2d2");
 			}
 		})

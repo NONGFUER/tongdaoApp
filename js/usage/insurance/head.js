@@ -71,8 +71,11 @@ var requestUrl = {
     cancerInsure         : base.url + 'cancerRisk/toubao.do',     //防癌险投保接口@cc
     cancerPay            : base.url + 'cancerRisk/pay.do',      //防癌险支付@cc
     cancerPayBack        : base.url + 'cancerRisk/payBack.do',//投保地区查询@cc
-
-    
+    //挂号险投保
+    ghxProductInfo		 : base.url + 'ghxProduct/yianGhxProductInfo.do',
+    ghxAddOrder			 : base.url + 'ghxOrder/addOrder.do',
+    ghxPay				 : base.url + 'ghxOrder/pay.do'
+    						
 }
 //全局变量
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));

@@ -109,7 +109,28 @@ function callService(phone, obj) {
 		}
 	}
 }
-
+//同道出行车险 壳上分享方法
+function cxShareMethod(cxSessionId){
+	var shareStr={
+		"body":{
+			"cxSessionId":cxSessionId
+		}
+	}
+	shareStr = JSON.stringify(shareStr);
+	shareStr = UrlEncode(shareStr); // 加密过后的操作
+	var shareurl=base.url+'weixin/wxcar/html/carinsure/shareOrderDetail.html?jsonKey='+shareStr;// 分享链接
+	if(systemsource == "ios"){
+		var shareParams={
+			"url":shareurl,
+			"flag":"1",
+			"title": "同道出行", // 分享标题
+		    "desc": "专业车险在线展业平台"//描述
+		}
+		objcObject.share(shareParams)
+	}else if(systemsource == "android"){
+		android.JsShareBy("2","同道出行","专业车险在线展业平台","",shareurl);
+	}
+}
 //防癌险 壳上分享方法
 function shareMethod(shareurl, title, desc, flag, picUrl) {
 	if(systemsource == "ios") {
@@ -266,7 +287,7 @@ function changeTitle(title){
 	if(systemsource == "ios"){
 		objcObject.changeTitle(title)
 	}else if(systemsource == "android"){
-		android.changeTitle(tittle);
+		android.changeTitle(title);
 	}
 }
 //控制头部右边按钮的显示
@@ -274,7 +295,7 @@ function showRightIcon(){
 	if(systemsource == "ios"){
 		objcObject.showRight()
 	}else if(systemsource == "android"){
-		android.showRight();
+		android.setShareVisible();
 	}
 }
 

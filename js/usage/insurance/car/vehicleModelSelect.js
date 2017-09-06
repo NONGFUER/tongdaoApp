@@ -220,7 +220,7 @@ function pullupRefreshlist(){
 			if(totalPageNum >= pageIndex){
 				selectMore();
 			}
-		}, 100);
+		}, 50);
 	}
 }
 /*设置滑动区域*/

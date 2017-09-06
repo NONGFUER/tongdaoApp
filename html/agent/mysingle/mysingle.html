@@ -35,27 +35,27 @@
 								<div class="man-div-body-ul_li_div mui-slider-handle">
 									<ul class="man-div-body-ul_li_div_ul1">
 										<li>
-											<span v-html="value.baodan">保单号:&nbsp;8888888888888888</span>
-											<span  v-html="value.baozhang" class="baozhang"></span>
+											<span v-html="'保单号: '+value.policyNo">保单号:&nbsp;8888888888888888</span>
+											<span  v-html="value.orderStatus" class="baozhang"></span>
 										</li>
 										<li>
-											<span v-html="value.shaoer">少儿高发恶性肿瘤险</span>
-											<span v-html="value.chengbao">天安财险承保</span>
+											<span v-html="value.commodityName">少儿高发恶性肿瘤险</span>
+											<span v-html="value.companyName">天安财险承保</span>
 										</li>
 									</ul>
 									<div class="xian"></div>
 									<ul class="man-div-body-ul_li_div_ul2">
 										<li>
-											<span v-html="value.name_bei">被保人</span>
-											<span v-html="value.name_value">陈某人</span>
+											<span>被保人</span>
+											<span v-html="value.insuredName">陈某人</span>
 										</li>
 										<li>
-											<span v-html="value.name_fei">保费</span>
-											<span v-html="value.value_fei">1000.00元</span>
+											<span>保费</span>
+											<span v-html="value.prem">1000.00元</span>
 										</li>
 										<li>
-											<span v-html="value.name_data">承保时间</span>
-											<span v-html="value.value_data">2017年05月24日</span>
+											<span>承保时间</span>
+											<span >2017年05月24日</span>
 										</li>
 									</ul>
 								</div>
@@ -71,5 +71,5 @@
 	<script src="../../../js/lib/common/base.js"></script>
 	<script src="../../../js/lib/common/common.js"></script>
 	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
-	<script src="../../../js/usage/account/mysingle/mysingle.js"></script>
+	<script src="../../../js/usage/agent/mysingle/mysingle.js"></script>
 </html>

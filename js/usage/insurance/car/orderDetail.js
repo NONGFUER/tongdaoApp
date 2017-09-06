@@ -64,7 +64,7 @@ $(function() {
 	
 	/**--去支付 分享按钮*/
 	$("#topay_btn_area .shareBtn").on("tap",function(){
-		 shareMethod(cxSessionId);//壳上分享方法	
+		cxShareMethod(cxSessionId);//壳上分享方法	
 	});
 });
 

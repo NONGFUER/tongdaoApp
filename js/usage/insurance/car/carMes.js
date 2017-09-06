@@ -43,8 +43,8 @@ $(function() {
 		// 获取车辆信息
 		$.loadCarInfoed();
 	}else{
+		parm.body={};
 		if(mobile != ""&&mobile!=undefined){
-			parm.body={};
 			var url = base.url + "vi/selectHistoryInfo.do";
 			var resData = {
 				"head":{
@@ -315,15 +315,10 @@ $(function() {
 
 	// 车辆基本信息确认按钮
 	$("#confirm1").unbind("tap").bind("tap",function() {
-//		if(parm.head.userName == ""||parm.head.userName==undefined){		
-//			loginControl();
-//			return false;
-//		}else{
-//			if(idAuth != "1"){
-//				registerControl();
-//				return false;
-//			}
-//		}
+		if(parm.roleType == "00" || parm.roleType == ""){
+			loginControl();
+			return false;
+		}
        $("#plate_number_input").val($("#plate_number_input").val().toUpperCase());//车牌小写转大写
 		// 解绑实时检查车主信息
 		unBindblurCheackOwner();

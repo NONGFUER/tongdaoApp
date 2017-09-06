@@ -10,7 +10,8 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	transToken=urlParm.transToken,
 	customerId=urlParm.customerId,
 	commodityId=urlParm.commodityId,
-	riskSupportAbility = urlParm.riskSupportAbility;
+	riskSupportAbility = urlParm.riskSupportAbility,
+	pieces = urlParm.pieces;
 
 var vm = new Vue({
 	el: '#list',
@@ -39,6 +40,7 @@ var vm = new Vue({
 							"dayLimit":dayLimit,
 							"title":titles,
 							"bankName":bankName,
+							"pieces":pieces
 					}
 					var jsonStr = UrlEncode(JSON.stringify(param));
 					window.location.href = "../messageFillout/messageFillout.html?jsonKey=" + jsonStr;
@@ -56,7 +58,7 @@ $(function() {
 			"transTime": ""
 		},
 		"body": {
-			"commodityId": "7",
+			"commodityId": commodityId,
 			"flag": "1"
 		}
 	}
