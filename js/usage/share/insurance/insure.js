@@ -575,7 +575,7 @@ function sendInsureRequest(){
 	            "insurePhone"            : formData.telNo,
 	            "insureIdentitycard"     : formData.certificateNo,				
 	            "coverage"               : coverage,
-	            "invitrerPhone"           : shareMobile,
+	            "invitrerPhone"          : shareMobile,
 	            "insureAddress"          : formData.address,
 	            "totalPieces"            : cPieces,//parseInt(peices),
 	            "channelResource"        : '2'// '渠道来源,1-微信公众号，2-分享进入，3-App',	
@@ -626,7 +626,11 @@ function insureReponse(data){
 	console.log(data);
 	console.log("--- --- ---");
 	if(data.statusCode == "000000"){
-	    var serialNo = data.returns.bxOrder.orderNo;//获取序列号
+	    if(ccId != "1" && ccId != "2" && ccId != "3"){
+			var serialNo = data.returns.shortRiskOrder.yuyueId;
+		}else{
+			 var serialNo = data.returns.bxOrder.yuyueId;//获取序列号
+		}	   
 	    payRequest(serialNo)//核保成功,调支付接口
 	}else{
 	    modelAlert(data.statusMessage);
