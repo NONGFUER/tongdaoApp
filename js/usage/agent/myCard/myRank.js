@@ -87,8 +87,8 @@ function rankMonthDataRender(dataValue){
 			}
 		})
 		if(agentArmory){
-			var count = agentArmory.count; //您当月签单：count单
-			var prem = toDecimal2(agentArmory.prem);		//您当月保费：prem.00元
+			var count = dataValue.returns.count; //您当月签单：count单
+			var prem = toDecimal2(dataValue.returns.amount);		//您当月保费：prem.00元
 			var rank = paiming;		//你的排名
 			$("#count").data("count",count);
 			$("#prem").data("prem",prem);
@@ -115,7 +115,7 @@ function rankMonthDataRender(dataValue){
 				$(".monthMore").data("monthMore","no");
 			}
 			for(var i=0;i<ranklist.length;i++){
-				var heroName = ranklist[i].insureName;
+				var heroName = ranklist[i].name;
 				var heroCity = ranklist[i].workProvinceName+''+ranklist[i].workCityName;
 				if(!heroCity){
 					heroCity = "不详"
@@ -186,10 +186,10 @@ function rankYearDataRender(dataValue){
 		var agentArmory = dataValue.returns.agentArmory;
 		var count=dataValue.returns.count;
 		var amount=dataValue.returns.amount;
-		var agentlist=dataValue.returns.agentArmory;
-		agentlist.forEach(function(key,value){
+		var paihang='';
+		agentArmory.forEach(function(key,value){
 			if(key.id==customerId){
-				var paiming=key.rankOrder;
+				paiming=key.rankOrder;
 			}
 		})
 		if(agentArmory){
@@ -206,7 +206,7 @@ function rankYearDataRender(dataValue){
 				$(".yearMore").hide();
 			}
 			for(var i=0;i<ranklist.length;i++){
-				var heroName = ranklist[i].insureName;
+				var heroName = ranklist[i].name;
 				var heroCity = ranklist[i].workProvinceName+''+ranklist[i].workCityName;
 				if(!heroCity){
 					heroCity = "不详"
@@ -221,7 +221,7 @@ function rankYearDataRender(dataValue){
 						renderStr += '<div class="rank_bar clearfix aftertwoyear">';
 					}					
 					if(i>=0&&i<=2){
-						renderStr += '<div class="rank_no"><img src="../../../image/agent/myRank/'+i+'.png"></div>';
+						renderStr += '<div class="rank_no"><img src="../../../image/agent/myRank/first'+i+'.png"></div>';
 					}else{
 						renderStr += '<div class="rank_no">'+(i+1)+'</div>';
 					}				

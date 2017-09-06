@@ -76,16 +76,16 @@ function policyQueryListInfo(data) {
 
 function chuli() {
 	$('.baozhang').each(function() {
-		if($(this).html() == '01') {
+		if($(this).html() == '11') {
 			$(this).attr('class', 'baozhang dai');
 			$(this).html('待生效');
-		} else if($(this).html() == '02') {
+		} else if($(this).html() == '2') {
 			$(this).attr('class', 'baozhang bao');
 			$(this).html('保障中');
-		} else if($(this).html() == '03') {
+		} else if($(this).html() == '4') {
 			$(this).attr('class', 'baozhang yilingqu');
 			$(this).html('已领取');
-		} else if($(this).html() == '04') {
+		} /*else if($(this).html() == '04') {
 			$(this).attr('class', 'baozhang yilingqu');
 			$(this).html('核保中');
 		} else if($(this).html() == '05') {
@@ -115,7 +115,7 @@ function chuli() {
 		} else if($(this).html() == '99') {
 			$(this).attr('class', 'baozhang');
 			$(this).html('已失效');
-		}
+		}*/
 	})
 }
 /*登录失效*/

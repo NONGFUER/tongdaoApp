@@ -55,27 +55,27 @@ function chuli() {
 					$(this).html('核保失败');
 					$(this).addClass('huise');
 					$(this).parent().parent('li').prev().children('.money').addClass('huise');
-				} else if($(this).html() == '06' || $(this).html() == '09' && $(this).parent().parent('li').prev().children('.goumaizhuangtai').html() == '购买') {
+				} else if($(this).html() == '08' || $(this).html() == '13' && $(this).parent().parent('li').prev().children('.goumaizhuangtai').html() == '购买') {
 					$(this).html('处理中');
 					$(this).addClass('lanse');
 					$(this).parent().parent('li').prev().children('.money').addClass('lanse');
-				} else if($(this).html() == '02') {
+				} else if($(this).html() == '05') {
 					$(this).html('核保成功');
 					$(this).addClass('lanse');
 					$(this).parent().parent('li').prev().children('.money').addClass('lanse');
-				} else if($(this).html() == '04') {
+				} else if($(this).html() == '09') {
 					$(this).html('待生效');
 					$(this).addClass('lanse');
 					$(this).parent().parent('li').prev().children('.money').addClass('lanse');
-				} else if($(this).html() == '05') {
+				} else if($(this).html() == '10') {
 					$(this).html('投保成功');
 					$(this).addClass('lanse');
 					$(this).parent().parent('li').prev().children('.money').addClass('lanse');
-				} else if($(this).html() == '08') {
+				} else if($(this).html() == '12') {
 					$(this).html('已退保');
 					$(this).addClass('huise');
 					$(this).parent().parent('li').prev().children('.money').addClass('huise');
-				} else if($(this).html() == '07') {
+				} else if($(this).html() == '11') {
 					$(this).html('投保失败');
 					$(this).addClass('huise');
 					$(this).parent().parent('li').prev().children('.money').addClass('huise');
@@ -96,17 +96,21 @@ function chuli() {
 					$(this).addClass('huangse');
 					$(this).parent().parent('li').prev().children('.money').addClass('huangse');
 				} else if($(this).html() == '04') {
-					$(this).html('投保成功');
+					$(this).html('赎回试算成功');
 					$(this).addClass('huangse');
 					$(this).parent().parent('li').prev().children('.money').addClass('huangse');
 				} else if($(this).html() == '05') {
-					$(this).html('投保失败');
+					$(this).html('赎回试算失败');
 					$(this).addClass('huise');
 					$(this).parent().parent('li').prev().children('.money').addClass('huise');
 				}
 			})
 		}
 	})
+}
+
+function backlast() {
+	sysback();
 }
 
 function mylist(userCode, transToken, customerId, commodityCommId, flag) {
@@ -132,6 +136,7 @@ function list(userCode, transToken, customerId, commodityCommId, flag) {
 			"flag": flag
 		}
 	}
+	var url = base.url + 'moneyManage/policyDetail.do';
 	$.reqAjaxsFalse(url, reqData, policyDetail);
 	mui('.man-div-title ul').on('tap', 'li', function() {
 		$('.man-div-title ul').children('li').removeClass('li_xuan');

@@ -8,16 +8,16 @@ var vm = new Vue({
 		this.$nextTick(function() {
 			$(function() {
 				$('.baozhang').each(function() {
-					if($(this).html() == '01') {
+					if($(this).html() == '11') {
 						$(this).attr('class', 'baozhang dai');
 						$(this).html('待生效');
-					} else if($(this).html() == '02') {
+					} else if($(this).html() == '2') {
 						$(this).attr('class', 'baozhang bao');
 						$(this).html('保障中');
-					} else if($(this).html() == '03') {
+					} else if($(this).html() == '4') {
 						$(this).attr('class', 'baozhang yilingqu');
 						$(this).html('已领取');
-					} else if($(this).html() == '99') {
+					} else if($(this).html() == '6') {
 						$(this).attr('class', 'baozhang yilingqu');
 						$(this).html('已失效');
 					}
@@ -66,6 +66,9 @@ $(function() {
 	transToken = urlParm.transToken;
 	list(userCode, transToken, commdityCommId, customerId);
 })
+function backlast() {
+	sysback();
+}
 
 function redemptionList(data) {
 	console.log(data);

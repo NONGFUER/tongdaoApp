@@ -408,7 +408,7 @@ function sendFeeCityRequest( cusId, ccId){
 	var url = requestUrl.defalultArea;
 	var reqData = {
 	        "head":{
-	            "channel"  :"01",
+	            "channel"  :"02",
 	            "userCode" :mobile,
 	            "transTime":$.getTimeStr()
 	        },
@@ -459,7 +459,7 @@ function sendCityRequest(provinceCode,cityCode,ccId){
 	var url = requestUrl.chooseArea;
 	var reqData = {
 	        "head":{
-	            "channel"  :"01",
+	            "channel"  :"02",
 	            "userCode" :mobile,
 	            "transTime":$.getTimeStr()
 	        },
@@ -561,7 +561,7 @@ function sendInsureRequest(){
 	if(!formData){return false;}
 	var reqData = {
 	    "head":{
-	        "channel"  :"01",
+	        "channel"  :"02",
 	        "userCode" :mobile,
 	        "transTime":$.getTimeStr(),
 	        "transToken":transToken
@@ -574,11 +574,11 @@ function sendInsureRequest(){
 	            "customerId"             : customerId,
 	            "insurePhone"            : formData.telNo,
 	            "insureIdentitycard"     : formData.certificateNo,				
-	            "coverage"               : "500000",
-	            "invitrerPhone"           : mobile,
+	            "coverage"               : coverage,
+	            "invitrerPhone"           : shareMobile,
 	            "insureAddress"          : formData.address,
 	            "totalPieces"            : cPieces,//parseInt(peices),
-	            "channelResource"        : '3'// '渠道来源,1-微信公众号，2-分享进入，3-App',	
+	            "channelResource"        : '2'// '渠道来源,1-微信公众号，2-分享进入，3-App',	
 	        },
 	        "shortRiskInsured":{
 	            "apRelation"  			 : formData.relation,
@@ -587,8 +587,8 @@ function sendInsureRequest(){
 	            "insuredmobile"          : formData.recogTelNo
 	        },
 	        "customerId"				 : customerId,
-	        "buyType"					 : "01",
-	        "recommendId"                : customerId
+	        "buyType"					 : "02",
+	        "recommendId"                : shareCusId
 	    }
 	}
 	if(ccId != "1" && ccId != "2" && ccId != "3"){
@@ -643,7 +643,7 @@ function payRequest(serialNo){
 	}
 	var reqData = {
 	    "head":{
-	        "channel":"01",
+	        "channel":"02",
 	        "userCode":mobile,
 	        "transTime":$.getTimeStr()
 	    },"body":{
@@ -674,7 +674,7 @@ function getServiceTime(){
 	var url = requestUrl.getServeTimeUrl;
 	var reqData = {
 	    "head":{
-	        "channel":"01",
+	        "channel":"02",
 	        "userCode":"",
 	        "transTime":$.getTimeStr()
 	    },"body":{}
@@ -736,7 +736,7 @@ function sendCaldoRequest(ccId){
 	 var url = requestUrl.calDoUrl;
 	 var sendJson = {
 		"head" : {
-		  "channel" : "01",
+		  "channel" : "02",
 		  "userCode" : mobile,
 		  "transTime" : $.getTimeStr(),
 		  "transToken": transToken

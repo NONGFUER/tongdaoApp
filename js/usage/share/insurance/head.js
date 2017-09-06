@@ -74,23 +74,29 @@ var requestUrl = {
 
     
 }
-//全局变量
-var urlParm = {};
-	urlParm.openid = getUrlQueryString("openid");
-	urlParm.roleType = getUrlQueryString("roletype");
-	urlParm.shareMobile = getUrlQueryString("roletype");
-	urlParm.shareCusId = getUrlQueryString("shareCusId");
-	urlParm.provinceCode = getUrlQueryString("provinceCode");
-	urlParm.cityCode = getUrlQueryString("cityCode");
-	urlParm.ccId = getUrlQueryString("ccId");
-	urlParm.customerId = getUrlQueryString("customerId");
-	urlParm.shareFlag = getUrlQueryString("shareFlag");
-	urlParm.mobile = getUrlQueryString("mobile");
-//微信比app多（不同）的字段
-var openid = urlParm.openid;
-var shareMobile = urlParm.shareMobile;
-var shareCusId = urlParm.shareCusId;
-var shareFlag = urlParm.shareFlag;
+if(getUrlQueryString("jsonKey")){
+	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
+}else{
+	//全局变量
+	var urlParm = {};
+		urlParm.openid = getUrlQueryString("openid");
+		urlParm.roleType = getUrlQueryString("roletype");
+		urlParm.shareMobile = getUrlQueryString("shareMobile");
+		urlParm.shareCusId = getUrlQueryString("shareCusId");
+		urlParm.provinceCode = getUrlQueryString("provinceCode");
+		urlParm.cityCode = getUrlQueryString("cityCode");
+		urlParm.ccId = getUrlQueryString("ccId");
+		urlParm.customerId = getUrlQueryString("customerId") ? getUrlQueryString("customerId"):"";
+		urlParm.shareFlag = getUrlQueryString("shareFlag");
+		urlParm.mobile = getUrlQueryString("mobile") ? getUrlQueryString("mobile") : "";
+	//微信比app多（不同）的字段
+	var openid = urlParm.openid;
+	var shareMobile = urlParm.shareMobile;
+	var shareCusId = urlParm.shareCusId;
+	var shareFlag = urlParm.shareFlag;
+}
+
+
 
 var mobile      = urlParm.mobile;                //"18900001111";  //urlParm.mobile;//用户手机号
 var customerId  = urlParm.customerId;            //"8";            //urlParm.customerId;//用户id

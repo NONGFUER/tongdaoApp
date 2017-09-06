@@ -404,8 +404,7 @@ function changeDate(id){
 
 function buyBind(){
 	$("#toubao").unbind('tap').bind('tap',function(){
-		isLoginWechat(roleType,toInsure,openid,"online")
-		//toInsure();
+		toInsure();
 	});	
 }
 
@@ -426,7 +425,12 @@ function toInsure(){
 	urlParm.calChoices = calChoices;
 	urlParm.cPieces = cPieces;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	window.location.href = "insure.html?jsonKey="+jsonStr;
+	if( roleType == "00" || roleType == "" ){
+		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype='online'";
+	}else{
+		window.location.href = "insure.html?jsonKey="+jsonStr;
+	}
+	
 }
 
 function shareHandle(){

@@ -118,15 +118,15 @@ function phoneyin(phone) {
 }
 
 function chuli() {
-	if($('.baozhang').html() == '01') {
+	if($('.baozhang').html() == '11') {
 		$('.baozhang').html('待生效')
-	} else if($('.baozhang').html() == '02') {
+	} else if($('.baozhang').html() == '2') {
 		$('.baozhang').html('保障中')
-	} else if($('.baozhang').html() == '03') {
+	} else if($('.baozhang').html() == '4') {
 		$('.baozhang').html('已领取')
 		$('#lingqu').off('tap', '#lingqu');
 		$('#lingqu').addClass('huisebtn');
-	} else if($('.baozhang').html() == '04') {
+	} /*else if($('.baozhang').html() == '04') {
 		$('.baozhang').html('核保中');
 		$('#lingqu').off('tap', '#lingqu');
 		$('#lingqu').addClass('huisebtn');
@@ -166,7 +166,7 @@ function chuli() {
 		$('#lingqu').off('tap', '#lingqu');
 		$('#lingqu').addClass('huisebtn');
 		$('.baozhang').html('已失效');
-	}
+	}*/
 	if($('.baozhang').html() != '03' && $('.baozhang').html() != '已领取') {
 		mui('.man-div-body-ul_li_div_btn').on('tap', '#lingqu', function() {
 			var url = base.url + 'hkRedemption/getRedemption.do';

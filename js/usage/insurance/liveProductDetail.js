@@ -302,3 +302,11 @@ function download(obj){
 function backlast(){
 	sysback();
 }
+function shareHandle(){
+	var shareList = getProductShare(ccId);
+	var title = shareList[0] ;
+	var desc  = shareList[1] ;	
+	var shareurl = base.url+"tongdaoApp/html/share/insurance/main/liveProductDetail.html"+window.location.search;
+	var picUrl = getProductSharePic(ccId);
+	shareMethod(shareurl,title,desc,"baodan",picUrl);		
+};
