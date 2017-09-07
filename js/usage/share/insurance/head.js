@@ -71,6 +71,13 @@ var requestUrl = {
     cancerInsure         : base.url + 'cancerRisk/toubao.do',     //防癌险投保接口@cc
     cancerPay            : base.url + 'cancerRisk/pay.do',      //防癌险支付@cc
     cancerPayBack        : base.url + 'cancerRisk/payBack.do',//投保地区查询@cc
+    //挂号险投保
+    ghxProductInfo		 : base.url + 'ghxProduct/yianGhxProductInfo.do',//@wxw
+    ghxAddOrder			 : base.url + 'ghxOrder/addOrder.do',			//@wxw
+    ghxPay				 : base.url + 'ghxOrder/pay.do',				//@wxw
+    //健康告知
+    heathTold			 : base.url + 'commodityCombination/getHealthTold.do',//@gxj
+    notice				 : base.url + 'commodityCombination/getNotice.do'//@gxj
 
     
 }

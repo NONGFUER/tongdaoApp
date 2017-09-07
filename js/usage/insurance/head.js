@@ -72,10 +72,12 @@ var requestUrl = {
     cancerPay            : base.url + 'cancerRisk/pay.do',      //防癌险支付@cc
     cancerPayBack        : base.url + 'cancerRisk/payBack.do',//投保地区查询@cc
     //挂号险投保
-    ghxProductInfo		 : base.url + 'ghxProduct/yianGhxProductInfo.do',
-    ghxAddOrder			 : base.url + 'ghxOrder/addOrder.do',
-    ghxPay				 : base.url + 'ghxOrder/pay.do'
-    						
+    ghxProductInfo		 : base.url + 'ghxProduct/yianGhxProductInfo.do',//@wxw
+    ghxAddOrder			 : base.url + 'ghxOrder/addOrder.do',			//@wxw
+    ghxPay				 : base.url + 'ghxOrder/pay.do',				//@wxw
+    //健康告知
+    heathTold			 : base.url + 'commodityCombination/getHealthTold.do',//@gxj
+    notice				 : base.url + 'commodityCombination/getNotice.do'//@gxj
 }
 //全局变量
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
