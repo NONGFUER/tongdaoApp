@@ -9,7 +9,7 @@
 	    <!-- 忽略Android平台中对邮箱地址的识别 -->
 	    <meta name="format-detection" content="email=no" />
 		<title>健康告知</title>
-		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css">
+		<link rel="stylesheet" type="text/css" href="../../../css/usage/insurance/common.css">
 		<style type="text/css">
 			html {
 				min-height: 100%;
@@ -42,23 +42,8 @@
 		<div id="body_mian">					
 		 <div class="healthy-box">
 			<h1 class="h01">健康告知</h1>
-			<div class="box">
+			<div class="box" id="healthTold">
 				被保险人有以下任何一种情况均不得投保本产品，如有隐瞒或告知不实，足以影响保险公司承保决定的，所签发的保单将视为无效，保险公司有权解除合同。对于合同解除前发生的任何事故，保险公司不承担任何责任。<br />
-				1、被保险人过去两年内投保人身保险或健康保险时，曾被保险公司拒保、延期、加费或附加相关条件承保。<br />
-				2、被保险人过去一年内发现健康检查异常（如血液、超声、影像检查、内镜、病理检查等），过去两年内因疾病住院或被要求进一步检查、手术或住院治疗（不包括剖腹产/顺产/鼻炎/急性肠胃炎/肺炎/上呼吸道感染住院）或者需要长期服用药物。<br />
-				3、被保险人现在正在进行任何健康咨询、药物治疗、外科手术，但不包括普通感冒、流感或敏感症；或曾考虑在短期内寻求诊疗、检查、测试、住院治疗或外科手术；<br />
-				4、被保险人目前或过往患有下列疾病、曾出现如下任一体征或检查异常、曾接受如下任一治疗（相关定义以世界卫生组织颁布的《疾病和有关健康问题的国际统计分类（ICD-10）》为准）：<br />
-				4.1冠心病、心肌梗塞、心绞痛、心脏瓣膜疾病、动脉瘤或血管畸形，血友病，脑卒中；<br />
-				4.2痴呆、癫痫、多发性硬化症、帕金森病、阿尔茨海默病或任何影响脑部或神经系统的失常；<br />
-				4.3肝脏疾病或症状（如肝炎（肝炎病毒携带者），肝硬化，肝功能衰竭等）、胃旁路手术、溃疡性结肠病、胰腺炎；<br />
-				4.4代谢综合症、各种类型糖尿病、高血压（收缩压大于160mmHg，舒张压大于100mmHg）、肾上腺皮质功能不全、系统性红斑狼疮，；<br />
-				4.5恶性肿瘤、良性肿瘤未手术、白血病、淋巴瘤、重型再生障碍型贫血、不明性质的肿块/息肉/结节/新生物；<br/>
-				4.6精神病、各种类型的抑郁症、自闭症、厌食症或暴食症、试图自杀；<br/>
-				4.7肢体瘫痪（包括截肢、偏瘫或全瘫）、类风湿性关节炎、强直性脊柱炎、肌营养不良、多发性硬化；<br/>
-				4.8肾小球（肾盂）疾病、肾病综合症，慢性肾功能衰竭，肾透析；<br/>
-				4.9肺气肿、慢性阻塞性肺病、肺纤维化；<br/>
-				4.10各种器官移植，如心、肺、肝、肾、胰脏、造血干细胞移植等；<br/>
-				5、过去一年内存在下列疾病：反复头痛，昏厥，胸痛，气急，紫绀，持续反复发热，抽搐，不明原因皮下出血点，咯血，反复呕吐，警示梗噎感或吞咽困难，呕血，浮肿，腹痛，黄疸，便血，血尿，蛋白尿，肿块，消瘦（体重减轻5公斤以上）。<br/>
 				
 			</div>
 			<div class="box">
@@ -82,10 +67,11 @@
     	<input type="hidden" id="productId" value="329">
 		</div>
 	</body>
-	<script type="text/javascript" src="../../../js/lib/common/zepto.min.js" charset="utf-8"></script>
-	<script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js" charset="utf-8"></script>
-	<script type="text/javascript" src="../../../js/usage/insurance/all.js" charset="utf-8"></script>
-	<script type="text/javascript" src="../../../js/lib/common/base.js" ></script> 
-	<script type="text/javascript" src="../../../js/lib/common/common.js" ></script> 
-	<script type="text/javascript" src="../../../js/usage/insurance/healthNotice.js" charset="utf-8"></script>
+	
+	<script  src="../../../js/lib/widget/mui/mui.min.js" charset="utf-8"></script>
+	<script  src="../../../js/usage/insurance/all.js" charset="utf-8"></script>
+	<script  src="../../../js/lib/common/base.js" ></script> 
+	<script  src="../../../js/lib/common/common.js" ></script> 
+	<script  src="../../../js/usage/insurance/head.js" charset="utf-8"></script>
+	<script  src="../../../js/usage/insurance/healthNotice.js" charset="utf-8"></script>
 </html>
