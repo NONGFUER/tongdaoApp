@@ -15,7 +15,7 @@ $(function(){
 	$("#close").bind("tap",function(){
 		sysbackproduct();
 	})
-	$("#backproduct").bind("tap",function(){
+	$(".backProduct").bind("tap",function(){
 		sysbackproduct();
 	})	
 	/**--分享--*/
@@ -88,6 +88,8 @@ function init(orderNo){
 	});
 }
 
-
+function backlast(){
+	sysbackproduct();
+}
 
 
