@@ -59,6 +59,8 @@ function queryInfoCallBack( data ){
 		$("#agentWhite").attr( "data-name",agentInfo.recommendAgentName);
 		$("#agentWhite").attr( "data-mobile",agentInfo.recommendAgentMobile);
 		$("#agentWhite").attr( "data-idno",agentInfo.recommendAgentIdno);
+		$("#agentWhite").attr( "data-tcode",agentInfo.teamNo);		//归属团队代码
+		$("#agentWhite").attr( "data-tname",agentInfo.teamInfo);			//归属团队名称
 		$("#agentArea").attr( "data-provicecode",agentInfo.workProvinceCode );		//省代码
 		$("#agentArea").attr( "data-provicename",agentInfo.workProvinceName);		//省名称
 		$("#agentArea").attr( "data-citycode",agentInfo.workCityCode);		//市代码
@@ -127,11 +129,15 @@ function isWhiteCallBack( data ){
 		var reComProvinceName = coreWhiteDto.provinceName;
 		var reComCityCode     = coreWhiteDto.cityCode;
 		var reComCityName     = coreWhiteDto.cityName;
-		var comcode           = coreWhiteDto.comcode;
+		var comcode           = coreWhiteDto.comcode;			//归属机构代码
+		var teamCode          = coreWhiteDto.teamCode;			//归属团队代码
+		var teamName		  = coreWhiteDto.teamName;			//归属团队名称
 		$("#agentWhite").attr( "data-name", whiteName );
 		//$("#agentWhite").attr( "data-code", recommendCode);
 		$("#agentWhite").attr( "data-mobile", recommendMobile );
 		$("#agentWhite").attr( "data-idno", recommendIdno );
+		$("#agentWhite").attr( "data-tcode", teamCode );
+		$("#agentWhite").attr( "data-tname", teamName );
 		
 		$("#agentArea").attr( "data-agentid", comcode );		
 		$("#agentArea").val( reComProvinceName + " "+ reComCityName );
@@ -298,6 +304,8 @@ function saveAgentInfoRequest(formData){
 				"recommendAgentName"  : formData.recomWname,		//推荐人姓名
 				"recommendAgentMobile": formData.recomWphon,		//推荐人手机号
 				"recommendAgentIdno"  : formData.agentWidno,		//推荐人身份证
+				"teamNo"			  : formData.agentTcode,
+				"teamInfo"            : formData.agentTname,
 				
 				"workProvinceCode"    : formData.agentPcode,		//省代码
 				"workProvinceName"    : formData.agentPname,		//省名称
@@ -347,6 +355,8 @@ function getFormData(){
 	var recomWname = $("#agentWhite").attr( "data-name");
 	var recomWphon = $("#agentWhite").attr( "data-mobile");
 	var agentWidno = $("#agentWhite").attr( "data-idno");
+	var agentTcode = $("#agentWhite").attr( "data-tcode");		//归属团队代码
+	var agentTname = $("#agentWhite").attr( "data-tname");			//归属团队名称
 	var agentPcode = $("#agentArea").attr( "data-provicecode" );		//省代码
 	var agentPname = $("#agentArea").attr( "data-provicename");		//省名称
 	var agentCcode = $("#agentArea").attr( "data-citycode");		//市代码
@@ -404,10 +414,12 @@ function getFormData(){
 		return false;
 	}
 	formData.agentId = agentId;
-	formData.recomWcode = recomWcode
-	formData.recomWname = recomWname
-	formData.recomWphon = recomWphon
-	formData.agentWidno = agentWidno
+	formData.recomWcode = recomWcode;
+	formData.recomWname = recomWname;
+	formData.recomWphon = recomWphon;
+	formData.agentWidno = agentWidno;
+	formData.agentTcode = agentTcode;
+	formData.agentTname = agentTname;
 	formData.agentPcode = agentPcode;		//省代码
 	formData.agentPname = agentPname;		//省名称
 	formData.agentCcode = agentCcode;		//市代码
