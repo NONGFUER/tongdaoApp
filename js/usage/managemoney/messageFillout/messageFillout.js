@@ -1,12 +1,10 @@
 /*获取数据*/
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
 	commodityCombinationId = urlParm.commodityCombinationId,
-//	alert(commodityCombinationId);
 	userCode = urlParm.userCode,
 	phone = urlParm.userCode,
 	bankName = urlParm.bankName,
 	commodityId = urlParm.commodityId,
-//	alert(commodityId);
 	bankCode = urlParm.bankCode,
 	customerId = urlParm.customerId,
 	bankMaxMoney = urlParm.dayLimit,
@@ -110,7 +108,7 @@ $(function() {
 			} else if(yinhang == null || yinhang == "") {
 				mui.alert("请填写银行卡号");
 				dui = false;
-			} else if(bankName == null || bankName == "") {
+			} else if(bankName == "请选择银行") {
 				mui.alert("请选择银行");
 				dui = false;
 			}
@@ -220,6 +218,7 @@ $(function() {
 		} else {
 			vm.phone = '';
 		}
+		$('.phone').html(vm.phone);
 		vm.bankCode = $('.bank').attr('bankCode');
 		if(vm.Objectitle.insureInfo.dayLimit != null && vm.Objectitle.insureInfo.dayLimit != "") {
 			bankMaxMoney = vm.Objectitle.insureInfo.dayLimit;
@@ -499,8 +498,16 @@ function toRiskType(tempScore) {
 
 function backlast() {
 	var sendData = {
-		"userCode": phone,
-		"insurePhone": phone,
+		"userCode": userCode,
+		"insurePhone": userCode,
+		"bankName":bankName,
+		"bankCode":bankCode,
+		"commodityId":commodityId,
+		"customerId":customerId,
+		"dayLimit":bankMaxMoney,
+		"transToken":transToken,
+		"riskSupportAbility":riskSupportAbility,
+		"pieces":pieces,
 		"commodityCombinationId": commodityCombinationId,
 		"title": title,
 		"leftIco":'1',

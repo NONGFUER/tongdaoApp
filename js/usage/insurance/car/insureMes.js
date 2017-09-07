@@ -93,8 +93,8 @@ $.addPriceContent = function(param) {
 			$("#indexarea").hide();
 
 			$.showzs($(this).attr("name"), $(this).data('txt'));
-			changeTitle("专属服务");
 			cxPriserviceFlag="1";
+			changeTitle("专属服务");
 		});
 		//车型产地  进口车、合资车、国产车
 		producingarea=param.cxInfo.cxCarMessage.producingarea;
@@ -338,7 +338,11 @@ $.setscroll2 = function() {
 
 function backlast(){
 	if(cxPriserviceFlag=="0"){
-		window.history.back();
+		//window.history.back();
+		parm.title="订单详情";
+		var jsonStr = JSON.stringify(parm);
+		jsonStr = UrlEncode(jsonStr);
+		window.location.href = "orderDetail.html?jsonKey=" + jsonStr;
 	}else{
 		$(".titHead").hide();
 		$(".order_index").hide();

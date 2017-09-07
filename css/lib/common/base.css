@@ -13,6 +13,9 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
+[v-cloak] {
+  display: none;
+}
 body {
 	position: absolute;
 	width: 100%; /* 2560px */

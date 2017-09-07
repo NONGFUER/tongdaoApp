@@ -34,6 +34,7 @@ $(function() {
 	parm.source="3";//App渠道
 	parm.leftIco="1";
 	parm.rightIco="0";
+	parm.downIco="0"
 	parm.title="车险指南";
 	/**首页banner跳转***/
 	$(".banner").attr("href","carInfo.html?jsonKey="+UrlEncode(JSON.stringify(parm)));
@@ -185,7 +186,9 @@ $(function() {
     });
     //车辆提示遮罩隐藏
     $("#cjh").bind("tap",function() {
-    	$("#cjh,.shadow").hide();
+    	setTimeout(function(){
+    	   $("#cjh,.shadow").hide();
+    	},200);
     });
     //返回
 	$(".h_back").unbind("tap").bind("tap",function() {
@@ -381,7 +384,7 @@ $(function() {
 						$(".firstPart").hide();//车辆投保地区隐藏
 						$(".lastPart").show("fast");//车辆详细信息显示
 					}else if(paramList.status.statusCode == "123456"){
-						modelAlert(paramList.status.statusMessage,function(){
+						modelAlert(paramList.status.statusMessage,"",function(){
 							 loginControl();
 						});
 					}else{
@@ -409,16 +412,16 @@ $(function() {
 		//校验品牌型号查询的所有字段
 		carinfoCheack();
 		if (carinfoCheakFlag == true){
-			changeTitle("品牌型号选择")
 			$(".carMes").hide();
 			$("#maindiv").hide();
 			$(".vehicleInfo").show();
 	        $("#searchcustomer").empty();
 	        $("#searchtext").val("请输入关键字点击查询").css("color", "#cccccc");
+	        pageflag = 2;
 			setTimeout(function() {
 				mui('#wrapper').scroll().scrollTo(0,0,0);//100毫秒滚动到顶
 			}, 100);
-	        pageflag = 2;
+	        changeTitle("品牌型号选择");
 	    }
 	});
 
@@ -570,7 +573,7 @@ $(function() {
 				var nextPageUrl = "insuranceCoverage.html?jsonKey="+ jsonStr;
 				window.location.href = nextPageUrl;
 			}else if(paramList.status.statusCode == "123456"){
-				modelAlert(paramList.status.statusMessage,function(){
+				modelAlert(paramList.status.statusMessage,"",function(){
 					 loginControl();
 				});
 			} else {
@@ -1299,6 +1302,7 @@ $.addInfo = function(param){
 					if(!$.isNull(param.cxInfo.cxOrder.cityCode)){
 						citynum=param.cxInfo.cxOrder.cityCode;
 						$("#car_shi").attr("name",param.cxInfo.cxOrder.cityCode);
+						$("#car_sheng").attr("name",param.cxInfo.cxOrder.provinceCode);
 						if(citynum=="3110000"){//新车北京地区
                             if(!$.isNull(param.cxInfo.cxCarMessage.fuelType)){//能源种类
 								$("#fuelType").attr("name",param.cxInfo.cxCarMessage.fuelType).val(param.cxInfo.cxCarMessage.fuelTypeName)
@@ -1516,9 +1520,9 @@ function backlast(){//返回上一页
     	$(".firstPart").show("fast");//车辆投保地区显示
 		pageflag = 0;
 	}else{
-		changeTitle("车辆信息");
 		$(".vehicleInfo").hide();
 		$(".carMes").show();
 		pageflag = 1;
+		changeTitle("车辆信息");
 	}
 }

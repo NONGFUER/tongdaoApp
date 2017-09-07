@@ -5,6 +5,7 @@ var choiceEdit = [];
 var listArray = [];
 var lowAge = "";
 var upAge = "";
+var healthFlag = "";
 $(function(){
     $.setscroll("bodyMuiScroll");
     buyBind();
@@ -264,6 +265,10 @@ function productInfoRender(data){
         var commodityCombinationModuleMapper = body.commodityCombinationModuleMapper;
         var commodityCombination             = body.commodityCombination;
         var companyProfile 					 = body.companyProfile;
+        var healthTold						 = body.healthTold;			//健康告知
+        if(healthTold.length != 0){
+        	healthFlag = "y"
+        }
         cId   = body.CommodityInfo[0].id;
         cName = body.CommodityInfo[0].commodityName;
         ccName = commodityCombination.commodityCombinationName;
@@ -428,7 +433,12 @@ function toInsure(){
 	if( roleType == "00" || roleType == "" ){
 		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype='online'";
 	}else{
-		window.location.href = "insure.html?jsonKey="+jsonStr;
+		if( healthFlag == "y"){
+			window.location.href = "healthNotice.html?jsonKey="+jsonStr;
+		}else{
+			window.location.href = "insure.html?jsonKey="+jsonStr;
+		}
+		
 	}
 	
 }

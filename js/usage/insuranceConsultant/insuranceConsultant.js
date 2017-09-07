@@ -1,25 +1,28 @@
 mui.init();
 /*获取数据*/
-/*var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	transToken = urlParm.transToken,
 	customerId = urlParm.customerId,
-	postcard=urlParm.postcardField,
-	postcardFieid=urlParm.postcardFieid;*/
-	
-var transToken = 'transToken',
+	agentCode=urlParm.agentId,
+	postcardField = urlParm.postcardField;
+/*	insuranceConsultantId=urlParm.insuranceConsultantId;*/
+
+/*var transToken = 'transToken',
 	userCode = '13800000000',
 	insuranceConsultantId = '1',
 	postcardField='1',
-	customerId = '8';
+	customerId = '8';*/
 
 var vm = new Vue({
 	el: '#list',
 	data: {
-		Objectitle: {}
+		Objectitle: {},
+		urlimg:{},
 	}
 })
 $(function() {
+	vm.urlimg=base.url;
 	var reqData = {
 		"head": {
 			"userCode": userCode,
@@ -37,18 +40,20 @@ $(function() {
 	/*添加顾问*/
 	$(".tianjia").unbind("tap").bind("tap", function() {
 		$('.note').show();
-		$('.note-div-btn').unbind("tap").bind("tap", function() {
-			var postcardPhone=$('#yan').val();
-			if(postcardPhone!=null&&postcardPhone!=""){
-				if(!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(postcardPhone))){
-					chaxun(userCode, transToken, postcardPhone, insuranceConsultantId);
-				}else{
-					modelAlert('请输入正确的手机号');
+		$('.queding').unbind("tap").bind("tap", function() {
+			var postcardPhone = $('#yan').val();
+			if(postcardPhone != null && postcardPhone != "") {
+				if(tit.regExp.isMobile(postcardPhone) == false) {
+					modelAlert("请输入正确的手机号码！");
+				} else {
+					chaxun(userCode, transToken, postcardPhone);
 				}
-			}else{
+			} else {
 				modelAlert('顾问手机号不能为空');
 			}
-			
+		})
+		$('.quxiao').unbind("tap").bind("tap", function() {
+			$('.note').hide();
 		})
 	})
 	mui('.man-div-body-ul ').on('tap', '.man-div-body-li', function() {
@@ -57,7 +62,7 @@ $(function() {
 	})
 })
 /*查询保险人和保险顾问地区是否一致*/
-function chaxun(userCode, transToken, postcardPhone, insuranceConsultantId) {
+function chaxun(userCode, transToken, postcardPhone) {
 	var reqData = {
 		"head": {
 			"channel": "1",
@@ -66,7 +71,7 @@ function chaxun(userCode, transToken, postcardPhone, insuranceConsultantId) {
 			"userCode": userCode
 		},
 		"body": {
-			"postcardPhone": postcardPhone
+			"Phone": postcardPhone
 		}
 	}
 	var url = base.url + 'insuranceConsultantInfo/getInsuranceConsultantInfo.do';
@@ -74,7 +79,7 @@ function chaxun(userCode, transToken, postcardPhone, insuranceConsultantId) {
 	$.reqAjaxsFalse(url, reqData, getInsuranceConsultantInfo);
 }
 /*新增保险顾问*/
-function xinzeng(userCode, transToken, customerId, insuranceConsultantId){
+function xinzeng(userCode, transToken, customerId, insuranceConsultantId) {
 	var reqData = {
 		"head": {
 			"channel": "1",
@@ -84,7 +89,7 @@ function xinzeng(userCode, transToken, customerId, insuranceConsultantId){
 		},
 		"body": {
 			"insuranceConsultantId": insuranceConsultantId,
-			"customerId":customerId
+			"customerId": customerId
 		}
 	}
 	var url = base.url + 'insuranceConsultantInfo/updateInsuranceConsultantInfo.do';
@@ -104,20 +109,28 @@ function getInsuranceConsultantInfos(data) {
 	} else {
 		modelAlert(data.statusMessage)
 	}
-
 }
 /*新增保险顾问*/
-function updateInsuranceConsultantInfo(data){
-	modelAlert("添加保险顾问成功","",guanbi);
+function updateInsuranceConsultantInfo(data) {
+	modelAlert("添加保险顾问成功", "", backlast);
 }
 /*查询判断保险顾问地区*/
 function getInsuranceConsultantInfo(data) {
-	if(!data.returns.insuranceConsultantInfo.postcardField){
-		var diqu=data.returns.insuranceConsultantInfo.postcardField;
-		var insuranceConsultantId=data.returns.insuranceConsultantInfo.customerId;
-		if(diqu==postcardField){
-			xinzeng(userCode, transToken, customerId, insuranceConsultantId);
+	console.log(data);
+	if(data.returns.insuranceConsultantInfo!= null && data.returns.insuranceConsultantInfo!= "") {
+		if(data.returns.insuranceConsultantInfo.agentId != null && data.returns.insuranceConsultantInfo.agentId != "") {
+			var diqu = data.returns.insuranceConsultantInfo.agentId;
+			var insuranceConsultantId = data.returns.insuranceConsultantInfo.customerId;
+			if(diqu == agentCode) {
+				xinzeng(userCode, transToken, customerId, insuranceConsultantId);
+			}else{
+				modelAlert('保险顾问服务地区不符','',guanbi);
+			}
+		} else {
+			modelAlert('您输入的不是保险顾问手机号');
 		}
+	} else {
+		modelAlert('您输入的不是保险顾问手机号');
 	}
 }
 /*点击关闭*/
@@ -126,6 +139,7 @@ $(".note-div_title_right").unbind("tap").bind("tap", function() {
 })
 
 function guanbi() {
+	$('#yan').val('');
 	$('.note').hide()
 }
 

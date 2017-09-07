@@ -43,6 +43,7 @@
 .title_name_right span:last-child {
 	font-size: 10px;
 	color: #747474;
+	margin-left: 4px;
 }
 
 .ul_title {
@@ -85,6 +86,7 @@
 .title_body_right span:last-child {
 	font-size: 10px;
 	color: #747474;
+	margin-left: 4px;
 }
 
 .dizi {

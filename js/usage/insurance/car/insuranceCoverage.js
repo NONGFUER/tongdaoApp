@@ -618,7 +618,7 @@ $.submitCallBack = function(paramList) {
 			}
 		}
 	}else if(paramList.statusCode == "123456"){
-		modelAlert(paramList.statusMessage,function(){
+		modelAlert(paramList.statusMessage,"",function(){
 			 loginControl();
 		});
 	}else {
@@ -1073,10 +1073,10 @@ function intoServicePage(n){
 	var serviceStr = "";
 	$("#title").html(bxCxPriserviceArr[n].serviceTitle);
 	$("#inner").html(bxCxPriserviceArr[n].serviceInfo);
-	changeTitle("专属服务");
 	$(".servicePage").show();
 	cxPriserviceFlag="1"
 	$(".mainPage").hide();
+	changeTitle("专属服务");
 }
 //获得下一年在这一天的日期
 function getNextYeardate() {
@@ -1132,8 +1132,8 @@ function backlast(){//返回上一页
 	if(cxPriserviceFlag=="1"){//显示专属服务
 		$(".mainPage").show();
 		$(".servicePage").hide();
-		changeTitle("选择投保方案");
 		cxPriserviceFlag="0";
+		changeTitle("选择投保方案");
 	}else if(cxPriserviceFlag=="0"){
 		if(parm.body.fromBaojia!="Y"){
 			parm.body.cxSessionId = cxSessionId;

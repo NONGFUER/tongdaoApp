@@ -5,6 +5,7 @@ var choiceEdit = [];
 var listArray = [];
 var lowAge = "";
 var upAge = "";
+var healthFlag = "";
 $(function(){
     $.setscroll("bodyMuiScroll");
     buyBind();
@@ -272,6 +273,10 @@ function productInfoRender(data){
         var commodityCombinationModuleMapper = body.commodityCombinationModuleMapper;
         var commodityCombination             = body.commodityCombination;
         var companyProfile 					 = body.companyProfile;
+        var healthTold						 = body.healthTold;			//健康告知
+        if(healthTold.length != 0){
+        	healthFlag = "y"
+        }
         cId   = body.CommodityInfo[0].id;
         cName = body.CommodityInfo[0].commodityName;
         ccName = commodityCombination.commodityCombinationName;
@@ -412,18 +417,21 @@ function changeDate(id){
 
 function buyBind(){
 	$("#toubao").unbind('tap').bind('tap',function(){
-		isLogin(roleType,toInsure)
-		//toInsure();
+		if( healthFlag == "y"){
+			isLogin(roleType,toHealthHtml);
+		}else{
+			isLogin(roleType,toInsure);
+		}				
 	});	
 }
-
+//跳转到投保页面
 function toInsure(){
 	if($("div[name='versions']").length != 0){
 		cId = $("div[name='versions']").find(".on").attr("data-cid");
 		cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
-		alert(cId+":"+cName);
+		//alert(cId+":"+cName);
 	}
-	title = "投保"
+	title = "投保信息"
 	urlParm.cId = cId;
 	urlParm.cName = cName;
 	urlParm.cPrem = cPrem;
@@ -433,10 +441,32 @@ function toInsure(){
 	urlParm.downIco = "0"
 	urlParm.calChoices = calChoices;
 	urlParm.cPieces = cPieces;
+	urlParm.cVersion = cVersion;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = "insure.html?jsonKey="+jsonStr;
 }
-
+//跳转到健康告知页面
+function toHealthHtml(){
+	if($("div[name='versions']").length != 0){
+		cId = $("div[name='versions']").find(".on").attr("data-cid");
+		cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
+		cVersion = $("div[name='versions']").attr("data-value");
+		alert(cId+":"+cName);
+	}
+	title = "健康告知"
+	urlParm.cId = cId;
+	urlParm.cName = cName;
+	urlParm.cPrem = cPrem;
+	urlParm.title = title;
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0"
+	urlParm.calChoices = calChoices;
+	urlParm.cPieces = cPieces;
+	urlParm.cVersion = cVersion;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = "healthNotice.html?jsonKey="+jsonStr;
+}
 function shareHandle(){
 	var shareList = getProductShare(ccId);
 	var title = shareList[0] ;

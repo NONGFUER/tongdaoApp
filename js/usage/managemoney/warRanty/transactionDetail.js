@@ -25,15 +25,15 @@ var userCode = "",
 	transToken = "",
 	customerId = "",
 	commodityCommId = "",
-	policyNo="";
+	policyNo = "";
 $(function() {
 	/*获取数据*/
 	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
-		userCode = urlParm.userCode;
-		transToken = urlParm.transToken;
-		customerId = urlParm.customerId;
-		commodityCommId = urlParm.commodityComId;
-		policyNo = urlParm.policyNo;
+	userCode = urlParm.userCode;
+	transToken = urlParm.transToken;
+	customerId = urlParm.customerId;
+	commodityCommId = urlParm.commodityComId;
+	policyNo = urlParm.policyNo;
 	console.log("页面初始化，获取上个页面传值报文--");
 	list(userCode, transToken, customerId, commodityCommId, '1');
 })
@@ -114,15 +114,20 @@ function backlast() {
 }
 
 function mylist(userCode, transToken, customerId, commodityCommId, flag) {
-	list(userCode, transToken, customerId, commodityCommId, flag);
-}
-
-function list(userCode, transToken, customerId, commodityCommId, flag) {
 	userCode = userCode;
 	transToken = transToken;
 	customerId = customerId;
-	commodityCommId = commodityCommId;
-	flag = flag;
+	commodityComId = commodityComId;
+	list(userCode, transToken, customerId, commodityCommId, flag);
+	mui('.man-div-title ul').on('tap', 'li', function() {
+		$('.man-div-title ul').children('li').removeClass('li_xuan');
+		$(this).addClass('li_xuan');
+		var flag = $(this).attr('flag');
+		list(userCode, transToken, customerId, commodityCommId, flag);
+	})
+}
+
+function list(userCode, transToken, customerId, commodityCommId, flag) {
 	var reqData = {
 		"head": {
 			"userCode": userCode,
@@ -138,10 +143,10 @@ function list(userCode, transToken, customerId, commodityCommId, flag) {
 	}
 	var url = base.url + 'moneyManage/policyDetail.do';
 	$.reqAjaxsFalse(url, reqData, policyDetail);
-	mui('.man-div-title ul').on('tap', 'li', function() {
-		$('.man-div-title ul').children('li').removeClass('li_xuan');
-		$(this).addClass('li_xuan');
-		var flag = $(this).attr('flag');
-		list(userCode, transToken, customerId, commodityCommId, flag);
-	})
 }
+mui('.man-div-title ul').on('tap', 'li', function() {
+	$('.man-div-title ul').children('li').removeClass('li_xuan');
+	$(this).addClass('li_xuan');
+	var flag = $(this).attr('flag');
+	list(userCode, transToken, customerId, commodityCommId, flag);
+})

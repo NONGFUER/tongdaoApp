@@ -27,7 +27,7 @@
 							</div>
 						</div>
 						<div class="simple_info">
-							<div><span class="name" id="name" v-html="mingpian.name">姓名</span></div>
+							<div><span class="name" id="name" v-html="name">姓名</span></div>
 							<div class="">
 								<span class="iden"></span><span class="split">|</span>服务区域：<span class="area" v-html="dizhi"></span>
 							</div>
@@ -45,23 +45,22 @@
 						</div>
 						<div class="code_info">
 							<div class="code_info_up">
-								业务员代码：<span id="agentCode" v-html="mingpian.agentCode"></span>
+								业务员代码：<span id="agentCode" v-html="agentCode"></span>
 							</div>
 							<div class="code_info_down">
-								执业证编码：<span id="practiceCode" v-html="mingpian.practiceCode"></span>
+								执业证编码：<span id="practiceCode" v-html="practiceCode"></span>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="contact clearfix">
-					<div class="phone" v-bind:phone='phone'><img src="../../../image/common/phone.png" /><span v-bind:phone="mingpian.postcardPhone">联系我</span></div>
-					<div class="wechat" v-bind:weixin='weixin'><img src="../../../image/common/wechat.png" /><span v-bind:img='mingpian.postcardWxImage'>加微信</span></div>
+					<div class="phone" v-bind:phone='phone'><img src="../../../image/common/phone.png" /><span v-bind:phone="postcardPhone">联系我</span></div>
+					<div class="wechat" v-bind:weixin='weixin'><img src="../../../image/common/wechat.png" /><span v-bind:img='postcardWxImage'>加微信</span></div>
 				</div>
 				<div class="company">
 					<img src="../../../image/common/logo.png" class="logo" />
 					<span>天安佰盈保险销售有限公司</span>
 					<img src="../../../image/agent/rightArrow.png" class="arrow" />
-
 				</div>
 				<div class="intro">
 					<div class="titbar">

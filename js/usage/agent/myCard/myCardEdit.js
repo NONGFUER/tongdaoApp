@@ -17,15 +17,15 @@ $(function() {
 	cardObj = cardParm.BxWxAgent;
 	$.setscroll();
 	//从前面那个页面渲染	
-	$("#name").text(cardParm.BxWxAgent.name);//姓名
-	$(".iden").text(cardParm.BxWxAgent.iden);//代理人身份
-	$(".area").text(cardParm.BxWxAgent.area);//地区
-	$("#cardphone").val(cardParm.BxWxAgent.cardmobile);//手机
-	$("#agentCode").text(cardParm.BxWxAgent.agentCode);////业务员代码
-	$("#practiceCode").text(cardParm.BxWxAgent.practiceCode);//职业
-	$("#introarea").val(cardParm.BxWxAgent.introinfo);//个人介绍
-	$(".fieldlist").data("field", cardParm.BxWxAgent.field);//擅长
-	$(".tou img").attr("src", cardObj.touxiang);//头像
+	$("#name").text(cardParm.BxWxAgent.name); //姓名
+	$(".iden").text(cardParm.BxWxAgent.iden); //代理人身份
+	$(".area").text(cardParm.BxWxAgent.area); //地区
+	$("#cardphone").val(cardParm.BxWxAgent.cardmobile); //手机
+	$("#agentCode").text(cardParm.BxWxAgent.agentCode); ////业务员代码
+	$("#practiceCode").text(cardParm.BxWxAgent.practiceCode); //职业
+	$("#introarea").val(cardParm.BxWxAgent.introinfo); //个人介绍
+	$(".fieldlist").data("field", cardParm.BxWxAgent.field); //擅长
+	$(".tou img").attr("src", cardObj.touxiang); //头像
 	//跳转到引导步骤
 	$(".wechat_right").bind("tap", function() {
 		window.location.href = "./getEWM.html";
@@ -56,17 +56,7 @@ $(function() {
 		}
 
 	});
-	//保存
-	$(".save").bind("tap", function() {
-		var ph = $("#cardphone").val()
-		if(!tit.regExp.isMobile(ph)) {
-			modelAlert("请输入正确的手机号！");
-			return false;
-		} else {
-			saveReq();
-		}
 
-	});
 	//退回
 	$(".h_back").bind("tap", function() {
 		var sendData = {
@@ -170,7 +160,11 @@ function saveReq() {
 function savecard(data) {
 	console.log(data);
 	var sendData = {
-		"customerId": cardObj.customerId
+		"customerId": cardObj.customerId,
+		"leftIco": '1',
+		"rightIco": '3',
+		"downIco": '0',
+		"title": '我的名片',
 	}
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
 	window.location.href = base.url + "tongdaoApp/html/agent/myCard/myCard.html" + jsonStr;
@@ -221,7 +215,7 @@ function getWxQRCode(id, userCode, transToken) {
 		}
 	}
 	$.reqAjaxs(url, reqData, function(data) {
-		console.log(data.returns.insuranceConsultantInfo.postcardWxImage)
+		console.log(data)
 		if(data.status_code == "000000") {
 			if(!data.returns.insuranceConsultantInfo.postcardWxImage) {
 				$(".erweima_img img").attr("src", "../../../image/account/add.png");
@@ -340,3 +334,17 @@ function toArr(arry) {
 function lognCont() {
 	loginControl();
 }
+//保存
+/*$(".save").bind("tap", function() {*/
+function baocun() {
+	alert(1);
+	var ph = $("#cardphone").val()
+	if(!tit.regExp.isMobile(ph)) {
+		modelAlert("请输入正确的手机号！");
+		return false;
+	} else {
+		saveReq();
+	}
+}
+
+/*});*/

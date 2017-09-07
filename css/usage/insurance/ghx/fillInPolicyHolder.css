@@ -1,0 +1,597 @@
+@charset "utf-8";
+#insure_indexs { 
+}
+body {
+  background: #f0f0f0 !important;
+}
+header{
+	line-height: 44px;
+}
+.policyowner_same .importsame{
+	width: 1.6rem;
+    height: 1.6rem;
+    /* margin: auto;
+    margin-left: 50%; */
+    margin-top: 1.3rem;
+    float: right;
+}
+.policyowner_same{
+	width: 47%;/* 48px/150px */
+	margin-left: 50%;/* 60px */
+	text-align: right;
+	font-size: 16px;
+	color: #444;
+}
+/*----------------------------被保信息录入-----------------------------------*/ 
+#info_input {
+	margin-top: 5px;
+	width:100%;
+}
+/*----------------------------被保人信息-----------------------------------*/ 
+#recognizee_info {
+	width: 100%;
+}
+#recognizee_info_iscroll {
+	width: 100%;
+}
+#recognizee_info ul {
+	width: 100%;
+	background-color: #FAFAFAf;
+}
+input{
+	background-color: #FAFAFA !important;
+}
+#recognizee_info input {
+	height: 19px;
+	  line-height: 19px;
+	width: 100%;
+	font-size: 16px;
+	text-align: right;
+	font-family:"microsoft yahei";
+}
+#recognizee_info li{
+	width: 100%;
+	height: 4.167rem;
+	line-height: 4.167rem;
+	font-size: 1.33rem;
+	color: #585858;
+	display: -moz-box; 
+    display: -webkit-box; 
+    display: box;
+}
+#recognizee_info_iscroll li {
+	margin-left: 5.55%;/* 60px */
+	width: 95.4%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+	color: #585858;
+	display: -moz-box;
+	display: -webkit-box;
+	display: box;
+}
+#recognizee_info_iscroll .recognizee_li_left {
+	-moz-box-flex: 26;
+	-webkit-box-flex: 26;
+	box-flex: 26;
+	width: 33.5%;
+}
+#recognizee_info_iscroll .recognizee_li_center {
+	-moz-box-flex: 64;
+	-webkit-box-flex: 64;
+	box-flex: 64;
+	width: 55.7%;
+	text-align: right;
+}
+#recognizee_info_iscroll .recognizee_li_right {
+	-moz-box-flex: 12; 
+    -webkit-box-flex: 12; 
+    box-flex: 12;
+    width: 11.7%;
+}
+#recognizee_info_iscroll .recognizee_li_rightHide {
+	-moz-box-flex: 12; 
+    -webkit-box-flex: 12; 
+    box-flex: 12;
+    width: 11.7%;
+}
+#recognizee_info_iscroll .recognizee_li_right div {
+	width: 25%; /* 42px/120px */
+	margin: auto;
+}
+#recognizee_info_iscroll .recognizee_li_right .import_client {
+	width: 50%; /* 60px/120px */
+	margin: auto;
+}
+
+.btn_jump_policy_distribution {
+	width: 94.6667%;
+    line-height: 3.75rem;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    background-color: #1b6bb8;
+    border-radius: 0.667rem;
+    margin-bottom: 1.5rem;
+}
+
+/*----------------------------投保人信息-----------------------------------*/ 
+#policyholder_info,
+#stakeholder_info {
+	display: block;
+	margin-top:1rem;
+}
+#policyholder_info_iscroll,
+#stakeholder_info_iscroll {
+	width: 100%;
+}
+#stakeholder_info ul {
+	background-color: #fff;
+}
+.stakeholder_add_area {
+	margin-bottom: 1.25rem;  /* 20px */
+}
+#stakeholder_info li {
+	height: 44px;
+	line-height: 44px;
+	font-size: 16px;
+	color: #585858;
+	display: -moz-box;
+	display: -webkit-box;
+	display: box;
+}
+.box_flex_left {
+	-moz-box-flex: 15; 
+    -webkit-box-flex: 15; 
+    box-flex: 15;
+    width: 13.8%;
+}
+.policyholder_same,
+.policyholder_add,
+.stakeholder_same,
+.stakeholder_add {
+	width: 40%;  /* 48px/150px */
+	/*margin: auto;*/
+	margin-left: 40%; /* 60px */
+}
+.policyholder_details,
+.stakeholder_details {
+	width: 20%;  /* 42px/150px */
+	margin: auto;
+}
+.box_flex_center {
+	-moz-box-flex: 78; 
+    -webkit-box-flex: 78; 
+    box-flex: 78;
+    width: 72%;
+    overflow:hidden;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+	-webkit-text-overflow:ellipsis;
+	-moz-text-overflow:ellipsis;
+	white-space:nowrap;
+}
+.box_flex_right {
+	-moz-box-flex: 15; 
+    -webkit-box-flex: 15; 
+    box-flex: 15;
+    width: 13.8%;
+}
+.policyholder_add_li .box_flex_center,
+.stakeholder_add_li .box_flex_center {
+	text-align: left;
+	color: #585858;
+	font-size:1.33rem;
+}
+
+
+.insureName{
+	width: 100%;
+	height: 44px;
+	line-height: 44px;
+	background-color: #fff;
+}
+.insureName img{
+	width: 1.3rem;
+	float: left;
+	margin-left: 4.8%;
+	margin-right: 2.8%;
+	margin-top: 1.3rem;
+}
+/*----------------------------投保信息录入-----------------------------------*/ 
+.policyholder_add_area {
+	width: 100%;
+	background-color: #fff;
+}
+.policyholder_add_area input {
+	width: 100%;
+	font-size: 16px;
+	text-align: right;
+}
+.policyholder_add_area li {
+	margin-left: 5.55%;/* 60px */
+	width: 95.4%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+	color: #585858;
+	display: -moz-box;
+	display: -webkit-box;
+	display: box;
+}
+.policyholder_add_area .policyholder_li_left {
+	-moz-box-flex: 26; 
+    -webkit-box-flex: 26; 
+    box-flex: 26;
+    width: 25.5%;
+}
+.policyholder_add_area .policyholder_li_center {
+	-moz-box-flex: 64; 
+    -webkit-box-flex: 64; 
+    box-flex: 64;
+    width: 62.7%;
+    text-align: right;
+}
+.policyholder_add_area .policyholder_li_right {
+	-moz-box-flex: 12; 
+    -webkit-box-flex: 12; 
+    box-flex: 12;
+    width: 11.7%;
+}
+.policyholder_add_area .policyholder_li_right div {
+	width: 25%; /* 42px/120px */
+	margin: auto;
+}
+.policyholder_add_area .policyholder_li_right .import_client {
+	width: 50%; /* 60px/120px */
+	margin: auto;
+}
+.btn_jump_recognizee_info_area {
+	padding-top: 2.22rem;
+	padding-bottom: 1rem;
+}
+.btn_jump_recognizee_info {
+	width: 94.6667%;
+    line-height: 3.75rem;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    background-color: #1b6bb8;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.guahao{
+	height: 95px;
+	background-color: #FFFFFF;
+}
+.top{
+	margin-bottom: -12px;
+	margin-top: 10px;
+	width: 100%;
+	height: 43px;
+	  float: left;
+  margin-left: 5%;
+	font-size: 16px;
+}
+.middle{
+	margin-left: 5%;
+	font-size: 15px;
+	color: #F67F4D;
+}
+.yianpic{
+	margin-right: 10%;
+	float: right;
+	width: 15%;
+}
+.bottom{
+	  margin-top: 6px;
+}
+.xianzhong{
+	font-size: 14px;
+	margin-left: 5%;
+	width: 70%;
+}
+.scale{
+	font-size: 14px;
+	float: right;
+	margin-right: 5%;
+}
+.c_333 {
+  color: #333;
+}
+.jxi{
+	margin-top: 5px;
+}
+.syr{
+	background-color: white;
+	height: 50px;
+}
+.syrname{
+	line-height: 50px;
+	margin-left: 5%;
+}
+.fdsyr{
+	line-height: 50px;
+	color: #F67E4E;
+	float: right;
+	margin-right: 10%;
+}
+.ziti{
+}
+.dagou{
+	margin-left: 5%;
+	width: 4%;
+}
+.agree{
+	margin-top: 20px;
+	font-size: 12px;
+}
+.blue{
+	color: #5E93E8;
+}
+.isbenren{
+	text-align: right;
+	width: 60%;
+	font-size: 15px;
+	float: left;
+}
+.buc{
+}
+.flt{
+	  float: right !important;
+  /*margin-right: -25% !important;*/
+  margin-top:-29px !important;
+}
+.policyowner_same .importsame{
+	width: 1.6rem;
+    height: 1.6rem;
+    /* margin: auto;
+    margin-left: 50%; */
+    margin-top: 1.3rem;
+    float: right;
+}
+.policyowner_same{
+	width: 47%;/* 48px/150px */
+	margin-left: 50%;/* 60px */
+	text-align: right;
+	font-size: 16px;
+	color: #444;
+}
+#policyholder_info {
+	width: 100%;
+}
+#policyholder_info_iscroll {
+	width: 100%;
+}
+#policyholder_info ul {
+	width: 100%;
+	background-color: #FAFAFAf;
+}
+#policyholder_info input {
+	height: 19px;
+	  line-height: 19px;
+	width: 100%;
+	font-size: 16px;
+	text-align: right;
+	font-family:"microsoft yahei";
+}
+#policyholder_info li{
+	width: 100%;
+	height: 4.167rem;
+	line-height: 4.167rem;
+	font-size: 1.33rem;
+	color: #585858;
+	display: -moz-box; 
+    display: -webkit-box; 
+    display: box;
+}
+#policyholder_info_iscroll li {
+	margin-left: 5.55%;/* 60px */
+	width: 95.4%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+	color: #585858;
+	display: -moz-box;
+	display: -webkit-box;
+	display: box;
+}
+#policyholder_info_iscroll .policyholder_li_left {
+	-moz-box-flex: 26;
+	-webkit-box-flex: 26;
+	box-flex: 26;
+	width: 33.5%;
+}
+#policyholder_info_iscroll .policyholder_li_center {
+	-moz-box-flex: 64;
+	-webkit-box-flex: 64;
+	box-flex: 64;
+	width: 55.7%;
+	text-align: right;
+}
+#policyholder_info_iscroll .policyholder_li_right {
+	-moz-box-flex: 12; 
+    -webkit-box-flex: 12; 
+    box-flex: 12;
+    width: 11.7%;
+}
+#policyholder_info_iscroll .policyholder_li_rightHide {
+	-moz-box-flex: 12; 
+    -webkit-box-flex: 12; 
+    box-flex: 12;
+    width: 11.7%;
+}
+#policyholder_info_iscroll .policyholder_li_right div {
+	width: 25%; /* 42px/120px */
+	margin: auto;
+}
+#policyholder_info_iscroll .policyholder_li_right .import_client {
+	width: 50%; /* 60px/120px */
+	margin: auto;
+}
+
+
+/*----------------------------投保人信息-----------------------------------*/ 
+#policyholder_info,
+#stakeholder_info {
+	display: block;
+	margin-top:1rem;
+}
+#policyholder_info_iscroll,
+#stakeholder_info_iscroll {
+	width: 100%;
+}
+.policyholder_same,
+.policyholder_add,
+.stakeholder_same,
+.stakeholder_add {
+	width: 40%;  /* 48px/150px */
+	/*margin: auto;*/
+	margin-left: 40%; /* 60px */
+}
+.policyholder_details,
+.stakeholder_details {
+	width: 20%;  /* 42px/150px */
+	margin: auto;
+}
+.policyholder_add_li .box_flex_center,
+.stakeholder_add_li .box_flex_center {
+	text-align: left;
+	color: #585858;
+	font-size:1.33rem;
+}
+
+.policytitle {
+	padding-left: 5%;
+	width: 30%;
+	font-size: 16px;
+	color: #4481C1;
+	float: left;
+}
+/*----------------------------投保信息录入-----------------------------------*/ 
+.policyholder_add_area {
+	width: 100%;
+	background-color: #fff;
+}
+.policyholder_add_area input {
+	width: 100%;
+	font-size: 16px;
+	text-align: right;
+}
+.policyholder_add_area li {
+	margin-left: 5.55%;/* 60px */
+	width: 95.4%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+	color: #585858;
+	display: -moz-box;
+	display: -webkit-box;
+	display: box;
+}
+.policyholder_add_area .policyholder_li_left {
+	-moz-box-flex: 26; 
+    -webkit-box-flex: 26; 
+    box-flex: 26;
+    width: 25.5%;
+}
+.policyholder_add_area .policyholder_li_center {
+	-moz-box-flex: 64; 
+    -webkit-box-flex: 64; 
+    box-flex: 64;
+    width: 62.7%;
+    text-align: right;
+}
+.policyholder_add_area .policyholder_li_right {
+	-moz-box-flex: 12; 
+    -webkit-box-flex: 12; 
+    box-flex: 12;
+    width: 11.7%;
+}
+.policyholder_add_area .policyholder_li_right div {
+	width: 25%; /* 42px/120px */
+	margin: auto;
+}
+.policyholder_add_area .policyholder_li_right .import_client {
+	width: 50%; /* 60px/120px */
+	margin: auto;
+}
+.btn_jump_policyholder_info_area {
+	padding-top: 2.22rem;
+	padding-bottom: 1rem;
+}
+.btn_jump_policyholder_info {
+	width: 94.6667%;
+    line-height: 3.75rem;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    background-color: #1b6bb8;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.show{
+	display: none;
+}
+.ext{
+	float: right;
+	margin-right: 18%;
+}
+input::-webkit-input-placeholder {direction: ltr;}  	
+input:-moz-placeholder { direction: ltr;}
+input::-moz-placeholder {  direction: ltr;}
+input:-ms-input-placeholder {direction: ltr;}	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

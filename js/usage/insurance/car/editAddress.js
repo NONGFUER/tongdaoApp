@@ -169,7 +169,8 @@ $.updeletedataback = function(param) {
 };
 //回调函数跳转页面
 function updelePage(){
-	window.history.back();
+	//window.history.back();
+	back();
 }
 
 
@@ -183,5 +184,15 @@ $.setscroll = function() {
 
 
 function backlast(){//返回上一页
-	window.history.back();
+	//window.history.back();
+	back();
+}
+
+
+
+function back(){
+	parm.title="选择收货地址";
+	var jsonStr = JSON.stringify(parm);
+	jsonStr = UrlEncode(jsonStr);
+	window.location.href = "policyDeliveryAddress.html?jsonKey=" + jsonStr;
 }

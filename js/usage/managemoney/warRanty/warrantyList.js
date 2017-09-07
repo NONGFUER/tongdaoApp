@@ -47,21 +47,24 @@ $(function() {
 			}
 		});
 	})
-	mui('.man-div-body-ul ').on('tap', 'li', function() {
+	mui('.man-div-body-ul ').on('tap', '.man-div-body-ul_li', function() {
 		var policyNo = $(this).attr('policyNo');
 		var orderNo = $(this).attr('orderNo');
 		var insureNo = $(this).attr('insureNo');
+		var commditycomname = $(this).attr('commdityComName');
+		console.log($(this));
 		var param = {
 			"userCode": userCode,
 			"policyNo": policyNo,
 			"orderNo": orderNo,
 			"insureNo": insureNo,
 			"customerId": customerId,
+			"transToken":transToken,
 			"commodityComId": commodityComId,
+			"title": commditycomname,
 			"leftIco": '1',
 			"rightIco": '0',
 			"downIco": '0',
-			"title": $(this).children('.man-div-body-ul_li_div_ul1').children('.commdityComName').html(),
 			/*订单编号*/
 		}
 		var jsonStr = UrlEncode(JSON.stringify(param));
@@ -85,7 +88,8 @@ function chuli() {
 		} else if($(this).html() == '4') {
 			$(this).attr('class', 'baozhang yilingqu');
 			$(this).html('已领取');
-		} /*else if($(this).html() == '04') {
+		}
+		/*else if($(this).html() == '04') {
 			$(this).attr('class', 'baozhang yilingqu');
 			$(this).html('核保中');
 		} else if($(this).html() == '05') {

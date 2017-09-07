@@ -15,7 +15,7 @@
 	<body>
 		<div class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
-				<div class="man mui-table-view" id='list'> 
+				<div class="man mui-table-view" id='list' v-cloak> 
 					<div class="b"></div>
 					<div class="banklist clearfix tui"  v-for="(value,key) in Objectitle" v-bind:bankName='value.bankName' v-bind:commodityId='value.commodityId' v-bind:bankCode='value.bankCode' v-bind:dayLimit='value.dayLimit'>
 						<div class="banklogo"><img src="../../../image/managemoney/productDetails/ICBC.png"></div>

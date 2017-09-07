@@ -43,3 +43,7 @@ function getYuyueOrderDetail(data){
 	console.log(data)
 	vm.objectlist=data.returns;
 }
+/*登录失效*/
+function lognCont() {
+	loginControl();
+}

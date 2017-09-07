@@ -90,7 +90,23 @@ function sysback() {
 		}
 	}
 }
-
+/*调用壳方法
+ * 使用方法：sysback();
+ * */
+function sysbackproduct() {
+	var ua = navigator.userAgent.toLowerCase();
+	if(ua.match(/MicroMessenger/i) == "micromessenger") {
+		document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+			WeixinJSBridge.call('closeWindow');
+		})
+	} else {
+		if(systemsource == "ios") {
+			objcObject.OpenUrl("backProduct");
+		} else if(systemsource == "android") {
+			android.goBack();
+		}
+	}
+}
 /*调用壳方法，拨打客服电话 */
 function callService(phone, obj) {
 	var ua = navigator.userAgent.toLowerCase();

@@ -643,7 +643,7 @@ $.prop = function() {
 	ajaxPrevent += "<div class='ajax_prevent_a' style='width: 30%;margin-top: 55%;"
 			+ "margin-left: 35%;text-align: center;background-clip: padding-box;"
 			+ "color: #585858;'>";
-	ajaxPrevent += "<img src='../../../image/dh_loading.gif' style='width:100%'></div></div>";
+	ajaxPrevent += "<img src='"+base.url+"tongdaoApp/image/common/dh_loading.gif' style='width:100%'></div></div>";
 	$("body").append(ajaxPrevent);
 	$(".ajax_prevent_a").css("margin-top",(window.innerHeight - $(".ajax_prevent_a").width())/2);
 };
@@ -1130,7 +1130,7 @@ $.getTimeStr = function() {
 };
 // 获取时间 (年-月-日)
 $.getTimeStr2 = function(param) {
-	if (param == "") {
+	if (param == ""||param==undefined) {
 		var current = new Date();
 	} else {
 		var current = new Date(param);

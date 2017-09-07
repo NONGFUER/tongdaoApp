@@ -12,7 +12,7 @@
 	</head>
 
 	<body>
-		<div class="mui-content mui-scroll-wrapper" id='list'>
+		<div class="mui-content mui-scroll-wrapper" id='list' v-cloak>
 			<div class="mui-scroll">
 				<ul class="mui-table-view man">
 					<li class="mui-media man-li" v-for="(value, key) in objectlist" v-bind:yuyueNo='value.yuyueNo' v-bind:customerId='value.customerId' v-bind:commodityCombinationId='value.commodityCombinationId' v-bind:yuyuePhone='value.yuyuePhone' v-bind:yuyueName='value.yuyueName'>

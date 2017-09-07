@@ -18,7 +18,8 @@
 	height: 27px;
 	line-height: 27px;
 }
-.baodanhao{
+
+.baodanhao {
 	font-size: 13px;
 	color: #666666!important;
 }
@@ -131,8 +132,12 @@ ul li span {
 /*底部按钮*/
 
 .man-div-body-ul_li_div_btn {
-	margin-top: 25%;
+	margin-top: 17px;
+	width: 100%;
 	text-align: center;
+	position: fixed;
+	bottom: 0;
+	z-index: 2;
 }
 
 .div_btn {

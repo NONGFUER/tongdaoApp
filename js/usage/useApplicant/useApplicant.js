@@ -8,7 +8,7 @@ var customerId = '8';
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
 customerId = urlParm.customerId;
 userCode = urlParm.userCode,
-//transToken = urlParm.transToken,
+transToken = urlParm.transToken,
 
 //初始化
 $(function() {
@@ -331,4 +331,10 @@ function updateCheck(){
 		return false;
 	}
 	return true;
+}
+
+//返回上一页
+function backlast(){
+//	window.history.back();
+	sysback();
 }

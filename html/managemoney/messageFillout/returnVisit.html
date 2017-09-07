@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+ 		<!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 -->
+	    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	    <!-- 忽略IOS将页面中的数字识别为电话号码 -->
+	    <meta name="format-detection" content="telephone=no" />
+	    <!-- 忽略Android平台中对邮箱地址的识别 -->
+	    <meta name="format-detection" content="email=no" />
+		<title>回访确认</title>
+		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
+	    <link rel="stylesheet" href="../../../css/lib/common/base.css" />
+	    <link rel="stylesheet" href="../../../css/lib/common/common.css" />
+	    <style type="text/css">
+		    p {
+	    		width: 95%;
+	    		margin-left: 3%;
+	    		text-indent: 2em;
+	    		color: #8f8f94;
+			}
+			.pno {
+	    		width: 95%;
+	    		margin-left: 3%;
+	    		text-indent: 0em;
+	    		color:black;
+	    		font-weight:bold;
+			}
+			.pp{
+				text-indent: 0em;
+				padding-left:3em;
+				color:red;
+			}
+			.xu{
+				float:left;
+			}
+			.cancel{
+				width: 42%;
+   				 height: 40px;
+    			line-height: 40px;
+    			background: #1B6BB8;
+    			color: #fff;
+    			text-align: center;
+    			font-size: 17px;
+    			border-radius: 6px;
+    			margin: 10px 0 20px
+			}
+			.visit{
+				width: 42%;
+   				 height: 40px;
+    			line-height: 40px;
+    			background: #1B6BB8;
+    			color: #fff;
+    			text-align: center;
+    			font-size: 17px;
+    			border-radius: 6px;
+    			margin: 10px 0 20px
+			}
+			.fl {
+    			float: left;
+    			display: inline;
+			}
+			.ri {
+			    float: right;
+			    display: inline;
+			}
+			.bottom{
+				width:80%;
+				margin:0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 滚动区域 -->
+		<div id="product_scroll" class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+			<div class="wen">
+				<p class="pno">为了您的权益，请确认以下信息</p>
+				<p>感谢您选择弘康人寿，为了维护您的权益，现根据保监会的要求对您进行一次服务性回访，本次回访将通过系统记录并存档，请您认真核对以下信息：</p>
+				<p>1、	本人已收到并阅读了电子保单。	</p>
+				<p>2、	在投保过程中已详细阅读并确认了风险提示语。</p>
+				<p class="pp">（风险提示语定：本人已阅读保险条款、产品说明书、投保提示书，并了解本产品的特点和保单利益的不确性。）</p>
+				<p>3、</span>	本人已阅读并理解保险条款、产品说明书、投保提示书且知悉该产品的保险责任、责任免除、保险期限、缴费方式等相关内容。</p>
+				<p>4、	本人已知悉自购买成功次日起，享有15天犹豫期时间，在犹豫期内可以无条件解除保险合同，犹豫期后解除保险合同会有一定损失。</p>
+				<p>5、	本人了解购买投资连结险产品的相关费用及扣除比例，其中初始费为0.3%、资产管理费的收取比例不高于2%（公布的历史年化投资回报率为扣除资产管理费后的收益）。</p>
+				<p>6、	本人在投保过程中已接受了风险承受能力评测，并对评测结果亲自确认。</p>
+				<p>7、	本人知悉投资连结保险具有保障和投资功能，但它的投资收益会有波动，可能盈利，也可能亏损，投资风险将全部有本人承担。</p>				
+			</div>	
+			<div class="bottom">
+				<div class="cancel fl">取消</div><div class="visit ri">确认回访</div>
+			</div>
+				
+				
+			</div>
+		</div>					
+	</body>
+	<script type="text/javascript" src="../../../js/util/zepto.min.js" ></script>
+	<script type="text/javascript" src="../../../js/mui/mui.min.js" ></script>
+	<script type="text/javascript" src="../../../js/util/base.js"></script>
+	<script type="text/javascript" src="../../js/hongkang/returnVisit.js" charset="utf-8"></script>
+</html>

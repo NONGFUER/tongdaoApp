@@ -4,7 +4,7 @@
 var testType;
 var titles = "";
 var transToken = "";
-var commodityId="";
+var commodityId = "";
 $(function() {
 	//	url传值解密过程
 
@@ -16,7 +16,8 @@ $(function() {
 	mobile = parm.body.mobile;
 	productCode = parm.body.productCode;
 	customerId = parm.body.customerId;
-	commodityId =parm.body.commodityId;
+	commodityId = parm.body.commodityId;
+	commodityCombinationId = parm.body.commodityCombinationId;
 	transToken = parm.head.transToken;
 	titles = parm.titles;
 	//初始化
@@ -86,8 +87,10 @@ function product() {
 			var sendData = {
 				"insurePhone": mobile,
 				"customerId": customerId,
-				"commodityCombinationId": customerId,
+				"commodityCombinationId": commodityCombinationId,
 				"userCode": productCode,
+				"commodityId": commodityId,
+				"transToken": transToken,
 				"title": titles,
 			}
 			var jsonStr = JSON.stringify(sendData);
@@ -121,11 +124,14 @@ function buy() {
 				"insurePhone": mobile,
 				"userCode": productCode,
 				"customerId": customerId,
-				"commodityCombinationId": customerId,
-				"commodityId":commodityId,
+				"commodityCombinationId": commodityCombinationId,
+				"commodityId": commodityId,
 				"testType": $('.testType').html(),
-				"transToken":transToken,
+				"transToken": transToken,
 				'title': titles,
+				"leftIco": '1',
+				"rightIco": '0',
+				"downIco": '0',
 			}
 			var jsonStr = JSON.stringify(sendData);
 			jsonStr = UrlEncode(jsonStr);

@@ -37,6 +37,52 @@ var vm = new Vue({
 })
 
 $(function() {
+	xinzhen(userCode, transToken, customerId, policyStatus, riskType)
+	mui('#list').on('tap', '.mui-btn', function() {
+		var elem = this;
+		var li = elem.parentNode.parentNode;
+		var policyNo = $(elem).attr('policyNo');
+		mui.confirm('确认删除该保单吗？', '', ['确认', '取消'], function(e) {
+			if(e.index == 0) {
+				shanchu(userCode, transToken, customerId, policyNo)
+				li.parentNode.removeChild(li);
+			} else {
+				setTimeout(function() {
+					mui.swipeoutClose(li);
+				}, 0);
+			}
+		});
+	})
+	mui('.man-div-title ul').on('tap', 'li', function() {
+		$('.man-div-title ul').children('li').removeClass('li_xuan');
+		$(this).addClass('li_xuan');
+		var flag = $(this).attr('orderStatus');
+		if(flag == '') {
+			flag = null;
+		}
+		xinzhen(userCode, transToken, customerId,flag, riskType);
+	})
+})
+
+function getPolicyList(data) {
+	console.log(data);
+	if(data.status_code == '000000') {
+		if(data.returns.length > 0) {
+			vm.Objectlist = data.returns;
+		}
+	} else if(data.status_code == '123456') {
+		modelAlert(data.status_message, '', lognCont);
+	} else {
+		modelAlert(data.status_message);
+	}
+}
+
+
+mui('.mui-scroll-wrapper').scroll({
+	deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
+});
+
+function xinzhen(userCode, transToken, customerId, policyStatus, riskType) {
 	var reqData = {
 		"body": {
 			"loggingCustomerId": customerId,
@@ -53,69 +99,35 @@ $(function() {
 	}
 	var url = base.url + 'personal/getPolicyList.do';
 	$.reqAjaxsFalse(url, reqData, getPolicyList);
-	mui('#list').on('tap', '.mui-btn', function() {
-		var elem = this;
-		var li = elem.parentNode.parentNode;
-		mui.confirm('确认删除该保单吗？', '', ['确认', '取消'], function(e) {
-			if(e.index == 0) {
-				li.parentNode.removeChild(li);
-			} else {
-				setTimeout(function() {
-					mui.swipeoutClose(li);
-				}, 0);
-			}
-		});
-	})
-	$(".wechat").unbind("tap").bind("tap", function() {
-		
-	})
-})
-
-function getPolicyList(data) {
-	console.log(data);
-	if(data.status_code == '000000') {
-		if(data.returns.length > 0) {
-			vm.Objectlist = data.returns;
+}
+/*删除*/
+function shanchu(userCode, transToken, customerId, policyNo) {
+	var reqData = {
+		"body": {
+			"loggingCustomerId": customerId,
+			"customerId": customerId,
+			"policyNo": policyNo,
+		},
+		"head": {
+			"channel": "01",
+			"userCode": userCode,
+			"transTime": "",
+			"transToken": transToken
 		}
-	} else if(data.status_code == '123456') {
-		modelAlert(data.status_message,'',lognCont);
-	} else {
+	}
+	var url = base.url + 'personal/deleteMyPolicy.do';
+	$.reqAjaxsFalse(url, reqData, deleteMyPolicy);
+}
+
+function deleteMyPolicy(data) {
+	if(data.status_code=='000000'){
+		modelAlert('删除成功');
+	}else if(data.status_code=='123456'){
+		modelAlert(data.status_message,"",lognCont);
+	}else{
 		modelAlert(data.status_message);
 	}
-}
-
-/*登录失效*/
-function lognCont() {
-	loginControl();
-}
-
-mui('.mui-scroll-wrapper').scroll({
-	deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
-});
-
-function bianji() {
-	var sendData = {
-		"BxWxAgent": {
-			"name": vm.name,
-			"iden": vm.mingpian.insuranceConsultantType,
-			"area": vm.dizhi,
-			"cardmobile": vm.phone,
-			"agentCode": vm.mingpian.agentCode,
-			"practiceCode": vm.mingpian.practiceCode,
-			"introinfo": jie,
-			"field": shan,
-		},
-		"touxiang": $(".tou img").attr("src"),
-		"customerId": customerId,
-		"transToken": transToken,
-		"userCode": userCode,
-		"leftIco": '1',
-		"rightIco": '3',
-		"downIco": '0',
-		"title": '我的名片',
-	};
-	var jsonStr = UrlEncode(JSON.stringify(sendData));
-	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyList.html?jsonKey=" + jsonStr;
+	
 }
 
 function chuli() {
@@ -161,4 +173,12 @@ function chuli() {
 			$(this).html('已失效');
 		}
 	})
+}
+
+/*登录失效*/
+function lognCont() {
+	loginControl();
+}
+function backlast() {
+	sysback();
 }

@@ -2,7 +2,6 @@ mui.init();
 /*获取数据*/
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
-	commodityComId = urlParm.commodityComId,
 	roleType = urlParm.roleType,
 	transToken = urlParm.transToken,
 	customerId = urlParm.customerId;
@@ -15,13 +14,18 @@ var vm = new Vue({
 	el: '#card_scroll',
 	data: {
 		mingpian: {}, //名片list
+		agentCode: {},
+		practiceCode: {},
+		postcardPhone: {},
+		postcardWxImage: {},
+		insuranceConsultantType:{},
 		dizhi: {}, //地址
 		shanchang: {}, //擅长领域
 		objectlist: {},
 		phone: {}, //联系我
 		jiesao: {}, //个人介绍
 		weixin: {}, //微信二维码
-		name: {}, //姓名
+		name:{}, //姓名
 	}
 })
 var kuo = "<",
@@ -80,8 +84,16 @@ function getBusinessCard(data) {
 	vm.mingpian = data.returns.insuranceConsultantInfo;
 	vm.name = data.returns.name;
 	vm.dizhi = data.returns.serviceArea;
-	shan = data.returns.insuranceConsultantInfo.postcardField;
-	jie = data.returns.insuranceConsultantInfo.postcardIntroduction;
+	if(data.returns.insuranceConsultantInfo != "" && data.returns.insuranceConsultantInfo != null) {
+		shan = data.returns.insuranceConsultantInfo.postcardField;
+		jie = data.returns.insuranceConsultantInfo.postcardIntroduction;
+		vm.phone = data.returns.insuranceConsultantInfo.postcardPhone;
+		if(data.returns.insuranceConsultantInfo.postcardWxImage != null && data.returns.insuranceConsultantInfo.postcardWxImage != "") {
+			vm.weixin = base.url + data.returns.insuranceConsultantInfo.postcardWxImage;
+		} else {
+			vm.weixin = '';
+		}
+	}
 	if(shan != null && shan != "") {
 		vm.shanchang = htmlp(kuo, kuo2, kuo3, dou, ju, shan, biaoqian);
 	} else {
@@ -92,13 +104,6 @@ function getBusinessCard(data) {
 	} else {
 		vm.jiesao = "<span style='color: #8f8f94;font-size: 14px;'>请点击编辑,撰写您的个人介绍</span>";
 	}
-	vm.phone = data.returns.insuranceConsultantInfo.postcardPhone;
-	if(data.returns.insuranceConsultantInfo.postcardWxImage != null && data.returns.insuranceConsultantInfo.postcardWxImage != "") {
-		vm.weixin = base.url + data.returns.insuranceConsultantInfo.postcardWxImage;
-	} else {
-		vm.weixin = '';
-	}
-
 }
 
 /*登录失效*/
@@ -130,14 +135,15 @@ mui('.mui-scroll-wrapper').scroll({
 });
 
 function bianji() {
+	alert(1);
 	var sendData = {
 		"BxWxAgent": {
 			"name": vm.name,
-			"iden": vm.mingpian.insuranceConsultantType,
+			"iden": vm.insuranceConsultantType,
 			"area": vm.dizhi,
 			"cardmobile": vm.phone,
-			"agentCode": vm.mingpian.agentCode,
-			"practiceCode": vm.mingpian.practiceCode,
+			"agentCode": vm.agentCode,
+			"practiceCode": vm.practiceCode,
 			"introinfo": jie,
 			"field": shan,
 		},
@@ -146,12 +152,12 @@ function bianji() {
 		"transToken": transToken,
 		"userCode": userCode,
 		"leftIco": '1',
-		"rightIco": '3',
+		"rightIco": '5',
 		"downIco": '0',
-		"title":'我的名片',
+		"title": '我的名片',
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
-	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyList.html?jsonKey=" + jsonStr;
+	window.location.href = base.url + "tongdaoApp/html/agent/myCard/myCardEdit.html?jsonKey=" + jsonStr;
 }
 
 function getTouxiang() {
@@ -170,4 +176,12 @@ function getTouxiang() {
 			$(".tou img").attr("src", "../../../image/account/tou.png");
 		}
 	})
+}
+/*登录失效*/
+function lognCont() {
+	loginControl();
+}
+
+function backlast() {
+	sysback();
 }

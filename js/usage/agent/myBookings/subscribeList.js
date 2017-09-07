@@ -1,13 +1,12 @@
 /*获取数据*/
-/*var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
-	commodityComId = urlParm.commodityComId,
 	customerPhone = urlParm.customerPhone,
 	roleType = urlParm.roleType,
 	transToken = urlParm.transToken,
-	customerId = urlParm.customerId;*/
-	var transToken='059876d99ec46c490953d04d4993da56';
-	var userCode='13601460140';
+	customerId = urlParm.customerId;
+/*	var transToken='059876d99ec46c490953d04d4993da56';
+	var userCode='13601460140';*/
 var vm = new Vue({
 	el: '#list',
 	data: {
@@ -36,21 +35,19 @@ $(function() {
 			
 			var reqData = {
 				"body": {
-					"customerId": "6",
-					"customerPhone": "13601460140",
-					"roleType": "03"
-
+					"customerId": customerId,
+					"customerPhone": userCode,
+					"roleType": roleType,
 				},
 				"head": {
 					"channel": "01",
-					"userCode": "",
-					"transTime": "",
+					"userCode": userCode,
+					"transTime":$.getTimeStr(),
 					"transToken": transToken
 				}
 			}
 			var url = base.url + 'yuyueOrder/getYuyueOrderList.do';
 			console.log("页面初始化，发送请求报文--");
-			/*console.log(urlParm);*/
 			$.reqAjaxsFalse(url, reqData, getYuyueOrderList);
 			mui('.mui-content').pullRefresh().endPulldownToRefresh();
 		}, 500);
@@ -68,7 +65,7 @@ $(function() {
 			"yuyuePhone":yuyuePhone,
 			"yuyueName":yuyueName,
 			"transToken":transToken,
-			"userCode":'13601460140'
+			"userCode":userCode
 		};
 		var jsonStr = UrlEncode(JSON.stringify(sendData));
 		window.location.href = base.url + "tongdaoApp/html/agent/myBookings/bookingDetails.html?jsonKey=" + jsonStr;
@@ -78,4 +75,11 @@ $(function() {
 function getYuyueOrderList(data) {
 	console.log(data.returns.yuyueOrderList);
 	vm.objectlist = data.returns.yuyueOrderList;
+}
+/*登录失效*/
+function lognCont() {
+	loginControl();
+}
+function backlast() {
+	sysback();
 }

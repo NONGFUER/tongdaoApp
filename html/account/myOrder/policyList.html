@@ -6,8 +6,6 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>我的保单</title>
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/font.css" />
-		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/usage/account/myOrder/policyList.css" />
@@ -19,17 +17,17 @@
 				<div class="man mui-table-view">
 					<div class="man-div-title ">
 						<ul>
-							<li class="li_xuan">全部</li>
-							<li>待生效</li>
-							<li>保障中</li>
-							<li>已过期</li>
+							<li orderStatus="" class="li_xuan">全部</li>
+							<li orderStatus='01'>待生效</li>
+							<li orderStatus='02'>保障中</li>
+							<li orderStatus='03'>已过期</li>
 						</ul>
 					</div>
-					<div id='list' class="man-div-body ">
+					<div id='list' class="man-div-body " v-cloak>
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist">
-								<div v-if="value.baozhang=='已过期'" class="mui-slider-right mui-disabled shanchu">
-									<a class="mui-btn mui-btn-red">
+							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:policyNo="value.policyNo">
+								<div v-if="value.orderStatus=='03'" class="mui-slider-right mui-disabled shanchu" >
+									<a class="mui-btn mui-btn-red" v-bind:policyNo="value.policyNo">
 										<i class="lajitong"></i>
 										<span>删除</span>
 									</a>
@@ -37,27 +35,27 @@
 								<div class="man-div-body-ul_li_div mui-slider-handle">
 									<ul class="man-div-body-ul_li_div_ul1">
 										<li>
-											<span v-html="value.baodan">保单号:&nbsp;8888888888888888</span>
-											<span  v-html="value.baozhang" class="baozhang"></span>
+											<span v-html="'保单号: '+value.policyNo">保单号:&nbsp;8888888888888888</span>
+											<span  v-html="value.orderStatus" class="baozhang"></span>
 										</li>
 										<li>
-											<span v-html="value.shaoer">少儿高发恶性肿瘤险</span>
-											<span v-html="value.chengbao">天安财险承保</span>
+											<span v-html="value.commodityName">少儿高发恶性肿瘤险</span>
+											<span v-html="value.companyName">天安财险承保</span>
 										</li>
 									</ul>
 									<div class="xian"></div>
 									<ul class="man-div-body-ul_li_div_ul2">
 										<li>
-											<span v-html="value.name_bei">被保人</span>
-											<span v-html="value.name_value">陈某人</span>
+											<span>被保人</span>
+											<span v-html="value.insuredName">陈某人</span>
 										</li>
 										<li>
-											<span v-html="value.name_fei">保费</span>
-											<span v-html="value.value_fei">1000.00元</span>
+											<span>保费</span>
+											<span v-html="value.prem">1000.00元</span>
 										</li>
 										<li>
-											<span v-html="value.name_data">承保时间</span>
-											<span v-html="value.value_data">2017年05月24日</span>
+											<span>承保时间</span>
+											<span >2017年05月24日</span>
 										</li>
 									</ul>
 								</div>

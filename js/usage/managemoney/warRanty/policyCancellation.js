@@ -1,18 +1,20 @@
 /*获取数据*/
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
-	orderNo = urlParm.body.orderNo,
-	insureNo = urlParm.body.insureNo,
-	commmodityComId = urlParm.body.commmodityComId,
-	policyNo = urlParm.body.policyNo,
+	orderNo = urlParm.orderNo,
+	insureNo = urlParm.insureNo,
+	commodityComId = urlParm.commodityComId,
+	policyNo = urlParm.policyNo,
 	transToken = urlParm.transToken,
 	title = urlParm.title,
 	customerId = urlParm.customerId,
-	userCode = urlParm.head.userCode;
+	userCode = urlParm.userCode;
 
 var vm = new Vue({
 	el: '#list',
 	data: {
-		Objectlist: {},
+		Objectlist: {
+			hKCalculate: {},
+		},
 		bao: null,
 	},
 	mounted() {
@@ -32,7 +34,7 @@ $(function() {
 			"transToken": transToken
 		},
 		"body": {
-			"commodityCommId": commmodityComId,
+			"commodityComId": commodityComId,
 			"orderNo": orderNo,
 			"customerId": customerId
 		}
@@ -45,7 +47,7 @@ $(function() {
 
 function redemptionTrial(data) {
 	console.log(data);
-	vm.Objectlist = data.returns.hKCalculate;
+	vm.Objectlist = data.returns;
 }
 /*退保1*/
 function tuibao() {
@@ -71,7 +73,7 @@ function getRedemptionConfirmation(data) {
 	if(data.statusCode != '000000') {
 		mui.alert(data.statusMessage);
 	} else {
-		mui.alert(data.statusMessage);
+		mui.alert(data.statusMessage,'',chenggong);
 		mui(".man-div-body-ul_li_div_btn").off("tap", "#huifang", tuibao);
 		$('#huifang').addClass('huisebtn');
 	}
@@ -80,15 +82,39 @@ function getRedemptionConfirmation(data) {
 function backlast() {
 	var sendData = {
 		"userCode": userCode,
+		"customerId": customerId,
+		"commodityComId": commodityComId,
 		"channel": "01",
 		"transTime": $.getTimeStr(),
 		"transToken": transToken,
 		"orderNo": orderNo,
 		"policyNo": policyNo,
 		"insureNo": insureNo,
-		"customerId": customerId,
 		"title": title,
+		"leftIco": '1',
+		"rightIco": '0',
+		"downIco": '0',
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
 	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
+}
+/*回到列表页面*/
+function chenggong(){
+	var sendData = {
+		"userCode": userCode,
+		"customerId": customerId,
+		"commodityComId": commodityComId,
+		"channel": "01",
+		"transTime": $.getTimeStr(),
+		"transToken": transToken,
+		"orderNo": orderNo,
+		"policyNo": policyNo,
+		"insureNo": insureNo,
+		"title": title,
+		"leftIco": '1',
+		"rightIco": '0',
+		"downIco": '0',
+	};
+	var jsonStr = UrlEncode(JSON.stringify(sendData));
+	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyList.html?jsonKey=" + jsonStr;
 }

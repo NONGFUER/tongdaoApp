@@ -1,15 +1,14 @@
 mui.init();
 /*获取数据*/
-/*var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	commodityComId = urlParm.commodityComId,
 	roleType = urlParm.roleType,
 	transToken = urlParm.transToken,
-	customerId = urlParm.customerId;*/
-var transToken = '059876d99ec46c490953d04d4993da56';
+	customerId = urlParm.customerId;
+/*var transToken = '059876d99ec46c490953d04d4993da56';
 var userCode = '138000000';
-var username = userCode + "";
-var customerId='20';
+var customerId='20';*/
 var vm = new Vue({
 	el: '#card_scroll',
 	data: {

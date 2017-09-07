@@ -478,7 +478,10 @@ ul li span {
 .xiehuise {
 	background-color: rgb(136, 136, 136);
 }
+
+
 /*银行卡号*/
+
 #yinhangka {
 	text-align: right;
 	font-size: 15px;
@@ -486,20 +489,24 @@ ul li span {
 	line-height: 41px;
 	color: #333;
 }
+
+
 /*地址*/
+
 #dizhi {
 	text-align: right;
 	font-size: 15px;
 	height: 41px;
-	line-height: 41px;
 	color: #333;
 }
+
+
 /*email*/
+
 #email {
 	text-align: right;
 	font-size: 15px;
 	height: 41px;
-	line-height: 41px;
 	color: #333;
 }
 
@@ -577,9 +584,11 @@ ul li span {
 
 
 /*btn按钮 确定*/
-.note{
+
+.note {
 	display: none;
 }
+
 .dianji {
 	font-size: 15px;
 }

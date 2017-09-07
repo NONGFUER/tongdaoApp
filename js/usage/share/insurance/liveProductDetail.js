@@ -196,7 +196,7 @@ function liveProductInfoRender( data ){
         var commodityClauseList  = body.commodityClauseList;  //所有产品条款列表       
         var commodityModuleList  = body.commodityModuleList;  //商品组合模块配置信息列表
         var commodityCombination = body.commodityCombination; //商品组合详情       
-        var picUrl = "../../../image/banner/" + commodityCombination.banner;
+        var picUrl = commodityCombination.banner;
         $("#banner").attr("src",picUrl);                                                        //bannner图
         $("#commodityCombinationName").text(commodityCombination.commodityCombinationName);     //商品组合名称
         $("#companyName").text(companyInfo.companyName);                                        //保险公司名称

@@ -7,28 +7,13 @@ var vm = new Vue({
 	mounted() {
 		this.$nextTick(function() {
 			$(function() {
-				$('.baozhang').each(function() {
-					if($(this).html() == '11') {
-						$(this).attr('class', 'baozhang dai');
-						$(this).html('待生效');
-					} else if($(this).html() == '2') {
-						$(this).attr('class', 'baozhang bao');
-						$(this).html('保障中');
-					} else if($(this).html() == '4') {
-						$(this).attr('class', 'baozhang yilingqu');
-						$(this).html('已领取');
-					} else if($(this).html() == '6') {
-						$(this).attr('class', 'baozhang yilingqu');
-						$(this).html('已失效');
-					}
-				})
+				chuli();
 				$(".div_btn").unbind("tap").bind("tap", function() {
 					var url = base.url + 'hkRedemption/getRedemption.do';
 					commodityCommId = $(this).attr('commoditycommid');
 					orderNo = $(this).attr('orderno');
 					policyNo = $(this).attr("policyno");
 					insureNo = $(this).attr('insureno');
-				
 					var reqData = {
 						"head": {
 							"userCode": userCode,
@@ -48,6 +33,15 @@ var vm = new Vue({
 
 			})
 		})
+	},
+	watch: {
+		Objectlist: function(val) {
+			this.$nextTick(function() {
+				$(function() {
+					chuli();
+				})
+			})
+		}
 	}
 })
 var userCode = "",
@@ -59,46 +53,56 @@ $(function() {
 	/*获取数据*/
 	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
 	userCode = urlParm.userCode;
-	title = urlParm.title;
 	commdityCommId = urlParm.commodityComId;
-
 	customerId = urlParm.customerId;
 	transToken = urlParm.transToken;
 	list(userCode, transToken, commdityCommId, customerId);
+	mui('.man-div-body-ul ').on('tap', '.man-div-body-ul_li', function() {
+
+	})
 })
-function backlast() {
-	sysback();
-}
 
 function redemptionList(data) {
-	console.log(data);
-	vm.Objectlist = data.returns.list;
+	if(data.statusCode == '000000') {
+		console.log(data);
+		vm.Objectlist = data.returns.list;
+	} else if(data.statusCode == '123456') {
+		modelAlert(data.statusMessage, '', lognCont);
+	} else {
+		modelAlert(data.statusMessage);
+	}
 }
 
 function getRedemption(data) {
 	console.log(data);
-	if(data.statusCode != '000000') {
-		mui.alert(data.statusMessage);
-	} else {
-//		var commodityCommId = $(this).attr('commoditycommid');
-//		orderNo = $(this).attr('orderno');
-//		policyNo = $(this).attr("policyno");
-//		insureNo = $(this).attr('insureno');
-
+	if(data.statusCode == '000000') {
 		var reqData = {
 			"orderNo": orderNo,
 			"policyNo": policyNo,
 			"insureNo": insureNo,
 			"title": title,
 			"customerId": customerId,
-			"commodityCommId": commodityCommId
+			"commodityCommId": commodityCommId,
+			"userCode":userCode,
+			"transToken":transToken,
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '0',
 		}
 		var jsonStr = UrlEncode(JSON.stringify(reqData));
 		window.location.href = "policyRedemption.html?jsonKey=" + jsonStr;
+	} else if(data.statusCode == '123456') {
+		modelAlert(data.statusMessage, '', lognCont);
+	} else {
+		modelAlert(data.statusMessage);
 	}
 }
 
-function mylist(userCode, transToken, commdityCommId, customerId) {
+function mylist(userCode, transToken, customerId, commdityCommId) {
+	userCode = userCode;
+	transToken = transToken;
+	commdityCommId = commdityCommId;
+	customerId = customerId;
 	list(userCode, transToken, commdityCommId, customerId);
 }
 
@@ -117,4 +121,30 @@ function list(userCode, transToken, commdityCommId, customerId) {
 	}
 	var url = base.url + 'moneyManage/redemptionList.do';
 	$.reqAjaxsFalse(url, reqData, redemptionList);
+}
+/*登录失效*/
+function lognCont() {
+	loginControl();
+}
+
+function backlast() {
+	sysback();
+}
+
+function chuli() {
+	$('.baozhang').each(function() {
+		if($(this).html() == '11') {
+			$(this).attr('class', 'baozhang dai');
+			$(this).html('待生效');
+		} else if($(this).html() == '2') {
+			$(this).attr('class', 'baozhang bao');
+			$(this).html('保障中');
+		} else if($(this).html() == '4') {
+			$(this).attr('class', 'baozhang yilingqu');
+			$(this).html('已领取');
+		} else if($(this).html() == '6') {
+			$(this).attr('class', 'baozhang yilingqu');
+			$(this).html('已失效');
+		}
+	})
 }

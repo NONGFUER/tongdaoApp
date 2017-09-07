@@ -64,12 +64,17 @@ $(function() {
 		window.location.href = base.url + vm.Objectitle.bxPolicyFinance.policyForm;
 	})
 	$(".chanping").unbind("tap").bind("tap", function() {
-		var commodityCombinationId = vm.Objectitle.bxPolicyFinance.commodityCombinationId
+		var commodityCombinationId = vm.Objectitle.bxPolicyFinance.commodityCombinationId;
 		var reqData = {
-			"commodityCombinationId": commodityCombinationId,
+			"commodityCombinationId": commodityCombinationId + "",
 			"userCode": userCode,
 			"customerId": customerId,
-			"insurePhone": vm.Objectitle.bxPolicyFinance.insurePhone
+			"transToken": transToken,
+			"insurePhone": userCode,
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '0',
+			"title": title,
 		}
 		var jsonStr = UrlEncode(JSON.stringify(reqData));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
@@ -77,32 +82,40 @@ $(function() {
 })
 /*页面信息*/
 function policyQueryListInfo(data) {
-	console.log(data)
-	vm.Objectitle = data.returns;
+	if(data.statusCode == '000000') {
+		console.log(data)
+		vm.Objectitle = data.returns;
+	}else if(data.statusCode == '123456'){
+		modelAlert(data.statusMessage, '', lognCont);
+	}else{
+		modelAlert(data.statusMessage);
+	}
 }
 /*退保试算*/
 function getRedemption(data) {
 	console.log(data);
-	if(data.statusCode != '000000') {
-		mui.alert(data.statusMessage);
-	} else {
+	if(data.statusCode == '000000') {
 		var reqData = {
-			"body": {
-				"orderNo": data.returns.redemptionDto.orderNo,
-				"insureNo": insureNo,
-				"policyNo": data.returns.redemptionDto.policyNo,
-				"customerId": customerId,
-				"commmodityComId": data.returns.redemptionDto.commmodityComId
-			},
-			"head": {
-				"userCode": data.userCode,
-				"transTime": "",
-				"channel": "01"
-			},
+			"orderNo": data.returns.redemptionDto.orderNo,
+			"insureNo": insureNo,
+			"policyNo": data.returns.redemptionDto.policyNo,
+			"customerId": customerId,
+			"commodityComId": commodityComId,
+			"userCode": data.userCode,
+			"transTime": "",
+			"channel": "01",
+			"transToken": transToken,
 			"title": title,
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '0',
 		}
 		var jsonStr = UrlEncode(JSON.stringify(reqData));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/policyCancellation.html?jsonKey=" + jsonStr;
+	} else if(data.statusCode == '123456') {
+		modelAlert(data.statusMessage, '', lognCont);
+	} else {
+		modelAlert(data.statusMessage);
 	}
 }
 /*截取银行卡号*/
@@ -126,7 +139,8 @@ function chuli() {
 		$('.baozhang').html('已领取')
 		$('#lingqu').off('tap', '#lingqu');
 		$('#lingqu').addClass('huisebtn');
-	} /*else if($('.baozhang').html() == '04') {
+	}
+	/*else if($('.baozhang').html() == '04') {
 		$('.baozhang').html('核保中');
 		$('#lingqu').off('tap', '#lingqu');
 		$('#lingqu').addClass('huisebtn');
@@ -206,4 +220,8 @@ function backlast() {
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
 	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyList.html?jsonKey=" + jsonStr;
+}
+/*登录失效*/
+function lognCont() {
+	loginControl();
 }

@@ -95,7 +95,12 @@ $(function(){
 	});
 	//点击"查询职业"
 	$(".search").unbind("tap").bind("tap",function(){
-	    window.location.href = "../../html/tiaokuan/profession.html"
+		urlParm.title = '职业风险类别表';
+		urlParm.leftIco = "1";
+		urlParm.rightIco = "0";
+		urlParm.downIco = "0"
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	    window.location.href = "../../../html/agreement/profession.html?jsonKey="+jsonStr;
 	});
 	//点击"返回按钮"
 	$(".h_back").unbind("tap").bind("tap",function(){
@@ -105,13 +110,13 @@ $(function(){
 	$("#chooseicon,.xinche").unbind("tap").bind("tap",function(){
 	    if($("#chooseicon").hasClass("on")){
 	        $("#chooseicon").removeClass("on");
-	        $("#chooseicon").attr("src","../../image/gouxuankuang.png");
+	        $("#chooseicon").attr("src","../../../image/insurance/gouxuankuang.png");
 	        $(".xinche").css("color","black");
 	        $("#FieldAI").val("");
 	        document.getElementById("FieldAI").readOnly=false;
 	    }else{
 	        $("#chooseicon").addClass("on");
-	        $("#chooseicon").attr("src","../../../image/common/gouxuankuang1.png");
+	        $("#chooseicon").attr("src","../../../image/insurance/gouxuankuang1.png");
 	        $(".xinche").css("color","#1b6bb8");
 	        $("#FieldAI").val(" ");
 	        document.getElementById("FieldAI").readOnly=true;
@@ -594,7 +599,7 @@ function sendInsureRequest(){
 		reqData.body.certiNo       = formData.certiNo;
 		reqData.body.businessSource= formData.businessSource;
 	}else{
-		reqData.body.versions = "01";
+		reqData.body.versions = cVersion;//版本
 	}
 	if( cId == COMMODITY_ID.LLHM ){
 		reqData.body.FieldAA = formData.FieldAA;

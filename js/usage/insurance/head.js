@@ -99,6 +99,7 @@ var cName = urlParm.cName ? urlParm.cName : "";
 var ccName = urlParm.ccName ? urlParm.ccName : "";
 var cPrem = urlParm.cPrem ? urlParm.cPrem : "";
 var cPieces	= urlParm.cPieces ? urlParm.cPieces : "1";
+var cVersion = urlParm.cVersion ? urlParm.cVersion : "01";
 var coverage = "";
 var title = "";
 var leftIco = "";

@@ -150,7 +150,9 @@ $.newCreateback = function(param) {
 };
 //回调跳转到下一个页面
 function newCreateAdress(){
-	window.history.back();
+	//window.history.back();
+	
+	back();
 }
 
 /* 设置滑动区域 */
@@ -163,5 +165,15 @@ $.setscroll = function() {
 
 
 function backlast(){//返回上一页
-	window.history.back();
+	//window.history.back();
+	
+	back();
+}
+
+
+function back(){
+	parm.title="选择收货地址";
+	var jsonStr = JSON.stringify(parm);
+	jsonStr = UrlEncode(jsonStr);
+	window.location.href = "policyDeliveryAddress.html?jsonKey=" + jsonStr;
 }

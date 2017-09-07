@@ -17,17 +17,17 @@
 				<div class="man mui-table-view">
 					<div class="man-div-title ">
 						<ul>
-							<li class="li_xuan">全部</li>
-							<li>待生效</li>
-							<li>保障中</li>
-							<li>已过期</li>
+							<li orderStatus="" class="li_xuan">全部</li>
+							<li orderStatus='01'>待生效</li>
+							<li orderStatus='02'>保障中</li>
+							<li orderStatus='03'>已过期</li>
 						</ul>
 					</div>
-					<div id='list' class="man-div-body ">
+					<div id='list' class="man-div-body " v-cloak>
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist">
-								<div v-if="value.baozhang=='已过期'" class="mui-slider-right mui-disabled shanchu">
-									<a class="mui-btn mui-btn-red">
+							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:policyNo="value.policyNo">
+								<div v-if="value.orderStatus=='03'" class="mui-slider-right mui-disabled shanchu" >
+									<a class="mui-btn mui-btn-red" v-bind:policyNo="value.policyNo">
 										<i class="lajitong"></i>
 										<span>删除</span>
 									</a>

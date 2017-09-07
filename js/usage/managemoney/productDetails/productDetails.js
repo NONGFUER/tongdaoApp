@@ -151,20 +151,22 @@ function getRiskAble(data) {
 		} else if(data.returns.isRisk == "1") {
 			var sendData = {
 				"head": {
+					"userCode":userCode,
 					"riskSupportAbility": riskSupportAbility,
 					"transToken": transToken
 				},
 				"body": {
 					"returnflag": "",
 					"testType": "",
-					"mobile": phone,
+					"mobile": userCode,
 					"customerId": customerId,
 					"commodityId": vm.Objectitle.commodityInfo.id + "",
-					"productCode": userCode
+					"productCode": userCode,
+					"commodityCombinationId":commodityCombinationId,
 				},
 				"title": '风险评估 ',
 				"titles": vm.Objectitle.commodityCombination.commodityCombinationName,
-				"leftIco": '0',
+				"leftIco": '1',
 				"rightIco": '0',
 				"downIco": '0',
 			}
@@ -172,8 +174,6 @@ function getRiskAble(data) {
 			window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/riskQuestion.html?jsonKey=" + jsonStr;
 		} else if(data.returns.isRisk == "2") {
 			modelAlert(data.statusMessage);
-		} else {
-			modelAlert(data.statusMessage, "", lognCont);
 		}
 	} else if(data.statusCode == '123456') {
 		modelAlert(data.statusMessage, "", lognCont);

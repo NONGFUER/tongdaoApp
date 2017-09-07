@@ -20,20 +20,29 @@
         <div class="result-content">
             <dl>
                 <dt>详细信息</dt>
-                <dd>支付金额：<span id="">23466.00元</span></dd>
-                <dd>产品名称：<span id="">百万少儿重大疾病保险</span></dd>
-                <dd><span class="letter3">订单号</span>：<span id="">12312121213131616161611</span></dd>
-                <dd>失败原因：<span id="">网络发生改变，导致支付失败！</span></dd>
+                <dd>支付金额：<span id="prem">23466.00元</span></dd>
+                <dd>产品名称：<span id="productName">百万少儿重大疾病保险</span></dd>
+                <dd><span class="letter3">订单号</span>：<span id="orderNo"></span></dd>
+                <dd style="display:none" class="reason">失败原因：<span id="">网络发生改变，导致支付失败！</span></dd>
             </dl>
         </div>      
     </div>
-    <div class="result-click">
-        <div class="result-button">返回首页</div>  
+    <div class="result-click" style="display:none" id="success">
+        <div class="result-button" id="backProduct">返回首页</div>  
         <div class="result-button on1">再次购买</div>  
     </div>
-    <script src="../../../js/lib/common/zepto.min.js"></script>
+    <div class="result-click" id="fail">
+        <div class="result-button" id="backProduct">返回首页</div>  
+        <div class="result-button on1">订单详情</div>  
+    </div>
+    <form id="f1" action="" style="display:none;" method='post'>
+					<textarea id="requestDoc" name="requestDoc"></textarea>
+					<input type="submit" value="Submit" />
+				</form>
+    <script src="../../../js/lib/common/jquery-1.11.0.js"></script>
     <script src="../../../js/lib/widget/mui/mui.min.js"></script>
     <script src="../../../js/lib/common/base.js"></script>
     <script src="../../../js/lib/common/common.js"></script>
+    <script src="../../../js/usage/insurance/payResult.js"></script>
 </body>
 </html>

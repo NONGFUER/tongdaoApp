@@ -4,12 +4,12 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	insurePhone = urlParm.insurePhone,
 	titles = urlParm.titles,
-	title=urlParm.title,
-	channel=urlParm.channel,
-	transTime=urlParm.transTime,
-	transToken=urlParm.transToken,
-	customerId=urlParm.customerId,
-	commodityId=urlParm.commodityId,
+	title = urlParm.title,
+	channel = urlParm.channel,
+	transTime = urlParm.transTime,
+	transToken = urlParm.transToken,
+	customerId = urlParm.customerId,
+	commodityId = urlParm.commodityId,
 	riskSupportAbility = urlParm.riskSupportAbility,
 	pieces = urlParm.pieces;
 
@@ -29,18 +29,21 @@ var vm = new Vue({
 					var bankCode = $(this).attr('bankCode');
 					var dayLimit = $(this).attr('dayLimit');
 					var param = {
-							"userCode": userCode,
-							"channel": "01",
-							"transTime": $.getTimeStr(),
-							"transToken": transToken,
-							"commodityCombinationId": commodityCombinationId,
-							"customerId": customerId,
-							"commodityId": commodityId,
-							"bankCode":bankCode,
-							"dayLimit":dayLimit,
-							"title":titles,
-							"bankName":bankName,
-							"pieces":pieces
+						"userCode": userCode,
+						"channel": "01",
+						"transTime": $.getTimeStr(),
+						"transToken": transToken,
+						"commodityCombinationId": commodityCombinationId,
+						"customerId": customerId,
+						"commodityId": commodityId,
+						"bankCode": bankCode,
+						"dayLimit": dayLimit,
+						"title": titles,
+						"bankName": bankName,
+						"pieces": pieces,
+						"leftIco": '1',
+						"rightIco": '0',
+						"downIco": '0',
 					}
 					var jsonStr = UrlEncode(JSON.stringify(param));
 					window.location.href = "../messageFillout/messageFillout.html?jsonKey=" + jsonStr;

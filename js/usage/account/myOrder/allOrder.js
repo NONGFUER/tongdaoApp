@@ -139,3 +139,10 @@ function chuli() {
 		}
 	})
 }
+/*登录失效*/
+function lognCont() {
+	loginControl();
+}
+function backlast() {
+	sysback();
+}

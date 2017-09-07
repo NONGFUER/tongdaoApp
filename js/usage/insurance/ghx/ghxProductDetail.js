@@ -22,4 +22,8 @@ function sendProductInfoRequest(ccId){
 function sendProductInfoCallBack(data){
 	console.log(data);
 }
+function toFillPolicyHtml(){
+	var jsonStr = "";
+	window.location.href = "fillInPolicyHolder.html?jsonKey=" + jsonStr;
+}
 

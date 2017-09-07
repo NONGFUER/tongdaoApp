@@ -14,6 +14,8 @@ var titles = "";
 var title = "";
 var commodityId = "";
 var transToken = "";
+var userCode="";
+var commodityCombinationId="";
 $(function() {
 
 	//	url传值解密过程
@@ -21,10 +23,12 @@ $(function() {
 	urlstr = UrlDecode(urlstr);
 	parm = JSON.parse(urlstr);
 	mobile = parm.body.mobile;
+	userCode=parm.head.userCode;
 	transToken = parm.head.transToken;
 	customerId = parm.body.customerId;
 	productCode = parm.body.productCode;
 	commodityId = parm.body.commodityId;
+	commodityCombinationId=parm.body.commodityCombinationId;
 	titles = parm.titles;
 	title = parm.title;
 	/*初始化页面*/
@@ -492,6 +496,7 @@ $.submitDataCallBack = function(param) {
 	if(param.statusCode == "000000") {
 		var jsonObj = {
 			"head": {
+				"userCode":userCode,
 				"transToken": transToken
 			},
 			"body": {
@@ -499,7 +504,8 @@ $.submitDataCallBack = function(param) {
 				"mobile": mobile,
 				"customerId": customerId,
 				"productCode": productCode,
-				"commodityId": commodityId
+				"commodityId": commodityId,
+				"commodityCombinationId":commodityCombinationId,
 			},
 			"title": '评估结果',
 			"titles": titles,
@@ -510,6 +516,10 @@ $.submitDataCallBack = function(param) {
 		var jsonStr = JSON.stringify(jsonObj);
 		jsonStr = UrlEncode(jsonStr);
 		window.location.href = "riskResult.html?jsonKey=" + jsonStr;
+	}else if(param.statusCode == "123456"){
+		modelAlert(data.statusMessage,"",lognCont);
+	}else{
+		modelAlert(data.statusMessage);
 	}
 
 };
@@ -576,4 +586,24 @@ function tps(tempScore) {
 		tp = "进取型";
 	}
 	return tp;
+}
+function backlast() {
+	var sendData = {
+		"userCode": userCode,
+		"insurePhone": userCode,
+		"commodityId":commodityId,
+		"customerId":customerId,
+		"transToken":transToken,
+		"commodityCombinationId": commodityCombinationId,
+		"title": title,
+		"leftIco":'1',
+		"rightIco":'0',
+		"downIco":'0',
+	};
+	var jsonStr = UrlEncode(JSON.stringify(sendData));
+	window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
+}
+/*登录失效*/
+function lognCont() {
+	loginControl();
 }

@@ -6,16 +6,15 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>确认赎回</title>
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/usage/managemoney/redemption/policyRedemption.css" />
 	</head>
 
 	<body>
-		<div class="mui-content mui-scroll-wrapper">
+		<div class="mui-content mui-scroll-wrapper" style="padding-bottom: 50px;">
 			<div class="mui-scroll">
-				<div class="man mui-table-view" id='list'>
+				<div class="man mui-table-view" id='list' v-cloak>
 					<div class="man-div-body-ul_li_div mb10">
 						<ul class="man-div-body-ul_li_div_ul1">
 							<li>
@@ -53,12 +52,12 @@
 							<li class="xianli"></li>
 							<li>
 								<span>实际领取金额</span>
-								<span class="lanse" v-html="Objectlist.hKCalculate.availableMoney+'元'">232323.32元</span>
+								<span class="lanse" v-html="Objectlist.hKCalculate.availableMoney+'元'"></span>
 							</li>
 							<li class="xianli"></li>
 							<li>
 								<span>下次免费领取时间</span>
-						<span v-html="Objectlist.hKCalculate.freeDateStart+'-'+Objectlist.hKCalculate.freeDateEnd"></span>
+								<span v-html="Objectlist.hKCalculate.freeDateStart+'/'+Objectlist.hKCalculate.freeDateEnd"></span>
 							</li>
 						</ul>
 					</div>
@@ -74,16 +73,17 @@
 							<li class="xianli"></li>
 							<li>
 								<span>银行卡号</span>
-								<span class='bank_weihao' v-html="Objectlist.hKCalculate.bankCertificate">尾号 2333</span>
+								<span class='bank_weihao' v-html="Objectlist.hKCalculate.bankCertificate"></span>
 							</li>
 						</ul>
 					</div>
-					<!--确认赎回-->
-					<div class="man-div-body-ul_li_div_btn">
-						<div id="huifang" class="div_btn">确认赎回</div>
-					</div>
+
 				</div>
 			</div>
+		</div>
+		<!--确认赎回-->
+		<div class="man-div-body-ul_li_div_btn">
+			<div id="huifang" class="div_btn">确认赎回</div>
 		</div>
 	</body>
 	<script src="../../../js/lib/widget/mui/mui.min.js"></script>

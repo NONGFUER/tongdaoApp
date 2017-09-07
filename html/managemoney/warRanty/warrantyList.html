@@ -12,7 +12,7 @@
 	</head>
 
 	<body>
-		<div class="mui-content mui-scroll-wrapper">
+		<div class="mui-content mui-scroll-wrapper" >
 			<div class="mui-scroll">
 				<div class="man mui-table-view">
 					<div class="man-div-title ">
@@ -23,9 +23,9 @@
 							<li orderStatus='3'>已领取</li>
 						</ul>
 					</div>
-					<div id='list' class="man-div-body ">
+					<div id='list' class="man-div-body" v-cloak>
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:policyNo='value.policyNo' v-bind:orderNo='value.orderNo' v-bind:insureNo='value.insureNo'>
+							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:policyNo='value.policyNo' v-bind:orderNo='value.orderNo' v-bind:insureNo='value.insureNo' v-bind:commdityComName='value.commdityComName'>
 								<div v-if="value.orderStatus=='99'" class="mui-slider-right mui-disabled shanchu">
 									<a class="mui-btn mui-btn-red">
 										<i class="lajitong"></i>

@@ -14,6 +14,8 @@ var times=0;
 var payUrl;//支付页面
 var tradeNo;//核保请求天安接口交易流水号
 var orderStatus;//订单状态
+var syStartDate;
+var jqStartDate;
 $(function() {
 	/**页面滑动设置*/
 	$.setscrollarea("indexpart");
@@ -38,6 +40,7 @@ $(function() {
     var month = current.getMonth() + 1;
     var day = current.getDate();
     var defaultTime=$.getTimeStr2();
+    console.log(defaultTime)
     $("#businessBdate,#jqxBdate").attr("data-options",'{"type":"date","value":"'+defaultTime+'","beginYear":'+year+',"beginMonth":'+month+',"beginDay":'+day+',"endYear":2030}');
 	changeDate("businessBdate");//商业险时间控件
 	changeDate("jqxBdate");
@@ -192,6 +195,7 @@ $(function() {
 					},'body':{
 						"addressInsuredDto":{
 							"sessionid":cxSessionId,
+							"orderNo":cxOrder.orderNo,
 							"sjrMobile":sjrMobile,//收件人手机号
 						    "sjrName":sjrName,//收件人姓名
 							"addresseeprovince":addresseeprovince,//收件人省市
@@ -244,7 +248,7 @@ $(function() {
 						 }
 						
 					}else if(respData.statusCode=="123456"){
-						modelAlert(respData.statusMessage,function(){
+						modelAlert(respData.statusMessage,"",function(){
 							loginControl();
 						});
 					}else{
@@ -275,6 +279,8 @@ $(function() {
 	
 	/**--关闭重新报价弹窗-----*/
 	$(".closeDialog").on("tap",function(){
+		$("#businessBdate").val(syStartDate);
+		$("#jqxBdate").val(jqStartDate);
 		$("#dialog,.baojiaDialog").hide();
 	})
 });
@@ -684,6 +690,9 @@ $.loadData = function(param) {
 				}else{
 					$("#jqxBdate").val(timeFormatDate(param.cxInfo.cxOffer.jqxBegindate.time, 'yyyy-MM-dd'))
 				}
+				
+				syStartDate=$("#businessBdate").val();
+				jqStartDate=$("#jqxBdate").val();
 				// 总保费
 				$("#premium").html("￥"+ $.formatNumOfTwo(param.cxInfo.cxOffer.totalpremium));// ￥7200.00
 

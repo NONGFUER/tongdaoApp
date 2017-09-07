@@ -13,20 +13,31 @@ var vm = new Vue({
 		})
 	}
 })
+var commodityCommId = "",
+	title = "",
+	customerId = "",
+	transToken = "",
+	orderNo = "",
+	userCode = "";
+insureNo = "";
 $(function() {
 	/*获取数据*/
-	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
-		commodityCommId = urlParm.commodityCommId,
-		title = urlParm.title,
-		transToken = urlParm.transToken,
-		orderNo = urlParm.orderNo;
+	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
+	commodityCommId = urlParm.commodityCommId;
+	title = urlParm.title;
+	insureNo = urlParm.insureNo;
+	customerId = urlParm.customerId;
+	userCode = urlParm.userCode;
+	transToken = urlParm.transToken;
+	orderNo = urlParm.orderNo;
 	console.log("页面初始化，获取上个页面传值报文--");
 	console.log(urlParm);
 	var reqData = {
 		"head": {
 			"channel": "01",
-			"userCode": "2835",
-			"transTime": ""
+			"userCode": userCode,
+			"transTime": $.getTimeStr(),
+			"transToken": transToken,
 		},
 		"body": {
 			"commodityCommId": commodityCommId,
@@ -36,8 +47,21 @@ $(function() {
 	var url = base.url + 'moneyManage/redemptionTrial.do';
 	$.reqAjaxsFalse(url, reqData, redemptionTrial);
 	mui('.man-div-body-ul_li_div_btn').on('tap', '#huifang', function() {
-		mui.alert('赎回成功');
-		/*接口请求位子*/
+		var reqData = {
+			"head": {
+				"channel": "01",
+				"userCode": userCode,
+				"transToken": transToken,
+				"transTime": $.getTimeStr(),
+			},
+			"body": {
+				"orderNo": orderNo,
+				"policyNo": vm.Objectlist.hKCalculate.policyNo,
+				"insureNo": insureNo,
+			}
+		}
+		var url = base.url + 'hkRedemption/getRedemption.do';
+		$.reqAjaxsFalse(url, reqData, getRedemption);
 	})
 })
 
@@ -45,6 +69,46 @@ function redemptionTrial(data) {
 	console.log(data);
 	vm.Objectlist = data.returns;
 }
+/*赎回试算*/
+function getRedemption(data) {
+	if(data.statusCode == '000000') {
+		var reqData = {
+			"body": {
+				"orderNo": orderNo,
+				"insureNo": insureNo,
+				"policyNo": vm.Objectlist.hKCalculate.policyNo,
+			},
+			"head": {
+				"userCode": userCode,
+				"transTime": $.getTimeStr(),
+				"transToken": transToken,
+				"channel": "01"
+			}
+		}
+		var url = base.url + 'hkRedemption/getRedemptionConfirmation.do';
+		$.reqAjaxsFalse(url, reqData, getRedemptionConfirmation);
+	}else if(data.statusCode=="123456"){
+		modelAlert(data.statusMessage,'',lognCont);
+	}else{
+		modelAlert(data.statusMessage);
+	}
+}
+/*退保赎回*/
+function getRedemptionConfirmation(data){
+	if(data.statusCode=="000000"){
+		modelAlert(data.statusMessage);
+		$('#huifang').attr('style','background-color: #999;')
+	}else if(data.statusCode=="123456"){
+		modelAlert(data.statusMessage,'',lognCont);
+	}else{
+		modelAlert(data.statusMessage);
+	}
+}
+/*登录失效*/
+function lognCont() {
+	loginControl();
+}
+
 /*截取银行卡号*/
 function bankweihao() {
 	var banke = $('.bank_weihao').html();
@@ -59,10 +123,9 @@ function backlast() {
 		"userCode": userCode,
 		"channel": "01",
 		"transTime": $.getTimeStr(),
-		"customerId": customerId,
 		"transToken": transToken,
-		"title": title
+		"title": title,
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
-	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
+	window.location.href = "policyRedemption.html?jsonKey=" + jsonStr;
 }
