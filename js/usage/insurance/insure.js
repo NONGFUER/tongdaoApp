@@ -197,7 +197,7 @@ $(function(){
 		urlParm.title = "常用投保人";
 		urlParm.rightIco = "4";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	    window.location.href= base.url + "tongdaoApp/html/useApplicant/useApplicant.html?jsonKey="+jsonStr+"&pageFrom=online";
+	    window.location.href= base.url + "tongdaoApp/html/useApplicant/useApplicant.html?jsonKey="+jsonStr;
 	});
 	//选择座位数
 	$("#FieldAN,.zdown").unbind("tap").bind("tap",function(){
