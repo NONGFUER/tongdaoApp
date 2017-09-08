@@ -799,6 +799,88 @@ function insureValidate(insureName,certificateNo,telNo){
 	    return false;
 	}
 }
+//function sendGhxInsureRequest(){
+//	if(!$("#word").hasClass("on")){return false;}
+//	var formData = getFormData();
+//	if(!formData){return false;}
+//	var url = requestUrl.ghxAddOrder;
+//	var reqData = {
+//			"head": {
+//				"userCode": mobile,
+//				"transTime": $.getTimeStr(),
+//				"channel": "01"
+//			},
+//			"body": {
+//				"ejxInfo": {
+//					"agrtCode": ghxDicChannel, //dicchannel1
+//					"data": {
+//						"customerList": [{
+//							"birthDate": tbrBir,
+//							"customerAddress": "",
+//							"customerFlag": "1",
+//							"customerName": formData.insureName,
+//							"customerSameInd": tbrCsi,
+//							"customerType": "1",
+//							"docNo": formData.telNo,
+//							"docType": "01",
+//							"email": tbrEmail,
+//							"phoneNo": formData.telNo,
+//							"sex": tbrSex
+//						}, {
+//							"birthDate": bbrBir,
+//							"customerAddress": "",
+//							"customerFlag": "2",
+//							"customerName": formData.recogName,
+//							"customerSameInd": bbrCsi,
+//							"customerType": "1",
+//							"docNo": formData.,
+//							"docType": "01",
+//							"email": bbrEmail,
+//							"phoneNo": formData.,
+//							"sex": bbrSex
+//						}],
+//						"insuredObject": {
+//							"fieldAA": "01",
+//							"fieldAC": "01",
+//							"fieldAE": parm.banbenFlag, //11
+//							"fieldAF": nextday //当前日期的下一任
+//							
+//						},
+//						"orderDynamicDto": { //扩展被保险人
+//							"fieldAA": parm.peiouFlag + "",
+//							"fieldAB": parm.zinvFlag + "",
+//							"fieldAC": parm.fumuFlag + "",
+//							"fieldAD": parm.qitaFlag + ""
+//
+//						},
+//						"projectCode": parm.dicCode, //2 diccode
+//						"riskCode": "1014"
+//					},
+//					"dataSource": "O-BY",
+//					"interfaceCode": "createOrder",
+//					"requestTime": nowday //gettime
+//				},
+//				"other": {
+//					"customerId": parm.customerId, //代理人ID
+//					"prem": parm.baofeiSum + "", //总保费
+//					"productId": code[0], //	险种代码
+//					//"orderResources": "1", //渠道来源  
+//					"ghProductIds": parm.remark, //主险代码+附加险代码
+//					"ghOptionalFlag": s, // '可选保障项代码1：附加，0不附加',
+//					//"inviterCode":"",
+//					"inviterPhone":parm.userCode,
+//				    "channelResource":"3",//渠道来源  
+//					"insureList": insureList
+//				}
+//
+//			}
+//		}
+//		$.toAjaxs(url, reqData, sendGhxInsureCallback)			
+//}
+//
+//function sendGhxInsureCallback(data){
+//	
+//}
 
 //不同的商品组合判断，选填表单项
 function formItemControl( ccId ){
@@ -816,6 +898,8 @@ function formItemControl( ccId ){
 		$(".diqu").show();
 	}else if( ccId == COMMODITYCOMBINE_ID.XPXSX){
 		$(".diqu").show();
+	}else if( ccId == COMMODITYCOMBINE_ID.GHX ){
+		$(".email").show();
 	}	
 }
 function backlast(){

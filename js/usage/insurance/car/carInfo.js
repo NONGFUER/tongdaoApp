@@ -12,7 +12,7 @@ $(function() {
 
 
 function backlast(){//返回上一页
-	parm.title="车险信息";
+	parm.title="车辆信息";
 	if(parm.body!=undefined){
 		parm.body.pagesflag="1";
 		var jsonStr = JSON.stringify(parm);

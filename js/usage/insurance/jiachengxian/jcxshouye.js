@@ -66,7 +66,7 @@ $(function(){
 	$.replacePlaceholder($("#chepaiValue"), "请输入车牌号码");
 	$.replacePlaceholder($("#mailValue"), "请输入电子邮箱（选填）");
 	//获取剩余份数
-	$.getShengyu(cId);
+	$.getShengyu("21");
 	//返回
 	$(".h_back1").unbind("tap").bind("tap",function(){
 		window.location.href="zhuanqu.html"+window.location.search;
@@ -140,8 +140,9 @@ $(function(){
 				var reqData={
 						"head":{
 							"channel": "01",
-						    "userCode": "2835",
-						    "transTime": ""
+						    "userCode": mobile,
+						    "transTime": "",
+						    "transToken":transToken
 						},"body":{
 							"carCode": chepai, //车牌号
 						    "email": mail,  //邮箱
@@ -152,8 +153,8 @@ $(function(){
 						    "customePhone": mobile , //登录用户手机号
 						    "inviterPhone": mobile,
 						    "flag":"1",//1 app  2 分享
-						    "commodityCombinationId": ccId,
-						    "commodityId": cId,
+						    "commodityCombinationId": "15",
+						    "commodityId": "21",
 						    "channelResource": "3",
 						    "customeId":customerId,
 						    "buyType":"1"
@@ -332,7 +333,7 @@ $.setscroll3 = function() {
 function backlast(){
 	urlParm.title = '驾乘无忧';
 	urlParm.leftIco = "1";
-	urlParm.rightIco = "1";
+	urlParm.rightIco = "0";
 	urlParm.downIco = "0"
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = "jcxshouye.html?jsonKey="+jsonStr;

@@ -13,43 +13,42 @@
 <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"> 
 <meta HTTP-EQUIV="expires" CONTENT="0">
 <title>驾乘人员意外伤害保险</title>
-<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
-<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.picker.min.css" />
-<link rel="stylesheet" href="../../../css/lib/common/base.css" />
-<link rel="stylesheet" href="../../../css/lib/common/common.css" />
-<link rel="stylesheet" href="../../../css/usage/insurance/jiachengxian/jcxshouye.css" />
-<link rel="stylesheet" href="../../../css/usage/insurance/jiachengxian/jcxtiaokuan.css" />
+<link rel="stylesheet" href="../../css/mui/mui.min.css" />
+<link rel="stylesheet" href="../../css/mui/mui.picker.min.css" />
+<link rel="stylesheet" href="../../css/common/base.css" />
+<link rel="stylesheet" href="../../css/common/common.css" />
+<link rel="stylesheet" href="../../css/jiachengxian/jcxshouyeShare.css" />
+<link rel="stylesheet" href="../../css/jiachengxian/jcxtiaokuan.css" />
 </head>
 <body>
 	<div class="PageInfo" style="width:100%;">
-		<!-- <header>
+		<header>
 			<div class="h_back h_back1">
 				<div class="backindex" style="width:14%;"><img src="../../images/left.png" /></div>
 			</div>
 			<div class="h_title" id="pageTitle1">驾乘人员意外伤害保险</div>
-			<div class="dingdan">
-				<div class="dingdanimg"><img src="../../../image/jcx/dingdan.png" /></div>
+			<div>
+				<div></div>
 			</div>
-		</header> -->
+		</header>
 	   	<div id="contentHead1" class="mui-scroll-wrapper">
 			<div id="insure_iscroll1" class="mui-scroll">
-			
 				<div class="banner1">
-	   				<img class="bannerImg1" src="../../../image/insurance/jcx/bannerjiachengxian.png">
+	   				<img class="bannerImg1" src="../../images/bannerjiachengxian.png">
 	   			</div>
 	   			<div class="shengyu">
-	   				<div class="shengyu1">剩余<span class="shengyuNum"></span>份</div>
+	   				<div class="shengyu1">剩余<span class="shengyuNum">10000</span>份</div>
 	   			</div>
 	   			<div class="tablepng">
-	   				<img src="../../../image/insurance/jcx/table.png">
+	   				<img src="../../images/table.png">
 	   			</div>
 	   			<div class="xuxian">
-	   				<img src="../../../image/insurance/jcx/xuxian.png">
+	   				<img src="../../images/xuxian.png">
 	   			</div>
 	   			<!-- <table class="riskInfo">
 	   				<tr>
 	   					<td class="firsttd">保险名称</td>
-	   					<td>驾乘人员意外伤害保险</td>
+	   					<td>驾乘意外伤害身故险</td>
 	   				</tr>
 	   				<tr>
 	   					<td>保障额度</td>
@@ -79,7 +78,7 @@
 	   			<div class="userInfo">
 	   				<div class="name userInfoDiv">
 	   					<div class="div1">
-	   						<div class="nameimg"><img src="../../../image/insurance/jcx/jcxname.png"></div>
+	   						<div class="nameimg"><img src="../../images/jcxname.png"></div>
 	   					</div>
 	   					<div class="div2 nameinput">
 	   						<input id="nameValue" type="text" value="请输入姓名" maxlength="20">
@@ -87,7 +86,7 @@
 	   				</div>
 	   				<div class="IDcard userInfoDiv">
 	   					<div class="div1">
-	   						<div class="IDimg"><img src="../../../image/insurance/jcx/jcxIDcard.png"></div>
+	   						<div class="IDimg"><img src="../../images/jcxIDcard.png"></div>
 	   					</div>
 	   					<div class="div2 IDinput">
 	   						<input id="IDcardValue" type="text" value="请输入身份证号码" maxlength="18">
@@ -95,7 +94,7 @@
 	   				</div>
 	   				<div class="mobile userInfoDiv">
 	   					<div class="div1">
-	   						<div class="mobileimg"><img src="../../../image/insurance/jcx/jcxmobile.png"></div>
+	   						<div class="mobileimg"><img src="../../images/jcxmobile.png"></div>
 	   					</div>
 	   					<div class="div2 mobileinput">
 	   						<input id="mobileValue" type="text" value="请输入手机号码" maxlength="11">
@@ -103,7 +102,7 @@
 	   				</div>
 	   				<div class="chepai userInfoDiv">
 	   					<div class="div1">
-	   						<div class="chepaiimg"><img src="../../../image/insurance/jcx/jcxchepai.png"></div>
+	   						<div class="chepaiimg"><img src="../../images/jcxchepai.png"></div>
 	   					</div>
 	   					<div class="div2 chepaiinput">
 	   						<input id="chepaiValue" type="text" autocomplete="off" value="请输入车牌号码"  maxlength="8" style="text-transform:uppercase;">
@@ -111,32 +110,40 @@
 	   				</div>
 	   				<div class="mail userInfoDiv">
 	   					<div class="div1">
-	   						<div class="mailimg"><img src="../../../image/insurance/jcx/jcxmail.png"></div>
+	   						<div class="mailimg"><img src="../../images/jcxmail.png"></div>
 	   					</div>
 	   					<div class="div2 mailinput">
 	   						<input id="mailValue" type="text" value="请输入电子邮箱（选填）" maxlength="20">
 	   					</div>
 	   				</div>
 	   			</div>
-	   			<div class="queren">	   				
-	   				<span><img id="kuang" class="kuang" src="../../../image/insurance/jcx/jcxyigouxuan.png"/>
+	   			<div class="queren">
+	   				<!-- <img id="kuang" class="kuang" src="../../images/jcxyigouxuan.png"/>
+	   				<div class="yiyuedu">我已阅读并同意<span class="tiaokuan">《保险条款》</span>和<span class="xuzhi">《投保须知》</span></div> -->
+	   				<span><img id="kuang" class="kuang" src="../../images/jcxyigouxuan.png"/>
 	   				<span class="yiyuedu">我已阅读并同意<span class="tiaokuan">《保险条款》</span>和<span class="xuzhi">《投保须知》</span></span></span>
 	   			</div>
 	   			
 	   		</div>
 	   	</div>
 	   	<div class="anniumen">
-		   	<div class="kefu">
-			   	<div class="kefuimg"><img src="../../../image/insurance/jcx/kefu.png"/></div>
+	   		<div class="kefu">
+	   			<a class="" href="tel:4006895505">
+			   	<div class="kefuimg"><img src="../../images/kefu.png"/></div>
 			   	<div class="kegu1">客服</div>
+		   	</a>
+	   		</div>
+		   	
+		   	<div class="guanzhu">
+		   		<div class="fuwuhao">关注微信服务号</div>
+		   		<div class="chakan">(查看保单详情)</div>
 		   	</div>
-		   	<div class="zengsong">赠送给客户</div>
-		   	<div class="toubao">立即投保</div>
+		   	<div class="toubao">免费投保</div>
 	   	</div>
 	   	<div class="success" style="display:none;">
-	   		<div class="successImg"><img src="../../../image/insurance/jcx/gongxi.png"></div>
+	   		<div class="successImg"><img src="../../images/gongxi.png"></div>
 	   		<div class="successWord">领取保障成功</div>
-	   		<div class="successAnniu">确定</div>
+	   		<div class="successAnniu">关注微信服务号，查看保单详情</div>
 	   	</div>
 	   	<div class="shadow" style="position:absolute;top:0;left:0;z-index:999;width:100%;height:100%;opacity:0.5;background-color:#000;display:none;"></div>
 	</div>
@@ -144,7 +151,7 @@
 	<div class="xuzhiInfo" style="display:none;width:100%;">
 		<header>
 				<div class="h_back h_back2">
-					<div class="backindex" style="width:14%;"><img src="../../../image/insurance/jcx/left.png" /></div>
+					<div class="backindex" style="width:14%;"><img src="../../images/left.png" /></div>
 				</div>
 				<div class="h_title" id="pageTitle2">投保须知</div>
 				<div>
@@ -178,7 +185,7 @@
 	<div class="tiaokuanInfo" style="display:none;width:100%;">
 		<header>
 				<div class="h_back h_back3">
-					<div class="backindex" style="width:14%;"><img src="../../../image/insurance/jcx/left.png" /></div>
+					<div class="backindex" style="width:14%;"><img src="../../images/left.png" /></div>
 				</div>
 				<div class="h_title" id="pageTitle3">保险条款</div>
 				<div>
@@ -366,12 +373,12 @@
 	   	</div>
    	</div>
    	
-   	
 </body>
-	<script type="text/javascript" src="../../../js/lib/common/zepto.min.js" ></script>
-    <script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js" ></script>
-    <script type="text/javascript" src="../../../js/lib/common/base.js" ></script>
-    <script type="text/javascript" src="../../../js/lib/common/common.js" ></script>
-    <script  src="../../../js/usage/insurance/head.js" ></script>
-    <script type="text/javascript" src="../../../js/usage/insurance/jiachengxian/jcxshouye.js" ></script>
+	<script type="text/javascript" src="../../js/util/zepto.min.js" ></script>
+    <script type="text/javascript" src="../../js/mui/mui.min.js" ></script>
+    <script type="text/javascript" src="../../js/util/base.js" ></script>
+    <script type="text/javascript" src="../../js/util/common.js" ></script>
+    <script type="text/javascript" src="../../js/util/underscore.js" ></script>
+    <script type="text/javascript" src="../../js/util/weixin.js"></script>
+    <script type="text/javascript" src="../../js/jiachengxian/jcxshouyeShare.js" ></script>
 </html>

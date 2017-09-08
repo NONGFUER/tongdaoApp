@@ -4,25 +4,21 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	transToken = urlParm.transToken,
 	customerId = urlParm.customerId,
-	agentCode=urlParm.agentId,
+	agentCode = urlParm.agentId,
+	type = urlParm.type,
 	postcardField = urlParm.postcardField;
-/*	insuranceConsultantId=urlParm.insuranceConsultantId;*/
-
-/*var transToken = 'transToken',
-	userCode = '13800000000',
-	insuranceConsultantId = '1',
-	postcardField='1',
-	customerId = '8';*/
-
 var vm = new Vue({
 	el: '#list',
 	data: {
 		Objectitle: {},
-		urlimg:{},
+		urlimg: {},
 	}
 })
 $(function() {
-	vm.urlimg=base.url;
+	vm.urlimg = base.url;
+	if(type == '02' || type == '03' || type == '04' || type == '05' || type == '06') {
+		$('.baoxian').hide();
+	}//普通01.02代理人、03客户经理 。04.内勤。05 团队 。06.RK
 	var reqData = {
 		"head": {
 			"userCode": userCode,
@@ -33,7 +29,7 @@ $(function() {
 		"body": {
 			"customerId": customerId
 		}
-	}
+	} 
 	var url = base.url + 'insuranceConsultantInfo/getInsuranceConsultantInfos.do';
 	console.log(reqData);
 	$.reqAjaxsFalse(url, reqData, getInsuranceConsultantInfos);
@@ -71,7 +67,7 @@ function chaxun(userCode, transToken, postcardPhone) {
 			"userCode": userCode
 		},
 		"body": {
-			"Phone": postcardPhone
+			"phone": postcardPhone
 		}
 	}
 	var url = base.url + 'insuranceConsultantInfo/getInsuranceConsultantInfo.do';
@@ -88,7 +84,7 @@ function xinzeng(userCode, transToken, customerId, insuranceConsultantId) {
 			"userCode": userCode
 		},
 		"body": {
-			"insuranceConsultantId": insuranceConsultantId,
+			"insuranceConsultantId": insuranceConsultantId+"",
 			"customerId": customerId
 		}
 	}
@@ -112,19 +108,21 @@ function getInsuranceConsultantInfos(data) {
 }
 /*新增保险顾问*/
 function updateInsuranceConsultantInfo(data) {
-	modelAlert("添加保险顾问成功", "", backlast);
+	modelAlert(data.statusMessage);
 }
 /*查询判断保险顾问地区*/
 function getInsuranceConsultantInfo(data) {
 	console.log(data);
-	if(data.returns.insuranceConsultantInfo!= null && data.returns.insuranceConsultantInfo!= "") {
+	if(data.returns.insuranceConsultantInfo != null && data.returns.insuranceConsultantInfo != "") {
 		if(data.returns.insuranceConsultantInfo.agentId != null && data.returns.insuranceConsultantInfo.agentId != "") {
 			var diqu = data.returns.insuranceConsultantInfo.agentId;
 			var insuranceConsultantId = data.returns.insuranceConsultantInfo.customerId;
 			if(diqu == agentCode) {
 				xinzeng(userCode, transToken, customerId, insuranceConsultantId);
-			}else{
-				modelAlert('保险顾问服务地区不符','',guanbi);
+			} else {
+				modelAlert('保险顾问服务地区不符', '', guanbi);
+				xinzeng(userCode, transToken, customerId, insuranceConsultantId);
+				chaxunend();
 			}
 		} else {
 			modelAlert('您输入的不是保险顾问手机号');
@@ -132,6 +130,24 @@ function getInsuranceConsultantInfo(data) {
 	} else {
 		modelAlert('您输入的不是保险顾问手机号');
 	}
+}
+
+/*查询*/
+function chaxunend() {
+	var reqData = {
+		"head": {
+			"userCode": userCode,
+			"channel": "01",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
+		},
+		"body": {
+			"customerId": customerId
+		}
+	} //普通01.02代理人、03客户经理 。04.内勤。05 团队 。06.RK
+	var url = base.url + 'insuranceConsultantInfo/getInsuranceConsultantInfos.do';
+	console.log(reqData);
+	$.reqAjaxsFalse(url, reqData, getInsuranceConsultantInfos);
 }
 /*点击关闭*/
 $(".note-div_title_right").unbind("tap").bind("tap", function() {

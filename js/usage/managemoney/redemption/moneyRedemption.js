@@ -25,7 +25,8 @@ var vm = new Vue({
 							"orderNo": orderNo,
 							"policyNo": policyNo,
 							"insureNo": insureNo,
-							"commodityCommId": commodityCommId
+							"commodityCommId": commodityCommId,
+							"customerId": customerId
 						}
 					}
 					$.reqAjaxsFalse(url, reqData, getRedemption);

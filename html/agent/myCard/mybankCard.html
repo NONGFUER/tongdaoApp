@@ -19,21 +19,21 @@
 	<body>
 		<div id="rank_scroll" class="mui-scroll-wrapper">
 			<div class="mui-scroll">
-				<ul class="mybank-ul">
+				<ul class="mybank-ul" id='list' v-cloak>
 					<li>
 						<span>开户银行</span>
-						<span>中国农业银行</span>
+						<span v-bind:bankCode='banck.bankCode' v-html='banck.bankName'>中国农业银行</span>
 					</li>
 					<li>
 						<span>所属省市</span>
-						<span>山东-济南</span>
+						<span v-html="diqu">山东-济南</span>
 					</li>
 					<li>
 						<span>开户支行</span>
-						<span>历下区分行</span>
+						<span v-html="banck.subName">历下区分行</span>
 					</li><li>
 						<span>银行卡号</span>
-						<span>6252522********36362</span>
+						<span v-html="banck.certificateCode">6252522********36362</span>
 					</li>
 				</ul>
 			</div>

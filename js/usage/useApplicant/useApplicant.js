@@ -2,9 +2,9 @@
 var paramlist = null;//常用保险人列表
 var editnum = null;//编辑对象编号
 
-var transToken = '059876d99ec46c490953d04d4993da56';
-var userCode = '13601460140';
-var customerId = '8';
+//var transToken = '059876d99ec46c490953d04d4993da56';
+//var userCode = '13601460140';
+//var customerId = '8';
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
 customerId = urlParm.customerId;
 userCode = urlParm.userCode,
@@ -95,32 +95,33 @@ function ListCallBack(data) {
 				str += '</a>';
 				str += '</div>';
 				str += '<div class="man-div-body-ul_li_div mui-slider-handle">';
-				str += '<ul class="ul_title">';
+				str += '<ul class="ul_title" onclick="toInsure(this)">';
 				str += '<li>';
 				str += '<div class="title_name_left">';
-				str += '<span>'+name+'</span>';
+				str += '<span id="name">'+name+'</span>';
 				//判断关系
 				if(retail =="01"){
 					str += '<span>本人</span>';
 				}else{
 					str += '<span style="visibility: hidden;"></span>';
+					
 				}
 				str += '</div>';
 				str += '<div class="title_name_right">';
 				str += '<span><img src="../../image/useApplicant/email.png"/></span>';
-				str += '<span>'+email+'</span>';
+				str += '<span id="email">'+email+'</span>';
 				str += '</div>';
 				str += '</li>';
 				str += '<li>';
 				str += '<div class="title_body_left">';
-				str += '<span>'+phone+'</span>';
+				str += '<span id="phone">'+phone+'</span>';
 				str += '</div>';
 				str += '<div class="title_body_right">';
 				str += '<span><img src="../../image/useApplicant/shenfenzheng.png"/></span>';
-				str += '<span>'+idNo+'</span>';
+				str += '<span id="idNo">'+idNo+'</span>';
 				str += '</div>';
 				str += '</li>';
-				str += '<li class="dizi">';
+				str += '<li class="dizi" id="address">';
 				str += addressDetial;
 				str += '</li>';
 				str += '</ul>';
@@ -332,7 +333,27 @@ function updateCheck(){
 	}
 	return true;
 }
-
+function toInsure( obj ){
+	var name = $(obj).find("#name").text();
+	var email = $(obj).find("#email").text();
+	var address = $(obj).find("#address").text();
+	var phone = $(obj).find("#phone").text();
+	var idNo = $(obj).find("#idNo").text();
+	console.log("name:"+name+" email:"+ email+" address:"+ address+ " phone:" + phone+" idNo:"+idNo);
+	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
+	var info ={
+			"name":name,
+			"email":email,
+			"address":address,
+			"phone":phone,
+			"idNo":idNo
+	}
+	urlParm.holder = info;
+	urlParm.title = "投保信息";
+	urlParm.rightIco = "0";
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/insurance/main/insure.html?jsonKey="+jsonStr;
+}
 //返回上一页
 function backlast(){
 //	window.history.back();

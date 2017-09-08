@@ -36,7 +36,7 @@
 						<div class="noRecordimg"><img src="../../../image/agent/gzpt_noRecord.png"></div>
 						<div class="noRecordfont">没有相关记录</div>
 					</div>
-					<div class="content-wrap" v-for="(value,key) in objectlist">
+					<div class="content-wrap" v-for="(value,key) in objectlist" v-cloak>
 						<div class="tm-title">
 							<div class="tm-title-wrap">
 								<span class="personName blueColor" v-html="value.name">团队</span>

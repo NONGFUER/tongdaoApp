@@ -2,17 +2,16 @@ mui.init();
 /*获取数据*/
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
-	commodityComId = urlParm.commodityComId,
-	roleType = urlParm.roleType,
 	transToken = urlParm.transToken,
 	customerId = urlParm.customerId;
 /*var transToken = '059876d99ec46c490953d04d4993da56';
 var userCode = '138000000';
 var customerId='20';*/
 var vm = new Vue({
-	el: '#card_scroll',
+	el: '#list',
 	data: {
 		banck:{},
+		diqu:"",
 	}
 })
 
@@ -35,6 +34,16 @@ $(function() {
 
 function getCertificationBankCard(data) {
 	console.log(data);
+	if(data.status_code=='000000'){
+		if(data.returns!=null&&data.returns!=""){
+			vm.banck=data.returns;
+			vm.diqu=vm.banck.provinceName+'-'+vm.banck.cityname
+		}
+	}else if(data.status_code=='123456'){
+		modelAlert(data.status_message,'',lognCont);
+	}else{
+		modelAlert(data.status_message);
+	}
 }
 
 /*登录失效*/
@@ -45,3 +54,7 @@ function lognCont() {
 mui('.mui-scroll-wrapper').scroll({
 	deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
 });
+
+function backlast() {
+	sysback();
+}

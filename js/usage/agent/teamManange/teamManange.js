@@ -1,14 +1,11 @@
 mui.init();
 /*获取数据*/
-/*var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
-	commodityComId = urlParm.commodityComId,
-	customerPhone = urlParm.customerPhone,
-	roleType = urlParm.roleType,
 	transToken = urlParm.transToken,
-	customerId = urlParm.customerId;*/
-var transToken = '059876d99ec46c490953d04d4993da56';
-var userCode = '13601460140';
+	customerId=urlParm.customerId;
+/*var transToken = '059876d99ec46c490953d04d4993da56';
+var userCode = '13601460140';*/
 var vm = new Vue({
 	el: '#order_index',
 	data: {
@@ -21,8 +18,8 @@ var vm = new Vue({
 $(function() {
 	var reqData = {
 		"body": {
-			"loggingCustomerId": "20",
-			"customerId": "20",
+			"loggingCustomerId":customerId,
+			"customerId": customerId,
 		},
 		"head": {
 			"channel": "01",
@@ -35,8 +32,8 @@ $(function() {
 	$.reqAjaxsFalse(url, reqData, getCountMyTeam);
 	var getAmountMyTeamdata = {
 		"body": {
-			"loggingCustomerId": "20",
-			"customerId": "20",
+			"loggingCustomerId": customerId,
+			"customerId": customerId,
 		},
 		"head": {
 			"channel": "01",
@@ -50,8 +47,8 @@ $(function() {
 	/*↑以上初始化团队总信息*/
 	var getMyTeamdata = {
 		"body": {
-			"loggingCustomerId": "20",
-			"customerId": "20",
+			"loggingCustomerId": customerId,
+			"customerId": customerId,
 		},
 		"head": {
 			"channel": "01",
@@ -66,12 +63,32 @@ $(function() {
 
 function getCountMyTeam(data) {
 	console.log(data.returns);
-	vm.tuanduinumber = data.returns;
+	if(data.status_code == '000000') {
+		if(data.returns != null && data.returns != "") {
+			vm.tuanduinumber = data.returns;
+		}else{
+			vm.tuanduinumber='0';
+		}
+	}else if(data.status_code=='123456'){
+		modelAlert(data.status_message,'',lognCont);
+	}else{
+		modelAlert(data.status_message);
+	}
 }
 
 function getAmountMyTeam(data) {
 	console.log(data);
-	vm.zongmoney = data.returns;
+	if(data.status_code == '000000') {
+		if(data.returns != null && data.returns != "") {
+			vm.zongmoney = data.returns;
+		}else{
+			vm.zongmoney = '0';
+		}
+	}else if(data.status_code=='123456'){
+		modelAlert(data.status_message,'',lognCont);
+	}else{
+		modelAlert(data.status_message);
+	}
 }
 
 function getMyTeam(data) {
@@ -86,10 +103,11 @@ function getMyTeam(data) {
 	} else if(data.status_code == '123456') {
 		modelAlert(data.statusMessage, "", lognCont);
 	} else {
-		modelAlert(data.status_code);
+		if(data.status_message!=null&&data.status_message!=""){
+			modelAlert(data.status_message);
+		}
 		$('#noRecord').show();
 	}
-
 }
 Date.prototype.format = function(format) {
 	var o = {

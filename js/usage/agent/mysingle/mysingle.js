@@ -1,18 +1,17 @@
 mui.init();
 /*获取数据*/
-/*var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
-	commodityComId = urlParm.commodityComId,
-	roleType = urlParm.roleType,
+	riskType = urlParm.riskType,
 	transToken = urlParm.transToken,
-	customerId = urlParm.customerId;*/
-var transToken = '059876d99ec46c490953d04d4993da56';
-var userCode = '13601460140';
-var username = userCode + "",
-	policyStatus = null,
-	customerId = '20',
-	riskType = null;
-
+	policyStatus=urlParm.policyStatus,
+	customerId = urlParm.customerId;
+	if(riskType==""){
+		riskType=null;
+	}
+	if(policyStatus==""){
+		policyStatus=null;
+	}
 var vm = new Vue({
 	el: '#list',
 	data: {

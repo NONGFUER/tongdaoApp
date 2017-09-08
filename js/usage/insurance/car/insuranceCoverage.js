@@ -1074,7 +1074,7 @@ function intoServicePage(n){
 	$("#title").html(bxCxPriserviceArr[n].serviceTitle);
 	$("#inner").html(bxCxPriserviceArr[n].serviceInfo);
 	$(".servicePage").show();
-	cxPriserviceFlag="1"
+	cxPriserviceFlag="1";
 	$(".mainPage").hide();
 	changeTitle("专属服务");
 }

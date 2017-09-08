@@ -8,13 +8,12 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	customerId = urlParm.customerId,
 	policyStatus = urlParm.policyStatus,
 	riskType = urlParm.riskType;
-	
-/*var transToken = '059876d99ec46c490953d04d4993da56';
-var userCode = '13601460140';
-var username = userCode + "",
-	policyStatus = null,
-	customerId = '20',
-	riskType = null;*/
+if(riskType == "") {
+	riskType = null;
+}
+if(policyStatus == "") {
+	policyStatus = null;
+}
 
 var vm = new Vue({
 	el: '#list',
@@ -63,7 +62,7 @@ $(function() {
 		if(flag == '') {
 			flag = null;
 		}
-		xinzhen(userCode, transToken, customerId,flag, riskType);
+		xinzhen(userCode, transToken, customerId, flag, riskType);
 	})
 })
 
@@ -79,7 +78,6 @@ function getPolicyList(data) {
 		modelAlert(data.status_message);
 	}
 }
-
 
 mui('.mui-scroll-wrapper').scroll({
 	deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
@@ -123,14 +121,14 @@ function shanchu(userCode, transToken, customerId, policyNo) {
 }
 
 function deleteMyPolicy(data) {
-	if(data.status_code=='000000'){
+	if(data.status_code == '000000') {
 		modelAlert('删除成功');
-	}else if(data.status_code=='123456'){
-		modelAlert(data.status_message,"",lognCont);
-	}else{
+	} else if(data.status_code == '123456') {
+		modelAlert(data.status_message, "", lognCont);
+	} else {
 		modelAlert(data.status_message);
 	}
-	
+
 }
 
 function chuli() {
@@ -182,6 +180,7 @@ function chuli() {
 function lognCont() {
 	loginControl();
 }
+
 function backlast() {
 	sysback();
 }

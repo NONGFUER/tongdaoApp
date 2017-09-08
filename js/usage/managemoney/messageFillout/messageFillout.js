@@ -9,11 +9,10 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
 	customerId = urlParm.customerId,
 	bankMaxMoney = urlParm.dayLimit,
 	transToken = urlParm.transToken,
-	invMobie = '13333333333', //引荐人手机号
+	invMobie = urlParm.invMobie, //引荐人手机号
 	riskSupportAbility = urlParm.riskSupportAbility, //类型
 	pieces = urlParm.pieces,
 	title = urlParm.title;
-
 if(title == null || title == "") {
 	title = urlParm.titles;
 }

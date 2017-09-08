@@ -77,7 +77,7 @@ $(function() {
 				var a = lingyu[i];
 				var flag = $.inArray(a, oldArray);
 				oldArray.splice(flag, 1);
-				str += '<div class="tag" name="' + lingyu[i] + '">' + toField(lingyu[i]) + '<sup class="deletesup" onclick="deletex(this)"><img alt="" src="../../image/account/delete.png"></sup></div>';
+				str += '<div class="tag" name="' + lingyu[i] + '">' + toField(lingyu[i]) + '<sup class="deletesup" onclick="deletex(this)"><img alt="" src="../../../image/account/delete.png"></sup></div>';
 			}
 			hideArray = oldArray; //选择器中的值
 			str += '<div class="tag addLingyu">+</div>';
@@ -117,7 +117,7 @@ $(function() {
 			if(showArray.length == 6) {
 				$(".addLingyu").hide();
 			}
-			var tag = '<div class="tag" name="' + tianjia + '">' + toField(tianjia) + '<sup class="deletesup" onclick="deletex(this)" ><img alt="" src="../../image/account/delete.png"></sup></div>';
+			var tag = '<div class="tag" name="' + tianjia + '">' + toField(tianjia) + '<sup class="deletesup" onclick="deletex(this)" ><img alt="" src="../../../image/account/delete.png"></sup></div>';
 			$(".addLingyu").before(tag);
 			$(".tag").each(function(i) {
 				$(this).click(function() {
@@ -138,20 +138,18 @@ $.setscroll = function() {
 function saveReq() {
 	var url = urlObj.myCardSaveUrl;
 	var reqData = {
-		request: {
-			"head": {
-				"channel": "01",
-				"userCode": userCode,
-				"transTime": "",
-				"transToken": transToken
-			},
-			"body": {
-				"loggingCustomerId": cardObj.id,
-				"customerId": cardObj.customerId,
-				"postcardIntroduction": $("#introarea").val(),
-				"postcardField": toArr(showArray),
-				"postcardPhone": $("#cardphone").val()
-			}
+		"head": {
+			"channel": "01",
+			"userCode": userCode,
+			"transTime": "",
+			"transToken": transToken
+		},
+		"body": {
+			"loggingCustomerId": customerId,
+			"customerId": customerId,
+			"postcardIntroduction": $("#introarea").val(),
+			"postcardField": toArr(showArray),
+			"postcardPhone": $("#cardphone").val()
 		}
 	}
 	$.reqAjaxs(url, reqData, savecard);
@@ -159,15 +157,23 @@ function saveReq() {
 
 function savecard(data) {
 	console.log(data);
-	var sendData = {
-		"customerId": cardObj.customerId,
-		"leftIco": '1',
-		"rightIco": '3',
-		"downIco": '0',
-		"title": '我的名片',
+	if(data.status_code == '000000') {
+		var sendData = {
+			"userCode":userCode,
+			"transToken":transToken,
+			"customerId": cardObj.customerId,
+			"leftIco": '1',
+			"rightIco": '3',
+			"downIco": '0',
+			"title": '我的名片',
+		}
+		var jsonStr = UrlEncode(JSON.stringify(sendData));
+		window.location.href = base.url + "tongdaoApp/html/agent/myCard/myCard.html?jsonKey=" + jsonStr;
+	} else if(data.status_code == '123456') {
+		modelAlert(data.status_message, '', lognCont);
+	} else {
+		modelAlert(data.status_message);
 	}
-	var jsonStr = UrlEncode(JSON.stringify(sendData));
-	window.location.href = base.url + "tongdaoApp/html/agent/myCard/myCard.html" + jsonStr;
 }
 /*
  * 上传图片接口请求
@@ -190,10 +196,10 @@ function uploadImg(img, id, userCode, transToken) {
 		}
 	}
 	$.reqAjaxs(url, reqData, function(data) {
-		if(data.status_code == "000000") {
+		if(data.statusCode == "000000") {
 			modelAlert("上传成功");
-		} else if(data.status_code == "123456") {
-			modelAlert(data.status_message, "", lognCont);
+		} else if(data.statusCode == "123456") {
+			modelAlert(data.statusMessage, "", lognCont);
 		} else {
 			modelAlert("上传失败");
 		}
@@ -220,7 +226,7 @@ function getWxQRCode(id, userCode, transToken) {
 			if(!data.returns.insuranceConsultantInfo.postcardWxImage) {
 				$(".erweima_img img").attr("src", "../../../image/account/add.png");
 			} else {
-				$(".erweima_img img").attr("src", data.returns.insuranceConsultantInfo.postcardWxImage);
+				$(".erweima_img img").attr("src", base.url+'App/img/'+data.returns.insuranceConsultantInfo.postcardWxImage);
 			}
 		}
 	});
@@ -337,7 +343,6 @@ function lognCont() {
 //保存
 /*$(".save").bind("tap", function() {*/
 function baocun() {
-	alert(1);
 	var ph = $("#cardphone").val()
 	if(!tit.regExp.isMobile(ph)) {
 		modelAlert("请输入正确的手机号！");
@@ -347,4 +352,7 @@ function baocun() {
 	}
 }
 
+function backlast() {
+	sysback();
+}
 /*});*/

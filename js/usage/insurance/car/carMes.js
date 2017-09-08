@@ -21,8 +21,6 @@ var inforCar ={};  //向下一个页面传参数的实体
 var parm;
 var cxSessionId;
 var carPlate="";//车牌
-var type = "";
-var idAuth = "";
 var mobile
 $(function() {
 	var str = window.location.search;
@@ -178,8 +176,6 @@ $(function() {
 		}
 	}
 	$.setscrollarea("indexpart");
-	/***获取用户角色****/
-	getAppInfo();
 	//车辆提示遮罩显示
     $(".howInput").bind("tap",function() {
       	$("#cjh,.shadow").show();
@@ -1477,33 +1473,6 @@ function selectChannel(){
 		});
 	});
 }
-
-
-/***获取用户角色****/
-function getAppInfo(){
-	idAuth="1";
-	type="3"
-//	if(parm.head.userName != ""&&parm.head.userName!=undefined){
-//		var url=base.url+"appUser/getCurrentUserInfo.do";
-//		var reqData={
-//				"head":{
-//					"userCode":"",
-//					"transTime":$.getTimeStr(),
-//					"channel":"1"
-//				},
-//				"body":{
-//					"userName": parm.head.userName  //手机号
-//				}		
-//		}
-//		$.reqAjaxs(url,reqData,function(data){
-//			if(data.statusCode == "000000"){
-//				type = data.returns.cutomerBasic.type;	
-//				idAuth = data.returns.cutomerBasic.idAuth; 
-//			}
-//		});
-//	}
-}
-
 
 
 

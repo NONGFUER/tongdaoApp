@@ -431,7 +431,7 @@ function toInsure(){
 	urlParm.cPieces = cPieces;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	if( roleType == "00" || roleType == "" ){
-		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype='online'";
+		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=online&openid="+openid+"&healthFlag="+healthFlag;
 	}else{
 		if( healthFlag == "y"){
 			window.location.href = "healthNotice.html?jsonKey="+jsonStr;

@@ -1,69 +1,18 @@
-var mobile="";//电话号码
-var productCode="";//产品编码
-var type = "";
-var idAuth = "";
 $(function(){
 	/* 设置滑动区域 */
 	$.setscroll();		
 	//获取剩余份数
-	$.getShengyu(cId);
+	$.getShengyu("21");
 	//领取
-	// getAppInfo();	
-		$(".lingqu").css("color","#ff6a00");
-		$(".lingqu").css("border","1px solid #ff6a00");
+	// getAppInfo();			
 		$(".lingqu").unbind("tap").bind("tap",function(){					
-			var parm={};
-			parm.mobile=mobile;
-			parm.productCode=productCode;
-			var jsonStr=UrlEncode(JSON.stringify(parm));
+			urlParm.title = "驾乘人员意外伤害保险";
+			urlParm.leftIco = "1";
+			urlParm.rightIco = "0";
+			urlParm.downIco = "0";
+			var jsonStr=UrlEncode(JSON.stringify(urlParm));			
 			window.location.href="jcxshouye.html?jsonKey="+jsonStr;
-		})			
-	
-	//赠送客户
-	if(mobile == ""||mobile == undefined){
-		$(".zengsong").unbind("tap").bind("tap",function(){
-		//alert("1"+" "+mobile);
-			//loginControl();
-		})
-	}else{
-		//alert(idAuth +" "+type);
-		if(idAuth == "1"){
-			if(type == "2" || type == "3" || type == "4"){
-			$(".zengsong").css("color","#1b6bb8");
-			$(".zengsong").css("border","1px solid #1b6bb8");
-			$(".zengsong").on("tap",function(){
-				//alert("2"+" "+mobile);
-				var parm={};
-				parm.mobile=mobile;
-				parm.productCode=productCode;
-				var jsonStr=UrlEncode(JSON.stringify(parm));
-		    	if(systemsource == "ios"){
-		    		var shareParam={
-		    				url:base.url+"App/html/jiachengxian/jcxshouyeShare.html?jsonKey="+jsonStr,
-		    				flag:"2",
-		    				title:"免费领取20万驾乘意外险",
-		    				desc:"驾车乘车都能保，20万保额免费送！",
-		    				descQuan:"免费领取20万驾乘意外险，驾车乘车都能保！",
-		    				picUrl:"http://td-sit.ta-by.com/tongdaoPlatform/App/images/jiachenxianfenx.png"
-		    		}
-					objcObject.share(shareParam);
-				}else if(systemsource == "android"){
-					android.JsShareBy("4","免费领取20万驾乘意外险","驾车乘车都能保，20万保额免费送！","免费领取20万驾乘意外险，驾车乘车都能保！",base.url+"App/html/jiachengxian/jcxshouyeShare.html?jsonKey="+jsonStr);
-				}
-		    });
-			}else{
-				$(".zengsong").unbind("tap").bind("tap",function(){
-					//registerControl();
-				});
-			}
-		}else{
-			$(".zengsong").unbind("tap").bind("tap",function(){
-				//registerControl();
-			});
-		}
-	}
-	
-	//
+		})	
 })
 //获取剩余份数,领取记录
 $.getShengyu=function(cId){
@@ -72,7 +21,8 @@ $.getShengyu=function(cId){
 			"head":{
 				"channel": "01",
 			    "userCode": mobile,
-			    "transTime": ""
+			    "transTime": "",
+			    "transToken":transToken
 			},"body":{
 				"phone": mobile,  //手机号
 			    "commmodityId": cId   //产品编码

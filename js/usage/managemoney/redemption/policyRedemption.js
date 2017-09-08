@@ -41,7 +41,8 @@ $(function() {
 		},
 		"body": {
 			"commodityCommId": commodityCommId,
-			"orderNo": orderNo
+			"orderNo": orderNo,
+			"customerId": customerId
 		}
 	}
 	var url = base.url + 'moneyManage/redemptionTrial.do';
@@ -58,6 +59,7 @@ $(function() {
 				"orderNo": orderNo,
 				"policyNo": vm.Objectlist.hKCalculate.policyNo,
 				"insureNo": insureNo,
+				"customerId": customerId
 			}
 		}
 		var url = base.url + 'hkRedemption/getRedemption.do';
@@ -77,6 +79,7 @@ function getRedemption(data) {
 				"orderNo": orderNo,
 				"insureNo": insureNo,
 				"policyNo": vm.Objectlist.hKCalculate.policyNo,
+				"customerId": customerId
 			},
 			"head": {
 				"userCode": userCode,
