@@ -82,7 +82,7 @@ function rankMonthDataRender(dataValue) {
 		var renderStr = "";
 		var ranklist = dataValue.returns.agentArmory;
 		var agentArmory = dataValue.returns.agentArmory;
-		var paihang = '';
+		var paiming = '';
 		agentArmory.forEach(function(key, value) {
 			if(key.id == customerId) {
 				paiming = key.rankOrder;
@@ -118,8 +118,17 @@ function rankMonthDataRender(dataValue) {
 			}
 			for(var i = 0; i < ranklist.length; i++) {
 				var heroName = ranklist[i].name;
+				if(ranklist[i].workProvinceName==null){
+					ranklist[i].workProvinceName="";
+				}
+				if(ranklist[i].workCityName==null){
+					ranklist[i].workCityName="";
+				}
 				var heroCity = ranklist[i].workProvinceName + '' + ranklist[i].workCityName;
 				if(!heroCity) {
+					heroCity = "不详"
+				}
+				if(heroCity=='nullnull') {
 					heroCity = "不详"
 				}
 				if(!heroName) {
@@ -188,7 +197,7 @@ function rankYearDataRender(dataValue) {
 		var agentArmory = dataValue.returns.agentArmory;
 		var count = dataValue.returns.count;
 		var amount = dataValue.returns.amount;
-		var paihang = '';
+		var paiming = '';
 		agentArmory.forEach(function(key, value) {
 			if(key.id == customerId) {
 				paiming = key.rankOrder;
@@ -327,3 +336,11 @@ $.setscroll = function() {
 	$("#rank_scroll").height(Scrollheight + "px");
 	mui("#rank_scroll").scroll();
 };
+/*登录失效*/
+function lognCont() {
+	loginControl();
+}
+
+function backlast() {
+	sysback();
+}

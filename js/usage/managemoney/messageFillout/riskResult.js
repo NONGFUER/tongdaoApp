@@ -85,13 +85,16 @@ function product() {
 	function saveRiskAbles(data) {
 		if(data.statusCode == '000000') {
 			var sendData = {
-				"insurePhone": mobile,
+				"insurePhone": productCode,
 				"customerId": customerId,
 				"commodityCombinationId": commodityCombinationId,
 				"userCode": productCode,
 				"commodityId": commodityId,
 				"transToken": transToken,
 				"title": titles,
+				"leftIco": '1',
+				"rightIco": '0',
+				"downIco": '0',
 			}
 			var jsonStr = JSON.stringify(sendData);
 			jsonStr = UrlEncode(jsonStr);
@@ -104,7 +107,7 @@ function buy() {
 	var reqData = {
 		"body": {
 			"userPhone": mobile,
-			"resultRisk": "1",
+			"resultRisk": testType,
 			"customerId": customerId,
 		},
 		"head": {
@@ -121,7 +124,7 @@ function buy() {
 		if(data.statusCode == '000000') {
 			var sendData = {
 				"riskSupportAbility": testType,
-				"insurePhone": mobile,
+				"insurePhone": productCode,
 				"userCode": productCode,
 				"customerId": customerId,
 				"commodityCombinationId": commodityCombinationId,

@@ -4,6 +4,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
 		<title>保险顾问</title>
 		<link rel="stylesheet" type="text/css" href="../../css/lib/widget/mui/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/lib/common/base.css" />
@@ -18,7 +22,7 @@
 					<div class="man-div-body " v-cloak>
 						<ul class="man-div-body-ul ">
 							<li class="man-div-body-li mb10" v-for="(value,key) in Objectitle">
-								<i class="xuan"></i>
+								<i class="xuan" v-if='key==0'></i>
 								<span class="first">
 									<img class="imgzhao"  v-bind:src="value.postcardWxImage==''?'../../image/insuranceConsultant/1.png':urlimg+value.postcardWxImage">
 									<span class="renzheng">
@@ -36,7 +40,7 @@
 							</li>
 							<li class='huise'>
 								<span>手机号码：</span>
-								<span v-html="value.postcardPhone"></span>
+								<span v-html="value.userPhone"></span>
 							</li>
 							<li class='huise'> <span>业务员代码：</span>
 								<span v-html="value.agentCode"></span>

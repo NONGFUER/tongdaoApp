@@ -123,7 +123,6 @@ $(function() {
 				whereCode = whereCode.split(",");
 				buyPrem = $('#money').html().split('.');
 				var startPrem = Number(buyPrem[0]) * Number(vm.feilvshuzi);
-				/*vm.Objectitle.insureInfo.insureIdNO = '420625199202080010';*/
 				beiName = vm.Objectitle.insureInfo.insureName;
 				var redata = {
 					"head": {
@@ -397,11 +396,6 @@ function saveOrder(data) {
 		orderNo = data.returns.OrderNo;
 		insureNo = data.returns.ProposalNo;
 		$('.note').show();
-		//		if(productCode == "006199002") {
-		//			var productFlag = "02"
-		//		} else if(productCode = "006199001") {
-		//			var productFlag = "01"
-		//		}
 		/*触发短信接口*/
 		$(".note-div-btn").unbind("tap").bind("tap", function() {
 			if($('#yan').val() != null && $('#yan').val() != "") {
@@ -447,7 +441,7 @@ $("#risktype").unbind("tap").bind("tap", function() {
 	var sendData = {
 		"head": {
 			"channel": "01",
-			"userCode": "2835",
+			"userCode": userCode,
 			"transTime": "",
 			"transToken": transToken,
 			"riskSupportAbility": riskSupportAbility
@@ -455,8 +449,11 @@ $("#risktype").unbind("tap").bind("tap", function() {
 		"body": {
 			"returnflag": "",
 			"testType": "",
-			"mobile": phone,
-			"customerId": commodityCombinationId,
+			"mobile": userCode,
+			"customerId": customerId,
+			"insurePhone": userCode,
+			"commodityId":commodityId,
+			"commodityCombinationId": commodityCombinationId,
 			"productCode": userCode
 		},
 		'title': '风险评估',

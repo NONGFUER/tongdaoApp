@@ -26,6 +26,14 @@ $(function(){
     //根据保费试算项进行保费试算
     sendCaldoRequest( ccId );
     //calOptionsRender(data4);
+    showRightIcon();
+    /**拨打电话*/
+	$(".kefu").unbind("tap").bind("tap",function(){
+    	callService("4006895505",".kefuPhone");
+    })
+    $(".rexian").unbind("tap").bind("tap",function(){
+    	callService("95505",".rexian");
+    })
 });
 
 //根据保费试算项进行保费试算
@@ -299,6 +307,8 @@ function moduleStr(mapperList){
 			}	    
 		}else if( mapperList.moduleType == "03" ){//链接
 			str += '<span class="btn1 fl" onclick="toArticle()">合同条款</span><a href="'+mapperList.modueInfo+'" class="btn1 ri" id="hetongDemo">合同样张</a>'
+		}else if(  mapperList.moduleType == "01"  ){
+			str += '<img src="' + mapperList.modueInfo + '" class="mb10">';
 		}      								
 		str += '</dd></dl>';
 	}
@@ -409,17 +419,23 @@ function changeDate(id){
 
 function buyBind(){
 	$("#toubao").unbind('tap').bind('tap',function(){
-		toInsure();
+		//微信与app不同		
+		if( healthFlag == "y"){
+			toHealthHtml();
+		}else{
+			toInsure();
+		}				
 	});	
 }
-
+//跳转到投保页面
 function toInsure(){
 	if($("div[name='versions']").length != 0){
 		cId = $("div[name='versions']").find(".on").attr("data-cid");
 		cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
-		alert(cId+":"+cName);
+		cVersion = $("div[name='versions']").attr("data-value");
+		//alert(cId+":"+cName);
 	}
-	title = "投保"
+	title = "投保信息"
 	urlParm.cId = cId;
 	urlParm.cName = cName;
 	urlParm.cPrem = cPrem;
@@ -429,20 +445,41 @@ function toInsure(){
 	urlParm.downIco = "0"
 	urlParm.calChoices = calChoices;
 	urlParm.cPieces = cPieces;
+	urlParm.cVersion = cVersion;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	if( roleType == "00" || roleType == "" ){
-		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=online&openid="+openid+"&healthFlag="+healthFlag;
+		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=online&openid="+openid;
 	}else{
-		if( healthFlag == "y"){
-			window.location.href = "healthNotice.html?jsonKey="+jsonStr;
-		}else{
-			window.location.href = "insure.html?jsonKey="+jsonStr;
-		}
-		
+		window.location.href = "insure.html?jsonKey="+jsonStr;
 	}
 	
 }
-
+//跳转到健康告知页面
+function toHealthHtml(){
+	if($("div[name='versions']").length != 0){
+		cId = $("div[name='versions']").find(".on").attr("data-cid");
+		cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
+		cVersion = $("div[name='versions']").attr("data-value");
+	}
+	title = "健康告知"
+	urlParm.cId = cId;
+	urlParm.cName = cName;
+	urlParm.cPrem = cPrem;
+	urlParm.title = title;
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0"
+	urlParm.calChoices = calChoices;
+	urlParm.cPieces = cPieces;
+	urlParm.cVersion = cVersion;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	if( roleType == "00" || roleType == "" ){
+		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineHealth&openid="+openid;
+	}else{
+		window.location.href = "healthNotice.html?jsonKey="+jsonStr;
+	}
+	
+}
 function shareHandle(){
 	var shareList = getProductShare(ccId);
 	var title = shareList[0] ;
@@ -451,4 +488,6 @@ function shareHandle(){
 	var picUrl = getProductSharePic(ccId);
 	shareMethod(shareurl,title,desc,"baodan",picUrl);		
 };
-
+function backlast(){
+	sysback();
+}

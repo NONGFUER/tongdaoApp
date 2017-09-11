@@ -61,7 +61,15 @@ $(function() {
 	})
 	$(".phone").unbind("tap").bind("tap", function() {
 		var phone = $(this).attr('phone');
-		callService(phone, ".kefuPhone");
+		if(phone==""||phone==null){
+			modelAlert('请点击编辑添加手机号');
+		}else{
+			callService(phone, ".kefuPhone");
+		}
+	})
+	/*点击关闭*/
+	$(".spanClose").unbind("tap").bind("tap", function() {
+		$('.popup').hide();
 	})
 })
 
@@ -78,11 +86,13 @@ function getBusinessCard(data) {
 				vm.postcardPhone = data.returns.insuranceConsultantInfo.postcardPhone;
 				vm.agentCode = data.returns.insuranceConsultantInfo.agentCode;
 				vm.practiceCode = data.returns.insuranceConsultantInfo.practiceCode;
-				vm.insuranceConsultantType=insurantype(data.returns.insuranceConsultantInfo.insuranceConsultantType);
+				vm.insuranceConsultantType = insurantype(data.returns.insuranceConsultantInfo.insuranceConsultantType);
 				if(data.returns.insuranceConsultantInfo.postcardWxImage != null && data.returns.insuranceConsultantInfo.postcardWxImage != "") {
-					vm.weixin =base.url+'App/img/'+ data.returns.insuranceConsultantInfo.postcardWxImage;
+					vm.weixin = base.url + 'tongdaoApp/img/wxQRCode/' + data.returns.insuranceConsultantInfo.postcardWxImage;
+					$('.popup_content img').attr('src', vm.weixin);
 				} else {
 					vm.weixin = '';
+					$('.popup_content').attr('src', vm.weixin);
 				}
 			}
 			if(shan != null && shan != "") {
@@ -133,7 +143,7 @@ function bianji() {
 			"agentCode": vm.agentCode,
 			"practiceCode": vm.practiceCode,
 			"introinfo": jie,
-			"customerId":customerId,
+			"customerId": customerId,
 			"field": shan,
 			"touxiang": $(".tou img").attr("src"),
 		},
@@ -198,7 +208,7 @@ function toField(str) {
 /*保险顾问类型*/
 function insurantype(str) {
 	var field = "";
-	 if(str == "02") {
+	if(str == "02") {
 		field = "代理人"
 	} else if(str == "03") {
 		field = "客户经理"
@@ -207,10 +217,11 @@ function insurantype(str) {
 	} else if(str == "05") {
 		field = "团队人员"
 	} else if(str == "06") {
-		field = "2k代理人"
+		field = "代理人"
 	}
 	return field;
 }
+
 /*登录失效*/
 function lognCont() {
 	loginControl();

@@ -130,5 +130,5 @@ function backlast() {
 		"title": title,
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
-	window.location.href = "policyRedemption.html?jsonKey=" + jsonStr;
+	window.location.href =base.url + "tongdaoApp/html/managemoney/redemption/policyRedemption.html?jsonKey=" + jsonStr;
 }

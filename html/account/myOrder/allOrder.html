@@ -4,6 +4,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
 		<title>全部订单</title>
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
@@ -17,16 +21,16 @@
 				<div class="man mui-table-view">
 					<div class="man-div-title ">
 						<ul>
-							<li class="li_xuan">全部</li>
-							<li>待支付</li>
-							<li>已支付</li>
-							<li>已关闭</li>
+							<li orderStatus='' class="li_xuan">全部</li>
+							<li orderStatus='01'>待支付</li>
+							<li orderStatus='02'>已支付</li>
+							<li orderStatus='03'>已关闭</li>
 						</ul>
 					</div>
 					<div id='list' class="man-div-body " v-cloak>
 						<ul class="man-div-body-ul ">
 							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist">
-								<div v-if="value.baozhang=='已关闭'" class="mui-slider-right mui-disabled shanchu">
+								<div v-if="value.orderStatus=='3'" class="mui-slider-right mui-disabled shanchu">
 									<a class="mui-btn mui-btn-red">
 										<i class="lajitong"></i>
 										<span>删除</span>
@@ -35,11 +39,11 @@
 								<div class="man-div-body-ul_li_div mui-slider-handle">
 									<ul class="man-div-body-ul_li_div_ul1">
 										<li>
-											<span v-html="'保单号:'+value.policyNo">保单号:&nbsp;8888888888888888</span>
+											<span v-html="'订单号:'+value.orderNo">订单号:&nbsp;8888888888888888</span>
 											<span v-html="value.orderStatus" class="baozhang"></span>
 										</li>
 										<li>
-											<span v-html="value.commodityName">少儿高发恶性肿瘤险</span>
+											<span v-html="value.commodityName+''+value.cxCommodityName==null?value.cxCommodityName=='':value.commodityName+value.cxCommodityName">少儿高发恶性肿瘤险</span>
 											<span v-html="value.companyName">天安财险承保</span>
 										</li>
 									</ul>
@@ -50,7 +54,7 @@
 											<span v-html="value.insuredName">陈某人</span>
 										</li>
 										<li>
-											<span >保费</span>
+											<span>保费</span>
 											<span v-html="value.prem">1000.00元</span>
 										</li>
 										<li>
@@ -75,6 +79,7 @@
 	<script src="../../../js/lib/common/zepto.min.js"></script>
 	<script src="../../../js/lib/common/base.js"></script>
 	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/common/titPackage.js"></script>
 	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
 	<script src="../../../js/usage/account/myOrder/allOrder.js"></script>
 

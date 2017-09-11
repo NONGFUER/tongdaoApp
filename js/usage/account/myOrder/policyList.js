@@ -6,13 +6,17 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	roleType = urlParm.roleType,
 	transToken = urlParm.transToken,
 	customerId = urlParm.customerId,
-	policyStatus = urlParm.policyStatus,
-	riskType = urlParm.riskType;
+	tagId = urlParm.tagId,
+	policyStatus = null,
+	riskType = null;
 if(riskType == "") {
 	riskType = null;
 }
 if(policyStatus == "") {
 	policyStatus = null;
+}
+if(tagId == "") {
+	tagId = null;
 }
 
 var vm = new Vue({
@@ -39,7 +43,7 @@ var vm = new Vue({
 })
 
 $(function() {
-	xinzhen(userCode, transToken, customerId, policyStatus, riskType)
+	xinzhen(userCode, transToken, customerId, policyStatus, riskType, tagId)
 	mui('#list').on('tap', '.mui-btn', function() {
 		var elem = this;
 		var li = elem.parentNode.parentNode;
@@ -55,15 +59,6 @@ $(function() {
 			}
 		});
 	})
-	mui('.man-div-title ul').on('tap', 'li', function() {
-		$('.man-div-title ul').children('li').removeClass('li_xuan');
-		$(this).addClass('li_xuan');
-		var flag = $(this).attr('orderStatus');
-		if(flag == '') {
-			flag = null;
-		}
-		xinzhen(userCode, transToken, customerId, flag, riskType);
-	})
 })
 
 function getPolicyList(data) {
@@ -71,6 +66,8 @@ function getPolicyList(data) {
 	if(data.status_code == '000000') {
 		if(data.returns.length > 0) {
 			vm.Objectlist = data.returns;
+		} else {
+			vm.Objectlist = {};
 		}
 	} else if(data.status_code == '123456') {
 		modelAlert(data.status_message, '', lognCont);
@@ -83,13 +80,14 @@ mui('.mui-scroll-wrapper').scroll({
 	deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
 });
 
-function xinzhen(userCode, transToken, customerId, policyStatus, riskType) {
+function xinzhen(userCode, transToken, customerId, policyStatus, riskType, tagId) {
 	var reqData = {
 		"body": {
 			"loggingCustomerId": customerId,
 			"customerId": customerId,
 			"policyStatus": policyStatus,
 			"riskType": riskType,
+			"tagId": tagId,
 		},
 		"head": {
 			"channel": "01",
@@ -99,7 +97,7 @@ function xinzhen(userCode, transToken, customerId, policyStatus, riskType) {
 		}
 	}
 	var url = base.url + 'personal/getPolicyList.do';
-	$.reqAjaxsFalse(url, reqData, getPolicyList);
+	$.toreqAjaxs(url, reqData, getPolicyList);
 }
 /*删除*/
 function shanchu(userCode, transToken, customerId, policyNo) {
@@ -117,7 +115,7 @@ function shanchu(userCode, transToken, customerId, policyNo) {
 		}
 	}
 	var url = base.url + 'personal/deleteMyPolicy.do';
-	$.reqAjaxsFalse(url, reqData, deleteMyPolicy);
+	$.toreqAjaxs(url, reqData, deleteMyPolicy);
 }
 
 function deleteMyPolicy(data) {
@@ -175,6 +173,42 @@ function chuli() {
 		}
 	})
 }
+
+function mylist(userCode, transToken, customerId, riskType, orderStatus, tagId) {
+	userCode = userCode;
+	transToken = transToken;
+	customerId = customerId;
+	riskType = riskType;
+	policyStatus = orderStatus;
+	tagId = tagId;
+	if(policyStatus == '') {
+		policyStatus = null;
+	}
+	if(riskType == '') {
+		riskType = null;
+	}
+	xinzhen(userCode, transToken, customerId, policyStatus, riskType, tagId);
+	mui('.man-div-title ').on('tap', 'li', function() {
+		console.log(1);
+		$('.man-div-title ul').children('li').removeClass('li_xuan');
+		$(this).addClass('li_xuan');
+		var policyStatus = $(this).attr('policyStatus');
+		if(policyStatus == "") {
+			policyStatus = null;
+		}
+		xinzhen(userCode, transToken, customerId, policyStatus, riskType, tagId)
+	})
+}
+mui('.man-div-title ').on('tap', 'li', function() {
+	console.log(1);
+	$('.man-div-title ul').children('li').removeClass('li_xuan');
+	$(this).addClass('li_xuan');
+	var policyStatus = $(this).attr('policyStatus');
+	if(policyStatus == "") {
+		policyStatus = null;
+	}
+	xinzhen(userCode, transToken, customerId, policyStatus, riskType, tagId)
+})
 
 /*登录失效*/
 function lognCont() {

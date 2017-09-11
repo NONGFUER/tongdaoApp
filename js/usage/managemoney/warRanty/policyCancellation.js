@@ -34,7 +34,7 @@ $(function() {
 			"transToken": transToken
 		},
 		"body": {
-			"commodityComId": commodityComId,
+			"commodityCommId": commodityComId,
 			"orderNo": orderNo,
 			"customerId": customerId
 		}

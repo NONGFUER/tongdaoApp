@@ -15,7 +15,8 @@ var COMMODITYCOMBINE_ID ={
 	    "LLHM" : "10",	//邻里和睦	    
 	    "SWFR" : "11",	//商务飞人
 	    "XPXSX": "12",   //码上长大(省心版)
-	    "XPXAX": "12"    //码上长大(省心版)
+	    "XPXAX": "12",    //码上长大(省心版)
+	    "GHX"  : "14"
 	}
 var COMMODITY_ID ={
 		"MCAN" : "1",
@@ -122,11 +123,22 @@ var cName = urlParm.cName ? urlParm.cName : "";
 var ccName = urlParm.ccName ? urlParm.ccName : "";
 var cPrem = urlParm.cPrem ? urlParm.cPrem : "";
 var cPieces	= urlParm.cPieces ? urlParm.cPieces : "1";
+var cVersion = urlParm.cVersion ? urlParm.cVersion : "01";
 var coverage = "";
 var title = "";
 var leftIco = "";
 var rightIco = "";
 
+//挂号线
+var ghxDicChannel = urlParm.ghxDicChannel ? urlParm.ghxDicChannel : "";
+var ghxDicCode = urlParm.ghxDicCode ? urlParm.ghxDicCode : "";
+var ghxRemark = urlParm.ghxRemark ? urlParm.ghxRemark : "";
+var isA = urlParm.isA ? urlParm.isA : "0";
+var fumuFlag = urlParm.fumuFlag ? urlParm.fumuFlag : "0";
+var peiouFlag = urlParm.peiouFlag ? urlParm.peiouFlag : "0";
+var zinvFlag = urlParm.zinvFlag ? urlParm.zinvFlag : "0";
+var qitaFlag = urlParm.qitaFlag ? urlParm.qitaFlag : "0";
+var banbenFlag = urlParm.banbenFlag ? urlParm.banbenFlag : "01";
 var PRODUCT_SHARE = {
 		"MCAN" : "男性百万恶性肿瘤险-直付100万，全球抗癌疾病保险，15元起,"+name+"为你推荐男性百万恶性肿瘤险。",		
 		"FCAN" : "女性百万恶性肿瘤险-直付100万，全球抗癌疾病保险，70元起,"+name+"为你推荐女性百万恶性肿瘤险。",		

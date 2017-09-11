@@ -3,7 +3,12 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 -->
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
 		<title>常用保险人</title>
 		<link rel="stylesheet" type="text/css" href="../../css/lib/widget/mui/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/lib/common/base.css" />

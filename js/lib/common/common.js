@@ -125,26 +125,34 @@ function callService(phone, obj) {
 		}
 	}
 }
+/*调用壳方法，发短信 */
+function callSendMessage(phone){
+	if(systemsource == "ios") {
+		objcObject.sendMessage(phone);
+	} else if(systemsource == "android") {
+		android.JsSendSms(phone);
+	}
+}
 //同道出行车险 壳上分享方法
-function cxShareMethod(cxSessionId){
-	var shareStr={
-		"body":{
-			"cxSessionId":cxSessionId
+function cxShareMethod(cxSessionId) {
+	var shareStr = {
+		"body": {
+			"cxSessionId": cxSessionId
 		}
 	}
 	shareStr = JSON.stringify(shareStr);
 	shareStr = UrlEncode(shareStr); // 加密过后的操作
-	var shareurl=base.url+'weixin/wxcar/html/carinsure/shareOrderDetail.html?jsonKey='+shareStr;// 分享链接
-	if(systemsource == "ios"){
-		var shareParams={
-			"url":shareurl,
-			"flag":"1",
+	var shareurl = base.url + 'weixin/wxcar/html/carinsure/shareOrderDetail.html?jsonKey=' + shareStr; // 分享链接
+	if(systemsource == "ios") {
+		var shareParams = {
+			"url": shareurl,
+			"flag": "1",
 			"title": "同道出行", // 分享标题
-		    "desc": "专业车险在线展业平台"//描述
+			"desc": "专业车险在线展业平台" //描述
 		}
 		objcObject.share(shareParams)
-	}else if(systemsource == "android"){
-		android.JsShareBy("2","同道出行","专业车险在线展业平台","",shareurl);
+	} else if(systemsource == "android") {
+		android.JsShareBy("2", "同道出行", "专业车险在线展业平台", "", shareurl);
 	}
 }
 //防癌险 壳上分享方法
@@ -284,41 +292,40 @@ mui('.mui-scroll-wrapper').scroll({
 	deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
 });
 //设置头部
-function setTitleMethod(back,tittle,type){
-	if(systemsource == "ios"){
-		var titleParams={
-				"back":back,
-				"tittle":tittle,
-				"type":type			    
+function setTitleMethod(back, tittle, type) {
+	if(systemsource == "ios") {
+		var titleParams = {
+			"back": back,
+			"tittle": tittle,
+			"type": type
 		}
 		objcObject.setTittle(titleParams)
-	}else if(systemsource == "android"){
-		android.setTittle(back,tittle,type);
+	} else if(systemsource == "android") {
+		android.setTittle(back, tittle, type);
 	}
 }
 
-
 /**改变壳上标题****/
-function changeTitle(title){
-	if(systemsource == "ios"){
+function changeTitle(title) {
+	if(systemsource == "ios") {
 		objcObject.changeTitle(title)
-	}else if(systemsource == "android"){
+	} else if(systemsource == "android") {
 		android.changeTitle(title);
 	}
 }
 //控制头部右边按钮的显示
-function showRightIcon(){
-	if(systemsource == "ios"){
+function showRightIcon() {
+	if(systemsource == "ios") {
 		objcObject.showRight()
-	}else if(systemsource == "android"){
+	} else if(systemsource == "android") {
 		android.setShareVisible();
 	}
 }
 
-function isLogin(roletype,method){
-	if(roletype == "00" || roletype == ""){
+function isLogin(roletype, method) {
+	if(roletype == "00" || roletype == "") {
 		loginControl();
-	}else{
+	} else {
 		method();
 	}
 }
@@ -329,3 +336,17 @@ function isLogin(roletype,method){
 //		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?fromtype="+ fromtype +"&openid="+openid;
 //	}
 //}
+
+function ChangeDateFormat(jsondate) {
+	jsondate = jsondate.replace("/Date(", "").replace(")/", "");
+
+	if(jsondate.indexOf("+") > 0) {
+		jsondate = jsondate.substring(0, jsondate.indexOf("+"));
+	} else if(jsondate.indexOf("-") > 0) {
+		jsondate = jsondate.substring(0, jsondate.indexOf("-"));
+	}
+	var date = new Date(parseInt(jsondate, 10));
+	var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+	var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+	return date.getFullYear() + "-" + month + "-" + currentDate + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+};

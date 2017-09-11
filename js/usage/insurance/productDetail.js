@@ -127,16 +127,6 @@ function calOptionsRender(data){
            }          
            str += '<div class="label">' + calName+ '：</div>';
            str += '<div class="conter" id="' + calCode + '">';
-           //str += tempStr;
-//           if( showType == 'date'){        	   
-//        	   str += '<input id="birthdate" type="text" readonly="readonly">';
-//           }else if( showType == 'listArea' ){
-//        	   str += calDetails;
-//           }else if( showType == 'label' ){
-//        	   str += calOptions[0].enuContent;
-//           }else if( showType == 'list' ){
-//        	   str += listChoice;
-//           }        
            str += '</div>';
            $(".insurance-choice").append(str); 
            appendStr(showType,calOptions,calCode);
@@ -307,6 +297,8 @@ function moduleStr(mapperList){
 			}	    
 		}else if( mapperList.moduleType == "03" ){//链接
 			str += '<span class="btn1 fl" onclick="toArticle()">合同条款</span><a href="'+mapperList.modueInfo+'" class="btn1 ri" id="hetongDemo">合同样张</a>'
+		}else if(  mapperList.moduleType == "01"  ){
+			str += '<img src="' + mapperList.modueInfo + '" class="mb10">';
 		}      								
 		str += '</dd></dl>';
 	}
@@ -429,6 +421,7 @@ function toInsure(){
 	if($("div[name='versions']").length != 0){
 		cId = $("div[name='versions']").find(".on").attr("data-cid");
 		cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
+		cVersion = $("div[name='versions']").attr("data-value");
 		//alert(cId+":"+cName);
 	}
 	title = "投保信息"
@@ -451,7 +444,7 @@ function toHealthHtml(){
 		cId = $("div[name='versions']").find(".on").attr("data-cid");
 		cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
 		cVersion = $("div[name='versions']").attr("data-value");
-		alert(cId+":"+cName);
+		//alert(cId+":"+cName);
 	}
 	title = "健康告知"
 	urlParm.cId = cId;

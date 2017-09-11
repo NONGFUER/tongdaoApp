@@ -44,7 +44,7 @@ $(function() {
 		if ($.isNull(searchText) || searchText == "请输入关键字点击查询") {
 			modelAlert("请输入查询关键字！");
 		} else {
-
+			$("#customManageWrapper").css("transform","translate3d(0px, 0px, 0px)");
 			$("#searchcustomer").empty();
 			vehicleModelList = new Array();
 			pageIndex = 1;
@@ -225,7 +225,7 @@ function pullupRefreshlist(){
 }
 /*设置滑动区域*/
 $.setscroll = function(){
-	var Scrollheight = window.innerHeight- 138;
+	var Scrollheight = window.innerHeight- 94;
 	$("#wrapper").height(Scrollheight + "px");
 	mui("#wrapper").scroll();
 };

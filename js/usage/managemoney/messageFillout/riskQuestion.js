@@ -496,7 +496,7 @@ $.submitDataCallBack = function(param) {
 	if(param.statusCode == "000000") {
 		var jsonObj = {
 			"head": {
-				"userCode":userCode,
+				"userCode":productCode,
 				"transToken": transToken
 			},
 			"body": {
@@ -517,9 +517,9 @@ $.submitDataCallBack = function(param) {
 		jsonStr = UrlEncode(jsonStr);
 		window.location.href = "riskResult.html?jsonKey=" + jsonStr;
 	}else if(param.statusCode == "123456"){
-		modelAlert(data.statusMessage,"",lognCont);
+		modelAlert(param.statusMessage,"",lognCont);
 	}else{
-		modelAlert(data.statusMessage);
+		modelAlert(param.statusMessage);
 	}
 
 };
@@ -589,8 +589,8 @@ function tps(tempScore) {
 }
 function backlast() {
 	var sendData = {
-		"userCode": userCode,
-		"insurePhone": userCode,
+		"userCode": productCode,
+		"insurePhone": productCode,
 		"commodityId":commodityId,
 		"customerId":customerId,
 		"transToken":transToken,

@@ -25,7 +25,8 @@ $.getShengyu=function(cId){
 			    "transToken":transToken
 			},"body":{
 				"phone": mobile,  //手机号
-			    "commmodityId": cId   //产品编码
+			    "commmodityId": cId,   //产品编码
+			    "customerId":customerId
 			}
 	}
 	$.reqAjaxs(url,reqData,function(data){

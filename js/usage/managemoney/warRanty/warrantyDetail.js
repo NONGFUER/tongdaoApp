@@ -57,8 +57,28 @@ $(function() {
 	mui('.man-div-body-ul_li_div_btn').on('tap', '#huifang', function() {
 		mui.alert('确认');
 		/*接口请求位子*/
+		var reqData = {
+				"head": {
+					"userCode": userCode,
+					"channel": "01",
+					"transTime": $.getTimeStr(),
+					"transToken": transToken
+				},
+				"body": {
+					"orderNo": orderNo,
+					"customerId": customerId,
+					"policyNo":policyNo
+				}
+			}
+			var url = base.url + 'hkRedemption/getReview.do';
+			console.log("页面初始化，发送请求报文--");
+			$.reqAjaxsFalse(url, reqData, getReview);
 	})
 
+	
+	function getReview(data){
+		console.log(data)
+	}
 	$(".baodan").unbind("tap").bind("tap", function() {
 		/*正式版使用接口↓*/
 		window.location.href = base.url + vm.Objectitle.bxPolicyFinance.policyForm;
@@ -116,6 +136,40 @@ function getRedemption(data) {
 		modelAlert(data.statusMessage, '', lognCont);
 	} else {
 		modelAlert(data.statusMessage);
+	}
+}
+
+
+
+
+/*页面信息*/
+function policyQueryListInfo(data) {
+	console.log(data)
+	vm.Objectitle = data.returns;
+}
+/*退保试算*/
+function getRedemption(data) {
+	console.log(data);
+	if(data.statusCode != '000000') {
+		mui.alert(data.statusMessage);
+	} else {
+		var reqData = {
+			"orderNo": data.returns.redemptionDto.orderNo,
+			"insureNo": insureNo,
+			"policyNo": data.returns.redemptionDto.policyNo,
+			"customerId": customerId,
+			"commodityComId": commodityComId,
+			"userCode": data.userCode,
+			"transTime": "",
+			"channel": "01",
+			"transToken": transToken,
+			"title": title,
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '0',
+		}
+		var jsonStr = UrlEncode(JSON.stringify(reqData));
+		window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/policyCancellation.html?jsonKey=" + jsonStr;
 	}
 }
 /*截取银行卡号*/

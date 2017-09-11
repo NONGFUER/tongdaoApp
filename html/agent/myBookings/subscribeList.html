@@ -4,6 +4,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
 		<title>预约列表</title>
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
@@ -12,9 +16,9 @@
 	</head>
 
 	<body>
-		<div class="mui-content mui-scroll-wrapper" id='list' v-cloak>
+		<div class="mui-content mui-scroll-wrapper" id='list'>
 			<div class="mui-scroll">
-				<ul class="mui-table-view man">
+				<ul class="mui-table-view man" v-cloak>
 					<li class="mui-media man-li" v-for="(value, key) in objectlist" v-bind:yuyueNo='value.yuyueNo' v-bind:customerId='value.customerId' v-bind:commodityCombinationId='value.commodityCombinationId' v-bind:yuyuePhone='value.yuyuePhone' v-bind:yuyueName='value.yuyueName'>
 						<div class="man-li_title">
 							<h3 class="h3-list_title" v-html="value.commodityCombinationName" >【10年交】华夏健康人生重大疾病保险</h3>

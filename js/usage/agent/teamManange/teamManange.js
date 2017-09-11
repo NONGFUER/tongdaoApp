@@ -3,7 +3,7 @@ mui.init();
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	transToken = urlParm.transToken,
-	customerId=urlParm.customerId;
+	customerId = urlParm.customerId;
 /*var transToken = '059876d99ec46c490953d04d4993da56';
 var userCode = '13601460140';*/
 var vm = new Vue({
@@ -18,7 +18,7 @@ var vm = new Vue({
 $(function() {
 	var reqData = {
 		"body": {
-			"loggingCustomerId":customerId,
+			"loggingCustomerId": customerId,
 			"customerId": customerId,
 		},
 		"head": {
@@ -66,12 +66,12 @@ function getCountMyTeam(data) {
 	if(data.status_code == '000000') {
 		if(data.returns != null && data.returns != "") {
 			vm.tuanduinumber = data.returns;
-		}else{
-			vm.tuanduinumber='0';
+		} else {
+			vm.tuanduinumber = '0';
 		}
-	}else if(data.status_code=='123456'){
-		modelAlert(data.status_message,'',lognCont);
-	}else{
+	} else if(data.status_code == '123456') {
+		modelAlert(data.status_message, '', lognCont);
+	} else {
 		modelAlert(data.status_message);
 	}
 }
@@ -81,12 +81,12 @@ function getAmountMyTeam(data) {
 	if(data.status_code == '000000') {
 		if(data.returns != null && data.returns != "") {
 			vm.zongmoney = data.returns;
-		}else{
+		} else {
 			vm.zongmoney = '0';
 		}
-	}else if(data.status_code=='123456'){
-		modelAlert(data.status_message,'',lognCont);
-	}else{
+	} else if(data.status_code == '123456') {
+		modelAlert(data.status_message, '', lognCont);
+	} else {
 		modelAlert(data.status_message);
 	}
 }
@@ -95,15 +95,17 @@ function getMyTeam(data) {
 	console.log(data);
 	var datas = new Array();
 	if(data.returns.length > 0) {
-		vm.objectlist.$each(function(index, element) {
+		data.returns.forEach(function(index, element) {
 			datas.push(index);
-			datas.recentDate.push(timestampformat(index.recentDate));
+			if(index.recentDate != null) {
+				datas[element].recentDate=$.getTimeStr2(index.recentDate.time);
+			}
 		})
 		vm.objectlist = datas;
 	} else if(data.status_code == '123456') {
 		modelAlert(data.statusMessage, "", lognCont);
 	} else {
-		if(data.status_message!=null&&data.status_message!=""){
+		if(data.status_message != null && data.status_message != "") {
 			modelAlert(data.status_message);
 		}
 		$('#noRecord').show();
@@ -112,19 +114,19 @@ function getMyTeam(data) {
 Date.prototype.format = function(format) {
 	var o = {
 		"M + ": this.getMonth() + 1,
-		// month
+
 		"d + ": this.getDate(),
-		// day
+
 		"h + ": this.getHours(),
-		// hour
+
 		"m + ": this.getMinutes(),
-		// minute
+
 		"s + ": this.getSeconds(),
-		// second
+
 		"q + ": Math.floor((this.getMonth() + 3) / 3),
-		// quarter
+
 		"S": this.getMilliseconds()
-		// millisecond
+
 	};
 	if(/(y+)/.test(format) || /(Y+)/.test(format)) {
 		format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
@@ -138,7 +140,7 @@ Date.prototype.format = function(format) {
 };
 
 function timestampformat(DATE) {
-	return(new Date(DATE.time * 1000)).format("yyyy - MM - dd hh: mm: ss");
+	return(new Date(DATE.time * 1000)).format("yyyy - MM - dd");
 }
 /*登录失效*/
 function lognCont() {
@@ -149,5 +151,6 @@ mui('.mui-scroll-wrapper').scroll({
 });
 
 function backlast() {
+	mui.alert(1);
 	sysback();
 }

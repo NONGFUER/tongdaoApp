@@ -45,7 +45,7 @@ $(function() {
 		var path = $(".erweima_img img").attr("src");
 		var image = new Image();
 		image.src = path;
-		if(path == "../../image/account/add.png") {
+		if(path == "../../../image/account/add.png") {
 			modelAlert("请从相册中选择二维码图片上传!");
 		} else {
 			image.onload = function() {
@@ -226,7 +226,7 @@ function getWxQRCode(id, userCode, transToken) {
 			if(!data.returns.insuranceConsultantInfo.postcardWxImage) {
 				$(".erweima_img img").attr("src", "../../../image/account/add.png");
 			} else {
-				$(".erweima_img img").attr("src", base.url+'App/img/'+data.returns.insuranceConsultantInfo.postcardWxImage);
+				$(".erweima_img img").attr("src", base.url+'tongdaoApp/img/wxQRCode/'+data.returns.insuranceConsultantInfo.postcardWxImage);
 			}
 		}
 	});

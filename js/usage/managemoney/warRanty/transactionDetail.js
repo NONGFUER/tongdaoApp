@@ -1,8 +1,17 @@
+/*获取数据*/
+var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+userCode = urlParm.userCode,
+transToken = urlParm.transToken,
+customerId = urlParm.customerId,
+commodityCommId = urlParm.commodityComId,
+policyNo = urlParm.policyNo;
+console.log("页面初始化，获取上个页面传值报文--");
+var flag='1';
 var vm = new Vue({
 	el: '#list',
 	data: {
-		Objectlist: null,
-		bao: null,
+		Objectlist: {},
+		bao: {},
 	},
 	mounted() {
 		this.$nextTick(function() {
@@ -15,32 +24,29 @@ var vm = new Vue({
 		Objectlist: function(val) {
 			this.$nextTick(function() {
 				$(function() {
-					chuli();
+
 				})
 			})
 		}
 	}
 })
-var userCode = "",
-	transToken = "",
-	customerId = "",
-	commodityCommId = "",
-	policyNo = "";
 $(function() {
-	/*获取数据*/
-	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
-	userCode = urlParm.userCode;
-	transToken = urlParm.transToken;
-	customerId = urlParm.customerId;
-	commodityCommId = urlParm.commodityComId;
-	policyNo = urlParm.policyNo;
-	console.log("页面初始化，获取上个页面传值报文--");
-	list(userCode, transToken, customerId, commodityCommId, '1');
+	list(userCode, transToken, customerId, commodityCommId, flag);
 })
 
 function policyDetail(data) {
 	console.log(data);
-	vm.Objectlist = data.returns.list1;
+	if(data.statusCode == '000000') {
+		if(data.returns.list1.length > 0) {
+			vm.Objectlist = data.returns.list1;
+		} else {
+			vm.Objectlist = {};
+		}
+	} else if(data.statusCode == '123456') {
+		modelAlert(data.statusMessage, '', lognCont);
+	} else {
+		modelAlert(data.statusMessage);
+	}
 }
 
 function chuli() {
@@ -118,11 +124,12 @@ function mylist(userCode, transToken, customerId, commodityCommId, flag) {
 	transToken = transToken;
 	customerId = customerId;
 	commodityComId = commodityComId;
+	flag = flag;
 	list(userCode, transToken, customerId, commodityCommId, flag);
 	mui('.man-div-title ul').on('tap', 'li', function() {
 		$('.man-div-title ul').children('li').removeClass('li_xuan');
 		$(this).addClass('li_xuan');
-		var flag = $(this).attr('flag');
+		flag = $(this).attr('flag');
 		list(userCode, transToken, customerId, commodityCommId, flag);
 	})
 }
@@ -147,6 +154,10 @@ function list(userCode, transToken, customerId, commodityCommId, flag) {
 mui('.man-div-title ul').on('tap', 'li', function() {
 	$('.man-div-title ul').children('li').removeClass('li_xuan');
 	$(this).addClass('li_xuan');
-	var flag = $(this).attr('flag');
+	flag = $(this).attr('flag');
 	list(userCode, transToken, customerId, commodityCommId, flag);
 })
+/*登录失效*/
+function lognCont() {
+	loginControl();
+}

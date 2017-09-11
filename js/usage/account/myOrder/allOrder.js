@@ -1,13 +1,17 @@
 /*获取数据*/
-/*var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	commodityComId = urlParm.commodityComId,
 	customerPhone = urlParm.customerPhone,
 	roleType = urlParm.roleType,
+	riskType = null,
 	transToken = urlParm.transToken,
-	customerId = urlParm.customerId;*/
-var transToken = '059876d99ec46c490953d04d4993da56';
-var userCode = '13601460140';
+	orderStatus = null,
+	tagId = urlParm.tagId,
+	customerId = urlParm.customerId;
+if(tagId == "") {
+	tagId = null;
+}
 var vm = new Vue({
 	el: '#list',
 	data: {
@@ -31,24 +35,7 @@ var vm = new Vue({
 	}
 })
 $(function() {
-	var reqData = {
-		"body": {
-			"channel": "",
-			"customerId": '20',
-			"loggingCustomerId": '20',
-			"riskType": null,
-			"orderStatus": null,
-		},
-		"head": {
-			"userCode": userCode,
-			"channel": "01",
-			"transToken": transToken
-		}
-	}
-	var url = base.url + 'personal/getOrderList.do';
-	console.log("页面初始化，发送请求报文--");
-	/*console.log(urlParm);*/
-	$.reqAjaxsFalse(url, reqData, getOrderList);
+	chaxun(userCode, transToken, customerId, riskType, orderStatus, tagId)
 	mui('#list').on('tap', '.mui-btn', function() {
 		var elem = this;
 		var li = elem.parentNode.parentNode;
@@ -62,34 +49,34 @@ $(function() {
 			}
 		});
 	})
-	mui('.man-div-title ').on('tap', 'li', function() {
-		$('.man-div-title ul').children('li').removeClass('li_xuan');
-		$(this).addClass('li_xuan');
-		var reqData = {
-			"body": {
-				"channel": "",
-				"customerId": '20',
-				"loggingCustomerId": '20',
-				"riskType": null,
-				"orderStatus": null,
-			},
-			"head": {
-				"userCode": userCode,
-				"channel": "01",
-				"transToken": transToken
-			}
-		}
-		var url = base.url + 'personal/getOrderList.do';
-		console.log("页面初始化，发送请求报文--");
-		/*console.log(urlParm);*/
-		$.reqAjaxsFalse(url, reqData, getOrderList);
-	})
-
 })
 
 function getOrderList(data) {
 	console.log(data);
-	vm.Objectlist = data.returns;
+	var datas = new Array();
+	if(data.status_code == '000000') {
+		if(data.returns.length > 0) {
+			data.returns.forEach(function(index, element) {
+				datas.push(index);
+				if(index.startTime != null && index.startTime != "" && index.endTime != null && index.endTime != "") {
+					if(index.startTime.time != null && index.startTime.time != "" && index.endTime.time != null && index.endTime.time != "") {
+						datas[element].startTime = ($.getTimeStr2(index.startTime.time));
+						datas[element].endTime = ($.getTimeStr2(index.endTime.time));
+					}
+				} else {
+					datas[element].startTime = ("");
+					datas[element].endTime = ("");
+				}
+			})
+			vm.Objectlist = datas;
+		} else {
+			vm.Objectlist = {};
+		}
+	} else if(data.status_code == '123456') {
+		modelAlert(data.status_message, '', lognCont);
+	} else {
+		modelAlert(data.status_message);
+	}
 }
 
 function chuli() {
@@ -139,10 +126,66 @@ function chuli() {
 		}
 	})
 }
+
+function mylist(userCode, transToken, customerId, riskType, orderStatus, tagId) {
+	userCode = userCode;
+	transToken = transToken;
+	customerId = customerId;
+	riskType = riskType;
+	orderStatus = orderStatus;
+	tagId = tagId;
+	if(orderStatus == '') {
+		orderStatus = null;
+	}
+	if(riskType == '') {
+		riskType = null;
+	}
+	chaxun(userCode, transToken, customerId, riskType, orderStatus, tagId);
+	mui('.man-div-title ').on('tap', 'li', function() {
+		$('.man-div-title ul').children('li').removeClass('li_xuan');
+		$(this).addClass('li_xuan');
+		var orderStatus = $(this).attr('orderStatus');
+		if(orderStatus == "") {
+			orderStatus = null;
+		}
+		chaxun(userCode, transToken, customerId, riskType, orderStatus, tagId)
+	})
+}
+
+function chaxun(userCode, transToken, customerId, riskType, orderStatus, tagId) {
+	var reqData = {
+		"body": {
+			"channel": "",
+			"customerId": customerId,
+			"loggingCustomerId": customerId,
+			"riskType": riskType,
+			"orderStatus": orderStatus,
+			'tagId': tagId,
+		},
+		"head": {
+			"userCode": userCode,
+			"channel": "01",
+			"transToken": transToken
+		}
+	}
+	var url = base.url + 'personal/getOrderList.do';
+	console.log("页面初始化，发送请求报文--");
+	$.reqAjaxsFalse(url, reqData, getOrderList);
+}
+mui('.man-div-title ').on('tap', 'li', function() {
+	$('.man-div-title ul').children('li').removeClass('li_xuan');
+	$(this).addClass('li_xuan');
+	var orderStatus = $(this).attr('orderStatus');
+	if(orderStatus == "") {
+		orderStatus = null;
+	}
+	chaxun(userCode, transToken, customerId, riskType, orderStatus, tagId)
+})
 /*登录失效*/
 function lognCont() {
 	loginControl();
 }
+
 function backlast() {
 	sysback();
 }

@@ -102,17 +102,17 @@ $(function() {
 									$("#fuelType").attr("name",data.returns.cxCarMessage.fuelType).val(data.returns.cxCarMessage.fuelTypeName)
 								}
 							}
-							if(!$.isNull(data.returns.cxOrder.certiStartDate)){//身份证起期
-								$("#certiStartDate").val(data.returns.cxOrder.certiStartDate.split(" ")[0]);
+							if(!$.isNull(data.returns.cxOrder.certiStartdate)){//身份证起期
+								$("#certiStartDate").val(data.returns.cxOrder.certiStartdate.split(" ")[0]);
 							}
-	                        if(!$.isNull(data.returns.cxOrder.certiEndDate)){//身份证止期
-	                         	$("#certiEndDate").val(data.returns.cxOrder.certiEndDate.split(" ")[0]);
+	                        if(!$.isNull(data.returns.cxOrder.certiEnddate)){//身份证止期
+	                         	$("#certiEndDate").val(data.returns.cxOrder.certiEnddate.split(" ")[0]);
 							}
 	                        if(!$.isNull(data.returns.cxOrder.nation)){//民族
 	                        	 $("#nation").val(data.returns.cxOrder.nation)
 							}
-	                        if(!$.isNull(data.returns.cxOrder.issuer)){//签发机构
-								$("#issuer").val(data.returns.cxOrder.issuer)
+	                        if(!$.isNull(data.returns.cxOrder.issuerAuthority)){//签发机构
+								$("#issuer").val(data.returns.cxOrder.issuerAuthority)
 							}
 							if (data.returns.cxOrder.newcarFlag == "1") {
 								if(data.returns.cxCarMessage != null){
@@ -315,7 +315,9 @@ $(function() {
 	// 车辆基本信息确认按钮
 	$("#confirm1").unbind("tap").bind("tap",function() {
 		if(parm.roleType == "00" || parm.roleType == ""){
-			loginControl();
+			modelAlert("请先登入","",function(){
+				loginControl();
+			});
 			return false;
 		}
        $("#plate_number_input").val($("#plate_number_input").val().toUpperCase());//车牌小写转大写
@@ -377,8 +379,10 @@ $(function() {
 						}else{
 							$("#plateEmail").hide();
 						}
-						$(".firstPart").hide();//车辆投保地区隐藏
-						$(".lastPart").show("fast");//车辆详细信息显示
+						setTimeout(function() {
+							$(".firstPart").hide();//车辆投保地区隐藏
+							$(".lastPart").show();//车辆详细信息显示
+						}, 200);
 					}else if(paramList.status.statusCode == "123456"){
 						modelAlert(paramList.status.statusMessage,"",function(){
 							 loginControl();
@@ -504,10 +508,10 @@ $(function() {
 			if(citynum=="3110000"){//北京地区
 				cxCarMessage.fuelType=$("#fuelType").attr("name");
 				cxCarMessage.fuelTypeName=$.trim($("#fuelType").val());
-				cxOrder.certiStartDate=$("#certiStartDate").val();
-				cxOrder.certiEndDate=$("#certiEndDate").val();
+				cxOrder.certiStartdate=$("#certiStartDate").val();
+				cxOrder.certiEnddate=$("#certiEndDate").val();
 				cxOrder.nation=$("#nation").val();
-				cxOrder.issuer=$("#issuer").val();
+				cxOrder.issuerAuthority=$("#issuer").val();
 				if(chooseicon==1){
 					cxCarMessage.certificateType=$("#certificateType").attr("name");
 					cxCarMessage.certificateTypeName=$.trim($("#certificateType").val());
@@ -1303,23 +1307,23 @@ $.addInfo = function(param){
                             if(!$.isNull(param.cxInfo.cxCarMessage.fuelType)){//能源种类
 								$("#fuelType").attr("name",param.cxInfo.cxCarMessage.fuelType).val(param.cxInfo.cxCarMessage.fuelTypeName)
 							}
-                            if(!$.isNull(param.cxInfo.cxOrder.certiStartDate)){//身份证起期
-								$("#certiStartDate").val(timeFormatDate(param.cxInfo.cxOrder.certiStartDate.time,'yyyy-MM-dd'));
+                            if(!$.isNull(param.cxInfo.cxOrder.certiStartdate)){//身份证起期
+								$("#certiStartDate").val(timeFormatDate(param.cxInfo.cxOrder.certiStartdate.time,'yyyy-MM-dd'));
 							}
-                            if(!$.isNull(param.cxInfo.cxOrder.certiEndDate)){//身份证止期
-                            	$("#certiEndDate").val(timeFormatDate(param.cxInfo.cxOrder.certiEndDate.time,'yyyy-MM-dd'));
+                            if(!$.isNull(param.cxInfo.cxOrder.certiEnddate)){//身份证止期
+                            	$("#certiEndDate").val(timeFormatDate(param.cxInfo.cxOrder.certiEnddate.time,'yyyy-MM-dd'));
 							}
                             if(!$.isNull(param.cxInfo.cxOrder.nation)){//民族
 								$("#nation").val(param.cxInfo.cxOrder.nation)
 							}
-                            if(!$.isNull(param.cxInfo.cxOrder.issuer)){//签发机构
-								$("#issuer").val(param.cxInfo.cxOrder.issuer)
+                            if(!$.isNull(param.cxInfo.cxOrder.issuerAuthority)){//签发机构
+								$("#issuer").val(param.cxInfo.cxOrder.issuerAuthority)
 							}
                             $("#fuelTypeTable,#cardTable").show();
 						}
 						if(citynum=="3440300"){//深圳地区
-							if(!$.isNull(data.returns.cxOrder.owneremail)){ //邮箱
-							   $("#owner_email").val(param.cxInfo.cxOrder.owneremail)
+							if(!$.isNull(data.returns.cxOrder.ownerEmail)){ //邮箱
+							   $("#owner_email").val(param.cxInfo.cxOrder.ownerEmail)
 							   $("#plateEmail").show();
 							}
 						}

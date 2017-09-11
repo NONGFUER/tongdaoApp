@@ -32,7 +32,7 @@ $(function() {
 	/*下拉刷新*/
 	function pulldownRefresh() {
 		setTimeout(function() {
-			
+
 			var reqData = {
 				"body": {
 					"customerId": customerId,
@@ -42,7 +42,7 @@ $(function() {
 				"head": {
 					"channel": "01",
 					"userCode": userCode,
-					"transTime":$.getTimeStr(),
+					"transTime": $.getTimeStr(),
 					"transToken": transToken
 				}
 			}
@@ -59,13 +59,18 @@ $(function() {
 		var yuyueName = $(this).attr('yuyueName');
 		var yuyueNo = $(this).attr('yuyueNo');
 		var sendData = {
-			"customerId":customerId,
-			"commodityCombinationId":commodityCombinationId,
-			"yuyueNo":yuyueNo,
-			"yuyuePhone":yuyuePhone,
-			"yuyueName":yuyueName,
-			"transToken":transToken,
-			"userCode":userCode
+			"customerId": customerId,
+			"commodityCombinationId": commodityCombinationId,
+			"yuyueNo": yuyueNo,
+			"yuyuePhone": yuyuePhone,
+			"yuyueName": yuyueName,
+			"transToken": transToken,
+			"roleType": roleType,
+			"userCode": userCode,
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '0',
+			"title": '预约详细',
 		};
 		var jsonStr = UrlEncode(JSON.stringify(sendData));
 		window.location.href = base.url + "tongdaoApp/html/agent/myBookings/bookingDetails.html?jsonKey=" + jsonStr;
@@ -80,6 +85,7 @@ function getYuyueOrderList(data) {
 function lognCont() {
 	loginControl();
 }
+
 function backlast() {
 	sysback();
 }

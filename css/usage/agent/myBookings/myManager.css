@@ -1,0 +1,86 @@
+.insurance-customer {
+	width: 82%;
+	margin: 0 auto;
+	border-radius: 8px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	box-shadow: 0px 4px 0px #E2E2E2;
+}
+
+.insurance-cutomer_info {
+	border-bottom: 1px solid #ccc;
+	padding: 19px;
+}
+
+.info-icon {
+	width: 65px;
+	height: 65px;
+	float: left;
+}
+
+.info-icon img {
+	width: 100%;
+	height: 100%;
+	border-radius: 100%;
+}
+
+.info-content {
+	/* padding:  */
+	padding-left: 12px;
+	float: left;
+	font-size: 14px;
+}
+
+.info-content_up {
+	font-weight: bolder;
+	height: 45px;
+	line-height: 45px;
+}
+
+.info-content_down {
+	height: 20px;
+	line-height: 20px;
+}
+
+.phone-button,
+.message-button {
+	text-align: center;
+	color: #48a0f0;
+	width: 50%;
+	float: left;
+	height: 40px;
+	line-height: 40px;
+}
+
+.phone-button {
+	border-right: 1px solid #ccc;
+}
+
+.bigname {
+	color: #262626;
+	font-size: 17px;
+}
+
+.huisexia {
+	font-size: 15px;
+	background-color: #FAFAFA;
+}
+
+.zhuanshu {
+	height: 21px;
+	vertical-align: text-bottom;
+	line-height: 21px;
+	background-color: #ECF5FD;
+	color: #48A0F0;
+	padding: 5px 10px 5px 10px;
+	margin-left: 5px;
+}
+
+
+/*底部*/
+
+.body_insurance {
+	width: 100%;
+	height: 500px;
+	background-color: #fff;
+}

@@ -12,7 +12,7 @@ $(function(){
 	/**-----返回------*/
 	$(".ps_appload").on("tap",function(){
 		if(systemsource == "ios"){
-			objcObject.OpenUrl("back");
+			objcObject.sysbackproduct();
 		}else if(systemsource == "android"){
 			android.goBack();
 		}

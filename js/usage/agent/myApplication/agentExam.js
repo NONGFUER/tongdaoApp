@@ -3,8 +3,9 @@ var answerList = new Array();
 $(function(){
 	$.init();
 	//弹出框
-	$(".cancle").unbind("tap").bind("tap",function(){		
-		window.location.href = 'agentapply.html';
+	$(".cancle").unbind("tap").bind("tap",function(){
+		$(".shadow").hide();
+		location.replace(location);//刷新当前页面
 	})
 	$(".retest").unbind("tap").bind("tap",function(){
 		$(".shadow").hide();

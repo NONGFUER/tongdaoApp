@@ -157,6 +157,7 @@ $(function(){
 						    "commodityId": "21",
 						    "channelResource": "3",
 						    "customeId":customerId,
+						    "customerId":customerId,
 						    "buyType":"1"
 						}
 				}
@@ -267,9 +268,11 @@ $.getShengyu=function(cId){
 			"head": {
 				    "channel": "01",
 				    "userCode": mobile,
-				    "transTime": ""
+				    "transTime": "",
+				    "transToken":transToken
 			},"body": {
-				    "comdityId": cId
+				    "comdityId": cId,
+				    "customerId":customerId
 			}
 
 	}
@@ -336,7 +339,7 @@ function backlast(){
 	urlParm.rightIco = "0";
 	urlParm.downIco = "0"
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	window.location.href = "jcxshouye.html?jsonKey="+jsonStr;
+	window.location.href = "zhuanqu.html?jsonKey="+jsonStr;
 }
 
 

@@ -3,12 +3,14 @@
 	/* background: #fff; */
 }
 #header{
-	background-color: #1b6bb8;
+	/* background-color: #1b6bb8; */
+	background-color: #fff;
     height: 44px;
     line-height:44px;
 }
 .mui-action-back, .mui-title {
-    color: #fff;
+    /* color: #fff; */
+    color: #000;
 }
 #helpInfo{
 	margin-top: 3.5833rem;

@@ -2,16 +2,16 @@ mui.init();
 /*获取数据*/
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
-	riskType = urlParm.riskType,
+	riskType = null,
 	transToken = urlParm.transToken,
-	policyStatus=urlParm.policyStatus,
+	policyStatus = null,
 	customerId = urlParm.customerId;
-	if(riskType==""){
-		riskType=null;
-	}
-	if(policyStatus==""){
-		policyStatus=null;
-	}
+/*if(riskType == "") {
+	riskType = null;
+}
+if(policyStatus == "") {
+	policyStatus = null;
+}*/
 var vm = new Vue({
 	el: '#list',
 	data: {
@@ -52,15 +52,7 @@ $(function() {
 			}
 		});
 	})
-	mui('.man-div-title ul').on('tap', 'li', function() {
-		$('.man-div-title ul').children('li').removeClass('li_xuan');
-		$(this).addClass('li_xuan');
-		var flag = $(this).attr('orderStatus');
-		if(flag == '') {
-			flag = null;
-		}
-		xinzhen(userCode, transToken, customerId,flag, riskType);
-	})
+
 })
 
 function getPolicyList(data) {
@@ -68,6 +60,8 @@ function getPolicyList(data) {
 	if(data.status_code == '000000') {
 		if(data.returns.length > 0) {
 			vm.Objectlist = data.returns;
+		}else{
+			vm.Objectlist ={};
 		}
 	} else if(data.status_code == '123456') {
 		modelAlert(data.status_message, '', lognCont);
@@ -75,7 +69,6 @@ function getPolicyList(data) {
 		modelAlert(data.status_message);
 	}
 }
-
 
 mui('.mui-scroll-wrapper').scroll({
 	deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
@@ -119,14 +112,14 @@ function shanchu(userCode, transToken, customerId, policyNo) {
 }
 
 function deleteMyPolicy(data) {
-	if(data.status_code=='000000'){
+	if(data.status_code == '000000') {
 		modelAlert('删除成功');
-	}else if(data.status_code=='123456'){
-		modelAlert(data.status_message,"",lognCont);
-	}else{
+	} else if(data.status_code == '123456') {
+		modelAlert(data.status_message, "", lognCont);
+	} else {
 		modelAlert(data.status_message);
 	}
-	
+
 }
 
 function chuli() {
@@ -173,11 +166,45 @@ function chuli() {
 		}
 	})
 }
+/*壳上调用的方法*/
+function mylist(userCode, transToken, customerId, riskType, policyStatus) {
+	userCode = userCode;
+	transToken = transToken;
+	customerId = customerId;
+	riskType = riskType;
+	policyStatus = policyStatus;
+	if(policyStatus == '') {
+		policyStatus = null;
+	}
+	if(riskType == '') {
+		riskType = null;
+	}
+	xinzhen(userCode, transToken, customerId, policyStatus, riskType);
+	mui('.man-div-title ul').on('tap', 'li', function() {
+		$('.man-div-title ul').children('li').removeClass('li_xuan');
+		$(this).addClass('li_xuan');
+		var riskType = $(this).attr('riskType');
+		if(riskType == '') {
+			riskType = null;
+		}
+		xinzhen(userCode, transToken, customerId, policyStatus, riskType);
+	})
+}
 
+mui('.man-div-title ul').on('tap', 'li', function() {
+	$('.man-div-title ul').children('li').removeClass('li_xuan');
+	$(this).addClass('li_xuan');
+	var riskType = $(this).attr('riskType');
+	if(riskType == '') {
+		riskType = null;
+	}
+	xinzhen(userCode, transToken, customerId, policyStatus, riskType);
+})
 /*登录失效*/
 function lognCont() {
 	loginControl();
 }
+
 function backlast() {
 	sysback();
 }

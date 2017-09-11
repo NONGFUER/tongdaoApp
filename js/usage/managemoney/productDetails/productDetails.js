@@ -3,9 +3,9 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	commodityCombinationId = urlParm.commodityCombinationId,
 	userCode = urlParm.userCode,
 	transToken = urlParm.transToken,
-	customerId = urlParm.customerId,
-	phone = urlParm.insurePhone;
-$('.phone').html(phoneyin(phone));
+	customerId = urlParm.customerId;
+	var phone=phoneyin(userCode);
+$('.phone').html(phone);
 console.log("页面初始化，获取上个页面传值报文--");
 console.log(urlParm);
 var ma = null;
@@ -61,7 +61,7 @@ $(function() {
 	$("#huifang").unbind("tap").bind("tap", function() {
 		var reqData = {
 			"body": {
-				"userPhone": phone,
+				"userPhone": userCode,
 				"customerId": customerId,
 			},
 			"head": {
@@ -82,7 +82,7 @@ $(function() {
 function buy() {
 	var sendData = {
 		"riskSupportAbility": $('.retest').attr('testType'),
-		"insurePhone": phone,
+		"insurePhone": userCode,
 		"userCode": userCode,
 		"customerId": customerId,
 		"transToken": transToken,
@@ -182,8 +182,8 @@ function getRiskAble(data) {
 	}
 }
 /*隐藏手机号中间几位*/
-function phoneyin(phone) {
-	var mphone = phone.substr(0, 3) + '****' + phone.substr(7);
+function phoneyin(userCode) {
+	var mphone = userCode.substr(0, 3) + '****' + userCode.substr(7);
 	return mphone;
 }
 /*登录失效*/

@@ -6,13 +6,11 @@ var parm = '';
 var code = '';
 var data = '';
 $(function() {
-	var str = getUrlQueryString("jsonKey");
-	str = UrlDecode(str);
-	parm = JSON.parse(str);
-	agentId = parm.agentId;
-	customerId=parm.customerId;
-	userCode=parm.userCode;
-	transToken=parm.transToken;
+	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
+	agentId = urlParm.agentId;
+	customerId = urlParm.customerId;
+	userCode = urlParm.userCode;
+	transToken = urlParm.transToken;
 	$.init();
 	$.setscroll();
 });
@@ -75,7 +73,7 @@ function datelist(date) {
 	$.reqAjaxsFalse(url, reqData, function(datas) {
 		console.log(datas);
 		if(data.status_code == '000000') {
-			 data=datas;
+			data = datas;
 		} else {
 			modelAlert(data.status_message);
 		}
@@ -298,6 +296,7 @@ function datetimes() {
 
 	return now;
 }
+
 function backlast() {
 	sysback();
 }

@@ -196,8 +196,10 @@ $(function(){
 		urlParm.userCode = mobile;
 		urlParm.title = "常用投保人";
 		urlParm.rightIco = "4";
+		urlParm.frompage = "insureHtml"
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	    window.location.href= base.url + "tongdaoApp/html/useApplicant/useApplicant.html?jsonKey="+jsonStr;
+	    return false;
 	});
 	//选择座位数
 	$("#FieldAN,.zdown").unbind("tap").bind("tap",function(){
@@ -307,6 +309,8 @@ function getFormData(){
 		    modelAlert("投保人地址不能为空！");
 		    return false;
 		}
+	}else{
+		address = "";
 	}
 	
 	// 与投保人关系校验
@@ -439,6 +443,7 @@ function getFormData(){
 	formData.email			= email;
 	formData.address 		= address;
 	formData.cityCode       = cityCode;
+	formData.provinceCode   = provinceCode;
 	formData.agentCode      = agentCode;	 
 	formData.teamCode       = teamCode;	 
 	formData.certiNo        = certiNo;      
@@ -651,6 +656,8 @@ function sendInsureRequest(){
 		reqData.body.teamCode      = formData.teamCode;
 		reqData.body.certiNo       = formData.certiNo;
 		reqData.body.businessSource= formData.businessSource;
+		reqData.body.cityCode = formData.cityCode;
+		reqData.body.provinceCode = formData.provinceCode;
 	}else{
 		reqData.body.versions = cVersion;//版本
 	}
@@ -661,9 +668,9 @@ function sendInsureRequest(){
 		reqData.body.FieldAI = formData.FieldAI;
 		reqData.body.FieldAN = formData.FieldAN;
 	}else if(cId == COMMODITY_ID.XPXSX ){
-		reqData.body.shortRiskOrder.type = "01"
+		reqData.body.shortRiskOrder.type = "01";		
 	}else if(cId == COMMODITY_ID.XPXAX){
-		reqData.body.shortRiskOrder.type = "02"
+		reqData.body.shortRiskOrder.type = "02";		
 	}
 	console.log("====== 请求数据 ======");
 	console.log(reqData);
@@ -820,9 +827,13 @@ function sendCaldoRequest(ccId){
  */
 function calDoRender(data){
     console.log(data);
-    cPrem = data.returns.premiun;
-    coverage = data.returns.insuredAmount;
-    $("#jwx_foot_price").text("价格：￥" + data.returns.premiun);
+    if(data.statusCode == "000000"){
+    	cPrem = data.returns.premiun;
+        coverage = data.returns.insuredAmount;
+        $("#jwx_foot_price").text("价格：￥" + data.returns.premiun);
+    }else{
+    	modelAlert(data.statusMessage);
+    }   
 }
 
 /*姓名，手机号，身份证校验*/
@@ -937,8 +948,8 @@ function sendGhxInsureRequest(){
 					"inviterPhone":mobile,
 				    "channelResource":"3",//渠道来源  
 					"insureList": insureList
-				}
-
+				},
+				"customerId": customerId
 			}
 		}
 		$.reqAjaxs(url, reqData, sendGhxInsureCallback)			
@@ -1011,25 +1022,18 @@ function backlast(){
 	if( ccId != "14" ){
 		window.location.href = 'productDetail.html?jsonKey='+jsonStr;
 	}else{
-		window.location.href = base.url + 'ongdaoApp/html/insurance/ghx/ghxProductDetail.html?jsonKey='+jsonStr;
+		window.location.href = base.url + 'tongdaoApp/html/insurance/ghx/ghxProductDetail.html?jsonKey='+jsonStr;
 	}
 	
 };
-//function toArticle(){  
-//var param={
-//        "head":{
-//            "mobile":mobile,
-//            "switchCommission":"",
-//            "pageFrom":path
-//        },"body":{
-//            "customerId":customerId,
-//            "productCode":productCode,
-//            "commodityNo":"00419900802"
-//        }
-//    }
-//var jsonStr = UrlEncode(JSON.stringify(param));
-//window.location.href = "article.html?jsonKey="+jsonStr;
-//}
+function toArticle(){ 
+	urlParm.title = "保险条款列表";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";	
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/agreement/article.html?jsonKey="+jsonStr;
+}
 //function toProductDetail(){
 //var sendData = {
 //        "head":{

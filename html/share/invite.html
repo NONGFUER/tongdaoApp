@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>邀请客户</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="../../css/lib/widget/mui/mui.min.css" />
+    <link rel="stylesheet" href="../../css/lib/common/base.css">
+    <link rel="stylesheet" href="../../css/lib/common/common.css">
+    <style type="text/css">
+    	body{
+    		background:#fcd528;
+    	}
+    	.beautyInput{
+    		width:92%;
+    		margin:8px auto;
+    		border:1px solid #222;
+    		height:44px;
+    		border-radius:22px;
+    		background:#fff;
+    		padding: 11px 22px;
+    		font-size:14px;
+    	}
+    	.beautyInput input[type=text]{
+    		width:68%;
+    		padding: 0 0;
+    		color:#222;
+    		line-height:20px;
+    		height:20px;
+    		font-size:14px;
+    	}
+    	#checkCode{
+    		border-right:1px solid black;
+    	}
+    	.beautyInput input[type=button]{   
+    		width:30%;		
+    		padding: 0 0;
+    		color:#222;
+    		outline:none;
+    		border:none;
+    		font-weight:bold;
+    		line-height:20px;
+    		height:20px;
+    		font-size:14px;
+    	}
+    	.invite-context{
+    		width:63%;
+    		margin:40px auto 20px auto;
+    		background:#2554c3;
+    		padding:10px 0px;
+    		border-radius:5px;
+    		box-shadow:#666 0px 0px 10px
+    	}
+    	.invite-context p{
+    		text-align:center;
+    		color:#fff;
+    	}
+    	.invite_button{
+    		width:92%;
+    		margin:20px auto;
+    	}
+    	.blue1{
+    		color:#2554c3;
+    	}
+    	.invite-font{
+    		width:92%;
+    		margin:0 auto;
+    		font-size:12px;
+    	}
+    	.invite-font img{
+    		width:16px;
+    		height:16px;
+    		position:relative;
+ 			top:-2px;
+ 			margin-right:5px;
+    	}
+    	.touxiang{
+    		width: 80px;
+    		height: 80px;
+   			border-radius: 100%;
+    		background: #fcd528;
+    		position: absolute;
+    		top: 180px;
+    		right: 40%;
+    		padding: 3px 0;
+    		box-shadow: #666 0px 0px 10px
+    	}
+    	.touinner{
+    		width: 74px;
+    		height: 74px;
+   			border-radius: 100%;
+    		background: #fff;
+    		margin:0 auto;
+    		display: block;    		   		    		
+    	}
+    	#name{
+    		font-weight:bold;
+    	}
+    </style>
+</head>
+<body>
+	<div id="bodyMuiScroll" class="mui-scroll-wrapper"><div class="mui-scroll">
+		<div>
+			<img alt="" src="../../image/share/invite/invite_head.png">
+			<div class="touxiang">
+				<img class="touinner" />
+			</div>
+		</div>
+		<div class="invite-context">
+			<p>嗨!我是你的专属保险顾问：<span id="name"></span></p>
+			<p>诚挚邀请您加入同道保险</p>
+		</div>
+		<div>
+			<div class="beautyInput">
+				<input type="text" id="checkPhone" name="checkPhone" size="11" maxlength="11" placeholder="请输入你的手机号码" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/> 
+			</div>
+			<div class="beautyInput">
+				<input type="text" id="checkCode" name="checkCode" size="6" maxlength="6" placeholder="请输入你的验证码" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
+				<input id="btnSendCode" type="button" value="发送验证码" />
+			</div>
+        	  			
+		</div>
+		<div class="invite-font" ><img class="on" src="../../image/share/invite/lgou.png" />我已经阅读并同意<span class="blue1 xieyi">《注册协议》</span></div>
+		<div class="invite_button">
+			<img alt="" src="../../image/share/invite/invite_button.png">
+		</div>
+		<div>
+			<img alt="" src="../../image/share/invite/invite_foot.png">
+		</div>		
+	</div></div>
+    <script src="../../js/lib/common/zepto.min.js"></script>
+    <script src="../../js/lib/widget/mui/mui.min.js"></script>
+    <script src="../../js/lib/common/base.js"></script>
+    <script src="../../js/lib/common/common.js"></script>
+    <script src="../../js/usage/share/invite.js"></script>
+</body>
+</html>

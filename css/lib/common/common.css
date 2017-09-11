@@ -57,6 +57,7 @@ li:after{
 .contact{
 	font-size:14px;
 	margin-bottom: 60px;
+	text-align:center;
 }
 .phone{
 	width: 15.5px;
@@ -293,7 +294,7 @@ p{
 .content-info p{
 	font-size: 13px;
 }
-.content-info .star:before{
+.star p:before{
 	content: "";
 	margin-right: 8px;
 	display: inline-block;

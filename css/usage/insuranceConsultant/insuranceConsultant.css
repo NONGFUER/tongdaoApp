@@ -62,7 +62,7 @@
 }
 
 .huise span:first-child {
-	padding-right: 5px;
+	/*padding-right: 5px;*/
 }
 
 .guwen {
@@ -232,5 +232,5 @@
 	background-size: 100%;
 	position: absolute;
 	right: 0;
-	opacity: 0;
+	opacity: 1;
 }

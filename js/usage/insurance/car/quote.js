@@ -172,14 +172,14 @@ $(function() {
 			    var insuredmobile=samebeibao=="1"?cxOrder.ownerMobile:$("#recognizee_phone_input").val();// 被保人手机
 			    var insuredadress=addressInfo.province+" "+addressInfo.address;//被保人地址
 			    if(parm.body.cityCode=="3110000"){//北京地区
-			    	  var insuredStartDate=samebeibao=="1"?timeFormatDate(cxOrder.certiStartDate.time, 'yyyy-MM-dd'):$("#recognizee_startDate_input").val();// 被保人起期
-			    	  var insuredEndDate=samebeibao=="1"?timeFormatDate(cxOrder.certiEndDate.time, 'yyyy-MM-dd'):$("#recognizee_endDate_input").val();// 被保人止期
+			    	  var insuredStartDate=samebeibao=="1"?timeFormatDate(cxOrder.certiStartdate.time, 'yyyy-MM-dd'):$("#recognizee_startDate_input").val();// 被保人起期
+			    	  var insuredEndDate=samebeibao=="1"?timeFormatDate(cxOrder.certiEnddate.time, 'yyyy-MM-dd'):$("#recognizee_endDate_input").val();// 被保人止期
 			    	  var insurednation=samebeibao=="1"?cxOrder.nation:$("#recognizee_nation_input").val();//被保人民族
-			    	  var insuredissuer=samebeibao=="1"?cxOrder.issuer:$("#recognizee_issuer_input").val();// 被保人签发机构
-			    	  var phStartDate=sametoubao=="1"?timeFormatDate(cxOrder.certiStartDate.time, 'yyyy-MM-dd'):$("#policyholder_startDate_input").val();// 投保人起期
-			    	  var phEndDate=sametoubao=="1"?timeFormatDate(cxOrder.certiEndDate.time, 'yyyy-MM-dd'):$("#policyholder_endDate_input").val();// 投保人止期
+			    	  var insuredissuer=samebeibao=="1"?cxOrder.issuerAuthority:$("#recognizee_issuer_input").val();// 被保人签发机构
+			    	  var phStartDate=sametoubao=="1"?timeFormatDate(cxOrder.certiStartdate.time, 'yyyy-MM-dd'):$("#policyholder_startDate_input").val();// 投保人起期
+			    	  var phEndDate=sametoubao=="1"?timeFormatDate(cxOrder.certiEnddate.time, 'yyyy-MM-dd'):$("#policyholder_endDate_input").val();// 投保人止期
 			    	  var phnation=sametoubao=="1"?cxOrder.nation:$("#policyholder_nation_input").val();// 投保人民族
-			    	  var phissuer=sametoubao=="1"?cxOrder.issuer:$("#policyholder_issuer_input").val();// 投保人签发机构
+			    	  var phissuer=sametoubao=="1"?cxOrder.issuerAuthority:$("#policyholder_issuer_input").val();// 投保人签发机构
 			    }
 			    if(parm.body.cityCode=="3440300"){//深圳地区
 			    	var insuredemail=samebeibao=="1"?cxOrder.ownerEmail:$("#recognizee_email_input").val();// 被保人邮箱
@@ -782,19 +782,19 @@ $.loadData = function(param) {
 					samebeibao=parm.body.samebeibao;
 					if(samebeibao=="0"){
 						$("#beibaoSwitch").removeClass("mui-active");
-						if(param.cxInfo.gfbCxParty!=null){
-						    $("#recognizee_name_input").val(param.cxInfo.gfbCxParty.insuredname);// 被保人姓名
-						    $("#recognizee_idnumber_input").val(param.cxInfo.gfbCxParty.insuredidno);// 被保人证件号码
-						    $("#recognizee_phone_input").val(param.cxInfo.gfbCxParty.insuredmobile);// 被保人手机
-						    if(!$.isNull(param.cxInfo.gfbCxParty.insuredStartDate)){
-						    	$("#recognizee_startDate_input").val(timeFormatDate(param.cxInfo.gfbCxParty.insuredStartDate.time,'yyyy-MM-dd'));// 被保人起期
+						if(param.cxInfo.cxParty!=null){
+						    $("#recognizee_name_input").val(param.cxInfo.cxParty.insuredname);// 被保人姓名
+						    $("#recognizee_idnumber_input").val(param.cxInfo.cxParty.insuredidno);// 被保人证件号码
+						    $("#recognizee_phone_input").val(param.cxInfo.cxParty.insuredmobile);// 被保人手机
+						    if(!$.isNull(param.cxInfo.cxParty.insuredstartdate)){
+						    	$("#recognizee_startDate_input").val(timeFormatDate(param.cxInfo.cxParty.insuredstartdate.time,'yyyy-MM-dd'));// 被保人起期
 						    }
-						    if(!$.isNull(param.cxInfo.gfbCxParty.insuredEndDate)){
-						        $("#recognizee_endDate_input").val(timeFormatDate(param.cxInfo.gfbCxParty.insuredEndDate.time,'yyyy-MM-dd'));// 被保人止期
+						    if(!$.isNull(param.cxInfo.cxParty.insuredenddate)){
+						        $("#recognizee_endDate_input").val(timeFormatDate(param.cxInfo.cxParty.insuredenddate.time,'yyyy-MM-dd'));// 被保人止期
 						    }
-						    $("#recognizee_nation_input").val(param.cxInfo.gfbCxParty.insurednation);// 被保人名族
-						    $("#recognizee_issuer_input").val(param.cxInfo.gfbCxParty.insuredissuer);// 被保人机构
-						    $("#recognizee_email_input").val(param.cxInfo.gfbCxParty.insuredemail);// 被保人邮箱
+						    $("#recognizee_nation_input").val(param.cxInfo.cxParty.insurednation);// 被保人名族
+						    $("#recognizee_issuer_input").val(param.cxInfo.cxParty.insuredissuer);// 被保人机构
+						    $("#recognizee_email_input").val(param.cxInfo.cxParty.insuredemail);// 被保人邮箱
 						}
 						$(".beibaoCell").show();
 					}
@@ -803,19 +803,19 @@ $.loadData = function(param) {
 					sametoubao=parm.body.sametoubao;
 					if(sametoubao=="0"){
 						$("#toubaoSwitch").removeClass("mui-active");
-						if(param.cxInfo.gfbCxParty!=null){
-						    $("#policyholder_name_input").val(param.cxInfo.gfbCxParty.phname);// 投保人姓名
-						    $("#policyholder_idnumber_input").val(param.cxInfo.gfbCxParty.phidno);// 投保人证件号码
-						    $("#policyholder_phone_input").val(param.cxInfo.gfbCxParty.phtelephone);// 投保人手机
-						    if(!$.isNull(param.cxInfo.gfbCxParty.phStartDate)){
-						    	$("#policyholder_startDate_input").val(timeFormatDate(param.cxInfo.gfbCxParty.phStartDate.time,'yyyy-MM-dd'));// 投保人起期
+						if(param.cxInfo.cxParty!=null){
+						    $("#policyholder_name_input").val(param.cxInfo.cxParty.phname);// 投保人姓名
+						    $("#policyholder_idnumber_input").val(param.cxInfo.cxParty.phidno);// 投保人证件号码
+						    $("#policyholder_phone_input").val(param.cxInfo.cxParty.phtelephone);// 投保人手机
+						    if(!$.isNull(param.cxInfo.cxParty.phstartdate)){
+						    	$("#policyholder_startDate_input").val(timeFormatDate(param.cxInfo.cxParty.phstartdate.time,'yyyy-MM-dd'));// 投保人起期
 						    }
-						    if(!$.isNull(param.cxInfo.gfbCxParty.phEndDate)){
-						        $("#policyholder_endDate_input").val(timeFormatDate(param.cxInfo.gfbCxParty.phEndDate.time,'yyyy-MM-dd'));// 投保人止期
+						    if(!$.isNull(param.cxInfo.cxParty.phenddate)){
+						        $("#policyholder_endDate_input").val(timeFormatDate(param.cxInfo.cxParty.phenddate.time,'yyyy-MM-dd'));// 投保人止期
 						    }
-						    $("#policyholder_nation_input").val(param.cxInfo.gfbCxParty.phnation);// 投保人名族
-						    $("#policyholder_issuer_input").val(param.cxInfo.gfbCxParty.phissuer);// 投保人机构
-						    $("#policyholder_email_input").val(param.cxInfo.gfbCxParty.phemail);// 投保人邮箱
+						    $("#policyholder_nation_input").val(param.cxInfo.cxParty.phnation);// 投保人名族
+						    $("#policyholder_issuer_input").val(param.cxInfo.cxParty.phissuer);// 投保人机构
+						    $("#policyholder_email_input").val(param.cxInfo.cxParty.phemail);// 投保人邮箱
 						}
 						$(".toubaoCell").show();
 					}

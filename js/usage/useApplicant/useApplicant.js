@@ -352,10 +352,25 @@ function toInsure( obj ){
 	urlParm.title = "投保信息";
 	urlParm.rightIco = "0";
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	window.location.href = base.url + "tongdaoApp/html/insurance/main/insure.html?jsonKey="+jsonStr;
+	if(urlParm.frompage == "insureHtml"){		
+		window.location.href = base.url + "tongdaoApp/html/insurance/main/insure.html?jsonKey="+jsonStr;
+	}else{
+		
+	}
 }
 //返回上一页
 function backlast(){
 //	window.history.back();
-	sysback();
+	if(urlParm.frompage == "insureHtml"){
+		urlParm.title = "投保信息";
+		urlParm.leftIco = "1";
+		urlParm.rightIco = "0";
+		urlParm.downIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/insurance/main/insure.html?jsonKey="+jsonStr;
+	}else{
+		sysback();
+	}
+	
+	
 }

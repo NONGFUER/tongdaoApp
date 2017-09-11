@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>我的客户经理</title>
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/usage/agent/myBookings/myManager.css" />
+	</head>
+
+	<body>
+		<div class="mui-content mui-scroll-wrapper" >
+			<div class="mui-scroll ">
+				<div id="list" class="man" v-cloak>
+					<div class="insurance-customer whitebackground">
+						<div class="insurance-cutomer_info clearfix">
+							<div class="info-icon"><img src="../../../image/insurance/tou.jpg"></div>
+							<div class="info-content">
+								<div class="info-content_up"><span class="bigname" id="bigname" v-html="objectlist.teamName">刘建峰</span>
+									<span class="zhuanshu">专属客户经理</span>
+								</div>
+								<div class="info-content_down">手机号码：<span id="bigphone" v-html="objectlist.teamCodeMobile">13333333333</span></div>
+							</div>
+						</div>
+						<div class="clearfix huisexia">
+							<div class="phone-button" v-bind:phone='objectlist.teamCodeMobile'>电话联系我</div>
+							<div class="message-button" v-bind:phone='objectlist.teamCodeMobile'>短信联系我</div>
+						</div>
+					</div>
+					<div class="body_insurance">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../../js/lib/widget/mui/mui.min.js"></script>
+	<script src="../../../js/lib/common/zepto.min.js"></script>
+	<script src="../../../js/lib/common/base.js"></script>
+	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
+	<script src="../../../js/usage/agent/myBookings/myManager.js"></script>
+
+</html>
