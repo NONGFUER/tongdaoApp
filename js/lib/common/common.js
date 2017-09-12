@@ -306,10 +306,10 @@ function setTitleMethod(back, tittle, type) {
 }
 
 /**改变壳上标题****/
-function changeTitle(title) {
-	if(systemsource == "ios") {
+function changeTitle(title){
+	if(systemsource == "ios"){
 		objcObject.changeTitle(title)
-	} else if(systemsource == "android") {
+	}else if(systemsource == "android"){
 		android.changeTitle(title);
 	}
 }

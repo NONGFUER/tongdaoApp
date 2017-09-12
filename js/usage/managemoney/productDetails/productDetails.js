@@ -2,9 +2,11 @@
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	commodityCombinationId = urlParm.commodityCombinationId,
 	userCode = urlParm.userCode,
+	roleType = urlParm.roleType,
 	transToken = urlParm.transToken,
+	idAuth=urlParm.idAuth,
 	customerId = urlParm.customerId;
-	var phone=phoneyin(userCode);
+var phone = phoneyin(userCode);
 $('.phone').html(phone);
 console.log("页面初始化，获取上个页面传值报文--");
 console.log(urlParm);
@@ -38,6 +40,11 @@ var vm = new Vue({
 	}
 })
 $(function() {
+	if(roleType == ""||roleType=="00") {
+		$('#huifang').addClass('btnhuise');
+	} else if(idAuth == '0') {
+		$('#huifang').addClass('btnhuise');
+	}
 	var reqData = {
 		"body": {
 			"commodityCombinationId": commodityCombinationId,
@@ -59,20 +66,26 @@ $(function() {
 	})
 	/*点击购买*/
 	$("#huifang").unbind("tap").bind("tap", function() {
-		var reqData = {
-			"body": {
-				"userPhone": userCode,
-				"customerId": customerId,
-			},
-			"head": {
-				"userCode": userCode,
-				"channel": "01",
-				"transTime": $.getTimeStr(),
-				"transToken": transToken
+		if(roleType == ""||roleType=="00") {
+			modelAlert('请先登录', '', lognCont);
+		} else if(idAuth == '0') {
+			modelAlert('请先实名', '', register);
+		} else {
+			var reqData = {
+				"body": {
+					"userPhone": userCode,
+					"customerId": customerId,
+				},
+				"head": {
+					"userCode": userCode,
+					"channel": "01",
+					"transTime": $.getTimeStr(),
+					"transToken": transToken
+				}
 			}
+			var url = base.url + 'investmentLinkedInsurance/getRiskAble.do';
+			$.reqAjaxsFalse(url, reqData, getRiskAble);
 		}
-		var url = base.url + 'investmentLinkedInsurance/getRiskAble.do';
-		$.reqAjaxsFalse(url, reqData, getRiskAble);
 	})
 	$(".cancle").unbind("tap").bind("tap", function() {
 		$('#shadow').hide();
@@ -145,13 +158,16 @@ function goldProductInfo(data) {
 function getRiskAble(data) {
 	console.log(data);
 	if(data.statusCode == '000000') {
-		if(data.returns.isRisk == "0") {
+		if(data.returns.isRisk == "0" && data.returns.riskble != '5') {
 			$('#shadow').show();
 			$('.retest').attr('testType', data.returns.riskble);
+		} else if(data.returns.isRisk == "0" && data.returns.riskble == '5') {
+			$('.retest').attr('testType', data.returns.riskble);
+			buy();
 		} else if(data.returns.isRisk == "1") {
 			var sendData = {
 				"head": {
-					"userCode":userCode,
+					"userCode": userCode,
 					"riskSupportAbility": riskSupportAbility,
 					"transToken": transToken
 				},
@@ -162,7 +178,7 @@ function getRiskAble(data) {
 					"customerId": customerId,
 					"commodityId": vm.Objectitle.commodityInfo.id + "",
 					"productCode": userCode,
-					"commodityCombinationId":commodityCombinationId,
+					"commodityCombinationId": commodityCombinationId,
 				},
 				"title": '风险评估 ',
 				"titles": vm.Objectitle.commodityCombination.commodityCombinationName,
@@ -189,6 +205,10 @@ function phoneyin(userCode) {
 /*登录失效*/
 function lognCont() {
 	loginControl();
+}
+/*未实名*/
+function register() {
+	registerControl();
 }
 
 function backlast() {

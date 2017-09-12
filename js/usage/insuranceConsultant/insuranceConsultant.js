@@ -12,12 +12,14 @@ var vm = new Vue({
 	data: {
 		Objectitle: {},
 		urlimg: {},
+		shanchu: 'shanchu',
 	}
 })
 $(function() {
 	vm.urlimg = base.url;
 	if(type == '02' || type == '03' || type == '04' || type == '05' || type == '06') {
 		$('.baoxian').hide();
+		//vm.shanchu='';
 	} //普通01.02代理人、03客户经理 。04.内勤。05 团队 。06.RK
 	chaxunend(userCode, transToken, customerId);
 	/*添加顾问*/
@@ -39,9 +41,29 @@ $(function() {
 			$('.note').hide();
 		})
 	})
+	mui('#list').on('tap', '.mui-btn', function() {
+		var elem = this;
+		var li = elem.parentNode.parentNode;
+//		var customerId = $(elem).attr('customerId');
+		var insuranceConsultantId = $(elem).attr('insuranceConsultantId');
+		var agentCode = $(elem).attr('agentCode');
+		mui.confirm('确认删除该保险顾问吗？', '', ['确认', '取消'], function(e) {
+			if(e.index == 0) {
+				shanchu(userCode, transToken, customerId, insuranceConsultantId,agentCode);
+				li.parentNode.removeChild(li);
+			} else {
+				setTimeout(function() {
+					mui.swipeoutClose(li);
+				}, 0);
+			}
+		});
+	})
 	mui('.man-div-body-ul ').on('tap', '.man-div-body-li', function() {
-		$('.man-div-body-li').children('.xuan').attr('style', 'opacity:0');
-		$(this).children('.xuan').attr('style', 'opacity:1');
+		/*$('.man-div-body-li').children('.xuan').hide();
+		$(this).children('.xuan').show();*/
+//		customerId = $(this).attr('customerId');
+		insuranceConsultantId = $(this).attr('insuranceConsultantId');
+		xinzeng(userCode, transToken, customerId, insuranceConsultantId);
 	})
 })
 /*查询保险人和保险顾问地区是否一致*/
@@ -107,13 +129,12 @@ function getInsuranceConsultantInfos(data) {
 /*根据手机号查询保险顾问头像*/
 function baoxianimg(username) {
 	var img = false;
-	$.ajax({
+	/*$.ajax({
 		async: false,
 		type: "get",
 		url: base.url + "customerBasic/getAppImage.do",
 		data: "userName=" + username,
 		success: function(data) {
-			console.log(data);
 			if(data != '' && data != null) {
 				img = true;
 			} else {
@@ -123,8 +144,7 @@ function baoxianimg(username) {
 		error: function() {
 			img = false;
 		}
-	});
-
+	});*/
 	if(img) {
 		return "customerBasic/getAppImage.do?userName=" + username;
 	} else {
@@ -156,7 +176,24 @@ function getInsuranceConsultantInfo(data) {
 		modelAlert('您输入的不是保险顾问手机号');
 	}
 }
-
+/*删除*/
+function shanchu(userCode, transToken, customerId, insuranceConsultantId) {
+	var reqData = {
+		"head": {
+			"channel": "1",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken,
+			"userCode": userCode
+		},
+		"body": {
+			"customerId": customerId,
+			"insuranceConsultantId": insuranceConsultantId,
+			"agentCode": agentCode,
+		}
+	}
+	var url = base.url + 'insuranceConsultantInfo/deleteInsuranceConsultantInfo.do';
+	$.reqAjaxsFalse(url, reqData, deleteInsuranceConsultantInfo);
+}
 /*查询*/
 function chaxunend(userCode, transToken, customerId) {
 	var reqData = {
@@ -173,6 +210,9 @@ function chaxunend(userCode, transToken, customerId) {
 	var url = base.url + 'insuranceConsultantInfo/getInsuranceConsultantInfos.do';
 	console.log(reqData);
 	$.reqAjaxsFalse(url, reqData, getInsuranceConsultantInfos);
+}
+function deleteInsuranceConsultantInfo(data){
+	console.log(data);
 }
 /*点击关闭*/
 $(".note-div_title_right").unbind("tap").bind("tap", function() {

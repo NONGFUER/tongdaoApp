@@ -1,11 +1,7 @@
 .man-div-body-ul {}
 
 .man-div-body-ul .man-div-body-li {
-	padding: 0 20px 0 20px;
-	overflow: hidden;
-	clear: both;
-	display: flex;
-	background-color: #FFFFFF;
+	padding: 0;
 }
 
 .man-div-body-ul .man-div-body-li .first {
@@ -233,4 +229,19 @@
 	position: absolute;
 	right: 0;
 	opacity: 1;
+}
+.leirong {
+	padding: 0 20px 0 20px;
+	overflow: hidden;
+	clear: both;
+	display: flex;
+	background-color: #FFFFFF;
+}
+.lajitong {
+	position: absolute;
+	top: 35%;
+	width: 30px;
+	height: 30px;
+	background: url(../../../image/account/myOrder/lajitong.png);
+	background-size: 100%;
 }

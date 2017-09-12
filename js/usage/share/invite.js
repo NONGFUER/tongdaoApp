@@ -161,7 +161,7 @@ function getTouxiang(){
 		data: "userName="+shareMobile,
 		success: function(data){
 			if(data){
-				$(".touinner").attr("src",base.url+"appUser/getAppImage.do?userName="+shareMobile);
+				$(".touinner").attr("src",base.url+"customerBasic/getAppImage.do?userName="+shareMobile);
 			}else{
 				$(".touinner").attr("src","../../image/common/tou.png");
 			}		

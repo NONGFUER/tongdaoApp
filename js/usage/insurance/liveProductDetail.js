@@ -13,8 +13,9 @@ $(function(){
     	$(".single-footer").removeClass("yincang");
     	sendCusInsConsultantRequest();
     }
-    showRightIcon();
-   
+    if( roleType != "00" ){
+    	showRightIcon();
+    }
 });
 //点击预约出单
 function yuyueClickBind(){
@@ -170,6 +171,7 @@ function addYuyueInfoRender(data){
         var cusInfo = data.returns.customerBasic;
         var mobile1  = cusInfo.mobile;//获取姓名
         var name1    = cusInfo.name;//获取手机号
+        getTouxiang(mobile1);
         //var userImg = cusInfo.userImage;//获取用户头像
         $("#bigname").text(name1);
         $("#bigphone").text(mobile1);
@@ -343,6 +345,24 @@ function toYuyueList(){
 	urlParm.userCode = mobile;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/agent/myBookings/subscribeList.html?jsonKey="+jsonStr;
+}
+
+function getTouxiang(mobile){
+	$.ajax({
+		type: "get",
+		url: base.url+"customerBasic/getAppImage.do",
+		data: "userName="+mobile,
+		success: function(data){
+			if(data){
+				$(".touinner").attr("src",base.url+"customerBasic/getAppImage.do?userName="+mobile);
+			}else{
+				$(".touinner").attr("src","../../../image/common/tou.png");
+			}		
+		   },
+		error:function(){
+			$(".touinner").attr("src","../../../image/account/tou.png");
+		}
+		});
 }
 function backlast(){
 	sysback();

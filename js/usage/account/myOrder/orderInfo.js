@@ -3,7 +3,6 @@ var mobile = urlParm.mobile; //"13852291705";
 var transToken = urlParm.transToken;//"c8c95c7f95a1b20bd72825ae67842b98";
 var customerId = urlParm.customerId;//"812";
 var orderNo = urlParm.orderNo;//"BY2017090817544703721608";
-var policyNo = urlParm.policyNo;//"8G8013423201700090000057"
 $(function(){
 	getOrderDetailRequest( customerId,orderNo);
 	getPolicyDetailRequest("20",policyNo);
@@ -21,10 +20,8 @@ function getOrderDetailRequest( customerId,orderNo){
             "transTime":$.getTimeStr(),
             "transToken":transToken
 		},
-		"body":{
-			"loggingCustomerId":customerId,
-			"orderNo":orderNo,
-			"customerId":customerId
+		"body":{			
+			"orderNo":orderNo
 		}			
 	} 
 	$.reqAjaxs( url, sendJson, orderDetailCallback );

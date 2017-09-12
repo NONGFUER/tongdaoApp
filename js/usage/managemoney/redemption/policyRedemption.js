@@ -90,20 +90,20 @@ function getRedemption(data) {
 		}
 		var url = base.url + 'hkRedemption/getRedemptionConfirmation.do';
 		$.reqAjaxsFalse(url, reqData, getRedemptionConfirmation);
-	}else if(data.statusCode=="123456"){
-		modelAlert(data.statusMessage,'',lognCont);
-	}else{
+	} else if(data.statusCode == "123456") {
+		modelAlert(data.statusMessage, '', lognCont);
+	} else {
 		modelAlert(data.statusMessage);
 	}
 }
 /*退保赎回*/
-function getRedemptionConfirmation(data){
-	if(data.statusCode=="000000"){
+function getRedemptionConfirmation(data) {
+	if(data.statusCode == "000000") {
 		modelAlert(data.statusMessage);
-		$('#huifang').attr('style','background-color: #999;')
-	}else if(data.statusCode=="123456"){
-		modelAlert(data.statusMessage,'',lognCont);
-	}else{
+		$('#huifang').attr('style', 'background-color: #999;')
+	} else if(data.statusCode == "123456") {
+		modelAlert(data.statusMessage, '', lognCont);
+	} else {
 		modelAlert(data.statusMessage);
 	}
 }
@@ -121,14 +121,17 @@ function bankweihao() {
 /*返回*/
 function backlast() {
 	var sendData = {
-		"commdityCommId": commdityCommId,
+		"commodityComId": commodityCommId,
 		"customerId": customerId,
 		"userCode": userCode,
 		"channel": "01",
 		"transTime": $.getTimeStr(),
 		"transToken": transToken,
 		"title": title,
+		"leftIco": '1',
+		"rightIco": '0',
+		"downIco": '1',
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
-	window.location.href =base.url + "tongdaoApp/html/managemoney/redemption/policyRedemption.html?jsonKey=" + jsonStr;
+	window.location.href = base.url + "tongdaoApp/html/managemoney/redemption/moneyRedemption.html?jsonKey=" + jsonStr;
 }

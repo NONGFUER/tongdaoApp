@@ -78,23 +78,22 @@ $(function() {
 						if (data.returns.cxOrder.newcarFlag == "1") {
 							document.getElementById("chooseicon").src = base.imagePath+"insurance/car/gouxuankuang1.png";
 							$("#plateNum").css("color","#1b6bb8");
-							$("#plate_number_input").val("请输入车牌号码").css("color", "#888"); // 车牌号码
 							$('#plate_number_input').attr("disabled", true);// 选中新车未上牌时车牌号码输入框元素设置为disabled
 							chooseicon = 1;// 是否新车标志 1：新车，0：非新车
 						} else {
 							document.getElementById("chooseicon").src = base.imagePath + "insurance/car/gouxuankuang.png";
-							$("#plateNum").css("color","#585858");
+							$("#plateNum");
 							$('#plate_number_input').removeAttr("disabled");// 去除input元素的readonly属性
-							$("#plate_number_input").val(data.returns.cxOrder.plateno).css("color","#585858");
+							$("#plate_number_input").val(data.returns.cxOrder.plateno);
 						}
 						if(!$.isNull(data.returns.cxOrder.ownerName)){ //车主姓名
-						    $("#owner_name").val(data.returns.cxOrder.ownerName).css("color","#585858");
+						    $("#owner_name").val(data.returns.cxOrder.ownerName);
 						}
 						if(!$.isNull(data.returns.cxOrder.ownerIdno)){ //身份证
-						    $("#owner_idNo").val(data.returns.cxOrder.ownerIdno).css("color","#585858");
+						    $("#owner_idNo").val(data.returns.cxOrder.ownerIdno);
 						}
 						if(!$.isNull(data.returns.cxOrder.ownerMobile)){ //手机号码
-						    $("#owner_mobile").val(data.returns.cxOrder.ownerMobile).css("color","#585858");
+						    $("#owner_mobile").val(data.returns.cxOrder.ownerMobile);
 						}
 						if(data.returns.cxOrder.cityCode=="3110000"){//新车北京地区
 							if(data.returns.cxCarMessage != null){
@@ -112,7 +111,7 @@ $(function() {
 	                        	 $("#nation").val(data.returns.cxOrder.nation)
 							}
 	                        if(!$.isNull(data.returns.cxOrder.issuerAuthority)){//签发机构
-								$("#issuer").val(data.returns.cxOrder.issuerAuthority)
+								$("#issuer").val(data.returns.cxOrder.issuerAuthority);
 							}
 							if (data.returns.cxOrder.newcarFlag == "1") {
 								if(data.returns.cxCarMessage != null){
@@ -120,7 +119,7 @@ $(function() {
 										$("#certificateType").attr("name",data.returns.cxCarMessage.certificateType).val(data.returns.cxCarMessage.certificateTypeName)
 									}
 									if(!$.isNull(data.returns.cxCarMessage.certificateNo)){//凭证编号
-										$("#certificateNo").val(data.returns.cxCarMessage.certificateNo)
+										$("#certificateNo").val(data.returns.cxCarMessage.certificateNo);
 									}
 									if(!$.isNull(data.returns.cxCarMessage.certificateDate)){//凭证日期
 										$("#certificateDate").val(data.returns.cxCarMessage.certificateDate.split(" ")[0]);
@@ -130,39 +129,39 @@ $(function() {
 						}
 						if(citynum=="3440300"){//深圳地区
 							if(!$.isNull(data.returns.cxOrder.owneremail)){ //邮箱
-							   $("#owner_email").val(data.returns.cxOrder.owneremail).css("color","#585858");
+							   $("#owner_email").val(data.returns.cxOrder.owneremail);
 							}
 						}
 					}
 					if(data.returns.cxCarMessage != null){
 						if(!$.isNull(data.returns.cxCarMessage.rackNo)){//车辆识别代码/VIN
-						    $("#vehicle_identification_input").val(data.returns.cxCarMessage.rackNo).css("color","#585858");
+						    $("#vehicle_identification_input").val(data.returns.cxCarMessage.rackNo);
 						}
 						if(!$.isNull(data.returns.cxCarMessage.engineNo)){ //发动机号
-						    $("#engine_number_input").val(data.returns.cxCarMessage.engineNo).css("color","#585858");
+						    $("#engine_number_input").val(data.returns.cxCarMessage.engineNo);
 						}
 						var registerDate = "";
 						if(!$.isNull(data.returns.cxCarMessage.registerDate)){ //车辆注册日期
 							registerDate = subTime(data.returns.cxCarMessage.registerDate);
-						    $("#vehicle_registration_date").val(registerDate).css("color","#585858");
+						    $("#vehicle_registration_date").val(registerDate);
 						}
 						//是否过户
 						if(data.returns.cxCarMessage.transferFlag == 1){
 							document.getElementById("chooseIcons").src = base.imagePath + "insurance/car/dakai.png";
 							$("#specialCarDate_select").show();
 							var transferDate = subTime(data.returns.cxCarMessage.transferDate); //过户日期
-						    $("#specialCarDate").val(transferDate).css("color","#585858");
+						    $("#specialCarDate").val(transferDate);
 						}else{
 							document.getElementById("chooseIcons").src = base.imagePath + "insurance/car/guanbi.png";
 							$("#specialCarDate_select").hide();
-							$("#specialCarDate").val("请选择过户日期").css("color","#585858");
+							$("#specialCarDate").val("");
 						}
 						//是否外地车
 						if(data.returns.cxCarMessage.ecdemicVehicleFlag == 1){
 							$("#info_car_choose div").css("color","#1b6bb8");
 							document.getElementById("choosecar").src = base.imagePath + "insurance/car/dakai.png";
 						}else{
-							$("#info_car_choose div").css("color","#585858");
+							$("#info_car_choose div");
 							document.getElementById("choosecar").src = base.imagePath + "insurance/car/guanbi.png";
 						}
 					}
@@ -184,7 +183,7 @@ $(function() {
     $("#cjh").bind("tap",function() {
     	setTimeout(function(){
     	   $("#cjh,.shadow").hide();
-    	},200);
+    	},500);
     });
     //返回
 	$(".h_back").unbind("tap").bind("tap",function() {
@@ -192,35 +191,21 @@ $(function() {
 	});
 
 	/** ************************车主信息********************************* */
-	$("#issueChannel").val( "请选择渠道").css("color","#888");
-	$("#car_sheng").val( "请选择省份").css("color","#888");
-	$("#car_shi").val( "请选择城市").css("color","#888");
-	$("#seat").val("请输入车辆座位数").css("color","#888");
 	$("#checkNo").val("请输入验证码").css("color","#888");
-	$.replacePlaceholder($("#plate_number_input"), "请输入车牌号码");
-	$.replacePlaceholder($("#owner_name"), "请输入车主姓名");
-	$.replacePlaceholder($("#owner_idNo"), "请输入车主身份证号");
-	$.replacePlaceholder($("#owner_mobile"), "请输入车主手机号码");
 	$.replacePlaceholder($("#checkNo"), "请输入验证码");
-	$.replacePlaceholder($("#seat"), "请输入车辆座位数");
-	$.replacePlaceholder($("#brand_model_input"), "请输入品牌型号");
-	$.replacePlaceholder($("#vehicle_identification_input"),"请输入车辆识别代码");
-	$.replacePlaceholder($("#engine_number_input"), "请输入发动机号");
-	$.replacePlaceholder($("#vehicleInvoiceNo"), "请输入新车购置发票号");
-	$.replacePlaceholder($("#certificateNo"), "请输入凭证编号");
-	$.replacePlaceholder($("#issuer"), "请输入签发机构");
-	$.replacePlaceholder($("#owner_email"), "请输入车主邮箱");
+	
+	
 	$("#carselectChannel").unbind("tap").bind("tap",function() {
 		selectChannel();
-		$("#brand_model_input").val("请选择品牌型号");
+		$("#brand_model_input").val("");
 	});
 	$("#carselectSheng").unbind("tap").bind("tap",function() {
 		selectSheng();
-		$("#brand_model_input").val("请选择品牌型号");
+		$("#brand_model_input").val("");
 	});
 	$("#carselectshi").unbind("tap").bind("tap",function() {
 		selectShi();
-		$("#brand_model_input").val("请选择品牌型号");
+		$("#brand_model_input").val("");
 	});
 	// 勾选新车未上牌
 	$("#plateNum").unbind("tap").bind("tap",function(){
@@ -228,15 +213,15 @@ $(function() {
 		if (picName == "gouxuankuang.png") {
 			document.getElementById("chooseicon").src = base.imagePath + "insurance/car/gouxuankuang1.png";
 			$("#plateNum").css("color","#1b6bb8");
-			$("#plate_number_input").val("请输入车牌号码").css("color", "#888"); // 车牌号码
+			$("#plate_number_input").val(""); // 车牌号码
 			$('#plate_number_input').attr("disabled", true);// 选中新车未上牌时车牌号码输入框元素设置为disabled
 			chooseicon = 1;// 是否新车标志 1：新车，0：非新车
-			$("#brand_model_input").val("请选择品牌型号");
+			$("#brand_model_input").val("");
 		} else {
 			document.getElementById("chooseicon").src = base.imagePath + "insurance/car/gouxuankuang.png";
 			$("#plateNum").css("color","#888");
 			$('#plate_number_input').removeAttr("disabled");// 去除input元素的readonly属性
-			$("#plate_number_input").val(carPlate).css("color","#585858");//牌照
+			$("#plate_number_input").val(carPlate);//牌照
 			chooseicon = 0;// 是否新车标志 1：新车，0：非新车
 		}
 	})
@@ -248,7 +233,7 @@ $(function() {
 			  vehicle_registration_date = "";
 		  }
 		  openDataNowDate("vehicle_registration_date");
-		  $("#brand_model_input").val("请选择品牌型号");
+		  $("#brand_model_input").val("");
 		});
 	
 	// 过户日期调用日期控件
@@ -263,7 +248,7 @@ $(function() {
 			specialCarDate = "";
 		}
 		openDataNowDate("specialCarDate");
-		$("#brand_model_input").val("请选择品牌型号");
+		$("#brand_model_input").val("");
 	});
 	$("#specialCarDate_select").hide();
 	
@@ -382,7 +367,7 @@ $(function() {
 						setTimeout(function() {
 							$(".firstPart").hide();//车辆投保地区隐藏
 							$(".lastPart").show();//车辆详细信息显示
-						}, 200);
+						}, 500);
 					}else if(paramList.status.statusCode == "123456"){
 						modelAlert(paramList.status.statusMessage,"",function(){
 							 loginControl();
@@ -443,13 +428,13 @@ $(function() {
                     return false;
 			}
            if(sessionStorage.getItem("checkFlag")=="0"){
-        	   if($("#checkNo").val()=="请输入验证码"){
+        	   if($("#checkNo").val()=="请输入验证码"||$.isNull($("#checkNo").val())){
         		   if($("#yanzhengmaImg").css("display")!="none"){
 					    modelAlert("请输入验证码！");
 					    return false;
 	               }
         	   }else{
-        		   sessionStorage.setItem("checkNo", $("#checkNo").val());
+        		   sessionStorage.setItem("checkCode", $("#checkNo").val());
         	   }
            }
            cxCarMessage.sessionid=parm.body.cxSessionId;
@@ -617,7 +602,7 @@ function selectCarFlag() {
 			$("#specialCarDate_select").show("fast");
 		} else {
 			document.getElementById("chooseIcons").src = base.imagePath + "insurance/car/guanbi.png";
-			$("#info_choose div").css("color","#585858");
+			$("#info_choose div");
 			$("#specialCarDate_select").hide();
 		}
 	});
@@ -629,7 +614,7 @@ function selectCarFlag() {
 			$("#info_car_choose div").css("color","#1b6bb8");
 		} else {
 			document.getElementById("choosecar").src = base.imagePath + "insurance/car/guanbi.png";
-			$("#info_car_choose div").css("color","#585858");
+			$("#info_car_choose div");
 		}
 	});
 }
@@ -641,12 +626,12 @@ function loadCarContent(param) {
 		var itemValue = param.brandName;
 		vehicleModelData = param; // 车型数据 保存车主 车辆信息的时候 需要用到
 		$("#brand_model_input").val(itemValue).css("width", "85%"); // 品牌型号
-		$("#seat").val(parseInt(param.seatCount).toFixed(0)).css("color","#585858"); // 座位数
+		$("#seat").val(parseInt(param.seatCount).toFixed(0)); // 座位数
 		/*验证码图片*/
 		if(sessionStorage.getItem("checkFlag")=="0"){
 			$("#yanzhengmaImg").show();
 			var str="/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcU FhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgo KCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAYAFQDASIA AhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA AAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3 ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm p6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3 uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD16ZdN 0nwxpV5daNpjW4sYbmSYpCHl2oTKrGQKi8bCHL4JLZ2hcnodSsdDi083enaPol3CkrxSuI0+QruQ gAKdzCUBWUlcfNzldpytCtUtY/CwDSiJrSJw8rNLlmyxUFicDLYA6KCAAAABz/x68Uah4Z8P32r2 cNs1xpuz7OkkzyRSrJJCpMsQ2gMDuA5bA5yN7LQB0+n6fo4hsjHpej3Ni1rHdi6VY5TKG3FgCE2l QuHVlZiwUjAABMvijS9Etns4V0rTl3SB5CsKqdo4wcDODk8+1cd8N/Fmq6p4p8TaNq8Fst3ps1qR dQyOVLTRb44zuyx2lXQuNu4P91cYrqfHFrE1xHafOkJtRF+7kZGC5YcMCGBx3ByPWgCxrfh7w5eW aWy6TpyxtAz+cbKF2jVkKbl8xGBbaztgg5CEEEE1S8Q6ToSeILUDTrWJYF2sYogqjeyklkxtfCqM ZBIycHkg+d/s8v8AYpPGFnEzbT4lu0iaV2dg67NhZjljnlSSckMcmu08ZaVcG8ktrbUb2w2sHSaB Y2YpjAT96jjA6Zxn5evUUAb1zpmiXV3plta6Xp4d3Erv9jEYZAM8AryDz+VVvEWn6PBdwfZNDsLm VJB+5tRHvk29YyrbUBJOAWYDjkgVwXwI1zXde0PQ9c17WNTllu4ZLXY0NosRVZmVXjCR7gBtCnec 5DnGNpqf9qe3mn+H+trAkszfZ4JNqrkqqzqWPA6AKWJPQZ7UAdvDZaU2uSxWui6RMJnVAjqm1VUj c6kIQPk3EL3YAEqDkaGt6XptmYPsfh3TZyGEkoaGJF8kHEhB2k7lBDAY5IAyMkjxTwF4hv8AxF8Q Licw2/8AxKzfW8MsIO1YGls3t5WJJH7wBirHCsASBxmvXdTne5vpGe1h3uEQq0ThlOAwU+5+7nuF 7CgDzf4haaNK1Kyg+y2VrI1sZZEtLZYELNNKclVJBbGMtn5jk4XO0FafxiaN/EVg0GPKNhGUwMDb vfHFFAHY6bd6XLpXhyRdR09Zra3gE4M+XQKq8EDIUA5yTjHHNZfjCz0HxZHqGl6pe2t5plxJGZ2F x5aDDBlyytjC7cdVJJxzRRQBNaaL4Vtdd1rV7PWNNtdQ1GaJ5JlulO5Y1IQBd+FxuxwB93PerniS 80nVbi1aTULd4ZIdl0ltdfNEmfmO+Ntw4Y/MMEYyDRRQBjeEdC8H6RPe6loWtR2i6lumYXWozu0h kKSea6SzZWXIUEsA3y89TWtf31vqV/JNZSwRtDglkuUcE7A+V2Mf4t65O0lgeMEMxRQBgfCTRtO8 MeB7TSb3xRYeZbxzw20oWCKaENKziTBklQtuZmUkD5SoZQQwrR1h9I8QXl5BqF9FdWV48kNzbM8a iK34jOHiblWXL7i24b+duAqlFAEekeHPB/hm9a78OT2Eks7QxTwx3PnM8ESBI1Cs7Z2oCMgZOcnp mtS8u7Se6lnF7paNulMZh1DfwHyrAkDDHO5gPlXJ54DkooA86+MFppmqeIbCS1u5ZY4rFIv9D1GX YpDyHGUcAkZ784x7UUUUAf/Z"
-			$("#checkImg").attr("src","data:image/png;base64,"+sessionStorage.getItem("checkNo"));
+			$("#checkImg").attr("src","data:image/png;base64,"+sessionStorage.getItem("checkCode"));
 			$("#checkNo").val("请输入验证码").css("#888");
 		}else{
 			$("#yanzhengmaImg").hide();
@@ -674,7 +659,7 @@ function blurCheackOwner() {
 			modelAlert("车牌号码长度不正确！");
 			return false;
 		}
-		$("#brand_model_input").val("请选择品牌型号");
+		$("#brand_model_input").val("");
 	});
 	
 }
@@ -750,7 +735,7 @@ function blurCheackCarinfo() {
 			modelAlert("车辆识别代码必须由17位的数字或大写字母组成！");
 			return false;
 		}
-		$("#brand_model_input").val("请选择品牌型号");
+		$("#brand_model_input").val("");
 	});
 
 	// 发动机号验证
@@ -767,7 +752,7 @@ function blurCheackCarinfo() {
 			modelAlert("发动机号是由数字和字母组成！");
 			return false;
 		}
-		$("#brand_model_input").val("请选择品牌型号");
+		$("#brand_model_input").val("");
 	});
 	//车主姓名
 	$("#owner_name").change(function() {
@@ -1192,10 +1177,10 @@ $.loadData = function(param) {
 						selectResult.value = items[0].text;
 						selectResult.style.color = "#585858";
 						selectResult.name = shengList[num].id;
-						doc.getElementById("car_shi").value = "请选择城市";
+						doc.getElementById("car_shi").value = "";
 						doc.getElementById("car_shi").style.color = "#888";
 						doc.getElementById("car_shi").name = "";
-						doc.getElementById("plate_number_input").value = "请输入车牌号码";
+						doc.getElementById("plate_number_input").value = "";
 						doc.getElementById("plate_number_input").style.color = "#888";
 						doc.getElementById("plate_number_input").name = "";
 						citynum = "";
@@ -1317,13 +1302,13 @@ $.addInfo = function(param){
 								$("#nation").val(param.cxInfo.cxOrder.nation)
 							}
                             if(!$.isNull(param.cxInfo.cxOrder.issuerAuthority)){//签发机构
-								$("#issuer").val(param.cxInfo.cxOrder.issuerAuthority)
+								$("#issuer").val(param.cxInfo.cxOrder.issuerAuthority);
 							}
                             $("#fuelTypeTable,#cardTable").show();
 						}
 						if(citynum=="3440300"){//深圳地区
 							if(!$.isNull(data.returns.cxOrder.ownerEmail)){ //邮箱
-							   $("#owner_email").val(param.cxInfo.cxOrder.ownerEmail)
+							   $("#owner_email").val(param.cxInfo.cxOrder.ownerEmail);
 							   $("#plateEmail").show();
 							}
 						}
@@ -1331,7 +1316,6 @@ $.addInfo = function(param){
 					if (param.cxInfo.cxOrder.newcarFlag == "1") {
 						document.getElementById("chooseicon").src = base.imagePath+"insurance/car/gouxuankuang1.png";
 						$("#plateNum").css("color","#1b6bb8");
-						$("#plate_number_input").val("请输入车牌号码").css("color", "#888"); // 车牌号码
 						$('#plate_number_input').attr("disabled", true);// 选中新车未上牌时车牌号码输入框元素设置为disabled
 						chooseicon=1;
 						if(citynum=="3110000"){//新车北京地区
@@ -1339,7 +1323,7 @@ $.addInfo = function(param){
 								$("#certificateType").attr("name",param.cxInfo.cxCarMessage.certificateType).val(param.cxInfo.cxCarMessage.certificateTypeName)
 							}
 							if(!$.isNull(param.cxInfo.cxCarMessage.certificateNo)){//凭证编号
-								$("#certificateNo").val(param.cxInfo.cxCarMessage.certificateNo)
+								$("#certificateNo").val(param.cxInfo.cxCarMessage.certificateNo);
 							}
 							if(!$.isNull(param.cxInfo.cxCarMessage.certificateDate)){//凭证日期
 								$("#certificateDate").val(timeFormatDate(param.cxInfo.cxCarMessage.certificateDate.time,'yyyy-MM-dd'));
@@ -1348,61 +1332,61 @@ $.addInfo = function(param){
 						}
 					} else {
 						document.getElementById("chooseicon").src = base.imagePath + "insurance/car/gouxuankuang.png";
-						$("#plateNum").css("color","#585858");
+						$("#plateNum");
 						$('#plate_number_input').removeAttr("disabled");// 去除input元素的readonly属性
-						$("#plate_number_input").val(param.cxInfo.cxOrder.plateno).css("color","#585858");
+						$("#plate_number_input").val(param.cxInfo.cxOrder.plateno);
 						chooseicon=0;
 					}
 					if(!$.isNull(param.cxInfo.cxOrder.ownerName)){ //车主姓名
-					    $("#owner_name").val(param.cxInfo.cxOrder.ownerName).css("color","#585858");
+					    $("#owner_name").val(param.cxInfo.cxOrder.ownerName);
 					}
 					if(!$.isNull(param.cxInfo.cxOrder.ownerIdno)){ //身份证
-					    $("#owner_idNo").val(param.cxInfo.cxOrder.ownerIdno).css("color","#585858");
+					    $("#owner_idNo").val(param.cxInfo.cxOrder.ownerIdno);
 					}
 					if(!$.isNull(param.cxInfo.cxOrder.ownerMobile)){ //手机号码
-					    $("#owner_mobile").val(param.cxInfo.cxOrder.ownerMobile).css("color","#585858");
+					    $("#owner_mobile").val(param.cxInfo.cxOrder.ownerMobile);
 					}
 				}
 				if(param.cxInfo.cxCarMessage != null){
 					if(!$.isNull(param.cxInfo.cxCarMessage.rackNo)){//车辆识别代码/VIN
-					    $("#vehicle_identification_input").val(param.cxInfo.cxCarMessage.rackNo).css("color","#585858");
+					    $("#vehicle_identification_input").val(param.cxInfo.cxCarMessage.rackNo);
 					}
 					if(!$.isNull(param.cxInfo.cxCarMessage.engineNo)){ //发动机号
-					    $("#engine_number_input").val(param.cxInfo.cxCarMessage.engineNo).css("color","#585858");
+					    $("#engine_number_input").val(param.cxInfo.cxCarMessage.engineNo);
 					}
 					var registerDate = "";
 					if(!$.isNull(param.cxInfo.cxCarMessage.registerDate)){ //车辆注册日期
 						registerDate = timeFormatDate(param.cxInfo.cxCarMessage.registerDate.time,'yyyy-MM-dd');
-					    $("#vehicle_registration_date").val(registerDate).css("color","#585858");
+					    $("#vehicle_registration_date").val(registerDate);
 					}
 					//是否过户
 					if(param.cxInfo.cxCarMessage.transferFlag == 1){
 						document.getElementById("chooseIcons").src = base.imagePath + "insurance/car/dakai.png";
 						$("#specialCarDate_select").show();
 						var transferDate = timeFormatDate(param.cxInfo.cxCarMessage.transferDate.time,'yyyy-MM-dd'); //过户日期
-					    $("#specialCarDate").val(transferDate).css("color","#585858");
+					    $("#specialCarDate").val(transferDate);
 					}else{
 						document.getElementById("chooseIcons").src = base.imagePath + "insurance/car/guanbi.png";
 						$("#specialCarDate_select").hide();
-						$("#specialCarDate").val("请选择过户日期").css("color","#585858");
+						$("#specialCarDate").val("");
 					}
 					var vehicleinvoicedate = "";
 					if(!$.isNull(parm.body.businessBegindate)){ //起保日期
-					    $("#startDate").val(parm.body.businessBegindate).css("color","#585858");
+					    $("#startDate").val(parm.body.businessBegindate);
 					}
 					//是否外地车
 					if(param.cxInfo.cxCarMessage.ecdemicVehicleFlag == 1){
 						$("#info_car_choose div").css("color","#1b6bb8");
 						document.getElementById("choosecar").src = base.imagePath + "insurance/car/dakai.png";
 					}else{
-						$("#info_car_choose div").css("color","#585858");
+						$("#info_car_choose div");
 						document.getElementById("choosecar").src = base.imagePath + "insurance/car/guanbi.png";
 					}
 					if(!$.isNull(param.cxInfo.cxCarMessage.vehicleBrand)){ //品牌型号jingyouVehicleName
-					    $("#brand_model_input").val(param.cxInfo.cxCarMessage.vehicleBrand).css("color","#585858");
+					    $("#brand_model_input").val(param.cxInfo.cxCarMessage.vehicleBrand);
 					}
 					if(!$.isNull(param.cxInfo.cxCarMessage.seats)){ //座位数
-					    $("#seat").val(parseInt(param.cxInfo.cxCarMessage.seats).toFixed(0)).css("color","#585858");
+					    $("#seat").val(parseInt(param.cxInfo.cxCarMessage.seats).toFixed(0));
 					}
 					if(parm.body.pagesflag == "carinfo" ){
 						$(".firstPart").hide();
@@ -1430,13 +1414,13 @@ function checkNo(param) {
 	return reg.test(param);
 }
 
-//输入一个汉字一个字母和5个数字
+//输入一个汉字一个字母和5个数字（车牌校验）
 function checkCarNo(param) {
 	reg = /^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]{5,6}$/;
 	return reg.test(param);
 }
 
-//汉字正则表达式
+//发动机号校验
 function checkChinese(str){
 	reg = /^[A-Za-z0-9-_]+$/;
 	return reg.test(str);
@@ -1464,14 +1448,11 @@ function selectChannel(){
 		userPicker.show(function(items) {
 			document.getElementById("issueChannel").value=items[0].text;
 			document.getElementById("issueChannel").setAttribute("channelCode", items[0].value)
-			document.getElementById("car_sheng").value = "请选择省份";
-			document.getElementById("car_sheng").style.color = "#888";
+			document.getElementById("car_sheng").value = "";
 			document.getElementById("car_sheng").name = "";
-			document.getElementById("car_shi").value = "请选择城市";
-			document.getElementById("car_shi").style.color = "#888";
+			document.getElementById("car_shi").value = "";
 			document.getElementById("car_shi").name = "";
-			document.getElementById("plate_number_input").value = "请输入车牌号码";
-			document.getElementById("plate_number_input").style.color = "#888";
+			document.getElementById("plate_number_input").value = "";
 			document.getElementById("plate_number_input").name = "";
 			citynum = "";
 		});

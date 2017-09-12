@@ -23,8 +23,8 @@
 		<div id="insure_iscroll" class="mui-scroll">
 			<div class="bigTitle">
 				<div class="bigTitleLeft">
-					<p class="riskName"></p>
-					<p style="font-size:10px;"><span class="baodanhao">保单号：</span><span class="policyNo"></span></p>
+					<p class="riskName" id="riskName">&nbsp;</p>
+					<p style="font-size:10px;"><span class="baodanhao">保单号：</span><span class="policyNo" id="policyNo"></span></p>
 				</div>
 				<div class="bigTitleRight">
 					<img class="zhuangtai" src="../../image/baozhanging.png">
@@ -44,7 +44,7 @@
 					</li>
 					<li class="IDType border-1px-bottom">
 						<div class="li_title">证件类型</div>
-						<div id="TBRIDType" class="li_value"></div>
+						<div id="TBRIDType" class="li_value">身份证</div>
 					</li>
 					<li class="ID border-1px-bottom">
 						<div class="li_title">证件号</div>
@@ -80,7 +80,7 @@
 					</li>
 					<li class="IDType border-1px-bottom">
 						<div class="li_title">证件类型</div>
-						<div id="BBRIDType" class="li_value"></div>
+						<div id="BBRIDType" class="li_value">身份证</div>
 					</li>
 					<li class="ID border-1px-bottom">
 						<div class="li_title">证件号</div>
@@ -101,11 +101,7 @@
 					</div>
 				</article>
 				<div class="choose_way" style="font-size:14px">
-					<div class="bar clearfix">
-						<div class="">保障方案</div>
-						<div class="">保障范围</div>
-						<div class="">保障额度</div>
-					</tr>					
+					<div class="bxzr"></div>					
 				</div>
 			</div>
 			<!-- 保险条款 -->
@@ -113,7 +109,7 @@
             	<article class="insureName border-1px-bottom">
 					<div style="width: 100%">
 						<span>保险条款</span>
-						<img class="rightjiantou" src="../../image/right.png">
+						<img class="rightjiantou" src="../../../image/common/right.png">
 					</div>
 				</article>
 			</div>
@@ -127,5 +123,5 @@
     <script  src="../../../js/lib/widget/mui/mui.min.js" ></script>    
     <script  src="../../../js/lib/common/base.js" ></script>
     <script  src="../../../js/lib/common/common.js" ></script>
-    <script  src="../../../js/usage/account/myOrder/orderInfo.js" ></script>
+    <script  src="../../../js/usage/account/myOrder/policyInfo.js" ></script>
 </html>

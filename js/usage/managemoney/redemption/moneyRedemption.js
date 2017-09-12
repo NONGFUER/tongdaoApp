@@ -11,6 +11,7 @@ var vm = new Vue({
 				$(".div_btn").unbind("tap").bind("tap", function() {
 					var url = base.url + 'hkRedemption/getRedemption.do';
 					commodityCommId = $(this).attr('commoditycommid');
+					title=$(this).attr('commdityComName');
 					orderNo = $(this).attr('orderno');
 					policyNo = $(this).attr("policyno");
 					insureNo = $(this).attr('insureno');
@@ -27,7 +28,7 @@ var vm = new Vue({
 							"insureNo": insureNo,
 							"commodityCommId": commodityCommId,
 							"customerId": customerId
-						}
+						},
 					}
 					$.reqAjaxsFalse(url, reqData, getRedemption);
 				})

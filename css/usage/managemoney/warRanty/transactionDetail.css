@@ -124,6 +124,7 @@ ul li span {
 	color: #FFFFFF;
 }
 /*保障名称颜色*/
+
 .lanse{
 	color: #48A0F0!important;
 }
@@ -131,6 +132,15 @@ ul li span {
 	color: #F07935!important;
 }
 .huise{
+	color: #878787!important;
+}
+.lanseli .money{
+	color: #48A0F0!important;
+}
+.huangseli .money{
+	color: #F07935!important;
+}
+.huiseli .money{
 	color: #878787!important;
 }
 /*重写MUI*/

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../../../css/usage/insurance/payResult.css">
 </head>
 <body>
-    <div class="result whitebackground" >
+    <div class="result whitebackground" id='list'  v-cloak>
         <div class="result-status">
             <img class="result-status_img" src="../../../image/common/paySuccess.png" >
             <p class="result-status_p" id="payResult">支付成功</p>
@@ -20,9 +20,9 @@
         <div class="result-content">
             <dl>
                 <dt>详细信息</dt>
-                <dd>支付金额：<span id="prem"></span></dd>
-                <dd>产品名称：<span id="productName"></span></dd>
-                <dd><span class="letter3">订单号</span>：<span id="orderNo"></span></dd>
+                <dd>支付金额：<span id="prem" v-html="startPiece+'元'">23466.00元</span></dd>
+                <dd>产品名称：<span id="productName" v-html="comComName">百万少儿重大疾病保险</span></dd>
+                <dd><span class="letter3">订单号</span>：<span id="orderNo" v-html="orderNo"></span></dd>
                 <dd style="display:none" class="reason">失败原因：<span id="">网络发生改变，导致支付失败！</span></dd>
             </dl>
         </div>      
@@ -33,7 +33,7 @@
     </div>
     <div class="result-click" id="fail">
         <div class="result-button backProduct" >返回首页</div>  
-        <div class="result-button on1" id="orderDetail">保单详情</div>  
+        <div class="result-button on1">订单详情</div>  
     </div>
     <form id="f1" action="" style="display:none;" method='post'>
 					<textarea id="requestDoc" name="requestDoc"></textarea>
@@ -43,6 +43,7 @@
     <script src="../../../js/lib/widget/mui/mui.min.js"></script>
     <script src="../../../js/lib/common/base.js"></script>
     <script src="../../../js/lib/common/common.js"></script>
-    <script src="../../../js/usage/insurance/payResult.js"></script>
+    <script src="../../../js/lib/widget/mui/vue.mi.js"></script>
+    <script src="../../../js/usage/managemoney/messageFillout/payResult.js"></script>
 </body>
 </html>

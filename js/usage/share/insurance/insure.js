@@ -569,16 +569,18 @@ function cityReponse(data){
 	        var ccsa = data.returns.commodityCombinationSaleAreas;
 	        var cityArray = [];
 	        for( var i = 0; i < ccsa.length; i++ ){
-	            var item ={ 
-	                    "text":ccsa[i].cityName,
-	                    "value":ccsa[i].cityCode,
-	                    "agentCode":ccsa[i].intermediaryCode,//中介代码
-	                    "teamCode":ccsa[i].teamCode,//团队代码
-	                    "certiNo":ccsa[i].agentCode,
-	                    "businessSource":ccsa[i].yewuSource,
-	                    "agentName":ccsa[i].agnetName
-	                    }
-	            cityArray.push(item);
+	        	if( ccsa[i].cityCode != ""){
+		            var item ={ 
+		                    "text":ccsa[i].cityName,
+		                    "value":ccsa[i].cityCode,
+		                    "agentCode":ccsa[i].intermediaryCode,//中介代码
+		                    "teamCode":ccsa[i].teamCode,//团队代码
+		                    "certiNo":ccsa[i].agentCode,
+		                    "businessSource":ccsa[i].yewuSource,
+		                    "agentName":ccsa[i].agnetName
+		                    }
+		            cityArray.push(item);
+	        	}
 	        }
 	        selectPicker3.setData(cityArray);
 	        selectPicker3.show(function(item){
@@ -946,7 +948,8 @@ function sendGhxInsureRequest(){
 					//"inviterCode":"",
 					"inviterPhone":mobile,
 				    "channelResource":"3",//渠道来源  
-					"insureList": insureList
+					"insureList": insureList,
+					"buyType":"2"//2分享
 				},
 				"customerId":customerId
 
@@ -979,7 +982,8 @@ function sendGhxPayRequest(orderNo){
 		  "body": {
 		    "orderNo": orderNo,
 		    "payWay": "01",
-		    "redirectUrl": base.url + "tongdaoApp/html/insurance/main/payResult.html?orderNo="+orderNo
+		    "redirectUrl": base.url + "tongdaoApp/html/insurance/main/payResult.html?orderNo="+orderNo,
+		    "customerId": customerId
 		  }
 		}
 	$.reqAjaxs( url, sendJson, ghxPayBackCall );

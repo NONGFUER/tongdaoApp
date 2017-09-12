@@ -26,7 +26,10 @@ $(function(){
     //根据保费试算项进行保费试算
     sendCaldoRequest( ccId );
     //calOptionsRender(data4);
-    showRightIcon();
+    if( roleType != "00" ){
+    	 showRightIcon();
+    }
+   
     /**拨打电话*/
 	$(".kefu").unbind("tap").bind("tap",function(){
     	callService("4006895505",".kefuPhone");
@@ -296,7 +299,7 @@ function moduleStr(mapperList){
 				str += mapperList.modueInfo;	
 			}	    
 		}else if( mapperList.moduleType == "03" ){//链接
-			str += '<span class="btn1 fl" onclick="toArticle()">合同条款</span><a href="'+mapperList.modueInfo+'" class="btn1 ri" id="hetongDemo">合同样张</a>'
+			str += '<span class="btn1 fl" onclick="toCommodityList()">合同条款</span><a href="'+mapperList.modueInfo+'" class="btn1 ri" id="hetongDemo">合同样张</a>'
 		}else if(  mapperList.moduleType == "01"  ){
 			str += '<img src="' + mapperList.modueInfo + '" class="mb10">';
 		}      								
@@ -370,7 +373,7 @@ function timeRender(data){
     	}else{
     		currentTime.setFullYear(currentTime.getFullYear()-lowAge, currentTime.getMonth(), currentTime.getDate());
     	}
-    	currTime.setFullYear(currTime.getFullYear()-upAge+1, currTime.getMonth(), currTime.getDate()+1);//55周岁    	
+    	currTime.setFullYear(currTime.getFullYear()-upAge-1, currTime.getMonth(), currTime.getDate()+1);//55周岁    	
     	var year = currTime.getFullYear(),month= currTime.getMonth()+1,day = currTime.getDate();
     	defaultTime=$.getTimeStr2(currentTime);
     	var endYear = currentTime.getFullYear(),endMonth = currentTime.getMonth()+1,endDay = currentTime.getDate();
@@ -459,6 +462,12 @@ function toHealthHtml(){
 	urlParm.cVersion = cVersion;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = "healthNotice.html?jsonKey="+jsonStr;
+}
+
+//跳转到商品列表页
+function toCommodityList(){	
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/insurance/main/commodityList.html?jsonKey="+jsonStr;
 }
 function shareHandle(){
 	var shareList = getProductShare(ccId);

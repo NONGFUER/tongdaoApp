@@ -380,7 +380,7 @@ function timeRender(data){
     	}else{
     		currentTime.setFullYear(currentTime.getFullYear()-lowAge, currentTime.getMonth(), currentTime.getDate());
     	}
-    	currTime.setFullYear(currTime.getFullYear()-upAge+1, currTime.getMonth(), currTime.getDate()+1);//55周岁    	
+    	currTime.setFullYear(currTime.getFullYear()-upAge-1, currTime.getMonth(), currTime.getDate()+1);//55周岁    	
     	var year = currTime.getFullYear(),month= currTime.getMonth()+1,day = currTime.getDate();
     	defaultTime=$.getTimeStr2(currentTime);
     	var endYear = currentTime.getFullYear(),endMonth = currentTime.getMonth()+1,endDay = currentTime.getDate();

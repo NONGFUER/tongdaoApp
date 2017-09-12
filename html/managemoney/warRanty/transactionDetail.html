@@ -29,23 +29,23 @@
 					</div>
 					<div id='list' class="man-div-body " v-cloak>
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li  mui-table-view-cell" v-for="(value,key) in Objectlist">
+							<li class="man-div-body-ul_li  mui-table-view-cell" v-for="(value,key) in Objectlist"  v-bind:insureSurrender="value.insureSurrender" v-bind:orderStatus="value.orderStatus">
 								<div class="man-div-body-ul_li_div mui-slider-handle">
 									<ul class="man-div-body-ul_li_div_ul1">
-										<li>
+										<li class="man-div-body-ul_li_div_ul1_title">
 											<span class="goumaizhuangtai" v-html="value.insureSurrender=='1'?'购买':'领取'"></span>
 											<span class="xianright"></span>
 											<span v-html="value.productName"></span>
-											<span class="money" v-html="value.money"></span>
+											<span class="money" v-html="value.money+'元'"></span>
 										</li>
-										<li>
+										<li class="man-div-body-ul_li_div_ul1_body">
 											<div>
 												<span>订单号：</span>
 												<span v-html="value.orderNo"></span></div>
 											<div>
 												<span v-html="value.inserTime"></span>
 												<span class="xianright2"></span>
-												<span class="money" v-html="value.orderStatus"></span>
+												<span class="money orderStatus" v-html="value.orderStatus"></span>
 											</div>
 										</li>
 									</ul>

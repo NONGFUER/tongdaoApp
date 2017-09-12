@@ -4,13 +4,16 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	commodityComId = urlParm.commodityComId,
 	customerPhone = urlParm.customerPhone,
 	roleType = urlParm.roleType,
-	riskType = null,
+	riskType = urlParm.riskType,
 	transToken = urlParm.transToken,
-	orderStatus = null,
+	orderStatus = urlParm.orderStatus,
 	tagId = urlParm.tagId,
 	customerId = urlParm.customerId;
 if(tagId == "") {
 	tagId = null;
+}
+if(orderStatus == '') {
+	orderStatus = null;
 }
 var vm = new Vue({
 	el: '#list',
@@ -60,8 +63,8 @@ function getOrderList(data) {
 				datas.push(index);
 				if(index.startTime != null && index.startTime != "" && index.endTime != null && index.endTime != "") {
 					if(index.startTime.time != null && index.startTime.time != "" && index.endTime.time != null && index.endTime.time != "") {
-						datas[element].startTime = ($.getTimeStr2(index.startTime.time));
-						datas[element].endTime = ($.getTimeStr2(index.endTime.time));
+						datas[element].startTime = ($.getTimeStr(index.startTime.time));
+						datas[element].endTime = ($.getTimeStr(index.endTime.time));
 					}
 				} else {
 					datas[element].startTime = ("");

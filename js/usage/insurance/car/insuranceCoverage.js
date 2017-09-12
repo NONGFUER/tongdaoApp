@@ -150,7 +150,6 @@ $(function(){
 	$(".sytoubao").unbind("tap").bind("tap",function(){
 		var color = "";
 		color = $(".sytoubao").css("color");
-		console.log(color);
 		if(color == "rgb(174, 178, 183)"){
 			$(".sytoubao").css("color","#1b6bb8");
 			$(".sytoubao").css("border-color","#1b6bb8");

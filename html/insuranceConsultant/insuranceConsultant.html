@@ -18,25 +18,32 @@
 	<body>
 		<div class="mui-content mui-scroll-wrapper" id="list">
 			<div class="mui-scroll">
-				<div class="man mui-table-view" >
+				<div class="man mui-table-view">
 					<div class="man-div-body " v-cloak>
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-li mb10" v-for="(value,key) in Objectitle">
-								<i class="xuan" v-if='key==0'></i>
-								<span class="first">
+							<li class="man-div-body-li mb10 mui-table-view-cell" v-for="(value,key) in Objectitle" v-bind:customerId='value.customerId' v-bind:insuranceConsultantId='value.id'>
+								<div class="mui-slider-right mui-disabled shanchu"  v-if='shanchu'>
+									<a class="mui-btn mui-btn-red" v-bind:customerId="value.customerId" v-bind:insuranceConsultantId='value.id' v-bind:agentCode="value.agentCode">
+										<!--<i class="lajitong"></i>-->
+										<span>删除</span>
+									</a>
+								</div>
+								<div class="man-div-body-ul_li_div mui-slider-handle leirong">
+									<i class="xuan" v-if='key==0'></i>
+									<span class="first">
 									<img class="imgzhao"  v-bind:src="value.postcardWxImage==''?'../../image/insuranceConsultant/1.png':urlimg+value.postcardWxImage">
 									<span class="renzheng">
 										权威认证
 									</span>
-								</span>
-								<span class="last mgr15">
+									</span>
+									<span class="last mgr15">
 									<ul>
 									<li v-html="value.name">陈某人</li>
 													<li class='guwen mb10'>
 														<span>保险顾问</span>
-								<span class="heng"></span>
-								<span>服务区域:</span>
-								<span v-html="value.provinceName"></span>
+									<span class="heng"></span>
+									<span>服务区域:</span>
+									<span v-html="value.provinceName"></span>
 							</li>
 							<li class='huise'>
 								<span>手机号码：</span>
@@ -47,6 +54,7 @@
 							</li>
 						</ul>
 						</span>
+						</div>
 						</li>
 						</ul>
 					</div>

@@ -95,7 +95,7 @@ function ListCallBack(data) {
 				str += '</a>';
 				str += '</div>';
 				str += '<div class="man-div-body-ul_li_div mui-slider-handle">';
-				str += '<ul class="ul_title" onclick="toInsure(this)">';
+				str += '<ul class="ul_title">';
 				str += '<li>';
 				str += '<div class="title_name_left">';
 				str += '<span id="name">'+name+'</span>';
@@ -151,7 +151,10 @@ function ListCallBack(data) {
 			var unId=paramlist[num].id;
 			shanchu(unId);
 		});
-		
+		$(".notice_info").unbind("tap").bind("tap",function(){
+			//var num = $(this).find("input").val();
+			toInsure($(this));
+		});
 	}else{
 		modelAlert("查询常用保险人列表失败！");
 	}
@@ -251,6 +254,9 @@ function addCheck(){
 		return false;
 	} else if (tit.regExp.isChinese($.trim($("#addName").val())) == false) {
 		modelAlert("姓名必须为汉字！");
+		return false;
+	}else if (tit.regExp.isChinese($.trim($("#addName").val())).length<20) {
+		modelAlert("姓名必须少于20个字！");
 		return false;
 	}
 	
