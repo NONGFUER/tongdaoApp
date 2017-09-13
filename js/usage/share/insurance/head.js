@@ -97,13 +97,13 @@ if(getUrlQueryString("jsonKey")){
 		urlParm.customerId = getUrlQueryString("customerId") ? getUrlQueryString("customerId"):"";
 		urlParm.shareFlag = getUrlQueryString("shareFlag");
 		urlParm.mobile = getUrlQueryString("mobile") ? getUrlQueryString("mobile") : "";
-	//微信比app多（不同）的字段
-	var openid = urlParm.openid;
-	var shareMobile = urlParm.shareMobile;
-	var shareCusId = urlParm.shareCusId;
-	var shareFlag = urlParm.shareFlag;
+	
 }
-
+//微信比app多（不同）的字段
+var openid = urlParm.openid ? urlParm.openid : "";
+var shareMobile = urlParm.shareMobile ? urlParm.shareMobile : "";
+var shareCusId = urlParm.shareCusId ? urlParm.shareCusId : "";
+var shareFlag = urlParm.shareFlag ? urlParm.shareFlag : "";
 
 
 var mobile      = urlParm.mobile;                //"18900001111";  //urlParm.mobile;//用户手机号

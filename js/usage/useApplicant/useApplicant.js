@@ -69,11 +69,7 @@ function ListCallBack(data) {
 				var idNo = paramlist[i].idNo ? paramlist[i].idNo:"";
 				var addressDetial = paramlist[i].addressDetial ? paramlist[i].addressDetial:"";
 				var retail = paramlist[i].retail;//关系
-				
-				str += '<div class="notice_info">';
-				str += '<div class="helpcenter_enter"><input type="hidden" value="'+paramlist[i].questionCode+'"/>';
-				str += '<ul><li class="border-1px-bottom" id="loginpwd">';
-				
+												
 				str += '<li class="man-div-body-ul_li mui-table-view-cell">';
 				str += '<div class="mui-slider-right mui-disabled shanchu">';
 				//判断关系
@@ -151,7 +147,7 @@ function ListCallBack(data) {
 			var unId=paramlist[num].id;
 			shanchu(unId);
 		});
-		$(".notice_info").unbind("tap").bind("tap",function(){
+		$(".ul_title").unbind("tap").bind("tap",function(){
 			//var num = $(this).find("input").val();
 			toInsure($(this));
 		});

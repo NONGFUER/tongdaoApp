@@ -8,7 +8,7 @@ $(function(){
     //点击弹框里的确定按钮
     yuyueSubmit( customerId, ccId);		   
     sendLiveProductInfoRequest(ccId, provinceCode, cityCode, roleType )	//APP产品模块线下产品详情查询
-    if( roleType == "02" || roleType == "06" ){					//如果是代理人
+    if( roleType == "02" ){					//如果是代理人
     	$(".insurance-customer").removeClass("none");
     	$(".single-footer").removeClass("yincang");
     	sendCusInsConsultantRequest();
@@ -201,7 +201,9 @@ function liveProductInfoRender( data ){
         var commodityInfoList    = body.commodityInfoList;    //商品列表
         var commodityClauseList  = body.commodityClauseList;  //所有产品条款列表       
         var commodityModuleList  = body.commodityModuleList;  //商品组合模块配置信息列表
-        var commodityCombination = body.commodityCombination; //商品组合详情                                                                
+        var commodityCombination = body.commodityCombination; //商品组合详情 
+        shareDesc = commodityCombination.insuredInfo;
+        shareTitle = commodityCombination.commodityCombinationName;
         for( var i = 0; i < commodityModuleList.length; i++ ){
             //拼接一个模块
             moduleStr(commodityModuleList[i]);
@@ -368,9 +370,8 @@ function backlast(){
 	sysback();
 }
 function shareHandle(){
-	var shareList = getProductShare(ccId);
-	var title = shareList[0] ;
-	var desc  = shareList[1] ;	
+	var title = shareTitle;
+	var desc  = shareDesc;	
 	var shareurl = base.url+"tongdaoApp/html/share/insurance/main/liveProductDetail.html"+window.location.search;
 	var picUrl = getProductSharePic(ccId);
 	shareMethod(shareurl,title,desc,"baodan",picUrl);		

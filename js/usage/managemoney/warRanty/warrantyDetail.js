@@ -14,10 +14,11 @@ var vm = new Vue({
 	data: {
 		Objectitle: {
 			commodityCombination: {},
-			bxPolicyFinance: {}
+			bxPolicyFinance: {},
 		},
 		Objecbody: null,
 		baozhang: null,
+		returnVisit: {},
 	},
 	mounted() {
 		this.$nextTick(function() {
@@ -54,29 +55,38 @@ $(function() {
 	var url = base.url + 'moneyManage/policyQueryListInfo.do';
 	console.log("页面初始化，发送请求报文--");
 	$.reqAjaxsFalse(url, reqData, policyQueryListInfo);
+	if(vm.returnVisit == '1'){
+		$('#huifang').addClass('huisebtn');
+	}
 	mui('.man-div-body-ul_li_div_btn').on('tap', '#huifang', function() {
-		mui.alert('确认');
 		/*接口请求位子*/
-		var reqData = {
-				"head": {
-					"userCode": userCode,
-					"channel": "01",
-					"transTime": $.getTimeStr(),
-					"transToken": transToken
-				},
-				"body": {
-					"orderNo": orderNo,
-					"customerId": customerId,
-					"policyNo":policyNo
-				}
+		if(vm.returnVisit == '0') {
+			var reqData = {
+				"commodityCombinationId": commodityCombinationId + "",
+				"userCode": userCode,
+				"customerId": customerId,
+				"transToken": transToken,
+				"insurePhone": userCode,
+				"riskSupportAbility":riskSupportAbility,
+				"comComName":comComName,
+				"startPiece":startPiece,
+				"commodityCombinationId":commodityCombinationId,
+				"commodityId":commodityId,
+				"testType":testType,
+				"orderNo":orderNo,
+				"leftIco": '1',
+				"rightIco": '0',
+				"downIco": '0',
+				"title": title,
 			}
-			var url = base.url + 'hkRedemption/getReview.do';
-			console.log("页面初始化，发送请求报文--");
-			$.reqAjaxsFalse(url, reqData, getReview);
+			var jsonStr = UrlEncode(JSON.stringify(reqData));
+			window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/returnVisit.html?jsonKey=" + jsonStr;
+		} else {
+			$('#huifang').addClass('huisebtn');
+		}
 	})
 
-	
-	function getReview(data){
+	function getReview(data) {
 		console.log(data)
 	}
 	$(".baodan").unbind("tap").bind("tap", function() {
@@ -105,9 +115,10 @@ function policyQueryListInfo(data) {
 	if(data.statusCode == '000000') {
 		console.log(data)
 		vm.Objectitle = data.returns;
-	}else if(data.statusCode == '123456'){
+		vm.returnVisit = data.returns.bxPolicyFinance.returnVisit;
+	} else if(data.statusCode == '123456') {
 		modelAlert(data.statusMessage, '', lognCont);
-	}else{
+	} else {
 		modelAlert(data.statusMessage);
 	}
 }
@@ -138,9 +149,6 @@ function getRedemption(data) {
 		modelAlert(data.statusMessage);
 	}
 }
-
-
-
 
 /*页面信息*/
 function policyQueryListInfo(data) {

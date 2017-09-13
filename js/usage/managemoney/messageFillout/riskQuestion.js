@@ -16,6 +16,7 @@ var commodityId = "";
 var transToken = "";
 var userCode="";
 var commodityCombinationId="";
+var productFlag="";
 $(function() {
 
 	//	url传值解密过程
@@ -24,6 +25,7 @@ $(function() {
 	parm = JSON.parse(urlstr);
 	mobile = parm.body.mobile;
 	userCode=parm.head.userCode;
+	productFlag=parm.productFlag;
 	transToken = parm.head.transToken;
 	customerId = parm.body.customerId;
 	productCode = parm.body.productCode;
@@ -507,6 +509,7 @@ $.submitDataCallBack = function(param) {
 				"commodityId": commodityId,
 				"commodityCombinationId":commodityCombinationId,
 			},
+			"productFlag":productFlag,
 			"title": '评估结果',
 			"titles": titles,
 			"leftIco": '0',

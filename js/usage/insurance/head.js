@@ -106,6 +106,9 @@ var title = "";
 var leftIco = "";
 var rightIco = "";
 
+var shareDesc = "";
+var shareTitle = "";
+
 //挂号线
 var ghxDicChannel = urlParm.ghxDicChannel ? urlParm.ghxDicChannel : "";
 var ghxDicCode = urlParm.ghxDicCode ? urlParm.ghxDicCode : "";

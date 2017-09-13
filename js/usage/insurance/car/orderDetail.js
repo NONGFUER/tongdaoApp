@@ -1,13 +1,13 @@
 var cxSessionId = "";// 车险投保唯一流水号"15061915143671823305";
+var orderNo="";
 var bxfromFlag="";//1-订单列表进入  2-保单列表进入
 var orderPrams = "";// 页面传递订单信息
-var proNo = "";// 投保单号 有商业用商业 没有商业用交强
-var phName = "";// 投保人姓名
 var cxorderStatus = "";// 订单状态
 var orderNos = "";
 var payUrl = "";
 var parm;
 var tradeNo;
+var cxflag;//1-订单  2-保单  3-出单
 $(function() {
 	/* 设置滑动区域 */
 	$.setscroll();
@@ -16,7 +16,8 @@ $(function() {
 	str = UrlDecode(str);
 	parm = JSON.parse(str);
 	console.log(parm)
-	cxSessionId = parm.body.cxSessionId;
+	orderNo = parm.orderNo;
+	cxflag=parm.cxflag;
 	$("#order_index").css("height",($("body").height() - $("header").height() + "px"));
 	$("#indexpart").css("padding-bottom", "10rem");
 	$("#indexpart_scroll").css("padding-bottom", "10rem");
@@ -25,24 +26,7 @@ $(function() {
 	
 	//返回按钮
 	$(".h_back,#btn_backHome").unbind("tap").bind("tap",function() {
-		if(parm.body.bxfromFlag=="2"){
-			var backParam={
-			   "mobile": parm.head.userName  
-		   }
-		   var jsonStr = JSON.stringify(backParam);
-		   jsonStr = UrlEncode(jsonStr);
-		   window.location.href = "policyManagement.html?jsonKey=" + jsonStr;
-		}else{
-			 var backParam={
-				"agentId":parm.head.agentId,   
-				"phone": parm.head.userName,
-				"type":"1"
-			   }
-			   var jsonStr = JSON.stringify(backParam);
-			   jsonStr = UrlEncode(jsonStr);
-			   window.location.href = base.url+"tongdaoApp/page/html/users/policyManange.html?jsonKey=" + jsonStr;		
-		}
-		
+		backlast();
 	});
 
 	// 获取订单信息
@@ -52,7 +36,6 @@ $(function() {
 	// 查看详细投保信息
 	$("#see_details").unbind("tap").bind("tap",function() {
 		parm.title="投保信息";
-		parm.body.orderNos = orderNos;
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
 		window.location.href = "insureMes.html?jsonKey=" + jsonStr;
@@ -70,9 +53,9 @@ $(function() {
 
 // 获取订单信息模块初始化
 $.loadOrderInf = function() {
-	var url = base.url + "cx/getAllInfo.do";
+	var url = base.url + "cx/getCxAllInfo.do";
 	var data = {
-		"sessionId" : cxSessionId,// 车险投保唯一流水号
+		"orderNo" : orderNo,// 车险订单号
 	};
 	$.toAjaxs(url, data, $.loadData);
 };
@@ -89,6 +72,7 @@ $.loadData = function(param) {
 				cxorderStatus = param.cxInfo.cxOrder.orderStatus;// 订单状态
 				// 订单号
 				orderNos = param.cxInfo.cxOrder.orderNo;
+				cxSessionId=param.cxInfo.cxOrder.sessionid;
 				$("#orderno").html(orderNos);// A123456789012345657
 				// 车险公司名称
 				$("#comtype").html("天安财险");
@@ -193,3 +177,23 @@ $.setscroll = function() {
 	$("#order_index").height(Scrollheight);
 	mui("#order_index").scroll();
 };
+
+/*返回*/
+function backlast(){
+	if(cxflag=="1"){
+		parm.title="我的订单";
+		var jsonStr = JSON.stringify(parm);
+		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
+		window.location.href =base.url+"tongdaoApp/html/account/myOrder/allOrder.html?jsonKey=" + jsonStr;
+	}else if(cxflag=="2"){
+		parm.title="我的保单";
+		var jsonStr = JSON.stringify(parm);
+		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
+		window.location.href =base.url+"tongdaoApp/html/account/myOrder/policyList.html?jsonKey=" + jsonStr;
+	}else if(cxflag=="3"){
+		parm.title="我的出单";
+		var jsonStr = JSON.stringify(parm);
+		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
+		window.location.href =base.url+"tongdaoApp/html/agent/mysingle/mysingle.html?jsonKey=" + jsonStr;
+	}
+}

@@ -1,9 +1,9 @@
-var shareMobile = getUrlQueryString("mobile");//手机
+//var shareMobile = getUrlQueryString("mobile");//手机
 var cusId		= getUrlQueryString("cusId");//手机
+var shareMobile = "";
 var countdown = 60;
 $(function(){
 	getNameRequest(cusId);
-	getTouxiang();
 	$("#btnSendCode").unbind("tap").bind("tap",function(){		
 		var mobile = $("#checkPhone").val();
 		if($.isNull(mobile)){
@@ -143,18 +143,20 @@ function getNameRequest(cusId){
 				"customerId":cusId
 			}
 	}
-	$.reqAjaxs( url, sendJson, getNameCallback );
+	$.reqAjaxsFalse( url, sendJson, getNameCallback );
 }
 
 function getNameCallback(data){
 	if(data.statusCode == "000000"){
 		$("#name").text(data.returns.customerBasic.name);
+		shareMobile = data.returns.customerBasic.userName;
+		getTouxiang(shareMobile)
 	}else{
 		modelAlert(data.statusMessage);
 	}
 }
 
-function getTouxiang(){
+function getTouxiang(shareMobile){
 	$.ajax({
 		type: "get",
 		url: base.url+"customerBasic/getAppImage.do",

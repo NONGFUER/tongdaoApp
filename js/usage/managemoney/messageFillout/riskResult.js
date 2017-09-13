@@ -5,6 +5,7 @@ var testType;
 var titles = "";
 var transToken = "";
 var commodityId = "";
+var productFlag='';
 $(function() {
 	//	url传值解密过程
 
@@ -13,6 +14,7 @@ $(function() {
 	parm = JSON.parse(urlstr);
 	console.info(parm);
 	testType = parm.body.testType;
+	productFlag=parm.productFlag;
 	mobile = parm.body.mobile;
 	productCode = parm.body.productCode;
 	customerId = parm.body.customerId;
@@ -131,6 +133,7 @@ function buy() {
 				"commodityId": commodityId,
 				"testType": $('.testType').html(),
 				"transToken": transToken,
+				"productFlag":productFlag,
 				'title': titles,
 				"leftIco": '1',
 				"rightIco": '0',

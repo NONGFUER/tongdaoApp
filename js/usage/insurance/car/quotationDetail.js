@@ -1,10 +1,11 @@
 var parm;
-var cxSessionId;
+var sessionId;
 var tradeNo;
 var checkNo;
 var checkCode;
 var vehicleModelData={};
 var producingarea;//车型产地  进口车、合资车、国产车 
+var orderNo;
 $(function() {
 	/**页面滑动设置*/
 	$.setscrollarea("accprice_index");
@@ -12,7 +13,8 @@ $(function() {
 	str = str.substr(9, str.length);
 	str = UrlDecode(str);
 	parm = JSON.parse(str);
-	cxSessionId = parm.body.cxSessionId;
+	parm.body={};
+	orderNo = parm.orderNo;
 	init();
 	
 	/**--返回--*/
@@ -42,6 +44,7 @@ $(function() {
 		parm.rightIco="0";
 		parm.body.fromFlag = "1";
 		parm.body.fromBaojia="quote";
+		parm.body.cxSessionId=sessionId;
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
 		window.location.href = "quote.html?jsonKey=" + jsonStr;
@@ -51,6 +54,7 @@ $(function() {
 		parm.title="选择投保方案";
 		parm.leftIco="0";
 		parm.rightIco="0";
+		parm.body.cxSessionId=sessionId;
 		parm.body.businessBegindate=$("#busBeginDate").html();
 		parm.body.forceBeginDate=$("#busBeginDate").html();
 		sessionStorage.setItem("tradeNo",tradeNo);
@@ -64,9 +68,9 @@ $(function() {
 	});
 });
 function init(){
-	var url = base.url + "cx/getAllInfo.do";
+	var url = base.url + "cx/getCxAllInfo.do";
 	var data = {
-		"sessionId" : cxSessionId,// 车险投保唯一流水号
+		"orderNo" : orderNo,// 车险订单号
 	};
 	$.toAjaxs(url, data, function(respData){
 		respData = eval("(" + respData + ")");
@@ -77,6 +81,7 @@ function init(){
 			tradeNo=respData.cxInfo.cxOrder.tradeno;
 			checkNo=respData.cxInfo.cxOrder.checkno;
 			checkCode=respData.cxInfo.cxOrder.checkcode;
+			sessionId=respData.cxInfo.cxOrder.sessionid;
 			vehicleModelData=JSON.parse(UrlDecode(respData.cxInfo.cxOrder.vehiclemodeldata));
 			parm.body.cdPrivinceFlag=vehicleModelData.cdPrivinceFlag;
 			loadOrderInfo(respData);

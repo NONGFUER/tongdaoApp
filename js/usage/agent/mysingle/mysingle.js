@@ -57,11 +57,24 @@ $(function() {
 
 function getPolicyList(data) {
 	console.log(data);
+	var  datas= new Array();
 	if(data.status_code == '000000') {
 		if(data.returns.length > 0) {
-			vm.Objectlist = data.returns;
-		}else{
-			vm.Objectlist ={};
+			data.returns.forEach(function(index, element) {
+				datas.push(index);
+				if(index.underWrite != null && index.underWrite != "") {
+					if(index.underWrite.time != null && index.underWrite.time != "" && index.prem != "" && index.prem != null) {
+						datas[element].underWrite = ($.getTimeStr2(index.underWrite.time));
+						datas[element].prem = toDecimal2(datas[element].prem);
+					}
+				} else {
+					datas[element].underWrite = ("----");
+					datas[element].prem = '0.00';
+				}
+			})
+			vm.Objectlist = datas;
+		} else {
+			vm.Objectlist = {};
 		}
 	} else if(data.status_code == '123456') {
 		modelAlert(data.status_message, '', lognCont);
@@ -89,7 +102,7 @@ function xinzhen(userCode, transToken, customerId, policyStatus, riskType) {
 			"transToken": transToken
 		}
 	}
-	var url = base.url + 'personal/getPolicyList.do';
+	var url = base.url + 'agent/getAgentPolicy.do';
 	$.reqAjaxsFalse(url, reqData, getPolicyList);
 }
 /*删除*/
@@ -107,7 +120,7 @@ function shanchu(userCode, transToken, customerId, policyNo) {
 			"transToken": transToken
 		}
 	}
-	var url = base.url + 'personal/deleteMyPolicy.do';
+	var url = base.url + 'agent/deleteAgentPolicy.do';
 	$.reqAjaxsFalse(url, reqData, deleteMyPolicy);
 }
 

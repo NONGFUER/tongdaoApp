@@ -38,10 +38,19 @@ function toArticle(obj){
 	urlParm.leftIco = "1";
 	urlParm.rightIco = "0";
 	urlParm.downIco = "0";
+	urlParm.frompage = "commodityHtml";
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/agreement/article.html?jsonKey="+jsonStr;
 }
 
+function backlast(){
+	urlParm.title = "产品详情";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "1";
+	urlParm.downIco = "0";
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/insurance/main/productDetail.html?jsonKey="+jsonStr;
+}
 //佣金接口
 //function sendCommissionInfoRequest(provinceCode,cityCode,commodityId,roleType){
 //    var url = requestUrl.commissionInfoUrl;

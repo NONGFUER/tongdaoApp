@@ -1216,7 +1216,7 @@ $.getTimeStr = function() {
 	if (day < 10) {
 		day = "0" + day;
 	}
-	return year + "-" + month + "-" + day + " " + current.getHours() + ":"
+	return year + "年" + month + "月" + day + "日" + current.getHours() + ":"
 			+ current.getMinutes() + ":" + current.getSeconds();
 };
 $.getTimeStr2 = function(param) {
@@ -1234,7 +1234,7 @@ $.getTimeStr2 = function(param) {
 	if (day < 10) {
 		day = "0" + day;
 	}
-	return year + "/" + month + "/" + day;
+	return year + "年" + month + "月" + day+'日';
 };
 $.getTimeStr3 = function(param) {
 	if (param == "") {

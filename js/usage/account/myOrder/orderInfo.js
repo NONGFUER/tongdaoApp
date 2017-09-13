@@ -5,7 +5,7 @@ var customerId = urlParm.customerId;//"812";
 var orderNo = urlParm.orderNo;//"BY2017090817544703721608";
 $(function(){
 	getOrderDetailRequest( customerId,orderNo);
-	getPolicyDetailRequest("20",policyNo);
+	//getPolicyDetailRequest("20",policyNo);
 	$(".anniu2").unbind("tap").bind("tap",function(){
 		backlast();
 	});

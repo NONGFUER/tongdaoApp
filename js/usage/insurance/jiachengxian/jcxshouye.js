@@ -30,13 +30,7 @@ $(function(){
     })
     //条款
     $(".tiaokuan").unbind("tap").bind("tap",function(){
-    	//window.location.href="jcxtiaokuan.html"+window.location.search;
-    	$(".PageInfo").hide();
-    	$(".xuzhiInfo").hide();
-    	$(".tiaokuanInfo").show();
-    	$("body").css("background-color","#f2eff6");
-    	/* 设置滑动区域 */
-    	$.setscroll3();
+    	toArticle();
     })
     //须知
     $(".xuzhi").unbind("tap").bind("tap",function(){
@@ -92,23 +86,7 @@ $(function(){
 	})
 	//赠送客户
 	$(".zengsong").on("tap",function(){
-//		var parm={};
-//		parm.mobile=mobile;
-//		parm.productCode=productCode;
-//		var jsonStr=UrlEncode(JSON.stringify(parm));
-//    	if(systemsource == "ios"){
-//    		var shareParam={
-//    				url:base.url+"App/html/jiachengxian/jcxshouyeShare.html?jsonKey="+jsonStr,
-//    				flag:"2",
-//    				title:"免费领取20万驾乘意外险",
-//    				desc:"驾车乘车都能保，20万保额免费送！",
-//    				descQuan:"免费领取20万驾乘意外险，驾车乘车都能保！",
-//    				picUrl:"http://td-sit.ta-by.com/tongdaoPlatform/App/images/jiachenxianfenx.png"
-//    		}
-//			objcObject.share(shareParam);
-//		}else if(systemsource == "android"){
-//			android.JsShareBy("4","免费领取20万驾乘意外险","驾车乘车都能保，20万保额免费送！","免费领取20万驾乘意外险，驾车乘车都能保！",base.url+"App/html/jiachengxian/jcxshouyeShare.html?jsonKey="+jsonStr);
-//		}
+		shareHandle();
     });
 	//投保
 	$(".toubao").unbind("tap").bind("tap",function(){
@@ -331,6 +309,25 @@ $.setscroll3 = function() {
 	var Scrollheight = window.innerHeight - $("header").height();
 	$("#contentHead3").height(Scrollheight-46);
 	mui("#contentHead3").scroll();
+};
+
+function toArticle(){ 
+	urlParm.title = "保险条款列表";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";	
+	urlParm.frompage = "jcxHtml";
+	urlParm.cId = "21";
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/agreement/article.html?jsonKey="+jsonStr;
+}
+
+function shareHandle(){
+	var title = "易安驾乘无忧意外保险" ;
+	var desc  = "驾车乘车都能保，20万保额免费领" ;	
+	var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=4';
+	var picUrl = base.url + "tongdaoApp/image/share/jiachenxianfenx.png";
+	shareMethod(shareurl,title,desc,"baodan",picUrl);		
 };
 
 function backlast(){

@@ -8,17 +8,16 @@ $(function(){
     //点击弹框里的确定按钮
     yuyueSubmit( customerId, ccId);		   
     sendLiveProductInfoRequest(ccId, provinceCode, cityCode, roleType )	//APP产品模块线下产品详情查询
-    if( roleType == "02" || roleType == "06" ){					//如果是代理人
+    if( roleType == "02"){					//如果是代理人
     	$(".insurance-customer").removeClass("none");
-    	$(".single-footer").removeClass("yincang");
+    	//$(".single-footer").removeClass("yincang");
     	sendCusInsConsultantRequest();
-    }
-    //showRightIcon();
-   
+    }   
 });
 //点击预约出单
 function yuyueClickBind(){
     $("#chudan").unbind("tap").bind("tap",function(){
+    	sendCustomerAndAgentInfoRequest(customerId);
         $(".popup-shadow").css({"opacity":"1","display":"block"});
     });
 }
@@ -151,7 +150,7 @@ function addYuyueInfoRender(data){
         var yuyueNo  = body.yuyueNo;//获取预约号
         //alert(yuyueNo);
         closeShadow();
-        modelAlert("预约成功！","",toYuyueList);
+        modelAlert("恭喜您，预约提交成功！请保持电话畅通，客户经理会与您电话联系，谢谢！","",toYuyueList);
        
     }else if( data.statusCode == ajaxStatus.relogin ){
         modelAlert( data.statusMessage, "", toLogin ); 
@@ -169,11 +168,15 @@ function addYuyueInfoRender(data){
         var cusInfo = data.returns.customerBasic;
         var mobile1  = cusInfo.mobile;//获取姓名
         var name1    = cusInfo.name;//获取手机号
+        getTouxiang(mobile1);
         //var userImg = cusInfo.userImage;//获取用户头像
         $("#bigname").text(name1);
         $("#bigphone").text(mobile1);
         $(".phone-button").bind("tap",function(){
         	callService(mobile1,".phone-button");
+        });
+        $(".message-button").unbind("tap").bind("tap",function(){
+        	callSendMessage(mobile1);
         });
     }else if( data.statusCode == ajaxStatus.relogin ){
         modelAlert( data.statusMessage, "", toLogin ); 
@@ -278,12 +281,11 @@ function moduleStr( moduleList ){
 	    $("#insurance-choice").append(str);
 	}
 	if( moduleList.moduleName == "产品特色" ){
-		var moduleInfoList = modueInfo.split('|');
 	    var str = "";
 	    str += '<dl class="module mb10 whitebackground ">'
 	    str += '<dt class="content-title"><img src="../../../image/insurance/product_detail.png">' + moduleList.moduleName + '</dt>'
 	    str += '<dd class="con content-info star">' 
-		str += modueInfo  
+	    str += modueInfo     	    
 	    str += '</dd></dl>'
 	    $(".insurance-content").append(str);
 	}
@@ -333,7 +335,31 @@ function download(obj){
 }
 
 function toYuyueList(){
-	window.location.href = base.url + "tongdaoApp/html/agent/myBookings/subscribeList.html";
+	urlParm.title = "预约列表";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	urlParm.userCode = mobile;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/agent/myBookings/subscribeList.html?jsonKey="+jsonStr;
+}
+
+function getTouxiang(mobile){
+	$.ajax({
+		type: "get",
+		url: base.url+"customerBasic/getAppImage.do",
+		data: "userName="+mobile,
+		success: function(data){
+			if(data){
+				$(".touinner").attr("src",base.url+"customerBasic/getAppImage.do?userName="+mobile);
+			}else{
+				$(".touinner").attr("src","../../../image/common/tou.png");
+			}		
+		   },
+		error:function(){
+			$(".touinner").attr("src","../../../image/account/tou.png");
+		}
+		});
 }
 function backlast(){
 	sysback();

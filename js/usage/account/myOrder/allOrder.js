@@ -1,10 +1,8 @@
 /*获取数据*/
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
-	commodityComId = urlParm.commodityComId,
-	customerPhone = urlParm.customerPhone,
 	roleType = urlParm.roleType,
-	riskType = urlParm.riskType,
+	riskType = null,
 	transToken = urlParm.transToken,
 	orderStatus = urlParm.orderStatus,
 	tagId = urlParm.tagId,
@@ -52,6 +50,40 @@ $(function() {
 			}
 		});
 	})
+	mui('.man-div-body-ul').on('tap', '.man-div-body-ul_li', function() {
+		var orderNo = $(this).attr('orderNo');
+		var riskType = $(this).attr('riskType');
+		var orderStatus = $(this).attr('orderStatus');
+		var param = {
+			"userCode": userCode,
+			"mobile": userCode,
+			"orderNo": orderNo,
+			"policyNo": orderNo,
+			"roleType": roleType,
+			"customerId": customerId,
+			"transToken": transToken,
+			"orderStatus": orderStatus,
+			"cxflag": '1',
+			"tagId": tagId,
+			"title": '保单详情',
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '0',
+		}
+		var jsonStr = UrlEncode(JSON.stringify(param));
+		if(riskType == '03') {
+			if(orderStatus == '01') {
+				window.location.href = base.url + "tongdaoApp/html/insurance/car/quotationDetail.html?jsonKey=" + jsonStr;
+			} else {
+				window.location.href = base.url + "tongdaoApp/html/insurance/car/orderDetail.html?jsonKey=" + jsonStr;
+			}
+		} else if(riskType == '01') {
+			window.location.href = "orderInfo.html?jsonKey=" + jsonStr;
+		} else if(riskType == '04') {
+			mui.alert('寿险');
+		}
+	})
+
 })
 
 function getOrderList(data) {
@@ -62,13 +94,17 @@ function getOrderList(data) {
 			data.returns.forEach(function(index, element) {
 				datas.push(index);
 				if(index.startTime != null && index.startTime != "" && index.endTime != null && index.endTime != "") {
-					if(index.startTime.time != null && index.startTime.time != "" && index.endTime.time != null && index.endTime.time != "") {
+					if(index.startTime.time != null && index.startTime.time != "" && index.endTime.time != null && index.endTime.time != "" ) {
 						datas[element].startTime = ($.getTimeStr(index.startTime.time));
 						datas[element].endTime = ($.getTimeStr(index.endTime.time));
 					}
+					if(index.prem != "" && index.prem != null) {
+						datas[element].prem = toDecimal2(datas[element].prem);
+					}
 				} else {
-					datas[element].startTime = ("");
-					datas[element].endTime = ("");
+					datas[element].startTime = ("-");
+					datas[element].endTime = ("-");
+					datas[element].prem = '0.00';
 				}
 			})
 			vm.Objectlist = datas;
@@ -130,11 +166,11 @@ function chuli() {
 	})
 }
 
-function mylist(userCode, transToken, customerId, riskType, orderStatus, tagId) {
+function mylist(userCode, transToken, customerId, tagId, orderStatus) {
 	userCode = userCode;
 	transToken = transToken;
 	customerId = customerId;
-	riskType = riskType;
+	riskType = null;
 	orderStatus = orderStatus;
 	tagId = tagId;
 	if(orderStatus == '') {
@@ -184,6 +220,24 @@ mui('.man-div-title ').on('tap', 'li', function() {
 	}
 	chaxun(userCode, transToken, customerId, riskType, orderStatus, tagId)
 })
+
+function toDecimal2(x) {
+	var f = parseFloat(x);
+	if(isNaN(f)) {
+		return false;
+	}
+	var f = Math.round(x * 100) / 100;
+	var s = f.toString();
+	var rs = s.indexOf('.');
+	if(rs < 0) {
+		rs = s.length;
+		s += '.';
+	}
+	while(s.length <= rs + 2) {
+		s += '0';
+	}
+	return s;
+}
 /*登录失效*/
 function lognCont() {
 	loginControl();

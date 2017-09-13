@@ -29,7 +29,7 @@
 					</div>
 					<div id='list' class="man-div-body " v-cloak>
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:policyNo="value.policyNo">
+							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:policyNo="value.policyNo" v-bind:riskType='value.riskType'>
 								<div v-if="value.orderStatus=='6'" class="mui-slider-right mui-disabled shanchu">
 									<a class="mui-btn mui-btn-red" v-bind:policyNo="value.policyNo">
 										<i class="lajitong"></i>
@@ -58,8 +58,8 @@
 											<span v-html="value.prem+'元'">1000.00元</span>
 										</li>
 										<li>
-											<span>承保时间</span>
-											<span>2017年05月24日</span>
+											<span>保险期间</span>
+											<span v-html="value.startTime+'-'+value.endTime">2017年05月24日</span>
 										</li>
 									</ul>
 								</div>
@@ -74,6 +74,7 @@
 	<script src="../../../js/lib/widget/mui/mui.min.js"></script>
 	<script src="../../../js/lib/common/base.js"></script>
 	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/common/titPackage.js"></script>
 	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
 	<script src="../../../js/usage/account/myOrder/policyList.js"></script>
 

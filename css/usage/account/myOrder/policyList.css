@@ -80,7 +80,7 @@ ul li span {
 
 .man-div-body-ul_li_div ul li:last-child span:first-child {
 	/*账户我的保单页面限制长度保单号*/
-	width: 70%;
+	width: 30%;
 	height: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -101,7 +101,7 @@ ul li span {
 }
 
 .man-div-body-ul_li_div ul li:last-child span:last-child {
-	width: 30%;
+	width: 70%;
 	height: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;

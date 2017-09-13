@@ -2,6 +2,7 @@
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
 commodityCombinationId = urlParm.commodityCombinationId,
 	userCode = urlParm.userCode,
+	productFlag=urlParm.productFlag,
 	phone = urlParm.userCode,
 	bankName = urlParm.bankName,
 	commodityId = urlParm.commodityId,
@@ -411,7 +412,7 @@ function saveOrder(data) {
 							"orderNo": orderNo,
 							"insureNo": insureNo,
 							"payAmount": buyPrem[0],
-							"productFlag": "02",
+							"productFlag": productFlag,
 							"customerId": customerId,
 						}
 					}
@@ -440,6 +441,7 @@ function getinsure(data) {
 			"transToken": transToken,
 			"riskSupportAbility": riskSupportAbility,
 			"orderNo": data.returns.orderNo,
+			"policyNo":data.returns.policyNo,
 			"comComName": vm.comComName,
 			"startPiece": $('#money').html().split('.'),
 			'title': vm.comComName,

@@ -1,23 +1,17 @@
-var comparyCode = ""; // 车险保险公司编号
-var cxSessionId = ""; //车险投保唯一流水号"15061915143671823305""15090209241414063000";//;
 var cxProductId = "01102050001"; //车险产品编号
-var isShowBtn = ""; //操作显示标志  1-未提交  3-核保通过  7-已承保（显示商业险保单号和交强险保单号）
-var myScroll;
-var orderPrams = "";
 var producingarea;//车型产地  进口车、合资车、国产车 
 var cxPriserviceFlag="0";
+var cxflag;//1-订单  2-保单  3-出单
 $(function() {
-
 	/*设置滑动区域*/
 	$.setscroll();
-
 	var str = window.location.search;
 	str = str.substr(9, str.length);
 	str = UrlDecode(str);
 	parm = JSON.parse(str);
-	orderPrams = parm.body.orderNos;
-	isShowBtn = parm.body.isShowBtn;
-	cxSessionId = parm.body.cxSessionId;
+	console.log(parm)
+	orderNo = parm.orderNo;
+	cxflag=parm.cxflag;
 	// 加载页面数据
 	$.loadOrderInfo();
 
@@ -40,9 +34,9 @@ $(function() {
 });
 //渲染数据
 $.loadOrderInfo = function() {
-	var url = base.url + "cx/getAllInfo.do";
+	var url = base.url + "cx/getCxAllInfo.do";
 	var data = {
-		"sessionId": cxSessionId, // 车险投保唯一流水号
+		"orderNo" : orderNo,// 车险订单号
 	};
 	$.toAjaxs(url, data, $.addPriceContent);
 };
@@ -339,7 +333,13 @@ $.setscroll2 = function() {
 function backlast(){
 	if(cxPriserviceFlag=="0"){
 		//window.history.back();
-		parm.title="订单详情";
+		if(cxflag=="1"){
+			parm.title="订单详情";
+		}else if(cxflag=="2"){
+			parm.title="保单详情";
+		}else if(cxflag=="3"){
+			parm.title="出单详情";
+		}
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr);
 		window.location.href = "orderDetail.html?jsonKey=" + jsonStr;

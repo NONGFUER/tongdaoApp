@@ -4,10 +4,33 @@ $(function(){
 	getArticlesReq(cId);
 });
 function backlast(){
-	toProductDetail();
+	if( urlParm.frompage == "commodityHtml" ){
+		toCommodityList();//返回商品列表
+	}else if( urlParm.frompage == "insureHtml"){
+		toProductDetail();
+	}else if( urlParm.frompage == "jcxHtml" ){
+		toJcxHtml();
+	}
+	
+}
+function toJcxHtml(){
+	urlParm.title = "驾乘人员意外伤害保险";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/insurance/jiachengxian/jcxshouye.html?jsonKey="+jsonStr;
+}
+function toCommodityList(){
+	urlParm.title = "商品列表";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/insurance/main/commodityList.html?jsonKey="+jsonStr;
 }
 function toProductDetail(){	
-	urlParm.title = "产品详情";
+	urlParm.title = "投保信息";
 	urlParm.leftIco = "1";
 	urlParm.rightIco = "1";
 	urlParm.downIco = "0";

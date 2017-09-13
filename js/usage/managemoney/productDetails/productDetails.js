@@ -4,6 +4,7 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	roleType = urlParm.roleType,
 	transToken = urlParm.transToken,
+	productFlag=urlParm.productFlag,
 	idAuth=urlParm.idAuth,
 	customerId = urlParm.customerId;
 var phone = phoneyin(userCode);
@@ -103,6 +104,7 @@ function buy() {
 		"commodityId": vm.Objectitle.commodityInfo.id + "",
 		"testType": $('.retest').attr('testType'),
 		"title": vm.Objectitle.commodityCombination.commodityCombinationName,
+		"productFlag":productFlag,
 		"leftIco": '1',
 		"rightIco": '0',
 		"downIco": '0',
@@ -181,6 +183,7 @@ function getRiskAble(data) {
 					"commodityCombinationId": commodityCombinationId,
 				},
 				"title": '风险评估 ',
+				"productFlag":productFlag,
 				"titles": vm.Objectitle.commodityCombination.commodityCombinationName,
 				"leftIco": '1',
 				"rightIco": '0',

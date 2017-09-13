@@ -5,14 +5,24 @@ $(function(){
 	$.getShengyu("21");
 	//领取
 	// getAppInfo();			
-		$(".lingqu").unbind("tap").bind("tap",function(){					
-			urlParm.title = "驾乘人员意外伤害保险";
-			urlParm.leftIco = "1";
-			urlParm.rightIco = "0";
-			urlParm.downIco = "0";
-			var jsonStr=UrlEncode(JSON.stringify(urlParm));			
-			window.location.href="jcxshouye.html?jsonKey="+jsonStr;
+		$(".lingqu").unbind("tap").bind("tap",function(){
+			if(roleType == "00" || roleType == "") {
+				loginControl();
+			}else if( roleType == "05" ){
+				modelAlert("当前用户为团队人员，无法领取！");
+			}else{
+				tuLingqu();
+			}
 		})	
+		$(".zengsong").unbind().bind("tap",function(){
+			if(roleType == "00" || roleType == "") {
+				loginControl();
+			}else if( roleType == "05" ){
+				modelAlert("当前用户为团队人员，无法赠送！");
+			}else{
+				shareHandle();
+			}
+		});
 })
 //获取剩余份数,领取记录
 $.getShengyu=function(cId){
@@ -121,6 +131,24 @@ $.setscroll = function() {
 	$("#contentHead").height(Scrollheight);
 	mui("#contentHead").scroll();
 };
+
+function tuLingqu(){
+	urlParm.title = "驾乘人员意外伤害保险";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	var jsonStr=UrlEncode(JSON.stringify(urlParm));			
+	window.location.href="jcxshouye.html?jsonKey="+jsonStr;
+}
+
+function shareHandle(){
+	var title = "易安驾乘无忧意外保险" ;
+	var desc  = "驾车乘车都能保，20万保额免费领" ;	
+	var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=4';
+	var picUrl = base.url + "tongdaoApp/image/share/jiachenxianfenx.png";
+	shareMethod(shareurl,title,desc,"baodan",picUrl);		
+};
+
 function backlast(){
 	sysback();
 }

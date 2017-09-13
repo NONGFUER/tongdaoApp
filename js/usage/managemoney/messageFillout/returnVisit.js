@@ -6,6 +6,7 @@ var riskSupportAbility = '',
 	commodityId = '',
 	testType = '',
 	transToken = '',
+	policyNo='',
 	title = '';
 $(function() {
 	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
@@ -20,35 +21,14 @@ $(function() {
 	customerId = urlParm.customerId;
 	commodityCombinationId = urlParm.commodityCombinationId;
 	commodityId = urlParm.commodityId;
+	policyNo=urlParm.policyNo;
 	testType = urlParm.testType;
 	/**--返回--*/
 	$(".fl").bind("tap", function() {
 		fanhui();
 	})
 	$(".ri").bind("tap", function() {
-		if(laiyuan == '1') {
-			var sendData = {
-				"userCode": userCode,
-				"transTime": "",
-				"transToken": transToken,
-				"riskSupportAbility": riskSupportAbility,
-				"orderNo": orderNo,
-				"comComName": comComName,
-				"startPiece": startPiece,
-				'title': comComName,
-				"customerId": customerId,
-				"commodityCombinationId": commodityCombinationId,
-				"commodityId": commodityId,
-				"testType": testType,
-				"leftIco": '1',
-				"rightIco": '0',
-				"downIco": '0',
-			};
-			var jsonStr = UrlEncode(JSON.stringify(sendData));
-			window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/payResult.html?jsonKey=" + jsonStr;
-		}else{
-			mui.alert('回访确认');
-		}
+		huifang();
 	})
 })
 
@@ -70,6 +50,59 @@ function fanhui() {
 	var jsonStr = JSON.stringify(sendData);
 	jsonStr = UrlEncode(jsonStr);
 	window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/messageFillout.html?jsonKey=" + jsonStr;
+}
+
+function huifang() {
+	var reqData = {
+		"head": {
+			"userCode": userCode,
+			"channel": "01",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken
+		},
+		"body": {
+			"orderNo": orderNo,
+			"customerId": customerId,
+			"policyNo": policyNo
+		}
+	}
+	var url = base.url + 'hkRedemption/getReview.do';
+	console.log("页面初始化，发送请求报文--");
+	$.reqAjaxsFalse(url, reqData, getReview);
+}
+
+function getReview(data) {
+	if(data.statusCode == '000000') {
+		if(laiyuan == '1') {
+			tiaozhuan();
+		} else {
+			mui.alert('回访确认成功');
+		}
+	} else {
+		mui.alert(data.statusMessage);
+	}
+}
+
+function tiaozhuan() {
+	var sendData = {
+		"userCode": userCode,
+		"transTime": "",
+		"transToken": transToken,
+		"riskSupportAbility": riskSupportAbility,
+		"orderNo": orderNo,
+		"comComName": comComName,
+		"startPiece": startPiece,
+		'title': comComName,
+		"customerId": customerId,
+		"commodityCombinationId": commodityCombinationId,
+		"commodityId": commodityId,
+		"testType": testType,
+		"leftIco": '1',
+		"rightIco": '0',
+		"downIco": '0',
+	};
+	var jsonStr = UrlEncode(JSON.stringify(sendData));
+	window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/payResult.html?jsonKey=" + jsonStr;
 }
 
 function backlast() {

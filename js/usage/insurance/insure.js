@@ -172,7 +172,7 @@ $(function(){
 	            return false;
 	        };
 	        $(this).addClass("on");
-	        $(this).find("img").attr("src","../../image/cancerRisk/gou.png");
+	        $(this).find("img").attr("src","../../../image/common/gou.png");
 	        $(".beiNone").hide(1000);
 	        
 	        ageCal = $.getAge($.getBirthDay(sameNo),now);
@@ -1017,6 +1017,17 @@ function formItemControl( ccId ){
 		$(".email").show();
 	}		
 }
+
+function toArticle(){ 
+	urlParm.title = "保险条款列表";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";	
+	urlParm.frompage = "insureHtml";
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/agreement/article.html?jsonKey="+jsonStr;
+}
+
 function backlast(){
 	urlParm.title = '产品详情';
 	urlParm.leftIco = "1";
@@ -1030,14 +1041,7 @@ function backlast(){
 	}
 	
 };
-function toArticle(){ 
-	urlParm.title = "保险条款列表";
-	urlParm.leftIco = "1";
-	urlParm.rightIco = "0";
-	urlParm.downIco = "0";	
-	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	window.location.href = base.url + "tongdaoApp/html/agreement/article.html?jsonKey="+jsonStr;
-}
+
 //function toProductDetail(){
 //var sendData = {
 //        "head":{
