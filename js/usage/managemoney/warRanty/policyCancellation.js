@@ -8,19 +8,18 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	title = urlParm.title,
 	customerId = urlParm.customerId,
 	userCode = urlParm.userCode;
-
 var vm = new Vue({
 	el: '#list',
 	data: {
 		Objectlist: {
-			hKCalculate: {},
+				yearRate:"",
 		},
 		bao: null,
 	},
 	mounted() {
 		this.$nextTick(function() {
 			$(function() {
-
+				bankweihao()
 			})
 		})
 	}
@@ -47,7 +46,17 @@ $(function() {
 
 function redemptionTrial(data) {
 	console.log(data);
-	vm.Objectlist = data.returns;
+	if(data.statusCode=='000000'){
+		vm.Objectlist = data.returns.hKCalculate;
+	}else if(data.statusCode=='123456'){
+		modelAlert(data.statusMessage,'',lognCont)
+	}else{
+		modelAlert(data.statusMessage);
+	}
+}
+/*登录失效*/
+function lognCont() {
+	loginControl();
 }
 /*退保1*/
 function tuibao() {
@@ -97,6 +106,12 @@ function backlast() {
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
 	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
+}
+/*截取银行卡号*/
+function bankweihao() {
+	var banke = $('.bank_weihao').html();
+	banke = banke.substr(banke.length - 4);
+	$('.bank_weihao').html('尾号 ' + banke);
 }
 /*回到列表页面*/
 function chenggong(){

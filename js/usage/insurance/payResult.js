@@ -43,7 +43,9 @@ $(function(){
 			}
 		});
 	});
-	
+	$("#orderDetail").unbind("tap").bind("tap",function(){
+		toPolicyDetail();
+	});
 	
 	/**--关注关注号--*/
 	$(".follow").bind("tap",function(){
@@ -83,6 +85,19 @@ function init(orderNo){
 //跳转到订单详情页面
 function toOrderDetail(){
 	
+}
+
+function toPolicyDetail(){
+	var urlParm ={};
+	urlParm.title = "保单详情";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	urlParm.policyNo = policyNo;
+	urlParm.frompage = "payResultHtml";
+	urlParm.cxflag = "4";
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/account/myOrder/policyInfo.html?jsonKey="+jsonStr;
 }
 
 function backlast(){

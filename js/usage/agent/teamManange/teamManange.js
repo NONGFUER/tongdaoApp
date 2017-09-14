@@ -29,7 +29,7 @@ $(function() {
 		}
 	}
 	var url = base.url + 'agent/getCountMyTeam.do';
-	$.reqAjaxsFalse(url, reqData, getCountMyTeam);
+	$.reqAjaxs(url, reqData, getCountMyTeam);
 	var getAmountMyTeamdata = {
 		"body": {
 			"loggingCustomerId": customerId,
@@ -43,7 +43,7 @@ $(function() {
 		}
 	}
 	var url = base.url + 'agent/getAmountMyTeam.do';
-	$.reqAjaxsFalse(url, getAmountMyTeamdata, getAmountMyTeam);
+	$.reqAjaxs(url, getAmountMyTeamdata, getAmountMyTeam);
 	/*↑以上初始化团队总信息*/
 	var getMyTeamdata = {
 		"body": {
@@ -58,7 +58,7 @@ $(function() {
 		}
 	}
 	var url = base.url + 'agent/getMyTeam.do';
-	$.reqAjaxsFalse(url, getMyTeamdata, getMyTeam);
+	$.reqAjaxs(url, getMyTeamdata, getMyTeam);
 })
 
 function getCountMyTeam(data) {

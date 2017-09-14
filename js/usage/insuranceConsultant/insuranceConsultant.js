@@ -13,13 +13,14 @@ var vm = new Vue({
 		Objectitle: {},
 		urlimg: {},
 		shanchu: 'shanchu',
+		
 	}
 })
 $(function() {
 	vm.urlimg = base.url;
 	if(type == '02' || type == '03' || type == '04' || type == '05' || type == '06') {
 		$('.baoxian').hide();
-		//vm.shanchu='';
+		vm.shanchu='';
 	} //普通01.02代理人、03客户经理 。04.内勤。05 团队 。06.RK
 	chaxunend(userCode, transToken, customerId);
 	/*添加顾问*/
@@ -44,12 +45,11 @@ $(function() {
 	mui('#list').on('tap', '.mui-btn', function() {
 		var elem = this;
 		var li = elem.parentNode.parentNode;
-//		var customerId = $(elem).attr('customerId');
 		var insuranceConsultantId = $(elem).attr('insuranceConsultantId');
-		var agentCode = $(elem).attr('agentCode');
+		var agc = $(elem).attr('agentCode');
 		mui.confirm('确认删除该保险顾问吗？', '', ['确认', '取消'], function(e) {
 			if(e.index == 0) {
-				shanchu(userCode, transToken, customerId, insuranceConsultantId,agentCode);
+				shanchu(userCode, transToken, customerId, insuranceConsultantId,agc);
 				li.parentNode.removeChild(li);
 			} else {
 				setTimeout(function() {
@@ -59,9 +59,9 @@ $(function() {
 		});
 	})
 	mui('.man-div-body-ul ').on('tap', '.man-div-body-li', function() {
-		/*$('.man-div-body-li').children('.xuan').hide();
-		$(this).children('.xuan').show();*/
-//		customerId = $(this).attr('customerId');
+		$('.man-div-body-li').children('.xuan').hide();
+		$(this).children('.xuan').show();
+		customerId = $(this).attr('customerId');
 		insuranceConsultantId = $(this).attr('insuranceConsultantId');
 		xinzeng(userCode, transToken, customerId, insuranceConsultantId);
 	})
@@ -81,7 +81,7 @@ function chaxun(userCode, transToken, postcardPhone) {
 	}
 	var url = base.url + 'insuranceConsultantInfo/getInsuranceConsultantInfo.do';
 	console.log(reqData);
-	$.reqAjaxsFalse(url, reqData, getInsuranceConsultantInfo);
+	$.reqAjaxs(url, reqData, getInsuranceConsultantInfo);
 }
 /*新增保险顾问*/
 function xinzeng(userCode, transToken, customerId, insuranceConsultantId) {
@@ -99,7 +99,7 @@ function xinzeng(userCode, transToken, customerId, insuranceConsultantId) {
 	}
 	var url = base.url + 'insuranceConsultantInfo/updateInsuranceConsultantInfo.do';
 	console.log(reqData);
-	$.reqAjaxsFalse(url, reqData, updateInsuranceConsultantInfo);
+	$.reqAjaxs(url, reqData, updateInsuranceConsultantInfo);
 }
 
 /*页面信息*/
@@ -129,7 +129,7 @@ function getInsuranceConsultantInfos(data) {
 /*根据手机号查询保险顾问头像*/
 function baoxianimg(username) {
 	var img = false;
-	/*$.ajax({
+	$.ajax({
 		async: false,
 		type: "get",
 		url: base.url + "customerBasic/getAppImage.do",
@@ -144,7 +144,7 @@ function baoxianimg(username) {
 		error: function() {
 			img = false;
 		}
-	});*/
+	});
 	if(img) {
 		return "customerBasic/getAppImage.do?userName=" + username;
 	} else {
@@ -177,7 +177,7 @@ function getInsuranceConsultantInfo(data) {
 	}
 }
 /*删除*/
-function shanchu(userCode, transToken, customerId, insuranceConsultantId) {
+function shanchu(userCode, transToken, customerId, insuranceConsultantId,agc) {
 	var reqData = {
 		"head": {
 			"channel": "1",
@@ -188,11 +188,11 @@ function shanchu(userCode, transToken, customerId, insuranceConsultantId) {
 		"body": {
 			"customerId": customerId,
 			"insuranceConsultantId": insuranceConsultantId,
-			"agentCode": agentCode,
+			"agentCode": agc,
 		}
 	}
 	var url = base.url + 'insuranceConsultantInfo/deleteInsuranceConsultantInfo.do';
-	$.reqAjaxsFalse(url, reqData, deleteInsuranceConsultantInfo);
+	$.reqAjaxs(url, reqData, deleteInsuranceConsultantInfo);
 }
 /*查询*/
 function chaxunend(userCode, transToken, customerId) {
@@ -209,7 +209,7 @@ function chaxunend(userCode, transToken, customerId) {
 	} //普通01.02代理人、03客户经理 。04.内勤。05 团队 。06.RK
 	var url = base.url + 'insuranceConsultantInfo/getInsuranceConsultantInfos.do';
 	console.log(reqData);
-	$.reqAjaxsFalse(url, reqData, getInsuranceConsultantInfos);
+	$.reqAjaxs(url, reqData, getInsuranceConsultantInfos);
 }
 function deleteInsuranceConsultantInfo(data){
 	console.log(data);

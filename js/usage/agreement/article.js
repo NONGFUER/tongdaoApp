@@ -10,8 +10,20 @@ function backlast(){
 		toProductDetail();
 	}else if( urlParm.frompage == "jcxHtml" ){
 		toJcxHtml();
+	}else if( urlParm.frompage == "policyInfoHtml" ){
+		toPolicyInfo();
+	}else {
+		window.history.back(-1);
 	}
 	
+}
+function toPolicyInfo(){
+	urlParm.title = "保单详情";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/account/myOrder/policyInfo.html?jsonKey="+jsonStr;
 }
 function toJcxHtml(){
 	urlParm.title = "驾乘人员意外伤害保险";

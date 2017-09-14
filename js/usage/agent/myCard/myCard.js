@@ -50,7 +50,7 @@ $(function() {
 		}
 	}
 	var url = base.url + 'agent/getBusinessCard.do';
-	$.reqAjaxsFalse(url, reqData, getBusinessCard);
+	$.reqAjaxs(url, reqData, getBusinessCard);
 	$(".wechat").unbind("tap").bind("tap", function() {
 		var weixin = $(this).attr('weixin');
 		if(weixin != null && weixin != "") {

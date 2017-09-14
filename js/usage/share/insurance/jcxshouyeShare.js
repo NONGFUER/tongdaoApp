@@ -1,3 +1,9 @@
+if(roleType == '00'){
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?fromtype=jcx&openid="+openid+"&jsonKey="+jsonStr;
+}else{
+	$(".PageInfo").show();
+}
 $(function(){		
     window.onresize = function () {
         var h = $(window).height();
@@ -28,6 +34,11 @@ $(function(){
 			android.JsCallPhone("4006895505");
 		}
     })
+    $(".successAnniu,.guanzhu").unbind("tap").bind("tap",function(){
+		/*$(".success").hide();
+		$(".shadow").hide();*/
+		window.location.href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI5NzQzNjc0Mw==&scene=124#wechat_redirect";
+	})
     //条款
     $(".tiaokuan").unbind("tap").bind("tap",function(){
     	toArticle();
@@ -117,7 +128,7 @@ $(function(){
 				var url=base.url + "insuranceSave/insuranceSaveInfo.do"
 				var reqData={
 						"head":{
-							"channel": "01",
+							"channel": "02",
 						    "userCode": mobile,
 						    "transTime": "",
 						    "transToken":transToken
@@ -129,14 +140,14 @@ $(function(){
 						    "sex": sex, //投保人性别
 						    "pwd": ID,  //投保人身份证						    
 						    "customePhone": mobile , //登录用户手机号
-						    "inviterPhone": mobile,
-						    "flag":"1",//1 app  2 分享
+						    "inviterPhone": shareMobile,
+						    "flag":"2",//1 app  2 分享
 						    "commodityCombinationId": "15",
 						    "commodityId": "21",
-						    "channelResource": "3",
+						    "channelResource": "2",
 						    "customeId":customerId,
 						    "customerId":customerId,
-						    "buyType":"1"
+						    "buyType":"2"
 						}
 				}
 				$.reqAjaxs(url,reqData,function(data){
@@ -244,7 +255,7 @@ $.getShengyu=function(cId){
 	var url= base.url + "giveInsuranceAll/giveProductCount.do";
 	var reqData = {
 			"head": {
-				    "channel": "01",
+				    "channel": "02",
 				    "userCode": mobile,
 				    "transTime": "",
 				    "transToken":transToken

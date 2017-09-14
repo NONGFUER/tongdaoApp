@@ -60,19 +60,13 @@ $(function() {
 	}
 	mui('.man-div-body-ul_li_div_btn').on('tap', '#huifang', function() {
 		/*接口请求位子*/
-		if(vm.returnVisit == '0') {
+		if(vm.returnVisit == '0'&&$('.baozhang').html()!='已领取') {
 			var reqData = {
-				"commodityCombinationId": commodityCombinationId + "",
 				"userCode": userCode,
 				"customerId": customerId,
 				"transToken": transToken,
 				"insurePhone": userCode,
-				"riskSupportAbility":riskSupportAbility,
-				"comComName":comComName,
-				"startPiece":startPiece,
-				"commodityCombinationId":commodityCombinationId,
-				"commodityId":commodityId,
-				"testType":testType,
+				"policyNo":policyNo,
 				"orderNo":orderNo,
 				"leftIco": '1',
 				"rightIco": '0',
@@ -149,12 +143,6 @@ function getRedemption(data) {
 		modelAlert(data.statusMessage);
 	}
 }
-
-/*页面信息*/
-function policyQueryListInfo(data) {
-	console.log(data)
-	vm.Objectitle = data.returns;
-}
 /*退保试算*/
 function getRedemption(data) {
 	console.log(data);
@@ -201,48 +189,9 @@ function chuli() {
 		$('.baozhang').html('已领取')
 		$('#lingqu').off('tap', '#lingqu');
 		$('#lingqu').addClass('huisebtn');
+		$('#huifang').addClass('huisebtn');
+		vm.returnVisit == '1';
 	}
-	/*else if($('.baozhang').html() == '04') {
-		$('.baozhang').html('核保中');
-		$('#lingqu').off('tap', '#lingqu');
-		$('#lingqu').addClass('huisebtn');
-	} else if($('.baozhang').html() == '05') {
-		$('#lingqu').off('tap', '#lingqu');
-		$('#lingqu').addClass('huisebtn');
-		$('.baozhang').html('核保成功');
-	} else if($('.baozhang').html() == '06') {
-		$('#lingqu').off('tap', '#lingqu');
-		$('#lingqu').addClass('huisebtn');
-		$('.baozhang').html('支付失败');
-	} else if($('.baozhang').html() == '07') {
-		$('#lingqu').off('tap', '#lingqu');
-		$('#lingqu').addClass('huisebtn');
-		$('.baozhang').html('支付成功');
-	} else if($('.baozhang').html() == '08') {
-		$('#lingqu').off('tap', '#lingqu');
-		$('#lingqu').addClass('huisebtn');
-		$('.baozhang').html('承保处理中');
-	} else if($('.baozhang').html() == '09') {
-		$('#lingqu').off('tap', '#lingqu');
-		$('#lingqu').addClass('huisebtn');
-		$('.baozhang').html('待生效');
-	} else if($('.baozhang').html() == '10') {
-		$('#lingqu').off('tap', '#lingqu');
-		$('#lingqu').addClass('huisebtn');
-		$('.baozhang').html('承保成功');
-	} else if($('.baozhang').html() == '11') {
-		$('#lingqu').off('tap', '#lingqu');
-		$('#lingqu').addClass('huisebtn');
-		$('.baozhang').html('承保失败');
-	} else if($('.baozhang').html() == '12') {
-		$('#lingqu').off('tap', '#lingqu');
-		$('#lingqu').addClass('huisebtn');
-		$('.baozhang').html('已退保');
-	} else if($('.baozhang').html() == '99') {
-		$('#lingqu').off('tap', '#lingqu');
-		$('#lingqu').addClass('huisebtn');
-		$('.baozhang').html('已失效');
-	}*/
 	if($('.baozhang').html() != '03' && $('.baozhang').html() != '已领取') {
 		mui('.man-div-body-ul_li_div_btn').on('tap', '#lingqu', function() {
 			var url = base.url + 'hkRedemption/getRedemption.do';

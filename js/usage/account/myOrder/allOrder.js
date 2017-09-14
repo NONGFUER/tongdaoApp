@@ -2,12 +2,16 @@
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	roleType = urlParm.roleType,
-	riskType = null,
 	transToken = urlParm.transToken,
 	orderStatus = urlParm.orderStatus,
 	tagId = urlParm.tagId,
+	provinceCode = urlParm.provinceCode,
+	cityCode = urlParm.cityCode,
+	riskType = null,
+	orderStatus = null,
+	tagId = null,
 	customerId = urlParm.customerId;
-if(tagId == "") {
+if(tagId == "全部") {
 	tagId = null;
 }
 if(orderStatus == '') {
@@ -49,6 +53,54 @@ $(function() {
 				}, 0);
 			}
 		});
+	})
+	/*立即支付*/
+	mui('.man-div-body-ul').on('tap', '#liji', function() {
+		mui.alert('立即')
+
+		return false;
+	})
+	/*再次购买*/
+	mui('.man-div-body-ul').on('tap', '#zaici', function() {
+		mui.alert('再次')
+		var orderStatus = $(this).attr('orderStatus');
+		var commodityCombinationId = $(this).attr('commodityCombinationId');
+		var name = $(this).attr('name');
+		var commodityName = $(this).attr('commodityName');
+		var param = {
+			"userCode": userCode,
+			"mobile": userCode,
+			"roleType": roleType,
+			"customerId": customerId,
+			"transToken": transToken,
+			"orderStatus": orderStatus,
+			"idAuth": idAuth,
+			"idNo": "",
+			"riskType": riskType,
+			"ccId": commodityCombinationId,
+			"ccCode": "",
+			"cityCode": cityCode,
+			"provinceCode": provinceCode,
+			"cxflag": '1',
+			"tagId": tagId,
+			"title": '产品详情',
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '0',
+		}
+		var jsonStr = UrlEncode(JSON.stringify(param));
+		if(riskType == '01') {
+			if(commodityCombinationId == '14') {
+				window.location.href = base.url + "tongdaoApp/html/insurance/ghx/ghxProductDetail.html?jsonKey=" + jsonStr;
+			} else if(commodityCombinationId == '15') {
+				window.location.href = base.url + "tongdaoApp/html/insurance/jiachengxian/zhuanqu.html?jsonKey=" + jsonStr;
+			} else {
+				window.location.href = base.url + "tongdaoApp/html/insurance/main/productDetail.html?jsonKey=" + jsonStr;
+			}
+		} else if(riskType == '03') {
+		
+		}
+		return false;
 	})
 	mui('.man-div-body-ul').on('tap', '.man-div-body-ul_li', function() {
 		var orderNo = $(this).attr('orderNo');
@@ -93,18 +145,17 @@ function getOrderList(data) {
 		if(data.returns.length > 0) {
 			data.returns.forEach(function(index, element) {
 				datas.push(index);
-				if(index.startTime != null && index.startTime != "" && index.endTime != null && index.endTime != "") {
-					if(index.startTime.time != null && index.startTime.time != "" && index.endTime.time != null && index.endTime.time != "" ) {
-						datas[element].startTime = ($.getTimeStr(index.startTime.time));
-						datas[element].endTime = ($.getTimeStr(index.endTime.time));
-					}
-					if(index.prem != "" && index.prem != null) {
-						datas[element].prem = toDecimal2(datas[element].prem);
+				if(index.prem != "" && index.prem != null) {
+					datas[element].prem = toDecimal2(datas[element].prem);
+				} else {
+					datas[element].prem = '0.00';
+				}
+				if(index.insertTime != null && index.insertTime != "") {
+					if(index.insertTime.time != null && index.insertTime.time != "") {
+						datas[element].insertTime = ($.getTimeStr(index.insertTime.time));
 					}
 				} else {
-					datas[element].startTime = ("-");
-					datas[element].endTime = ("-");
-					datas[element].prem = '0.00';
+					datas[element].insertTime = ("--");
 				}
 			})
 			vm.Objectlist = datas;
@@ -120,48 +171,12 @@ function getOrderList(data) {
 
 function chuli() {
 	$('.baozhang').each(function() {
-		if($(this).html() == '01') {
-			$(this).attr('class', 'baozhang');
-			$(this).html('未提交核保');
-		} else if($(this).html() == '02') {
-			$(this).attr('class', 'baozhang');
-			$(this).html('已过期');
-			$(this).children('.div_btn').html('已关闭');
-		} else if($(this).html() == '03') {
-			$(this).attr('class', 'baozhang ');
-			$(this).html('核保失败');
-		} else if($(this).html() == '04') {
-			$(this).attr('class', 'baozhang yilingqu');
-			$(this).html('核保中');
-		} else if($(this).html() == '05') {
+		if($(this).html() == '已支付') {
 			$(this).attr('class', 'baozhang bao');
-			$(this).html('核保成功');
-			$(this).children('.div_btn').html('待支付');
-		} else if($(this).html() == '06') {
-			$(this).attr('class', 'baozhang');
-			$(this).html('支付失败');
-		} else if($(this).html() == '07') {
-			$(this).attr('class', 'baozhang bao');
-			$(this).html('支付成功');
-		} else if($(this).html() == '08') {
-			$(this).attr('class', 'baozhang bao');
-			$(this).html('承保处理中');
-		} else if($(this).html() == '09') {
+		} else if($(this).html() == '待支付') {
 			$(this).attr('class', 'baozhang dai');
-			$(this).html('待生效');
-		} else if($(this).html() == '10') {
-			$(this).attr('class', 'baozhang bao');
-			$(this).html('承保成功');
-			$(this).children('.div_btn').html('已支付');
-		} else if($(this).html() == '11') {
+		}else if($(this).html() == '已关闭'){
 			$(this).attr('class', 'baozhang');
-			$(this).html('承保失败');
-		} else if($(this).html() == '12') {
-			$(this).attr('class', 'baozhang');
-			$(this).html('已退保');
-		} else if($(this).html() == '99') {
-			$(this).attr('class', 'baozhang');
-			$(this).html('已失效');
 		}
 	})
 }
@@ -173,6 +188,9 @@ function mylist(userCode, transToken, customerId, tagId, orderStatus) {
 	riskType = null;
 	orderStatus = orderStatus;
 	tagId = tagId;
+	if(tagId == "全部") {
+		tagId = null;
+	}
 	if(orderStatus == '') {
 		orderStatus = null;
 	}
@@ -209,7 +227,7 @@ function chaxun(userCode, transToken, customerId, riskType, orderStatus, tagId) 
 	}
 	var url = base.url + 'personal/getOrderList.do';
 	console.log("页面初始化，发送请求报文--");
-	$.reqAjaxsFalse(url, reqData, getOrderList);
+	$.reqAjaxs(url, reqData, getOrderList);
 }
 mui('.man-div-title ').on('tap', 'li', function() {
 	$('.man-div-title ul').children('li').removeClass('li_xuan');

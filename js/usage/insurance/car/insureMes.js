@@ -83,7 +83,6 @@ $.addPriceContent = function(param) {
 			$("#ib").hide();
 			$("#zsfw").hide();
 			$("#zs-info").hide();
-			$("#original").hide();
 			$("#indexarea").hide();
 
 			$.showzs($(this).attr("name"), $(this).data('txt'));
@@ -317,7 +316,6 @@ function bk() {
 		$("#VCIarea").show();
 		$("#zsfw").show();
 		$("#zs-info").show();
-		$("#original").show();
 		$("#indexarea").show();
 
 	});
@@ -362,7 +360,6 @@ function backlast(){
 		$("#VCIarea").show();
 		$("#zsfw").show();
 		$("#zs-info").show();
-		$("#original").show();
 		$("#indexarea").show();
 		cxPriserviceFlag="0";
 		changeTitle("投保信息");

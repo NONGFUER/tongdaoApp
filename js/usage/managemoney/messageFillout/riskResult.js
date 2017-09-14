@@ -82,7 +82,7 @@ function product() {
 		"title": titles,
 	}
 	var url = base.url + 'investmentLinkedInsurance/saveRiskAble.do';
-	$.reqAjaxsFalse(url, reqData, saveRiskAbles);
+	$.reqAjaxs(url, reqData, saveRiskAbles);
 
 	function saveRiskAbles(data) {
 		if(data.statusCode == '000000') {
@@ -120,7 +120,7 @@ function buy() {
 		}
 	}
 	var url = base.url + 'investmentLinkedInsurance/saveRiskAble.do';
-	$.reqAjaxsFalse(url, reqData, saveRiskAble);
+	$.reqAjaxs(url, reqData, saveRiskAble);
 
 	function saveRiskAble(data) {
 		if(data.statusCode == '000000') {

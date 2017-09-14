@@ -29,8 +29,8 @@
 					</div>
 					<div id='list' class="man-div-body " v-cloak>
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:orderNo='value.orderNo' v-bind:riskType='value.riskType' v-bind:orderStatus='value.orderStatus'>
-								<div v-if="value.orderStatus=='3'" class="mui-slider-right mui-disabled shanchu">
+							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:orderNo='value.orderNo' v-bind:riskType='value.riskType' v-bind:orderStatus='value.orderStatus' v-bind:commodityCombinationId="value.commodityCombinationId">
+								<div v-if="value.orderStatus=='已关闭'" class="mui-slider-right mui-disabled shanchu">
 									<a class="mui-btn mui-btn-red">
 										<i class="lajitong"></i>
 										<span>删除</span>
@@ -44,7 +44,7 @@
 										</li>
 										<li>
 											<span class="titlename" v-html="value.commodityName+''+value.cxCommodityName==null?value.cxCommodityName=='':value.commodityName+value.cxCommodityName">少儿高发恶性肿瘤险</span>
-											<span v-html="value.companyName">天安财险承保</span>
+											<span></span>
 										</li>
 									</ul>
 									<div class="xian"></div>
@@ -59,12 +59,13 @@
 										</li>
 										<li>
 											<span>订单时间</span>
-											<span v-html="value.startTime">2017年05月24日</span>
+											<span v-html="value.insertTime">2017年05月24日</span>
 										</li>
 									</ul>
 									<ul class="man-div-body-ul_li_div_ul3">
 										<li>
-											<div class="div_btn">再次购买</div>
+											<div id='liji' class="div_btn" v-if="value.orderStatus=='待支付'" style="z-index: 3;">立即支付</div>
+											<div id='zaici' class="div_btn" v-if="value.orderStatus=='已支付'" style="z-index: 3;" v-bind:commodityCombinationId="value.commodityCombinationId" v-bind:orderNo="value.orderNo">再次购买</div>
 										</li>
 									</ul>
 								</div>

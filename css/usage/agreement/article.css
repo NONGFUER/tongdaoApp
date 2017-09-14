@@ -206,3 +206,11 @@
 	line-height: 45px;
 	text-align: center;
 }
+.bar span{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+    white-space: nowrap;
+    display: block;
+    float: left;
+}

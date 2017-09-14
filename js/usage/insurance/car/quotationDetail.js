@@ -19,22 +19,7 @@ $(function() {
 	
 	/**--返回--*/
 	$(".h_back").unbind("tap").bind("tap",function() {
-		if(parm.body.bxfromFlag=="2"){
-			var backParam={
-			   "mobile": parm.head.userName  
-		   }
-		   var jsonStr = JSON.stringify(backParam);
-		   jsonStr = UrlEncode(jsonStr);
-		   window.location.href = "policyManagement.html?jsonKey=" + jsonStr;
-		}else{
-		   var backParam={
-				"agentId":parm.head.agentId,   
-				"phone": parm.head.userName  
-		   }
-		   var jsonStr = JSON.stringify(backParam);
-		   jsonStr = UrlEncode(jsonStr);
-		   window.location.href = base.url+"tongdaoApp/page/html/users/policyManange.html?jsonKey=" + jsonStr;
-		}
+		backlast()
 	});
 
 	// 点击立即投保
@@ -60,7 +45,10 @@ $(function() {
 		sessionStorage.setItem("tradeNo",tradeNo);
 		sessionStorage.setItem("checkNo",checkNo);
 		sessionStorage.setItem("checkCode",checkCode);
-		parm.body.inforCar.vehicleModelData=vehicleModelData.vehicleModelData;
+		var inforCar={
+		   "vehicleModelData":vehicleModelData.vehicleModelData
+		}
+		parm.body.inforCar=inforCar
 		parm.body.fromBaojia="Y";
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
@@ -222,3 +210,13 @@ $.setscroll = function() {
 	$("#order_index").height(Scrollheight);
 	mui("#order_index").scroll();
 };
+
+
+
+/*返回*/
+function backlast(){
+	parm.title="我的订单";
+	var jsonStr = JSON.stringify(parm);
+	jsonStr = UrlEncode(jsonStr); // 加密过后的操作
+	window.location.href =base.url+"tongdaoApp/html/account/myOrder/allOrder.html?jsonKey=" + jsonStr;
+}

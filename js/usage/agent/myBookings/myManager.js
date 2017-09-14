@@ -31,14 +31,14 @@ $(function() {
 
 	var url = base.url + 'customerBasic/getCustomerAndAgentInfo.do';
 	console.log("页面初始化，发送请求报文--");
-	$.reqAjaxsFalse(url, reqData, getCustomerAndAgentInfo);
+	$.reqAjaxs(url, reqData, getCustomerAndAgentInfo);
 
 })
 
 function getCustomerAndAgentInfo(data) {
 	console.log(data)
 	if(data.statusCode=='000000'){
-		vm.objectlist = data.returns;
+		vm.objectlist = data.returns.agent;
 	}else if(data.statusCode=='123456'){
 		modelAlert(data.statusMessage,'',lognCont);
 	}else{

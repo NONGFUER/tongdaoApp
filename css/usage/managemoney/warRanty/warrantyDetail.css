@@ -47,7 +47,7 @@ ul li span {
 }
 
 .man-div-body-ul_li_div_ul1 li:last-child span:last-child {
-	background:url(../../../../image/managemoney/productDetails/baozhangkuang.png) no-repeat;
+	background: url(../../../../image/managemoney/productDetails/baozhangkuang.png) no-repeat;
 	background-size: 100%;
 	width: 67px;
 	height: 35px;
@@ -58,7 +58,6 @@ ul li span {
 	top: -13px;
 	line-height: 35px;
 	text-align: center;
-	
 }
 
 .man-div-body-ul_li_div .man-div-body-ul_li_div_ul1 li:first-child span:last-child {
@@ -120,23 +119,29 @@ ul li span {
 .man-div-body-ul_li_div_two ul li span {
 	line-height: 41px;
 }
+
+
 /*底部按钮*/
-.man-div-body-ul_li_div_btn{
+
+.man-div-body-ul_li_div_btn {
 	height: 135px;
 	line-height: 135px;
 	padding: 10px 20px 10px 20px;
 	text-align: center;
 }
-.div_btn{
+
+.div_btn {
 	display: inline-block;
 	height: 37.5px;
-	padding: 2px 7px 2px 7px;
+	text-align: center;
 	width: 38%;
 	line-height: 37.5px;
+	font-size: 15px;
 	color: #FFFFFF;
 	background-color: #48A0F0;
 	border-radius: 5px;
 }
+
 
 /*线*/
 
@@ -161,6 +166,7 @@ ul li span {
 	color: #48A0F0;
 }
 
+
 /*小图标》*/
 
 .rightjiantou {
@@ -170,17 +176,23 @@ ul li span {
 	height: 16px;
 }
 
+
 /*定位top 12.5*/
+
 .postop10 {
 	position: relative;
 	top: 12.5px;
 }
-.mbright30{
+
+.mbright30 {
 	margin-right: 30px;
 }
-.chanping{
+
+.chanping {
 	margin-right: 15px;
+	font-size: 12px;
 }
-.huisebtn{
+
+.huisebtn {
 	background-color: #959595;
 }

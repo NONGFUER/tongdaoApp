@@ -37,8 +37,26 @@ $(function() {
 	}
 	var url = base.url + 'yuyueOrder/getYuyueOrderDetail.do';
 	console.log("页面初始化，发送请求报文--");
-	$.reqAjaxsFalse(url, reqData, getYuyueOrderDetail);
-
+	$.reqAjaxs(url, reqData, getYuyueOrderDetail);
+	$(".btn").unbind("tap").bind("tap", function() {
+		var sendData = {
+			"customerPhone": userCode,
+			"roleType": roleType,
+			"customerId": customerId,
+			"commodityCombinationId":commodityCombinationId,
+			"yuyuePhone":yuyuePhone,
+			"yuyueName":yuyueName,
+			"yuyueNo":yuyueNo,
+			"transToken": transToken,
+			"userCode": userCode,
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '0',
+			"title": '客户经理'
+		};
+		var jsonStr = UrlEncode(JSON.stringify(sendData));
+		window.location.href = base.url + "tongdaoApp/html/agent/myBookings/myManager.html?jsonKey=" + jsonStr;
+	})
 })
 
 function getYuyueOrderDetail(data) {

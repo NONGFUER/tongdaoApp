@@ -90,6 +90,22 @@ function sysback() {
 		}
 	}
 }
+
+function sysbackurl(parm) {
+	var ua = navigator.userAgent.toLowerCase();
+	if(ua.match(/MicroMessenger/i) == "micromessenger") {
+		document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+			WeixinJSBridge.call('closeWindow');
+		})
+	} else {
+		if(systemsource == "ios") {
+			objcObject.OpenUrl(parm);
+		} else if(systemsource == "android") {
+			
+		}
+	}
+}
+
 /*调用壳方法
  * 使用方法：sysback();
  * */

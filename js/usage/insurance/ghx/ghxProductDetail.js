@@ -146,6 +146,15 @@ function toFillPolicyHtml(){
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/insurance/main/insure.html?jsonKey=" + jsonStr;
 }
+
+function shareHandle(){
+	var title = "易安挂号险";
+	var desc  = "绿色通道挂号服务，就诊咨询，就医陪诊" ;	
+	var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=6';
+	var picUrl = "";
+	shareMethod(shareurl,title,desc,"baodan",picUrl);		
+};
+
 function backlast(){
 	sysback();
 }

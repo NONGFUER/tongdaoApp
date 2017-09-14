@@ -29,8 +29,8 @@
 					</div>
 					<div id='list' class="man-div-body " v-cloak>
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:policyNo="value.policyNo" v-bind:riskType='value.riskType'>
-								<div v-if="value.orderStatus=='6'" class="mui-slider-right mui-disabled shanchu">
+							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:policyNo="value.policyNo" v-bind:orderNo="value.orderNo" v-bind:riskType='value.riskType'>
+								<div v-if="value.orderStatus=='已过期'" class="mui-slider-right mui-disabled shanchu">
 									<a class="mui-btn mui-btn-red" v-bind:policyNo="value.policyNo">
 										<i class="lajitong"></i>
 										<span>删除</span>
@@ -44,7 +44,7 @@
 										</li>
 										<li>
 											<span v-html="value.commodityName">少儿高发恶性肿瘤险</span>
-											<span v-html="value.companyName">天安财险承保</span>
+											<span></span>
 										</li>
 									</ul>
 									<div class="xian"></div>
@@ -58,7 +58,7 @@
 											<span v-html="value.prem+'元'">1000.00元</span>
 										</li>
 										<li>
-											<span>保险期间</span>
+											<span style="width: 20%;">保险期间</span>
 											<span v-html="value.startTime+'-'+value.endTime">2017年05月24日</span>
 										</li>
 									</ul>
@@ -67,6 +67,10 @@
 						</ul>
 					</div>
 				</div>
+			</div>
+			<div class="shiming">
+				<div class="left_shiming">完善实名信息,可查看更多保单信息</div>
+				<div class="right_shiming">去实名 ></div>
 			</div>
 		</div>
 	</body>

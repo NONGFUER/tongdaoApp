@@ -91,10 +91,10 @@
 							<div class="jiantou"></div>
 							<div class="xian"></div>
 						</div>
-						<ul class="man-div-body-ul_three">
+						<ul class="man-div-body-ul_three" id='xiagguan'>
 							<template v-for="(value,key) in xiangguanxieyi">
-								<li>
-									<span v-html="value.subModuleName"></span>
+								<li class="neirong" v-bind:modueInfo='value.modueInfo'>
+									<span class="tiaokuan" v-html="value.subModuleName"></span>
 									<span class="youjiantouhuise"></span>
 								</li>
 								<li class="xianli"></li>

@@ -4,9 +4,10 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	commodityComId = urlParm.commodityComId,
 	roleType = urlParm.roleType,
+	idAuth = urlParm.idAuth,
 	transToken = urlParm.transToken,
 	customerId = urlParm.customerId,
-	tagId = null,
+	tagId = urlParm.tagId,
 	policyStatus = null,
 	riskType = null;
 if(riskType == "") {
@@ -43,6 +44,12 @@ var vm = new Vue({
 })
 
 $(function() {
+	if(idAuth == '0') {
+		$('.shiming').show();
+		mui('.shiming').on('tap', '.right_shiming', function() {
+			register();
+		})
+	}
 	xinzhen(userCode, transToken, customerId, policyStatus, riskType, tagId)
 	mui('#list').on('tap', '.mui-btn', function() {
 		var elem = this;
@@ -60,27 +67,29 @@ $(function() {
 		});
 	})
 	mui('.man-div-body-ul ').on('tap', '.man-div-body-ul_li', function() {
-		var riskType=$(this).attr('riskType');
-		var policyNo= $(this).attr('policyNo');
+		var riskType = $(this).attr('riskType');
+		var policyNo = $(this).attr('policyNo');
+		var orderNo = $(this).attr('orderNo');
 		var param = {
 			"userCode": userCode,
 			"mobile": userCode,
 			"policyNo": policyNo,
+			"orderNo": orderNo,
 			"roleType": roleType,
 			"customerId": customerId,
-			"transToken":transToken,
-			"policyStatus":policyStatus,
-			"cxflag":'2',
-			"tagId":tagId,
+			"transToken": transToken,
+			"policyStatus": policyStatus,
+			"cxflag": '2',
+			"tagId": tagId,
 			"title": '保单详情',
 			"leftIco": '1',
 			"rightIco": '0',
 			"downIco": '0',
 		}
 		var jsonStr = UrlEncode(JSON.stringify(param));
-		if(riskType=='03'){
-			window.location.href =base.url+ "tongdaoApp/html/insurance/car/orderDetail.html?jsonKey=" + jsonStr;	
-		}else if(riskType=='01'){
+		if(riskType == '03') {
+			window.location.href = base.url + "tongdaoApp/html/insurance/car/orderDetail.html?jsonKey=" + jsonStr;
+		} else if(riskType == '01') {
 			window.location.href = "policyInfo.html?jsonKey=" + jsonStr;
 		}
 	})
@@ -96,11 +105,14 @@ function getPolicyList(data) {
 					if(index.startTime.time != null && index.startTime.time != "" && index.endTime.time != null && index.endTime.time != "" && index.prem != "" && index.prem != null) {
 						datas[element].startTime = ($.getTimeStr2(index.startTime.time));
 						datas[element].endTime = ($.getTimeStr2(index.endTime.time));
-						datas[element].prem = toDecimal2(datas[element].prem);
 					}
 				} else {
 					datas[element].startTime = ("");
 					datas[element].endTime = ("");
+				}
+				if(index.prem != null && index.prem != "") {
+					datas[element].prem = toDecimal2(datas[element].prem);
+				} else {
 					datas[element].prem = '0.00';
 				}
 			})
@@ -136,7 +148,7 @@ function xinzhen(userCode, transToken, customerId, policyStatus, riskType, tagId
 		}
 	}
 	var url = base.url + 'personal/getPolicyList.do';
-	$.reqAjaxsFalse(url, reqData, getPolicyList);
+	$.reqAjaxs(url, reqData, getPolicyList);
 }
 /*删除*/
 function shanchu(userCode, transToken, customerId, policyNo) {
@@ -154,7 +166,7 @@ function shanchu(userCode, transToken, customerId, policyNo) {
 		}
 	}
 	var url = base.url + 'personal/deleteMyPolicy.do';
-	$.reqAjaxsFalse(url, reqData, deleteMyPolicy);
+	$.reqAjaxs(url, reqData, deleteMyPolicy);
 }
 
 function deleteMyPolicy(data) {
@@ -170,48 +182,12 @@ function deleteMyPolicy(data) {
 
 function chuli() {
 	$('.baozhang').each(function() {
-		if($(this).html() == '1') {
+		if($(this).html() == '待生效') {
 			$(this).attr('class', 'baozhang dai');
-			$(this).html('待提交核保');
-		} else if($(this).html() == '2') {
+		} else if($(this).html() == '保障中') {
 			$(this).attr('class', 'baozhang bao');
-			$(this).html('已生效');
-		} else if($(this).html() == '3') {
+		} else if($(this).html() == '已过期') {
 			$(this).attr('class', 'baozhang yilingqu');
-			$(this).html('核保失败');
-		} else if($(this).html() == '4') {
-			$(this).attr('class', 'baozhang yilingqu');
-			$(this).html('已退保');
-		} else if($(this).html() == '5') {
-			$(this).attr('class', 'baozhang bao');
-			$(this).html('已退保');
-		} else if($(this).html() == '6') {
-			$(this).attr('class', 'baozhang');
-			$(this).html('已失效');
-		} else if($(this).html() == '7') {
-			$(this).attr('class', 'baozhang bao');
-			$(this).html('已失效');
-		} else if($(this).html() == '8') {
-			$(this).attr('class', 'baozhang bao');
-			$(this).html('理赔中');
-		} else if($(this).html() == '9') {
-			$(this).attr('class', 'baozhang dai');
-			$(this).html('理赔终止');
-		} else if($(this).html() == '10') {
-			$(this).attr('class', 'baozhang bao');
-			$(this).html('已支付');
-		} else if($(this).html() == '11') {
-			$(this).attr('class', 'baozhang');
-			$(this).html('已支付');
-		} else if($(this).html() == '12') {
-			$(this).attr('class', 'baozhang');
-			$(this).html('冻结中');
-		} else if($(this).html() == '13') {
-			$(this).attr('class', 'baozhang');
-			$(this).html('保单终止');
-		} else if($(this).html() == '99') {
-			$(this).attr('class', 'baozhang');
-			$(this).html('已失效');
 		}
 	})
 }
@@ -226,7 +202,7 @@ function mylist(userCode, transToken, customerId, tagId, policyStatus) {
 	if(policyStatus == '') {
 		policyStatus = null;
 	}
-	if(tagId == '') {
+	if(tagId == '全部') {
 		tagId = null;
 	}
 	xinzhen(userCode, transToken, customerId, policyStatus, riskType, tagId);
@@ -249,6 +225,7 @@ mui('.man-div-title ').on('tap', 'li', function() {
 	}
 	xinzhen(userCode, transToken, customerId, policyStatus, riskType, tagId)
 })
+
 function toDecimal2(x) {
 	var f = parseFloat(x);
 	if(isNaN(f)) {
@@ -265,6 +242,10 @@ function toDecimal2(x) {
 		s += '0';
 	}
 	return s;
+}
+/*未实名*/
+function register() {
+	registerControl();
 }
 /*登录失效*/
 function lognCont() {

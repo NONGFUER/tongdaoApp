@@ -33,7 +33,9 @@ var vm = new Vue({
 	el: '#list',
 	data: {
 		Objectitle: {
-			insureInfo: {}
+			insureInfo: {
+				yearRate:"",
+			}
 		},
 		goumaishuoming: {},
 		xiangguanxieyi: {},
@@ -78,7 +80,7 @@ $(function() {
 	}
 
 	var url = base.url + 'inureProduct/getInsureInfo.do';
-	$.reqAjaxsFalse(url, reqData, getInsureInfo);
+	$.reqAjaxs(url, reqData, getInsureInfo);
 	/*点击购买弹出发送短信框*/
 	$("#huifang").unbind("tap").bind("tap", function() {
 		var huiclass = $('#huifang').attr('class')
@@ -173,7 +175,7 @@ $(function() {
 					}
 				};
 				var url = base.url + 'hkunderwrit/saveOrder.do';
-				$.reqAjaxsFalse(url, redata, saveOrder);
+				$.reqAjaxs(url, redata, saveOrder);
 			}
 		} else {
 			mui.alert('请勾选已阅读协议');
@@ -289,7 +291,7 @@ $(function() {
 			}
 		};
 		var url = base.url + 'commonMethod/GetRegCode.do';
-		$.reqAjaxsFalse(url, reqData, GetRegCode);
+		$.reqAjaxs(url, reqData, GetRegCode);
 	}
 	/*验证码倒计时*/
 	function SetRemainTime() {
@@ -355,7 +357,7 @@ $(function() {
 			}
 		};
 		var url = base.url + 'investmentLinkedInsurance/getSelection.do';
-		$.reqAjaxsFalse(url, reqData, getSelection);
+		$.reqAjaxs(url, reqData, getSelection);
 	}
 
 	function getSelection(data) {
@@ -417,7 +419,7 @@ function saveOrder(data) {
 						}
 					}
 					var url = base.url + 'hkunderwrit/getinsure.do';
-					$.reqAjaxsFalse(url, reqData, getinsure);
+					$.reqAjaxs(url, reqData, getinsure);
 				} else {
 					mui.alert('验证码错误!');
 				}

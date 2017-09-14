@@ -66,7 +66,7 @@ $(function() {
 		}
 	}
 	var url = base.url + 'investmentLinkedInsurance/getBank.do';
-	$.reqAjaxsFalse(url, reqData, getBank);
+	$.reqAjaxs(url, reqData, getBank);
 })
 
 function getBank(data) {

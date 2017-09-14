@@ -646,7 +646,7 @@ function sendInsureRequest(){
 	            "insuredmobile"          : formData.recogTelNo
 	        },
 	        "customerId"				 : customerId,
-	        "buyType"					 : "02",
+	        "buyType"					 : "2",
 	        "recommendId"                : shareCusId
 	    }
 	}
@@ -947,7 +947,7 @@ function sendGhxInsureRequest(){
 					"ghOptionalFlag": isA, // '可选保障项代码1：附加，0不附加',
 					//"inviterCode":"",
 					"inviterPhone":mobile,
-				    "channelResource":"3",//渠道来源  
+				    "channelResource":"2",//渠道来源  
 					"insureList": insureList,
 					"buyType":"2"//2分享
 				},
@@ -974,7 +974,7 @@ function sendGhxPayRequest(orderNo){
 	var url = requestUrl.ghxPay;
 	var sendJson = {
 		  "head": {
-		    "channel": "01",
+		    "channel": "02",
 		    "userCode": mobile,
 		    "transTime": $.getTimeStr(),
 		    "transToken":transToken

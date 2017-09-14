@@ -28,7 +28,7 @@
 								<span class="baodanhao" v-html="'保单号:'+Objectlist.hKCalculate.policyNo"></span>
 							</li>
 							<li class="list_two">
-								<h1 v-html="Objectlist.hKCalculate.yearRate+'%'"></h1>
+								<h1 v-html="Objectlist.hKCalculate.yearRate+'%'" v-cloak></h1>
 							</li>
 							<li>
 								<span>历史年化投资回报率</span>
@@ -61,7 +61,7 @@
 							<li class="xianli"></li>
 							<li>
 								<span>下次免费领取时间</span>
-								<span v-html="Objectlist.hKCalculate.freeDateStart+'/'+Objectlist.hKCalculate.freeDateEnd"></span>
+								<span v-html="Objectlist.hKCalculate.freeDateStart"></span>
 							</li>
 						</ul>
 					</div>

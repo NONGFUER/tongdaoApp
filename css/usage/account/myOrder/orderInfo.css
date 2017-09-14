@@ -238,3 +238,6 @@ table.gridtable td {
 .gridtable td{
   color: #000000;
 }
+.border-1px-bottom{
+	border-bottom:1px solid #ebebeb;
+}

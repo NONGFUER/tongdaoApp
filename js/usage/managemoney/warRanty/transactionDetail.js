@@ -59,30 +59,48 @@ function policyDetail(data) {
 function chuli() {
 	$('.man-div-body-ul_li').each(function() {
 		if($(this).attr('orderStatus') == '未核保') {
+			$(this).removeClass('huangseli');
 			$(this).addClass('lanseli');
 		} else if($(this).attr('orderStatus') == '核保失败') {
+			$(this).removeClass('huangseli');
+			$(this).removeClass('lanseli');
 			$(this).addClass('huiseli');
 		} else if($(this).attr('orderStatus') == '处理中') {
+			$(this).removeClass('huangseli');
 			$(this).addClass('lanseli');
 		} else if($(this).attr('orderStatus') == '核保成功') {
+			$(this).removeClass('huangseli');
 			$(this).addClass('lanseli');
 		} else if($(this).attr('orderStatus') == '待生效') {
+			$(this).removeClass('huangseli');
 			$(this).addClass('lanseli');
 		} else if($(this).attr('orderStatus') == '投保成功') {
+			$(this).removeClass('huangseli');
 			$(this).addClass('lanseli');
 		} else if($(this).attr('orderStatus') == '已退保') {
+			$(this).removeClass('huangseli');
+			$(this).removeClass('lanseli');
+			$(this).removeClass('huangseli');
 			$(this).addClass('huiseli');
 		} else if($(this).attr('orderStatus') == '投保失败') {
+			$(this).removeClass('lanseli');
+			$(this).removeClass('huangseli');
 			$(this).addClass('huiseli');
 		} else if($(this).attr('orderStatus') == '领取成功') {
+			$(this).removeClass('lanseli');
 			$(this).addClass('huangseli');
 		} else if($(this).attr('orderStatus') == '领取失败') {
+			$(this).removeClass('lanseli');
+			$(this).removeClass('huangseli');
 			$(this).addClass('huiseli');
 		} else if($(this).attr('orderStatus') == '处理中') {
+			$(this).removeClass('lanseli');
 			$(this).addClass('huangseli');
 		} else if($(this).attr('orderStatus') == '赎回试算成功') {
+			$(this).removeClass('lanseli');
 			$(this).addClass('huangseli');
 		} else if($(this).attr('orderStatus') == '赎回试算失败') {
+			$(this).removeClass('huangseli');
 			$(this).addClass('lanseli');
 		}
 	})
@@ -102,7 +120,6 @@ function panding(insureSurrender, orderStatus) {
 			return '待生效';
 		} else if(orderStatus == '10') {
 			return '投保成功';
-			$(this).children('money').addClass('lanse');
 		} else if(orderStatus == '12') {
 			return '已退保';
 		} else if(orderStatus == '11') {
@@ -157,7 +174,7 @@ function list(userCode, transToken, customerId, commodityCommId, flag) {
 		}
 	}
 	var url = base.url + 'moneyManage/policyDetail.do';
-	$.reqAjaxsFalse(url, reqData, policyDetail);
+	$.reqAjaxs(url, reqData, policyDetail);
 }
 mui('.man-div-title ul').on('tap', 'li', function() {
 	$('.man-div-title ul').children('li').removeClass('li_xuan');

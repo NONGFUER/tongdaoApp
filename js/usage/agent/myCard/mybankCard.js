@@ -27,7 +27,7 @@ $(function() {
 		}
 	}
 	var url = base.url + 'agent/getCertificationBankCard.do';
-	$.reqAjaxsFalse(url, reqData, getCertificationBankCard);
+	$.reqAjaxs(url, reqData, getCertificationBankCard);
 })
 
 function getCertificationBankCard(data) {

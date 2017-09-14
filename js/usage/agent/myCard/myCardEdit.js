@@ -28,7 +28,9 @@ $(function() {
 	$(".tou img").attr("src", cardObj.touxiang); //头像
 	//跳转到引导步骤
 	$(".wechat_right").bind("tap", function() {
-		window.location.href = "./getEWM.html";
+		cardParm.title='如何获取二维码';
+		var jsonStr = UrlEncode(JSON.stringify(cardParm));
+		window.location.href = "./getEWM.html?jsonKey=" + jsonStr;
 	});
 
 	//跳转"关于我们"

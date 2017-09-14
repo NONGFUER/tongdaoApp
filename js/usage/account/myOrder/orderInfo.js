@@ -9,6 +9,9 @@ $(function(){
 	$(".anniu2").unbind("tap").bind("tap",function(){
 		backlast();
 	});
+	$("#riskTiaokuan").unbind("tap").bind("tap",function(){
+		toArticle($(this))
+	});
 });
 //订单详情	
 function getOrderDetailRequest( customerId,orderNo){
@@ -36,12 +39,21 @@ function orderDetailCallback(data){
 		var orderBasic			 = body.orderBasic;
 		var shortRiskInsured	 = body.shortRiskInsured;
 		var shortRiskOrder		 = body.shortRiskOrder;
+		var status				 = shortRiskOrder.policyStatus;
+		var picPath	= picStatus(status);
+		$(".zhuangtai").attr("src",picPath);
 		
 		var startTime = shortRiskOrder.startTime.time;
 			startTime = timeFormatDate(startTime,"yyyy-MM-dd");
 		var endTime   = shortRiskOrder.endTime.time;
 			endTime   = timeFormatDate(endTime,"yyyy-MM-dd");
 		var prem      = toDecimal2(shortRiskOrder.prem);
+		
+		if( shortRiskInsured.apRelation == "01"){
+			$(".tong").show();			
+		}else{
+			$(".BBR").show();
+		}
 		//投保人星系
 		$("#orderNo").text(orderNo);//订单号
 		$("#insureName").text(commodityInfo.commodityName);//商品名称
@@ -53,6 +65,14 @@ function orderDetailCallback(data){
 		//被保人信息
 		$("#BBRName").text(shortRiskInsured.insuredname);
 		$("#BBRID").text(shortRiskInsured.insuredidno);
+		var imgDiv = '<img src="'+commodityInfo.banner+'">';
+		$(".bxzr").append(imgDiv);
+		
+		//保险条款
+		$("#riskTiaokuan").attr("data-cid",commodityInfo.id + "");		
+		$("#epolicy").unbind("tap").bind("tap",function(){
+			window.location.href = epolicyUrl;
+		});
 	}
 }
 
@@ -83,6 +103,28 @@ function getPolicyDetailRequest(customerId,policyNo){
 	
 }
 
+function picStatus(sta){
+	var pic = base.url + "tongdaoApp/image/common/nullstatus.png";
+	if(sta == "5" ){//待生效
+		var pic = base.url + "tongdaoApp/image/common/daizhifu.png";
+	}else if(sta == "7" || sta == "8" || sta == "9" || sta == "10" || sta == "13"){//已支付
+		var pic = base.url + "tongdaoApp/image/common/yizhifu.png";
+	}else if(sta == "2" || sta == "3" || sta == "6" || sta == "11" || sta == "12" || sta == "99" ){//已关闭
+		var pic = base.url + "tongdaoApp/image/common/yiguanbi.png";
+	}
+	return pic;
+}
+
+function toArticle(obj){	
+	urlParm.cId  = $(obj).attr("data-cid");
+	urlParm.title = "条款列表";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	urlParm.frompage = "orderInfoHtml";
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/agreement/article.html?jsonKey="+jsonStr;
+}
 
 //保单详情
 function policyNoDetailCallback(data){

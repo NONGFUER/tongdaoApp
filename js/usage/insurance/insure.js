@@ -647,7 +647,7 @@ function sendInsureRequest(){
 	            "insuredmobile"          : formData.recogTelNo
 	        },
 	        "customerId"				 : customerId,
-	        "buyType"					 : "01",
+	        "buyType"					 : "1",
 	        "recommendId"                : customerId
 	    }
 	}

@@ -5,8 +5,6 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	roleType = urlParm.roleType,
 	transToken = urlParm.transToken,
 	customerId = urlParm.customerId;
-/*	var transToken='059876d99ec46c490953d04d4993da56';
-	var userCode='13601460140';*/
 var vm = new Vue({
 	el: '#list',
 	data: {

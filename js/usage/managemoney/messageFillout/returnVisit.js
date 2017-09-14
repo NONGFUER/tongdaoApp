@@ -6,7 +6,7 @@ var riskSupportAbility = '',
 	commodityId = '',
 	testType = '',
 	transToken = '',
-	policyNo='',
+	policyNo = '',
 	title = '';
 $(function() {
 	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
@@ -21,7 +21,7 @@ $(function() {
 	customerId = urlParm.customerId;
 	commodityCombinationId = urlParm.commodityCombinationId;
 	commodityId = urlParm.commodityId;
-	policyNo=urlParm.policyNo;
+	policyNo = urlParm.policyNo;
 	testType = urlParm.testType;
 	/**--返回--*/
 	$(".fl").bind("tap", function() {
@@ -33,23 +33,28 @@ $(function() {
 })
 
 function fanhui() {
-	var sendData = {
-		"riskSupportAbility": testType,
-		"insurePhone": userCode,
-		"userCode": userCode,
-		"customerId": customerId,
-		"commodityCombinationId": commodityCombinationId,
-		"commodityId": commodityId,
-		"testType": $('.testType').html(),
-		"transToken": transToken,
-		'title': title,
-		"leftIco": '1',
-		"rightIco": '0',
-		"downIco": '0',
+	if(laiyuan == '1') {
+		var sendData = {
+			"riskSupportAbility": testType,
+			"insurePhone": userCode,
+			"userCode": userCode,
+			"customerId": customerId,
+			"commodityCombinationId": commodityCombinationId,
+			"commodityId": commodityId,
+			"testType": $('.testType').html(),
+			"transToken": transToken,
+			'title': title,
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '0',
+		}
+		var jsonStr = JSON.stringify(sendData);
+		jsonStr = UrlEncode(jsonStr);
+		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/messageFillout.html?jsonKey=" + jsonStr;
+	}else{
+		sysback();
 	}
-	var jsonStr = JSON.stringify(sendData);
-	jsonStr = UrlEncode(jsonStr);
-	window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/messageFillout.html?jsonKey=" + jsonStr;
+
 }
 
 function huifang() {
@@ -68,7 +73,7 @@ function huifang() {
 	}
 	var url = base.url + 'hkRedemption/getReview.do';
 	console.log("页面初始化，发送请求报文--");
-	$.reqAjaxsFalse(url, reqData, getReview);
+	$.reqAjaxs(url, reqData, getReview);
 }
 
 function getReview(data) {

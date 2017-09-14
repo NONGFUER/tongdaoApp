@@ -20,7 +20,7 @@
 		<div class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
 				<div class="man mui-table-view">
-					<div id='list' class="man-div-body" v-cloak>
+					<div id='list' class="man-div-body">
 						<ul class="man-div-body-ul ">
 							<li class="man-div-body-ul_li mb10" v-for="(value,key) in Objectlist">
 								<div class="man-div-body-ul_li_div mui-slider-handle">
@@ -48,7 +48,7 @@
 												</li>
 												<li>
 													<span>下次免费领取时间</span>
-													<span v-html="value.freeDateStart+'/'+value.freeDateEnd"></span>
+													<span v-html="value.freeDateStart"></span>
 												</li>
 												<li class="xian" style="line-height: 10px; height: 10px;"></li>
 											</ul>

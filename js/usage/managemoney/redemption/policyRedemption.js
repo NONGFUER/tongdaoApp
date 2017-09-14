@@ -3,6 +3,7 @@ var vm = new Vue({
 	data: {
 		Objectlist: {
 			hKCalculate: {},
+			huisebtn: {},
 		},
 	},
 	mounted() {
@@ -48,22 +49,24 @@ $(function() {
 	var url = base.url + 'moneyManage/redemptionTrial.do';
 	$.reqAjaxsFalse(url, reqData, redemptionTrial);
 	mui('.man-div-body-ul_li_div_btn').on('tap', '#huifang', function() {
-		var reqData = {
-			"head": {
-				"channel": "01",
-				"userCode": userCode,
-				"transToken": transToken,
-				"transTime": $.getTimeStr(),
-			},
-			"body": {
-				"orderNo": orderNo,
-				"policyNo": vm.Objectlist.hKCalculate.policyNo,
-				"insureNo": insureNo,
-				"customerId": customerId
+		if(vm.huisebtn != '1') {
+			var reqData = {
+				"head": {
+					"channel": "01",
+					"userCode": userCode,
+					"transToken": transToken,
+					"transTime": $.getTimeStr(),
+				},
+				"body": {
+					"orderNo": orderNo,
+					"policyNo": vm.Objectlist.hKCalculate.policyNo,
+					"insureNo": insureNo,
+					"customerId": customerId
+				}
 			}
+			var url = base.url + 'hkRedemption/getRedemption.do';
+			$.reqAjaxsFalse(url, reqData, getRedemption);
 		}
-		var url = base.url + 'hkRedemption/getRedemption.do';
-		$.reqAjaxsFalse(url, reqData, getRedemption);
 	})
 })
 
@@ -100,6 +103,7 @@ function getRedemption(data) {
 function getRedemptionConfirmation(data) {
 	if(data.statusCode == "000000") {
 		modelAlert(data.statusMessage);
+		vm.huisebtn = '1';
 		$('#huifang').attr('style', 'background-color: #999;')
 	} else if(data.statusCode == "123456") {
 		modelAlert(data.statusMessage, '', lognCont);

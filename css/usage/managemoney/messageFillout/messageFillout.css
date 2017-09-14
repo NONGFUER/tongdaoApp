@@ -529,8 +529,8 @@ ul li span {
 	bottom: 0;
 	right: 0;
 	opacity: 1;
-	height: 250px;
-	width: 90%;
+	height: 230px;
+	width: 80%;
 	background-color: #FFFFFF;
 	z-index: 9999;
 	border-radius: 12px;
@@ -541,12 +541,18 @@ ul li span {
 	width: 100%;
 	background: url(../../../../image/common/notetitle.png) no-repeat;
 	background-size: 100%;
+	text-align: center;
+	line-height: 50px;
 }
-
+.phone{
+	vertical-align: sub;
+}
 .note-div_title_right {
 	width: 13%;
-	height: 70%;
-	float: right;
+	height: 20%;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
 
 .note-div_body_title {
@@ -604,5 +610,5 @@ ul li span {
 	line-height: 37px;
 	color: #FFFFFF;
 	margin: 0 auto;
-	margin-top: 26.5px;
+	margin-top: 20.5px;
 }
