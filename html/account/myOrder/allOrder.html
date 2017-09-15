@@ -29,7 +29,7 @@
 					</div>
 					<div id='list' class="man-div-body " v-cloak>
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:orderNo='value.orderNo' v-bind:riskType='value.riskType' v-bind:orderStatus='value.orderStatus' v-bind:commodityCombinationId="value.commodityCombinationId">
+							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:commodityCombinationId="value.commodityCombinationId"  v-bind:orderNo='value.orderNo' v-bind:riskType='value.riskType' v-bind:orderStatus='value.orderStatus' v-bind:policyNo="value.policyNo" v-bind:insureNo='value.insureNo'>
 								<div v-if="value.orderStatus=='已关闭'" class="mui-slider-right mui-disabled shanchu">
 									<a class="mui-btn mui-btn-red">
 										<i class="lajitong"></i>
@@ -65,7 +65,7 @@
 									<ul class="man-div-body-ul_li_div_ul3">
 										<li>
 											<div id='liji' class="div_btn" v-if="value.orderStatus=='待支付'" style="z-index: 3;">立即支付</div>
-											<div id='zaici' class="div_btn" v-if="value.orderStatus=='已支付'" style="z-index: 3;" v-bind:commodityCombinationId="value.commodityCombinationId" v-bind:orderNo="value.orderNo">再次购买</div>
+											<div id='zaici' class="div_btn" v-if="value.orderStatus=='已支付'" style="z-index: 3;" v-bind:commodityCombinationId="value.commodityCombinationId" v-bind:orderNo="value.orderNo"  v-bind:riskType='value.riskType' >再次购买</div>
 										</li>
 									</ul>
 								</div>

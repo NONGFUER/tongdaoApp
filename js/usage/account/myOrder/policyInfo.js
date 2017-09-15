@@ -97,7 +97,7 @@ function picStatus(sta){
 	if(sta == "10" || sta == "11" ){//待生效
 		var pic = base.url + "tongdaoApp/image/common/daishengxiao.png";
 	}else if(sta == "2" || sta == "8" || sta == "12" || sta == "9"){//保障中
-		var pic = base.url + "tongdaoApp/image/common/baozhangzhong.png";
+		var pic = base.url + "tongdaoApp/image/common/baozhanging.png";
 	}else if(sta == "3" || sta == "4" || sta == "5" || sta == "6" || sta == "7" || sta == "13"){//已过期
 		var pic = base.url + "tongdaoApp/image/common/yiguoqi.png";
 	}

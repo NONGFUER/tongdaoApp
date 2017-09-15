@@ -143,6 +143,8 @@ $.loadData = function(param) {
 					$("#orderStatus").html("支付成功");
 				}else if(cxorderStatus=="06"){
 					$("#orderStatus").html("支付失败");
+				}else if(cxorderStatus=="09"){	
+					$("#orderStatus").html("待生效");	
 				}else if(cxorderStatus=="10"){	
 					$("#orderStatus").html("承保成功");
 				}else if(cxorderStatus=="99"){

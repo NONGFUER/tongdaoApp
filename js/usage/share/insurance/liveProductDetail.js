@@ -283,7 +283,7 @@ function moduleStr( moduleList ){
 	if( moduleList.moduleName == "产品特色" ){
 	    var str = "";
 	    str += '<dl class="module mb10 whitebackground ">'
-	    str += '<dt class="content-title"><img src="../../../image/insurance/product_detail.png">' + moduleList.moduleName + '</dt>'
+	    str += '<dt class="content-title"><img src="../../../../image/insurance/product_detail.png">' + moduleList.moduleName + '</dt>'
 	    str += '<dd class="con content-info star">' 
 	    str += modueInfo     	    
 	    str += '</dd></dl>'
@@ -300,7 +300,7 @@ function clauseModuleStr( clauseModuleList ){
     var moduleName = '保险产品详细说明';
     var str = "";
     str += '<dl class="module mb10 whitebackground ">'
-    str += '<dt class="content-title"><img src="../../../image/insurance/product_point.png">' + moduleName + '</dt>'
+    str += '<dt class="content-title"><img src="../../../../image/insurance/product_point.png">' + moduleName + '</dt>'
     str += '<dd class="content-info"><ul class="clearfix" id="">'
     for(var i = 0; i < clauseModuleList.length; i++ ){
         if( clauseModuleList[i].isNeed == "1" ){
@@ -353,11 +353,11 @@ function getTouxiang(mobile){
 			if(data){
 				$(".touinner").attr("src",base.url+"customerBasic/getAppImage.do?userName="+mobile);
 			}else{
-				$(".touinner").attr("src","../../../image/common/tou.png");
+				$(".touinner").attr("src","../../../../image/common/tou.png");
 			}		
 		   },
 		error:function(){
-			$(".touinner").attr("src","../../../image/account/tou.png");
+			$(".touinner").attr("src","../../../../image/account/tou.png");
 		}
 		});
 }

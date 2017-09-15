@@ -8,14 +8,13 @@ $(function(){
     //点击弹框里的确定按钮
     yuyueSubmit( customerId, ccId);		   
     sendLiveProductInfoRequest(ccId, provinceCode, cityCode, roleType )	//APP产品模块线下产品详情查询
-    if( roleType == "02" ){					//如果是代理人
-    	$(".insurance-customer").removeClass("none");
-    	$(".single-footer").removeClass("yincang");
+    if( roleType == "02" ){					//如果是代理人    	
+    	$(".single-footer").removeClass("yincang");    	
+    }   
+    if( roleType != "00" ){   	
     	sendCusInsConsultantRequest();
     }
-    if( roleType != "00" ){
-    	showRightIcon();
-    }
+    showRightIcon();
 });
 //点击预约出单
 function yuyueClickBind(){
@@ -167,7 +166,7 @@ function addYuyueInfoRender(data){
  */
  function cusInsConsultantRender(data){
     console.log(data);
-    if( data.statusCode == ajaxStatus.success ){
+    if( data.statusCode == ajaxStatus.success ){    	
         var cusInfo = data.returns.customerBasic;
         var mobile1  = cusInfo.mobile;//获取姓名
         var name1    = cusInfo.name;//获取手机号
@@ -181,10 +180,14 @@ function addYuyueInfoRender(data){
         $(".message-button").unbind("tap").bind("tap",function(){
         	callSendMessage(mobile1);
         });
+        if( cusInfo.cityCode == cityCode ){
+        	$(".insurance-customer").removeClass("none");
+        }
+        
     }else if( data.statusCode == ajaxStatus.relogin ){
         modelAlert( data.statusMessage, "", toLogin ); 
     }else{
-    	modelAlert( data.statusMessage );
+    	//modelAlert( data.statusMessage );
     }
     
  }

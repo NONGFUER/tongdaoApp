@@ -105,11 +105,11 @@ function getPolicyDetailRequest(customerId,policyNo){
 
 function picStatus(sta){
 	var pic = base.url + "tongdaoApp/image/common/nullstatus.png";
-	if(sta == "5" ){//待生效
+	if(sta == "05" ){//待生效
 		var pic = base.url + "tongdaoApp/image/common/daizhifu.png";
-	}else if(sta == "7" || sta == "8" || sta == "9" || sta == "10" || sta == "13"){//已支付
+	}else if(sta == "07" || sta == "08" || sta == "09" || sta == "10" || sta == "13"){//已支付
 		var pic = base.url + "tongdaoApp/image/common/yizhifu.png";
-	}else if(sta == "2" || sta == "3" || sta == "6" || sta == "11" || sta == "12" || sta == "99" ){//已关闭
+	}else if(sta == "02" || sta == "03" || sta == "06" || sta == "11" || sta == "12" || sta == "99" ){//已关闭
 		var pic = base.url + "tongdaoApp/image/common/yiguanbi.png";
 	}
 	return pic;

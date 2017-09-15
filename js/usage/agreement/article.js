@@ -44,7 +44,7 @@ function toCommodityList(){
 function toProductDetail(){	
 	urlParm.title = "投保信息";
 	urlParm.leftIco = "1";
-	urlParm.rightIco = "1";
+	urlParm.rightIco = "0";
 	urlParm.downIco = "0";
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/insurance/main/insure.html?jsonKey="+jsonStr;

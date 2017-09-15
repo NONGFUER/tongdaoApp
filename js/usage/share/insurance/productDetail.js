@@ -26,7 +26,7 @@ $(function(){
     //根据保费试算项进行保费试算
     sendCaldoRequest( ccId );
     //calOptionsRender(data4);
-    showRightIcon();
+    //showRightIcon();
     /**拨打电话*/
 	$(".kefu").unbind("tap").bind("tap",function(){
     	callService("4006895505",".kefuPhone");

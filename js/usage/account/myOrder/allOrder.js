@@ -3,11 +3,12 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	roleType = urlParm.roleType,
 	transToken = urlParm.transToken,
+	idAuth=urlParm.idAuth,
 	orderStatus = urlParm.orderStatus,
 	tagId = urlParm.tagId,
 	provinceCode = urlParm.provinceCode,
 	cityCode = urlParm.cityCode,
-	riskType = null,
+	riskType = urlParm.riskType,
 	orderStatus = null,
 	tagId = null,
 	customerId = urlParm.customerId;
@@ -56,28 +57,90 @@ $(function() {
 	})
 	/*立即支付*/
 	mui('.man-div-body-ul').on('tap', '#liji', function() {
-		mui.alert('立即')
+		var orderNo = $(this).attr('orderNo');
+		var policyNo= $(this).attr('policyNo');
+		var riskType = $(this).attr('risktype');
+		var insureNo = $(this).attr('insureNo');
+		var commodityCombinationId = $(this).attr('commodityCombinationId');
+		var orderStatus = $(this).attr('orderStatus');
+		var commodityName=$(this).attr('commodityName');
+		if(commodityCombinationId == '4') {
+			var productFlag='01';
+		}else{
+			var productFlag='02';
+		}
+		var param = {
+			"userCode": userCode,
+			"mobile": userCode,
+			"orderNo": orderNo,
+			"policyNo": policyNo,
+			"insureNo":insureNo,
+			"riskType": riskType,
+			"riskSupportAbility":riskType,
+			"commodityCombinationId": commodityCombinationId,
+			"commodityComId":commodityCombinationId,
+			"customerId": customerId,
+			"commodityId":commodityCombinationId,
+			"transToken": transToken,
+			"orderStatus": orderStatus,
+			"idAuth":idAuth,
+			"productFlag":productFlag,
+			"cxflag": '1',
+			"tagId": tagId,
+			"title": commodityName,
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '0',
+		}
+		var jsonStr = UrlEncode(JSON.stringify(param));
+		if(riskType == '03') {
+			if(orderStatus == '01') {
+				window.location.href = base.url + "tongdaoApp/html/insurance/car/quotationDetail.html?jsonKey=" + jsonStr;
+			} else {
+				window.location.href = base.url + "tongdaoApp/html/insurance/car/orderDetail.html?jsonKey=" + jsonStr;
+			}
+		} else if(riskType == '01') {
+			window.location.href = "orderInfo.html?jsonKey=" + jsonStr;
+		} else if(riskType == '04') {
+			mui.alert('寿险');
+		} else if(riskType == '02') {
+			window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/messageFillout.html?jsonKey=" + jsonStr;
+		}
 
 		return false;
 	})
 	/*再次购买*/
 	mui('.man-div-body-ul').on('tap', '#zaici', function() {
-		mui.alert('再次')
 		var orderStatus = $(this).attr('orderStatus');
 		var commodityCombinationId = $(this).attr('commodityCombinationId');
 		var name = $(this).attr('name');
 		var commodityName = $(this).attr('commodityName');
+		var riskType=$(this).attr('risktype');
+		var orderNo = $(this).attr('orderNo');
+		var policyNo= $(this).attr('policyNo');
+		var insureNo = $(this).attr('insureNo');
+		if(commodityCombinationId == '4') {
+			var productFlag='01';
+		}else{
+			var productFlag='02';
+		}
 		var param = {
 			"userCode": userCode,
 			"mobile": userCode,
+			"orderNo": orderNo,
+			"policyNo": policyNo,
 			"roleType": roleType,
+			"insureNo":insureNo,
 			"customerId": customerId,
 			"transToken": transToken,
 			"orderStatus": orderStatus,
-			"idAuth": idAuth,
+			"idAuth":idAuth,
+			"productFlag":productFlag,
 			"idNo": "",
 			"riskType": riskType,
 			"ccId": commodityCombinationId,
+			"commodityComId":commodityCombinationId,
+			"commodityCombinationId": commodityCombinationId,
 			"ccCode": "",
 			"cityCode": cityCode,
 			"provinceCode": provinceCode,
@@ -98,26 +161,41 @@ $(function() {
 				window.location.href = base.url + "tongdaoApp/html/insurance/main/productDetail.html?jsonKey=" + jsonStr;
 			}
 		} else if(riskType == '03') {
-		
+
+		}else if(riskType=='02'){
+			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
 		}
 		return false;
 	})
 	mui('.man-div-body-ul').on('tap', '.man-div-body-ul_li', function() {
 		var orderNo = $(this).attr('orderNo');
-		var riskType = $(this).attr('riskType');
+		var policyNo= $(this).attr('policyNo');
+		var riskType = $(this).attr('risktype');
+		var insureNo = $(this).attr('insureNo');
+		var commodityCombinationId = $(this).attr('commodityCombinationId');
 		var orderStatus = $(this).attr('orderStatus');
+		if(commodityCombinationId == '4') {
+			var productFlag='01';
+		}else{
+			var productFlag='02';
+		}
 		var param = {
 			"userCode": userCode,
 			"mobile": userCode,
 			"orderNo": orderNo,
-			"policyNo": orderNo,
-			"roleType": roleType,
+			"policyNo": policyNo,
+			"insureNo":insureNo,
+			"riskType": riskType,
+			"commodityCombinationId": commodityCombinationId,
+			"commodityComId":commodityCombinationId,
 			"customerId": customerId,
 			"transToken": transToken,
 			"orderStatus": orderStatus,
+			"idAuth":idAuth,
+			"productFlag":productFlag,
 			"cxflag": '1',
 			"tagId": tagId,
-			"title": '保单详情',
+			"title": '产品详情',
 			"leftIco": '1',
 			"rightIco": '0',
 			"downIco": '0',
@@ -133,6 +211,8 @@ $(function() {
 			window.location.href = "orderInfo.html?jsonKey=" + jsonStr;
 		} else if(riskType == '04') {
 			mui.alert('寿险');
+		} else if(riskType == '02') {
+			window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
 		}
 	})
 
@@ -152,7 +232,7 @@ function getOrderList(data) {
 				}
 				if(index.insertTime != null && index.insertTime != "") {
 					if(index.insertTime.time != null && index.insertTime.time != "") {
-						datas[element].insertTime = ($.getTimeStr(index.insertTime.time));
+						datas[element].insertTime = ($.getTimeStr2(index.insertTime.time));
 					}
 				} else {
 					datas[element].insertTime = ("--");
@@ -175,7 +255,7 @@ function chuli() {
 			$(this).attr('class', 'baozhang bao');
 		} else if($(this).html() == '待支付') {
 			$(this).attr('class', 'baozhang dai');
-		}else if($(this).html() == '已关闭'){
+		} else if($(this).html() == '已关闭') {
 			$(this).attr('class', 'baozhang');
 		}
 	})

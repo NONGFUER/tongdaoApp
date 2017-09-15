@@ -7,6 +7,7 @@ var riskSupportAbility = '',
 	testType = '',
 	transToken = '',
 	policyNo = '',
+	queren='0',
 	title = '';
 $(function() {
 	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
@@ -28,7 +29,9 @@ $(function() {
 		fanhui();
 	})
 	$(".ri").bind("tap", function() {
-		huifang();
+		if(queren!='1'){
+			huifang();
+		}	
 	})
 })
 
@@ -82,6 +85,8 @@ function getReview(data) {
 			tiaozhuan();
 		} else {
 			mui.alert('回访确认成功');
+			$('.ri').addClass('huisebtn');
+			queren='1';
 		}
 	} else {
 		mui.alert(data.statusMessage);

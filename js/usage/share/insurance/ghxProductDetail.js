@@ -19,8 +19,7 @@ $(function(){
     	calPrem()
     });
     $("#toubao").bind("tap",function(){
-    	isLogin(roleType,toFillPolicyHtml);
-    	//toFillPolicyHtml();//跳转到投保信息
+    	toFillPolicyHtml();//跳转到投保信息
     });
     /**拨打电话*/
 	$(".kefu").unbind("tap").bind("tap",function(){
@@ -152,7 +151,12 @@ function toFillPolicyHtml(){
 	urlParm.rightIco = "0";
 	urlParm.downIco  = "0";
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	window.location.href = base.url + "tongdaoApp/html/insurance/main/insure.html?jsonKey=" + jsonStr;
+	if( roleType == "00" || roleType == "" ){
+		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=ghx&openid="+openid;
+	}else{
+		window.location.href = base.url + "tongdaoApp/html/share/insurance/main/insure.html?jsonKey=" + jsonStr;
+	}
+	
 }
 
 function shareHandle(){

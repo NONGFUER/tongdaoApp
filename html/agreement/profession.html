@@ -91,7 +91,7 @@
 			var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));			
 			urlParm.title = "投保信息";
 			var jsonStr = UrlEncode(JSON.stringify(urlParm));
-			window.location.href = "insure.html?jsonKey="+jsonStr;
+			window.location.href = base.url +"tongdaoApp/html/insurance/main/insure.html?jsonKey="+jsonStr;
 		}
 	</script>
 </html>

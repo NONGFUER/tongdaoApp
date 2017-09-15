@@ -7,6 +7,10 @@ var lowAge = "";
 var upAge = "";
 var healthFlag = "";
 $(function(){
+	if( isComing == "1"){
+		$("#toubao").css({background:"#ccc"});
+	}
+	$("body").show();
     $.setscroll("bodyMuiScroll");
     buyBind();
     jieshaoToshuomingBind();		//介绍和产品详情间的切换
@@ -26,10 +30,9 @@ $(function(){
     //根据保费试算项进行保费试算
     sendCaldoRequest( ccId );
     //calOptionsRender(data4);
-    if( roleType != "00" ){
+    if( roleType != "00" && isComing != "1"){
     	 showRightIcon();
     }
-   
     /**拨打电话*/
 	$(".kefu").unbind("tap").bind("tap",function(){
     	callService("4006895505",".kefuPhone");
@@ -40,6 +43,7 @@ $(function(){
     $("#hetongDemo").unbind("tap").bind("tap",function(){
     	toHetongDemo(this)
     });
+	
 });
 
 //根据保费试算项进行保费试算
@@ -415,6 +419,9 @@ function changeDate(id){
 
 function buyBind(){
 	$("#toubao").unbind('tap').bind('tap',function(){
+		if( isComing == "1"){
+			return false;
+		}
 		if( healthFlag == "y"){
 			isLogin(roleType,toHealthHtml);
 		}else{

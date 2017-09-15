@@ -35,9 +35,7 @@ $(function(){
 		}
     })
     $(".successAnniu,.guanzhu").unbind("tap").bind("tap",function(){
-		/*$(".success").hide();
-		$(".shadow").hide();*/
-		window.location.href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI5NzQzNjc0Mw==&scene=124#wechat_redirect";
+    	toDownload();
 	})
     //条款
     $(".tiaokuan").unbind("tap").bind("tap",function(){
@@ -90,9 +88,9 @@ $(function(){
 		var index= str.lastIndexOf("/");
 		kuang=str.substring(index+1,str.length);
 		if(kuang=="jcxyigouxuan.png"){
-			$("#kuang").attr("src","../../images/jcxweigouxuan.png")
+			$("#kuang").attr("src","../../../images/jcxweigouxuan.png")
 		}else{
-			$("#kuang").attr("src","../../images/jcxyigouxuan.png")
+			$("#kuang").attr("src","../../../images/jcxyigouxuan.png")
 		}
 	})
 	//赠送客户
@@ -163,14 +161,7 @@ $(function(){
 	})
 	//投保成功点确定
 	$(".successAnniu").unbind("tap").bind("tap",function(){
-		/*$(".success").hide();
-		$(".shadow").hide();*/
-		window.location.reload(true);
-		/*$("#nameValue").val("请输入姓名");
-		$("#IDcardValue").val("请输入身份证号码");
-		$("#mobileValue").val("请输入手机号码");
-		$("#chepaiValue").val("请输入车牌号码");
-		$("#mailValue").val("请输入电子邮箱（选填）");*/
+		toDownload();
 	})
 })
 //投保前校验信息
@@ -331,6 +322,10 @@ function toArticle(){
 	urlParm.cId = "21";
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/agreement/article.html?jsonKey="+jsonStr;
+}
+
+function toDownload(){
+	window.location.href = base.url + "tongdaoApp/html/share/download/appDownload.html";
 }
 
 function shareHandle(){

@@ -2,7 +2,10 @@
 var cusId		= getUrlQueryString("cusId");//手机
 var shareMobile = "";
 var countdown = 60;
+var validateCode = "q";
 $(function(){
+	var calheight = $("#calheight").height()-40;
+	$(".touxiang").css("top",calheight+"px");
 	getNameRequest(cusId);
 	$("#btnSendCode").unbind("tap").bind("tap",function(){		
 		var mobile = $("#checkPhone").val();
@@ -104,18 +107,20 @@ function inviteRequest(mobile,shareMobile){
 
 function inviteCallback(data){
 	if( data.statusCode == "000000" ){
-		modelAlert("恭喜您，成功加入同道保险！");
+		modelAlert("恭喜您，注册成功，立即下载APP,开启同道保险。","",toDownload);
 		$("#checkPhone").val("");
 		$("#checkCode").val("");
+	}else if(data.statusCode == "000001"){
+		modelAlert("您已注册同道保险，请下载APP直接登录。","",toDownload);
 	}else{
-		modelAlert(data.statusMessage);
+		modelAlert(data.statusMessage,"",reload);
 	}
 }
 
 //点击"获取验证码"
 function settime() {
 	if(countdown == 0) {
-		$("#btnSendCode").attr("disabled",false);
+		$("#btnSendCode").removeAttr("disabled");
 		$("#btnSendCode").val("发送验证码");
 		countdown = 60;
 		return false;
@@ -172,4 +177,10 @@ function getTouxiang(shareMobile){
 			$(".touinner").attr("src","../../image/account/tou.png");
 		}
 		});
+}
+function reload(){
+	window.location.reload(true);
+}
+function toDownload(){
+	window.location.href = base.url + "tongdaoApp/html/share/download/appDownload.html";
 }

@@ -256,12 +256,12 @@ function unfoldMes(idarea, idmes, mes2, mes3) {
 				$(idmes).hide();
 				$(mes2).hide();
 				$(mes3).hide();
-				foldIcon.attr("src", base.imagePath + "index_top.png");
+				foldIcon.attr("src", base.url + "tongdaoApp/image/insurance/car/index_top.png");
 			} else {
 				$(idmes).show();
 				$(mes2).show();
 				$(mes3).show();
-				foldIcon.attr("src", base.imagePath + "index_bottom.png");
+				foldIcon.attr("src", base.url + "tongdaoApp/image/insurance/car/index_bottom.png");
 			}
 		});
 };

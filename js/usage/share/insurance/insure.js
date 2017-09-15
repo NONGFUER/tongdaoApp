@@ -946,7 +946,7 @@ function sendGhxInsureRequest(){
 					"ghProductIds": ghxRemark, //主险代码+附加险代码
 					"ghOptionalFlag": isA, // '可选保障项代码1：附加，0不附加',
 					//"inviterCode":"",
-					"inviterPhone":mobile,
+					"inviterPhone":shareMobile,
 				    "channelResource":"2",//渠道来源  
 					"insureList": insureList,
 					"buyType":"2"//2分享
@@ -1026,7 +1026,7 @@ function backlast(){
 	if( ccId != "14" ){
 		window.location.href = 'productDetail.html?jsonKey='+jsonStr;
 	}else{
-		window.location.href = base.url + 'tongdaoApp/html/insurance/ghx/ghxProductDetail.html?jsonKey='+jsonStr;
+		window.location.href = base.url + 'tongdaoApp/html/share/insurance/ghx/ghxProductDetail.html?jsonKey='+jsonStr;
 	}
 	
 };
