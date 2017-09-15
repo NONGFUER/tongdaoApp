@@ -33,7 +33,11 @@ $(function(){
     })
     $(".rexian").unbind("tap").bind("tap",function(){
     	callService("95505",".rexian");
-    })
+	})
+	
+	$(".download").unbind("tap").bind("tap",function(){
+		toDownload();
+	});
 });
 
 //根据保费试算项进行保费试算
@@ -480,6 +484,11 @@ function toHealthHtml(){
 	}
 	
 }
+
+function toDownload(){
+	window.location.href = base.url + "tongdaoApp/html/share/download/appDownload.html";
+}
+
 function shareHandle(){
 	var shareList = getProductShare(ccId);
 	var title = shareList[0] ;

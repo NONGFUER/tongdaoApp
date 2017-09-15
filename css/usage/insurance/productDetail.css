@@ -226,3 +226,8 @@ table.gridtable td {
 .iconfont {
 	font-family: iconfont
 }
+
+.download{
+	color:orange;
+	text-decoration:underline;
+}

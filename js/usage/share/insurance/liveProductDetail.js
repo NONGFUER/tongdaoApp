@@ -12,7 +12,11 @@ $(function(){
     	$(".insurance-customer").removeClass("none");
     	//$(".single-footer").removeClass("yincang");
     	sendCusInsConsultantRequest();
-    }   
+    }
+    $(".download").unbind("tap").bind("tap",function(){
+        toDownload();
+    });
+       
 });
 //点击预约出单
 function yuyueClickBind(){
@@ -361,6 +365,11 @@ function getTouxiang(mobile){
 		}
 		});
 }
+
+function toDownload(){
+	window.location.href = base.url + "tongdaoApp/html/share/download/appDownload.html";
+}
+
 function backlast(){
 	sysback();
 }
