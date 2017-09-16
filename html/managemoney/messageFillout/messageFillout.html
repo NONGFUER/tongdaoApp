@@ -40,7 +40,7 @@
 						<ul class="man-div-body-ul">
 							<li>
 								<span>单价(元/份)</span>
-								<span v-html="'份数(最少购买1份,最多'+Objectitle.insureInfo.salesNum+'份)'"></span>
+								<span v-cloak v-html="'份数(最少购买1份,最多'+Objectitle.insureInfo.salesNum+'份)'"></span>
 							</li>
 							<li id="fenshu">
 								<span v-html="startPiece">1000.00</span>

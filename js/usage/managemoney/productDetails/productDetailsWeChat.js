@@ -1,20 +1,41 @@
 /*获取数据*/
-var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
-	commodityCombinationId = urlParm.commodityCombinationId,
-	userCode = urlParm.userCode,
-	roleType = urlParm.roleType,
-	transToken = "",
-	ccid=urlParm.commodityCombinationId,
-	productFlag = urlParm.productFlag,
-	idAuth = urlParm.idAuth,
-	customerId = urlParm.customerId;
+
+var userCode = getUrlQueryString('mobile'),
+	shareMobile = getUrlQueryString('shareMobile'),
+	customerId = getUrlQueryString('customerId'),
+	ccId = getUrlQueryString('ccId'),
+	commodityCombinationId = getUrlQueryString('ccId'),
+	shareFlag = getUrlQueryString('shareFlag'),
+	roleType = getUrlQueryString('roletype'),
+	openid = getUrlQueryString('openid'),
+	idAuth = '',
+	fromtype = 'licai',
+	transToken = '';
+var jsonKey = getUrlQueryString("jsonKey");
+if(jsonKey) {
+	var urlParm = JSON.parse(UrlDecode(jsonKey)),
+		shareMobile = urlParm.shareMobile,
+		commodityCombinationId = urlParm.commodityCombinationId,
+		userCode = urlParm.userCode,
+		roleType = urlParm.roleType,
+		shareFlag=urlParm.shareFlag,
+		openid=urlParm.openid,
+		transToken = "",
+		ccid = urlParm.commodityCombinationId,
+		productFlag = urlParm.productFlag,
+		idAuth = urlParm.idAuth,
+		customerId = urlParm.customerId;
+}
+if(commodityCombinationId = '4'){
+	productFlag = '01';
+}else if(commodityCombinationId = '5'){
+	productFlag = '02';
+}
 var phone = phoneyin(userCode);
 $('.phone').html(phone);
-console.log("页面初始化，获取上个页面传值报文--");
-console.log(urlParm);
 var ma = null;
 var riskSupportAbility = "";
-var channel="";
+var channel = "";
 var vm = new Vue({
 	el: '#list',
 	data: {
@@ -23,7 +44,7 @@ var vm = new Vue({
 			CommodityCombinationModuleList: {},
 			commodityInfo: {},
 			commodityCombination: {
-				remark:"",
+				remark: "",
 			},
 			productInfo: {},
 		},
@@ -35,7 +56,7 @@ var vm = new Vue({
 		},
 		goumaishuoming: {},
 		xiangguanxieyi: {},
-		cid:{},
+		cid: {},
 	},
 	mounted() {
 		this.$nextTick(function() {
@@ -46,13 +67,11 @@ var vm = new Vue({
 	}
 })
 $(function() {
+	adid();
 	if(roleType == "" || roleType == "00") {
 		$('#huifang').addClass('btnhuise');
 	} else if(idAuth == '0') {
 		$('#huifang').addClass('btnhuise');
-	}
-	if(roleType!='00'){
-		showRightIcon();
 	}
 	var reqData = {
 		"body": {
@@ -70,7 +89,7 @@ $(function() {
 	$.reqAjaxs(url, reqData, goldProductInfo);
 	mui('.man-div-body-ul_li_div_three').on('tap', '.neirong', function() {
 		var urls = $(this).attr('modueinfo');
-		urlParm.cId=vm.cid;
+		urlParm.cId = vm.cid;
 		urlParm.frompage = "hongkanghtml";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = urls + "?jsonKey=" + jsonStr;
@@ -83,9 +102,38 @@ $(function() {
 	/*点击购买*/
 	$("#huifang").unbind("tap").bind("tap", function() {
 		if(roleType == "" || roleType == "00") {
-			modelAlert('请先登录', '', lognCont);
+			modelAlert('请先登录', '', function() {
+				var sendData = {
+					"userCode": userCode,
+					"shareMobile": shareMobile,
+					"customerId": customerId,
+					"commodityCombinationId": commodityCombinationId,
+					"ccId": ccId,
+					"fromtype": 'licai',
+					"shareFlag": shareFlag,
+					"roleType": roleType,
+					"channel":'02',
+				}
+				var jsonStr1 = JSON.stringify(sendData);
+				jsonStr1 = UrlEncode(jsonStr1);
+				window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?fromtype = " + fromtype + " & openid = " + openid + " & jsonKey = " + jsonStr1;
+			});
 		} else if(idAuth == '0') {
-			modelAlert('请先实名', '', register);
+			modelAlert('请先实名', '', function() {
+				var sendData = {
+					"userCode": userCode,
+					"shareMobile": shareMobile,
+					"customerId": customerId,
+					"commodityCombinationId": commodityCombinationId,
+					"ccId": ccId,
+					"fromtype": 'licai',
+					"shareFlag": shareFlag,
+					"roleType": roleType,
+				}
+				var jsonStr1 = JSON.stringify(sendData);
+				jsonStr1 = UrlEncode(jsonStr1);
+				window.location.href = base.url + "weixin/wxusers/html/users/certification.html?fromtype=" + fromtype + "&openid=" + openid + "&customerId=" + customerId + "&mobile=" + userCode + "&jsonKey=" + jsonStr1;
+			});
 		} else {
 			var reqData = {
 				"body": {
@@ -94,7 +142,7 @@ $(function() {
 				},
 				"head": {
 					"userCode": userCode,
-					"channel": "01",
+					"channel": "02",
 					"transTime": $.getTimeStr(),
 					"transToken": transToken
 				}
@@ -121,6 +169,7 @@ function buy() {
 		"testType": $('.retest').attr('testType'),
 		"title": vm.Objectitle.commodityCombination.commodityCombinationName,
 		"productFlag": productFlag,
+		"channel":'02',
 		"leftIco": '1',
 		"rightIco": '0',
 		"downIco": '0',
@@ -135,7 +184,7 @@ function goldProductInfo(data) {
 	if(data.statusCode == '000000') {
 		vm.Objectitle = data.returns;
 		vm.CommodityCombinationModuleList = data.returns.CommodityCombinationModuleList;
-		vm.cid=data.returns.commodityInfo.id;
+		vm.cid = data.returns.commodityInfo.id;
 		/*产品基本信息*/
 		var cmlist = new Array();
 		/*产品投资周期*/
@@ -204,6 +253,7 @@ function getRiskAble(data) {
 					"productCode": userCode,
 					"commodityCombinationId": commodityCombinationId,
 				},
+				"channel":'02',
 				"title": '风险评估 ',
 				"productFlag": productFlag,
 				"titles": vm.Objectitle.commodityCombination.commodityCombinationName,
@@ -222,24 +272,30 @@ function getRiskAble(data) {
 		modelAlert(data.statusMessage, "", lognCont);
 	}
 }
-function getProductShare(productCode){
-	var shareContent = "";
-	if( productCode == '4'){
-		shareContent = "弘康安溢保两全保险(1年期)";
-	}else if( productCode == '5' ){
-		shareContent = "弘康安溢保两全保险(5年期)";
+/*获取用户信息*/
+function adid() {
+	var url = base.url + "customerBasic/getCustomerBasicInfo.do";
+	var sendJson = {
+		"head": {
+			"channel": "02",
+			"userCode": userCode,
+			"transTime": $.getTimeStr(),
+			"transToken": ""
+		},
+		"body": {
+			"customerId": customerId,
+		}
 	}
-	var shareList = shareContent.split("-");
-	return shareList;
+	$.reqAjaxsFalse(url, sendJson, getNameCallback);
 }
-function shareHandle(){
-	var shareList = getProductShare(ccId);
-	var title = shareList[0] ;
-	var desc  = shareList[1] ;	
-	var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=5';
-	var picUrl = getProductSharePic(ccId);
-	shareMethod(shareurl,title,desc,"baodan",picUrl);		
-};
+
+function getNameCallback(data) {
+	if(data.statusCode == '000000') {
+		idAuth = data.returns.customerBasic.idAuth;
+	} else {
+		modelAlert(data.statusMessage);
+	}
+}
 /*隐藏手机号中间几位*/
 function phoneyin(userCode) {
 	var mphone = userCode.substr(0, 3) + '****' + userCode.substr(7);

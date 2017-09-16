@@ -14,7 +14,11 @@ $(function(){
     if( roleType != "00" ){   	
     	sendCusInsConsultantRequest();
     }
+    $(".info-content").unbind("tap").bind("tap",function(){
+    	toInsuranceConsultant();
+    });
     showRightIcon();
+   
 });
 //点击预约出单
 function yuyueClickBind(){
@@ -350,6 +354,37 @@ function toYuyueList(){
 	urlParm.userCode = mobile;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/agent/myBookings/subscribeList.html?jsonKey="+jsonStr;
+}
+
+function toInsuranceConsultant(){
+	urlParm.title = "保险顾问";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	urlParm.userCode = mobile;
+	var url = base.url + "customerBasic/getCustomerBasicInfo.do";
+	var agentId ="";
+	var sendJson = {
+			"head":{
+				"channel" : "02",
+	            "userCode" : "",
+	            "transTime" : $.getTimeStr(),
+	            "transToken": ""
+			},
+			"body":{
+				"customerId":customerId
+			}
+	}
+	$.reqAjaxsFalse( url, sendJson, function(data){
+		console.log(data);
+		if( data.statusCode == "000000"){
+			agentId = data.returns.agentInfo.agentId
+		}
+	} );
+	urlParm.agentId  = agentId;
+	urlParm.type = roleType;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/insuranceConsultant/insuranceConsultant.html?jsonKey="+jsonStr;
 }
 
 function getTouxiang(mobile){

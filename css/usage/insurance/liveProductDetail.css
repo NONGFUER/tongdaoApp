@@ -21,6 +21,7 @@
 }
 .info-content{
     /* padding:  */
+    position:relative;
     padding-left: 12px;
     float: left;
     font-size: 14px;
@@ -53,4 +54,17 @@
 .download{
 	color:orange;
 	text-decoration:underline;
+}
+.detailLook{	
+	width:15px;
+	height:15px;
+	display:block; 
+	position:absolute; 
+	right:0px; 
+	top:0px;
+}
+.detailLook img{
+	width:15px;
+	height:15px;
+	
 }

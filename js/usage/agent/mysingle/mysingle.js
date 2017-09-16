@@ -103,7 +103,7 @@ function xinzhen(userCode, transToken, customerId, policyStatus, riskType) {
 		}
 	}
 	var url = base.url + 'agent/getAgentPolicy.do';
-	$.reqAjaxs(url, reqData, getPolicyList);
+	$.reqAjaxsFalse(url, reqData, getPolicyList);
 }
 /*删除*/
 function shanchu(userCode, transToken, customerId, policyNo) {
@@ -121,7 +121,7 @@ function shanchu(userCode, transToken, customerId, policyNo) {
 		}
 	}
 	var url = base.url + 'agent/deleteAgentPolicy.do';
-	$.reqAjaxs(url, reqData, deleteMyPolicy);
+	$.reqAjaxsFalse(url, reqData, deleteMyPolicy);
 }
 
 function deleteMyPolicy(data) {
@@ -147,7 +147,7 @@ function chuli() {
 	})
 }
 /*壳上调用的方法*/
-function mylist(userCode, transToken, customerId, policyStatus, riskType) {
+function mylist(userCode, transToken, customerId,riskType,policyStatus) {
 	userCode = userCode;
 	transToken = transToken;
 	customerId = customerId;
@@ -156,18 +156,19 @@ function mylist(userCode, transToken, customerId, policyStatus, riskType) {
 	if(policyStatus == '') {
 		policyStatus = null;
 	}
-	if(riskType == '') {
+	if(riskType == '全部') {
 		riskType = null;
 	}
-	xinzhen(userCode, transToken, customerId, policyStatus, riskType);
+	xinzhen(userCode, transToken, customerId,policyStatus,riskType);
 	mui('.man-div-title ul').on('tap', 'li', function() {
 		$('.man-div-title ul').children('li').removeClass('li_xuan');
 		$(this).addClass('li_xuan');
 		var policyStatus = $(this).attr('policyStatus');
 		if(policyStatus == '') {
 			policyStatus = null;
-		}
-		xinzhen(userCode, transToken, customerId, policyStatus, riskType);
+		} 
+		xinzhen(userCode, transToken, customerId,policyStatus,riskType);
+		return false;
 	})
 }
 

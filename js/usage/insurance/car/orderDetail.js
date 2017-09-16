@@ -133,25 +133,24 @@ $.loadData = function(param) {
 					$("#topay_btn_area").show();
 				}
 
-				if(cxorderStatus=="05"){	
-					$("#orderStatus").html("待支付");	
-				}else if(cxorderStatus=="03"){	
-					$("#orderStatus").html("核保失败");	
-				}else if(cxorderStatus=="04"){	
-					$("#orderStatus").html("核保中");
-				}else if(cxorderStatus=="07"){	
-					$("#orderStatus").html("支付成功");
-				}else if(cxorderStatus=="06"){
-					$("#orderStatus").html("支付失败");
-				}else if(cxorderStatus=="09"){	
-					$("#orderStatus").html("待生效");	
-				}else if(cxorderStatus=="10"){	
-					$("#orderStatus").html("承保成功");
-				}else if(cxorderStatus=="99"){
-					$("#orderStatus").html("已失效");				
-				}else if(cxorderStatus=="02"){
-					$("#orderStatus").html("已过期");
+				if(cxflag=="1"){//订单状态
+					if(cxorderStatus == "05" ){//待生效
+						$("#orderStatus").html("待支付");	
+					}else if(cxorderStatus == "07" || cxorderStatus == "08" || cxorderStatus == "09" || cxorderStatus == "10" || cxorderStatus == "13"){//已支付
+						$("#orderStatus").html("已支付");	
+					}else if(cxorderStatus == "02" || cxorderStatus == "03" || cxorderStatus == "06" || cxorderStatus == "11" || cxorderStatus == "12" || cxorderStatus == "99" ){//已关闭
+						$("#orderStatus").html("已关闭");	
+					}
+				}else{//保单状态
+					if(cxorderStatus == "09" ){
+						$("#orderStatus").html("待生效");	
+					}else if(cxorderStatus == "10"  ){
+						$("#orderStatus").html("保障中");	
+					}else{
+						$("#orderStatus").html("已过期");	
+					}
 				}
+				
 				// 总保费
 				$("#summoney").html("￥"+ $.formatNumOfTwo(param.cxInfo.cxOffer.totalpremium));// ￥7200.00
 

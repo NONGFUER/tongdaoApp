@@ -1028,6 +1028,16 @@ function toArticle(){
 	window.location.href = base.url + "tongdaoApp/html/agreement/article.html?jsonKey="+jsonStr;
 }
 
+//跳转投保须知
+function toXuzhi(){
+	urlParm.title = "投保须知";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";	
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/agreement/changeXuzhi.html?jsonKey="+jsonStr;
+}
+
 function backlast(){
 	urlParm.title = '产品详情';
 	urlParm.leftIco = "1";
@@ -1042,35 +1052,3 @@ function backlast(){
 	
 };
 
-//function toProductDetail(){
-//var sendData = {
-//        "head":{
-//            "mobile":mobile,
-//            "switchCommission":""
-//        },
-//        "body":{
-//            "mobile":mobile,
-//            "productCode":productCode,
-//            "commodityNo":"00419900802",
-//            "customerId":customerId
-//        }
-//}
-//var jsonKey = UrlEncode(JSON.stringify(sendData));
-//window.location.href = "productDetail.html?jsonkey="+jsonKey;
-//}
-//function toXuzhi(){
-//var sendData = {
-//        "head":{
-//            "mobile":mobile,
-//            "switchCommission":""
-//        },
-//        "body":{
-//            "mobile":mobile,
-//            "productCode":productCode,
-//            "commodityNo":"00419900802",
-//            "customerId":customerId
-//        }
-//}
-//var jsonKey = UrlEncode(JSON.stringify(sendData));
-//window.location.href = "../tiaokuan/changeXuzhi.html?jsonkey="+jsonKey;
-//}

@@ -36,9 +36,9 @@
     <script type="text/javascript" src="../../js/lib/common/common.js" ></script>	
 	 <script>
 		var myScroll;
-		parm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));	
-		productCode = parm.body.productCode;				//上个页面传过来的riskCode
-		mobile = parm.head.mobile;
+		var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));	
+		var ccId = urlParm.ccId;				//上个页面传过来的riskCode
+		var mobile = urlParm.mobile;
 		$(function() {
 			getXuzhi();
 			$(".h_back").unbind("tap").bind("tap",function(){
@@ -48,25 +48,30 @@
 			$.setscroll();
 		});
 		function getXuzhi(){
-			var url = base.url + "cardProduct/getProductOfPropertyCode.do";
+			var url = base.url + "commodityCombination/getNotice.do";
 			var reqData = {
 					"head":{
 						"channel"  :"01",
 						"userCode" :mobile,
-						"transTime":$.getTimeStr()
+						"transTime":$.getTimeStr(),
+						"transToken":""
 					},
 					"body":{
-						"productCode": productCode,
-						"propertyCode": "instructiun"
+						"commodityCombinationId": ccId
 					}
 			};
 			$.reqAjaxs(url,reqData,xuzhi);
 		}
-		function xuzhi(data){
-			console.log(data.returns.productList["0"].propertyValue)
-			var xuzhiContent = data.returns.productList["0"].propertyValue;
-				xuzhiContent = xuzhiContent.replace(/\|/gi, "<br/>")
-			$(".render").html(xuzhiContent);
+		function xuzhi(data){			
+			if(data.statusCode == "000000"){
+				console.log(data.returns.notice.modueInfo)
+				var xuzhiContent = data.returns.notice.modueInfo;
+				//xuzhiContent = xuzhiContent.replace(/\|/gi, "<br/>")
+				$(".render").html(xuzhiContent);
+			}else{
+				modelAlert(data.statusMessage);
+			}
+			
 		}
 
 		/*设置滑动区域*/
@@ -74,5 +79,8 @@
 			var Scrollheight = window.innerHeight - $("header").height() - 10;
 			$("#noticecontent").height(Scrollheight + "px");
 		};
+		function backlast(){
+			window.history.back(-1);
+		}
 	</script>
 </html>

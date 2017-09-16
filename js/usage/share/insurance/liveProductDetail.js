@@ -8,11 +8,8 @@ $(function(){
     //点击弹框里的确定按钮
     yuyueSubmit( customerId, ccId);		   
     sendLiveProductInfoRequest(ccId, provinceCode, cityCode, roleType )	//APP产品模块线下产品详情查询
-    if( roleType == "02"){					//如果是代理人
-    	$(".insurance-customer").removeClass("none");
-    	//$(".single-footer").removeClass("yincang");
-    	sendCusInsConsultantRequest();
-    }
+    sendCusInsConsultantRequest();
+  
     $(".download").unbind("tap").bind("tap",function(){
         toDownload();
     });
@@ -173,6 +170,7 @@ function addYuyueInfoRender(data){
         var mobile1  = cusInfo.mobile;//获取姓名
         var name1    = cusInfo.name;//获取手机号
         getTouxiang(mobile1);
+        $(".insurance-customer").removeClass("none");
         //var userImg = cusInfo.userImage;//获取用户头像
         $("#bigname").text(name1);
         $("#bigphone").text(mobile1);

@@ -13,6 +13,7 @@ commodityCombinationId = urlParm.commodityCombinationId,
 	invMobie = urlParm.invMobie, //引荐人手机号
 	riskSupportAbility = urlParm.riskSupportAbility, //类型
 	pieces = urlParm.pieces,
+	channel=urlParm.channel,
 	title = urlParm.title;
 if(title == null || title == "") {
 	title = urlParm.titles;
@@ -37,19 +38,19 @@ var vm = new Vue({
 				yearRate:"",
 			}
 		},
-		goumaishuoming: {},
-		xiangguanxieyi: {},
-		feilv: {}, //初始费率带文字
-		feilvshuzi: {}, //初始费率值
-		mymoney: {}, //进入账户金额
-		startPiece: {}, //购买金额
-		startPiecechushi: {}, //单价
-		fenshu: {}, //份数
-		shenfenzheng: {}, //身份证
-		phone: {}, //手机号
-		bankCode: {}, //银行代码
-		bankname: {},
-		comComName: {},
+		goumaishuoming: "",
+		xiangguanxieyi: "",
+		feilv: "", //初始费率带文字
+		feilvshuzi: "", //初始费率值
+		mymoney: "", //进入账户金额
+		startPiece: "", //购买金额
+		startPiecechushi: "", //单价
+		fenshu: "", //份数
+		shenfenzheng: "", //身份证
+		phone: "", //手机号
+		bankCode: "", //银行代码
+		bankname: "",
+		comComName: "",
 	},
 	mounted() {
 		this.$nextTick(function() {
@@ -68,7 +69,7 @@ $(function() {
 	var reqData = {
 		"head": {
 			"userCode": userCode,
-			"channel": "01",
+			"channel": channel,
 			"transTime": $.getTimeStr(),
 			"transToken": transToken
 		},
@@ -130,7 +131,7 @@ $(function() {
 				var redata = {
 					"head": {
 						"userCode": userCode,
-						"channel": "01",
+						"channel": channel,
 						"transTime": $.getTimeStr(),
 						"transToken": transToken
 					},
@@ -281,7 +282,7 @@ $(function() {
 		var reqData = {
 			"head": {
 				"userCode": userCode,
-				"channel": "01",
+				"channel": channel,
 				"transTime": $.getTimeStr(),
 				"transToken": transToken
 			},
@@ -333,7 +334,7 @@ $(function() {
 			"riskSupportAbility": riskSupportAbility,
 			"title": '银行卡信息',
 			"titles": vm.comComName,
-			"channel": "01",
+			"channel": channel,
 			"transTime": $.getTimeStr(),
 			"transToken": transToken,
 			"customerId": customerId,
@@ -348,7 +349,7 @@ $(function() {
 		var reqData = {
 			"head": {
 				"userCode": userCode,
-				"channel": "01",
+				"channel": channel,
 				"transTime": $.getTimeStr(),
 				"transToken": transToken
 			},
@@ -403,7 +404,7 @@ function saveOrder(data) {
 					var reqData = {
 						"head": {
 							"userCode": userCode,
-							"channel": "01",
+							"channel": channel,
 							"transTime": $.getTimeStr(),
 							"transToken": transToken
 						},
@@ -468,7 +469,7 @@ function getinsure(data) {
 $("#risktype").unbind("tap").bind("tap", function() {
 	var sendData = {
 		"head": {
-			"channel": "01",
+			"channel": channel,
 			"userCode": userCode,
 			"transTime": "",
 			"transToken": transToken,

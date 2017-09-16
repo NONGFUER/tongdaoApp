@@ -280,6 +280,7 @@ function productInfoRender(data){
         cId   = body.CommodityInfo[0].id;
         cName = body.CommodityInfo[0].commodityName;
         ccName = commodityCombination.commodityCombinationName;
+        shareDesc = commodityCombination.insuredInfo;
         $(".banner-img").attr("src",commodityCombination.banner);		//渲染图片
         $("#commodityCombinationName").text(ccName);					//渲染商品组合名
         $("#companyName").text(companyProfile.companyName);				//渲染保险公司名字
@@ -306,7 +307,7 @@ function moduleStr(mapperList){
 				str += mapperList.modueInfo;	
 			}	    
 		}else if( mapperList.moduleType == "03" ){//链接
-			str += '<span class="btn1 fl" onclick="toCommodityList()">合同条款</span><a href="#" data-url="'+mapperList.modueInfo+'" class="btn1 ri" id="hetongDemo">合同样张</a>'
+			str += '<span class="btn1 fl" onclick="toCommodityList()">合同条款</span><span href="#" data-url="'+mapperList.modueInfo+'" class="btn1 ri" id="hetongDemo">合同样张</span>'
 		}else if(  mapperList.moduleType == "01"  ){
 			str += '<img src="' + mapperList.modueInfo + '" class="mb10">';
 		}      								
@@ -494,9 +495,9 @@ function toHetongDemo(obj){
 	window.location.href = base.url + "tongdaoApp/html/agreement/hetong.html?jsonKey="+jsonStr;
 }
 function shareHandle(){
-	var shareList = getProductShare(ccId);
-	var title = shareList[0] ;
-	var desc  = shareList[1] ;	
+	//var shareList = getProductShare(ccId);
+	var title = ccName;
+	var desc  = shareDesc ;	
 	var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=2';
 	var picUrl = getProductSharePic(ccId);
 	shareMethod(shareurl,title,desc,"baodan",picUrl);		

@@ -1,5 +1,9 @@
 $(function(){
 	//$.setscrollarea("order_result");
+	var ua = navigator.userAgent.toLowerCase();
+	if(ua.match(/MicroMessenger/i) == "micromessenger") {
+		$(".result-download").show();		
+	}	
 	var payResult=getUrlQueryString("payResult");
 	if(payResult){
 		console.log(payResult)
@@ -46,11 +50,11 @@ $(function(){
 	$("#orderDetail").unbind("tap").bind("tap",function(){
 		toPolicyDetail();
 	});
+	//跳转到下载页面
+	$(".result-download").unbind("tap").bind("tap",function(){			
+		window.location.href = base.url + "tongdaoApp/html/share/download/appDownload.html";		
+	});
 	
-	/**--关注关注号--*/
-	$(".follow").bind("tap",function(){
-		window.location.href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI5NzQzNjc0Mw==&scene=124#wechat_redirect";
-	})
 })
 function init(orderNo){
 	var url = base.url + "personal/getMyOrderDetail.do";

@@ -6,9 +6,9 @@ var titles = "";
 var transToken = "";
 var commodityId = "";
 var productFlag='';
+var channel='';
 $(function() {
 	//	url传值解密过程
-
 	var urlstr = getUrlQueryString('jsonKey');
 	urlstr = UrlDecode(urlstr);
 	parm = JSON.parse(urlstr);
@@ -16,6 +16,7 @@ $(function() {
 	testType = parm.body.testType;
 	productFlag=parm.productFlag;
 	mobile = parm.body.mobile;
+	channel=parm.channel;
 	productCode = parm.body.productCode;
 	customerId = parm.body.customerId;
 	commodityId = parm.body.commodityId;
@@ -93,6 +94,7 @@ function product() {
 				"userCode": productCode,
 				"commodityId": commodityId,
 				"transToken": transToken,
+				"channel":channel,
 				"title": titles,
 				"leftIco": '1',
 				"rightIco": '0',
@@ -100,7 +102,12 @@ function product() {
 			}
 			var jsonStr = JSON.stringify(sendData);
 			jsonStr = UrlEncode(jsonStr);
-			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
+			if(channel=='01'){
+				window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
+			}else{
+				window.location.href = base.url + "tongdaoApp/html/managemoney/productDetailsWeChat/productDetailsWeChat.html?jsonKey=" + jsonStr;
+			}
+			
 		}
 	}
 }
@@ -133,6 +140,7 @@ function buy() {
 				"commodityId": commodityId,
 				"testType": $('.testType').html(),
 				"transToken": transToken,
+				"channel":channel,
 				"productFlag":productFlag,
 				'title': titles,
 				"leftIco": '1',
@@ -141,7 +149,8 @@ function buy() {
 			}
 			var jsonStr = JSON.stringify(sendData);
 			jsonStr = UrlEncode(jsonStr);
-			window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/messageFillout.html?jsonKey=" + jsonStr;
+				window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/messageFillout.html?jsonKey=" + jsonStr;
+			
 		}
 	}
 

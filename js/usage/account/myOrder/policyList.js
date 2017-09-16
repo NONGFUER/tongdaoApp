@@ -148,7 +148,7 @@ function xinzhen(userCode, transToken, customerId, policyStatus, riskType, tagId
 		}
 	}
 	var url = base.url + 'personal/getPolicyList.do';
-	$.reqAjaxs(url, reqData, getPolicyList);
+	$.reqAjaxsFalse(url, reqData, getPolicyList);
 }
 /*删除*/
 function shanchu(userCode, transToken, customerId, policyNo) {
@@ -166,7 +166,7 @@ function shanchu(userCode, transToken, customerId, policyNo) {
 		}
 	}
 	var url = base.url + 'personal/deleteMyPolicy.do';
-	$.reqAjaxs(url, reqData, deleteMyPolicy);
+	$.reqAjaxsFalse(url, reqData, deleteMyPolicy);
 }
 
 function deleteMyPolicy(data) {

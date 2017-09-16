@@ -300,9 +300,7 @@ $(function() {
 	// 车辆基本信息确认按钮
 	$("#confirm1").unbind("tap").bind("tap",function() {
 		if(parm.roleType == "00" || parm.roleType == ""){
-			modelAlert("请先登入","",function(){
-				loginControl();
-			});
+			loginControl();
 			return false;
 		}
        $("#plate_number_input").val($("#plate_number_input").val().toUpperCase());//车牌小写转大写

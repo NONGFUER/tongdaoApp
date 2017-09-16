@@ -310,7 +310,7 @@ function moduleStr(mapperList){
 				str += mapperList.modueInfo;	
 			}	    
 		}else if( mapperList.moduleType == "03" ){//链接
-			str += '<span class="btn1 fl" onclick="toArticle()">合同条款</span><a href="'+mapperList.modueInfo+'" class="btn1 ri" id="hetongDemo">合同样张</a>'
+			str += '<span class="btn1 fl" onclick="toArticle()">合同条款</span><span href="'+mapperList.modueInfo+'" class="btn1 ri" id="hetongDemo">合同样张</span>'
 		}else if(  mapperList.moduleType == "01"  ){
 			str += '<img src="' + mapperList.modueInfo + '" class="mb10">';
 		}      								

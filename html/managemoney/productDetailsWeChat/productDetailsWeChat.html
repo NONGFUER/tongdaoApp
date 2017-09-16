@@ -17,13 +17,9 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">安溢保两全保险(一年期)</h1>
-		</header>
 		<div class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
-				<div class="man mui-table-view" id='list' v-cloak>
+				<div class="man mui-table-view" id='list'  v-cloak>
 					<div class="man-div-body-ul_li_div mb10">
 						<ul class="man-div-body-ul_li_div_ul1">
 							<li class="mb30">
@@ -113,6 +109,7 @@
 							</li>
 						</ul>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -120,37 +117,19 @@
 		<div class="man-div-body-ul_li_div_btn" style="position: fixed;">
 			<div id="huifang" class="div_btn">立即购买</div>
 		</div>
-		<div class="note">
-			<div class="note-div">
-				<div class="note-div_title">
-					<div class="note-div_title_right"></div>
+		<div id="product_footer" class="footer yincang">立即购买</div>
+		<div id="shadow" class="shadow" style="display:none;">
+			<div class="tip">
+				<div class="tiphead">
+					<p>温馨提示</p>
+					<!-- <img src="../../image/delete.png" class="cancleimg"> -->
 				</div>
-				<div class="note-div_body">
-					<div class="note-div_body_title">
-						<ul>
-							<li>
-								<span>短信发送至手机号：</span>
-								<span>135****3456</span>
-							</li>
-						</ul>
-					</div>
-					<div class="note-div_body_input">
-						<ul>
-							<li>
-								<span>
-									<input id='yan' type="text" name="" id="" value="" placeholder="请输入验证码" />
-								</span>
-								<span class="dianji">
-								获取验证码
-								</span>
-							</li>
-						</ul>
-						<div class="note-div-button">
-							<div class="note-div-btn">
-								确定
-							</div>
-						</div>
-					</div>
+				<div class="tipbody">
+					<p>我已完成投资风险承受能力测试，并已明白<span id="pdname"></span>产品所需承担的风险高于投资风险承受评估建议的风险承受能力，根据本人意愿，仍然愿意继续购买。</p>
+				</div>
+				<div class="tipfoot">
+					<div class="cancle">放弃购买</div>
+					<div class="retest" onclick="buy()">继续购买</div>
 				</div>
 			</div>
 		</div>
@@ -160,6 +139,6 @@
 	<script src="../../../js/lib/common/base.js"></script>
 	<script src="../../../js/lib/common/common.js"></script>
 	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
-	<script src="../../../js/usage/managemoney/productDetails/productDetails.js"></script>
+	<script src="../../../js/usage/managemoney/productDetails/productDetailsWeChat.js"></script>
 
 </html>
