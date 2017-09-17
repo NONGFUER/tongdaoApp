@@ -1,5 +1,4 @@
 /*获取数据*/
-
 var userCode = getUrlQueryString('mobile'),
 	shareMobile = getUrlQueryString('shareMobile'),
 	customerId = getUrlQueryString('customerId'),
@@ -11,6 +10,9 @@ var userCode = getUrlQueryString('mobile'),
 	idAuth = '',
 	fromtype = 'licai',
 	transToken = '';
+if(userCode == null) {
+	userCode = '';
+}
 var jsonKey = getUrlQueryString("jsonKey");
 if(jsonKey) {
 	var urlParm = JSON.parse(UrlDecode(jsonKey)),
@@ -18,20 +20,26 @@ if(jsonKey) {
 		commodityCombinationId = urlParm.commodityCombinationId,
 		userCode = urlParm.userCode,
 		roleType = urlParm.roleType,
-		shareFlag=urlParm.shareFlag,
-		openid=urlParm.openid,
+		shareFlag = urlParm.shareFlag,
+		openid = urlParm.openid,
 		transToken = "",
 		ccid = urlParm.commodityCombinationId,
 		productFlag = urlParm.productFlag,
 		idAuth = urlParm.idAuth,
 		customerId = urlParm.customerId;
 }
-if(commodityCombinationId = '4'){
+if(commodityCombinationId = '4') {
 	productFlag = '01';
-}else if(commodityCombinationId = '5'){
+	/*$('.mui-title"').html('安溢保两全保险 &#40一年期 &#41');*/
+} else if(commodityCombinationId = '5') {
 	productFlag = '02';
+	/*$('.mui-title"').html('安溢保两全保险 &#40五年期 &#41');*/
 }
-var phone = phoneyin(userCode);
+
+var phone = '';
+if(userCode != '' && userCode != null) {
+	phone = phoneyin(userCode);
+}
 $('.phone').html(phone);
 var ma = null;
 var riskSupportAbility = "";
@@ -67,7 +75,9 @@ var vm = new Vue({
 	}
 })
 $(function() {
-	adid();
+	if(userCode != '' && userCode != null) {
+		adid();
+	}
 	if(roleType == "" || roleType == "00") {
 		$('#huifang').addClass('btnhuise');
 	} else if(idAuth == '0') {
@@ -88,10 +98,21 @@ $(function() {
 	var url = base.url + 'firstPage/goldProductInfo.do';
 	$.reqAjaxs(url, reqData, goldProductInfo);
 	mui('.man-div-body-ul_li_div_three').on('tap', '.neirong', function() {
-		var urls = $(this).attr('modueinfo');
-		urlParm.cId = vm.cid;
-		urlParm.frompage = "hongkanghtml";
-		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		if(channel == '01') {
+			var urls = $(this).attr('modueinfo');
+			urlParm.cId = vm.cid;
+			urlParm.frompage = "hongkanghtml";
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		}else{
+			var urls = $(this).attr('modueinfo');
+			var urlParm={
+				
+			}
+			urlParm.cId = vm.cid;
+			urlParm.frompage = "hongkanghtml";
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		}
+
 		window.location.href = urls + "?jsonKey=" + jsonStr;
 	})
 	/*伸缩按钮*/
@@ -112,11 +133,11 @@ $(function() {
 					"fromtype": 'licai',
 					"shareFlag": shareFlag,
 					"roleType": roleType,
-					"channel":'02',
+					"channel": '02',
 				}
 				var jsonStr1 = JSON.stringify(sendData);
 				jsonStr1 = UrlEncode(jsonStr1);
-				window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?fromtype = " + fromtype + " & openid = " + openid + " & jsonKey = " + jsonStr1;
+				window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?	fromtype=" + fromtype + "&openid=" + openid + "&jsonKey=" + jsonStr1;
 			});
 		} else if(idAuth == '0') {
 			modelAlert('请先实名', '', function() {
@@ -169,7 +190,7 @@ function buy() {
 		"testType": $('.retest').attr('testType'),
 		"title": vm.Objectitle.commodityCombination.commodityCombinationName,
 		"productFlag": productFlag,
-		"channel":'02',
+		"channel": '02',
 		"leftIco": '1',
 		"rightIco": '0',
 		"downIco": '0',
@@ -253,7 +274,7 @@ function getRiskAble(data) {
 					"productCode": userCode,
 					"commodityCombinationId": commodityCombinationId,
 				},
-				"channel":'02',
+				"channel": '02',
 				"title": '风险评估 ',
 				"productFlag": productFlag,
 				"titles": vm.Objectitle.commodityCombination.commodityCombinationName,

@@ -5,6 +5,7 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	policyNo = urlParm.policyNo,
 	insureNo = urlParm.insureNo,
 	transToken = urlParm.transToken,
+	channel=urlParm.channel,
 	commodityComId = urlParm.commodityComId,
 	customerId = urlParm.customerId,
 	title = urlParm.title,
@@ -19,6 +20,7 @@ var vm = new Vue({
 		Objecbody: null,
 		baozhang: null,
 		returnVisit: {},
+		channel:"",
 	},
 	mounted() {
 		this.$nextTick(function() {
@@ -43,7 +45,7 @@ $(function() {
 	var reqData = {
 		"head": {
 			"userCode": userCode,
-			"channel": "01",
+			"channel": channel,
 			"transTime": $.getTimeStr(),
 			"transToken": transToken
 		},
@@ -82,8 +84,17 @@ $(function() {
 			"title": title,
 		}
 		var jsonStr = UrlEncode(JSON.stringify(reqData));
-		window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
+		if(channel == '01') {
+			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
+		} else {
+			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetailsWeChat/productDetailsWeChat.html?jsonKey=" + jsonStr;
+		}
+
 	})
+	$(".liji").unbind("tap").bind("tap", function() {
+		
+	})
+	vm.channel=channel;
 })
 /*页面信息*/
 function policyQueryListInfo(data) {
@@ -155,7 +166,9 @@ function chuli() {
 }
 
 function backlast() {
-	var sendData = urlParm.urlParm;
+	urlParm.title = '我的订单';
+	urlParm.downIco = '1';
+	var sendData = urlParm;
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
 	window.location.href = base.url + "tongdaoApp/html/account/myOrder/allOrder.html?jsonKey=" + jsonStr;
 }

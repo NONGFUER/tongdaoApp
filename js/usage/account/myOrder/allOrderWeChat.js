@@ -1,20 +1,35 @@
 /*获取数据*/
-var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
-	userCode = urlParm.userCode,
-	roleType = urlParm.roleType,
-	transToken = urlParm.transToken,
-	idAuth = urlParm.idAuth,
-	orderStatus = urlParm.orderStatus,
-	tagId = urlParm.tagId,
-	provinceCode = urlParm.provinceCode,
-	cityCode = urlParm.cityCode,
-	channel = '01',
+var userCode = getUrlQueryString('userCode'),
+	shareMobile = getUrlQueryString('shareMobile'),
+	customerId = getUrlQueryString('customerId'),
+	ccId = getUrlQueryString('ccId'),
+	commodityCombinationId = getUrlQueryString('ccId'),
+	shareFlag = getUrlQueryString('shareFlag'),
+	roleType = getUrlQueryString('roletype'),
+	openid = getUrlQueryString('openid'),
+	orderStatus = getUrlQueryString('orderStatus'),
+	tagId = getUrlQueryString('tagId'),
+	channel = getUrlQueryString('channel'),
+	idAuth = getUrlQueryString('idAuth'),
 	riskType = null,
-	orderStatus = null,
-	tagId = null,
-	customerId = urlParm.customerId;
+	fromtype = 'baodan',
+	transToken = '';
+var jsonKey = getUrlQueryString("jsonKey");
+if(jsonKey) {
+	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+		userCode = urlParm.userCode,
+		roleType = urlParm.roleType,
+		transToken = urlParm.transToken,
+		idAuth = urlParm.idAuth,
+		orderStatus = urlParm.orderStatus,
+		tagId = urlParm.tagId,
+		channel = '02',
+		riskType = null,
+		orderStatus = null,
+		customerId = urlParm.customerId;
+}
 var shanchucheng = '';
-if(tagId == "全部") {
+if(tagId == "全部"||tagId=='  ') {
 	tagId = null;
 }
 if(orderStatus == '') {
@@ -62,123 +77,6 @@ $(function() {
 			}
 		});
 	})
-	/*立即支付*/
-	mui('.man-div-body-ul').on('tap', '#liji', function() {
-		var orderNo = $(this).attr('orderNo');
-		var policyNo = $(this).attr('policyNo');
-		var riskType = $(this).attr('risktype');
-		var insureNo = $(this).attr('insureNo');
-		var commodityCombinationId = $(this).attr('commodityCombinationId');
-		var orderStatus = $(this).attr('orderStatus');
-		var commodityId = $(this).attr('commodityId');
-		var commodityName = $(this).attr('commodityName');
-		var payUrl = $(this).attr('payUrl');
-		var riskSupportAbility = $(this).attr('riskSupportAbility');
-		var orderStatus = $(this).attr('orderStatus');
-		if(commodityCombinationId == '4') {
-			var productFlag = '01';
-		} else {
-			var productFlag = '02';
-		}
-		var param = {
-			"userCode": userCode,
-			"mobile": userCode,
-			"orderNo": orderNo,
-			"policyNo": policyNo,
-			"insureNo": insureNo,
-			"riskType": riskType,
-			"riskSupportAbility": riskSupportAbility,
-			"commodityCombinationId": commodityCombinationId,
-			"commodityComId": commodityCombinationId,
-			"customerId": customerId,
-			"commodityId": commodityId,
-			"transToken": transToken,
-			"orderStatus": orderStatus,
-			"idAuth": idAuth,
-			"orderStatus": orderStatus,
-			"productFlag": productFlag,
-			"cxflag": '1',
-			"tagId": tagId,
-			"title": commodityName,
-			"leftIco": '1',
-			"rightIco": '0',
-			"downIco": '0',
-		}
-		var jsonStr = UrlEncode(JSON.stringify(param));
-		if(riskType == '03') {
-			window.location.href = payUrl;
-		} else if(riskType == '01') {
-			window.location.href = "orderInfo.html?jsonKey=" + jsonStr;
-		} else if(riskType == '04') {
-			mui.alert('寿险');
-		} else if(riskType == '02') {
-			window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/messageFillout.html?jsonKey=" + jsonStr;
-		}
-		return false;
-	})
-	/*再次购买*/
-	mui('.man-div-body-ul').on('tap', '#zaici', function() {
-		var orderStatus = $(this).attr('orderStatus');
-		var commodityCombinationId = $(this).attr('commodityCombinationId');
-		var name = $(this).attr('name');
-		var commodityName = $(this).attr('commodityName');
-		var riskType = $(this).attr('risktype');
-		var orderNo = $(this).attr('orderNo');
-		var policyNo = $(this).attr('policyNo');
-		var insureNo = $(this).attr('insureNo');
-		if(commodityCombinationId == '4') {
-			var productFlag = '01';
-		} else {
-			var productFlag = '02';
-		}
-		var param = {
-			"userCode": userCode,
-			"mobile": userCode,
-			"orderNo": orderNo,
-			"policyNo": policyNo,
-			"roleType": roleType,
-			"insureNo": insureNo,
-			"customerId": customerId,
-			"transToken": transToken,
-			"orderStatus": orderStatus,
-			"idAuth": idAuth,
-			"productFlag": productFlag,
-			"idNo": "",
-			"riskType": riskType,
-			"ccId": commodityCombinationId,
-			"commodityComId": commodityCombinationId,
-			"commodityCombinationId": commodityCombinationId,
-			"ccCode": "",
-			"cityCode": cityCode,
-			"urlParm": urlParm,
-			"provinceCode": provinceCode,
-			"cxflag": '1',
-			"tagId": tagId,
-			"title": '产品详情',
-			"leftIco": '1',
-			"rightIco": '0',
-			"downIco": '0',
-		}
-		var jsonStr = UrlEncode(JSON.stringify(param));
-		if(riskType == '01') {
-			if(commodityCombinationId == '14') {
-				window.location.href = base.url + "tongdaoApp/html/insurance/ghx/ghxProductDetail.html?jsonKey=" + jsonStr;
-			} else if(commodityCombinationId == '15') {
-				window.location.href = base.url + "tongdaoApp/html/insurance/jiachengxian/zhuanqu.html?jsonKey=" + jsonStr;
-			} else {
-				window.location.href = base.url + "tongdaoApp/html/insurance/main/productDetail.html?jsonKey=" + jsonStr;
-			}
-		} else if(riskType == '03') {
-			if(commodityCombinationId == '13') {
-				param.title = "车辆信息";
-				var jsonStr = UrlEncode(JSON.stringify(param));
-				window.location.href = base.url + "tongdaoApp/html/insurance/car/carMes.html?jsonKey=" + jsonStr;
-			}
-		} else if(riskType == '02') {
-			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
-		}
-		return false;
-	})
 	mui('.man-div-body-ul').on('tap', '.man-div-body-ul_li', function() {
 		var orderNo = $(this).attr('orderNo');
 		var policyNo = $(this).attr('policyNo');
@@ -204,26 +102,20 @@ $(function() {
 			"transToken": transToken,
 			"orderStatus": orderStatus,
 			"idAuth": idAuth,
-			"channel":channel,
+			"channel": '02',
 			"productFlag": productFlag,
 			"cxflag": '1',
 			"tagId": tagId,
-			"title": '订单详情',
+			"title": '产品详情',
 			"leftIco": '1',
 			"rightIco": '0',
 			"downIco": '0',
 		}
 		var jsonStr = UrlEncode(JSON.stringify(param));
 		if(riskType == '03') {
-			if(orderStatus == '01') {
-				window.location.href = base.url + "tongdaoApp/html/insurance/car/quotationDetail.html?jsonKey=" + jsonStr;
-			} else {
-				window.location.href = base.url + "tongdaoApp/html/insurance/car/orderDetail.html?jsonKey=" + jsonStr;
-			}
+			window.location.href = base.url + "weixin/wxcar/html/carinsure/orderDetail.html?jsonKey=" + jsonStr;
 		} else if(riskType == '01') {
-			if(commodityCombinationId != '25') {
-				window.location.href = "orderInfo.html?jsonKey=" + jsonStr;
-			}
+			window.location.href = "orderInfo.html?jsonKey=" + jsonStr;
 		} else if(riskType == '04') {
 			mui.alert('寿险');
 		} else if(riskType == '02') {

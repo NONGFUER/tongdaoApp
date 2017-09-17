@@ -134,8 +134,8 @@ function cusAndAgenInfoRender(data){
         var agent         = body.agent;
         $("#name").val(customerBasic.name);
         $("#mobile").val(customerBasic.userName);
-        $("#kehuName").text(agent.recommendAgentName);
-        $("#kehuPhone").text(agent.recommendAgentMobile);
+        $("#kehuName").text(agent.teamName);
+        $("#kehuPhone").text(agent.teamCodeMobile);
     }else if( data.statusCode == ajaxStatus.relogin ){
         modelAlert( data.statusMessage, "", toLogin ); 
     }else{

@@ -5,11 +5,10 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	roleType = urlParm.roleType,
 	transToken = urlParm.transToken,
 	customerId = urlParm.customerId;
-/*var transToken = '059876d99ec46c490953d04d4993da56';
-var userCode = '13601460140';*/
 var username = userCode + "";
 var shan = "";
 var jie = "";
+
 var vm = new Vue({
 	el: '#card_scroll',
 	data: {
@@ -26,6 +25,13 @@ var vm = new Vue({
 		jiesao: {}, //个人介绍
 		weixin: {}, //微信二维码
 		name: {}, //姓名
+	},
+	watch: {
+		data() {
+			this.$nextTick(() => {
+				shuaxin();
+			})
+		}
 	}
 })
 var kuo = "<",
@@ -61,9 +67,9 @@ $(function() {
 	})
 	$(".phone").unbind("tap").bind("tap", function() {
 		var phone = $(this).attr('phone');
-		if(phone==""||phone==null){
+		if(phone == "" || phone == null) {
 			modelAlert('请点击编辑添加手机号');
-		}else{
+		} else {
 			callService(phone, ".kefuPhone");
 		}
 	})
@@ -220,6 +226,23 @@ function insurantype(str) {
 		field = "代理人"
 	}
 	return field;
+}
+
+function shuaxin() {
+	var reqData = {
+		"body": {
+			"loggingCustomerId": customerId,
+			"customerId": customerId,
+		},
+		"head": {
+			"channel": "01",
+			"userCode": userCode,
+			"transTime": "",
+			"transToken": transToken
+		}
+	}
+	var url = base.url + 'agent/getBusinessCard.do';
+	$.reqAjaxs(url, reqData, getBusinessCard);
 }
 
 /*登录失效*/

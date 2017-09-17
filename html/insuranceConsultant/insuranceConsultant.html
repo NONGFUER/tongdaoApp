@@ -16,12 +16,12 @@
 	</head>
 
 	<body>
-		<div class="mui-content mui-scroll-wrapper" id="list">
+		<div class="mui-content mui-scroll-wrapper" id="list"  >
 			<div class="mui-scroll">
 				<div class="man mui-table-view">
-					<div class="man-div-body " v-cloak>
+					<div class="man-div-body ">
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-li mb10 mui-table-view-cell" v-for="(value,key) in Objectitle" v-bind:agentId='value.agentId' v-bind:isDefault='value.isDefault' v-bind:insuranceConsultantId='value.id'  >
+							<li class="man-div-body-li mb10 mui-table-view-cell" v-for="(value,key) in Objectitle" v-bind:agentId='value.agentId' v-bind:isDefault='value.isDefault' v-bind:insuranceConsultantId='value.id'  v-cloak>
 								<div class="mui-slider-right mui-disabled shanchu"  v-if="value.isDefault!='01'">
 									<a class="mui-btn mui-btn-red"  v-bind:insuranceConsultantId='value.id' v-bind:agentId="value.agentId">
 										<!--<i class="lajitong"></i>-->
@@ -50,7 +50,7 @@
 								<span v-html="value.userPhone"></span>
 							</li>
 							<li class='huise'> <span>业务员代码：</span>
-								<span v-html="value.agentId"></span>
+								<span v-html="value.agentCode"></span>
 							</li>
 						</ul>
 						</span>
@@ -58,7 +58,7 @@
 						</li>
 						</ul>
 					</div>
-					<div class="baoxian">
+					<div class="baoxian" style="display: none;">
 						<div class="tianjia"><span class="jia">+</span>添加保险顾问</div>
 					</div>
 				</div>

@@ -18,6 +18,8 @@ var userCode="";
 var commodityCombinationId="";
 var productFlag="";
 var channel="";
+var roleType='';
+var idAuth='';
 $(function() {
 
 	//	url传值解密过程
@@ -27,6 +29,8 @@ $(function() {
 	mobile = parm.body.mobile;
 	userCode=parm.head.userCode;
 	channel=parm.channel;
+	roleType=parm.roleType;
+	idAuth=parm.idAuth;
 	productFlag=parm.productFlag;
 	transToken = parm.head.transToken;
 	customerId = parm.body.customerId;
@@ -512,6 +516,8 @@ $.submitDataCallBack = function(param) {
 				"commodityCombinationId":commodityCombinationId,
 			},
 			"channel":channel,
+			"roleType":roleType,
+			"idAuth":idAuth,
 			"productFlag":productFlag,
 			"title": '评估结果',
 			"titles": titles,
@@ -602,6 +608,8 @@ function backlast() {
 		"transToken":transToken,
 		"commodityCombinationId": commodityCombinationId,
 		"title": title,
+		"roleType":roleType,
+		"idAuth":idAuth,
 		"leftIco":'1',
 		"rightIco":'0',
 		"downIco":'0',

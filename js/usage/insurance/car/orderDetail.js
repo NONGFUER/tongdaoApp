@@ -183,16 +183,19 @@ $.setscroll = function() {
 function backlast(){
 	if(cxflag=="1"){
 		parm.title="我的订单";
+		parm.downIco="1";
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
 		window.location.href =base.url+"tongdaoApp/html/account/myOrder/allOrder.html?jsonKey=" + jsonStr;
 	}else if(cxflag=="2"){
 		parm.title="我的保单";
+		parm.downIco="1";
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
 		window.location.href =base.url+"tongdaoApp/html/account/myOrder/policyList.html?jsonKey=" + jsonStr;
 	}else if(cxflag=="3"){
 		parm.title="我的出单";
+		parm.downIco="1";
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
 		window.location.href =base.url+"tongdaoApp/html/agent/mysingle/mysingle.html?jsonKey=" + jsonStr;

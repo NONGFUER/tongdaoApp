@@ -141,6 +141,9 @@ function getInsuranceConsultantInfos(data) {
 				vm.Objectitle = datas;
 			}
 		}
+		if(type != '02' || type != '03' || type != '04' || type != '05' || type != '06') {
+			$('.baoxian').show();
+		}
 	} else if(data.statusCode == '123456') {
 		modelAlert(data.statusMessage, "", lognCont);
 	} else {
@@ -186,7 +189,7 @@ function getInsuranceConsultantInfo(data) {
 			var diqu = data.returns.insuranceConsultantInfo.agentId;
 			var insuranceConsultantId = data.returns.insuranceConsultantInfo.id;
 			if(diqu == agentId) {
-				modelAlert('新增保险顾问成功', '', function(){
+				modelAlert('新增保险顾问成功', '', function() {
 					xinzeng(userCode, transToken, customerId, insuranceConsultantId);
 				});
 			} else {

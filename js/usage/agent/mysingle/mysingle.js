@@ -52,6 +52,37 @@ $(function() {
 			}
 		});
 	})
+	mui('.man-div-body-ul ').on('tap', '.man-div-body-ul_li', function() {
+		var riskType = $(this).attr('riskType');
+		var policyNo = $(this).attr('policyNo');
+		var orderNo = $(this).attr('orderNo');
+		var insureNo = $(this).attr('insureNo');
+		var param = {
+			"userCode": userCode,
+			"mobile": userCode,
+			"policyNo": policyNo,
+			"orderNo": orderNo,
+			"roleType": roleType,
+			"customerId": customerId,
+			"transToken": transToken,
+			"policyStatus": policyStatus,
+			"commodityComId":commodityComId,
+			"cxflag": '2',
+			"tagId": tagId,
+			"title": '出单详情',
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '0',
+		}
+		var jsonStr = UrlEncode(JSON.stringify(param));
+		if(riskType == '03') {
+			window.location.href = base.url + "tongdaoApp/html/insurance/car/orderDetail.html?jsonKey=" + jsonStr;
+		} else if(riskType == '01') {
+			window.location.href = "policyInfo.html?jsonKey=" + jsonStr;
+		}else if(riskType == '02') {
+			window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
+		}
+	})
 
 })
 

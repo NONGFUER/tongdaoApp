@@ -5,10 +5,17 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	policyNo = urlParm.policyNo,
 	insureNo = urlParm.insureNo,
 	transToken = urlParm.transToken,
-	commodityComId = urlParm.commodityComId,
 	customerId = urlParm.customerId,
 	title = urlParm.title,
 	orderNo = urlParm.orderNo;
+var channel = urlParm.channel;
+var commodityComId = urlParm.commodityComId;
+if(typeof(commdityCommId) == 'undefined') {
+	commodityComId = '';
+}
+if(channel == '' || channel == null) {
+	channel = '01';
+}
 var vm = new Vue({
 	el: '#list',
 	data: {
@@ -19,6 +26,8 @@ var vm = new Vue({
 		Objecbody: null,
 		baozhang: null,
 		returnVisit: {},
+		commodityComId: "",
+		channel:"",
 	},
 	mounted() {
 		this.$nextTick(function() {
@@ -40,10 +49,11 @@ var vm = new Vue({
 $(function() {
 	console.log("页面初始化，获取上个页面传值报文--");
 	console.log(urlParm);
+
 	var reqData = {
 		"head": {
 			"userCode": userCode,
-			"channel": "01",
+			"channel": channel,
 			"transTime": $.getTimeStr(),
 			"transToken": transToken
 		},
@@ -55,19 +65,19 @@ $(function() {
 	var url = base.url + 'moneyManage/policyQueryListInfo.do';
 	console.log("页面初始化，发送请求报文--");
 	$.reqAjaxsFalse(url, reqData, policyQueryListInfo);
-	if(vm.returnVisit == '1'){
+	if(vm.returnVisit == '1') {
 		$('#huifang').addClass('huisebtn');
 	}
 	mui('.man-div-body-ul_li_div_btn').on('tap', '#huifang', function() {
 		/*接口请求位子*/
-		if(vm.returnVisit == '0'&&$('.baozhang').html()!='已领取') {
+		if(vm.returnVisit == '0' && $('.baozhang').html() != '已领取') {
 			var reqData = {
 				"userCode": userCode,
 				"customerId": customerId,
 				"transToken": transToken,
 				"insurePhone": userCode,
-				"policyNo":policyNo,
-				"orderNo":orderNo,
+				"policyNo": policyNo,
+				"orderNo": orderNo,
 				"leftIco": '1',
 				"rightIco": '0',
 				"downIco": '0',
@@ -103,6 +113,8 @@ $(function() {
 		var jsonStr = UrlEncode(JSON.stringify(reqData));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
 	})
+	vm.commodityComId = commodityComId;
+	vm.channel=channel;
 })
 /*页面信息*/
 function policyQueryListInfo(data) {
@@ -128,7 +140,7 @@ function getRedemption(data) {
 			"commodityComId": commodityComId,
 			"userCode": data.userCode,
 			"transTime": "",
-			"channel": "01",
+			"channel": channel,
 			"transToken": transToken,
 			"title": title,
 			"leftIco": '1',
@@ -157,7 +169,7 @@ function getRedemption(data) {
 			"commodityComId": commodityComId,
 			"userCode": data.userCode,
 			"transTime": "",
-			"channel": "01",
+			"channel": channel,
 			"transToken": transToken,
 			"title": title,
 			"leftIco": '1',
@@ -198,7 +210,7 @@ function chuli() {
 			var reqData = {
 				"head": {
 					"userCode": userCode,
-					"channel": "01",
+					"channel": channel,
 					"transTime": $.getTimeStr(),
 					"transToken": transToken
 				},
@@ -217,20 +229,38 @@ function chuli() {
 }
 
 function backlast() {
-	var sendData = {
-		"userCode": userCode,
-		"commodityComId": commodityComId,
-		"flag": '',
-		"pageNo": '',
-		"customerId": customerId,
-		"transToken": transToken,
-		"title": '保单列表',
-		"leftIco": '1',
-		"rightIco": '0',
-		"downIco": '1',
-	};
-	var jsonStr = UrlEncode(JSON.stringify(sendData));
-	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyList.html?jsonKey=" + jsonStr;
+	if(commodityComId != "" && channel == '01') {
+		var sendData = {
+			"userCode": userCode,
+			"commodityComId": commodityComId,
+			"flag": '',
+			"pageNo": '',
+			"customerId": customerId,
+			"transToken": transToken,
+			"title": '保单列表',
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '1',
+		};
+		var jsonStr = UrlEncode(JSON.stringify(sendData));
+		window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyList.html?jsonKey=" + jsonStr;
+	} else {
+		if(channel == '01') {
+			urlParm.title = '我的保单';
+			urlParm.downIco = '1';
+			urlParm.channel = channel;
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+			window.location.href = base.url + "tongdaoApp/html/account/myOrder/policyList.html?jsonKey=" + jsonStr;
+		} else {
+			urlParm.title = '我的保单';
+			urlParm.downIco = '1';
+			urlParm.channel = channel;
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+			window.location.href = base.url + "tongdaoApp/html/account/myOrder/policyListWeChat.html?jsonKey=" + jsonStr;
+		}
+
+	}
+
 }
 /*登录失效*/
 function lognCont() {

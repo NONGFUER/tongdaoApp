@@ -1041,7 +1041,11 @@ function toXuzhi(){
 function backlast(){
 	urlParm.title = '产品详情';
 	urlParm.leftIco = "1";
-	urlParm.rightIco = "0";
+	if( roleType != "00" ){
+		urlParm.rightIco = "1";
+	}else{
+		urlParm.rightIco = "0";
+	}
 	urlParm.downIco = "0";
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	if( ccId != "14" ){

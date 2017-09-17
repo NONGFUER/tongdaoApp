@@ -67,7 +67,7 @@ function sendMessageRequest( mobile ){
 			},
 			"body":{
 				"userName":mobile,
-				"type":"101"
+				"type":"1101"
 			}
 	}
 	$.reqAjaxs( url, sendJson, sendMessageCallback );

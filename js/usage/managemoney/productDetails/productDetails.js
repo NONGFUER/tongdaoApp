@@ -3,24 +3,23 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	commodityCombinationId = urlParm.commodityCombinationId,
 	userCode = urlParm.userCode,
 	roleType = urlParm.roleType,
-	ccId=urlParm.commodityCombinationId,
+	ccId = urlParm.commodityCombinationId,
 	transToken = urlParm.transToken,
 	idAuth = urlParm.idAuth,
-	channel='01',
+	channel = '01',
 	customerId = urlParm.customerId;
-var PRODUCT_SHARE = {
-		"HK" : "弘康安溢保两全保险(1年期)-弘康安溢保两全保险",	
-		"HK5":"弘康安溢保两全保险(5年期)-弘康安溢保两全保险",
+if(userCode==null){
+	userCode='';
 }
-var PRODUCT_PICURL ={
-		"HONGKANG" : base.url + "tongdaoApp/image/share/tongdaoic.png",
-}
-if(commodityCombinationId = '4'){
+if(commodityCombinationId = '4') {
 	productFlag = '01';
-}else if(commodityCombinationId = '5'){
+} else if(commodityCombinationId = '5') {
 	productFlag = '02';
 }
-var phone = phoneyin(userCode);
+var phone ='';
+if(userCode!=''&&userCode!=null){
+	phone = phoneyin(userCode);
+}
 $('.phone').html(phone);
 console.log("页面初始化，获取上个页面传值报文--");
 console.log(urlParm);
@@ -47,6 +46,8 @@ var vm = new Vue({
 		goumaishuoming: {},
 		xiangguanxieyi: {},
 		cid: {},
+		name: "",
+		title: "",
 	},
 	mounted() {
 		this.$nextTick(function() {
@@ -57,14 +58,6 @@ var vm = new Vue({
 	}
 })
 $(function() {
-	if(roleType == "" || roleType == "00") {
-		$('#huifang').addClass('btnhuise');
-	} else if(idAuth == '0') {
-		$('#huifang').addClass('btnhuise');
-	}
-	if(roleType != '00') {
-		showRightIcon();
-	}
 	var reqData = {
 		"body": {
 			"commodityCombinationId": commodityCombinationId,
@@ -79,6 +72,11 @@ $(function() {
 	};
 	var url = base.url + 'firstPage/goldProductInfo.do';
 	$.reqAjaxs(url, reqData, goldProductInfo);
+	if(roleType == "" || roleType == "00") {
+		$('#huifang').addClass('btnhuise');
+	} else if(idAuth == '0') {
+		$('#huifang').addClass('btnhuise');
+	}
 	mui('.man-div-body-ul_li_div_three').on('tap', '.neirong', function() {
 		var urls = $(this).attr('modueinfo');
 		urlParm.cId = vm.cid;
@@ -119,6 +117,7 @@ $(function() {
 	})
 
 })
+
 /*购买*/
 function buy() {
 	var sendData = {
@@ -132,7 +131,9 @@ function buy() {
 		"testType": $('.retest').attr('testType'),
 		"title": vm.Objectitle.commodityCombination.commodityCombinationName,
 		"productFlag": productFlag,
-		"channel":channel,
+		"channel": channel,
+		"roleType": roleType,
+		"idAuth": idAuth,
 		"leftIco": '1',
 		"rightIco": '0',
 		"downIco": '0',
@@ -148,6 +149,8 @@ function goldProductInfo(data) {
 		vm.Objectitle = data.returns;
 		vm.CommodityCombinationModuleList = data.returns.CommodityCombinationModuleList;
 		vm.cid = data.returns.commodityInfo.id;
+		vm.name = data.returns.commodityCombination.commodityCombinationAbbreviation;
+		vm.title = data.returns.commodityCombination.insuredInfo;
 		/*产品基本信息*/
 		var cmlist = new Array();
 		/*产品投资周期*/
@@ -183,12 +186,19 @@ function goldProductInfo(data) {
 			vm.touzizhouqi.chixu = vm.touzizhouqi[2].modueInfo;
 			vm.goumaishuoming = goumai[0].modueInfo;
 			vm.xiangguanxieyi = xiangguan;
+
 		} else {
 			modelAlert(data.statusMessage);
 		}
 	} else {
 		modelAlert(data.statusMessage);
 	}
+	if(roleType != '00') {
+		showRightIcon();
+	}
+}
+var PRODUCT_PICURL = {
+	"HONGKANG": base.url + "tongdaoApp/image/share/tongdaoic.png",
 }
 /*风险评估*/
 function getRiskAble(data) {
@@ -216,7 +226,9 @@ function getRiskAble(data) {
 					"productCode": userCode,
 					"commodityCombinationId": commodityCombinationId,
 				},
-				"channel":channel,
+				"roleType": roleType,
+				"idAuth": idAuth,
+				"channel": channel,
 				"title": '风险评估 ',
 				"productFlag": productFlag,
 				"titles": vm.Objectitle.commodityCombination.commodityCombinationName,
@@ -235,32 +247,21 @@ function getRiskAble(data) {
 		modelAlert(data.statusMessage, "", lognCont);
 	}
 }
-/*分享*/
-function getProductShare(productCode){
-	var shareContent = "";
-	if( productCode == '4'){
-		shareContent = PRODUCT_SHARE.HK;
-	}else if( productCode == '5' ){
-		shareContent = "弘康安溢保两全保险(5年期)";
-	}
-	var shareList = shareContent.split("-");
-	return shareList;
-}
 //根据不同的产品获取分享信息
-function getProductSharePic(productCode){
+function getProductSharePic(productCode) {
 	var picUrl = "";
-	if( productCode == '4' ){
+	if(productCode == '4') {
 		picUrl = PRODUCT_PICURL.HONGKANG;
-	}	
+	}
 	return picUrl;
 }
-function shareHandle(){
-	var shareList = getProductShare(ccId);
-	var title = shareList[0] ;
-	var desc  = shareList[1] ;	
-	var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+userCode+'&ccId='+ccId+'&type=5';
+
+function shareHandle() {
+	var title = vm.name;
+	var desc = vm.title;
+	var shareurl = base.url + "tongdaoApp/html/share/kongbai.html?mobile=" + userCode + '&ccId=' + ccId + '&type=5';
 	var picUrl = getProductSharePic(ccId);
-	shareMethod(shareurl,title,desc,"baodan",picUrl);
+	shareMethod(shareurl, title, desc, "baodan", picUrl);
 };
 /*隐藏手机号中间几位*/
 function phoneyin(userCode) {

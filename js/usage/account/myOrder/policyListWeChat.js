@@ -1,15 +1,32 @@
 mui.init();
 /*获取数据*/
-var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
-	userCode = urlParm.userCode,
-	commodityComId = urlParm.commodityComId,
-	roleType = urlParm.roleType,
-	idAuth = urlParm.idAuth,
-	transToken = urlParm.transToken,
-	customerId = urlParm.customerId,
-	tagId = urlParm.tagId,
-	policyStatus = null,
-	riskType = null;
+var userCode = getUrlQueryString('userCode'),
+	shareMobile = getUrlQueryString('shareMobile'),
+	customerId = getUrlQueryString('customerId'),
+	ccId = getUrlQueryString('ccId'),
+	commodityCombinationId = getUrlQueryString('ccId'),
+	shareFlag = getUrlQueryString('shareFlag'),
+	roleType = getUrlQueryString('roletype'),
+	openid = getUrlQueryString('openid'),
+	orderStatus = getUrlQueryString('orderStatus'),
+	tagId = getUrlQueryString('tagId'),
+	channel = getUrlQueryString('channel'),
+	commodityComId="",
+	idAuth = getUrlQueryString('idAuth'),
+	fromtype = 'dingdan',
+	transToken = '';
+var jsonKey = getUrlQueryString("jsonKey");
+if(jsonKey) {
+	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+		userCode = urlParm.userCode,
+		roleType = urlParm.roleType,
+		idAuth = urlParm.idAuth,
+		transToken = urlParm.transToken,
+		customerId = urlParm.customerId,
+		tagId = urlParm.tagId;
+}
+var policyStatus = null;
+var riskType = null;
 if(riskType == "") {
 	riskType = null;
 }
@@ -83,6 +100,7 @@ $(function() {
 			"policyStatus": policyStatus,
 			"commodityComId": commodityComId,
 			"cxflag": '2',
+			"channel":channel,
 			"tagId": tagId,
 			"title": '保单详情',
 			"leftIco": '1',
@@ -91,7 +109,7 @@ $(function() {
 		}
 		var jsonStr = UrlEncode(JSON.stringify(param));
 		if(riskType == '03') {
-			window.location.href = base.url + "tongdaoApp/html/insurance/car/orderDetail.html?jsonKey=" + jsonStr;
+			window.location.href = base.url + "weixin/wxcar/html/carinsure/orderDetail.html?jsonKey=" + jsonStr;
 		} else if(riskType == '01') {
 			if(commodityId != '17') {
 				window.location.href = "policyInfo.html?jsonKey=" + jsonStr;
@@ -148,7 +166,7 @@ function xinzhen(userCode, transToken, customerId, policyStatus, riskType, tagId
 			"tagId": tagId,
 		},
 		"head": {
-			"channel": "01",
+			"channel": channel,
 			"userCode": userCode,
 			"transTime": "",
 			"transToken": transToken
@@ -166,7 +184,7 @@ function shanchu(userCode, transToken, customerId, policyNo) {
 			"policyNo": policyNo,
 		},
 		"head": {
-			"channel": "01",
+			"channel": channel,
 			"userCode": userCode,
 			"transTime": "",
 			"transToken": transToken

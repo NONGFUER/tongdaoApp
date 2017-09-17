@@ -24,7 +24,7 @@
 							<li>
 								<span v-html="Objectitle.commodityCombination.commodityCombinationName"></span>
 								<span class="jiantou"></span>
-								<span class="chanping">查看产品详细</span>
+								<span class="chanping" v-if="channel!='02'">查看产品详细</span>
 							</li>
 							<li class="list_two">
 								<h1 v-html="Objectitle.commodityCombination.remark+'%'"></h1>
@@ -134,7 +134,7 @@
 							</li>
 						</ul>
 					</div>
-					<div class="man-div-body-ul_li_div_btn">
+					<div class="man-div-body-ul_li_div_btn" v-if="commodityComId!=''">
 						 <div id="huifang" class="div_btn mbright30">回访确认</div>
 						 <div id='lingqu' class="div_btn">退保领取</div>
 					</div>

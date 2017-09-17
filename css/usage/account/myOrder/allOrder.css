@@ -139,3 +139,7 @@ ul li span {
 	border: 1px solid #48A0F0;
 	border-radius: 3px;
 }
+/*重写MUI*/
+.mui-bar-nav~.mui-content{
+	padding-top: 0;
+}

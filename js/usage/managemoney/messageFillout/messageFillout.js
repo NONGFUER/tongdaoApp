@@ -2,21 +2,28 @@
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
 commodityCombinationId = urlParm.commodityCombinationId,
 	userCode = urlParm.userCode,
-	productFlag=urlParm.productFlag,
+	productFlag = urlParm.productFlag,
 	phone = urlParm.userCode,
 	bankName = urlParm.bankName,
 	commodityId = urlParm.commodityId,
 	bankCode = urlParm.bankCode,
+	roleType = urlParm.roleType,
+	idAuth = urlParm.idAuth,
 	customerId = urlParm.customerId,
 	bankMaxMoney = urlParm.dayLimit,
 	transToken = urlParm.transToken,
 	invMobie = urlParm.invMobie, //引荐人手机号
 	riskSupportAbility = urlParm.riskSupportAbility, //类型
 	pieces = urlParm.pieces,
-	channel=urlParm.channel,
+	channel = urlParm.channel,
 	title = urlParm.title;
 if(title == null || title == "") {
 	title = urlParm.titles;
+}
+if(roleType != '00') {
+	rightIco = '1';
+} else {
+	rightIco = '0';
 }
 testType = toRiskType(riskSupportAbility); //类型
 if(bankCode != null && bankCode != "") {
@@ -35,7 +42,7 @@ var vm = new Vue({
 	data: {
 		Objectitle: {
 			insureInfo: {
-				yearRate:"",
+				yearRate: "",
 			}
 		},
 		goumaishuoming: "",
@@ -66,6 +73,10 @@ if(pieces) {
 	$("#money").html(1000 * pieces);
 }
 $(function() {
+	if(channel == '02') {
+		$('#tou').show();
+		$('.mui-content').css('padding-top', '44px');
+	}
 	var reqData = {
 		"head": {
 			"userCode": userCode,
@@ -334,6 +345,8 @@ $(function() {
 			"riskSupportAbility": riskSupportAbility,
 			"title": '银行卡信息',
 			"titles": vm.comComName,
+			"roleType": roleType,
+			"idAuth": idAuth,
 			"channel": channel,
 			"transTime": $.getTimeStr(),
 			"transToken": transToken,
@@ -436,7 +449,7 @@ function saveOrder(data) {
 function getinsure(data) {
 	console.log(data);
 	if(data.statusCode == '000000') {
-		var laiyuan='1';//1.投保页面,2.保单列表页
+		var laiyuan = '1'; //1.投保页面,2.保单列表页
 		$('.note').hide();
 		var sendData = {
 			"userCode": userCode,
@@ -444,14 +457,16 @@ function getinsure(data) {
 			"transToken": transToken,
 			"riskSupportAbility": riskSupportAbility,
 			"orderNo": data.returns.orderNo,
-			"policyNo":data.returns.policyNo,
+			"policyNo": data.returns.policyNo,
 			"comComName": vm.comComName,
 			"startPiece": $('#money').html().split('.'),
 			'title': vm.comComName,
-			"customerId":customerId,
-			"commodityCombinationId":commodityCombinationId,
-			"commodityId":commodityId,
-			"testType":testType,
+			"customerId": customerId,
+			"commodityCombinationId": commodityCombinationId,
+			"commodityId": commodityId,
+			"testType": testType,
+			"idAuth": idAuth,
+			"roleType": roleType,
 			'laiyuan': laiyuan, //页面来源
 			"leftIco": '1',
 			"rightIco": '0',
@@ -485,6 +500,9 @@ $("#risktype").unbind("tap").bind("tap", function() {
 			"commodityCombinationId": commodityCombinationId,
 			"productCode": userCode
 		},
+		"channel": channel,
+		"roleType": roleType,
+		"idAuth": idAuth,
 		'title': '风险评估',
 		"titles": vm.comComName,
 	};
@@ -535,12 +553,14 @@ function backlast() {
 		"customerId": customerId,
 		"dayLimit": bankMaxMoney,
 		"transToken": transToken,
+		"roleType": roleType,
+		'idAuth': idAuth,
 		"riskSupportAbility": riskSupportAbility,
 		"pieces": pieces,
 		"commodityCombinationId": commodityCombinationId,
 		"title": title,
 		"leftIco": '1',
-		"rightIco": '0',
+		"rightIco": rightIco,
 		"downIco": '0',
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));

@@ -34,7 +34,9 @@ $(function(){
     $(".rexian").unbind("tap").bind("tap",function(){
     	callService("95505",".rexian");
 	})
-	
+	$("#hetongDemo").unbind("tap").bind("tap",function(){
+    	toHetongDemo(this)
+    });
 	$(".download").unbind("tap").bind("tap",function(){
 		toDownload();
 	});
@@ -96,7 +98,7 @@ function sendProductInfoRequest(ccId,cityCode,provinceCode,type){
             "provinceCode":provinceCode//"220000"
         }
     }
-    $.reqAjaxs( url, sendJson, productInfoRender ); 
+    $.reqAjaxsFalse( url, sendJson, productInfoRender ); 
 }
 
 /**
@@ -310,7 +312,7 @@ function moduleStr(mapperList){
 				str += mapperList.modueInfo;	
 			}	    
 		}else if( mapperList.moduleType == "03" ){//链接
-			str += '<span class="btn1 fl" onclick="toArticle()">合同条款</span><span href="'+mapperList.modueInfo+'" class="btn1 ri" id="hetongDemo">合同样张</span>'
+			str += '<span class="btn1 fl" onclick="toCommodityList()">合同条款</span><span data-url="'+mapperList.modueInfo+'" class="btn1 ri" id="hetongDemo">合同样张</span>'
 		}else if(  mapperList.moduleType == "01"  ){
 			str += '<img src="' + mapperList.modueInfo + '" class="mb10">';
 		}      								
@@ -489,6 +491,26 @@ function toDownload(){
 	window.location.href = base.url + "tongdaoApp/html/share/download/appDownload.html";
 }
 
+//跳转到商品列表页
+function toCommodityList(){	
+	urlParm.title = "商品列表";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0"
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/insurance/main/commodityList.html?jsonKey="+jsonStr;
+}
+
+//跳转到合同条款
+function toHetongDemo(obj){
+	urlParm.title = "合同样张";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	urlParm.picurl = $(obj).attr("data-url");
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/agreement/hetong.html?jsonKey="+jsonStr;
+}
 function shareHandle(){
 	var shareList = getProductShare(ccId);
 	var title = shareList[0] ;
