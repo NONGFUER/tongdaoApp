@@ -4,7 +4,8 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	roleType = urlParm.roleType,
 	transToken = urlParm.transToken,
-	customerId = urlParm.customerId;
+	customerId = urlParm.customerId,
+	frompage = urlParm.frompage;
 var username = userCode + "";
 var shan = "";
 var jie = "";
@@ -251,5 +252,13 @@ function lognCont() {
 }
 
 function backlast() {
-	sysback();
+	if( frompage == "liveProductHtml" ){
+		urlParm.title = "产品详情";
+		urlParm.rightIco = "1";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/insurance/main/liveProductDetail.html?jsonKey="+jsonStr;
+	}else{
+		sysback();
+	}
+	
 }

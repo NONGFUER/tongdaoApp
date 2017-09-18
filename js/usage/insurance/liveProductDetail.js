@@ -356,35 +356,17 @@ function toYuyueList(){
 	window.location.href = base.url + "tongdaoApp/html/agent/myBookings/subscribeList.html?jsonKey="+jsonStr;
 }
 
+//跳转到我的名片
 function toInsuranceConsultant(){
-	urlParm.title = "保险顾问";
+	urlParm.title = "我的名片";
 	urlParm.leftIco = "1";
 	urlParm.rightIco = "0";
 	urlParm.downIco = "0";
 	urlParm.userCode = mobile;
-	var url = base.url + "customerBasic/getCustomerBasicInfo.do";
-	var agentId ="";
-	var sendJson = {
-			"head":{
-				"channel" : "02",
-	            "userCode" : "",
-	            "transTime" : $.getTimeStr(),
-	            "transToken": ""
-			},
-			"body":{
-				"customerId":customerId
-			}
-	}
-	$.reqAjaxsFalse( url, sendJson, function(data){
-		console.log(data);
-		if( data.statusCode == "000000"){
-			agentId = data.returns.agentInfo.agentId
-		}
-	} );
-	urlParm.agentId  = agentId;
-	urlParm.type = roleType;
+	urlParm.frompage = "liveProductHtml";
+	urlParm.roleType = roleType;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	window.location.href = base.url + "tongdaoApp/html/insuranceConsultant/insuranceConsultant.html?jsonKey="+jsonStr;
+	window.location.href = base.url + "tongdaoApp/html/agent/myCard/myCard.html?jsonKey="+jsonStr;
 }
 
 function getTouxiang(mobile){
