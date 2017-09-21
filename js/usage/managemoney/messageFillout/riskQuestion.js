@@ -20,6 +20,7 @@ var productFlag="";
 var channel="";
 var roleType='';
 var idAuth='';
+var invMobie='';
 $(function() {
 
 	//	url传值解密过程
@@ -27,6 +28,7 @@ $(function() {
 	urlstr = UrlDecode(urlstr);
 	parm = JSON.parse(urlstr);
 	mobile = parm.body.mobile;
+	invMobie=parm.invMobie;
 	userCode=parm.head.userCode;
 	channel=parm.channel;
 	roleType=parm.roleType;
@@ -150,7 +152,7 @@ $.detailinit = function() {
 	var url = base.url + "investmentLinkedInsurance/getRiskTest.do";
 	var data = {
 		"head": {
-			"channel": "01",
+			"channel": channel,
 			"userCode": productCode,
 			"transTime": $.getTimeStr(),
 			"transToken": transToken
@@ -492,7 +494,7 @@ $.submitData = function() {
 		},
 		"head": {
 			"userCode": productCode,
-			"channel": "01",
+			"channel": channel,
 			"transTime": $.getTimeStr(),
 			"transToken": transToken
 		}
@@ -517,6 +519,7 @@ $.submitDataCallBack = function(param) {
 			},
 			"channel":channel,
 			"roleType":roleType,
+			"invMobie":invMobie,
 			"idAuth":idAuth,
 			"productFlag":productFlag,
 			"title": '评估结果',
@@ -609,6 +612,7 @@ function backlast() {
 		"commodityCombinationId": commodityCombinationId,
 		"title": title,
 		"roleType":roleType,
+		"invMobie":invMobie,
 		"idAuth":idAuth,
 		"leftIco":'1',
 		"rightIco":'0',

@@ -6,6 +6,7 @@ var listArray = [];
 var lowAge = "";
 var upAge = "";
 var healthFlag = "";
+var CommodityInfo = [];
 $(function(){
     $.setscroll("bodyMuiScroll");
     buyBind();
@@ -278,6 +279,7 @@ function productInfoRender(data){
         var body = data.returns;
         var commodityCombinationModuleMapper = body.commodityCombinationModuleMapper;
         var commodityCombination             = body.commodityCombination;
+        	CommodityInfo                    = body.CommodityInfo;
         var companyProfile 					 = body.companyProfile;
         var healthTold						 = body.healthTold;			//健康告知
         if(healthTold.length != 0){
@@ -440,7 +442,13 @@ function toInsure(){
 		cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
 		cVersion = $("div[name='versions']").attr("data-value");
 		//alert(cId+":"+cName);
+		var indax =$("div[name='versions']").find("li").index($(".on"));
 	}
+	if( CommodityInfo.length == 1 ){
+		urlParm.bzPic = CommodityInfo[0].banner;
+	}else if( CommodityInfo.length == 2){
+		urlParm.bzPic = CommodityInfo[indax].banner;
+	}	
 	title = "投保信息"
 	urlParm.cId = cId;
 	urlParm.cName = cName;
@@ -466,6 +474,12 @@ function toHealthHtml(){
 		cId = $("div[name='versions']").find(".on").attr("data-cid");
 		cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
 		cVersion = $("div[name='versions']").attr("data-value");
+		var indax =$("div[name='versions']").find("li").index($(".on"));
+	}
+	if( CommodityInfo.length == 1 ){
+		urlParm.bzPic = CommodityInfo[0].banner;
+	}else if( CommodityInfo.length == 2){
+		urlParm.bzPic = CommodityInfo[indax].banner;
 	}
 	title = "健康告知"
 	urlParm.cId = cId;
@@ -480,7 +494,7 @@ function toHealthHtml(){
 	urlParm.cVersion = cVersion;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	if( roleType == "00" || roleType == "" ){
-		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineHealth&openid="+openid;
+		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineHealth&openid="+openid+"&inviterPhone="+shareMobile;
 	}else{
 		window.location.href = "healthNotice.html?jsonKey="+jsonStr;
 	}

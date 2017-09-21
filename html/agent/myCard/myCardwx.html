@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 -->
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>我的名片</title>
+		<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" href="../../../css/lib/commons/base.css" />
+		<link rel="stylesheet" href="../../../css/lib/commons/common.css" />
+		<link rel="stylesheet" href="../../../css/usage/account/myCard.css?v=20160615" />
+	</head>
+
+	<body>
+		<div id="card_scroll" class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="card_info">
+					<div class="card_up clearfix">
+						<div class="minipng">
+							<div class="tou">
+								<img src="../../../image/common/tou.png" style="border-radius:100%;" />
+							</div>
+						</div>
+						<div class="simple_info">
+							<div><span class="name" id="name" v-html="name">姓名</span></div>
+							<div class="">
+								<span class="iden" v-html="insuranceConsultantType"></span><span class="split">|</span>服务区域：<span class="area" v-html="dizhi"></span>
+							</div>
+						</div>
+						<div class="card_renz">
+							<img src="../../../image/agent/renzheng.png" />
+						</div>
+					</div>
+					<div class="card_down clearfix">
+						<div class="code_logo">
+							<img src="../../../image/common/code.png">
+						</div>
+						<div class="xiantiao">
+
+						</div>
+						<div class="code_info">
+							<div class="code_info_up">
+								业务员代码：<span id="agentCode" v-html="agentCode"></span>
+							</div>
+							<div class="code_info_down">
+								执业证编码：<span id="practiceCode" v-html="practiceCode"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="contact clearfix">
+					<div class="phone" v-bind:phone='postcardPhone'><img src="../../../image/common/phone.png" /><a class="kefuPhone" style="margin-left: 20px;font-size: 14px;color: #1B6BB8;" v-bind:phone="postcardPhone">联系我</a></div>
+					<div class="wechat" v-bind:weixin='weixin'><img src="../../../image/common/wechat.png" /><span v-bind:img='weixin'>加微信</span></div>
+				</div>
+				<div class="company">
+					<img src="../../../image/common/logo.png" class="logo" />
+					<span>天安佰盈保险销售有限公司</span>
+					<img src="../../../image/agent/rightArrow.png" class="arrow" />
+				</div>
+				<div class="intro">
+					<div class="titbar">
+						<img src="../../../image/common/intro.png">
+						<span>个人介绍</span></div>
+					<div class="introinfo">
+						<pre id="introarea" style="white-space: pre-wrap;word-wrap: break-word;font-family: 'Microsoft YaHei',sans-serif;" v-html="jiesao"></pre>
+					</div>
+				</div>
+				<div class="field">
+					<div class="titbar">
+						<img src="../../../image/common/field.png">
+						<span>擅长领域</span>
+					</div>
+					<div class="fieldlist clearfix shanchang" v-html="shanchang">
+						<!--<span>重急症</span>
+						<span>重急症</span>
+						<span>重急症</span>
+						<span>重急症</span>
+						<span>重急症</span>-->
+					</div>
+				</div>
+			<!--	<div class="button_share">
+					立即分享
+				</div>-->
+
+			</div>
+		</div>
+		<div class="popup">
+			<div class="popup_content">
+				<img alt="" src="">
+			</div>
+			<span class="spanClose close""></span>
+		</div>
+				<script type="text/javascript" src="../../../js/lib/common/zepto.min.js"></script>
+		<script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js"></script>
+		<script type="text/javascript" src="../../../js/lib/common/base.js"></script>
+		<script type="text/javascript" src="../../../js/lib/common/common.js"></script>
+		<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
+		<script src="../../../js/usage/agent/myCard/myCardwx.js"></script>
+	</body>
+
+</html>

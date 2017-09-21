@@ -196,3 +196,106 @@ ul li span {
 .huisebtn {
 	background-color: #959595;
 }
+
+
+/*发送短信页面*/
+
+.note {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(51, 51, 51, 0.2);
+	z-index: 3;
+}
+
+.note-div {
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	opacity: 1;
+	height: 230px;
+	width: 80%;
+	background-color: #FFFFFF;
+	z-index: 9999;
+	border-radius: 12px;
+}
+
+.note-div_title {
+	height: 26%;
+	width: 100%;
+	background: url(../../../../image/common/notetitle.png) no-repeat;
+	background-size: 100%;
+	text-align: center;
+	line-height: 50px;
+}
+.phone{
+	vertical-align: sub;
+}
+.note-div_title_right {
+	width: 13%;
+	height: 20%;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.note-div_body_title {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 25px;
+}
+
+.note-div_body_input {
+	text-align: center;
+	padding: 0 5% 0 5%;
+}
+
+.note-div_body_input li:last-child {
+	display: flex;
+	border-bottom: 1px solid #E0E0E0;
+	padding-bottom: 15px;
+}
+
+.note-div_body_input li span:first-child {
+	flex: 2;
+	border-right: 1px solid #E0E0E0;
+}
+
+.note-div_body_input li span:first-child input {
+	font-size: 15px;
+	color: #333;
+	padding-left: 10px;
+	font-family: 微软雅黑;
+}
+
+.note-div_body_input li span:last-child {
+	flex: 1;
+}
+
+
+/*btn按钮 确定*/
+
+.note {
+	display: none;
+}
+
+.dianji {
+	font-size: 15px;
+}
+
+.note-div-button {}
+
+.note-div-btn {
+	width: 50%;
+	height: 37px;
+	background-color: #48A0F0;
+	border-radius: 5px;
+	text-align: center;
+	line-height: 37px;
+	color: #FFFFFF;
+	margin: 0 auto;
+	margin-top: 20.5px;
+}

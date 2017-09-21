@@ -6,6 +6,7 @@ var listArray = [];
 var lowAge = "";
 var upAge = "";
 var healthFlag = "";
+var CommodityInfo = [];
 $(function(){
 	if( isComing == "1"){
 		$("#toubao").css({background:"#ccc"});
@@ -272,6 +273,7 @@ function productInfoRender(data){
         var body = data.returns;
         var commodityCombinationModuleMapper = body.commodityCombinationModuleMapper;
         var commodityCombination             = body.commodityCombination;
+            CommodityInfo                    = body.CommodityInfo;
         var companyProfile 					 = body.companyProfile;
         var healthTold						 = body.healthTold;			//健康告知
         if(healthTold.length != 0){
@@ -377,7 +379,7 @@ function timeRender(data){
     	var currTime=new Date(data.returns.serviceTime);
     	var currentTime=new Date(data.returns.serviceTime);
     	if( lowAge == 0 ){
-    		currentTime.setDate(currentTime.getDate() - 30);//出生30天
+    		currentTime.setDate(currentTime.getDate() - 31);//出生30天
     	}else{
     		currentTime.setFullYear(currentTime.getFullYear()-lowAge, currentTime.getMonth(), currentTime.getDate());
     	}
@@ -437,7 +439,13 @@ function toInsure(){
 		cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
 		cVersion = $("div[name='versions']").attr("data-value");
 		//alert(cId+":"+cName);
+		var indax =$("div[name='versions']").find("li").index($(".on"));
 	}
+	if( CommodityInfo.length == 1 ){
+		urlParm.bzPic = CommodityInfo[0].banner;
+	}else if( CommodityInfo.length == 2){
+		urlParm.bzPic = CommodityInfo[indax].banner;
+	}	
 	title = "投保信息"
 	urlParm.cId = cId;
 	urlParm.cName = cName;
@@ -459,7 +467,14 @@ function toHealthHtml(){
 		cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
 		cVersion = $("div[name='versions']").attr("data-value");
 		//alert(cId+":"+cName);
+		var indax =$("div[name='versions']").find("li").index($(".on"));
 	}
+	if( CommodityInfo.length == 1 ){
+		urlParm.bzPic = CommodityInfo[0].banner;
+	}else if( CommodityInfo.length == 2){
+		urlParm.bzPic = CommodityInfo[indax].banner;
+	}		
+	
 	title = "健康告知"
 	urlParm.cId = cId;
 	urlParm.cName = cName;

@@ -29,7 +29,7 @@ if(jsonKey) {
 		customerId = urlParm.customerId;
 }
 var shanchucheng = '';
-if(tagId == "全部"||tagId=='  ') {
+if(tagId == "全部" || tagId == '  ') {
 	tagId = null;
 }
 if(orderStatus == '') {
@@ -58,6 +58,40 @@ var vm = new Vue({
 	}
 })
 $(function() {
+	if(roleType == "" || roleType == "00") {
+		modelAlert('请先登录', '', function() {
+			var sendData = {
+				"userCode": userCode,
+				"shareMobile": shareMobile,
+				"customerId": customerId,
+				"commodityCombinationId": commodityCombinationId,
+				"ccId": ccId,
+				"fromtype": '2',
+				"shareFlag": shareFlag,
+				"roleType": roleType,
+				"channel": '02',
+			}
+			var jsonStr1 = JSON.stringify(sendData);
+			jsonStr1 = UrlEncode(jsonStr1);
+			window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?fromtype=" + fromtype + "&openid=" + openid + "&jsonKey=" + jsonStr1;
+		});
+	} else if(idAuth == '0') {
+		modelAlert('请先实名', '', function() {
+			var sendData = {
+				"userCode": userCode,
+				"shareMobile": shareMobile,
+				"customerId": customerId,
+				"commodityCombinationId": commodityCombinationId,
+				"ccId": ccId,
+				"fromtype": '2',
+				"shareFlag": shareFlag,
+				"roleType": roleType,
+			}
+			var jsonStr1 = JSON.stringify(sendData);
+			jsonStr1 = UrlEncode(jsonStr1);
+			window.location.href = base.url + "weixin/wxusers/html/users/certification.html?fromtype=" + fromtype + "&openid=" + openid + "&customerId=" + customerId + "&mobile=" + userCode + "&jsonKey=" + jsonStr1;
+		});
+	}
 	chaxun(userCode, transToken, customerId, riskType, orderStatus, tagId)
 	mui('#list').on('tap', '.mui-btn', function() {
 		var elem = this;

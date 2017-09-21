@@ -41,17 +41,17 @@
 						<ul class="man-div-body-ul">
 							<li>
 								<span>保单价值</span>
-								<span v-html="Objectitle.bxPolicyFinance.accountValue+'元'">232323.32元</span>
+								<span v-html="Objectitle.bxPolicyFinance.orderStatus=='11'?'--':Objectitle.bxPolicyFinance.accountValue+'元'">232323.32元</span>
 							</li>
 							<li class="xianli"></li>
 							<li>
 								<span>累计收益</span>
-								<span v-html="Objectitle.bxPolicyFinance.totalProfit+'元'"></span>
+								<span v-html="Objectitle.bxPolicyFinance.orderStatus=='11'?'--':Objectitle.bxPolicyFinance.totalProfit+'元'"></span>
 							</li>
 							<li class="xianli"></li>
 							<li>
 								<span>昨日收益</span>
-								<span v-html="Objectitle.bxPolicyFinance.yesterdayProfit+'元'"></span>
+								<span v-html="Objectitle.bxPolicyFinance.orderStatus=='11'?'--':Objectitle.bxPolicyFinance.yesterdayProfit+'元'"></span>
 							</li>
 							<li class="xianli"></li>
 							<li>

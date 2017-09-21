@@ -139,6 +139,10 @@ var peiouFlag = urlParm.peiouFlag ? urlParm.peiouFlag : "0";
 var zinvFlag = urlParm.zinvFlag ? urlParm.zinvFlag : "0";
 var qitaFlag = urlParm.qitaFlag ? urlParm.qitaFlag : "0";
 var banbenFlag = urlParm.banbenFlag ? urlParm.banbenFlag : "01";
+
+//绿意险
+var cGuaranteeTerm = '';
+
 var PRODUCT_SHARE = {
 		"MCAN" : "男性百万恶性肿瘤险-直付100万，全球抗癌疾病保险，15元起,"+name+"为你推荐男性百万恶性肿瘤险。",		
 		"FCAN" : "女性百万恶性肿瘤险-直付100万，全球抗癌疾病保险，70元起,"+name+"为你推荐女性百万恶性肿瘤险。",		

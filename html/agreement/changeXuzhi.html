@@ -79,8 +79,21 @@
 			var Scrollheight = window.innerHeight - $("header").height() - 10;
 			$("#noticecontent").height(Scrollheight + "px");
 		};
-		function backlast(){
-			window.history.back(-1);
+		function backlast(){			
+			urlParm.leftIco = "1";
+			urlParm.rightIco = "0";
+			urlParm.downIco = "0";
+			if( urlParm.frompage == "insureHtml" ){
+				urlParm.title = "投保信息";
+				var jsonStr = UrlEncode(JSON.stringify(urlParm));
+				var toUrl = base.url + "tongdaoApp/html/insurance/main/insure.html?jsonKey="+jsonStr;
+			}else if( urlParm.frompage == "jcxHtml" ){
+				urlParm.title = "驾乘人员意外伤害保险";
+				var jsonStr = UrlEncode(JSON.stringify(urlParm));
+				var toUrl = base.url + "tongdaoApp/html/insurance/jiachengxian/jcxshouye.html?jsonKey="+jsonStr;
+			}			
+			window.location.href = toUrl;
+			
 		}
 	</script>
 </html>

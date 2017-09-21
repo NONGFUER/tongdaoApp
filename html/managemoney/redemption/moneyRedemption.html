@@ -22,7 +22,7 @@
 				<div class="man mui-table-view">
 					<div id='list' class="man-div-body">
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li mb10" v-for="(value,key) in Objectlist">
+							<li class="man-div-body-ul_li mb10" v-for="(value,key) in Objectlist" v-cloak>
 								<div class="man-div-body-ul_li_div mui-slider-handle">
 									<ul class="man-div-body-ul_li_div_ul1">
 										<li>
@@ -66,6 +66,10 @@
 						</ul>
 					</div>
 				</div>
+			</div>
+			<div id="noRecord" style="display: none;background-color: #efeff4;" class="noRecord">
+				<div class="noRecordimg"><img src="../../../image/agent/gzpt_noRecord.png"></div>
+				<div class="noRecordfont">没有相关记录</div>
 			</div>
 		</div>
 	</body>

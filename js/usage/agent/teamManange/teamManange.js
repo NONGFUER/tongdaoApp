@@ -4,13 +4,11 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	transToken = urlParm.transToken,
 	customerId = urlParm.customerId;
-/*var transToken = '059876d99ec46c490953d04d4993da56';
-var userCode = '13601460140';*/
 var vm = new Vue({
-	el: '#order_index',
+	el: '#order',
 	data: {
-		tuanduinumber: {},
-		zongmoney: {},
+		tuanduinumber: "0",
+		zongmoney: "0",
 		objectlist: {},
 	}
 })
@@ -98,10 +96,22 @@ function getMyTeam(data) {
 		data.returns.forEach(function(index, element) {
 			datas.push(index);
 			if(index.recentDate != null) {
-				datas[element].recentDate=$.getTimeStr2(index.recentDate.time);
+				datas[element].recentDate = $.getTimeStr2(index.recentDate.time);
 			}
 		})
 		vm.objectlist = datas;
+		mui('.personList').on('tap', '.content-wrap', function() {
+			var customerIds = $(this).attr('customerId');
+			urlParm.channel = '02';
+			urlParm.riskType = null;
+			urlParm.userCode = userCode;
+			urlParm.policyStatus = null;
+			urlParm.logincustomerId = customerId;
+			urlParm.customerId = customerIds;
+			urlParm.title='我的出单';
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+			window.location.href = base.url + "tongdaoApp/html/agent/mysingle/teaMmysingle.html?jsonKey=" + jsonStr;
+		})
 	} else if(data.status_code == '123456') {
 		modelAlert(data.statusMessage, "", lognCont);
 	} else {
@@ -146,11 +156,7 @@ function timestampformat(DATE) {
 function lognCont() {
 	loginControl();
 }
-mui('.mui-scroll-wrapper').scroll({
-	deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
-});
 
 function backlast() {
-	mui.alert(1);
 	sysback();
 }

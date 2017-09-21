@@ -12,16 +12,31 @@ function backlast(){
 		toJcxHtml();
 	}else if( urlParm.frompage == "policyInfoHtml" ){
 		toPolicyInfo();
-	}else {
+	}else if( urlParm.frompage == "orderInfoHtml"){
+		toOrderInfo();
+	}else{
 		window.history.back(-1);
 	}
 	
 }
+
+function toOrderInfo(){
+	urlParm.title = "订单详情";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/account/myOrder/orderInfo.html?jsonKey="+jsonStr;
+}
+
 function toPolicyInfo(){
 	urlParm.title = "保单详情";
 	urlParm.leftIco = "1";
 	urlParm.rightIco = "0";
 	urlParm.downIco = "0";
+	if(urlParm.search){
+		urlParm.search = urlParm.search;
+	}	
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/account/myOrder/policyInfo.html?jsonKey="+jsonStr;
 }

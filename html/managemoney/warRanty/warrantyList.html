@@ -53,7 +53,7 @@
 										<ul class="man-div-body-ul_li_div_ul2">
 											<li>
 												<span>保单价值</span>
-												<span v-html="value.accountValue+'元'" ></span>
+												<span v-html="value.orderStatus=='11'?'--': value.accountValue+'元'" ></span>
 											</li>
 											<li>
 												<span>投资本金</span>
@@ -61,11 +61,11 @@
 											</li>
 											<li>
 												<span>昨日收益</span>
-												<span v-html="value.yesterdayProfit+'元'"></span>
+												<span v-html="value.orderStatus=='11'?'--':value.yesterdayProfit+'元'"></span>
 											</li>
 											<li>
 												<span>累计收益</span>
-												<span v-html="value.totalProfit+'元'"></span>
+												<span v-html="value.orderStatus=='11'?'--':value.totalProfit+'元'"></span>
 											</li>
 											<li>
 												<span>初始费用</span>

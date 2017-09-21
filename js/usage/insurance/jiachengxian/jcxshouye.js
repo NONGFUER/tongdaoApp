@@ -34,13 +34,7 @@ $(function(){
     })
     //须知
     $(".xuzhi").unbind("tap").bind("tap",function(){
-    	//window.location.href="jcxxuzhi.html"+window.location.search;
-    	$(".PageInfo").hide();
-    	$(".tiaokuanInfo").hide();
-    	$(".xuzhiInfo").show();
-    	$("body").css("background-color","#f2eff6");
-    	/* 设置滑动区域 */
-    	$.setscroll2();
+    	toXuzhi();
     })
     //条款、须知页面返回
     $(".h_back3,.h_back2").unbind("tap").bind("tap",function(){
@@ -79,9 +73,9 @@ $(function(){
 		var index= str.lastIndexOf("/");
 		kuang=str.substring(index+1,str.length);
 		if(kuang=="jcxyigouxuan.png"){
-			$("#kuang").attr("src","../../images/jcxweigouxuan.png")
+			$("#kuang").attr("src","../../../image/insurance/jcx/jcxweigouxuan.png")
 		}else{
-			$("#kuang").attr("src","../../images/jcxyigouxuan.png")
+			$("#kuang").attr("src","../../../image/insurance/jcx/jcxyigouxuan.png")
 		}
 	})
 	//赠送客户
@@ -321,6 +315,19 @@ function toArticle(){
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/agreement/article.html?jsonKey="+jsonStr;
 }
+
+//跳转投保须知
+function toXuzhi(){
+	urlParm.title = "";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	urlParm.ccId = "15";
+	urlParm.frompage = "jcxHtml";
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/agreement/changeXuzhi.html?jsonKey="+jsonStr;
+}
+
 
 function shareHandle(){
 	var title = "易安驾乘无忧意外保险" ;

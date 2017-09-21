@@ -132,3 +132,30 @@ img {
 a{
 	color: #FFFFFF;
 }
+
+.pdiv{
+	display:block;
+	line-height:44px;
+	color:black;
+	height:44px;
+	text-align:center;
+	background:#fff;
+	width:100%;
+	padding: 12px 4%;
+}
+
+.ltk{
+	float: left;
+    height: 20px;
+    line-height: 20px;
+    font-size: 13px;
+}
+.rtk{
+	float: right;
+    background: #48a0f0;
+    color: #fff;
+    height: 20px;
+    line-height: 20px;
+    width: 50px;
+    font-size: 13px;
+}

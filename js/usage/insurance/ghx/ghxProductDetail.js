@@ -2,6 +2,9 @@ var dicChannelList = [];
 var dicCodeList    = [];
 var remarkList	   = [];
 $(function(){
+	if( isComing == "1"){
+		$("#toubao").css({background:"#ccc"});
+	}
     $.setscroll("bodyMuiScroll"); 
     sendProductInfoRequest("14");
     
@@ -19,6 +22,9 @@ $(function(){
     	calPrem()
     });
     $("#toubao").bind("tap",function(){
+    	if( isComing == "1"){
+			return false;
+		}
     	isLogin(roleType,toFillPolicyHtml);
     	//toFillPolicyHtml();//跳转到投保信息
     });
@@ -29,6 +35,12 @@ $(function(){
     $(".rexian").unbind("tap").bind("tap",function(){
     	callService("95505",".rexian");
     })
+    $(".hospital").unbind("tap").bind("tap",function(){
+    	toHospital();
+    });
+	if( roleType != "00" && isComing != "1"){
+	   	 showRightIcon();
+	}
 });
 
 function sendProductInfoRequest(ccId){
@@ -151,8 +163,27 @@ function toFillPolicyHtml(){
 	urlParm.leftIcon = "1";
 	urlParm.rightIco = "0";
 	urlParm.downIco  = "0";
+	urlParm.ccId     = "14";
+	var indax = $("#versions").find(".on").data("index");
+	if( indax == "0" ){
+		urlParm.bzPic = "http://jichupro.oss-cn-szfinance.aliyuncs.com/commodityCombination/commodityBaoZhang/00500001.png"
+	}else if( indax == "1" ){
+		urlParm.bzPic = "http://jichupro.oss-cn-szfinance.aliyuncs.com/commodityCombination/commodityBaoZhang/00500002.png"
+	}else if( indax == "2" ){
+		urlParm.bzPic = "http://jichupro.oss-cn-szfinance.aliyuncs.com/commodityCombination/commodityBaoZhang/00500003.png"
+	}
+	
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/insurance/main/insure.html?jsonKey=" + jsonStr;
+}
+//
+function toHospital(){
+	urlParm.title    = "医院列表";
+	urlParm.leftIcon = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco  = "0";
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/insurance/ghx/hospitalList.html?jsonKey=" + jsonStr;
 }
 
 function shareHandle(){

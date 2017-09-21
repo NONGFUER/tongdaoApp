@@ -94,14 +94,12 @@ function sysback() {
 function sysbackurl(parm) {
 	var ua = navigator.userAgent.toLowerCase();
 	if(ua.match(/MicroMessenger/i) == "micromessenger") {
-		document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-			WeixinJSBridge.call('closeWindow');
-		})
+		window.location.href = parm;
 	} else {
 		if(systemsource == "ios") {
 			objcObject.OpenUrl(parm);
 		} else if(systemsource == "android") {
-			
+			window.location.href = parm;
 		}
 	}
 }
@@ -111,15 +109,13 @@ function sysbackurl(parm) {
  * */
 function sysbackproduct() {
 	var ua = navigator.userAgent.toLowerCase();
-	if(ua.match(/MicroMessenger/i) == "micromessenger") {
-		document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-			WeixinJSBridge.call('closeWindow');
-		})
+	if(ua.match(/MicroMessenger/i) == "micromessenger") {		
+			WeixinJSBridge.call('closeWindow');		
 	} else {
 		if(systemsource == "ios") {
 			objcObject.OpenUrl("backProduct");
 		} else if(systemsource == "android") {
-			android.goBack();
+			android.goHomePage();
 		}
 	}
 }
@@ -143,10 +139,20 @@ function callService(phone, obj) {
 }
 /*调用壳方法，发短信 */
 function callSendMessage(phone){
-	if(systemsource == "ios") {
-		objcObject.sendMessage(phone);
-	} else if(systemsource == "android") {
-		android.JsSendSms(phone);
+	var ua = navigator.userAgent.toLowerCase();
+	if(ua.match(/MicroMessenger/i) == "micromessenger") {
+		if(systemsource == "ios") {
+			$(obj).attr("href", "sms:" + phone);
+		} else if(systemsource == "android") {
+			$(obj).attr("href", "sms:" + phone + "#mp.weixin.qq.com");
+		}
+
+	} else {
+		if(systemsource == "ios") {
+			objcObject.sendMessage(phone);
+		} else if(systemsource == "android") {
+			android.JsSendSms(phone);
+		}
 	}
 }
 //同道出行车险 壳上分享方法

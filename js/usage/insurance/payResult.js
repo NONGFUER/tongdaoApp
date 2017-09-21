@@ -78,6 +78,7 @@ function init(orderNo){
 	    	var prem = toDecimal2(shortRiskOrder.prem)+'元';
 	    	var commodityInfo = body.commodityInfo;
 	    	var productName = commodityInfo.commodityName;
+	    	policyNo = shortRiskOrder.policyNo;
 	    	$("#prem").text(prem)
 	    	$("#productName").text(productName);
 	    }else {
@@ -100,6 +101,7 @@ function toPolicyDetail(){
 	urlParm.policyNo = policyNo;
 	urlParm.frompage = "payResultHtml";
 	urlParm.cxflag = "4";
+	urlParm.search	= window.location.search; 
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/account/myOrder/policyInfo.html?jsonKey="+jsonStr;
 }

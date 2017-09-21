@@ -45,7 +45,7 @@ $(function() {
 		var li = elem.parentNode.parentNode;
 		var insuranceConsultantId = $(elem).attr('insuranceConsultantId');
 		var agc = $(elem).attr('agentId');
-		mui.confirm('确认删除该保险顾问吗？', '', ['确认', '取消'], function(e) {
+		mui.confirm('是否确认删除？', '', ['确认', '取消'], function(e) {
 			if(e.index == 0) {
 				shanchu(userCode, transToken, customerId, insuranceConsultantId, agc);
 				li.parentNode.removeChild(li);
@@ -62,11 +62,12 @@ $(function() {
 			$('.man-div-body-li').children('.xuan').hide();
 			$(this).children('.xuan').show();
 			insuranceConsultantId = $(this).attr('insuranceConsultantId');
-			qiehuan(userCode, transToken, customerId, insuranceConsultantId);
+			var phones = $(this).attr('phone');
+			qiechaxun(userCode, transToken, phones)
 		}
 	})
 })
-/*查询保险人和保险顾问地区是否一致*/
+/*新增查询保险人和保险顾问地区是否一致*/
 function chaxun(userCode, transToken, postcardPhone) {
 	var reqData = {
 		"head": {
@@ -82,6 +83,43 @@ function chaxun(userCode, transToken, postcardPhone) {
 	var url = base.url + 'insuranceConsultantInfo/getInsuranceConsultantInfo.do';
 	console.log(reqData);
 	$.reqAjaxs(url, reqData, getInsuranceConsultantInfo);
+}
+/*切换查询保险人和保险顾问地区是否一致*/
+function qiechaxun(userCode, transToken, postcardPhone) {
+	var reqData = {
+		"head": {
+			"channel": "1",
+			"transTime": $.getTimeStr(),
+			"transToken": transToken,
+			"userCode": userCode
+		},
+		"body": {
+			"phone": postcardPhone
+		}
+	}
+	var url = base.url + 'insuranceConsultantInfo/getInsuranceConsultantInfo.do';
+	console.log(reqData);
+	$.reqAjaxs(url, reqData, getqiehuan);
+}
+
+function getqiehuan(data) {
+	if(data.returns.insuranceConsultantInfo != null && data.returns.insuranceConsultantInfo != "") {
+		if(data.returns.insuranceConsultantInfo.agentId != null && data.returns.insuranceConsultantInfo.agentId != "") {
+			var diqu = data.returns.insuranceConsultantInfo.agentId;
+			var insuranceConsultantId = data.returns.insuranceConsultantInfo.id;
+			if(diqu != agentId) {
+				var btnArray = ['否', '是'];
+				mui.confirm('您设置的保险顾问服务区域与当前所在城市，会存在服务不到位的情况，是否继续设置？', '', btnArray, function(e) {
+					if(e.index == 1) {
+						qiehuan(userCode, transToken, customerId, insuranceConsultantId);
+					} else {
+						
+					}
+				})
+			}
+		}
+
+	}
 }
 /*新增保险顾问*/
 function xinzeng(userCode, transToken, customerId, insuranceConsultantId) {
@@ -141,7 +179,9 @@ function getInsuranceConsultantInfos(data) {
 				vm.Objectitle = datas;
 			}
 		}
-		if(type != '02' || type != '03' || type != '04' || type != '05' || type != '06') {
+		if(type == '02' || type == '03' || type == '04' || type == '05' || type == '06') {
+			$('.baoxian').hide();
+		} else {
 			$('.baoxian').show();
 		}
 	} else if(data.statusCode == '123456') {
@@ -189,19 +229,19 @@ function getInsuranceConsultantInfo(data) {
 			var diqu = data.returns.insuranceConsultantInfo.agentId;
 			var insuranceConsultantId = data.returns.insuranceConsultantInfo.id;
 			if(diqu == agentId) {
-				modelAlert('新增保险顾问成功', '', function() {
+				modelAlert('恭喜您，设置成功', '', function() {
 					xinzeng(userCode, transToken, customerId, insuranceConsultantId);
 				});
 			} else {
-				modelAlert('保险顾问服务地区不符', '', function() {
+				modelAlert('您设置的保险顾问服务区域与当前所在城市，会存在服务不到位的情况，是否继续设置？', '', function() {
 					xinzeng(userCode, transToken, customerId, insuranceConsultantId);
 				});
 			}
 		} else {
-			modelAlert('您输入的不是保险顾问手机号');
+			modelAlert('未查询到指定的保险顾问，请重新输入！');
 		}
 	} else {
-		modelAlert('您输入的不是保险顾问手机号');
+		modelAlert('未查询到指定的保险顾问，请重新输入！');
 	}
 }
 /*删除*/

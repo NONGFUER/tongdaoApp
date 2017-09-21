@@ -10,6 +10,7 @@ var userCode = getUrlQueryString('mobile'),
 	idAuth = '',
 	fromtype = 'licai',
 	transToken = '';
+var productFlag='01';
 if(userCode == null) {
 	userCode = '';
 }
@@ -28,12 +29,11 @@ if(jsonKey) {
 		idAuth = urlParm.idAuth,
 		customerId = urlParm.customerId;
 }
+var invMobie=shareMobile;
 if(commodityCombinationId = '4') {
 	productFlag = '01';
-	/*$('.mui-title"').html('安溢保两全保险 &#40一年期 &#41');*/
 } else if(commodityCombinationId = '5') {
 	productFlag = '02';
-	/*$('.mui-title"').html('安溢保两全保险 &#40五年期 &#41');*/
 }
 
 var phone = '';
@@ -137,7 +137,7 @@ $(function() {
 				}
 				var jsonStr1 = JSON.stringify(sendData);
 				jsonStr1 = UrlEncode(jsonStr1);
-				window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?	fromtype=" + fromtype + "&openid=" + openid + "&jsonKey=" + jsonStr1;
+				window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?	fromtype=" + fromtype + "&openid=" + openid + "&inviterPhone="+shareMobile+"&jsonKey=" + jsonStr1;
 			});
 		} else if(idAuth == '0') {
 			modelAlert('请先实名', '', function() {
@@ -175,6 +175,12 @@ $(function() {
 	$(".cancle").unbind("tap").bind("tap", function() {
 		$('#shadow').hide();
 	})
+	$(".youyuqi img").unbind("tap").bind("tap",function(){
+		modelAlert("犹豫期是指在购买后处于犹豫期内进行赎回，免手续费");
+	});
+	$(".suoding_left img").unbind("tap").bind("tap",function(){
+		modelAlert("锁定期是指在购买后处于锁定期内进行赎回，需收取一定费率的手续费（在锁定期外或犹豫期内赎回免手续费）");
+	});
 
 })
 /*购买*/
@@ -190,6 +196,7 @@ function buy() {
 		"testType": $('.retest').attr('testType'),
 		"title": vm.Objectitle.commodityCombination.commodityCombinationName,
 		"productFlag": productFlag,
+		"invMobie":invMobie,
 		"channel": '02',
 		"leftIco": '1',
 		"rightIco": '0',
@@ -275,6 +282,7 @@ function getRiskAble(data) {
 					"commodityCombinationId": commodityCombinationId,
 				},
 				"channel": '02',
+				"invMobie":invMobie,
 				"title": '风险评估 ',
 				"productFlag": productFlag,
 				"titles": vm.Objectitle.commodityCombination.commodityCombinationName,

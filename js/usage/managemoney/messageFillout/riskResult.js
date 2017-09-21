@@ -9,13 +9,14 @@ var productFlag='';
 var channel='';
 var roleType='';
 var idAuth='';
+var invMobie='';
 $(function() {
 	//	url传值解密过程
 	var urlstr = getUrlQueryString('jsonKey');
 	urlstr = UrlDecode(urlstr);
 	parm = JSON.parse(urlstr);
-	console.info(parm);
 	testType = parm.body.testType;
+	invMobie=parm.invMobie;
 	productFlag=parm.productFlag;
 	mobile = parm.body.mobile;
 	channel=parm.channel;
@@ -80,7 +81,7 @@ function product() {
 		},
 		"head": {
 			"userCode": productCode,
-			"channel": "01",
+			"channel": channel,
 			"transTime": $.getTimeStr(),
 			"transToken": transToken
 		},
@@ -99,6 +100,7 @@ function product() {
 				"commodityId": commodityId,
 				"transToken": transToken,
 				"channel":channel,
+				"invMobie":invMobie,
 				"roleType":roleType,
 				"idAuth":idAuth,
 				"title": titles,
@@ -127,7 +129,7 @@ function buy() {
 		},
 		"head": {
 			"userCode": productCode,
-			"channel": "01",
+			"channel": channel,
 			"transTime": $.getTimeStr(),
 			"transToken": transToken
 		}
@@ -148,6 +150,7 @@ function buy() {
 				"transToken": transToken,
 				"channel":channel,
 				"roleType":roleType,
+				"invMobie":invMobie,
 				"idAuth":idAuth,
 				"productFlag":productFlag,
 				'title': titles,

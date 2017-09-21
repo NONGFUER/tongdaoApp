@@ -212,6 +212,8 @@ function mylist(userCode, transToken, customerId, tagId, policyStatus) {
 	if(tagId == '全部') {
 		tagId = null;
 	}
+	$('.man-div-title ul').children('li').removeClass('li_xuan');
+	$('.man-div-title ul').find('li').eq(0).addClass('li_xuan');
 	xinzhen(userCode, transToken, customerId, policyStatus, riskType, tagId);
 	mui('.man-div-title ').on('tap', 'li', function() {
 		$('.man-div-title ul').children('li').removeClass('li_xuan');

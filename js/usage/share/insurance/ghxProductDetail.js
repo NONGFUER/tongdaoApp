@@ -150,9 +150,18 @@ function toFillPolicyHtml(){
 	urlParm.leftIcon = "1";
 	urlParm.rightIco = "0";
 	urlParm.downIco  = "0";
+	urlParm.ccId     = "14";
+	var indax = $("#versions").find(".on").data("index");
+	if( indax == "0" ){
+		urlParm.bzPic = "http://jichupro.oss-cn-szfinance.aliyuncs.com/commodityCombination/commodityBaoZhang/00500001.png"
+	}else if( indax == "1" ){
+		urlParm.bzPic = "http://jichupro.oss-cn-szfinance.aliyuncs.com/commodityCombination/commodityBaoZhang/00500002.png"
+	}else if( indax == "2" ){
+		urlParm.bzPic = "http://jichupro.oss-cn-szfinance.aliyuncs.com/commodityCombination/commodityBaoZhang/00500003.png"
+	}
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	if( roleType == "00" || roleType == "" ){
-		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=ghx&openid="+openid;
+		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=ghx&openid="+openid+"&inviterPhone="+shareMobile;
 	}else{
 		window.location.href = base.url + "tongdaoApp/html/share/insurance/main/insure.html?jsonKey=" + jsonStr;
 	}

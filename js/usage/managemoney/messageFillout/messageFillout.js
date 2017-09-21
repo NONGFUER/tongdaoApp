@@ -17,6 +17,7 @@ commodityCombinationId = urlParm.commodityCombinationId,
 	pieces = urlParm.pieces,
 	channel = urlParm.channel,
 	title = urlParm.title;
+var inFlag = '1';
 if(title == null || title == "") {
 	title = urlParm.titles;
 }
@@ -24,6 +25,11 @@ if(roleType != '00') {
 	rightIco = '1';
 } else {
 	rightIco = '0';
+}
+if(channel == '01') {
+	inFlag = '3';
+} else {
+	inFlag = '2';
 }
 testType = toRiskType(riskSupportAbility); //类型
 if(bankCode != null && bankCode != "") {
@@ -103,6 +109,7 @@ $(function() {
 			var email = $('#email').val();
 			var yinhang = $('#yinhangka').val();
 			bankName = $('.bank').html();
+			var reg = new RegExp("^[0-9]*$");
 			var dui = true;
 			if(chengshi == '请选择') {
 				mui.alert("请选择地区");
@@ -110,17 +117,26 @@ $(function() {
 			} else if(datawhere == "" || datawhere == null) {
 				mui.alert("请填写完整地区");
 				dui = false;
-			} else if(dizhi == "" || dizhi == null || dizhi.length < 8) {
-				mui.alert("请填写详细地址");
+			} else if(dizhi == "" || dizhi == null) {
+				mui.alert("请输入地址！");
+				dui = false;
+			} else if(dizhi.length < 8) {
+				mui.alert("地址输入格式不正确！");
+				dui = false;
+			} else if(email == null || email == '') {
+				mui.alert("请输入邮箱！");
 				dui = false;
 			} else if(tit.regExp.isEmail(email) == false) {
-				mui.alert("请填写正确的电子邮箱");
+				mui.alert("邮箱输入格式不正确！");
 				dui = false;
 			} else if(bankName == null || bankName == "") {
 				mui.alert("请选择银行");
 				dui = false;
 			} else if(yinhang == null || yinhang == "") {
 				mui.alert("请填写银行卡号");
+				dui = false;
+			} else if(!reg.test(yinhang)) {
+				mui.alert("请填写正确的银行卡号");
 				dui = false;
 			} else if(bankName == "请选择银行") {
 				mui.alert("请选择银行");
@@ -181,7 +197,7 @@ $(function() {
 						"beiEmail": email, //被投保人电子邮箱 	
 						"bankMaxMoney": bankMaxMoney + "", //银行最大金额
 						"invitePhone": invMobie, //引荐人手机号
-						"inFlag": "1", //来源渠道
+						"inFlag": inFlag, //来源渠道
 						"buyType": '1', //1直接购买，2分享购买
 						"customerId": customerId,
 					}
@@ -193,6 +209,9 @@ $(function() {
 			mui.alert('请勾选已阅读协议');
 		}
 	})
+	if(pieces != null) {
+		$('#goumai').val(pieces);
+	}
 	/*发送短信*/
 	$(".dianji").unbind("tap").bind("tap", function() {
 		sendMessage();
@@ -317,6 +336,14 @@ $(function() {
 			$(".dianji").html(curCount);
 		}
 	}
+	/*点击X关发送短信窗口*/
+	$(".note-div_title_right").unbind("tap").bind("tap", function() {
+		$('.note').hide();
+		window.clearInterval(InterValObj); //停止计时器  
+		$(".dianji").removeClass("mui-disabled"); //启用按钮  
+		$(".dianji").attr("style", "color:#333");
+		$(".dianji").html("获取验证码");
+	});
 	/*发送短信*/
 	function GetRegCode(data) {
 		mui.alert(data.statusMessage);
@@ -338,23 +365,10 @@ $(function() {
 	}
 	/*点击银行卡*/
 	$(".bank").unbind("tap").bind("tap", function() {
-		var param = {
-			"userCode": userCode,
-			"commodityCombinationId": commodityCombinationId,
-			"insurePhone": phone,
-			"riskSupportAbility": riskSupportAbility,
-			"title": '银行卡信息',
-			"titles": vm.comComName,
-			"roleType": roleType,
-			"idAuth": idAuth,
-			"channel": channel,
-			"transTime": $.getTimeStr(),
-			"transToken": transToken,
-			"customerId": customerId,
-			"commodityId": commodityId,
-			"pieces": $("#goumai").val()
-		}
-		var jsonStr = UrlEncode(JSON.stringify(param));
+		urlParm.title = '银行卡信息';
+		urlParm.pieces = $('#goumai').val();
+		urlParm.titles = vm.comComName;
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = "../cardList/cardList.html?jsonKey=" + jsonStr;
 	})
 	//获取联动列表
@@ -399,10 +413,7 @@ $(function() {
 	})
 
 })
-/*点击X关发送短信窗口*/
-$(".note-div_title_right").unbind("tap").bind("tap", function() {
-	$('.note').hide();
-});
+
 /*核保*/
 function saveOrder(data) {
 	console.log(data.statusCode);
@@ -465,6 +476,7 @@ function getinsure(data) {
 			"commodityCombinationId": commodityCombinationId,
 			"commodityId": commodityId,
 			"testType": testType,
+			"channel": channel,
 			"idAuth": idAuth,
 			"roleType": roleType,
 			'laiyuan': laiyuan, //页面来源
@@ -476,10 +488,36 @@ function getinsure(data) {
 		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/returnVisit.html?jsonKey=" + jsonStr;
 	} else if(data.statusCode == '123456') {
 		modelAlert(data.statusMessage, '', lognCont);
+	} else if(data.statusCode == '999998') {
+		var laiyuan = '1'; //1.投保页面,2.保单列表页
+		$('.note').hide();
+		var sendData = {
+			"userCode": userCode,
+			"transTime": "",
+			"transToken": transToken,
+			"riskSupportAbility": riskSupportAbility,
+			"orderNo": orderNo,
+			"policyNo": data.returns.policyNo,
+			"comComName": vm.comComName,
+			"startPiece": $('#money').html().split('.'),
+			'title': vm.comComName,
+			"customerId": customerId,
+			"commodityCombinationId": commodityCombinationId,
+			"commodityId": commodityId,
+			"testType": testType,
+			"channel": channel,
+			"idAuth": idAuth,
+			"roleType": roleType,
+			'laiyuan': laiyuan, //页面来源
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '0',
+		};
+		var jsonStr = UrlEncode(JSON.stringify(sendData));
+		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/paymentFailure.html?jsonKey=" + jsonStr;
 	} else {
 		modelAlert(data.statusMessage);
 	}
-
 }
 $("#risktype").unbind("tap").bind("tap", function() {
 	var sendData = {

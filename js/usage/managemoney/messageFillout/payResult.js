@@ -1,15 +1,19 @@
 var vm = new Vue({
 	el: '#list',
 	data: {
-		 orderNo:"",
-		 title:"",
-		 comComName:"",
-		 startPiece:"",
-		 userCode:"",
-		 transToken:"",
+		orderNo: "",
+		title: "",
+		comComName: "",
+		startPiece: "",
+		userCode: "",
+		transToken: "",
 	}
 })
 $(function() {
+	var ua = navigator.userAgent.toLowerCase();
+	if(ua.match(/MicroMessenger/i) == "micromessenger") {
+		$(".result-download").show();		
+	}
 	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
 	vm.orderNo = urlParm.orderNo;
 	vm.title = urlParm.title;
@@ -17,13 +21,28 @@ $(function() {
 	vm.startPiece = urlParm.startPiece[0];
 	vm.userCode = urlParm.userCode;
 	vm.transToken = urlParm.transToken;
+	if(typeof(vm.startPiece) == 'undefined') {
+		vm.startPiece=urlParm.startPiece;
+		var canpingzhifu='01';//产品支付页面跳转过来
+	}else{
+		var canpingzhifu='02';//订单支付页跳转过来
+	}
 	/**--返回--*/
-	$("#close").bind("tap", function() {
+	$("#shouye").unbind("tap").bind("tap", function() {
 		sysbackproduct();
 	})
-	$(".backProduct").bind("tap", function() {
-		sysbackproduct();
+	$(".on1").unbind("tap").bind("tap", function() {
+		urlParm.title = '保单详情';
+		urlParm.commodityComId=urlParm.commodityCombinationId;
+		urlParm.canpingzhifu=canpingzhifu;
+		var sendData = urlParm;
+		var jsonStr = UrlEncode(JSON.stringify(sendData));
+		window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
 	})
+	//跳转到下载页面
+	$(".result-download").unbind("tap").bind("tap",function(){			
+		window.location.href = base.url + "tongdaoApp/html/share/download/appDownload.html";		
+	});
 	/**--分享--*/
 	/*$("#share").bind("tap",function(){
 		var jsonStr = JSON.stringify(parm);

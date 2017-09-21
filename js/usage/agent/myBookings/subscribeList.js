@@ -4,7 +4,7 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	customerPhone = urlParm.customerPhone,
 	roleType = urlParm.roleType,
 	transToken = urlParm.transToken,
-	customerId = urlParm.customerId;
+	customerId = urlParm.customerId;	
 var vm = new Vue({
 	el: '#list',
 	data: {
@@ -51,13 +51,12 @@ $(function() {
 		}, 500);
 	}
 	mui("ul").on("tap", "li", function() {
-		var customerId = $(this).attr('customerId');
 		var commodityCombinationId = $(this).attr('commodityCombinationId');
 		var yuyuePhone = $(this).attr('yuyuePhone');
 		var yuyueName = $(this).attr('yuyueName');
 		var yuyueNo = $(this).attr('yuyueNo');
 		var sendData = {
-			"customerId": customerId,
+			"customerId": customerId+'',
 			"commodityCombinationId": commodityCombinationId,
 			"yuyueNo": yuyueNo,
 			"yuyuePhone": yuyuePhone,
@@ -65,6 +64,7 @@ $(function() {
 			"transToken": transToken,
 			"roleType": roleType,
 			"userCode": userCode,
+			"customerPhone":customerPhone,
 			"leftIco": '1',
 			"rightIco": '0',
 			"downIco": '0',
@@ -76,8 +76,14 @@ $(function() {
 })
 
 function getYuyueOrderList(data) {
-	console.log(data.returns.yuyueOrderList);
-	vm.objectlist = data.returns.yuyueOrderList;
+	console.log(data);
+	if(data.statusCode=='000000'){
+		vm.objectlist = data.returns.yuyueOrderList;
+	}else if(data.statusCode=='123456'){
+		modelAlert(data.statusMessage,'',lognCont)
+	}else{
+		modelAlert(data.statusMessage);
+	}
 }
 /*登录失效*/
 function lognCont() {

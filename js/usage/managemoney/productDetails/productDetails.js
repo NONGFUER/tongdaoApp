@@ -6,10 +6,20 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	ccId = urlParm.commodityCombinationId,
 	transToken = urlParm.transToken,
 	idAuth = urlParm.idAuth,
+	isComing=urlParm.isComing,
 	channel = '01',
 	customerId = urlParm.customerId;
+var productFlag='01';
 if(userCode==null){
 	userCode='';
+}
+if(typeof(isComing) == 'undefined') {
+	isComing = '';
+}
+if(isComing=='1'){
+	$('#huifang').hide();
+}else{
+	$('#huifang').show();
 }
 if(commodityCombinationId = '4') {
 	productFlag = '01';
@@ -20,6 +30,7 @@ var phone ='';
 if(userCode!=''&&userCode!=null){
 	phone = phoneyin(userCode);
 }
+var invMobie=userCode;
 $('.phone').html(phone);
 console.log("页面初始化，获取上个页面传值报文--");
 console.log(urlParm);
@@ -79,10 +90,15 @@ $(function() {
 	}
 	mui('.man-div-body-ul_li_div_three').on('tap', '.neirong', function() {
 		var urls = $(this).attr('modueinfo');
+		var name = $(this).attr('subModuleName');
 		urlParm.cId = vm.cid;
 		urlParm.frompage = "hongkanghtml";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
-		window.location.href = urls + "?jsonKey=" + jsonStr;
+		if(name=='保险条款'){
+			window.location.href = urls + "?jsonKey=" + jsonStr;
+		}else{
+			window.location.href = urls;
+		}
 	})
 	/*伸缩按钮*/
 	$(".body_title").unbind("tap").bind("tap", function() {
@@ -115,6 +131,12 @@ $(function() {
 	$(".cancle").unbind("tap").bind("tap", function() {
 		$('#shadow').hide();
 	})
+	$(".youyuqi img").unbind("tap").bind("tap",function(){
+		modelAlert("犹豫期是指在购买后处于犹豫期内进行赎回，免手续费");
+	});
+	$(".suoding_left img").unbind("tap").bind("tap",function(){
+		modelAlert("锁定期是指在购买后处于锁定期内进行赎回，需收取一定费率的手续费（在锁定期外或犹豫期内赎回免手续费）");
+	});
 
 })
 
@@ -133,6 +155,7 @@ function buy() {
 		"productFlag": productFlag,
 		"channel": channel,
 		"roleType": roleType,
+		"invMobie":invMobie,
 		"idAuth": idAuth,
 		"leftIco": '1',
 		"rightIco": '0',
@@ -193,7 +216,7 @@ function goldProductInfo(data) {
 	} else {
 		modelAlert(data.statusMessage);
 	}
-	if(roleType != '00') {
+	if(roleType != '00'&&isComing!='1') {
 		showRightIcon();
 	}
 }
@@ -227,6 +250,7 @@ function getRiskAble(data) {
 					"commodityCombinationId": commodityCombinationId,
 				},
 				"roleType": roleType,
+				"invMobie":invMobie,
 				"idAuth": idAuth,
 				"channel": channel,
 				"title": '风险评估 ',

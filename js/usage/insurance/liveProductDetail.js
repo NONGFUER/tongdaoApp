@@ -14,9 +14,9 @@ $(function(){
     if( roleType != "00" ){   	
     	sendCusInsConsultantRequest();
     }
-    $(".info-content").unbind("tap").bind("tap",function(){
-    	toInsuranceConsultant();
-    });
+    $(".kefu").unbind("tap").bind("tap",function(){
+    	callService("4006895505",".kefuPhone");
+    })
     showRightIcon();
    
 });
@@ -174,6 +174,7 @@ function addYuyueInfoRender(data){
         var cusInfo = data.returns.customerBasic;
         var mobile1  = cusInfo.mobile;//获取姓名
         var name1    = cusInfo.name;//获取手机号
+        var customerId1 = cusInfo.id + "";   //
         getTouxiang(mobile1);
         //var userImg = cusInfo.userImage;//获取用户头像
         $("#bigname").text(name1);
@@ -187,7 +188,9 @@ function addYuyueInfoRender(data){
         if( cusInfo.cityCode == cityCode ){
         	$(".insurance-customer").removeClass("none");
         }
-        
+        $(".info-content").unbind("tap").bind("tap",function(){
+        	toInsuranceConsultant(customerId1,mobile1);
+        });
     }else if( data.statusCode == ajaxStatus.relogin ){
         modelAlert( data.statusMessage, "", toLogin ); 
     }else{
@@ -277,7 +280,7 @@ function moduleStr( moduleList ){
 	    str += '<div class="label">'+subModuleName+'：</div>';
 	    str += '<div class="conter">';
 	    if( subModuleName == "保障期限"){
-	    	str += '<ul class="radio"><li class="on">'+modueInfo+'</li></ul>'
+	    	str += modueInfo;
 	    }else if( subModuleName == "缴费期间" ){
 	    	var moduleList = modueInfo.split("、");
 	    	str += '<ul class="radio">';
@@ -357,16 +360,17 @@ function toYuyueList(){
 }
 
 //跳转到我的名片
-function toInsuranceConsultant(){
+function toInsuranceConsultant(cusId,mobile1){
 	urlParm.title = "我的名片";
 	urlParm.leftIco = "1";
 	urlParm.rightIco = "0";
 	urlParm.downIco = "0";
-	urlParm.userCode = mobile;
+	urlParm.userCode = mobile1;
 	urlParm.frompage = "liveProductHtml";
 	urlParm.roleType = roleType;
+	urlParm.customerId = cusId;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	window.location.href = base.url + "tongdaoApp/html/agent/myCard/myCard.html?jsonKey="+jsonStr;
+	window.location.href = base.url + "tongdaoApp/html/agent/myCard/myCardwx.html?jsonKey="+jsonStr;
 }
 
 function getTouxiang(mobile){

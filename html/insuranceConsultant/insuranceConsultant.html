@@ -21,7 +21,7 @@
 				<div class="man mui-table-view">
 					<div class="man-div-body ">
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-li mb10 mui-table-view-cell" v-for="(value,key) in Objectitle" v-bind:agentId='value.agentId' v-bind:isDefault='value.isDefault' v-bind:insuranceConsultantId='value.id'  v-cloak>
+							<li class="man-div-body-li mb10 mui-table-view-cell" v-for="(value,key) in Objectitle" v-bind:agentId='value.agentId' v-bind:isDefault='value.isDefault' v-bind:phone='value.userPhone' v-bind:insuranceConsultantId='value.id'  v-cloak>
 								<div class="mui-slider-right mui-disabled shanchu"  v-if="value.isDefault!='01'">
 									<a class="mui-btn mui-btn-red"  v-bind:insuranceConsultantId='value.id' v-bind:agentId="value.agentId">
 										<!--<i class="lajitong"></i>-->

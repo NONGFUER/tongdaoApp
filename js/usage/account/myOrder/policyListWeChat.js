@@ -11,7 +11,7 @@ var userCode = getUrlQueryString('userCode'),
 	orderStatus = getUrlQueryString('orderStatus'),
 	tagId = getUrlQueryString('tagId'),
 	channel = getUrlQueryString('channel'),
-	commodityComId="",
+	commodityComId = "",
 	idAuth = getUrlQueryString('idAuth'),
 	fromtype = 'dingdan',
 	transToken = '';
@@ -61,6 +61,24 @@ var vm = new Vue({
 })
 
 $(function() {
+	if(roleType == "" || roleType == "00") {
+		modelAlert('请先登录', '', function() {
+			var sendData = {
+				"userCode": userCode,
+				"shareMobile": shareMobile,
+				"customerId": customerId,
+				"commodityCombinationId": commodityCombinationId,
+				"ccId": ccId,
+				"fromtype": '3',
+				"shareFlag": shareFlag,
+				"roleType": roleType,
+				"channel": '02',
+			}
+			var jsonStr1 = JSON.stringify(sendData);
+			jsonStr1 = UrlEncode(jsonStr1);
+			window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?fromtype=" + fromtype + "&openid=" + openid + "&jsonKey=" + jsonStr1;
+		});
+	}
 	if(idAuth == '0') {
 		$('.shiming').show();
 		mui('.shiming').on('tap', '.right_shiming', function() {
@@ -100,7 +118,7 @@ $(function() {
 			"policyStatus": policyStatus,
 			"commodityComId": commodityComId,
 			"cxflag": '2',
-			"channel":channel,
+			"channel": channel,
 			"tagId": tagId,
 			"title": '保单详情',
 			"leftIco": '1',
@@ -270,7 +288,19 @@ function toDecimal2(x) {
 }
 /*未实名*/
 function register() {
-	registerControl();
+	var sendData = {
+		"userCode": userCode,
+		"shareMobile": shareMobile,
+		"customerId": customerId,
+		"commodityCombinationId": commodityCombinationId,
+		"ccId": ccId,
+		"fromtype": '3',
+		"shareFlag": shareFlag,
+		"roleType": roleType,
+	}
+	var jsonStr1 = JSON.stringify(sendData);
+	jsonStr1 = UrlEncode(jsonStr1);
+	window.location.href = base.url + "weixin/wxusers/html/users/certification.html?fromtype=" + fromtype + "&openid=" + openid + "&customerId=" + customerId + "&mobile=" + userCode + "&jsonKey=" + jsonStr1;
 }
 /*登录失效*/
 function lognCont() {

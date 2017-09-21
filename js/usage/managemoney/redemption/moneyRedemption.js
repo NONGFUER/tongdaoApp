@@ -59,19 +59,20 @@ $(function() {
 	customerId = urlParm.customerId;
 	transToken = urlParm.transToken;
 	list(userCode, transToken, commdityCommId, customerId);
-	mui('.man-div-body-ul ').on('tap', '.man-div-body-ul_li', function() {
-
-	})
 })
 
 function redemptionList(data) {
 	if(data.statusCode == '000000') {
 		console.log(data);
 		vm.Objectlist = data.returns.list;
+		if(vm.Objectlist.length == 0) {
+			$('#noRecord').show();
+		}
 	} else if(data.statusCode == '123456') {
 		modelAlert(data.statusMessage, '', lognCont);
 	} else {
 		modelAlert(data.statusMessage);
+		$('#noRecord').show();
 	}
 }
 

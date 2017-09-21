@@ -43,7 +43,7 @@ function policyDetail(data) {
 			data.returns.list1.forEach(function(value, key) {
 				datas.push(value);
 				datas[key].orderStatus = panding(datas[key].insureSurrender, datas[key].orderStatus);
-				datas[key].money=toDecimal2(datas[key].money);
+				datas[key].money = toDecimal2(datas[key].money);
 			})
 			vm.Objectlist = datas;
 		} else {
@@ -54,35 +54,39 @@ function policyDetail(data) {
 	} else {
 		modelAlert(data.statusMessage);
 	}
+	/*mui('.man-div-body-ul').on('tap', 'li', function() {
+		var policyNo = $(this).attr('policyNo');
+		var insureNo = $(this).attr('insureNo');
+		var orderNo = $(this).attr('orderNo');
+		var reqData = {
+			"userCode":userCode,
+			"policyNo":policyNo,
+			"insureNo":insureNo,
+			"transToken":transToken,
+			"channel":'01',
+			"commodityComId":commodityCommId,
+			"customerId":customerId,
+			"title":'交易详情',
+			"leixing":'jiaoyi',
+			"orderNo":orderNo,
+			"leftIco": '1',
+			"rightIco": '0',
+			"downIco": '0',
+		}
+		var jsonStr = UrlEncode(JSON.stringify(reqData));
+		window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/orderDetails.html?jsonKey=" + jsonStr;
+	})*/
 }
 
 function chuli() {
 	$('.man-div-body-ul_li').each(function() {
-		if($(this).attr('orderStatus') == '未核保') {
+		if($(this).attr('orderStatus') == '购买处理中') {
 			$(this).removeClass('huangseli');
 			$(this).addClass('lanseli');
-		} else if($(this).attr('orderStatus') == '核保失败') {
-			$(this).removeClass('huangseli');
-			$(this).removeClass('lanseli');
-			$(this).addClass('huiseli');
-		} else if($(this).attr('orderStatus') == '处理中') {
+		}else if($(this).attr('orderStatus') == '购买成功') {
 			$(this).removeClass('huangseli');
 			$(this).addClass('lanseli');
-		} else if($(this).attr('orderStatus') == '核保成功') {
-			$(this).removeClass('huangseli');
-			$(this).addClass('lanseli');
-		} else if($(this).attr('orderStatus') == '待生效') {
-			$(this).removeClass('huangseli');
-			$(this).addClass('lanseli');
-		} else if($(this).attr('orderStatus') == '投保成功') {
-			$(this).removeClass('huangseli');
-			$(this).addClass('lanseli');
-		} else if($(this).attr('orderStatus') == '已退保') {
-			$(this).removeClass('huangseli');
-			$(this).removeClass('lanseli');
-			$(this).removeClass('huangseli');
-			$(this).addClass('huiseli');
-		} else if($(this).attr('orderStatus') == '投保失败') {
+		}else if($(this).attr('orderStatus') == '购买失败') {
 			$(this).removeClass('lanseli');
 			$(this).removeClass('huangseli');
 			$(this).addClass('huiseli');
@@ -93,15 +97,9 @@ function chuli() {
 			$(this).removeClass('lanseli');
 			$(this).removeClass('huangseli');
 			$(this).addClass('huiseli');
-		} else if($(this).attr('orderStatus') == '处理中') {
+		} else if($(this).attr('orderStatus') == '领取处理中') {
 			$(this).removeClass('lanseli');
 			$(this).addClass('huangseli');
-		} else if($(this).attr('orderStatus') == '赎回试算成功') {
-			$(this).removeClass('lanseli');
-			$(this).addClass('huangseli');
-		} else if($(this).attr('orderStatus') == '赎回试算失败') {
-			$(this).removeClass('huangseli');
-			$(this).addClass('lanseli');
 		}
 	})
 }
@@ -109,21 +107,21 @@ function chuli() {
 function panding(insureSurrender, orderStatus) {
 	if(insureSurrender == '1') {
 		if(orderStatus == '01') {
-			return '未核保';
-		} else if(orderStatus == '03') {
-			return '核保失败';
+			return '购买失败';
+		}else if(orderStatus == '02'){
+			return '购买失败';
+		}else if(orderStatus == '03') {
+			return '购买失败';
 		} else if(orderStatus == '08' || orderStatus == '13') {
-			return '处理中';
+			return '购买处理中';
 		} else if(orderStatus == '05') {
-			return '核保成功';
+			return '购买处理中';
 		} else if(orderStatus == '09') {
-			return '待生效';
+			return '购买成功';
 		} else if(orderStatus == '10') {
-			return '投保成功';
-		} else if(orderStatus == '12') {
-			return '已退保';
+			return '购买成功';
 		} else if(orderStatus == '11') {
-			return '投保失败';
+			return '购买失败';
 		}
 	} else if(insureSurrender == '2') {
 		if(orderStatus == '01') {
@@ -131,12 +129,12 @@ function panding(insureSurrender, orderStatus) {
 		} else if(orderStatus == '02') {
 			return '领取失败';
 		} else if(orderStatus == '03') {
-			return '处理中';
-		} else if(orderStatus == '04') {
+			return '领取处理中';
+		} /*else if(orderStatus == '04') {
 			return '赎回试算成功';
 		} else if(orderStatus == '05') {
 			return '赎回试算失败';
-		}
+		}*/
 	}
 }
 
@@ -149,7 +147,7 @@ function mylist(userCode, transToken, customerId, commodityCommId, flag) {
 	transToken = transToken;
 	customerId = customerId;
 	commodityComId = commodityCommId;
-	flag='1';
+	flag = '1';
 	list(userCode, transToken, customerId, commodityCommId, flag);
 	mui('.man-div-title ul').on('tap', 'li', function() {
 		$('.man-div-title ul').children('li').removeClass('li_xuan');

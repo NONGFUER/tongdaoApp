@@ -29,6 +29,7 @@ $(function() {
 	//跳转到引导步骤
 	$(".wechat_right").bind("tap", function() {
 		cardParm.title='如何获取二维码';
+		cardParm.rightIco='0';
 		var jsonStr = UrlEncode(JSON.stringify(cardParm));
 		window.location.href = "./getEWM.html?jsonKey=" + jsonStr;
 	});

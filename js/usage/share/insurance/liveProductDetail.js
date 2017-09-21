@@ -177,9 +177,18 @@ function addYuyueInfoRender(data){
         $(".phone-button").bind("tap",function(){
         	callService(mobile1,".phone-button");
         });
-        $(".message-button").unbind("tap").bind("tap",function(){
-        	callSendMessage(mobile1);
-        });
+        var ua = navigator.userAgent.toLowerCase();
+    	if(ua.match(/MicroMessenger/i) == "micromessenger") {
+    		if(systemsource == "ios") {
+    			$(".message-button").attr("href", "sms:" + mobile1);
+    		} else if(systemsource == "android") {
+    			$(".message-button").attr("href", "sms:" + mobile1 + "#mp.weixin.qq.com");
+    		}
+
+    	}
+//        $(".message-button").unbind("tap").bind("tap",function(){
+//        	callSendMessage(mobile1,".message-button");
+//        });
     }else if( data.statusCode == ajaxStatus.relogin ){
         modelAlert( data.statusMessage, "", toLogin ); 
     }else{

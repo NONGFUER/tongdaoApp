@@ -4,7 +4,7 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	userCode = urlParm.userCode,
 	insurePhone = urlParm.insurePhone,
 	titles = urlParm.titles,
-	roleType=urlParm.roleType,
+	roleType = urlParm.roleType,
 	title = urlParm.title,
 	channel = urlParm.channel,
 	transTime = urlParm.transTime,
@@ -24,32 +24,21 @@ var vm = new Vue({
 	mounted() {
 		this.$nextTick(function() {
 			$(function() {
-				$(".banklist").unbind("tap").bind("tap", function() {
+				/*$(".banklist").unbind("tap").bind("tap", function() {
 					var commodityId = $(this).attr('commodityid');
 					var bankName = $(this).attr('bankName');
 					var bankCode = $(this).attr('bankCode');
 					var dayLimit = $(this).attr('dayLimit');
-					var param = {
-						"userCode": userCode,
-						"channel": "01",
-						"transTime": $.getTimeStr(),
-						"transToken": transToken,
-						"commodityCombinationId": commodityCombinationId,
-						"customerId": customerId,
-						"commodityId": commodityId,
-						"bankCode": bankCode,
-						"dayLimit": dayLimit,
-						"title": titles,
-						"roleType":roleType,
-						"bankName": bankName,
-						"pieces": pieces,
-						"leftIco": '1',
-						"rightIco": '0',
-						"downIco": '0',
-					}
+					urlParm.commodityId = commodityId;
+					urlParm.bankName = bankName;
+					urlParm.bankCode = bankCode;
+					urlParm.dayLimit = dayLimit;
+					urlParm.leftIco = '1';
+					urlParm.rightIco = '0';
+					urlParm.downIco = '0';
 					var jsonStr = UrlEncode(JSON.stringify(param));
 					window.location.href = "../messageFillout/messageFillout.html?jsonKey=" + jsonStr;
-				})
+				})*/
 			})
 		})
 	}
@@ -69,9 +58,35 @@ $(function() {
 	}
 	var url = base.url + 'investmentLinkedInsurance/getBank.do';
 	$.reqAjaxs(url, reqData, getBank);
+
 })
 
 function getBank(data) {
-	vm.Objectitle = data.returns.list;
-	console.log(vm.Objectitle)
+	if(data.statusCode == '000000') {
+		vm.Objectitle = data.returns.list;
+		mui('#list').on('tap', '.banklist', function() {
+			var commodityId = $(this).attr('commodityid');
+			var bankName = $(this).attr('bankName');
+			var bankCode = $(this).attr('bankCode');
+			var dayLimit = $(this).attr('dayLimit');
+			urlParm.commodityId = commodityId;
+			urlParm.bankName = bankName;
+			urlParm.bankCode = bankCode;
+			urlParm.dayLimit = dayLimit;
+			urlParm.title=titles;
+			urlParm.leftIco = '1';
+			urlParm.rightIco = '0';
+			urlParm.downIco = '0';
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+			window.location.href = "../messageFillout/messageFillout.html?jsonKey=" + jsonStr;
+		})
+	} else if(data.statusCode == '123456') {
+		modelAlert(data.statusMessage, '', lognCont);
+	} else {
+		modelAlert(data.statusMessage);
+	}
+}
+/*登录失效*/
+function lognCont() {
+	loginControl();
 }

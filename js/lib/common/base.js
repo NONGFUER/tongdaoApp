@@ -1575,7 +1575,7 @@ $.pulluptoRefresmui = function(id1, id2, pageNo, method) {
 
 function openDataNowDate(id) {
 	var pickers = {};
-	var optionsJson = '{"type":"date"}';
+	var optionsJson = '{"type":"date","beginYear":"1980"}';
 	var options = JSON.parse(optionsJson);
 	var id = id;
 	var result = document.getElementById(id);
@@ -2443,6 +2443,17 @@ $.phonePrivate = function(phone){
 		var phoneOther = '';
 	}
 	return phoneOhter;	
+}
+/**
+ * @function 姓名除姓之外隐去
+ */
+$.namePrivate = function(name){
+	if(name){
+		var nameOther = name.replace(/([\u4e00-\u9fa5]{1})[\u4e00-\u9fa5]*/g,'$1**');
+	}else{
+		var nameOther = '';
+	}
+	return nameOther;
 }
 /**
  * @function  身份证中间四位隐去

@@ -3,7 +3,12 @@ var mobile = urlParm.mobile; //"13852291705";
 var transToken = urlParm.transToken;//"c8c95c7f95a1b20bd72825ae67842b98";
 var customerId = urlParm.customerId;//"812";
 var orderNo = urlParm.orderNo;//"BY2017090817544703721608";
+var orderStatus = urlParm.orderStatus;
+var ccId = "";
 $(function(){
+	if( orderStatus == "待支付"){
+		$(".anniu1").removeClass("hidden");
+	}
 	getOrderDetailRequest( customerId,orderNo);
 	//getPolicyDetailRequest("20",policyNo);
 	$(".anniu2").unbind("tap").bind("tap",function(){
@@ -27,7 +32,7 @@ function getOrderDetailRequest( customerId,orderNo){
 			"orderNo":orderNo
 		}			
 	} 
-	$.reqAjaxs( url, sendJson, orderDetailCallback );
+	$.reqAjaxsFalse( url, sendJson, orderDetailCallback );
 }
 //订单详情
 function orderDetailCallback(data){
@@ -35,6 +40,7 @@ function orderDetailCallback(data){
 	if( data.status_code == "000000" ){
 		var body = data.returns;
 		var commodityCombination = body.commodityCombination;
+			ccId = commodityCombination.id+"";
 		var commodityInfo		 = body.commodityInfo;
 		var orderBasic			 = body.orderBasic;
 		var shortRiskInsured	 = body.shortRiskInsured;
@@ -42,13 +48,13 @@ function orderDetailCallback(data){
 		var status				 = shortRiskOrder.policyStatus;
 		var picPath	= picStatus(status);
 		$(".zhuangtai").attr("src",picPath);
-		
+			
 		var startTime = shortRiskOrder.startTime.time;
 			startTime = timeFormatDate(startTime,"yyyy-MM-dd");
 		var endTime   = shortRiskOrder.endTime.time;
 			endTime   = timeFormatDate(endTime,"yyyy-MM-dd");
 		var prem      = toDecimal2(shortRiskOrder.prem);
-		
+			yuyueId = shortRiskOrder.yuyueId;
 		if( shortRiskInsured.apRelation == "01"){
 			$(".tong").show();			
 		}else{
@@ -73,6 +79,13 @@ function orderDetailCallback(data){
 		$("#epolicy").unbind("tap").bind("tap",function(){
 			window.location.href = epolicyUrl;
 		});
+		$(".anniu1").unbind("tap").bind("tap",function(){
+			if( ccId == "14" ){
+				sendGhxPayRequest(orderNo)
+			}else{
+				payRequest(yuyueId);
+			}			
+		});
 	}
 }
 
@@ -84,23 +97,69 @@ function backlast(){
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = "allOrder.html?jsonKey="+jsonStr;
 }
-function getPolicyDetailRequest(customerId,policyNo){
-	var url = base.url + "personal/getMyPolicyDetail.do";
-	var sendJson = {
-			"head":{
-				"channel"  :"02",
-	            "userCode" :mobile,
-	            "transTime":$.getTimeStr(),
-	            "transToken":transToken
-			},
-			"body":{
-				"loggingCustomerId":customerId,
-				"policyNo":policyNo,
-				"customerId":customerId
-			}
+
+/*支付接口*/
+function payRequest(serialNo){
+	if( ccId != "1" && ccId != "2" && ccId != "3"){
+		var url = base.url + 'ecard/pay.do';
+	}else{
+		var url = base.url + 'cancerRisk/pay.do';
 	}
-	$.reqAjaxs( url, sendJson, policyNoDetailCallback );
-	
+	var reqData = {
+	    "head":{
+	        "channel":"01",
+	        "userCode":mobile,
+	        "transTime":$.getTimeStr()
+	    },"body":{
+	        "serialNo":serialNo	       
+	    }
+	}
+	if( ccId != "1" && ccId != "2" && ccId != "3"){
+		reqData.body.payType = "7";
+	}else{
+		reqData.body.orderResource = "5";
+	}	
+	$.toAjaxs(url,reqData,payReturnReponse);
+}
+
+//支付回调
+function payReturnReponse(data){
+	if(data.statusCode == "000000") {
+	    $("#requestDoc").val(data.returns.pay);
+	    $("#f1").attr("action", data.returns.payUrl);
+	    $("form").submit();
+	}else {
+	    modelAlert(data.statusMessage);
+	}
+}
+
+
+function sendGhxPayRequest(orderNo){
+	var url = base.url + 'ghxOrder/pay.do';
+	var sendJson = {
+		  "head": {
+		    "channel": "01",
+		    "userCode": mobile,
+		    "transTime": $.getTimeStr(),
+		    "transToken":transToken
+		  },
+		  "body": {
+		    "orderNo": orderNo,
+		    "payWay": "02",
+		    "redirectUrl": base.url + "tongdaoApp/html/insurance/main/payResult.html?orderNo="+orderNo,
+		    "customerId": customerId
+		  }
+		}
+	$.reqAjaxs( url, sendJson, ghxPayBackCall );
+}
+
+function ghxPayBackCall(data){
+	console.log(data);
+	if(data.statusCode == "000000"){
+		window.location.href=data.returns.payUrl;
+	}else{
+		modelAlert(data.statusMessage);
+	}
 }
 
 function picStatus(sta){
@@ -126,7 +185,3 @@ function toArticle(obj){
 	window.location.href = base.url + "tongdaoApp/html/agreement/article.html?jsonKey="+jsonStr;
 }
 
-//保单详情
-function policyNoDetailCallback(data){
-	console.log(data);
-}

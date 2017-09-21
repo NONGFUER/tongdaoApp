@@ -231,3 +231,17 @@ table.gridtable td {
 	color:orange;
 	text-decoration:underline;
 }
+#birthdate {
+    width: 50%;
+    text-indent: 0;
+    padding: 0;
+    text-align: left;
+    background: url(../../../image/common/date.png) no-repeat;
+    background-position: right;
+    background-size: 15%;
+    border: none;
+}
+input{
+	color:#222;
+	font-size:14px;
+}

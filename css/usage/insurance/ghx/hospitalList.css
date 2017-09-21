@@ -1,0 +1,30 @@
+#header{
+	background-color: #1b6bb8;
+    height: 44px;
+}
+.mui-action-back, .mui-title {
+    color: #fff;
+}
+.h_next div{
+	width: 25%;
+    margin-left: 45.5%;
+}
+#indexarea {
+	
+}
+#indexpart {
+	width: 100%;
+}
+.hospitalName{
+	height: 40px;
+	line-height: 40px;
+	font-size: 15px;
+	color: #666;
+	background-color: #fff;
+	padding-left: 4%;
+	border-bottom: 1px solid #dadada;
+	white-space: nowrap; /* （不换行，一行显示） */ 
+	text-overflow: ellipsis; /* （溢出用省略号） */
+	-o-text-overflow: ellipsis; 
+	overflow: hidden; /* （多出的文字，隐藏） */
+}

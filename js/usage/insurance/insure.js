@@ -18,6 +18,10 @@ $(function(){
 	getServiceTime();
 	$("#insuranceName").val(cName);					//渲染商品名称
 	$("#jwx_foot_price").html("价格：￥"+cPrem);		//渲染价格
+	if(urlParm.bzPic){
+		var picStr =  '<img src="'+urlParm.bzPic+'" />'
+		$(".duty").html(picStr);
+	}
 	//$(".duty").html(tableGener(duty));
 	if(holder){		
 		var insuIden  = holder.idNo;		
@@ -35,7 +39,9 @@ $(function(){
 		ageCal = $.getAge($.getBirthDay(insuIden),now);
 		genderCal = $.getSex(insuIden) + "";
 		if( ccId != "14"){
-        	productCalculate( ccId, ageCal, genderCal);
+			if($("#isSame").hasClass("on")){
+				productCalculate( ccId, ageCal, genderCal);
+			}        	
         }	
 	}
 
@@ -634,7 +640,7 @@ function sendInsureRequest(){
 	            "customerId"             : customerId,
 	            "insurePhone"            : formData.telNo,
 	            "insureIdentitycard"     : formData.certificateNo,				
-	            "coverage"               : "500000",
+	            "coverage"               : coverage,
 	            "invitrerPhone"           : mobile,
 	            "insureAddress"          : formData.address,
 	            "totalPieces"            : cPieces,//parseInt(peices),
@@ -660,6 +666,10 @@ function sendInsureRequest(){
 		reqData.body.businessSource= formData.businessSource;
 		reqData.body.cityCode = formData.cityCode;
 		reqData.body.provinceCode = formData.provinceCode;
+		if(ccId == "16"){
+			reqData.body.shortRiskOrder.type = cVersion;
+			reqData.body.guaranteeTerm = cGuaranteeTerm;
+		}
 	}else{
 		reqData.body.versions = cVersion;//版本
 	}
@@ -790,6 +800,8 @@ function productCalculate(ccId, age, gender ){
 	var ageFlag = calChoices.indexOf('insuredAge');
 	var genderFlag = calChoices.indexOf('gender');
 	var piecesFlag = calChoices.indexOf('pieces');
+	var versionFlag = calChoices.indexOf('versions');
+	var guaranteeTermFlag = calChoices.indexOf('guaranteeTerm');
 	if( ageFlag != -1){
 		calChoices[ageFlag+1] = age;
 	}
@@ -798,6 +810,12 @@ function productCalculate(ccId, age, gender ){
 	}
 	if( piecesFlag != -1 ){
 		cPieces = calChoices[piecesFlag+1]
+	}
+	if( versionFlag != -1){
+		cVersion = calChoices[versionFlag+1]
+	}
+	if( guaranteeTermFlag != -1 ){
+		cGuaranteeTerm = calChoices[guaranteeTermFlag+1]
 	}
 	sendCaldoRequest(ccId);
 }
@@ -999,6 +1017,9 @@ function ghxPayBackCall(data){
 }
 //不同的商品组合判断，选填表单项
 function formItemControl( ccId ){
+	if( ccId != "3" && ccId != "12"){
+		$("#isSame").removeClass("yincang");
+	}
 	if(ccId == COMMODITYCOMBINE_ID.JKJR){
 		$(".zhiye").show();$(".diqu").show();
 	}else if(ccId == COMMODITYCOMBINE_ID.QCWY){
@@ -1011,10 +1032,14 @@ function formItemControl( ccId ){
 		$(".diqu").show();
 	}else if(ccId == COMMODITYCOMBINE_ID.SWFR){
 		$(".diqu").show();
-	}else if( ccId == COMMODITYCOMBINE_ID.XPXSX){
-		$(".diqu").show();
+	}else if( ccId == COMMODITYCOMBINE_ID.XPXSX){		
+		$("#isSame").removeClass("on");$(".beiNone").show();$(".diqu").show();
 	}else if( ccId == COMMODITYCOMBINE_ID.GHX ){
 		$(".email").show();
+	}else if( ccId == "3" ){
+		$("#isSame").removeClass("on");$(".beiNone").show();
+	}else if( ccId == "16" ){
+		$(".diqu").show();
 	}		
 }
 
@@ -1030,10 +1055,11 @@ function toArticle(){
 
 //跳转投保须知
 function toXuzhi(){
-	urlParm.title = "投保须知";
+	urlParm.title = "";
 	urlParm.leftIco = "1";
 	urlParm.rightIco = "0";
-	urlParm.downIco = "0";	
+	urlParm.downIco = "0";
+	urlParm.frompage = "insureHtml";
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/agreement/changeXuzhi.html?jsonKey="+jsonStr;
 }
@@ -1047,6 +1073,9 @@ function backlast(){
 		urlParm.rightIco = "0";
 	}
 	urlParm.downIco = "0";
+	if(urlParm.holder){
+		delete urlParm.holder
+	}
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	if( ccId != "14" ){
 		window.location.href = 'productDetail.html?jsonKey='+jsonStr;

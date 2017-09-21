@@ -175,6 +175,7 @@ $(function() {
 		}
 	}
 	$.setscrollarea("indexpart");
+	$.setscrollarea("lastPart");
 	//车辆提示遮罩显示
     $(".howInput").bind("tap",function() {
       	$("#cjh,.shadow").show();

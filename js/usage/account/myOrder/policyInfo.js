@@ -14,9 +14,9 @@ if(getUrlQueryString("jsonKey")){
 }
 
 $(function(){
-	if(cxflag == "3"){
-		$(".anniu2").show();
-	}
+//	if(cxflag == "3"){
+//		$(".anniu2").show();
+//	}
 	getPolicyDetailRequest(customerId,policyNo);
 	$(".anniu2").unbind("tap").bind("tap",function(){
 		backlast();
@@ -82,8 +82,10 @@ function policyNoDetailCallback(data){
 		
 		//保险条款
 		$("#riskTiaokuan").attr("data-cid",commodityInfo.id + "");
-		if(epolicyUrl){
-			$("#epolicy").show();
+		if(epolicyUrl){		
+			if( urlParm.frompage != "payResultHtml" ){
+				$("#epolicy").show();
+			}					
 		}
 		$("#epolicy").unbind("tap").bind("tap",function(){
 			//window.location.href = epolicyUrl;
@@ -111,19 +113,40 @@ function toArticle(obj){
 	urlParm.rightIco = "0";
 	urlParm.downIco = "0";
 	urlParm.frompage = "policyInfoHtml";
+	if( urlParm.search ){
+		urlParm.search = urlParm.search;
+	}	
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/agreement/article.html?jsonKey="+jsonStr;
 }
 
 function backlast(){
-	if( urlParm.frompage == "payResultHtml" || urlParm.frompage == "policyInfoHtml"){
-		sysback();
-	}else{
-		urlParm.title = "我的保单";
-		urlParm.leftIco = "1";
-		urlParm.rightIco = "0";
-		urlParm.downIco = "1";
-		var jsonStr = UrlEncode(JSON.stringify(urlParm));
-		window.location.href = "policyList.html?jsonKey="+jsonStr;
-	}	
+		if( cxflag == "2" ){
+			urlParm.title = "我的保单";
+			urlParm.leftIco = "1";
+			urlParm.rightIco = "0";
+			urlParm.downIco = "1";
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+			window.location.href = "policyList.html?jsonKey="+jsonStr;
+		}else if(cxflag == "3"){
+			urlParm.title = "我的出单";
+			urlParm.leftIco = "1";
+			urlParm.rightIco = "0";
+			urlParm.downIco = "1";
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+			window.location.href = base.url + "tongdaoApp/html/agent/mysingle/mysingle.html?jsonKey="+jsonStr;
+		}else if(cxflag == "4"){
+			window.location.href = base.url + "tongdaoApp/html/insurance/main/payResult.html" + urlParm.search;
+		}else if( cxflag == "10" ){
+			urlParm.title = "我的出单";
+			urlParm.leftIco = "1";
+			urlParm.rightIco = "0";
+			urlParm.downIco = "0";
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+			window.location.href = base.url + "tongdaoApp/html/agent/mysingle/teaMmysingle.html?jsonKey="+jsonStr;
+		}else if(cxflag == "cancer"){
+			window.location.href = base.url + "tongdaoApp/page/html/cancerRisk/result.html" + urlParm.search;
+		}else if(cxflag == "ecard"){
+			window.location.href = base.url + "tongdaoApp/page/html/ecard/result.html" + urlParm.search;
+		}	
 }

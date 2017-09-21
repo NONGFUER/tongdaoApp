@@ -31,7 +31,7 @@ function protocalCallback(data){
 		var productModuleList = body.productModuleList;
 		var str = "";
 		for(var i=0; i < productModuleList.length; i++ ){
-			str += '<a style="display:block;line-height:44px;color:black;height:44px;text-align:center;background:#fff;width:100%" href="'+productModuleList[i].modueInfo+'">'+productModuleList[i].moduleName+'</a>'
+			str += '<a class="pdiv" href="'+productModuleList[i].modueInfo+'"><div class="ltk">'+productModuleList[i].moduleName+'</div><div class="rtk">下载</div></a>'
 		}
 		$(".protocol").append(str);
 	}else{

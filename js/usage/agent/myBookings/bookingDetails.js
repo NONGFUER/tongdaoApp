@@ -20,6 +20,9 @@ var vm = new Vue({
 	}
 })
 $(function() {
+	if(roleType == '02') {
+		$('.btn').show();
+	} 
 	var reqData = {
 		"body": {
 			"customerId": customerId,
@@ -69,7 +72,7 @@ function lognCont() {
 }
 
 function backlast() {
-	var sendData = {
+	/*var sendData = {
 		"customerPhone": userCode,
 		"roleType": roleType,
 		"customerId": customerId,
@@ -79,7 +82,11 @@ function backlast() {
 		"rightIco": '0',
 		"downIco": '0',
 		"title": '我的预约'
-	};
-	var jsonStr = UrlEncode(JSON.stringify(sendData));
+	};*/
+	urlParm.leftIco='1';
+	urlParm.rightIco='0';
+	urlParm.downIco='0';
+	urlParm.title='我的预约';
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/agent/myBookings/subscribeList.html?jsonKey=" + jsonStr;
 }

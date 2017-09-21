@@ -145,13 +145,13 @@ $(function(){
 	$("#chooseicon,.xinche").unbind("tap").bind("tap",function(){
 	    if($("#chooseicon").hasClass("on")){
 	        $("#chooseicon").removeClass("on");
-	        $("#chooseicon").attr("src","../../../image/insurance/gouxuankuang.png");
+	        $("#chooseicon").attr("src","../../../../image/insurance/gouxuankuang.png");
 	        $(".xinche").css("color","black");
 	        $("#FieldAI").val("");
 	        document.getElementById("FieldAI").readOnly=false;
 	    }else{
 	        $("#chooseicon").addClass("on");
-	        $("#chooseicon").attr("src","../../../image/insurance/gouxuankuang1.png");
+	        $("#chooseicon").attr("src","../../../../image/insurance/gouxuankuang1.png");
 	        $(".xinche").css("color","#1b6bb8");
 	        $("#FieldAI").val(" ");
 	        document.getElementById("FieldAI").readOnly=true;
@@ -161,7 +161,7 @@ $(function(){
 	$("#isSame").unbind("tap").bind("tap",function(){
 	    if($(this).hasClass("on")){
 	        $(this).removeClass("on");
-	        $(this).find("img").attr("src","../../../image/common/meigou.png");
+	        $(this).find("img").attr("src","../../../../image/common/meigou.png");
 	        $(".beiNone").show(1000);
 	    }else{
 	        var sameName    = $.trim($("#insureName").val());		//投保人姓名
@@ -172,7 +172,7 @@ $(function(){
 	            return false;
 	        };
 	        $(this).addClass("on");
-	        $(this).find("img").attr("src","../../image/cancerRisk/gou.png");
+	        $(this).find("img").attr("src","../../../../image/common/gou.png");
 	        $(".beiNone").hide(1000);
 	        
 	        ageCal = $.getAge($.getBirthDay(sameNo),now);
@@ -659,6 +659,10 @@ function sendInsureRequest(){
 		reqData.body.businessSource= formData.businessSource;
 		reqData.body.cityCode = formData.cityCode;
 		reqData.body.provinceCode = formData.provinceCode;
+		if(ccId == "16"){
+			reqData.body.shortRiskOrder.type = cVersion;
+			reqData.body.guaranteeTerm = cGuaranteeTerm;
+		}
 	}else{
 		reqData.body.versions = cVersion;//版本
 	}
@@ -789,6 +793,8 @@ function productCalculate(ccId, age, gender ){
 	var ageFlag = calChoices.indexOf('insuredAge');
 	var genderFlag = calChoices.indexOf('gender');
 	var piecesFlag = calChoices.indexOf('pieces');
+	var versionFlag = calChoices.indexOf('versions');
+	var guaranteeTermFlag = calChoices.indexOf('guaranteeTerm');
 	if( ageFlag != -1){
 		calChoices[ageFlag+1] = age;
 	}
@@ -797,6 +803,12 @@ function productCalculate(ccId, age, gender ){
 	}
 	if( piecesFlag != -1 ){
 		cPieces = calChoices[piecesFlag+1]
+	}
+	if( versionFlag != -1){
+		cVersion = calChoices[versionFlag+1]
+	}
+	if( guaranteeTermFlag != -1 ){
+		cGuaranteeTerm = calChoices[guaranteeTermFlag+1]
 	}
 	sendCaldoRequest(ccId);
 }
@@ -1015,7 +1027,9 @@ function formItemControl( ccId ){
 		$(".diqu").show();
 	}else if( ccId == COMMODITYCOMBINE_ID.GHX ){
 		$(".email").show();
-	}		
+	}else if( ccId == "16" ){//旅游险
+		$(".diqu").show();
+	}			
 }
 function backlast(){
 	urlParm.title = '产品详情';

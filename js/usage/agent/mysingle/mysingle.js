@@ -6,12 +6,12 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	transToken = urlParm.transToken,
 	policyStatus = null,
 	customerId = urlParm.customerId;
-/*if(riskType == "") {
+if(riskType == "") {
 	riskType = null;
 }
 if(policyStatus == "") {
 	policyStatus = null;
-}*/
+}
 var vm = new Vue({
 	el: '#list',
 	data: {
@@ -57,29 +57,32 @@ $(function() {
 		var policyNo = $(this).attr('policyNo');
 		var orderNo = $(this).attr('orderNo');
 		var insureNo = $(this).attr('insureNo');
+		var commodityId = $(this).attr('commodityId');
 		var param = {
 			"userCode": userCode,
 			"mobile": userCode,
 			"policyNo": policyNo,
 			"orderNo": orderNo,
-			"roleType": roleType,
+/*			"riskType": riskType,*/
 			"customerId": customerId,
 			"transToken": transToken,
 			"policyStatus": policyStatus,
-			"commodityComId":commodityComId,
-			"cxflag": '2',
-			"tagId": tagId,
+			"commodityComId":commodityId+'',
+			"cxflag": '3',
+/*			"tagId": tagId,*/
 			"title": '出单详情',
 			"leftIco": '1',
 			"rightIco": '0',
-			"downIco": '0',
+			"downIco": '1',
 		}
 		var jsonStr = UrlEncode(JSON.stringify(param));
 		if(riskType == '03') {
 			window.location.href = base.url + "tongdaoApp/html/insurance/car/orderDetail.html?jsonKey=" + jsonStr;
 		} else if(riskType == '01') {
-			window.location.href = "policyInfo.html?jsonKey=" + jsonStr;
-		}else if(riskType == '02') {
+			if(commodityId != '17') {
+				window.location.href = base.url+"tongdaoApp/html/account/myOrder/policyInfo.html?jsonKey=" + jsonStr;
+			}
+		} else if(riskType == '02') {
 			window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
 		}
 	})
@@ -93,14 +96,19 @@ function getPolicyList(data) {
 		if(data.returns.length > 0) {
 			data.returns.forEach(function(index, element) {
 				datas.push(index);
+				if(index.prem != "" && index.prem != null) {
+					datas[element].prem = toDecimal2(datas[element].prem);
+				}else{
+					datas[element].prem = '0.00';
+				}
 				if(index.underWrite != null && index.underWrite != "") {
-					if(index.underWrite.time != null && index.underWrite.time != "" && index.prem != "" && index.prem != null) {
+					if(index.underWrite.time != null && index.underWrite.time != "") {
 						datas[element].underWrite = ($.getTimeStr2(index.underWrite.time));
-						datas[element].prem = toDecimal2(datas[element].prem);
+					}else{
+						datas[element].underWrite = ("----");
 					}
 				} else {
 					datas[element].underWrite = ("----");
-					datas[element].prem = '0.00';
 				}
 			})
 			vm.Objectlist = datas;
@@ -163,7 +171,6 @@ function deleteMyPolicy(data) {
 	} else {
 		modelAlert(data.status_message);
 	}
-
 }
 
 function chuli() {

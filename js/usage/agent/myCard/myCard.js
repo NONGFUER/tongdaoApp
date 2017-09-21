@@ -9,7 +9,6 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 var username = userCode + "";
 var shan = "";
 var jie = "";
-
 var vm = new Vue({
 	el: '#card_scroll',
 	data: {
@@ -74,6 +73,10 @@ $(function() {
 			callService(phone, ".kefuPhone");
 		}
 	})
+	$(".button_share").unbind("tap").bind("tap", function() {
+		shareHandle();
+	})
+
 	/*点击关闭*/
 	$(".spanClose").unbind("tap").bind("tap", function() {
 		$('.popup').hide();
@@ -90,7 +93,11 @@ function getBusinessCard(data) {
 			if(data.returns.insuranceConsultantInfo != "" && data.returns.insuranceConsultantInfo != null) {
 				shan = data.returns.insuranceConsultantInfo.postcardField;
 				jie = data.returns.insuranceConsultantInfo.postcardIntroduction;
-				vm.postcardPhone = data.returns.insuranceConsultantInfo.postcardPhone;
+				if(data.returns.insuranceConsultantInfo.postcardPhone==null||data.returns.insuranceConsultantInfo.postcardPhone=='') {
+					vm.postcardPhone = userCode;
+				} else {
+					vm.postcardPhone = data.returns.insuranceConsultantInfo.postcardPhone;
+				}
 				vm.agentCode = data.returns.insuranceConsultantInfo.agentCode;
 				vm.practiceCode = data.returns.insuranceConsultantInfo.practiceCode;
 				vm.insuranceConsultantType = insurantype(data.returns.insuranceConsultantInfo.insuranceConsultantType);
@@ -120,6 +127,14 @@ function getBusinessCard(data) {
 	}
 }
 
+function shareHandle() {
+	var title = '我是天安佰盈保险代理人' + vm.name;
+	var desc = '愿用我的保险专业为您保驾护航,立刻点击查看我的名片。';
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var shareurl = base.url + "tongdaoApp/html/agent/myCard/myCardwx.html?jsonKey=" + jsonStr;
+	var picUrl = base.url + "tongdaoApp/image/share/tongdaoic.png";
+	shareMethod(shareurl, title, desc, "mingpian", picUrl);
+};
 /*登录失效*/
 function lognCont() {
 	loginControl();
@@ -252,13 +267,13 @@ function lognCont() {
 }
 
 function backlast() {
-	if( frompage == "liveProductHtml" ){
+	if(frompage == "liveProductHtml") {
 		urlParm.title = "产品详情";
 		urlParm.rightIco = "1";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
-		window.location.href = base.url + "tongdaoApp/html/insurance/main/liveProductDetail.html?jsonKey="+jsonStr;
-	}else{
+		window.location.href = base.url + "tongdaoApp/html/insurance/main/liveProductDetail.html?jsonKey=" + jsonStr;
+	} else {
 		sysback();
 	}
-	
+
 }

@@ -74,7 +74,13 @@ $(function() {
 
 function policyQueryListInfo(data) {
 	console.log(data);
-	vm.Objectlist = data.returns.pager.entities;
+	if(data.statusCode=='000000'){
+		vm.Objectlist = data.returns.pager.entities;
+	}else if(data.statusCode=='123456'){
+		modelAlert(data.statusMessage,'',lognCont);
+	}else{
+		modelAlert(data.statusMessage);
+	}
 }
 
 function chuli() {
@@ -89,37 +95,6 @@ function chuli() {
 			$(this).attr('class', 'baozhang yilingqu');
 			$(this).html('已领取');
 		}
-		/*else if($(this).html() == '04') {
-			$(this).attr('class', 'baozhang yilingqu');
-			$(this).html('核保中');
-		} else if($(this).html() == '05') {
-			$(this).attr('class', 'baozhang bao');
-			$(this).html('核保成功');
-		} else if($(this).html() == '06') {
-			$(this).attr('class', 'baozhang');
-			$(this).html('支付失败');
-		} else if($(this).html() == '07') {
-			$(this).attr('class', 'baozhang bao');
-			$(this).html('支付成功');
-		} else if($(this).html() == '08') {
-			$(this).attr('class', 'baozhang bao');
-			$(this).html('承保处理中');
-		} else if($(this).html() == '09') {
-			$(this).attr('class', 'baozhang dai');
-			$(this).html('待生效');
-		} else if($(this).html() == '10') {
-			$(this).attr('class', 'baozhang bao');
-			$(this).html('承保成功');
-		} else if($(this).html() == '11') {
-			$(this).attr('class', 'baozhang');
-			$(this).html('承保失败');
-		} else if($(this).html() == '12') {
-			$(this).attr('class', 'baozhang');
-			$(this).html('已退保');
-		} else if($(this).html() == '99') {
-			$(this).attr('class', 'baozhang');
-			$(this).html('已失效');
-		}*/
 	})
 }
 /*登录失效*/

@@ -107,9 +107,12 @@ function inviteRequest(mobile,shareMobile){
 
 function inviteCallback(data){
 	if( data.statusCode == "000000" ){
-		modelAlert("恭喜您，注册成功，立即下载APP,开启同道保险。","",toDownload);
 		$("#checkPhone").val("");
 		$("#checkCode").val("");
+		$("#btnSendCode").removeAttr("disabled");
+		$("#btnSendCode").val("发送验证码");
+		countdown = 0;
+		modelAlert("恭喜您，注册成功，立即下载APP,开启同道保险。","",toDownload);				
 	}else if(data.statusCode == "000001"){
 		modelAlert("您已注册同道保险，请下载APP直接登录。","",toDownload);
 	}else{

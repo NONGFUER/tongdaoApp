@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 -->
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>我的出单</title>
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/usage/account/myOrder/policyList.css" />
+	</head>
+
+	<body>
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="man mui-table-view">
+					<div class="man-div-title ">
+						<ul>
+							<li policyStatus="" class="li_xuan">全部</li>
+							<li policyStatus='01'>待生效</li>
+							<li policyStatus='02'>保障中</li>
+							<li policyStatus='03'>已过期</li>
+						</ul>
+					</div>
+					<div id='list' class="man-div-body " v-cloak>
+						<ul class="man-div-body-ul ">
+							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:policyNo="value.policyNo" v-bind:riskType="value.riskType" v-bind:orderNo="value.orderNo" v-bind:insureNo="value.insureNo" v-bind:commodityId="value.commodityId">
+								<div v-if="value.orderStatus=='已过期'" class="mui-slider-right mui-disabled shanchu" >
+									<a class="mui-btn mui-btn-red" v-bind:policyNo="value.policyNo">
+										<i class="lajitong"></i>
+										<!--<span>删除</span>-->
+									</a>
+								</div>
+								<div class="man-div-body-ul_li_div mui-slider-handle">
+									<ul class="man-div-body-ul_li_div_ul1">
+										<li>
+											<span v-html="'保单号: '+value.policyNo">保单号:&nbsp;8888888888888888</span>
+											<span  v-html="value.orderStatus" class="baozhang"></span>
+										</li>
+										<li>
+											<span v-html="value.commodityName">少儿高发恶性肿瘤险</span>
+											<span></span>
+										</li>
+									</ul>
+									<div class="xian"></div>
+									<ul class="man-div-body-ul_li_div_ul2">
+										<li>
+											<span>被保人</span>
+											<span v-html="value.insuredName">陈某人</span>
+										</li>
+										<li>
+											<span>保费</span>
+											<span v-html="value.prem+'元'">1000.00元</span>
+										</li>
+										<li>
+											<span style="width: 20%;">承保时间</span>
+											<span  v-html="value.underWrite">2017年05月24日</span>
+										</li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../../js/lib/widget/mui/mui.min.js"></script>
+	<script src="../../../js/lib/common/zepto.min.js"></script>
+	<script src="../../../js/lib/common/base.js"></script>
+	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
+	<script src="../../../js/usage/agent/mysingle/teaMmysingle.js"></script>
+</html>

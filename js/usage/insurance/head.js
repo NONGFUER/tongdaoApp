@@ -121,6 +121,9 @@ var peiouFlag = urlParm.peiouFlag ? urlParm.peiouFlag : "0";
 var zinvFlag = urlParm.zinvFlag ? urlParm.zinvFlag : "0";
 var qitaFlag = urlParm.qitaFlag ? urlParm.qitaFlag : "0";
 var banbenFlag = urlParm.banbenFlag ? urlParm.banbenFlag : "01";
+
+//驴意险
+var cGuaranteeTerm = '';
 // 18	18900001111				王晓伟
 
 // 1	00400001	天安防癌险（男神版）

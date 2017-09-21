@@ -14,7 +14,7 @@ $(function(){
 		if(systemsource == "ios"){
 			objcObject.OpenUrl("backProduct");
 		}else if(systemsource == "android"){
-			android.goBack();
+			android.goHomePage();
 		}
 	});
 });

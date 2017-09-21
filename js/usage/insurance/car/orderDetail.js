@@ -199,5 +199,11 @@ function backlast(){
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
 		window.location.href =base.url+"tongdaoApp/html/agent/mysingle/mysingle.html?jsonKey=" + jsonStr;
+	}else if(cxflag=="10"){
+		parm.title="我的出单";
+		parm.downIco="1";
+		var jsonStr = JSON.stringify(parm);
+		jsonStr = UrlEncode(jsonStr); // 加密过后的操作
+		window.location.href =base.url+"tongdaoApp/html/agent/mysingle/teaMmysingle.html?jsonKey=" + jsonStr;
 	}
 }

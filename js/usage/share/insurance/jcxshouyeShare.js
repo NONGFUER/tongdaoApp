@@ -1,6 +1,6 @@
 if(roleType == '00'){
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?fromtype=jcx&openid="+openid+"&jsonKey="+jsonStr;
+	window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?fromtype=jcx&openid="+openid+"&jsonKey="+jsonStr+"&inviterPhone="+shareMobile;
 }else{
 	$(".PageInfo").show();
 }
@@ -43,13 +43,7 @@ $(function(){
     })
     //须知
     $(".xuzhi").unbind("tap").bind("tap",function(){
-    	//window.location.href="jcxxuzhi.html"+window.location.search;
-    	$(".PageInfo").hide();
-    	$(".tiaokuanInfo").hide();
-    	$(".xuzhiInfo").show();
-    	$("body").css("background-color","#f2eff6");
-    	/* 设置滑动区域 */
-    	$.setscroll2();
+    	 toXuzhi();
     })
     //条款、须知页面返回
     $(".h_back3,.h_back2").unbind("tap").bind("tap",function(){
@@ -326,6 +320,17 @@ function toArticle(){
 
 function toDownload(){
 	window.location.href = base.url + "tongdaoApp/html/share/download/appDownload.html";
+}
+
+//跳转投保须知
+function toXuzhi(){
+	urlParm.title = "投保须知";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";	
+	urlParm.ccId = "15";
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + "tongdaoApp/html/agreement/changeXuzhi.html?jsonKey="+jsonStr;
 }
 
 function shareHandle(){

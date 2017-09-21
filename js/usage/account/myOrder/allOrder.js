@@ -48,7 +48,7 @@ $(function() {
 		var elem = this;
 		var li = elem.parentNode.parentNode;
 		var orderNo = $(elem).attr('orderNo');
-		mui.confirm('确认删除该保单吗？', '', ['确认', '取消'], function(e) {
+		mui.confirm('确认删除该订单吗？', '', ['确认', '取消'], function(e) {
 			if(e.index == 0) {
 				shanchu(userCode, transToken, customerId, orderNo);
 				if(shanchucheng == '1') {
@@ -64,6 +64,7 @@ $(function() {
 	})
 	/*立即支付*/
 	mui('.man-div-body-ul').on('tap', '#liji', function() {
+		var leixing='liji'
 		var orderNo = $(this).attr('orderNo');
 		var policyNo = $(this).attr('policyNo');
 		var riskType = $(this).attr('risktype');
@@ -99,6 +100,7 @@ $(function() {
 			"productFlag": productFlag,
 			"cxflag": '1',
 			"tagId": tagId,
+			"leixing":leixing,
 			"title": commodityName,
 			"leftIco": '1',
 			"rightIco": '0',
@@ -112,7 +114,7 @@ $(function() {
 		} else if(riskType == '04') {
 			mui.alert('寿险');
 		} else if(riskType == '02') {
-			window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/messageFillout.html?jsonKey=" + jsonStr;
+			window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/orderDetails.html?jsonKey=" + jsonStr;
 		}
 		return false;
 	})
@@ -313,6 +315,8 @@ function mylist(userCode, transToken, customerId, tagId, orderStatus) {
 	riskType = null;
 	orderStatus = orderStatus;
 	tagId = tagId;
+	$('.man-div-title ul').children('li').removeClass('li_xuan');
+	$('.man-div-title ul').find('li').eq(0).addClass('li_xuan');
 	if(tagId == "全部") {
 		tagId = null;
 	}

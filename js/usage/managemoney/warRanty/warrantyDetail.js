@@ -6,11 +6,12 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	insureNo = urlParm.insureNo,
 	transToken = urlParm.transToken,
 	customerId = urlParm.customerId,
+	cxflag=urlParm.cxflag,
 	title = urlParm.title,
 	orderNo = urlParm.orderNo;
 var channel = urlParm.channel;
 var commodityComId = urlParm.commodityComId;
-if(typeof(commdityCommId) == 'undefined') {
+if(typeof(commodityComId) == 'undefined') {
 	commodityComId = '';
 }
 if(channel == '' || channel == null) {
@@ -27,7 +28,7 @@ var vm = new Vue({
 		baozhang: null,
 		returnVisit: {},
 		commodityComId: "",
-		channel:"",
+		channel: "",
 	},
 	mounted() {
 		this.$nextTick(function() {
@@ -65,37 +66,13 @@ $(function() {
 	var url = base.url + 'moneyManage/policyQueryListInfo.do';
 	console.log("页面初始化，发送请求报文--");
 	$.reqAjaxsFalse(url, reqData, policyQueryListInfo);
-	if(vm.returnVisit == '1') {
-		$('#huifang').addClass('huisebtn');
-	}
-	mui('.man-div-body-ul_li_div_btn').on('tap', '#huifang', function() {
-		/*接口请求位子*/
-		if(vm.returnVisit == '0' && $('.baozhang').html() != '已领取') {
-			var reqData = {
-				"userCode": userCode,
-				"customerId": customerId,
-				"transToken": transToken,
-				"insurePhone": userCode,
-				"policyNo": policyNo,
-				"orderNo": orderNo,
-				"leftIco": '1',
-				"rightIco": '0',
-				"downIco": '0',
-				"title": title,
-			}
-			var jsonStr = UrlEncode(JSON.stringify(reqData));
-			window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/returnVisit.html?jsonKey=" + jsonStr;
-		} else {
-			$('#huifang').addClass('huisebtn');
-		}
-	})
 
-	function getReview(data) {
-		console.log(data)
-	}
+	/*	function getReview(data) {
+			console.log(data)
+		}*/
 	$(".baodan").unbind("tap").bind("tap", function() {
 		/*正式版使用接口↓*/
-		window.location.href = base.url + vm.Objectitle.bxPolicyFinance.policyForm;
+		window.location.href = vm.Objectitle.bxPolicyFinance.policyForm;
 	})
 	$(".chanping").unbind("tap").bind("tap", function() {
 		var commodityCombinationId = vm.Objectitle.bxPolicyFinance.commodityCombinationId;
@@ -114,8 +91,9 @@ $(function() {
 		window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
 	})
 	vm.commodityComId = commodityComId;
-	vm.channel=channel;
+	vm.channel = channel;
 })
+
 /*页面信息*/
 function policyQueryListInfo(data) {
 	if(data.statusCode == '000000') {
@@ -156,7 +134,7 @@ function getRedemption(data) {
 	}
 }
 /*退保试算*/
-function getRedemption(data) {
+/*function getRedemption(data) {
 	console.log(data);
 	if(data.statusCode != '000000') {
 		mui.alert(data.statusMessage);
@@ -179,7 +157,7 @@ function getRedemption(data) {
 		var jsonStr = UrlEncode(JSON.stringify(reqData));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/policyCancellation.html?jsonKey=" + jsonStr;
 	}
-}
+}*/
 /*截取银行卡号*/
 function bankweihao() {
 	var banke = $('.bank_weihao').html();
@@ -204,6 +182,9 @@ function chuli() {
 		$('#huifang').addClass('huisebtn');
 		vm.returnVisit == '1';
 	}
+	if(vm.returnVisit == '1') {
+		$('#huifang').addClass('huisebtn');
+	}
 	if($('.baozhang').html() != '03' && $('.baozhang').html() != '已领取') {
 		mui('.man-div-body-ul_li_div_btn').on('tap', '#lingqu', function() {
 			var url = base.url + 'hkRedemption/getRedemption.do';
@@ -223,13 +204,34 @@ function chuli() {
 			}
 			$.reqAjaxsFalse(url, reqData, getRedemption);
 		})
+		mui('.man-div-body-ul_li_div_btn').on('tap', '#huifang', function() {
+			/*接口请求位子*/
+			if(vm.returnVisit == '0' && $('.baozhang').html() != '已领取') {
+				var reqData = {
+					"userCode": userCode,
+					"customerId": customerId,
+					"transToken": transToken,
+					"insurePhone": userCode,
+					"policyNo": policyNo,
+					"orderNo": orderNo,
+					"leftIco": '1',
+					"rightIco": '0',
+					"downIco": '0',
+					"title": title,
+				}
+				var jsonStr = UrlEncode(JSON.stringify(reqData));
+				window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/returnVisit.html?jsonKey=" + jsonStr;
+			} else {
+				$('#huifang').addClass('huisebtn');
+			}
+		})
 	}
 	bankweihao();
 	$('.phoneyin').html(phoneyin($('.phoneyin').html()));
 }
 
 function backlast() {
-	if(commodityComId != "" && channel == '01') {
+	if(commodityComId != "" && channel == '01'&&cxflag!='2'&&cxflag!='3'&&cxflag!='10') {
 		var sendData = {
 			"userCode": userCode,
 			"commodityComId": commodityComId,
@@ -245,20 +247,31 @@ function backlast() {
 		var jsonStr = UrlEncode(JSON.stringify(sendData));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyList.html?jsonKey=" + jsonStr;
 	} else {
-		if(channel == '01') {
+		if(channel == '01'&&cxflag=='2') {
 			urlParm.title = '我的保单';
 			urlParm.downIco = '1';
 			urlParm.channel = channel;
 			var jsonStr = UrlEncode(JSON.stringify(urlParm));
 			window.location.href = base.url + "tongdaoApp/html/account/myOrder/policyList.html?jsonKey=" + jsonStr;
-		} else {
+		}else if(channel == '02'&&cxflag=='2') {
 			urlParm.title = '我的保单';
 			urlParm.downIco = '1';
 			urlParm.channel = channel;
 			var jsonStr = UrlEncode(JSON.stringify(urlParm));
 			window.location.href = base.url + "tongdaoApp/html/account/myOrder/policyListWeChat.html?jsonKey=" + jsonStr;
+		}else if(cxflag=='3'){
+			urlParm.title = '我的出单';
+			urlParm.downIco = '1';
+			urlParm.channel = channel;
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+			window.location.href = base.url + "tongdaoApp/html/agent/mysingle/mysingle.html?jsonKey=" + jsonStr;
+		}else if(cxflag=='10'){
+			urlParm.title = '我的出单';
+			urlParm.downIco = '0';
+			urlParm.channel = channel;
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+			window.location.href = base.url + "tongdaoApp/html/agent/mysingle/teaMmysingle.html?jsonKey=" + jsonStr;
 		}
-
 	}
 
 }

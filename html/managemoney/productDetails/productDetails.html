@@ -19,7 +19,7 @@
 	<body>
 		<div class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
-				<div class="man mui-table-view" id='list'  v-cloak>
+				<div class="man mui-table-view" id='list' v-cloak>
 					<div class="man-div-body-ul_li_div mb10">
 						<ul class="man-div-body-ul_li_div_ul1">
 							<li class="mb30">
@@ -93,7 +93,7 @@
 						</div>
 						<ul class="man-div-body-ul_three" id='xiagguan'>
 							<template v-for="(value,key) in xiangguanxieyi">
-								<li class="neirong" v-bind:modueInfo='value.modueInfo'>
+								<li class="neirong" v-bind:subModuleName="value.subModuleName" v-bind:modueInfo='value.modueInfo'>
 									<span class="tiaokuan" v-html="value.subModuleName"></span>
 									<span class="youjiantouhuise"></span>
 								</li>
@@ -109,13 +109,12 @@
 							</li>
 						</ul>
 					</div>
-
 				</div>
 			</div>
 		</div>
 		<!--确认购买-->
 		<div class="man-div-body-ul_li_div_btn" style="position: fixed;">
-			<div id="huifang" class="div_btn">立即购买</div>
+			<div id="huifang" class="div_btn" style="display: none;">立即购买</div>
 		</div>
 		<div id="product_footer" class="footer yincang">立即购买</div>
 		<div id="shadow" class="shadow" style="display:none;">

@@ -4,8 +4,15 @@ $(function(){
 	//获取剩余份数
 	$.getShengyu("21");
 	//领取
-	// getAppInfo();			
+	// getAppInfo();	
+	if( isComing == "1" ){
+		$(".zengsong").css({border: "1px solid #eee",color: "#eee"});
+		$(".lingqu").css({border: "1px solid #eee",color: "#eee"});		
+	}
 		$(".lingqu").unbind("tap").bind("tap",function(){
+			if( isComing == "1" ){				
+				return false;
+			}
 			if(roleType == "00" || roleType == "") {
 				loginControl();
 			}else if( roleType == "05" ){
@@ -15,6 +22,9 @@ $(function(){
 			}
 		})	
 		$(".zengsong").unbind().bind("tap",function(){
+			if( isComing == "1" ){				
+				return false;
+			}
 			if(roleType == "00" || roleType == "") {
 				loginControl();
 			}else if( roleType == "05" ){
@@ -64,8 +74,13 @@ $.getShengyu=function(cId){
 				str="<tr><th class='topLeft'>投保人名称</td><th class='middle'>投保人手机号</td><th class='topRight'>承保时间</td></tr>";
 				for(i=0;i<param.length;i++){
 					str+="<tr>";
-					str+="<td>"+param[i].insuName+"</td>";
-					str+="<td>"+param[i].insuPhone+"</td>";
+					if( roleType == "01" ){
+						str+="<td>"+$.namePrivate(param[i].insuName)+"</td>";
+						str+="<td>"+$.phonePrivate(param[i].insuPhone)+"</td>";
+					}else{
+						str+="<td>"+param[i].insuName+"</td>";
+						str+="<td>"+param[i].insuPhone+"</td>";
+					}	
 					str+="<td>"+param[i].underDate+"</td>";
 					str+="</tr>";
 				}
@@ -79,8 +94,13 @@ $.getShengyu=function(cId){
 				str1="<tr><th class='topLeft'>投保人名称</td><th class='middle'>投保人手机号</td><th class='topRight'>承保时间</td></tr>";
 				for(i=0;i<10;i++){
 					str1+="<tr>";
-					str1+="<td>"+param[i].insuName+"</td>";
-					str1+="<td>"+param[i].insuPhone+"</td>";
+					if( roleType == "01" ){
+						str1+="<td>"+$.namePrivate(param[i].insuName)+"</td>";
+						str1+="<td>"+$.phonePrivate(param[i].insuPhone)+"</td>";
+					}else{
+						str1+="<td>"+param[i].insuName+"</td>";
+						str1+="<td>"+param[i].insuPhone+"</td>";
+					}	
 					str1+="<td>"+param[i].underDate+"</td>";
 					str1+="</tr>";
 				}
@@ -89,7 +109,7 @@ $.getShengyu=function(cId){
 				$(".zhankai").unbind("tap").bind("tap",function(){
 					if($(".kai").html()=="点击展开"){//点击展开
 						$(".kai").html("点击收起");
-						$(".kaiImg").html("<img src='../../images/jiantou1.png'/>");
+						$(".kaiImg").html("<img src='../../../images/insurance/jcx/jiantou1.png'/>");
 						/*$(".kaiImg img").attr("src","../../images/jiantou1.png");*/
 						$(".zhankai").show();
 						$(".quanbu").html("已加载全部");
@@ -97,23 +117,33 @@ $.getShengyu=function(cId){
 						str2="<tr><th class='topLeft'>投保人名称</td><th class='middle'>投保人手机号</td><th class='topRight'>承保时间</td></tr>";
 						for(i=0;i<length;i++){
 							str2+="<tr>";
-							str2+="<td>"+param[i].insuName+"</td>";
-							str2+="<td>"+param[i].insuPhone+"</td>";
+							if( roleType == "01" ){
+								str2+="<td>"+$.namePrivate(param[i].insuName)+"</td>";
+								str2+="<td>"+$.phonePrivate(param[i].insuPhone)+"</td>";
+							}else{
+								str2+="<td>"+param[i].insuName+"</td>";
+								str2+="<td>"+param[i].insuPhone+"</td>";
+							}							
 							str2+="<td>"+param[i].underDate+"</td>";
 							str2+="</tr>";
 						}
 						$(".jiluTable").html(str2);
 					}else{//点击收起
 						$(".kai").html("点击展开");
-						$(".kaiImg").html("<img src='../../images/jiantou2.png'/>");
+						$(".kaiImg").html("<img src='../../../images/insurance/jcx/jiantou1.png'/>");
 						/*$(".kaiImg img").attr("src","../../images/jiantou2.png");*/
 						$(".zhankai").show();
 						$(".quanbu").hide();
 						str3="<tr><th class='topLeft'>投保人名称</td><th class='middle'>投保人手机号</td><th class='topRight'>承保时间</td></tr>";
 						for(i=0;i<10;i++){
 							str3+="<tr>";
-							str3+="<td>"+param[i].insuName+"</td>";
-							str3+="<td>"+param[i].insuPhone+"</td>";
+							if( roleType == "01" ){
+								str3+="<td>"+$.namePrivate(param[i].insuName)+"</td>";
+								str3+="<td>"+$.phonePrivate(param[i].insuPhone)+"</td>";
+							}else{
+								str3+="<td>"+param[i].insuName+"</td>";
+								str3+="<td>"+param[i].insuPhone+"</td>";
+							}							
 							str3+="<td>"+param[i].underDate+"</td>";
 							str3+="</tr>";
 						}

@@ -100,12 +100,10 @@ ul li span {
 /*垃圾桶*/
 
 .lajitong {
-	position: absolute;
-	top: 35%;
 	width: 30px;
-	height: 30px;
-	background: url(../../../../image/account/myOrder/lajitong.png);
-	background-size: 100%;
+    height: 60px;
+    background: url(../../../../image/common/shanchulian.png) no-repeat;
+    background-size: 100%;
 }
 .mui-btn-red span {
 	position: relative;
