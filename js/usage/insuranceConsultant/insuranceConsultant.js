@@ -113,9 +113,10 @@ function getqiehuan(data) {
 					if(e.index == 1) {
 						qiehuan(userCode, transToken, customerId, insuranceConsultantId);
 					} else {
-						
 					}
 				})
+			}else{
+				qiehuan(userCode, transToken, customerId, insuranceConsultantId);
 			}
 		}
 

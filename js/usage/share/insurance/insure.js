@@ -18,7 +18,10 @@ $(function(){
 	getServiceTime();
 	$("#insuranceName").val(cName);					//渲染商品名称
 	$("#jwx_foot_price").html("价格：￥"+cPrem);		//渲染价格
-	//$(".duty").html(tableGener(duty));
+	if(urlParm.bzPic){
+		var picStr =  '<img src="'+urlParm.bzPic+'" />'
+		$(".duty").html(picStr);
+	}
 	if(holder){		
 		var insuIden  = holder.idNo;		
 		var insuName  = holder.name;
