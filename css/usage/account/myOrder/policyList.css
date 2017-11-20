@@ -8,6 +8,8 @@
 .man-div-title ul {
 	padding: 10px 20px 10px 20px;
 	text-align: center;
+	display: -webkit-box;
+	display: -webkit-flex;
 	display: flex;
 	color: #878787;
 }
@@ -19,15 +21,21 @@
 }
 
 .man-div-title ul li:first-child {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
 	flex: 1;
 	border: 1px solid #E0E0E0;
 }
 
 .man-div-title ul li:last-child {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
 	flex: 1;
 }
 
 .man-div-title ul li {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
 	flex: 1;
 	border-top: 1px solid #E0E0E0;
 	border-bottom: 1px solid #E0E0E0;
@@ -137,7 +145,7 @@ ul li span {
 
 .lajitong {
 	width: 30px;
-    height: 60px;
+	height: 60px;
 	background: url(../../../../image/common/shanchulian.png)no-repeat;
 	background-size: 100%;
 }
@@ -164,6 +172,7 @@ ul li span {
 	position: fixed;
 	bottom: 0;
 }
+
 .left_shiming {
 	font-size: 13px;
 	color: #fff;
@@ -172,6 +181,7 @@ ul li span {
 	margin-left: 10px;
 	float: left;
 }
+
 .right_shiming {
 	font-size: 11px;
 	font-weight: bold;
@@ -180,7 +190,10 @@ ul li span {
 	line-height: 41px;
 	margin-right: 10px;
 }
+
+
 /*重写MUI*/
-.mui-bar-nav~.mui-content{
+
+.mui-bar-nav~.mui-content {
 	padding-top: 0;
 }

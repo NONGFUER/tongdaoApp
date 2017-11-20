@@ -31,12 +31,12 @@
 							<li class="li_body">
 								<span v-html="Objectitle.commodityCombination.startPiece">1000</span>
 								<span class="xianshu"></span>
-								<span>365</span>
+								<span v-text="chiyoudate">365</span>
 							</li>
 							<li class="li_body_two">
 								<span>起售金额(元)</span>
 								<span class="xianshu"></span>
-								<span>建议持有(天)</span>
+								<span v-text="chiyou">建议持有(天)</span>
 							</li>
 						</ul>
 					</div>
@@ -106,6 +106,12 @@
 							<li>
 								<span class="biao"></span>
 								<span>该产品为投资连结保险,投资回报具有不确定性,产品投资风险由投保人承担。</span>
+								<div>
+								<!--	<span>如您需要追加保险费，调整保额，请拨打</span>
+									<span id='dianhua' style="color: rgb(27, 107, 184)">4008-500-365</span>
+									<span>客服电话咨询客服进行申请办理</span>-->
+									<span>如您需要追加保险费，调整保额，请拨打4008-500-365客服电话咨询客服进行申请办理</span>
+								</div>
 							</li>
 						</ul>
 					</div>

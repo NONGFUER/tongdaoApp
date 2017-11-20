@@ -32,13 +32,15 @@ $(function() {
 		sysbackproduct();
 	})
 	$(".on1").unbind("tap").bind("tap", function() {
-		/*urlParm.title = '保单详情';
+		urlParm.title = '产品详情';
 		urlParm.commodityComId=urlParm.commodityCombinationId;
-		urlParm.canpingzhifu=canpingzhifu;
-		var sendData = urlParm;
-		var jsonStr = UrlEncode(JSON.stringify(sendData));
-		window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;*/
-		sysbackproduct();
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		if(urlParm.channel=='01'){
+			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
+		}else{
+			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetailsWeChat/productDetailsWeChat.html?jsonKey=" + jsonStr;
+		}
+		
 	})
 	//跳转到下载页面
 	$(".result-download").unbind("tap").bind("tap",function(){			

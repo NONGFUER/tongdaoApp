@@ -102,11 +102,28 @@
      					<label>车架号   </label> <input type="text" id="FieldAJ" value="" maxlength="17" placeholder="请输入正确的车架号" />
 					</dd >
 					<dd class="Field">
-     					<label>车牌号   </label> <span class="xinche">新车未上牌</span><img id="chooseicon" class="chooseicon" src="../../../image/insurance/gouxuankuang.png"/><input type="text" id="FieldAI" value="" maxlength="8" placeholder="请输入正确的车牌号"/>
+     					<label>车牌号   </label> <span class="xinche">新车未上牌</span><img id="chooseicon" class="chooseicon" src="../../../../image/insurance/gouxuankuang.png"/><input type="text" id="FieldAI" value="" maxlength="8" placeholder="请输入正确的车牌号"/>
 					</dd >
 					<dd class="Field">
      					<label>核定座位数   </label> <img alt="" src="../../../../image/insurance/down.png" class="down zdown"><span id="FieldAN">请选择</span> 
 					</dd >   				    				     				     				     				
+				 </dl>
+				 <dl class="insure-form-group hidden" id="dai">
+     				<dt class="group-title">
+     					<div class="group-title-main">借贷合同信息</div> 
+     				</dt>     				
+     				<dd >
+     					<label>发放贷款银行名称：  </label> <input type="text" id="cBankName" value="" maxlength="50" placeholder="请输入发放贷款银行名称"/>
+     				</dd>
+					<dd >
+     					<label>贷款合同号：    </label> <input type="text" id="cHtNo" value="" maxlength="50" placeholder="请输入贷款合同号"/>
+					</dd >
+					<dd >
+     					<label>贷款起期：    </label> <input type="text" id="cDaiBegin" value="" maxlength="18" class="riqi" placeholder="请选择贷款起期" readonly/>
+					</dd >
+					<dd >
+     					<label>贷款止期：    </label> <input type="text" id="cDaiEnd" value="" maxlength="18" class="riqi" placeholder="请选择贷款止期" readonly/>
+					</dd >				   				    				     				     				     				
 				 </dl>
 				<!-- 保险信息 -->
      			<dl class="insure-form-group">				
@@ -127,7 +144,7 @@
 					</dd>
 					<dd style="height:auto">
      					<label>保障说明</label> 
-						<div class="duty"></div>
+						<div class="duty" style="position:relative"></div>
 					</dd>			    				     				     				     				
 				 </dl>
 				<!-- 是否接受协议-->
@@ -156,7 +173,7 @@
     <script src="../../../../js/lib/widget/mui/mui.picker.min.js"></script>
     <script src="../../../../js/lib/common/base.js"></script>
 	<script src="../../../../js/lib/common/common.js"></script>
-	<script src="../../../../js/usage/share/insurance/head.js"></script>
-	<script src="../../../../js/usage/share/insurance/insure.js"></script>
+	<script src="../../../../js/usage/share/insurance/head.js?v=201711141647"></script>
+	<script src="../../../../js/usage/share/insurance/insure.js?v=201711141647"></script>
 </body>
 </html>

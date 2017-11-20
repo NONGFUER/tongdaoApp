@@ -16,14 +16,14 @@
 	</head>
 
 	<body>
-		<div class="mui-content mui-scroll-wrapper" id="list"  >
+		<div class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
-				<div class="man mui-table-view">
-					<div class="man-div-body ">
-						<ul class="man-div-body-ul ">
-							<li class="man-div-body-li mb10 mui-table-view-cell" v-for="(value,key) in Objectitle" v-bind:agentId='value.agentId' v-bind:isDefault='value.isDefault' v-bind:phone='value.userPhone' v-bind:insuranceConsultantId='value.id'  v-cloak>
-								<div class="mui-slider-right mui-disabled shanchu"  v-if="value.isDefault!='01'">
-									<a class="mui-btn mui-btn-red"  v-bind:insuranceConsultantId='value.id' v-bind:agentId="value.agentId">
+				<div class="man mui-table-view" id="list">
+					<div class="man-div-body">
+						<ul class="man-div-body-ul">
+							<li class="man-div-body-li mb10 mui-table-view-cell" v-for="(value,key) in Objectitle" v-bind:agentId='value.agentId' v-bind:isDefault='value.isDefault' v-bind:phone='value.userPhone' v-bind:insuranceConsultantId='value.id' v-cloak>
+								<div class="mui-slider-right mui-disabled shanchu" v-if="value.isDefault!='01'">
+									<a class="mui-btn mui-btn-red" v-bind:insuranceConsultantId='value.id' v-bind:agentId="value.agentId">
 										<!--<i class="lajitong"></i>-->
 										<span>删除</span>
 									</a>
@@ -64,6 +64,7 @@
 				</div>
 			</div>
 		</div>
+		<!--添加保险顾问-->
 		<div class="note">
 			<div class="note-div">
 				<div class="note-div_title">
@@ -72,22 +73,46 @@
 				</div>
 				<div class="note-div_body">
 					<div class="note-div_body_input">
-						<ul>
-							<li>
-								<span>
-									<input id='yan' type="text" name=""  value="" placeholder="请输入手机号"  maxlength='11' />
+						<input id='yan' type="text" name="" value="" placeholder="请输入手机号" maxlength='11' />
+						<div class="ssbody_div" v-cloak>
+							<div class="man-div-body-ul_li_div mui-slider-handle leirongs">
+								<span class="first">
+									<img class="imgzhao"  :src="inobject.postcardWxImage==''?'../../image/insuranceConsultant/1.png':urlimg+inobject.postcardWxImage" alt="" />
+									<!--<span class="renzheng">
+										权威认证
+									</span>-->
 								</span>
-							</li>
-						</ul>
-						<div class="note-div-button" style="display: flex;width: 80%;margin: 0 auto;">
-							<div class="note-div-btn quxiao" style="flex: 0.6;">
-								取消
+								<span class="last mgr15">
+										<ul style="text-align: left;">
+											<li style="margin-bottom: 15px;">
+												<span style="font-size: 15px;"  v-text="inobject.name"></span>
+								<span class="baoxianguwen"></span>
+								</li>
+								<li class='huise'>
+									<span>手机号码：</span>
+									<span v-text="inobject.phone"></span>
+								</li>
+								<li class='huise'> <span>业务员代码：</span>
+									<span v-text="inobject.agentCode"></span>
+								</li>
+								</ul>
+								</span>
 							</div>
-							<div style="flex: 0.1;"></div>
+						</div>
+						<div class="note-div-button" style="display:-webkit-box;display: -moz-box;display:-webkit-flex;display: -ms-flexbox;display:flex;width: 80%;margin: 0 auto;">
 							<div class="note-div-btn queding" style="flex: 0.6;">
 								确定
 							</div>
-
+							<div class="note-div-btn queding2" style="flex: 0.6;">
+								确定
+							</div>
+							<div style="flex: 0.1;"></div>
+							<div class="note-div-btn quxiao" style="flex: 0.6;">
+								取消
+							</div>
+							<div class="note-div-btn chongxin" style="flex: 0.6;">
+								重新搜索
+							</div>
 						</div>
 					</div>
 				</div>

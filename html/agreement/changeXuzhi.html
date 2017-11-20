@@ -91,6 +91,10 @@
 				urlParm.title = "驾乘人员意外伤害保险";
 				var jsonStr = UrlEncode(JSON.stringify(urlParm));
 				var toUrl = base.url + "tongdaoApp/html/insurance/jiachengxian/jcxshouye.html?jsonKey="+jsonStr;
+			}else if( urlParm.frompage == "familyInsureHtml" ){
+				urlParm.title = "投保信息";
+				var jsonStr = UrlEncode(JSON.stringify(urlParm));
+				var toUrl = base.url + "tongdaoApp/html/insurance/yian/familyInsure.html?jsonKey="+jsonStr;
 			}			
 			window.location.href = toUrl;
 			

@@ -84,11 +84,15 @@ ul li span {
 
 .man-div-body-ul li span:first-child {
 	float: left;
+	flex: 1.5;
 	color: #959595;
+	text-align: left;
 }
 
 .man-div-body-ul li span:last-child {
 	float: right;
+	flex: 3;
+	text-align: right;
 }
 
 .man-div-body-ul_li_div_two ul li span:first-child {
@@ -306,6 +310,7 @@ ul li span {
 	padding: 0 20px 0 0;
 	height: 41px;
 	line-height: 41px;
+	display: flex;
 }
 
 .man-div-body-ul_bank span:last-child div {
@@ -360,6 +365,7 @@ ul li span {
 	line-height: 41px;
 	height: 41px;
 	line-height: 41px;
+	display: flex;
 }
 
 
@@ -496,7 +502,7 @@ ul li span {
 #dizhi {
 	text-align: right;
 	font-size: 15px;
-	height: 41px;
+/*	height: 41px;*/
 	color: #333;
 }
 
@@ -506,7 +512,7 @@ ul li span {
 #email {
 	text-align: right;
 	font-size: 15px;
-	height: 41px;
+/*	height: 41px;*/
 	color: #333;
 }
 

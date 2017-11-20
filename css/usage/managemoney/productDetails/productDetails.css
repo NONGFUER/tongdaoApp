@@ -16,6 +16,9 @@
 	clear: both;
 	height: 27px;
 	line-height: 27px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 
@@ -224,9 +227,11 @@ ul li span {
 	margin-top: 17px;
 	padding: 0 20px 0 20px;
 }
-.man-div-body-ul_li_div_btn_one{
+
+.man-div-body-ul_li_div_btn_one {
 	padding-bottom: 60px;
 }
+
 .man-div-body-ul_li_div_btn_one ul li span {
 	font-size: 12px;
 	color: #B3B3B3;
@@ -416,8 +421,11 @@ ul li span {
 	box-shadow: 0 2px 1px #F1F1F1;
 }
 
+
 /*风险评估*/
-.shadow,.shadowpass{
+
+.shadow,
+.shadowpass {
 	z-index: 10;
 	position: absolute;
 	top: 0;
@@ -429,66 +437,81 @@ ul li span {
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
 	/* display: none; */
 }
-.option{
+
+.option {
 	color: #878787;
 }
-.tip,.tippass{
+
+.tip,
+.tippass {
 	z-index: 11;
 	width: 74%;
 	height: 174px;
 	/* font-size: 16px; */
 	margin-top: 50%;
-    margin-left: 13%;
+	margin-left: 13%;
 }
-.tip p,.tippass p{
+
+.tip p,
+.tippass p {
 	font-size: 16px;
 }
 
-.tiphead{
+.tiphead {
 	height: 45px;
 	line-height: 45px;
 	border-radius: 10px 10px 0 0;
 	background-color: #fafafa;
 }
-.tiphead p{
+
+.tiphead p {
 	color: #1b6bb8;
 	margin: 0;
 	text-align: center;
 	font-weight: bold;
 }
-.cancleimg{
+
+.cancleimg {
 	z-index: 12;
 	float: right;
 	width: 12px;
 	margin-top: -38px;
 	margin-right: 10px;
 }
-.tipbody,.tipbodypass{
+
+.tipbody,
+.tipbodypass {
 	/* height: 85px; */
 	background-color: #fff;
 	border-bottom: 1px solid #ccc;
 }
-.tipbody p, .tipbodypass p{
+
+.tipbody p,
+.tipbodypass p {
 	text-indent: 2em;
 	color: #333;
 	line-height: 30px;
 	width: 90%;
-    margin: auto;
-    padding-top: 11px;
+	margin: auto;
+	padding-top: 11px;
 }
-.tipfoot{
+
+.tipfoot {
 	height: 45px;
 	border-radius: 0 0 10px 10px;
 	background-color: #fafafa;
 	color: #1b6bb8;
 }
-.cancle,.retest{
+
+.cancle,
+.retest {
 	float: left;
-	width: 49.5%;	
+	width: 49.5%;
 	height: 45px;
 	line-height: 45px;
 	text-align: center;
 }
-.btnhuise{
+
+.btnhuise {
 	background-color: #999!important;
 }

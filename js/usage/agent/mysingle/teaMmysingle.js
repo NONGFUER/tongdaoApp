@@ -18,7 +18,7 @@ var vm = new Vue({
 	el: '#list',
 	data: {
 		Objectlist: {},
-	},
+	}/*,
 	mounted() {
 		this.$nextTick(function() {
 			$(function() {
@@ -34,7 +34,7 @@ var vm = new Vue({
 				})
 			})
 		}
-	}
+	}*/
 })
 
 $(function() {
@@ -118,6 +118,9 @@ function getPolicyList(data) {
 	} else {
 		modelAlert(data.status_message);
 	}
+	vm.$nextTick(function() {
+		chuli();
+	})
 }
 
 mui('.mui-scroll-wrapper').scroll({

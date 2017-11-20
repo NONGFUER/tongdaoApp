@@ -26,13 +26,13 @@ var vm = new Vue({
 		weixin: {}, //微信二维码
 		name: {}, //姓名
 	},
-	watch: {
+	/*watch: {
 		data() {
 			this.$nextTick(() => {
 				shuaxin();
 			})
 		}
-	}
+	}*/
 })
 var kuo = "<",
 	kuo2 = ">",
@@ -80,6 +80,9 @@ $(function() {
 	/*点击关闭*/
 	$(".spanClose").unbind("tap").bind("tap", function() {
 		$('.popup').hide();
+	})
+	vm.$nextTick(function() {
+		shuaxin();
 	})
 })
 

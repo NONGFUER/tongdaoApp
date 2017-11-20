@@ -63,31 +63,7 @@
 						<div id="qudao" class="li_value"></div>
 					</li> -->
 				</ul>
-			</div>
-			<div id="agenter" class="agenter">
-            	<article class="insureName border-1px-bottom" style="padding-right: 6.67%;">
-					<div style="width:50%;float:left">
-						<span>被保人信息</span>
-					</div>
-					<div  class="tong">
-						<span>同投保人</span>
-					</div>
-				</article>
-				<ul class="BBR hidden">
-					<li class="name border-1px-bottom">
-						<div class="li_title">姓名</div>
-						<div id="BBRName" class="li_value"></div>
-					</li>
-					<li class="IDType border-1px-bottom">
-						<div class="li_title">证件类型</div>
-						<div id="BBRIDType" class="li_value">身份证</div>
-					</li>
-					<li class="ID border-1px-bottom">
-						<div class="li_title">证件号</div>
-						<div id="BBRID" class="li_value"></div>
-					</li>															
-				</ul>
-			</div>
+			</div>			
 			<!--已发放佣金-->
 			<div class="yongjin">
 				<div class="yongjin_title">已发放佣金</div> 
@@ -95,9 +71,10 @@
 			</div>
 			<!-- 保险责任 -->
 			<div id="chuxing_way" class="chuxing_way">
-            	<article class="insureName border-1px-bottom">
+            	<article class="insureName border-1px-bottom" id="changeWay">
 					<div style="width: 100%">
 						<span>保险责任</span>
+						<img class="rightjiantou hidden" id="qhArrow" src="../../../image/common/right.png">
 					</div>
 				</article>
 				<div class="choose_way" style="font-size:14px">
@@ -132,5 +109,5 @@
     <script  src="../../../js/lib/common/base.js" ></script>
     <script  src="../../../js/lib/common/common.js" ></script>
     <script src="../../../js/lib/common/jweixin-1.1.0.js"></script>
-    <script  src="../../../js/usage/account/myOrder/policyInfo.js" ></script>
+    <script  src="../../../js/usage/account/myOrder/policyInfo.js?v=201710301602" ></script>
 </html>

@@ -52,7 +52,7 @@ function getHealthToldRequest(ccId){
     var url = requestUrl.heathTold;
     var sendJson = {
         "head" : {
-            "channel" : "01",
+            "channel" : channel,
             "userCode" : mobile,
             "transTime" : $.getTimeStr(),
             "transToken": ""
@@ -77,6 +77,18 @@ function healToldCallBack(data){
 		modelAlert(data.statusMessage);
 	}
 }
+
+function toYiUrl(){
+	urlParm.title = "易安职业风险类别表";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	urlParm.frompage = "healthNotice";
+	urlParm.search = window.location.search;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url+"tongdaoApp/html/agreement/yiAnProfession.html?jsonKey="+jsonStr;
+}
+
 //返回
 function backlast(){
 	urlParm.title    = "产品详情";

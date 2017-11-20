@@ -18,7 +18,8 @@ var vm = new Vue({
 	el: '#list',
 	data: {
 		Objectitle: {
-			list: {}
+			list: {},
+			backimg:"",
 		},
 	},
 	mounted() {
@@ -58,12 +59,19 @@ $(function() {
 	}
 	var url = base.url + 'investmentLinkedInsurance/getBank.do';
 	$.reqAjaxs(url, reqData, getBank);
-
 })
 
 function getBank(data) {
+	var datas = new Array();
 	if(data.statusCode == '000000') {
 		vm.Objectitle = data.returns.list;
+		vm.Objectitle.forEach(function(index, element) {
+			datas.push(index);
+			if(datas[element].dayLimit=='null'||datas[element].dayLimit==null) {
+				datas[element].dayLimit='无';
+			}
+		})
+		vm.Objectlist = datas;
 		mui('#list').on('tap', '.banklist', function() {
 			var commodityId = $(this).attr('commodityid');
 			var bankName = $(this).attr('bankName');
@@ -89,4 +97,10 @@ function getBank(data) {
 /*登录失效*/
 function lognCont() {
 	loginControl();
+}
+/*返回*/
+function backlast() {
+	urlParm.title=titles;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/messageFillout.html?jsonKey=" + jsonStr;
 }

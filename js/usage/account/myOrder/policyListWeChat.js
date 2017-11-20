@@ -145,7 +145,7 @@ function getPolicyList(data) {
 			data.returns.forEach(function(index, element) {
 				datas.push(index);
 				if(index.startTime != null && index.startTime != "" && index.endTime != null && index.endTime != "") {
-					if(index.startTime.time != null && index.startTime.time != "" && index.endTime.time != null && index.endTime.time != "" && index.prem != "" && index.prem != null) {
+					if(index.startTime.time != null && index.startTime.time != "" && index.endTime.time != null) {
 						datas[element].startTime = ($.getTimeStr2(index.startTime.time));
 						datas[element].endTime = ($.getTimeStr2(index.endTime.time));
 					}

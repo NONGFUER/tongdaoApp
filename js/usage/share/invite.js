@@ -4,8 +4,10 @@ var shareMobile = "";
 var countdown = 60;
 var validateCode = "q";
 $(function(){
-	var calheight = $("#calheight").height()-40;
-	$(".touxiang").css("top",calheight+"px");
+	resize();
+	window.addEventListener("resize", function () {
+		resize();
+	});	
 	getNameRequest(cusId);
 	$("#btnSendCode").unbind("tap").bind("tap",function(){		
 		var mobile = $("#checkPhone").val();
@@ -156,7 +158,12 @@ function getNameRequest(cusId){
 
 function getNameCallback(data){
 	if(data.statusCode == "000000"){
-		$("#name").text(data.returns.customerBasic.name);
+		if(data.returns.customerBasic.name){
+			$("#name").text("："+data.returns.customerBasic.name);
+		}else{
+			$("#name").text("");
+		}
+		
 		shareMobile = data.returns.customerBasic.userName;
 		getTouxiang(shareMobile)
 	}else{
@@ -186,4 +193,14 @@ function reload(){
 }
 function toDownload(){
 	window.location.href = base.url + "tongdaoApp/html/share/download/appDownload.html";
+}
+
+function resize(){
+	var cWidth = document.documentElement.clientWidth;
+	var calheight = $("#calheight").height()-cWidth*0.12;
+	$(".touxiang").css("top",calheight+"px");
+	$(".touxiang").css("width",cWidth*0.2);
+	$(".touxiang").css("height",cWidth*0.2);
+	$(".touxiang").css("padding",cWidth*0.008 +"px 0");
+	$(".invite-context").css("margin-top",cWidth*0.1+2 +"px");
 }

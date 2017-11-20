@@ -5,38 +5,39 @@ var editnum = null; //编辑对象编号
 //var transToken = '059876d99ec46c490953d04d4993da56';
 //var userCode = '13601460140';
 //var customerId = '8';
-var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
-customerId = urlParm.customerId;
-userCode = urlParm.userCode,
-	transToken = urlParm.transToken,
+var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+	customerId = urlParm.customerId,
+	userCode = urlParm.userCode,
+	mytitle = urlParm.title,
+	transToken = urlParm.transToken;
 
-	//初始化
-	$(function() {
-		if(customerId != null && customerId != "") {
-			getList(); //获取常用保险人列表
+//初始化
+$(function() {
+	if(customerId != null && customerId != "") {
+		getList(); //获取常用保险人列表
+	}
+
+	//	openAdd();//打开新增弹框
+
+	//关闭添加/修改弹出框
+	$(".note-div_title_right").unbind("tap").bind("tap", function() {
+		$(".note").hide();
+	});
+
+	/***新增*******/
+	$("#addBtn").on("tap", function() {
+		if(addCheck()) {
+			add();
 		}
+	});
 
-		//	openAdd();//打开新增弹框
-
-		//关闭添加/修改弹出框
-		$(".note-div_title_right").unbind("tap").bind("tap", function() {
-			$(".note").hide();
-		});
-
-		/***新增*******/
-		$("#addBtn").on("tap", function() {
-			if(addCheck()) {
-				add();
-			}
-		});
-
-		/*****修改*****/
-		$("#updateBtn").on("tap", function() {
-			if(updateCheck()) {
-				update();
-			}
-		});
-	})
+	/*****修改*****/
+	$("#updateBtn").on("tap", function() {
+		if(updateCheck()) {
+			update();
+		}
+	});
+})
 
 //获取常用保险人列表
 function getList() {
@@ -110,11 +111,11 @@ function ListCallBack(data) {
 				str += '</li>';
 				str += '<li>';
 				str += '<div class="title_body_left">';
-				str += '<span id="phone" data-phone="'+phone+'">' + phoneyin(phone) + '</span>';
+				str += '<span id="phone" data-phone="' + phone + '">' + phoneyin(phone) + '</span>';
 				str += '</div>';
 				str += '<div class="title_body_right">';
 				str += '<span><img src="../../image/useApplicant/shenfenzheng.png"/></span>';
-				str += '<span id="idNo" data-idno="'+idNo+'">' + shenfen(idNo) + '</span>';
+				str += '<span id="idNo" data-idno="' + idNo + '">' + shenfen(idNo) + '</span>';
 				str += '</div>';
 				str += '</li>';
 				str += '<li class="dizi" id="address">';
@@ -262,58 +263,58 @@ function openAdd() {
 }
 
 function addCheck() {
-
+	document.activeElement.blur();
 	if($.isNull($("#addName").val())) {
-		modelAlert("姓名不能为空！");
-		$('#editName').blur();
+		mui.alert("姓名不能为空！");
+
 		return false;
 	} else if(tit.regExp.isChinese($.trim($("#addName").val())) == false) {
 		modelAlert("姓名必须为汉字！");
-		$('#editName').blur();
+
 		return false;
 	} else if($("#addName").val().length > 20) {
 		modelAlert("姓名必须少于20个字！");
-		$('#editName').blur();
+
 		return false;
 	}
 
 	// 投保人手机号码校验
 	if($.isNull($("#addPhone").val())) {
 		modelAlert("手机号不能为空！");
-		$('#editPhone').blur();
+
 		return false;
 	} else if(tit.regExp.isMobile($("#addPhone").val()) == false) {
 		modelAlert("请输入正确的手机号码！");
-		$('#editPhone').blur();
+
 		return false;
 	}
 
 	//投保人身份证号
 	if($.isNull($("#addIdNo").val())) {
 		modelAlert("身份证号不能为空！");
-		$('#editIdNo').blur();
+
 		return false;
 	} else if($.checkIdCard($("#addIdNo").val().toLocaleUpperCase()) != 0) {
 		modelAlert("请输入合法的身份证号！");
-		$('#editIdNo').blur();
+
 		return false;
 	}
 
 	// 投保人邮箱校验
 	if($.isNull($("#addEmail").val())) {
 		modelAlert("邮箱不能为空！");
-		$('#editEmail').blur();
+
 		return false;
 	} else if(tit.regExp.isEmail($.trim($("#addEmail").val())) == false) {
 		modelAlert("请输入正确的邮箱！");
-		$('#editEmail').blur();
+
 		return false;
 	}
 
 	// 地址校验
 	if($.isNull($("#addAddress").val())) {
 		modelAlert("地址不能为空！");
-		$('#editAddress').blur();
+		$('#addAddress').focus();
 		return false;
 	}
 
@@ -379,16 +380,28 @@ function toInsure(obj) {
 		"phone": phone,
 		"idNo": idNo
 	}
-	urlParm.holder = info;
+	urlParm.mytitle=mytitle;
+	if(mytitle=='常用被保人'){
+		urlParm.holderbr = info;
+	}else if(mytitle=='常用投保人'){
+		urlParm.holder = info;
+	}
+	if(mytitle=='常用被保人二'){
+		urlParm.holdertwo = info;
+	}else if(mytitle=='常用被保人三'){
+		urlParm.holderthree = info;
+	}else if(mytitle=='常用被保人四'){
+		urlParm.holderfour = info;
+	}
 	urlParm.title = "投保信息";
 	urlParm.rightIco = "0";
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	if( urlParm.frompage == "insureHtml" ) {
+	if(urlParm.frompage == "insureHtml") { //在线产品（包含ecard,挂号险,防癌险）
 		window.location.href = base.url + "tongdaoApp/html/insurance/main/insure.html?jsonKey=" + jsonStr;
-	}else if( urlParm.frompage == "insureHtmlWechat" ){
+	} else if(urlParm.frompage == "insureHtmlWechat") { //微信公众号（包含ecard,挂号险,防癌险）
 		window.location.href = base.url + "weixin/ycCancer/html/insurance/main/insure.html?jsonKey=" + jsonStr;
-	} else {
-
+	} else if(urlParm.frompage == "familyInsureHtml") { //除挂号险之外的ecard
+		window.location.href = base.url + "tongdaoApp/html/insurance/yian/familyInsure.html?jsonKey=" + jsonStr;
 	}
 }
 //返回上一页
@@ -401,7 +414,14 @@ function backlast() {
 		urlParm.downIco = "0";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = base.url + "tongdaoApp/html/insurance/main/insure.html?jsonKey=" + jsonStr;
-	}else {
+	} else if(urlParm.frompage == "familyInsureHtml") {
+		urlParm.title = "投保信息";
+		urlParm.leftIco = "1";
+		urlParm.rightIco = "0";
+		urlParm.downIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/insurance/yian/familyInsure.html?jsonKey=" + jsonStr;
+	} else {
 		sysback();
 	}
 

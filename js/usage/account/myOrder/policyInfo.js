@@ -54,6 +54,11 @@ function policyNoDetailCallback(data){
 		var shortRiskPolicy      = body.shortRiskPolicy;
 		var status				 = shortRiskPolicy.policyStatus;
 		var picPath				 = picStatus(status);
+		if(commodityCombination.id == "17"){
+			$('#qhArrow').show()
+			qiehuan()
+			
+		}
 		$(".zhuangtai").attr("src",picPath);
 		var epolicyUrl			 = shortRiskOrder.epolicyUrl;
 		var startTime = shortRiskOrder.startTime.time;
@@ -61,11 +66,7 @@ function policyNoDetailCallback(data){
 		var endTime   = shortRiskOrder.endTime.time;
 			endTime   = timeFormatDate(endTime,"yyyy-MM-dd");
 		var prem      = toDecimal2(shortRiskOrder.prem);
-		if( shortRiskInsured.apRelation == "01"){
-			$(".tong").show();			
-		}else{
-			$(".BBR").show();
-		}
+		
 		//投保人星系
 		$("#policyNo").text(policyNo);//订单号
 		$("#riskName").text(commodityInfo.commodityName);//商品名称
@@ -74,11 +75,21 @@ function policyNoDetailCallback(data){
 		$("#qijian").text(startTime+"至"+endTime);//投保期间
 		$("#baofei").text(prem+"元");//保费
 		
-		//被保人信息
-		$("#BBRName").text(shortRiskInsured.insuredname);
-		$("#BBRID").text(shortRiskInsured.insuredidno);
-		var imgDiv = '<img src="'+commodityInfo.banner+'">';
-		$(".bxzr").append(imgDiv);
+		var insuredLen = shortRiskInsured.length;
+		if( insuredLen >= 1){
+			for( var i = insuredLen-1; i >= 0; i-- ){
+				var tbrstr = getTbrList(shortRiskInsured[i],i,insuredLen);
+				$("#toubaoren").after(tbrstr);
+			}
+		}
+		
+		if(commodityCombination.id == "17"){
+			qiehuanimg()
+		}else{
+			var imgDiv = '<img src="'+commodityInfo.banner+'">';
+			$(".bxzr").append(imgDiv);
+		}
+		
 		
 		//保险条款
 		$("#riskTiaokuan").attr("data-cid",commodityInfo.id + "");
@@ -94,6 +105,34 @@ function policyNoDetailCallback(data){
 	}
 }
 
+function getTbrList(obj,index,len){
+	console.log(obj);
+	if( obj.apRelation == "01" ){
+		var objstr =  '<div id="agenter" class="agenter">';
+    		objstr += '<article class="insureName border-1px-bottom" style="padding-right: 6.67%;">'
+    		if( len == "1" ){
+        		objstr += '<div style="width:50%;float:left"><span>被保人信息</span></div><div  class="tong" style="display:block"><span>同投保人</span></div>'
+        	}else{
+        		objstr += '<div style="width:50%;float:left"><span>被保人信息'+(index+1)+'</span></div><div  class="tong" style="display:block"><span>同投保人</span></div>'
+        	}   
+    		objstr += '</article></div>'		
+	}else{
+		var objstr = '<div id="agenter" class="agenter">'
+			objstr += '<article class="insureName border-1px-bottom" style="padding-right: 6.67%;">'
+		    objstr += '<div style="width:50%;float:left"><span>被保人信息'+(index+1)+'</span></div>'			
+			objstr += '</article>'
+			objstr += '<ul class="BBR">'
+			objstr += '<li class="name border-1px-bottom"><div class="li_title">姓名</div>'
+			objstr += '<div id="BBRName" class="li_value">'+obj.insuredname+'</div>'
+			objstr += '</li>'
+			objstr += '<li class="IDType border-1px-bottom"><div class="li_title">证件类型</div><div id="BBRIDType" class="li_value">身份证</div></li>'
+			objstr += '<li class="ID border-1px-bottom"><div class="li_title">证件号</div>'
+			objstr += '<div id="BBRID" class="li_value">'+obj.insuredidno+'</div>'
+			objstr += '</li></ul></div>'
+	}
+	return objstr;
+}
+
 function picStatus(sta){
 	var pic = base.url + "tongdaoApp/image/common/nullstatus.png";
 	if(sta == "10" || sta == "11" ){//待生效
@@ -104,6 +143,34 @@ function picStatus(sta){
 		var pic = base.url + "tongdaoApp/image/common/yiguoqi.png";
 	}
 	return pic;
+}
+function qiehuan(){
+	$("#changeWay").unbind("tap").bind("tap",function(){
+		urlParm.title = "保障切换";
+		urlParm.leftIco = "1";
+		urlParm.rightIco = "0";
+		urlParm.downIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + 'tongdaoApp/html/insurance/sxy/chooseChuxingWay.html?jsonKey='+jsonStr;
+	});
+}
+
+function qiehuanimg(){
+	var url = base.url + "common/getTrafficTime.do";
+	var reqData = {
+			"head":{
+				"channel":"01",
+				"userCode":"2835",
+				"transTime":""
+			},"body":{
+				"phone":mobile
+			}
+	}
+	$.reqAjaxsFalse(url,reqData,function(data){
+		var imgimg = 'http://jichupro.oss-cn-szfinance.aliyuncs.com/commodityCombination/commodityBaoZhang/00500005_'+data.returns.bxSxyTraffic.trafficWay+'.jpg'
+		var imgDiv = '<img src="'+imgimg+'">';
+		$(".bxzr").append(imgDiv);
+	});
 }
 
 function toArticle(obj){	

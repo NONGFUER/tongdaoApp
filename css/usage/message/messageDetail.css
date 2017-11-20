@@ -1,0 +1,53 @@
+@charset "utf-8"; 
+body{
+	background-color: #fff;
+}
+/****************************************************************/
+header{
+	position:absolute;
+	z-index:9999;
+}
+#messagesinfo{
+	position: relative;
+	/* margin-top: 4.53rem; */
+	background-color: #fff;
+	/* padding-top: 1rem; */
+}
+#indexpart {
+	position:relative;
+	width: 100%;
+}
+.messages_infort{
+	position: relative;
+	width: 100%;
+	padding-top:0.5rem;
+	background-color: #fff;
+}
+.messages_time{
+	position: relative;
+	width: 98%;
+	margin: 0 auto;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	padding-right: 24px;
+    text-align: right;
+	/* border-bottom: 1px #CCCCCC solid; */
+	background-color: #fff;
+}
+.messages_time span{
+	color:#585858;
+	font-size: 1.3rem;
+}
+.messages_infort{
+	width: 98%;
+	line-height: 3rem;
+	margin: 0 auto;
+}
+.messages_infort_content{
+	width:98%;
+	padding: 5px;
+	color: #444444;
+	font-size: 1.5rem;
+	text-indent: 2rem;
+	padding-top: 10px;
+}

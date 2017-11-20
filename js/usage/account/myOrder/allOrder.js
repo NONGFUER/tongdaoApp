@@ -24,23 +24,20 @@ var vm = new Vue({
 	el: '#list',
 	data: {
 		Objectlist: null
-	},
+	}/*,
 	mounted() {
-		this.$nextTick(function() {
-			$(function() {
-				chuli();
-			})
-		})
-	},
-	watch: {
-		Objectlist: function(val) {
-			this.$nextTick(function() {
-				$(function() {
-					chuli();
+		chuli();
+	}*/
+	/*,
+		watch: {
+			Objectlist: function(val) {
+				this.$nextTick(function() {
+					$(function() {
+						chuli();
+					})
 				})
-			})
-		}
-	}
+			}
+		}*/
 })
 $(function() {
 	chaxun(userCode, transToken, customerId, riskType, orderStatus, tagId)
@@ -64,7 +61,7 @@ $(function() {
 	})
 	/*立即支付*/
 	mui('.man-div-body-ul').on('tap', '#liji', function() {
-		var leixing='liji'
+		var leixing = 'liji'
 		var orderNo = $(this).attr('orderNo');
 		var policyNo = $(this).attr('policyNo');
 		var riskType = $(this).attr('risktype');
@@ -100,7 +97,7 @@ $(function() {
 			"productFlag": productFlag,
 			"cxflag": '1',
 			"tagId": tagId,
-			"leixing":leixing,
+			"leixing": leixing,
 			"title": commodityName,
 			"leftIco": '1',
 			"rightIco": '0',
@@ -206,7 +203,7 @@ $(function() {
 			"transToken": transToken,
 			"orderStatus": orderStatus,
 			"idAuth": idAuth,
-			"channel":channel,
+			"channel": channel,
 			"productFlag": productFlag,
 			"cxflag": '1',
 			"tagId": tagId,
@@ -229,10 +226,13 @@ $(function() {
 		} else if(riskType == '04') {
 			mui.alert('寿险');
 		} else if(riskType == '02') {
-			window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/orderDetails.html?jsonKey=" + jsonStr;
+			if(commodityCombinationId=='24'){
+				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/sunorderDetails.html?jsonKey=" + jsonStr;
+			}else{
+				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/orderDetails.html?jsonKey=" + jsonStr;
+			}
 		}
 	})
-
 })
 
 function shanchu(userCode, transToken, customerId, orderNo) {
@@ -294,6 +294,9 @@ function getOrderList(data) {
 	} else {
 		modelAlert(data.status_message);
 	}
+	vm.$nextTick(function() {
+		chuli();
+	})
 }
 
 function chuli() {
@@ -335,6 +338,9 @@ function mylist(userCode, transToken, customerId, tagId, orderStatus) {
 			orderStatus = null;
 		}
 		chaxun(userCode, transToken, customerId, riskType, orderStatus, tagId)
+		vm.$nextTick(function() {
+			chuli();
+		})
 	})
 }
 

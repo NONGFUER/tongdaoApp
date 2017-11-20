@@ -16,7 +16,14 @@ var COMMODITYCOMBINE_ID ={
 	    "SWFR" : "11",	//商务飞人
 	    "XPXSX": "12",   //码上长大(省心版)
 	    "XPXAX": "12",   //码上长大(省心版)
-	    "GHX"  : "14"
+	    "GHX"  : "14",
+	    "LYX"  : "16",	 //旅意险
+	    "ZHX"  : "18",	 //账号险
+	    "JDX"  : "19",	 //借贷险
+	    "LRX"  : "20",	 //老人险
+	    "BQJ"  : "21",    //易安保全家疾病保险
+	    "BWYL" : "22",    //易安百万医疗险
+	    "AXYW" : "23"    //易安安心意外险
 	}
 var COMMODITY_ID ={
 		"MCAN" : "1",
@@ -78,10 +85,20 @@ var requestUrl = {
     ghxPay				 : base.url + 'ghxOrder/pay.do',				//@wxw
     //健康告知
     heathTold			 : base.url + 'commodityCombination/getHealthTold.do',//@gxj
-    notice				 : base.url + 'commodityCombination/getNotice.do'//@gxj
+    notice				 : base.url + 'commodityCombination/getNotice.do',//@gxj
+    //易安保全家
+    bqjInsure			 : base.url + 'preservation/bqjcreateOrder.do',	//保全家投保接口@wxw
+    bqjPay				 : base.url + 'preservation/bqjPay.do',				//保全家支付@wxw
+    //议案百万医疗
+    yianInsure           : base.url + "yiAn/insure.do"						//百万医疗投保接口
 }
 //全局变量
-var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
+if(getUrlQueryString("jsonKey")){
+	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
+}else{
+	var urlParm = {};
+}
+
 
 var isComing    = urlParm.isComing ? urlParm.isComing : "";; 			//即将上线
 
@@ -91,7 +108,7 @@ var name		= urlParm.name;					 //姓名
 var idAuth		= urlParm.idAuth;				 //是否实名
 var idNo		= urlParm.idNo;					 //身份证号
 var roleType    = urlParm.roleType;              //"04";				//urlParm.roleType用户角色
-var transToken  = urlParm.transToken;//"40d1ef064f3259d6501dc15e69fb8d1c"//urlParm.transToken;			 //
+var transToken  = urlParm.transToken ? urlParm.transToken : '' ;//"40d1ef064f3259d6501dc15e69fb8d1c"//urlParm.transToken;			 //
 var ccId        = urlParm.ccId;                  //"3";             //urlParm.ccId;商品组合id
 var ccCode      = urlParm.ccCode;                //"00400003";      //urlParm.ccCode;商品组合code
 var cCode       = urlParm.cCode;				 //
@@ -124,49 +141,20 @@ var banbenFlag = urlParm.banbenFlag ? urlParm.banbenFlag : "01";
 
 //驴意险
 var cGuaranteeTerm = '';
-// 18	18900001111				王晓伟
-
-// 1	00400001	天安防癌险（男神版）
-// 2	00400002	天安防癌险（女神版）
-// 3	00400003	天安防癌险（少儿版）
-// 4	00600001	弘康安溢保两全保险
-// 5	00600002	弘康安盈保年金保险
-// 6	00400004	锦绣吉顺
-// 7	00400005	锦程交通意外险
-// 8	00400006	健康佳人（佳丽福）
-// 9	00400007	健康安享
-// 10	00400008	“邻里和睦”家财综合保障计划
-// 11	00400009	商务飞人（精英版）
-// 12	00400010	天安“码上长大”学平险
-// 13	00400011	天安车险
-// 14	00500001	挂号服务费用补偿保险
-// 101	00900001	富德人寿富康宝年金保险
-// 102	00300001	华夏福临门年金保险（2015铂金版）
-// 103	00300002	华夏健康人生重大疾病保险
-// 104	00100001	泰康乐安康终身重大疾病保险
-// 105	00100002	泰康乐行综合意外保障计划
-// 106	00100003	泰康乐鑫两全保险（分红型）
-// 107	00200001	阳光人寿健康保终身恶性肿瘤疾病保险
-// 108	00200002	阳光人寿金喜连连年金保险
-// 109	00200003	阳光人寿康世宁终身重大疾病保险
-// 110	00200004	阳光人寿孝顺保恶性肿瘤疾病保险
-// 111	01000001	恒大恒久健康终身重大疾病保险（2017版）
-// 112	01000002	恒大金财人生保险计划（分红型）
-// 113	01000003	恒大千万护航两全保险产品计划
-// 114	01000004	恒大鑫福
-// 118	004000011	天安防癌险（男神版）
-// 119	004000022	天安防癌险（女神版）
-// 120	004000032	天安防癌险（少儿版）
-var PRODUCT_SHARE = {
-		"MCAN" : "男性百万恶性肿瘤险-直付100万，全球抗癌疾病保险，15元起,"+name+"为你推荐男性百万恶性肿瘤险。",		
-		"FCAN" : "女性百万恶性肿瘤险-直付100万，全球抗癌疾病保险，70元起,"+name+"为你推荐女性百万恶性肿瘤险。",		
-		"BCAN" : "少儿百万恶性肿瘤险-直付100万，全球抗癌疾病保险，50元起,"+name+"为你推荐少儿百万恶性肿瘤险。",
-		"JKJR" : '健康佳人女性专属肿瘤保-100万保额，确诊直赔30万，含高额住院津贴，意外医疗保障',//健康佳人
-		"JKAX" : '健康安享重疾险-100万保额，30种重疾，60天超短等待期',							//健康安享
-		"QCWY" : '全车无忧驾乘意外险-50万保额，为您提供驾乘人员安全的全面保障！',				//全车无忧
-		"LLHM" : '“邻里和睦”家财综合保障计划-200万保额，家财综合保障计划全面守护您的家',		//邻里和睦
-		"JXJS" : '锦绣吉顺综合意外险-18万保额，每天不到3毛钱，为您提供全面意外伤害保障',		//锦绣吉顺
-		"SWFR" : '商务飞人航空意外险-500万元保额，1年无限次飞行，不限国内或国际航班'			//商务飞人		
+//微信公众号 渠道出单qudao 保险商城mall
+var entry = urlParm.entry ? urlParm.entry : 'app';
+if( entry == 'app' ){	
+	modelAlert("native");
+	var channel = "01"
+	var channelResource = "3"
+	var payWay = '02'
+}else{	
+	modelAlert("浏览器或微信端");	
+	var channel = "02"
+	var channelResource = "1"
+	var payWay = '01'
+	$("header").show();
+	$(".mui-scroll-wrapper").css("margin-top", "44px");
 }
 var PRODUCT_PICURL ={
 		"BASE" : base.url + "tongdaoApp/image/share/tongdaoic.png",
@@ -178,7 +166,14 @@ var PRODUCT_PICURL ={
 		"QCWY" : base.url + "tongdaoApp/image/share/qcwy.png",	//全车无忧
 		"LLHM" : base.url + "tongdaoApp/image/share/llhm.png",	//邻里和睦
 		"JXJS" : base.url + "tongdaoApp/image/share/jxjs.png",	//锦绣吉顺
-		"SWFR" : base.url + "tongdaoApp/image/share/swfr.png"	//商务飞人
+		"SWFR" : base.url + "tongdaoApp/image/share/swfr.png",	//商务飞人
+		"LYX"  : base.url + "tongdaoApp/image/share/lyx.png",	//旅意险
+		"LRX"  : base.url + "tongdaoApp/image/share/lrx.png",   //老人险
+		"ZHX"  : base.url + "tongdaoApp/image/share/zhx.png",   //账户险
+		"JDX"  : base.url + "tongdaoApp/image/share/jdx.png",   //借贷险	
+		"BQJ"  : base.url + "tongdaoApp/image/share/bqj.png",	//保全家
+		"BWYL" : base.url + "tongdaoApp/image/share/bwyl.png",   //百万医疗
+		"AXYW" : base.url + "tongdaoApp/image/share/axyw.png"	//安心意外险
 }
 //根据不同的产品获取分享信息
 function getProductSharePic(productCode){
@@ -201,35 +196,22 @@ function getProductSharePic(productCode){
 		picUrl = PRODUCT_PICURL.FCAN;
 	}else if( productCode == COMMODITYCOMBINE_ID.BCAN ){
 		picUrl = PRODUCT_PICURL.BCAN;
+	}else if( productCode == COMMODITYCOMBINE_ID.LYX ){
+		picUrl = PRODUCT_PICURL.LYX;
+	}else if( productCode == COMMODITYCOMBINE_ID.LRX ){
+		picUrl = PRODUCT_PICURL.LRX;
+	}else if( productCode == COMMODITYCOMBINE_ID.JDX ){
+		picUrl = PRODUCT_PICURL.JDX;
+	}else if( productCode == COMMODITYCOMBINE_ID.ZHX ){
+		picUrl = PRODUCT_PICURL.ZHX;
+	}else if( productCode == COMMODITYCOMBINE_ID.BQJ ){
+		picUrl = PRODUCT_PICURL.BQJ;
+	}else if( productCode == COMMODITYCOMBINE_ID.BWYL ){
+		picUrl = PRODUCT_PICURL.BWYL;
+	}else if( productCode == COMMODITYCOMBINE_ID.AXYW ){
+		picUrl = PRODUCT_PICURL.AXYW;
 	}else{
 		picUrl = PRODUCT_PICURL.BASE;
 	}	
 	return picUrl;
-}
-//根据不同的产品获取分享信息
-function getProductShare(productCode){
-	var shareContent = "";
-	if( productCode == COMMODITYCOMBINE_ID.JKJR ){
-		shareContent = PRODUCT_SHARE.JKJR;
-	}else if( productCode == COMMODITYCOMBINE_ID.JKAX ){
-		shareContent = PRODUCT_SHARE.JKAX;
-	}else if( productCode == COMMODITYCOMBINE_ID.LLHM ){
-		shareContent = PRODUCT_SHARE.LLHM;
-	}else if( productCode == COMMODITYCOMBINE_ID.QCWY ){
-		shareContent = PRODUCT_SHARE.QCWY;
-	}else if( productCode == COMMODITYCOMBINE_ID.JXJS ){
-		shareContent = PRODUCT_SHARE.JXJS;
-	}else if( productCode == COMMODITYCOMBINE_ID.SWFR ){
-		shareContent = PRODUCT_SHARE.SWFR;
-	}else if( productCode == COMMODITYCOMBINE_ID.MCAN ){
-		shareContent = PRODUCT_SHARE.MCAN;
-	}else if( productCode == COMMODITYCOMBINE_ID.FCAN ){
-		shareContent = PRODUCT_SHARE.FCAN;
-	}else if( productCode == COMMODITYCOMBINE_ID.BCAN ){
-		shareContent = PRODUCT_SHARE.BCAN;
-	}else {
-		shareContent = "产品名称-产品描述"
-	}
-	var shareList = shareContent.split("-");
-	return shareList;
 }

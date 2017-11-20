@@ -22,10 +22,10 @@
 				<div class="man mui-table-view" id='list' v-cloak> 
 					<div class="b"></div>
 					<div class="banklist clearfix tui"  v-for="(value,key) in Objectitle" v-bind:bankName='value.bankName' v-bind:commodityId='value.commodityId' v-bind:bankCode='value.bankCode' v-bind:dayLimit='value.dayLimit'>
-						<div class="banklogo"><img src="../../../image/managemoney/productDetails/ICBC.png"></div>
+						<div class="banklogo"><img v-bind:src="'../../../image/banklogo/'+value.bankCode+'.png'"></div>
 						<div class="bankdetail">
 							<div class="bank"> <span class="bankname" v-html="value.bankName">广发银行</span> <span class="cardtype" v-html="">储蓄卡</span></div>
-							<div class="limit" v-html="'单笔限额'+value.singleLimit+'，日累计限额'+value.dayLimit"></div>
+							<div class="limit" v-text="'单笔限额'+value.singleLimit+'，日累计限额'+value.dayLimit"></div>
 						</div>
 						<div></div>
 					</div>

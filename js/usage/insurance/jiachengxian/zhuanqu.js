@@ -87,7 +87,7 @@ $.getShengyu=function(cId){
 				$(".jiluTable").html(str);
 			}else{//大于10条，先展示前10条，点击展开按钮时再展示全部
 				$(".kai").html("点击展开");
-				$(".kaiImg").html("<img src='../../images/jiantou2.png'/>");
+				$(".kaiImg").html("<img src='../../../image/insurance/jcx/jiantou2.png'/>");
 				/*$(".kaiImg img").attr("src","../../images/jiantou2.png");*/
 				$(".zhankai").show();
 				$(".quanbu").hide();
@@ -130,7 +130,7 @@ $.getShengyu=function(cId){
 						$(".jiluTable").html(str2);
 					}else{//点击收起
 						$(".kai").html("点击展开");
-						$(".kaiImg").html("<img src='../../../images/insurance/jcx/jiantou1.png'/>");
+						$(".kaiImg").html("<img src='../../../images/insurance/jcx/jiantou2.png'/>");
 						/*$(".kaiImg img").attr("src","../../images/jiantou2.png");*/
 						$(".zhankai").show();
 						$(".quanbu").hide();
@@ -173,9 +173,9 @@ function tuLingqu(){
 
 function shareHandle(){
 	var title = "易安驾乘无忧意外保险" ;
-	var desc  = "20万驾乘险免费送，国庆放心自驾游。" ;	
+	var desc  = "20万保额免费领，驾车乘车都能保，放心自驾游。" ;	
 	var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=4';
-	var picUrl = base.url + "tongdaoApp/image/share/jiachenxianfenx.png";
+	var picUrl = base.url + "tongdaoApp/image/share/jiachenxianfen.png";
 	shareMethod(shareurl,title,desc,"baodan",picUrl);		
 };
 

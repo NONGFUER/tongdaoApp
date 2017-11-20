@@ -48,30 +48,27 @@
     font-size:14px;
 }
 .TBR{
-	margin-left:4.5%;
-	width:100%;
+	
 }
 .BBR{
-	margin-left:4.5%;
-	width:100%;
+	
 }
 .name,.IDType,.ID,.birthday,.mobile,.mail,.riskQijian,.baofei,.qudao{
 	height:47px;
-	line-height:47px;
-	width:100%;
+	line-height:47px;	
+	margin-left: 4.4%;
+    padding-right: 4.4%;
 }
 .li_title{
-	float:left;
-	width:30.23%;
+	display:inline;
 	font-size:14px;
 	color:#888;
 	padding-left: 3%;
 }
-.li_value{
-	width:58.97%;
+.li_value{	
 	height:47px;
 	line-height:47px;
-	float:left;
+	float:right;
 	color:#000;
 	text-align:right;
 	font-size:14px;

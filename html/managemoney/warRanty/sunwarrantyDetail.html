@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>保单详细</title>
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/usage/managemoney/warRanty/warrantyDetail.css" />
+	</head>
+
+	<body>
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="man mui-table-view" id='list' v-cloak>
+					<div class="man-div-body-ul_li_div mb10">
+						<ul class="man-div-body-ul_li_div_ul1">
+							<li>
+								<span v-html="ccName"></span>
+								<span class="jiantou"></span>
+								<span class="chanping" v-if="channel!='02'">查看产品详细</span>
+							</li>
+							<li class="list_two">
+								<h1 v-html="Objectitle.commodityCombination.remark"></h1>
+							</li>
+							<li>
+								<span>历史年化投资回报率</span>
+								<span v-html="Objectitle.bxPolicyFinance.orderStatus" class="baozhang"></span>
+							</li>
+						</ul>
+					</div>
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title_div">保单信息</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li>
+								<span>保单缴费金额</span>
+								<span v-text="Objectitle.bxPolicyFinance.prem+'元'">232323.32元</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>保单账户价值</span>
+								<span v-text="bdjiazhi+'元'"></span>
+							</li>						
+							<li class="xianli"></li>
+							<li>
+								<span>保单号</span>
+								<span v-html="Objectitle.bxPolicyFinance.policyNo">123456789010292821</span>
+							</li>
+						</ul>
+					</div>
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title_div">投保人信息</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li>
+								<span>投保人</span>
+								<span v-html="Objectitle.bxPolicyFinance.insureName"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>手机号</span>
+								<span class="phoneyin" v-html="Objectitle.bxPolicyFinance.insurePhone"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>城市</span>
+								<span v-html="Objectitle.bxPolicyFinance.provinceName+'&nbsp;&nbsp;'+Objectitle.bxPolicyFinance.cityName"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>地址</span>
+								<span v-html="Objectitle.bxPolicyFinance.insureAddress"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>电子邮箱</span>
+								<span v-html="Objectitle.bxPolicyFinance.insureEmail"></span>
+							</li>
+						</ul>
+					</div>
+					<!--投保人信息-->
+					<div class="man-div-body-ul_li_div_two mb10">
+						<ul class="man-div-body-ul">
+							<li>
+								<span class="heise">被保人信息</span>
+								<span class="lanse">同投保人</span>
+							</li>
+						</ul>
+					</div>
+					<!--电子保单-->
+					<div class="man-div-body-ul_li_div_two">
+						<ul class="man-div-body-ul">
+							<li class="baodan">
+								<span class="heise">电子保单</span>
+								<span class="rightjiantou  postop10"></span>
+							</li>
+						</ul>
+					</div>
+					<div class="man-div-body-ul_li_div_btn">
+						<!-- <div id="huifang" class="div_btn mbright30">在线回访</div>-->
+						 <div id='lingqu' class="div_btn">申请退保</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../../js/lib/widget/mui/mui.min.js"></script>
+	<script src="../../../js/lib/common/zepto.min.js"></script>
+	<script src="../../../js/lib/common/base.js"></script>
+	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
+	<script src="../../../js/usage/managemoney/warRanty/sunwarrantyDetail.js"></script>
+
+</html>

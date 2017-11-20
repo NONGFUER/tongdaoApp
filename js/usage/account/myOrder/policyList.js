@@ -24,23 +24,24 @@ var vm = new Vue({
 	el: '#list',
 	data: {
 		Objectlist: {},
-	},
-	mounted() {
-		this.$nextTick(function() {
-			$(function() {
-				chuli();
-			})
-		})
-	},
-	watch: {
-		Objectlist: function(val) {
+	}
+	/*,
+		mounted() {
 			this.$nextTick(function() {
 				$(function() {
 					chuli();
 				})
 			})
-		}
-	}
+		},
+		watch: {
+			Objectlist: function(val) {
+				this.$nextTick(function() {
+					$(function() {
+						chuli();
+					})
+				})
+			}
+		}*/
 })
 
 $(function() {
@@ -109,7 +110,7 @@ function getPolicyList(data) {
 			data.returns.forEach(function(index, element) {
 				datas.push(index);
 				if(index.startTime != null && index.startTime != "" && index.endTime != null && index.endTime != "") {
-					if(index.startTime.time != null && index.startTime.time != "" && index.endTime.time != null && index.endTime.time != "" && index.prem != "" && index.prem != null) {
+					if(index.startTime.time != null && index.startTime.time != "" && index.endTime.time != null && index.endTime.time != "") {
 						datas[element].startTime = ($.getTimeStr2(index.startTime.time));
 						datas[element].endTime = ($.getTimeStr2(index.endTime.time));
 					}
@@ -132,6 +133,9 @@ function getPolicyList(data) {
 	} else {
 		modelAlert(data.status_message);
 	}
+	vm.$nextTick(function() {
+		chuli();
+	})
 }
 
 mui('.mui-scroll-wrapper').scroll({

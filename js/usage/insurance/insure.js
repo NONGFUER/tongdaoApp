@@ -4,6 +4,7 @@ var genderCal = "";
 var code = ghxRemark.split(",");
 var insureList = [];
 var holder = urlParm.holder;
+var holderbr = urlParm.holderbr;
 for(var i = 0; i < code.length; i++) {
 	var pro = {
 		"productId": code[i]
@@ -12,15 +13,41 @@ for(var i = 0; i < code.length; i++) {
 }
 $(function(){
 	formItemControl( ccId )
-	if( ccId != "1" && ccId != "2" && ccId != "3" && ccId != "14"){//除防癌险,挂号险之外的ecard，会调默认投保地区接口
+	if( ccId != "1" && ccId != "2" && ccId != "3" && ccId != "14" && ccId != "22" && ccId != "23" ){//除防癌险,挂号险之外的ecard，会调默认投保地区接口
 		sendFeeCityRequest( customerId, ccId );
 	}
 	getServiceTime();
 	$("#insuranceName").val(cName);					//渲染商品名称
 	$("#jwx_foot_price").html("价格：￥"+cPrem);		//渲染价格
 	if(urlParm.bzPic){
-		var picStr =  '<img src="'+urlParm.bzPic+'" />'
+		if( ccId == "22"){
+			var picStr =  '<a style="position: absolute;top: 0; left: 0;right: 0; bottom: 0;z-index: 2;" onclick="toHosUrl()"></a><img src="'+urlParm.bzPic+'" />';
+		}else{
+			var picStr =  '<img src="'+urlParm.bzPic+'" />'
+		}		
 		$(".duty").html(picStr);
+	}
+	if(holderbr) {
+		$("#isSame").removeClass("on")
+		$('#isSame').find('img').attr('src', '../../../image/common/meigou.png');
+		$('.beiNone').show();
+		$('.mytitle').show();
+		var insuIden1 = holderbr.idNo;
+		var insuName1 = holderbr.name;
+		var insuPhone1 = holderbr.phone;
+		var insuEmail1 = holderbr.email;
+		var insuSex1 = $.getSex(insuIden1) == 1 ? "男" : "女";
+		var insuBirth1 = $.getBirthDay(insuIden1);
+		$("#recognizeeName").val(insuName1); //投保人姓名
+		$("#recogCertificateNo").val(insuIden1); //证件号码
+		/*$("#telNo").val(insuPhone); //手机号码*/
+		$("#recogGender").val(insuSex1); //性别
+		$("#recogBirthDate").val(insuBirth1); //出生日期
+		ageCal = $.getAge($.getBirthDay(insuIden1),now);
+		genderCal = $.getSex(insuIden1) + "";
+		if( ccId != "14"){			
+			productCalculate( ccId, ageCal, genderCal);			      	
+        }	
 	}
 	//$(".duty").html(tableGener(duty));
 	if(holder){		
@@ -74,7 +101,7 @@ $(function(){
 	$(document).on("input propertychange","#recogCertificateNo",function(e){
 	    if(this.value.length == CERTIFICATENO_LENGTH){
 	        if ($.checkIdCard(this.value.toLocaleUpperCase()) != 0) {
-	            modelAlert("请输入合法的投保人身份证号！");
+	            modelAlert("请输入合法的被保人身份证号！");
 	            this.value = "";
 	            return false;
 	        }else{
@@ -106,7 +133,11 @@ $(function(){
 	//点击"承保职业"
 	$("#profession,.prdown").unbind("tap").bind("tap",function(){
 	    var selectPicker = new mui.PopPicker();
-	    var popArray = [{value:'1',text:'一类'},{value:'2',text:'二类'}, {value:'3',text:'三类'},{value:'4',text:'四类'},{value:'5',text:'五类'},{value:'6',text:'六类'}]						
+	    var popArray = [{value:'1',text:'一类'},{value:'2',text:'二类'}, {value:'3',text:'三类'},{value:'4',text:'四类'},{value:'5',text:'五类'},{value:'6',text:'六类'}]	
+	    if( ccId == COMMODITYCOMBINE_ID.LRX ){
+	    	var tempArr = {value:'7',text:'退休人员'};
+	    	popArray.push(tempArr);
+	    }
 	    selectPicker.setData(popArray);
 	    selectPicker.show(function(item){
 	        $("#profession").text(item[0].text);
@@ -129,6 +160,8 @@ $(function(){
 	$("#toubao").unbind("tap").bind("tap",function(){
 		if( ccId == "14"){
 			sendGhxInsureRequest();
+		}else if( ccId == COMMODITYCOMBINE_ID.BWYL || ccId == COMMODITYCOMBINE_ID.AXYW ){
+			sendBwylRequest();
 		}else{
 			sendInsureRequest();	//发送投保请求
 		}
@@ -166,9 +199,14 @@ $(function(){
 	//点击同投保人
 	$("#isSame").unbind("tap").bind("tap",function(){
 	    if($(this).hasClass("on")){
-	        $(this).removeClass("on");
-	        $(this).find("img").attr("src","../../../image/common/meigou.png");
-	        $(".beiNone").show(1000);
+	    	if(ccId == COMMODITYCOMBINE_ID.JDX){
+	    		return false;
+	    	}else{
+	    		$(this).removeClass("on");
+		        $(this).find("img").attr("src","../../../image/common/meigou.png");
+		        $(".beiNone").show(1000);
+	    	}
+	        $('.mytitle').show();
 	    }else{
 	        var sameName    = $.trim($("#insureName").val());		//投保人姓名
 	        var sameNo      = $.trim($("#certificateNo").val());	//证件号码
@@ -186,7 +224,8 @@ $(function(){
 	        if( ccId != "14" ){
 	        	productCalculate( ccId, ageCal, genderCal);
 	        }
-	        
+	        $('.mytitle').hide();
+	        urlParm.holderbr='';
 	    }
 	});
 	//跳转到保险条款页面
@@ -207,6 +246,16 @@ $(function(){
 	    window.location.href= base.url + "tongdaoApp/html/useApplicant/useApplicant.html?jsonKey="+jsonStr;
 	    return false;
 	});
+	//跳转到常用被保人
+	$("#commonHoldersto").unbind("tap").bind("tap", function() {
+		urlParm.userCode = mobile;
+		urlParm.title = "常用被保人";
+		urlParm.rightIco = "4";
+		urlParm.frompage = "insureHtml"
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/useApplicant/useApplicant.html?jsonKey=" + jsonStr;
+		return false;
+	});
 	//选择座位数
 	$("#FieldAN,.zdown").unbind("tap").bind("tap",function(){
 	    var selectPicker4 = new mui.PopPicker();
@@ -220,6 +269,22 @@ $(function(){
 	/**拨打电话*/
 	$(".kefu").unbind("tap").bind("tap",function(){
 	    callService("4006895505",".kefuPhone");
+	})
+	//贷款起期
+	$("#cDaiBegin").unbind("tap").bind("tap",function(){
+		var picker = new mui.DtPicker({type:'date'});
+		picker.show(function(rs) {
+			$("#cDaiBegin").val(rs.text);		
+			picker.dispose();
+		});	
+	})
+	//贷款止期
+	$("#cDaiEnd").unbind("tap").bind("tap",function(){
+		var picker = new mui.DtPicker({type:'date'});
+		picker.show(function(rs) {
+			$("#cDaiEnd").val(rs.text);		
+			picker.dispose();
+		});	
 	})
 });
 
@@ -243,6 +308,13 @@ function getFormData(){
 	var FieldAJ		  = $.trim($("#FieldAJ").val().toLocaleUpperCase());
 	var FieldAI		  = $.trim($("#FieldAI").val().toLocaleUpperCase());
 	var FieldAN		  = $("#FieldAN").attr("name");
+	
+	//借贷险动态标
+	var jdxFieldAI    = $.trim($("#cBankName").val())	// 贷款发放金融机构
+	var jdxFieldAJ    = $.trim($("#cHtNo").val()) // 借款合同号
+	var jdxfieldAM    = $.trim($("#cDaiBegin").val())	// 贷款起期
+	var jdxfieldAN    = $.trim($("#cDaiEnd").val())	// 贷款止期
+	
 	if($(".isSame").hasClass("on")){
 	    var relation      = "01";	 		                        //与投保人关系
 	    var recogName     = insureName;	 							//被保人姓名
@@ -255,7 +327,7 @@ function getFormData(){
 	    var recogTelNo	  = telNo;//$.trim($("#recogTelNo").val());	//被保人手机号	
 	}
 	
-	if(cId == COMMODITY_ID.JKJR || cId == COMMODITY_ID.QCWY || cId == COMMODITY_ID.JXJS){
+	if(cId == COMMODITY_ID.JKJR || cId == COMMODITY_ID.QCWY || cId == COMMODITY_ID.JXJS || ccId == COMMODITYCOMBINE_ID.LRX ){
 	    var profession = $("#profession").attr("data-value");	//承保职业
 	}else{
 	    var profession = "1";	//承保职业
@@ -290,7 +362,7 @@ function getFormData(){
 	    modelAlert("请输入正确的投保人手机号码！");
 	    return false;
 	}
-	if( ccId == "14" ){
+	if( ccId == "14" || ccId =="22" || ccId == "23"){
 		if($.isNull(email)){
 			 modelAlert("投保人邮箱不能为空！");
 			 return false;
@@ -300,7 +372,7 @@ function getFormData(){
 		}
 	}
 	//投保地区校验
-	if( ccId != "1" && ccId != "2" && ccId != "3" && ccId != "14" ){
+	if( ccId != "1" && ccId != "2" && ccId != "3" && ccId != "14" && ccId != "22" && ccId != "23" ){
 		if($.isNull(provinceCode)){
 			modelAlert("投保地区省份不能为空！");
 			return false;
@@ -409,8 +481,11 @@ function getFormData(){
 	            modelAlert("该被保人承保职业与规则不符！");
 	            return false;
 	        }
-	    }else {
-	        
+	    }else if(ccId == COMMODITYCOMBINE_ID.LRX){
+	    	if( profession>4 && profession != 7  ){//1-4 7
+	            modelAlert("该被保人承保职业与规则不符！");
+	            return false;
+	        }
 	    }
 	}
 	if( cId == COMMODITY_ID.QCWY ){
@@ -442,6 +517,23 @@ function getFormData(){
 	        modelAlert("房屋坐落地址不能为空！");
 	        return false;
 	    }
+	}else if( ccId == COMMODITYCOMBINE_ID.JDX  ){	//借贷险中动态标的非空校验
+		if($.isNull(jdxFieldAI)){
+	        modelAlert("发放贷款银行名称不能为空！");
+	        return false;
+	    }
+		if($.isNull(jdxFieldAJ)){
+	        modelAlert("贷款合同号不能为空！");
+	        return false;
+	    }
+		if($.isNull(jdxfieldAM)){
+	        modelAlert("贷款起期不能为空！");
+	        return false;
+	    }
+		if($.isNull(jdxfieldAN)){
+	        modelAlert("贷款止期不能为空！");
+	        return false;
+	    }
 	}
 	formData.insureName 	= insureName;
 	formData.certificateNo  = certificateNo;
@@ -465,6 +557,12 @@ function getFormData(){
 	formData.recogName 		= recogName;
 	formData.recogCertiNo 	= recogCertiNo;	
 	formData.recogTelNo  	= recogTelNo;
+	
+	formData.jdxFieldAI     = jdxFieldAI	// 贷款发放金融机构
+	formData.jdxFieldAJ     = jdxFieldAJ 	// 借款合同号
+	formData.jdxfieldAM     = jdxfieldAM	// 贷款起期
+	formData.jdxfieldAN     = jdxfieldAN	// 贷款止期
+	
 	return formData;
 }
 //customerId查询落地城市
@@ -472,13 +570,14 @@ function sendFeeCityRequest( cusId, ccId){
 	var url = requestUrl.defalultArea;
 	var reqData = {
 	        "head":{
-	            "channel"  :"01",
+	            "channel"  :channel,
 	            "userCode" :mobile,
 	            "transTime":$.getTimeStr()
 	        },
 	        "body":{
 	            "customerId":cusId,//customerId,//773  198980 250
-	            "commodityCombinationId" : ccId //
+	            "commodityCombinationId" : ccId, //
+	            "attributionChannels": "01"
 	        }
 	}
 	$.reqAjaxs(url,reqData,feeCityReponse);
@@ -530,7 +629,8 @@ function sendCityRequest(provinceCode,cityCode,ccId){
 	        "body":{
 	            "provinceCode":provinceCode,
 	            "commodityCombinationId": ccId,//commodityCombinationId,
-	            "cityCode" : cityCode
+	            "cityCode" : cityCode,
+	            "attributionChannels": "01"
 	        }
 	}
 	if( provinceCode == "" && cityCode == "" ){
@@ -616,7 +716,7 @@ function getAllReponse(data){
 		 $("#orgCityCode").attr("businessSource",businessSource);
 		 $("#orgCityCode").attr("agentName",agentName);
 	}else{
-		
+		 modelAlert("获取业务员信息异常!");
 	}
 }
 //投保请求
@@ -627,7 +727,7 @@ function sendInsureRequest(){
 	if(!formData){return false;}
 	var reqData = {
 	    "head":{
-	        "channel"  :"01",
+	        "channel"  :channel,
 	        "userCode" :mobile,
 	        "transTime":$.getTimeStr(),
 	        "transToken":transToken
@@ -641,10 +741,10 @@ function sendInsureRequest(){
 	            "insurePhone"            : formData.telNo,
 	            "insureIdentitycard"     : formData.certificateNo,				
 	            "coverage"               : coverage,
-	            "invitrerPhone"           : mobile,
+	            "invitrerPhone"          : mobile,
 	            "insureAddress"          : formData.address,
 	            "totalPieces"            : cPieces,//parseInt(peices),
-	            "channelResource"        : '3'// '渠道来源,1-微信公众号，2-分享进入，3-App',	
+	            "channelResource"        : channelResource// '渠道来源,1-微信公众号，2-分享进入，3-App',	
 	        },
 	        "shortRiskInsured":{
 	            "apRelation"  			 : formData.relation,
@@ -666,9 +766,23 @@ function sendInsureRequest(){
 		reqData.body.businessSource= formData.businessSource;
 		reqData.body.cityCode = formData.cityCode;
 		reqData.body.provinceCode = formData.provinceCode;
+		reqData.body.shortRiskOrder.startTime = $("#effectivDate").val();		//BYRM-1069 可修改生效日期			
 		if(ccId == "16"){
 			reqData.body.shortRiskOrder.type = cVersion;
-			reqData.body.guaranteeTerm = cGuaranteeTerm;
+			reqData.body.guaranteeTerm = cGuaranteeTerm;			
+		}else if( ccId == COMMODITYCOMBINE_ID.LRX ){	//老人险
+			reqData.body.shortRiskOrder.type = cVersion;
+		}else if( ccId == COMMODITYCOMBINE_ID.ZHX ){	//账户险
+			reqData.body.insuredAmount = cAmount;
+		}else if( ccId == COMMODITYCOMBINE_ID.JDX ){ 	//借贷险
+			reqData.body.fieldAI = formData.jdxFieldAI;	// 贷款发放金融机构
+			reqData.body.fieldAJ = formData.jdxFieldAJ; // 借款合同号
+			reqData.body.fieldAM = formData.jdxfieldAM; // 贷款起期
+			reqData.body.fieldAN = formData.jdxfieldAN; // 贷款止期
+			reqData.body.fieldAL = cPieces*1000;
+			reqData.body.shortRiskOrder.totalPieces = cPieces;
+			reqData.body.shortRiskOrder.coverage = cPieces*1000
+			reqData.body.guaranteeTerm = '1';
 		}
 	}else{
 		reqData.body.versions = cVersion;//版本
@@ -723,7 +837,7 @@ function payRequest(serialNo){
 	}
 	var reqData = {
 	    "head":{
-	        "channel":"01",
+	        "channel":channel,
 	        "userCode":mobile,
 	        "transTime":$.getTimeStr()
 	    },"body":{
@@ -754,45 +868,56 @@ function getServiceTime(){
 	var url = requestUrl.getServeTimeUrl;
 	var reqData = {
 	    "head":{
-	        "channel":"01",
+	        "channel":channel,
 	        "userCode":"",
 	        "transTime":$.getTimeStr()
 	    },"body":{}
 	}	
 	$.reqAjaxsFalse(url,reqData,function(data){
 	    if(data.statusCode == "000000") {
-	    	nowday = data.returns.serviceTime;
-	        startDate=new Date(data.returns.serviceTime);
-	        endDate=new Date(data.returns.serviceTime);
-	        now=new Date(data.returns.serviceTime);
+	    	nowday    = data.returns.serviceTime;
+	        startDate = new Date(data.returns.serviceTime);
+	        endDate   = new Date(data.returns.serviceTime);
+	        now       = new Date(data.returns.serviceTime);
+	        nDate	  = new Date(data.returns.serviceTime);
+	        if( ccId == COMMODITYCOMBINE_ID.XPXSX ){
+	        	nDate.setDate( nDate.getDate() + 3 );
+	        }else{
+	        	nDate.setDate( nDate.getDate() + 90 );
+	        }	        
 	        startDate.setDate(startDate.getDate() +1);//生效日期T+1
-	        endDate.setFullYear(endDate.getFullYear()+1, endDate.getMonth(), endDate.getDate());//终止日期
+	        var sYear     = startDate.getFullYear(),
+	        	sMonth    = startDate.getMonth()+1,
+	        	sDay      = startDate.getDate(),
+	        	eYear	  = nDate.getFullYear(),
+	        	eMonth	  = nDate.getMonth()+1,
+	        	eDay	  = nDate.getDate(),
+	        	defaultTime = $.getTimeStr2( now );
+	        var optionStr = '{"type":"date","value":"'+defaultTime 
+	        				+'","beginYear":'+sYear
+	        				+',"beginMonth":'+sMonth
+	        				+',"beginDay":'+sDay
+	        				+',"endYear":'+eYear
+	        				+',"endMonth":'+eMonth
+	        				+',"endDay":'+eDay+'}';
 	        $("#effectivDate").val($.getTimeStr2(startDate));//生效日期T+1
-	        $("#endDate").val($.getTimeStr2(endDate));//终止日期
+	        if( ccId != "14" && ccId != "1" && ccId != "2" && ccId != "3" && ccId != "22" && ccId != "23" ){ //旅意险生效日其可修改	ecard生效日期可以修改  
+	        	$("#effectivDate").addClass("riqi");
+	        	endDateChange(endDate);
+	        	chooseDate("effectivDate",optionStr);
+	        }else{
+	        	if( ccId == "23" ){
+	        		endDateChange(endDate);
+	        	}else{
+	        		endDate.setFullYear(endDate.getFullYear()+1, endDate.getMonth(), endDate.getDate());//终止日期	        	
+		 	        $("#endDate").val($.getTimeStr2(endDate));//终止日期
+	        	}	        	
+	        }        	       
 	    }else {
 	       modelAlert(data.statusMessage);
 	       return false;
 	    }
 	});
-}
-//保障责任
-function tableGener(dutyStr){
-	var trCell = dutyStr.split("|");
-	var tableStr = '<table class="gridtable">'
-	for(var k = 0; k < trCell.length; k++){
-	    var tdCell = trCell[k].split("-");
-	    tableStr += '<tr>'
-	    for(var j = 0; j < tdCell.length ; j++){
-	        if( k == 0){
-	            tableStr += '<th>'+tdCell[j]+'</th>'
-	        }else{
-	            tableStr += '<td>'+tdCell[j]+'</td>'
-	        }					
-	    }
-	    tableStr += '</tr>'		
-	}
-	tableStr += '</table>'
-	return tableStr;
 }
 
 //根据前面传回的试算结果
@@ -802,6 +927,11 @@ function productCalculate(ccId, age, gender ){
 	var piecesFlag = calChoices.indexOf('pieces');
 	var versionFlag = calChoices.indexOf('versions');
 	var guaranteeTermFlag = calChoices.indexOf('guaranteeTerm');
+
+	var insureAmountFlag = calChoices.indexOf('insuredAmount');
+	var insuranceCoverage1 = calChoices.indexOf('insuranceCoverage1');
+	var insuranceCoverage2 = calChoices.indexOf('insuranceCoverage2');
+	var insuranceCoverage3 = calChoices.indexOf('insuranceCoverage3');
 	if( ageFlag != -1){
 		calChoices[ageFlag+1] = age;
 	}
@@ -817,6 +947,18 @@ function productCalculate(ccId, age, gender ){
 	if( guaranteeTermFlag != -1 ){
 		cGuaranteeTerm = calChoices[guaranteeTermFlag+1]
 	}
+	if( insureAmountFlag != -1 ){
+		cAmount = calChoices[insureAmountFlag+1] 
+	}
+	if( insuranceCoverage1 != -1 ){
+		cCoverage1 = calChoices[insuranceCoverage1+1] 
+	}
+	if( insuranceCoverage2 != -1 ){
+		cCoverage2 = calChoices[insuranceCoverage2+1] 
+	}
+	if( insuranceCoverage3 != -1 ){
+		cCoverage3 = calChoices[insuranceCoverage3+1] 
+	}
 	sendCaldoRequest(ccId);
 }
 
@@ -825,7 +967,7 @@ function sendCaldoRequest(ccId){
 	 var url = requestUrl.calDoUrl;
 	 var sendJson = {
 		"head" : {
-		  "channel" : "01",
+		  "channel" : channel,
 		  "userCode" : mobile,
 		  "transTime" : $.getTimeStr(),
 		  "transToken": transToken
@@ -902,7 +1044,7 @@ function sendGhxInsureRequest(){
 			"head": {
 				"userCode": mobile,
 				"transTime": $.getTimeStr(),
-				"channel": "01",
+				"channel": channel,
 				"transToken":transToken
 			},
 			"body": {
@@ -966,7 +1108,7 @@ function sendGhxInsureRequest(){
 					"ghOptionalFlag": isA, // '可选保障项代码1：附加，0不附加',
 					//"inviterCode":"",
 					"inviterPhone":mobile,
-				    "channelResource":"3",//渠道来源  
+				    "channelResource":channelResource,//渠道来源  
 					"insureList": insureList,
 					"buyType":"1"
 				},
@@ -992,14 +1134,14 @@ function sendGhxPayRequest(orderNo){
 	var url = requestUrl.ghxPay;
 	var sendJson = {
 		  "head": {
-		    "channel": "01",
+		    "channel": channel,
 		    "userCode": mobile,
 		    "transTime": $.getTimeStr(),
 		    "transToken":transToken
 		  },
 		  "body": {
-		    "orderNo": orderNo,
-		    "payWay": "02",
+		    "orderNo": orderNo+'',
+		    "payWay": payWay,
 		    "redirectUrl": base.url + "tongdaoApp/html/insurance/main/payResult.html?orderNo="+orderNo,
 		    "customerId": customerId
 		  }
@@ -1015,6 +1157,93 @@ function ghxPayBackCall(data){
 		modelAlert(data.statusMessage);
 	}
 }
+
+//百万医疗险
+function sendBwylRequest(){
+	if(!$("#word").hasClass("on")){return false;}
+	var formData = getFormData();
+	if(!formData){return false;}
+	var url = requestUrl.yianInsure;
+	var reqData =
+	{
+		    "head": {
+		        "userCode": mobile,
+		        "transtime": $.getTimeStr(),
+		        "channel": channel,
+		        "transToken": transToken
+		    },
+		    "body": {
+		        "customerId"             : customerId,
+		        "premium"                : cPrem+"",
+		        "inviterPhone"           : mobile,
+		        "buyType"                : "1",	  //1app2分享
+		        "commodityId"            : cId,   // 33 有社保  // 34 无社保
+		        "commodityCombinationId" : ccId,
+		        "channelResource"        : channelResource,   // '渠道来源,1-微信公众号，2-分享进入，3-App',
+		        "applicant": {
+		            "name"               : formData.insureName,
+		            "idNo"               : formData.certificateNo,
+		            "phoneNo"            : formData.telNo,
+		            "email"				 : formData.email
+		        },
+		        "recognizee": [
+		            {
+		                "name"           : formData.recogName,
+		                "idNo"           : formData.recogCertiNo,
+		                "relation"       : formData.relation,
+		                "phoneNo"        : formData.recogTelNo
+		            }
+		        ]
+		    }
+	}
+	if( ccId == COMMODITYCOMBINE_ID.AXYW ){
+		reqData.body.order = {}
+		reqData.body.order.guaranteeTerm = cGuaranteeTerm;			// 保障期限
+		reqData.body.order.insuranceCoverage1 = cCoverage1;		// insuranceCoverage1意外身故残疾
+		reqData.body.order.insuranceCoverage2 = cCoverage2;		// insuranceCoverage2 意外住院津贴
+		reqData.body.order.insuranceCoverage3 = cCoverage3;		// 意外医疗
+     }
+	$.reqAjaxs(url, reqData, insureBwylReponse)			
+}
+
+function insureBwylReponse(data){	
+	if( data.statusCode == "000000" ){		
+		var orderNo	 = data.returns.orderNo;
+		sendPayRequest(orderNo)
+		console.log(data);
+	}else{
+		modelAlert(data.statusMessage);
+	}
+}
+
+function sendPayRequest(orderNo){
+	var url = requestUrl.bqjPay;
+	var sendJson = {
+		  "head": {
+		    "channel": channel,
+		    "userCode": mobile,
+		    "transTime": $.getTimeStr(),
+		    "transToken":transToken
+		  },
+		  "body": {
+			 "orderNo": orderNo+"",		   
+		     "payWay": payWay,
+		     "redirectUrl": base.url + "tongdaoApp/html/insurance/main/payResult.html?orderNo="+orderNo,
+		     "customerId": customerId
+		  }
+		}
+	$.reqAjaxs( url, sendJson, bqjPayBackCall );
+}
+
+function bqjPayBackCall(data){
+	console.log(data);
+	if(data.statusCode == "000000"){
+		window.location.href=data.returns.payUrl;
+	}else{
+		modelAlert(data.statusMessage);
+	}
+}
+
 //不同的商品组合判断，选填表单项
 function formItemControl( ccId ){
 	if( ccId != "3" && ccId != "12"){
@@ -1040,7 +1269,65 @@ function formItemControl( ccId ){
 		$("#isSame").removeClass("on");$(".beiNone").show();
 	}else if( ccId == "16" ){
 		$(".diqu").show();
-	}		
+	}else if( ccId == COMMODITYCOMBINE_ID.ZHX ){//账号险
+		$(".diqu").show();
+	}else if( ccId == COMMODITYCOMBINE_ID.JDX){//借贷险
+		$(".diqu").show();
+		$("#dai").show();//借贷合同信息
+	}else if( ccId == COMMODITYCOMBINE_ID.LRX){//老人险
+		$(".diqu").show();$(".zhiye").show();
+	}else if( ccId == COMMODITYCOMBINE_ID.BWYL ){//百万医疗
+		$(".email").show();
+	}else if( ccId == COMMODITYCOMBINE_ID.AXYW ){//
+		$(".email").show();
+	}			
+}
+
+//旅意险截止日期动态变化
+function endDateChange(jzdate){
+	if( ccId == "16" ){	//旅意险
+		var guaranteeTermFlag = calChoices.indexOf('guaranteeTerm');
+		if( guaranteeTermFlag!= -1 ){
+			cGuaranteeTerm = calChoices[guaranteeTermFlag+1];
+			var intTerm = parseInt(cGuaranteeTerm);
+			jzdate.setFullYear(jzdate.getFullYear(), jzdate.getMonth(), jzdate.getDate()+intTerm);//旅意险终止日期根据试算项保障期限					    
+		}
+	}else if( ccId == "23" ){
+		var guaranteeTermFlag = calChoices.indexOf('guaranteeTerm');
+		if( guaranteeTermFlag!= -1 ){
+			cGuaranteeTerm = calChoices[guaranteeTermFlag+1];
+			var intTerm = parseInt(cGuaranteeTerm);
+			if( intTerm % 30 == 0){
+				intTerm = intTerm/30;
+				jzdate.setFullYear(jzdate.getFullYear(), jzdate.getMonth()+ intTerm, jzdate.getDate());
+			}else{
+				jzdate.setFullYear(jzdate.getFullYear(), jzdate.getMonth(), jzdate.getDate()+intTerm);//安心意外终止日期根据试算项保障期限	
+			}							    
+		}
+	}else{
+		jzdate.setFullYear(jzdate.getFullYear()+1, jzdate.getMonth(), jzdate.getDate());//ecard终止日期默认一年		
+	}
+	$("#endDate").val($.getTimeStr2(jzdate));//终止日期文本显示
+}
+
+//触发修改日期控件
+function chooseDate(id,options){	
+	var result = document.getElementById(id);
+	if( result ){
+		$(result).attr("data-options",options);
+		result.addEventListener('tap', function() {
+			var optionsJson = this.getAttribute('data-options') || '{}';
+			var options = JSON.parse(optionsJson);			
+			var picker = new mui.DtPicker(options);
+			picker.show(function(rs) {
+				result.value = rs.text;
+				dieDate   = new Date(result.value);
+				dieDate.setDate( dieDate.getDate() - 1)
+				endDateChange(dieDate);				
+				picker.dispose();
+			});		
+		});	
+	}
 }
 
 function toArticle(){ 
@@ -1064,6 +1351,17 @@ function toXuzhi(){
 	window.location.href = base.url + "tongdaoApp/html/agreement/changeXuzhi.html?jsonKey="+jsonStr;
 }
 
+function toHosUrl(){
+	urlParm.title = "重疾就医绿色通道服务医院清单";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	urlParm.frompage = "insureHtml";
+	urlParm.search = window.location.search;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url+"tongdaoApp/html/agreement/yiAnHospital.html?jsonKey="+jsonStr;
+}
+
 function backlast(){
 	urlParm.title = '产品详情';
 	urlParm.leftIco = "1";
@@ -1075,6 +1373,7 @@ function backlast(){
 	urlParm.downIco = "0";
 	if(urlParm.holder){
 		delete urlParm.holder
+		delete urlParm.holderbr
 	}
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	if( ccId != "14" ){

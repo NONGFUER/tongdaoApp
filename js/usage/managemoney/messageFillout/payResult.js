@@ -31,6 +31,12 @@ $(function() {
 	$("#shouye").unbind("tap").bind("tap", function() {
 		sysbackproduct();
 	})
+	$("#zaici").unbind("tap").bind("tap", function() {
+		urlParm.title = '产品详情';
+		urlParm.commodityComId=urlParm.commodityCombinationId;
+			var jsonStr = UrlEncode(JSON.stringify(sendData));
+		window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
+	})
 	$(".on1").unbind("tap").bind("tap", function() {
 		urlParm.title = '保单详情';
 		urlParm.commodityComId=urlParm.commodityCombinationId;

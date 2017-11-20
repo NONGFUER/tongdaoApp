@@ -27,9 +27,9 @@
 							</div>
 						</div>
 						<div class="simple_info">
-							<div><span class="name" id="name" v-html="name">姓名</span></div>
+							<div><span class="name" id="name" v-text="name">姓名</span></div>
 							<div class="">
-								<span class="iden" v-html="insuranceConsultantType"></span><span class="split">|</span>服务区域：<span class="area" v-html="dizhi"></span>
+								<span class="iden" v-text="insuranceConsultantType"></span><span class="split">|</span>服务区域：<span class="area" v-text="dizhi"></span>
 							</div>
 						</div>
 						<div class="card_renz">
@@ -45,10 +45,10 @@
 						</div>
 						<div class="code_info">
 							<div class="code_info_up">
-								业务员代码：<span id="agentCode" v-html="agentCode"></span>
+								业务员代码：<span id="agentCode" v-text="agentCode"></span>
 							</div>
 							<div class="code_info_down">
-								执业证编码：<span id="practiceCode" v-html="practiceCode"></span>
+								执业证编码：<span id="practiceCode" v-text="practiceCode"></span>
 							</div>
 						</div>
 					</div>
@@ -86,7 +86,6 @@
 				<div class="button_share">
 					立即分享
 				</div>
-
 			</div>
 		</div>
 		<div class="popup">

@@ -372,3 +372,14 @@ function ChangeDateFormat(jsondate) {
 	var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
 	return date.getFullYear() + "-" + month + "-" + currentDate + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 };
+
+//判断是否是微信端
+function isWeixin(){
+	var ua = navigator.userAgent.toLowerCase();
+	if(ua.match(/MicroMessenger/i) == "micromessenger") {
+		var wx = true;
+	}else{
+		var wx = false;
+	}
+	return wx;
+}

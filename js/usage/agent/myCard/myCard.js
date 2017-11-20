@@ -26,13 +26,22 @@ var vm = new Vue({
 		weixin: {}, //微信二维码
 		name: {}, //姓名
 	},
-	watch: {
-		data() {
-			this.$nextTick(() => {
-				shuaxin();
+	/*watch: {
+		Objectlist: function(val) {
+			this.$nextTick(function() {
+				$(function() {
+					shuaxin();
+				})
 			})
 		}
-	}
+	},
+	mounted() {
+		this.$nextTick(function() {
+			$(function() {
+				shuaxin();
+			})
+		})
+	}*/
 })
 var kuo = "<",
 	kuo2 = ">",
@@ -81,6 +90,9 @@ $(function() {
 	$(".spanClose").unbind("tap").bind("tap", function() {
 		$('.popup').hide();
 	})
+	vm.$nextTick(function() {
+		shuaxin();
+	})
 })
 
 function getBusinessCard(data) {
@@ -93,7 +105,7 @@ function getBusinessCard(data) {
 			if(data.returns.insuranceConsultantInfo != "" && data.returns.insuranceConsultantInfo != null) {
 				shan = data.returns.insuranceConsultantInfo.postcardField;
 				jie = data.returns.insuranceConsultantInfo.postcardIntroduction;
-				if(data.returns.insuranceConsultantInfo.postcardPhone==null||data.returns.insuranceConsultantInfo.postcardPhone=='') {
+				if(data.returns.insuranceConsultantInfo.postcardPhone == null || data.returns.insuranceConsultantInfo.postcardPhone == '') {
 					vm.postcardPhone = userCode;
 				} else {
 					vm.postcardPhone = data.returns.insuranceConsultantInfo.postcardPhone;

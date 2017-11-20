@@ -19,11 +19,11 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
-			<h1 class="mui-title">安溢保两全保险(一年期)</h1>
+			<h1 class="mui-title">产品详情</h1>
 		</header>
 		<div class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
-				<div class="man mui-table-view" id='list'  v-cloak>
+				<div class="man mui-table-view" id='list' v-cloak>
 					<div class="man-div-body-ul_li_div mb10">
 						<ul class="man-div-body-ul_li_div_ul1">
 							<li class="mb30">
@@ -35,12 +35,12 @@
 							<li class="li_body">
 								<span v-html="Objectitle.commodityCombination.startPiece">1000</span>
 								<span class="xianshu"></span>
-								<span>365</span>
+								<span v-text="chiyoudate">365</span>
 							</li>
 							<li class="li_body_two">
 								<span>起售金额(元)</span>
 								<span class="xianshu"></span>
-								<span>建议持有(天)</span>
+								<span v-text="chiyou">建议持有(天)</span>
 							</li>
 						</ul>
 					</div>
@@ -97,7 +97,7 @@
 						</div>
 						<ul class="man-div-body-ul_three" id='xiagguan'>
 							<template v-for="(value,key) in xiangguanxieyi">
-								<li class="neirong" v-bind:modueInfo='value.modueInfo'>
+								<li class="neirong" v-bind:modueInfo='value.modueInfo' v-bind:subModuleName="value.subModuleName">
 									<span class="tiaokuan" v-html="value.subModuleName"></span>
 									<span class="youjiantouhuise"></span>
 								</li>
@@ -110,6 +110,12 @@
 							<li>
 								<span class="biao"></span>
 								<span>该产品为投资连结保险,投资回报具有不确定性,产品投资风险由投保人承担。</span>
+								<div>
+									<!--<span>如您需要追加保险费，调整保额，请拨打</span>
+									<a id='dianhua' class="kefuPhone" phone='4008-500-365' style="font-size: 12px;color: rgb(27, 107, 184)">4008-500-365</a>
+									<span>客服电话咨询客服进行申请办理</span>-->
+									<span>如您需要追加保险费，调整保额，请拨打4008-500-365客服电话咨询客服进行申请办理</span>
+								</div>
 							</li>
 						</ul>
 					</div>
@@ -142,6 +148,7 @@
 	<script src="../../../js/lib/common/zepto.min.js"></script>
 	<script src="../../../js/lib/common/base.js"></script>
 	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/common/weixin.js"></script>
 	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
 	<script src="../../../js/usage/managemoney/productDetails/productDetailsWeChat.js"></script>
 

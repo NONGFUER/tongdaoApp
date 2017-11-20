@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>订单详细</title>
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/usage/managemoney/warRanty/warrantyDetail.css" />
+	</head>
+
+	<body>
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="man mui-table-view" id='list'>
+					<div class="man-div-body-ul_li_div mb10">
+						<ul class="man-div-body-ul_li_div_ul1">
+							<li>
+								<span v-html="Objectitle.commodityCombination.commodityCombinationName"></span>
+								<span class="jiantou"></span>
+								<span class="chanping" v-if="channel!='02'">查看产品详细</span>
+							</li>
+							<li class="list_two">
+								<h1 v-html="Objectitle.commodityCombination.remark"></h1>
+							</li>
+							<li>
+								<span>历史年化投资回报率</span>
+								<span v-html="Objectitle.financeOrder.orderStatus" class="baozhang"></span>
+							</li>
+						</ul>
+					</div>
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title_div">订单信息</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li>
+								<span>投资金额</span>
+								<span v-html="Objectitle.financeOrder.prem+'元'">232323.32元</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>订单号</span>
+								<span v-html="Objectitle.financeOrder.orderNo"></span>
+							</li>
+						</ul>
+					</div>
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title_div">投保人信息</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li>
+								<span>投保人</span>
+								<span v-html="Objectitle.financeOrder.insureName"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>手机号</span>
+								<span class="phoneyin" v-html="Objectitle.financeOrder.insurePhone"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>城市</span>
+								<span v-html="Objectitle.financeOrder.provinceName+'&nbsp;&nbsp;'+Objectitle.financeOrder.cityName"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>地址</span>
+								<span v-html="Objectitle.financeOrder.insureAddress"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>电子邮箱</span>
+								<span v-html="Objectitle.financeOrder.insureEmail"></span>
+							</li>
+						</ul>
+					</div>
+					<!--投保人信息-->
+					<div class="man-div-body-ul_li_div_two mb10">
+						<ul class="man-div-body-ul">
+							<li>
+								<span class="heise">被保人信息</span>
+								<span class="lanse">同投保人</span>
+							</li>
+						</ul>
+					</div>
+					<!--银行卡-->
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title_div">银行卡信息</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li>
+								<span>银行名称</span>
+								<span v-html="Objectitle.financeOrder.bankName"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>银行卡号</span>
+								<span class="bank_weihao" v-html="Objectitle.financeOrder.bankCertificate">尾号 2333</span>
+							</li>
+						</ul>
+					</div>
+					<!--电子保单-->
+					<div class="man-div-body-ul_li_div_btn" style="display: none;">
+						 <div id="liji" class="div_btn">立即支付</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--短信-->
+		<div class="note">
+			<div class="note-div">
+				<div class="note-div_title">
+					<div>短信验证</div>
+					<div class="note-div_title_right"></div>
+				</div>
+				<div class="note-div_body">
+					<div class="note-div_body_title">
+						<ul>
+							<li>
+								<span>短信发送至手机号：</span>
+								<span class="phone">135****3456</span>
+							</li>
+						</ul>
+					</div>
+					<div class="note-div_body_input">
+						<ul>
+							<li>
+								<span>
+									<input id='yan' type="text" name="" id="" value="" placeholder="请输入验证码" />
+								</span>
+								<span class="dianji">
+								获取验证码
+								</span>
+							</li>
+						</ul>
+						<div class="note-div-button">
+							<div class="note-div-btn">
+								确定
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../../js/lib/widget/mui/mui.min.js"></script>
+	<script src="../../../js/lib/common/zepto.min.js"></script>
+	<script src="../../../js/lib/common/base.js"></script>
+	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
+	<script src="../../../js/usage/managemoney/warRanty/sunorderDetails.js"></script>
+
+</html>

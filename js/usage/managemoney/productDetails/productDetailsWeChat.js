@@ -10,7 +10,7 @@ var userCode = getUrlQueryString('mobile'),
 	idAuth = '',
 	fromtype = 'licai',
 	transToken = '';
-var productFlag='01';
+var productFlag = '01';
 if(userCode == null) {
 	userCode = '';
 }
@@ -29,10 +29,10 @@ if(jsonKey) {
 		idAuth = urlParm.idAuth,
 		customerId = urlParm.customerId;
 }
-var invMobie=shareMobile;
-if(commodityCombinationId = '4') {
+var invMobie = shareMobile;
+if(commodityCombinationId == '4') {
 	productFlag = '01';
-} else if(commodityCombinationId = '5') {
+} else if(commodityCombinationId == '5') {
 	productFlag = '02';
 }
 
@@ -65,13 +65,8 @@ var vm = new Vue({
 		goumaishuoming: {},
 		xiangguanxieyi: {},
 		cid: {},
-	},
-	mounted() {
-		this.$nextTick(function() {
-			$(function() {
-
-			})
-		})
+		chiyou:"",
+		chiyoudate:"",
 	}
 })
 $(function() {
@@ -98,22 +93,23 @@ $(function() {
 	var url = base.url + 'firstPage/goldProductInfo.do';
 	$.reqAjaxs(url, reqData, goldProductInfo);
 	mui('.man-div-body-ul_li_div_three').on('tap', '.neirong', function() {
+		var urls = $(this).attr('modueinfo');
+		var name = $(this).attr('subModuleName');
 		if(channel == '01') {
-			var urls = $(this).attr('modueinfo');
 			urlParm.cId = vm.cid;
 			urlParm.frompage = "hongkanghtml";
 			var jsonStr = UrlEncode(JSON.stringify(urlParm));
-		}else{
-			var urls = $(this).attr('modueinfo');
-			var urlParm={
-				
-			}
+		} else {
+			var urlParm = {}
 			urlParm.cId = vm.cid;
 			urlParm.frompage = "hongkanghtml";
 			var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		}
-
-		window.location.href = urls + "?jsonKey=" + jsonStr;
+		if(name == '保险条款') {
+			window.location.href = urls + "?jsonKey=" + jsonStr;
+		} else {
+			window.location.href = urls;
+		}
 	})
 	/*伸缩按钮*/
 	$(".body_title").unbind("tap").bind("tap", function() {
@@ -137,7 +133,7 @@ $(function() {
 				}
 				var jsonStr1 = JSON.stringify(sendData);
 				jsonStr1 = UrlEncode(jsonStr1);
-				window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?	fromtype=" + fromtype + "&openid=" + openid + "&inviterPhone="+shareMobile+"&jsonKey=" + jsonStr1;
+				window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?	fromtype=" + fromtype + "&openid=" + openid + "&inviterPhone=" + shareMobile + "&jsonKey=" + jsonStr1;
 			});
 		} else if(idAuth == '0') {
 			modelAlert('请先实名', '', function() {
@@ -175,10 +171,14 @@ $(function() {
 	$(".cancle").unbind("tap").bind("tap", function() {
 		$('#shadow').hide();
 	})
-	$(".youyuqi img").unbind("tap").bind("tap",function(){
+	$("#dianhua").unbind("tap").bind("tap", function() {
+		var dianhua = $('#dianhua').html()
+		callService(dianhua, ".kefuPhone");
+	})
+	$(".youyuqi img").unbind("tap").bind("tap", function() {
 		modelAlert("犹豫期是指在购买后处于犹豫期内进行赎回，免手续费");
 	});
-	$(".suoding_left img").unbind("tap").bind("tap",function(){
+	$(".suoding_left img").unbind("tap").bind("tap", function() {
 		modelAlert("锁定期是指在购买后处于锁定期内进行赎回，需收取一定费率的手续费（在锁定期外或犹豫期内赎回免手续费）");
 	});
 
@@ -196,7 +196,7 @@ function buy() {
 		"testType": $('.retest').attr('testType'),
 		"title": vm.Objectitle.commodityCombination.commodityCombinationName,
 		"productFlag": productFlag,
-		"invMobie":invMobie,
+		"invMobie": invMobie,
 		"channel": '02',
 		"leftIco": '1',
 		"rightIco": '0',
@@ -212,7 +212,10 @@ function goldProductInfo(data) {
 	if(data.statusCode == '000000') {
 		vm.Objectitle = data.returns;
 		vm.CommodityCombinationModuleList = data.returns.CommodityCombinationModuleList;
+		/*$('。mui-title').html(data.)*/
 		vm.cid = data.returns.commodityInfo.id;
+		vm.chiyou = data.returns.CommodityCombinationModuleList[0].subModuleName;
+		vm.chiyoudate=data.returns.CommodityCombinationModuleList[0].modueInfo;
 		/*产品基本信息*/
 		var cmlist = new Array();
 		/*产品投资周期*/
@@ -282,7 +285,7 @@ function getRiskAble(data) {
 					"commodityCombinationId": commodityCombinationId,
 				},
 				"channel": '02',
-				"invMobie":invMobie,
+				"invMobie": invMobie,
 				"title": '风险评估 ',
 				"productFlag": productFlag,
 				"titles": vm.Objectitle.commodityCombination.commodityCombinationName,

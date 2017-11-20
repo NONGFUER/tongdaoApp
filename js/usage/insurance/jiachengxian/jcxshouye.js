@@ -331,9 +331,9 @@ function toXuzhi(){
 
 function shareHandle(){
 	var title = "易安驾乘无忧意外保险" ;
-	var desc  = "驾车乘车都能保，20万保额免费领" ;	
+	var desc  = "20万保额免费领，驾车乘车都能保，国庆放心自驾游。" ;	
 	var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=4';
-	var picUrl = base.url + "tongdaoApp/image/share/jiachenxianfenx.png";
+	var picUrl = base.url + "tongdaoApp/image/share/jiachenxianfen.png";
 	shareMethod(shareurl,title,desc,"baodan",picUrl);		
 };
 

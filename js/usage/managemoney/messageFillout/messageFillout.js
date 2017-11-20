@@ -64,13 +64,6 @@ var vm = new Vue({
 		bankCode: "", //银行代码
 		bankname: "",
 		comComName: "",
-	},
-	mounted() {
-		this.$nextTick(function() {
-			$(function() {
-
-			})
-		})
 	}
 })
 if(pieces) {

@@ -55,11 +55,6 @@ function orderDetailCallback(data){
 			endTime   = timeFormatDate(endTime,"yyyy-MM-dd");
 		var prem      = toDecimal2(shortRiskOrder.prem);
 			yuyueId = shortRiskOrder.yuyueId;
-		if( shortRiskInsured.apRelation == "01"){
-			$(".tong").show();			
-		}else{
-			$(".BBR").show();
-		}
 		//投保人星系
 		$("#orderNo").text(orderNo);//订单号
 		$("#insureName").text(commodityInfo.commodityName);//商品名称
@@ -68,9 +63,14 @@ function orderDetailCallback(data){
 		$("#qijian").text(startTime+"至"+endTime);//投保期间
 		$("#baofei").text(prem+"元");//保费
 		
-		//被保人信息
-		$("#BBRName").text(shortRiskInsured.insuredname);
-		$("#BBRID").text(shortRiskInsured.insuredidno);
+		var insuredLen = shortRiskInsured.length;
+		if( insuredLen >= 1){
+			for( var i = insuredLen-1; i >= 0; i-- ){
+				var tbrstr = getTbrList(shortRiskInsured[i],i,insuredLen);
+				$("#toubaoren").after(tbrstr);
+			}
+		}
+		
 		var imgDiv = '<img src="'+commodityInfo.banner+'">';
 		$(".bxzr").append(imgDiv);
 		
@@ -82,6 +82,8 @@ function orderDetailCallback(data){
 		$(".anniu1").unbind("tap").bind("tap",function(){
 			if( ccId == "14" ){
 				sendGhxPayRequest(orderNo)
+			}else if( ccId == "21" || ccId == "22" || ccId == "23" ){
+				sendPayRequest(orderNo);
 			}else{
 				payRequest(yuyueId);
 			}			
@@ -136,20 +138,36 @@ function payReturnReponse(data){
 
 function sendGhxPayRequest(orderNo){
 	var url = base.url + 'ghxOrder/pay.do';
-	var sendJson = {
-		  "head": {
-		    "channel": "01",
-		    "userCode": mobile,
-		    "transTime": $.getTimeStr(),
-		    "transToken":transToken
-		  },
-		  "body": {
-		    "orderNo": orderNo,
-		    "payWay": "02",
-		    "redirectUrl": base.url + "tongdaoApp/html/insurance/main/payResult.html?orderNo="+orderNo,
-		    "customerId": customerId
-		  }
-		}
+	if(isWeixin()){
+		var sendJson = {
+				  "head": {
+				    "channel": "02",
+				    "userCode": mobile,
+				    "transTime": $.getTimeStr()
+				  },
+				  "body": {
+				    "orderNo": orderNo,
+				    "payWay": "01",
+				    "redirectUrl": base.url + "tongdaoApp/html/insurance/main/payResult.html?orderNo="+orderNo,
+				    "customerId": customerId
+				  }
+				}
+	}else{
+		var sendJson = {
+				  "head": {
+				    "channel": "01",
+				    "userCode": mobile,
+				    "transTime": $.getTimeStr(),
+				    "transToken":transToken
+				  },
+				  "body": {
+				    "orderNo": orderNo,
+				    "payWay": "02",
+				    "redirectUrl": base.url + "tongdaoApp/html/insurance/main/payResult.html?orderNo="+orderNo,
+				    "customerId": customerId
+				  }
+				}
+	}	
 	$.reqAjaxs( url, sendJson, ghxPayBackCall );
 }
 
@@ -160,6 +178,79 @@ function ghxPayBackCall(data){
 	}else{
 		modelAlert(data.statusMessage);
 	}
+}
+
+//保全家
+function sendPayRequest(orderNo){
+	var url = base.url + 'preservation/bqjPay.do';
+	if(isWeixin()){
+		var sendJson = {
+				  "head": {
+				    "channel": "02",
+				    "userCode": mobile,
+				    "transTime": $.getTimeStr()
+				  },
+				  "body": {
+					 "orderNo": orderNo,		   
+				     "payWay": "01",
+				     "redirectUrl": base.url + "tongdaoApp/html/insurance/main/payResult.html?orderNo="+orderNo,
+				     "customerId": customerId
+				  }
+				}
+	}else{
+		var sendJson = {
+				  "head": {
+				    "channel": "01",
+				    "userCode": mobile,
+				    "transTime": $.getTimeStr(),
+				    "transToken":transToken
+				  },
+				  "body": {
+					 "orderNo": orderNo,		   
+				     "payWay": "02",
+				     "redirectUrl": base.url + "tongdaoApp/html/insurance/main/payResult.html?orderNo="+orderNo,
+				     "customerId": customerId
+				  }
+				}
+	}	
+	$.reqAjaxs( url, sendJson, bqjPayBackCall );
+}
+
+function bqjPayBackCall(data){
+	console.log(data);
+	if(data.statusCode == "000000"){
+		window.location.href=data.returns.payUrl;
+	}else{
+		modelAlert(data.statusMessage);
+	}
+}
+
+function getTbrList(obj,index,len){
+	console.log(obj);
+	if( obj.apRelation == "01" ){
+		var objstr =  '<div id="agenter" class="agenter">';
+    		objstr += '<article class="insureName border-1px-bottom" style="padding-right: 6.67%;">'
+    		if( len == "1" ){
+    			objstr += '<div style="width:50%;float:left"><span>被保人信息</span></div><div  class="tong" style="display:block"><span>同投保人</span></div>'
+    		}else{
+    			objstr += '<div style="width:50%;float:left"><span>被保人信息'+(index+1)+'</span></div><div  class="tong" style="display:block"><span>同投保人</span></div>'
+    		}   		
+    		objstr += '</article></div>'		
+	}else{
+		var objstr = '<div id="agenter" class="agenter">'
+			objstr += '<article class="insureName border-1px-bottom" style="padding-right: 6.67%;">'
+		    objstr += '<div style="width:50%;float:left"><span>被保人信息'+(index+1)+'</span></div>'			
+			objstr += '</article>'
+			objstr += '<ul class="BBR">'
+			objstr += '<li class="name border-1px-bottom"><div class="li_title">姓名</div>'
+			objstr += '<div id="BBRName" class="li_value">'+obj.insuredname+'</div>'
+			objstr += '</li>'
+			objstr += '<li class="IDType border-1px-bottom"><div class="li_title">证件类型</div><div id="BBRIDType" class="li_value">身份证</div></li>'
+			objstr += '<li class="ID border-1px-bottom"><div class="li_title">证件号</div>'
+			objstr += '<div id="BBRID" class="li_value">'+obj.insuredidno+'</div>'
+			objstr += '</li></ul></div>'
+	}
+	return objstr;
 }
 
 function picStatus(sta){

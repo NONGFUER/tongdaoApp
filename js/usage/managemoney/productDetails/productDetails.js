@@ -3,7 +3,7 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	commodityCombinationId = urlParm.commodityCombinationId,
 	userCode = urlParm.userCode,
 	roleType = urlParm.roleType,
-	ccId = urlParm.commodityCombinationId,
+	ccId = urlParm.ccId,
 	transToken = urlParm.transToken,
 	idAuth = urlParm.idAuth,
 	isComing=urlParm.isComing,
@@ -13,6 +13,9 @@ var productFlag='01';
 if(userCode==null){
 	userCode='';
 }
+if(commodityCombinationId==null||commodityCombinationId==''){
+	commodityCombinationId=ccId;
+}
 if(typeof(isComing) == 'undefined') {
 	isComing = '';
 }
@@ -21,9 +24,9 @@ if(isComing=='1'){
 }else{
 	$('#huifang').show();
 }
-if(commodityCombinationId = '4') {
+if(commodityCombinationId == '4') {
 	productFlag = '01';
-} else if(commodityCombinationId = '5') {
+} else if(commodityCombinationId == '5') {
 	productFlag = '02';
 }
 var phone ='';
@@ -59,13 +62,8 @@ var vm = new Vue({
 		cid: {},
 		name: "",
 		title: "",
-	},
-	mounted() {
-		this.$nextTick(function() {
-			$(function() {
-
-			})
-		})
+		chiyou:"",
+		chiyoudate:"",
 	}
 })
 $(function() {
@@ -128,6 +126,10 @@ $(function() {
 			$.reqAjaxs(url, reqData, getRiskAble);
 		}
 	})
+	$("#dianhua").unbind("tap").bind("tap", function() {
+		var dianhua=$('#dianhua').html()
+		callService(dianhua, "#dianhua");
+	})
 	$(".cancle").unbind("tap").bind("tap", function() {
 		$('#shadow').hide();
 	})
@@ -174,6 +176,8 @@ function goldProductInfo(data) {
 		vm.cid = data.returns.commodityInfo.id;
 		vm.name = data.returns.commodityCombination.commodityCombinationAbbreviation;
 		vm.title = data.returns.commodityCombination.insuredInfo;
+		vm.chiyou=data.returns.CommodityCombinationModuleList[0].subModuleName;
+		vm.chiyoudate=data.returns.CommodityCombinationModuleList[0].modueInfo;
 		/*产品基本信息*/
 		var cmlist = new Array();
 		/*产品投资周期*/
@@ -221,7 +225,8 @@ function goldProductInfo(data) {
 	}
 }
 var PRODUCT_PICURL = {
-	"HONGKANG": base.url + "tongdaoApp/image/share/tongdaoic.png",
+	"HONGKANG": base.url + "tongdaoApp/image/share/tongdaoicyi.png",
+	"HONGKANGWU": base.url + "tongdaoApp/image/share/tongdaoicwu.png",
 }
 /*风险评估*/
 function getRiskAble(data) {
@@ -276,6 +281,8 @@ function getProductSharePic(productCode) {
 	var picUrl = "";
 	if(productCode == '4') {
 		picUrl = PRODUCT_PICURL.HONGKANG;
+	}else{
+		picUrl = PRODUCT_PICURL.HONGKANGWU;
 	}
 	return picUrl;
 }

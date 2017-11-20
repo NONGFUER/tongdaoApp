@@ -77,6 +77,29 @@ function healToldCallBack(data){
 		modelAlert(data.statusMessage);
 	}
 }
+
+function toYiUrl(){
+	urlParm.title = "易安职业风险类别表";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	urlParm.frompage = "proDetail";
+	urlParm.search = window.location.search;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url+"tongdaoApp/html/agreement/yiAnProfession.html?jsonKey="+jsonStr;
+}
+
+function toHosUrl(){
+	urlParm.title = "重疾就医绿色通道服务医院清单";
+	urlParm.leftIco = "1";
+	urlParm.rightIco = "0";
+	urlParm.downIco = "0";
+	urlParm.frompage = "proDetail";
+	urlParm.search = window.location.search;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url+"tongdaoApp/html/agreement/yiAnHospital.html?jsonKey="+jsonStr;
+}
+
 //返回
 function backlast(){
 	urlParm.title    = "产品详情";
