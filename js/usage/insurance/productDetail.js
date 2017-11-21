@@ -1,3 +1,7 @@
+if( entry == 'qudao' ){
+	$('#qrcode').removeClass('yincang');
+}
+
 //试算条件
 var calChoices = []; 
 var calNames	= [];
@@ -33,7 +37,9 @@ $(function(){
     sendCaldoRequest( ccId );
     //calOptionsRender(data4);
     if( roleType != "00" && isComing != "1"){
-    	 showRightIcon();
+    	if(entry == 'app'){
+    		 showRightIcon();
+    	}   	
     }
     /**拨打电话*/
 	$(".kefu").unbind("tap").bind("tap",function(){
@@ -42,8 +48,8 @@ $(function(){
     $(".rexian").unbind("tap").bind("tap",function(){
     	callService("95505",".rexian");
     })
-    $("#hetongDemo").unbind("tap").bind("tap",function(){
-    	toHetongDemo(this)
+    $("#qrcode").unbind('tap').bind('tap',function(){
+    	toQrcodeHtml()
     });
 	
 });
@@ -340,7 +346,7 @@ function moduleStr(mapperList){
 				str += mapperList.modueInfo;	
 			}	    
 		}else if( mapperList.moduleType == "03" ){//链接
-			str += '<span class="btn1 fl" onclick="toCommodityList()">合同条款</span><span href="#" data-url="'+mapperList.modueInfo+'" class="btn1 ri" id="hetongDemo">合同样张</span>'
+			str += '<span class="btn1 fl" onclick="toCommodityList()">合同条款</span><span href="#" data-url="'+mapperList.modueInfo+'" class="btn1 ri" id="hetongDemo" onclick="toHetongDemo(this)">合同样张</span>'
 		}else if(  mapperList.moduleType == "01"  ){
 			if( ccId == "22" && mapperList.moduleName == "保障责任"){
 				str += '<a style="position: absolute;top: 0; left: 0;right: 0; bottom: 0;z-index: 2;" onclick="toHosUrl()"></a><img src="' + mapperList.modueInfo + '" class="mb10">';
@@ -509,7 +515,7 @@ function toInsure(){
 		if( entry == "app"){
 			loginControl();
 		}else{
-			window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=online&openid="+openid+"&inviterPhone="+shareMobile;
+			window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineX&openid="+openid+"&inviterPhone="+mobile;
 		}
 	}else{
 		if( ccId == COMMODITYCOMBINE_ID.BQJ ){
@@ -552,7 +558,7 @@ function toHealthHtml(){
 		if( entry == "app"){
 			loginControl();
 		}else{
-			window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineHealth&openid="+openid+"&inviterPhone="+mobile;
+			window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineHealthX&openid="+openid+"&inviterPhone="+mobile;
 		}		
 	}else{
 		window.location.href = "healthNotice.html?jsonKey="+jsonStr;
@@ -610,6 +616,13 @@ function toHosUrl(){
 	urlParm.search = window.location.search;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url+"tongdaoApp/html/agreement/yiAnHospital.html?jsonKey="+jsonStr;
+}
+
+//跳转到定位
+function toQrcodeHtml(){
+	urlParm.lastUrl = window.location.href;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	window.location.href = base.url + 'weixin/insureChannels/QRCode/QRCode.html?jsonKey='+jsonStr;
 }
 
 function shareHandle(){

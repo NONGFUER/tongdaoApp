@@ -14,7 +14,10 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 var channel = urlParm.channel;
 var commodityComId = urlParm.commodityCombinationId;
 if(typeof(commodityComId) == 'undefined') {
-	commodityComId = '';
+	commodityComId = urlParm.commodityComId;
+}
+if(typeof(commodityComId) == 'undefined') {
+	commodityComId = "";
 }
 if(channel == '' || channel == null) {
 	channel = '01';
@@ -82,6 +85,7 @@ $(function() {
 		"body": {
 			"policyNo": policyNo,
 			"orderNo":orderNo,
+			"customerId":customerId+'',
 		}
 	}
 	var urls = base.url + 'ygRedemption/getYgPolicyValue.do';
@@ -97,6 +101,7 @@ $(function() {
 		"body": {
 			"policyNo": policyNo,
 			"orderNo":orderNo,
+			"customerId":customerId+'',
 		}
 	}
 	var urldian = base.url + 'ygBasic/getYgDownloadUrl.do';
@@ -108,6 +113,7 @@ $(function() {
 	$(".chanping").unbind("tap").bind("tap", function() {
 		var reqData = {
 			"commodityCombinationId": commodityComId + "",
+			"ccId":commodityComId+'',
 			"userCode": userCode,
 			"customerId": customerId,
 			"transToken": transToken,

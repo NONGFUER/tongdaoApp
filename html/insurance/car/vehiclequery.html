@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../../../css/lib/widget/mui/mui.min.css" />
     <link rel="stylesheet" href="../../../css/usage/insurance/car/base.css" />
     <link rel="stylesheet" href="../../../css/lib/common/common.css" />
-    <link rel="stylesheet" href="../../../css/usage/insurance/car/vehicleModelSelect.css"/>
+    <link rel="stylesheet" href="../../../css/usage/insurance/car/vehicleModelSelect.css?V=20171117"/>
     <link rel="stylesheet" href="../../../css/usage/insurance/car/vehiclequery.css"/>
 </head>
 <body>
@@ -35,7 +35,13 @@
 				</div>
 				<div id="selectbtn" class="selectbtn">搜索</div>
 			</div>
-			<div class="noticediv"><span style="word-break:break-all;">提示：请按照行驶证上品牌型号如“别克SGM7180”可只填写汉字、字母和数字。</span></div>
+			<div class="noticediv">
+			     <span style="word-break:break-all;">
+				    1、请按照行驶证上的型号填写汉字、字母和数字，如“别克SGM7180”。<img class="wenhao" src="../../../image/insurance/car/wenhao.png" /><br/>
+				    2、如提示车型不对，可按照系统提示信息录入车型。
+				 </span>
+			</div>
+			<div class="mui-text-center" style="height:50px;line-height:50px;color:#262626; background-color: #fff;">系统识别该车辆型号为：<span class="demomodel"></span></div>
 		</div>
 		<!-- 无车型信息提示 --> 
 		<div id="maindiv" style="display:none">
@@ -55,6 +61,18 @@
 				    </div>
 				</div>
 			</section>	 
+		</div>
+	</div>
+	
+	<!-- 行驶证填写示例 -->
+	<div id="licenseshadow" class="mui-backdrop" style="display: none;">
+		<div class="backdrop-content" style="margin-top: 100px;">
+			<p class="whitetext">请按照行驶证填写</p>
+			<br>
+			<img style="width: 100%" src="../../../image/insurance/car/license.png">
+			<br>
+			<br>
+			<img style="width:30px;" src="../../../image/insurance/car/chahao2.png">
 		</div>
 	</div>
 	<!-- 弹窗 -->
@@ -90,5 +108,5 @@
     <script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js" ></script>
     <script type="text/javascript" src="../../../js/lib/common/base.js" ></script>
     <script type="text/javascript" src="../../../js/lib/common/common.js" ></script> 
-    <script type="text/javascript" src="../../../js/usage/insurance/car/vehiclequery.js" ></script>
+    <script type="text/javascript" src="../../../js/usage/insurance/car/vehiclequery.js?V=20171117" ></script>
 </html>

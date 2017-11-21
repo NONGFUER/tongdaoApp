@@ -43,22 +43,6 @@ var vm = new Vue({
 		name: "",
 
 	},
-	mounted() {
-		this.$nextTick(function() {
-			$(function() {
-				chuli();
-			})
-		})
-	},
-	watch: {
-		Objectlist: function(val) {
-			this.$nextTick(function() {
-				$(function() {
-					chuli();
-				})
-			})
-		}
-	}
 })
 $(function() {
 	console.log("页面初始化，获取上个页面传值报文--");
@@ -72,6 +56,7 @@ $(function() {
 		},
 		"body": {
 			"orderNo": orderNo,
+			"customerId":customerId+'',
 		}
 	}
 	var url = base.url + 'ygBasic/getYgOrderInform.do';
@@ -151,6 +136,9 @@ $(function() {
 		sendMessage();
 	})
 	vm.channel = channel;
+	vm.$nextTick(function() {
+		chuli();
+	})
 })
 
 function getinsure(data) {
@@ -271,7 +259,7 @@ function chuli() {
 		$('#huifang').addClass('huisebtn');
 		vm.returnVisit == '1';
 	} else if($('.baozhang').html() == '01') {
-		$('.baozhang').html('未提交核保')
+		$('.baozhang').html('未核保')
 	} else if($('.baozhang').html() == '02') {
 		$('.baozhang').html('已过期')
 	} else if($('.baozhang').html() == '03') {

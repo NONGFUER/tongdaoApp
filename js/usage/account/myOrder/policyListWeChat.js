@@ -133,7 +133,11 @@ $(function() {
 				window.location.href = "policyInfo.html?jsonKey=" + jsonStr;
 			}
 		} else if(riskType == '02') {
-			window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
+			if(commodityId == '36') {
+				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/sunwarrantyDetail.html?jsonKey=" + jsonStr;
+			} else {
+				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
+			}
 		}
 	})
 })

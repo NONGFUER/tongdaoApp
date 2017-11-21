@@ -27,15 +27,13 @@ $(function() {
 	}
 	var url = base.url + 'ygBasic/getYgOrderInform.do';
 	$.reqAjaxsFalse(url, reqData, getYgOrderInform);
-
 	function getYgOrderInform(data) {
 		console.log(data);
 		if(data.statusCode == '000000') {
 			vm.comComName = data.returns.ccName;
 			vm.startPiece = data.returns.prem;
-			vm.policyNo=data.returns.policyNo;
 		}
-	}
+	}	
 	/**--返回--*/
 	$("#shouye").unbind("tap").bind("tap", function() {
 		sysbackproduct();
@@ -76,7 +74,7 @@ function huifang() {
 	var reqData = {
 		"head": {},
 		"body": {
-			"policyNo": vm.policyNo,
+			"orderNo": vm.orderNo,
 		}
 	}
 	$.reqAjaxsFalse(url, reqData, huifangque);

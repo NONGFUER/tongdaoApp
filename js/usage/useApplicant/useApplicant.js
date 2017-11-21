@@ -402,6 +402,9 @@ function toInsure(obj) {
 		window.location.href = base.url + "weixin/ycCancer/html/insurance/main/insure.html?jsonKey=" + jsonStr;
 	} else if(urlParm.frompage == "familyInsureHtml") { //除挂号险之外的ecard
 		window.location.href = base.url + "tongdaoApp/html/insurance/yian/familyInsure.html?jsonKey=" + jsonStr;
+	} else if(urlParm.frompage == "sunshineFilloutHtml") { //阳光
+		urlParm.title = urlParm.titles;
+		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/sunshineFillout.html?jsonKey=" + jsonStr;
 	}
 }
 //返回上一页
@@ -421,7 +424,15 @@ function backlast() {
 		urlParm.downIco = "0";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = base.url + "tongdaoApp/html/insurance/yian/familyInsure.html?jsonKey=" + jsonStr;
-	} else {
+	}else if(urlParm.frompage == "sunshineFilloutHtml") {
+		urlParm.title = urlParm.titles;
+		urlParm.leftIco = "1";
+		urlParm.rightIco = "0";
+		urlParm.downIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/insurance/yian/familyInsure.html?jsonKey=" + jsonStr;
+	}
+	else {
 		sysback();
 	}
 

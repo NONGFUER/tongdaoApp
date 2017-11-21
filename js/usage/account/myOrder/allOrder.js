@@ -24,10 +24,11 @@ var vm = new Vue({
 	el: '#list',
 	data: {
 		Objectlist: null
-	}/*,
-	mounted() {
-		chuli();
-	}*/
+	}
+	/*,
+		mounted() {
+			chuli();
+		}*/
 	/*,
 		watch: {
 			Objectlist: function(val) {
@@ -111,7 +112,28 @@ $(function() {
 		} else if(riskType == '04') {
 			mui.alert('寿险');
 		} else if(riskType == '02') {
-			window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/orderDetails.html?jsonKey=" + jsonStr;
+			if(commodityCombinationId == '24') {
+				var url = base.url + 'ygBasic/getYgUrl.do';
+				var redata = {
+					"head": {
+						"userCode": userCode,
+						"channel": channel,
+						"transTime": $.getTimeStr(),
+						"transToken": transToken
+					},
+					"body": {
+						"orderNo": orderNo,
+					}
+				}
+				$.reqAjaxs(url, redata, getYgUrl);
+				function getYgUrl(data) {
+					if(data.statusCode == '000000') {
+						window.location.href = data.returns.url;
+					}
+				}
+			} else {
+				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/orderDetails.html?jsonKey=" + jsonStr;
+			}
 		}
 		return false;
 	})
@@ -174,7 +196,11 @@ $(function() {
 				window.location.href = base.url + "tongdaoApp/html/insurance/car/carMes.html?jsonKey=" + jsonStr;
 			}
 		} else if(riskType == '02') {
-			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
+			if(commodityCombinationId == '24') {
+				window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/sunshineDetails.html?jsonKey=" + jsonStr;
+			}else{
+				window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
+			}
 		}
 		return false;
 	})
@@ -226,9 +252,9 @@ $(function() {
 		} else if(riskType == '04') {
 			mui.alert('寿险');
 		} else if(riskType == '02') {
-			if(commodityCombinationId=='24'){
+			if(commodityCombinationId == '24') {
 				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/sunorderDetails.html?jsonKey=" + jsonStr;
-			}else{
+			} else {
 				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/orderDetails.html?jsonKey=" + jsonStr;
 			}
 		}

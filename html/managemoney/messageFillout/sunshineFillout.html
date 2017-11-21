@@ -24,6 +24,29 @@
 			height: 41px;
 			line-height: 41px;
 		}
+		
+		.changyongbaoxian {
+			float: right;
+			margin-right: 10px;
+			color: #48a0f0;
+			font-size: 14px;
+		}
+		
+		#name {
+			text-align: right;
+			font-size: 15px;
+			color: #333;
+		}
+		#phone{
+			text-align: right;
+			font-size: 15px;
+			color: #333;
+		}
+		#idNo{
+			text-align: right;
+			font-size: 15px;
+			color: #333;
+		}
 	</style>
 
 	<body>
@@ -56,11 +79,11 @@
 								<span v-cloak v-html="'份数(最少购买5份,最多'+Objectitle.insureInfo.salesNum+'份)'"></span>
 							</li>
 							<li id="fenshu">
-								<span v-html="startPiece">1000.00</span>
+								<span v-html="startPiecechushi">1000.00</span>
 								<span>
 								<div class="minus">-</div>
 								<div class="fenshu_input">
-									<input type="text" name="" id="goumai" value="5" readonly="readonly">
+									<input type="text" name="" id="goumai" value="1" readonly="readonly">
 								</div>
 								<div class="up">+</div>
 								</span>
@@ -100,16 +123,21 @@
 					<div class="man-div-body-ul_li_div_toubao mb10">
 						<div class="body_title_div">投保人信息</div>
 						<div class="body_title_div_div">仅支持投保人本人银行卡购买</div>
+						<div id="commonHoldersto" class="changyongbaoxian">常用保险人</div>
 						<div class="xian"></div>
 						<ul class="man-div-body-ul">
 							<li>
 								<span>姓名</span>
-								<span v-html="Objectitle.insureInfo.insureName">王胖子</span>
+								<span style="width:70%">
+									<input id='name' type="text"   v-model="holderbr.name">
+								</span>
 							</li>
 							<li class="xianli"></li>
 							<li>
 								<span>身份证号</span>
-								<span v-html="shenfenzheng">320**************2323</span>
+								<span style="width:70%">
+									<input id='idNo' type="text" maxlength="19" v-model="holderbr.idNo"/>
+								</span>
 							</li>
 							<li class="xianli"></li>
 							<li class="man-div-body-ul_bank">
@@ -122,7 +150,9 @@
 							<li class="xianli"></li>
 							<li>
 								<span>手机号</span>
-								<span v-html="phone">13877777777</span>
+								<span style="width:70%">
+									<input id='phone' maxlength="11" type="text" v-model="holderbr.phone"/>
+								</span>
 							</li>
 							<li class="xianli"></li>
 							<li class="man-div-body-ul_bank">
@@ -136,13 +166,13 @@
 							<li>
 								<span>地址</span>
 								<span style="width:70%">
-								<input id="dizhi" type="text" name="" value="" placeholder="街/路+门牌号，例南京路888号"></span>
+								<input id="dizhi" type="text" name="" value="" placeholder="街/路+门牌号，例国权北路888号" v-model="holderbr.address"></span>
 							</li>
 							<li class="xianli"></li>
 							<li>
 								<span>电子邮箱</span>
 								<span style="width:70%">
-								<input id="email" type="text" name="" value="" placeholder="请输入电子邮箱">
+								<input id="email" type="text" name="" value="" placeholder="请输入电子邮箱" v-model="holderbr.email">
 								</span>
 							</li>
 						</ul>

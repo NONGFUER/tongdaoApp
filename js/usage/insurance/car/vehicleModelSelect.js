@@ -24,6 +24,13 @@ $(function() {
 			$("#searchtext").val("请输入关键字点击查询").css("color", "#ccc");
 		}
 	});
+	/***品牌填写示例***/
+	$(".noticediv").unbind("tap").bind("tap",function() {
+		$("#licenseshadow").show();
+	});
+	$("#licenseshadow").unbind("tap").bind("tap",function() {
+		$("#licenseshadow").hide();
+	});
 	//查询品牌型号事件
 	$("#selectbtn").unbind("tap").bind("tap",function() {
 		// 获取父页面 值
@@ -228,8 +235,9 @@ function pullupRefreshlist(){
 }
 /*设置滑动区域*/
 $.setscroll = function(){
-	var Scrollheight = window.innerHeight- 94;
+	var Scrollheight = window.innerHeight- 140;
 	$("#wrapper").height(Scrollheight + "px");
+	$("#wrapper").css("top","140px");
 	mui("#wrapper").scroll();
 };
 

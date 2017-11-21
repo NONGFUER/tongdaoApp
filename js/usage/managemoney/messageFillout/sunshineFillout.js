@@ -1,11 +1,11 @@
 /*获取数据*/
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
-commodityCombinationId = '24',
+commodityCombinationId = urlParm.commodityCombinationId,
 	userCode = urlParm.userCode,
 	productFlag = urlParm.productFlag,
 	phone = urlParm.userCode,
 	bankName = urlParm.bankName,
-	commodityId = '36',
+	commodityId = urlParm.commodityId,
 	bankCode = urlParm.bankCode,
 	roleType = urlParm.roleType,
 	idAuth = urlParm.idAuth,
@@ -15,6 +15,7 @@ commodityCombinationId = '24',
 	invMobie = urlParm.invMobie, //引荐人手机号
 	riskSupportAbility = urlParm.riskSupportAbility, //类型
 	pieces = urlParm.pieces,
+	holderbr = urlParm.holderbr,
 	channel = urlParm.channel,
 	remark = urlParm.remark,
 	title = urlParm.title;
@@ -68,6 +69,13 @@ var vm = new Vue({
 		remark: '', //
 		diqu: "",
 		youxiaoqi: '', //身份证有效期
+		holderbr: {
+			name: '',
+			idNo: '',
+			phone: '',
+			email: '',
+			address: '',
+		},
 	}
 })
 if(pieces) {
@@ -103,8 +111,8 @@ $(function() {
 		if(huiclass == 'div_btn') {
 			var chengshi = $('#chengshi').html();
 			var datawhere = $('#chengshi').attr('data-where');
-			var dizhi = $('#dizhi').val();
-			var email = $('#email').val();
+			var dizhi = vm.holderbr.address;
+			var email = vm.holderbr.email;
 			var yinhang = $('#yinhangka').val();
 			bankName = $('.bank').html();
 			var reg = new RegExp("^[0-9]*$");
@@ -141,8 +149,8 @@ $(function() {
 				dui = false;
 			}
 			if(dui) {
-				var dizhi = $('#dizhi').val(),
-					email = $('#email').val();
+				var dizhi = vm.holderbr.address;
+				var email = vm.holderbr.email;
 				var where = $("#chengshi").html();
 				where = where.split(" ");
 				if(where == "请选择所在城市") {
@@ -179,8 +187,8 @@ $(function() {
 						"holderEmail": email, //投保人电子邮箱
 						"holderName": beiName, //被投保人姓名
 						"holderCardType": "SFZ", //证件类型（SFZ：身份证）
-						"holderCardNo": vm.Objectitle.insureInfo.insureIdNO, //被投保人身份证
-						"holderMobile": vm.Objectitle.insureInfo.insurePhone, //被投保人手机号
+						"holderCardNo": vm.holderbr.idNo, //被投保人身份证
+						"holderMobile": vm.holderbr.phone, //被投保人手机号
 						"holderSex": $.getSexHong(vm.Objectitle.insureInfo.insureIdNO) + "", //性别
 						"holderBirthday": $.getBirthDay(vm.Objectitle.insureInfo.insureIdNO) + '', //出生日期
 						"holderCardValid": vm.youxiaoqi, //证件有效期
@@ -216,12 +224,22 @@ $(function() {
 		console.log(vm.Objectitle);
 
 		//vm.feilv = '本产品初始费用' + Number(vm.Objectitle.insureInfo.firstRate) * 100 + '%,进入账户金额';
-		if(pieces==null||pieces==''){
-			pieces=$('#goumai').val();
+		if(pieces == null || pieces == '') {
+			pieces = $('#goumai').val();
 		}
 		vm.comComName = title;
 		vm.feilvshuzi = 0;
 		vm.Objectitle = data.returns;
+		if(holderbr) {
+			vm.holderbr = holderbr;
+		}
+		vm.$nextTick(function() {
+			var yinphone = $('#phone').val();
+			var yinidNo = $('#idNo').val();
+			$('#phone').val(phoneyin(yinphone));
+			$('#idNo').val(shenfen(yinidNo));
+		})
+
 		if(pieces) {
 			vm.mymoney = intToFloat(1000 * pieces);
 			vm.startPiece = intToFloat(1000 * pieces);
@@ -235,16 +253,6 @@ $(function() {
 		vm.CommodityCombinationModuleList = data.returns.CommodityCombinationModuleList;
 
 		vm.fenshu = vm.Objectitle.insureInfo.salesNum;
-		if(vm.Objectitle.insureInfo.insureIdNO != null && vm.Objectitle.insureInfo.insureIdNO != "") {
-			vm.shenfenzheng = shenfen(vm.Objectitle.insureInfo.insureIdNO);
-		} else {
-			vm.shenfenzheng = '';
-		}
-		if(vm.Objectitle.insureInfo.insurePhone != null && vm.Objectitle.insureInfo.insurePhone != "") {
-			vm.phone = phoneyin(vm.Objectitle.insureInfo.insurePhone);
-		} else {
-			vm.phone = '';
-		}
 		$('.phone').html(vm.phone);
 		vm.bankCode = $('.bank').attr('bankCode');
 		if(vm.Objectitle.insureInfo.dayLimit != null && vm.Objectitle.insureInfo.dayLimit != "") {
@@ -259,8 +267,7 @@ $(function() {
 		if(bankName != null && bankName != "") {
 			vm.bankname = bankName;
 		}
-		
-		
+
 		/*点击+-*/
 		$(".up").unbind("tap").bind("tap", function() {
 			var fenshu = $('.fenshu_input').children('input').val();
@@ -284,8 +291,8 @@ $(function() {
 			//var mymoney = $('#mymoney').html();
 			fenshu = Number(fenshu) - 1;
 			console.log(fenshu)
-			if(fenshu < 5) {
-				fenshu = '5';
+			if(fenshu < 1) {
+				fenshu = '1';
 			} else {
 				money = intToFloat((Number(money) - Number(vm.startPiecechushi)));
 				///mymoney = intToFloat(Number(mymoney) - (Number(vm.startPiecechushi) - (Number(vm.startPiecechushi) * Number(vm.feilvshuzi))));
@@ -333,6 +340,18 @@ $(function() {
 			$(".dianji").html(curCount);
 		}
 	}
+	$("#phone").blur(function() {
+		var yinphone = $('#phone').val();
+		var yinidNo = $('#idNo').val();
+		$('#phone').val(phoneyin(yinphone));
+		$('#idNo').val(shenfen(yinidNo));
+	});
+	$("#idNo").blur(function() {
+		var yinphone = $('#phone').val();
+		var yinidNo = $('#idNo').val();
+		$('#phone').val(phoneyin(yinphone));
+		$('#idNo').val(shenfen(yinidNo));
+	});
 	/*点击X关发送短信窗口*/
 	$(".note-div_title_right").unbind("tap").bind("tap", function() {
 		$('.note').hide();
@@ -348,13 +367,17 @@ $(function() {
 	}
 	/*隐藏手机号中间几位*/
 	function phoneyin(phone) {
-		var mphone = phone.substr(0, 3) + '****' + phone.substr(7);
-		return mphone;
+		if(phone) {
+			var mphone = phone.substr(0, 3) + '****' + phone.substr(7);
+			return mphone;
+		}
 	}
 	/*隐藏身份证中间几位*/
 	function shenfen(shenfen) {
-		var mphone = shenfen.substr(0, 3) + '**************' + shenfen.substr(-4);
-		return mphone;
+		if(shenfen) {
+			var mphone = shenfen.substr(0, 3) + '**************' + shenfen.substr(-4);
+			return mphone;
+		}
 	}
 	/*保留二位小数*/
 	function intToFloat(val) {
@@ -382,6 +405,16 @@ $(function() {
 		var url = base.url + 'ygBasic/getYgSelection.do';
 		$.reqAjaxs(url, reqData, getSelection);
 	}
+	//跳转到常用保险人
+	$("#commonHoldersto").unbind("tap").bind("tap", function() {
+		urlParm.userCode = userCode;
+		urlParm.title = "常用被保人";
+		urlParm.titles=vm.comComName;
+		urlParm.rightIco = "4";
+		urlParm.frompage = "sunshineFilloutHtml";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/useApplicant/useApplicant.html?jsonKey=" + jsonStr;
+	});
 
 	function getSelection(data) {
 		if(data.status_code == "000000") {
@@ -407,25 +440,24 @@ $(function() {
 		$('#huifang').toggleClass('xiehuise');
 	})
 	$("#shenfenzhengyxq").bind("tap", function() {
-		var dtPicker = new mui.DtPicker({
-			"type": "date",
-			beginDate: new Date(show()), //设置开始日期 
-		});
-		dtPicker.show(function(e) {
-			var datatext = e.text;
+		var mydate = new Date();
+		var yue = mydate.getMonth();
+		var nian = mydate.getFullYear() + 5;
+		var nianto = mydate.getFullYear() + 10;
+		var ri = mydate.getDate() + 1;
+		var dtpicker = new mui.DtPicker({
+			type: "date", //设置日历初始视图模式 
+			beginDate: new Date(nian, 0, 01), //设置开始日期 
+			endDate: new Date(nianto, 11, 31), //设置结束日期 
+			labels: ['年', '月', '日', ], //设置默认标签区域提示语 
+		})
+		dtpicker.show(function(rs) {
+			var datatext = rs.text;
 			$('#shenfenzhengyxq').html(datatext);
 			vm.youxiaoqi = datatext;
 		})
 	});
 })
-/*获取当前时间*/
-function show() {
-	var mydate = new Date();
-	var str = "" + mydate.getFullYear() + ",";
-	str += (mydate.getMonth() + 1) + ",";
-	str += mydate.getDate() + ",";
-	return str;
-}
 /*核保*/
 function saveOrder(data) {
 	console.log(data.statusCode);
@@ -575,6 +607,7 @@ function toRiskType(tempScore) {
 	}
 	return tp;
 }
+
 /*登录失效*/
 function lognCont() {
 	loginControl();
@@ -601,7 +634,7 @@ function backlast() {
 		"downIco": '0',
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
-	window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
+	window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/sunshineDetails.html?jsonKey=" + jsonStr;
 }
 
 /**计算年龄周岁**/

@@ -1,23 +1,23 @@
 /*获取数据*/
-var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
-	commodityCombinationId = urlParm.commodityCombinationId,
-	userCode = urlParm.userCode,
-	roleType = urlParm.roleType,
-	ccId = urlParm.ccId,
-	transToken = urlParm.transToken,
-	idAuth = urlParm.idAuth,
-	isComing = urlParm.isComing,
-	customerId=urlParm.customerId,
-	channel = '01';
+var commodityCombinationId = getUrlQueryString('commodityCombinationId'),
+	userCode = getUrlQueryString('userCode'),
+	roleType = getUrlQueryString('roleType'),
+	ccId = getUrlQueryString('ccId'),
+	transToken = getUrlQueryString('transToken'),
+	idAuth = getUrlQueryString('idAuth'),
+	isComing = getUrlQueryString('isComing'),
+	userCode=getUrlQueryString('mobile'),
+	customerId=getUrlQueryString('customerId'),
+	channel = '02';
 var productFlag = '01';
 if(userCode == null) {
 	userCode = '';
 }
-if(commodityCombinationId == null || commodityCombinationId == '') {
-	commodityCombinationId = ccId;
+if(transToken == null) {
+	transToken = '';
 }
-if(ccId == null || ccId == '') {
-	ccId = commodityCombinationId;
+if(commodityCombinationId == null&&ccId!=null || commodityCombinationId == ''&&ccId!=null) {
+	commodityCombinationId = ccId;
 }
 if(typeof(isComing) == 'undefined') {
 	isComing = '';
@@ -27,13 +27,16 @@ if(isComing == '1') {
 } else {
 	$('#huifang').show();
 }
+if(commodityCombinationId == '4') {
+	productFlag = '01';
+} else if(commodityCombinationId == '5') {
+	productFlag = '02';
+}
 var phone = '';
 if(userCode != '' && userCode != null) {
 	phone = phoneyin(userCode);
 }
 var invMobie = userCode;
-console.log("页面初始化，获取上个页面传值报文--");
-console.log(urlParm);
 var ma = null;
 var riskSupportAbility = "";
 var vm = new Vue({
@@ -61,19 +64,19 @@ var vm = new Vue({
 		title: "",
 		chiyou: "",
 		chiyoudate: "",
-		wenxin:"",
-		customerId:'',
+		wenxin: "",
+		commodityId:'',
 	}
 })
 $(function() {
 	var reqData = {
 		"body": {
-			"commodityCombinationId": commodityCombinationId+'',
-			"customerId": customerId+'',
+			"commodityCombinationId": commodityCombinationId + '',
+			"customerId": customerId + '',
 		},
 		"head": {
 			"userCode": userCode,
-			"channel": "01",
+			"channel": channel,
 			"transTime": $.getTimeStr(),
 			"transToken": transToken
 		}
@@ -134,13 +137,13 @@ function buy() {
 		"riskSupportAbility": $('.retest').attr('testType'),
 		"insurePhone": userCode,
 		"userCode": userCode,
-		"customerId": customerId,
+		"customerId": customerId+'',
 		"transToken": transToken,
-		"commodityCombinationId": commodityCombinationId,
-		"commodityId": vm.commodityId,
+		"commodityCombinationId": commodityCombinationId+'',
+		"commodityId": vm.commodityId+'',
 		"testType": $('.retest').attr('testType'),
 		"title": vm.Objectitle.commodityCombination.commodityCombinationName,
-		"remark":vm.Objectitle.commodityCombination.remark,
+		"remark": vm.Objectitle.commodityCombination.remark,
 		"productFlag": productFlag,
 		"channel": channel,
 		"roleType": roleType,
@@ -161,7 +164,7 @@ function goldProductInfo(data) {
 		vm.Objectitle = data.returns;
 		vm.CommodityCombinationModuleList = data.returns.CommodityCombinationModuleList;
 		vm.cid = data.returns.commodityInfo.id;
-		vm.commodityId=data.returns.commodityInfo.id+'';
+		vm.commodityId=data.returns.commodityInfo.id;
 		vm.name = data.returns.commodityCombination.commodityCombinationAbbreviation;
 		vm.title = data.returns.commodityCombination.insuredInfo;
 		vm.chiyou = data.returns.CommodityCombinationModuleList[0].subModuleName;
@@ -207,10 +210,10 @@ function goldProductInfo(data) {
 			if(wenxin != null && wenxin != '') {
 				vm.wenxin = wenxin[0].modueInfo;
 			}
-			if(goumai!=null&&goumai!=''){
+			if(goumai != null && goumai != '') {
 				vm.goumaishuoming = goumai[0].modueInfo;
 			}
-			if(xiangguan!=null&&xiangguan!=''){
+			if(xiangguan != null && xiangguan != '') {
 				vm.xiangguanxieyi = xiangguan;
 			}
 
@@ -243,7 +246,7 @@ function getProductSharePic(productCode) {
 function shareHandle() {
 	var title = vm.name;
 	var desc = vm.title;
-	var shareurl = base.url + "tongdaoApp/html/share/kongbai.html?mobile=" + userCode + '&ccId=' + ccId + '&commodityId=' + vm.commodityId + '&type=9';
+	var shareurl = base.url + "tongdaoApp/html/share/kongbai.html?mobile=" + userCode + '&ccId=' + ccId + '&type=9';
 	var picUrl = getProductSharePic(ccId);
 	shareMethod(shareurl, title, desc, "baodan", picUrl);
 };

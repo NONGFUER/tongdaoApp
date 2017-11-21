@@ -17,8 +17,8 @@
 	<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.picker.min.css" />
 	<link rel="stylesheet" href="../../../css/usage/insurance/car/base.css" />
 	<link rel="stylesheet" href="../../../css/lib/common/common.css" />
-    <link rel="stylesheet" href="../../../css/usage/insurance/car/carMes.css?v=20171031"/>
-    <link rel="stylesheet" href="../../../css/usage/insurance/car/vehicleModelSelect.css?v=20171031"/>
+    <link rel="stylesheet" href="../../../css/usage/insurance/car/carMes.css?V=20171117"/>
+    <link rel="stylesheet" href="../../../css/usage/insurance/car/vehicleModelSelect.css?V=20171117"/>
 </head>
 <body>
 	<header>
@@ -338,7 +338,12 @@
 				</div>
 				<div id="selectbtn" class="selectbtn">搜索</div>
 			</div>
-			<div class="noticediv"><span>提示：品牌型号如“别克SGM7180”可只填写汉字、字母和数字</span></div>
+			<div class="noticediv">
+			      <span style="word-break:break-all;">
+				    1、请按照行驶证上的型号填写汉字、字母和数字，如“别克SGM7180”。<img class="wenhao" src="../../../image/insurance/car/wenhao.png" /><br/>
+				    2、如提示车型不对，可按照系统提示信息录入车型。
+				 </span>
+			</div>
 		</div>
 		<!-- 无车型信息提示 --> 
 		<div id="maindiv" style="display:none">
@@ -362,6 +367,18 @@
 			</div>
 	</div>
 	<!-- 填写小助手 -->
+	<!-- 行驶证填写示例 -->
+	<div id="licenseshadow" class="mui-backdrop" style="display: none;">
+		<div class="backdrop-content" style="margin-top: 100px;">
+			<p class="whitetext">请按照行驶证填写</p>
+			<br>
+			<img style="width: 100%" src="../../../image/insurance/car/license.png">
+			<br>
+			<br>
+			<img style="width:30px;" src="../../../image/insurance/car/chahao2.png">
+		</div>
+	</div>
+	
 	<!-- 遮罩和卡片填写示例 -->
 	<div class="shadow"></div>
 	 <!-- 行驶证遮罩提示 -->
@@ -389,8 +406,8 @@
     <script type="text/javascript" src="../../../js/lib/widget/mui/mui.picker.min.js"></script>
     <script type="text/javascript" src="../../../js/lib/common/base.js?v=20171023" ></script>
     <script type="text/javascript" src="../../../js/lib/common/common.js" ></script> 
-    <script type="text/javascript" src="../../../js/usage/insurance/car/carMes.js?v=20171025" ></script>
-    <script type="text/javascript" src="../../../js/usage/insurance/car/vehicleModelSelect.js?v=20171023" ></script>
+    <script type="text/javascript" src="../../../js/usage/insurance/car/carMes.js?V=20171117" ></script>
+    <script type="text/javascript" src="../../../js/usage/insurance/car/vehicleModelSelect.js?V=20171117" ></script>
     <script type="text/javascript" charset="utf-8">
 		var slider = mui("#slider");
 		slider.slider({

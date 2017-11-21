@@ -576,8 +576,7 @@ function sendFeeCityRequest( cusId, ccId){
 	        },
 	        "body":{
 	            "customerId":cusId,//customerId,//773  198980 250
-	            "commodityCombinationId" : ccId, //
-	            "attributionChannels": "01"
+	            "commodityCombinationId" : ccId
 	        }
 	}
 	$.reqAjaxs(url,reqData,feeCityReponse);
@@ -629,8 +628,7 @@ function sendCityRequest(provinceCode,cityCode,ccId){
 	        "body":{
 	            "provinceCode":provinceCode,
 	            "commodityCombinationId": ccId,//commodityCombinationId,
-	            "cityCode" : cityCode,
-	            "attributionChannels": "01"
+	            "cityCode" : cityCode
 	        }
 	}
 	if( provinceCode == "" && cityCode == "" ){

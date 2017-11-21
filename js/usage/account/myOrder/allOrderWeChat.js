@@ -153,7 +153,11 @@ $(function() {
 		} else if(riskType == '04') {
 			mui.alert('寿险');
 		} else if(riskType == '02') {
-			window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/orderDetails.html?jsonKey=" + jsonStr;
+			if(commodityCombinationId == '24') {
+				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/sunorderDetails.html?jsonKey=" + jsonStr;
+			} else {
+				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/orderDetails.html?jsonKey=" + jsonStr;
+			}
 		}
 	})
 

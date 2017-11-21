@@ -144,18 +144,19 @@ var cGuaranteeTerm = '';
 //微信公众号 渠道出单qudao 保险商城mall
 var entry = urlParm.entry ? urlParm.entry : 'app';
 if( entry == 'app' ){	
-	modelAlert("native");
+	//modelAlert("native");
 	var channel = "01"
 	var channelResource = "3"
 	var payWay = '02'
 }else{	
-	modelAlert("浏览器或微信端");	
+	//modelAlert("浏览器或微信端");	
 	var channel = "02"
 	var channelResource = "1"
 	var payWay = '01'
 	$("header").show();
 	$(".mui-scroll-wrapper").css("margin-top", "44px");
 }
+var openid = urlParm.openid ? urlParm.openid : "";
 var PRODUCT_PICURL ={
 		"BASE" : base.url + "tongdaoApp/image/share/tongdaoic.png",
 		"MCAN" : base.url + "tongdaoApp/image/share/fangainan.png",

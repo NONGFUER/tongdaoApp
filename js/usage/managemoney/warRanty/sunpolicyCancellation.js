@@ -35,6 +35,7 @@ $(function() {
 		},
 		"body": {
 			"orderNo":orderNo,
+			"customerId":customerId+'',
 		}
 	}
 	var url = base.url + 'ygRedemption/ygRedemptionTrial.do';

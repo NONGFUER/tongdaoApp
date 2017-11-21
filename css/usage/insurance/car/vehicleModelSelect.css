@@ -7,6 +7,7 @@ header {
 /*----------------------------品牌型号列表---------------------------------------*/ 
 .searcharea{
 	width: 100%;
+	padding-bottom: 10px;
 	background-color: #ebebeb;
 }
 
@@ -23,13 +24,10 @@ header {
 }
 .noticediv{
 	width: 100%;
-	height:50px;
 	font-size: 14px;
-	padding-left: 5%;
-	padding-right: 3%;
+	padding:10px 5%;
 	color: #666;
 	background-color: #ebebeb;
-	border-bottom: 1px solid #ccc;
 }
 .cusselectClass{
 	float: left;
@@ -52,7 +50,6 @@ header {
 }
 .wrapper {
 	width: 100%;
-	top: 94px;
 	position: absolute;
 }
 .divWrapper {
@@ -60,9 +57,7 @@ header {
 	float: left;
 	position: relative;
 	background-color: #f7f7f7;
-	/* top:6rem; */
 	z-index: 100;
-/* 	padding-bottom:25px; */
 }
 .wrapper_line{
 	margin-left:5px;
@@ -90,7 +85,6 @@ header {
 	width: 18px;
 	height: 18px;
 	margin-top: 0.4rem;
-/* 	margin-left: 1rem; */
 	margin-right: 1rem;
 	float:right;
 }
@@ -106,8 +100,6 @@ header {
 	line-height:5rem;
 	text-align:center;
 	font-family:"Hiragino Sans GB W3";
-/* 	background-color: red; */
-/* 	border:1px solid #ccc; */
 }
 .selectbtn{
 	font-size: 16px;
@@ -120,7 +112,6 @@ header {
     line-height: 2.3rem;
     text-align: center;
     font-family: "Hiragino Sans GB W3";
-    /* background: #1b6bb8; */
     border-radius: 0.525rem;
 }
 
@@ -342,4 +333,25 @@ aside ul li{
 /*** 小写转大写 ***/
 #searchtext {
     text-transform: Uppercase;
+}
+
+/* 品牌填写示例 */
+.wenhao{
+	width: 12px;
+    height: 12px;
+    margin-left: 4px;
+}
+.whitetext
+{
+	color: #fff;
+	font-size: 14px;
+}
+.backdrop-content{
+	width:84%;
+	font-size: 18px;
+    color: #fff;
+    position: absolute;
+    left: 8%;
+    z-index: 1000;
+    text-align: center;
 }

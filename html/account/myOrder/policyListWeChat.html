@@ -33,7 +33,7 @@
 					</div>
 					<div id='list' class="man-div-body " v-cloak>
 						<ul class="man-div-body-ul ">
-							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:policyNo="value.policyNo" v-bind:orderNo="value.orderNo" v-bind:riskType='value.riskType'>
+							<li class="man-div-body-ul_li mb10 mui-table-view-cell" v-for="(value,key) in Objectlist" v-bind:policyNo="value.policyNo" v-bind:orderNo="value.orderNo" v-bind:riskType='value.riskType' v-bind:commodityId='value.commodityId'>
 								<div v-if="value.orderStatus=='已过期'" class="mui-slider-right mui-disabled shanchu">
 									<a class="mui-btn mui-btn-red" v-bind:policyNo="value.policyNo">
 										<i class="lajitong"></i>
