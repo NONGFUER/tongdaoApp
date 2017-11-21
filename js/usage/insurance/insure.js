@@ -5,6 +5,7 @@ var code = ghxRemark.split(",");
 var insureList = [];
 var holder = urlParm.holder;
 var holderbr = urlParm.holderbr;
+var channelSalesMan = {};
 for(var i = 0; i < code.length; i++) {
 	var pro = {
 		"productId": code[i]
@@ -12,9 +13,16 @@ for(var i = 0; i < code.length; i++) {
 	insureList.push(pro)
 }
 $(function(){
+	if(entry == 'qudao'){
+		queryShowInfo(customerId)
+	}
 	formItemControl( ccId )
 	if( ccId != "1" && ccId != "2" && ccId != "3" && ccId != "14" && ccId != "22" && ccId != "23" ){//除防癌险,挂号险之外的ecard，会调默认投保地区接口
-		sendFeeCityRequest( customerId, ccId );
+		if( entry == 'qudao'){
+			sendCityRequest(provinceCode,cityCode,ccId);
+		}else{
+			sendFeeCityRequest( customerId, ccId );
+		}	
 	}
 	getServiceTime();
 	$("#insuranceName").val(cName);					//渲染商品名称
@@ -287,6 +295,42 @@ $(function(){
 		});	
 	})
 });
+
+function queryShowInfo(customerId){
+	var url = base.url + 'channel/queryShowInfo.do';
+	var reqData = {
+			'request':{
+				"customerId" : customerId
+			}
+	}
+	$.reqAjaxs( url, reqData, queryShowInfoCallback );
+}
+
+function queryShowInfoCallback(data){
+	
+	var channelCustomerEdit      = data.returns.channelCustomerEdit;
+	channelSalesMan.agentId               = channelCustomerEdit.agentId
+	channelSalesMan.bySalesmanCode        = channelCustomerEdit.bySalesmanCode //业务员工号
+	channelSalesMan.bySalesmanName        = channelCustomerEdit.bySalesmanName //业务员名称
+	channelSalesMan.bySalesmanOrgCode     = channelCustomerEdit.bySalesmanOrgCode//业务员分公司
+	channelSalesMan.bySalesmanOrgName     = channelCustomerEdit.bySalesmanOrgName
+	channelSalesMan.bySalesmanSubOrgCode  = channelCustomerEdit.bySalesmanSubOrgCode//业务员中支机构
+	channelSalesMan.bySalesmanSubOrgName  = channelCustomerEdit.bySalesmanSubOrgName
+	
+	channelSalesMan.salesProvinceCode     = channelCustomerEdit.salesProvinceCode		//渠道所属地区
+	channelSalesMan.salesProvinceName     = channelCustomerEdit.salesProvinceName
+	channelSalesMan.salesCityCode         = channelCustomerEdit.salesCityCode		//渠道所属地区
+	channelSalesMan.salesCityName         = channelCustomerEdit.salesCityName
+	channelSalesMan.salesChannelCode      = channelCustomerEdit.salesChannelCode			//渠道名称
+	channelSalesMan.salesChannelName      = channelCustomerEdit.salesChannelName
+	channelSalesMan.dotCode               = channelCustomerEdit.dotCode			//渠道网点名称
+	channelSalesMan.dotName               = channelCustomerEdit.dotName
+	
+	channelSalesMan.salesmanCode          = channelCustomerEdit.salesmanCode				//渠道员工工号
+	channelSalesMan.salesmanMobile        = channelCustomerEdit.salesmanMobile			//渠道员工名称
+	channelSalesMan.salesmanName          = channelCustomerEdit.salesmanName				//渠道员工手机号码
+	channelSalesMan.remark                = channelCustomerEdit.remark					//备注
+}
 
 function getFormData(){
 	var formData = {};
@@ -707,7 +751,11 @@ function getAllReponse(data){
          var teamCode	    = lsf.teamCode;	
          var certiNo			= lsf.agentCode;
          var businessSource  = lsf.yewuSource;
-         var agentName		= lsf.agnetName;
+		 var agentName		= lsf.agnetName;
+		 if( entry == "qudao" ){
+			$("#orgProvinceCode").attr("name",provinceCode);	//省
+			$("#orgCityCode").attr("name",cityCode);		//市
+		 }
 		 $("#orgCityCode").attr("agentCode",agentCode);
 		 $("#orgCityCode").attr("teamCode",teamCode);
 		 $("#orgCityCode").attr("certiNo",certiNo);
@@ -782,6 +830,10 @@ function sendInsureRequest(){
 			reqData.body.shortRiskOrder.coverage = cPieces*1000
 			reqData.body.guaranteeTerm = '1';
 		}
+		if(entry == 'qudao'){
+			reqData.body.channelSalesMan = channelSalesMan;
+			reqData.body.attributionChannel = channelSalesMan.salesChannelCode;// 归属渠道 06 晋商银行
+		}
 	}else{
 		reqData.body.versions = cVersion;//版本
 	}
@@ -800,7 +852,11 @@ function sendInsureRequest(){
 	console.log(reqData);
 	console.log("... ... ...");
 	if( ccId != "1" && ccId != "2" && ccId != "3"){
-		var url = requestUrl.ecardInsure;
+		if( entry == 'qudao' ){
+			var url = requestUrl.channelTb;
+		}else{
+			var url = requestUrl.ecardInsure;
+		}	
 		$.reqAjaxs(url,reqData,insureReponse);
 	}else{
 		var url = requestUrl.cancerInsure;

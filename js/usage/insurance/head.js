@@ -90,7 +90,8 @@ var requestUrl = {
     bqjInsure			 : base.url + 'preservation/bqjcreateOrder.do',	//保全家投保接口@wxw
     bqjPay				 : base.url + 'preservation/bqjPay.do',				//保全家支付@wxw
     //议案百万医疗
-    yianInsure           : base.url + "yiAn/insure.do"						//百万医疗投保接口
+	yianInsure           : base.url + "yiAn/insure.do",						//百万医疗投保接口
+	channelTb            : base.url + "ecardChannel/toubao.do"
 }
 //全局变量
 if(getUrlQueryString("jsonKey")){
