@@ -37,15 +37,25 @@
 			font-size: 15px;
 			color: #333;
 		}
-		#phone{
+		
+		#phone {
 			text-align: right;
 			font-size: 15px;
 			color: #333;
 		}
-		#idNo{
+		
+		#idNo {
 			text-align: right;
 			font-size: 15px;
 			color: #333;
+		}
+		.wenhaoico{
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			background: url(../../../image/common/wen.png) no-repeat;
+			background-size: 100%;
+			vertical-align: middle;
 		}
 	</style>
 
@@ -76,7 +86,7 @@
 						<ul class="man-div-body-ul">
 							<li>
 								<span>单价(元/份)</span>
-								<span v-cloak v-html="'份数(最少购买5份,最多'+Objectitle.insureInfo.salesNum+'份)'"></span>
+								<span v-cloak v-html="'份数(最少购买1份,最多'+Objectitle.insureInfo.salesNum+'份)'"></span>
 							</li>
 							<li id="fenshu">
 								<span v-html="startPiecechushi">1000.00</span>
@@ -100,9 +110,78 @@
 							</li>-->
 						</ul>
 					</div>
+
+					<!--投保人信息-->
+					<div class="man-div-body-ul_li_div_toubao mb10">
+						<div class="body_title_div">投保人信息</div>
+						<div class="body_title_div_div">仅支持投保人本人银行卡购买</div>
+						<div id="commonHoldersto" class="changyongbaoxian" v-if="channel!='02'">常用保险人</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li>
+								<span>姓名</span>
+								<span style="width:70%">
+									<input id='name' type="text"   v-bind:value="holderbr.name">
+								</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>身份证号</span>
+								<span style="width:70%">
+									<input id='idNo' type="text" maxlength="19" v-bind:value="holderbr.idNo"/>
+								</span>
+							</li>
+							<li class="xianli"></li>
+							<li class="man-div-body-ul_bank">
+								<span>身份证有效期</span>
+								<span>
+								<div id='shenfenzhengyxq' data-where=''>请选择</div>
+								<div class="youjiantouhuise"></div>
+								</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>手机号</span>
+								<span style="width:70%">
+									<input id='phone' maxlength="11" type="text" v-bind:value="holderbr.phone"/>
+								</span>
+							</li>
+							<li class="xianli"></li>
+							<li class="man-div-body-ul_bank">
+								<span>所在城市</span>
+								<span>
+									<div id='chengshi' data-where=''>请选择</div>
+									<div class="youjiantouhuise"></div>
+								</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>地址</span>
+								<span style="width:70%">
+								<input id="dizhi" type="text" name="" value="" placeholder="街/路+门牌号，例国权北路888号" v-bind:value="holderbr.address"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>电子邮箱</span>
+								<span style="width:70%">
+								<input id="email" type="text" name="" value="" placeholder="请输入电子邮箱" v-bind:value="holderbr.email">
+								</span>
+							</li>
+						</ul>
+					</div>
+					<!--同被保人信息-->
+					<div class="man-div-body-ul_li_div_bank mb10">
+						<div class="body_title_div" style="display: inline-block;">被保人信息</div>
+						<div class="body_title_div_right" id='beibaoren'>
+							<img class='gou' src="../../../image/managemoney/productDetails/gou.png" />
+							<img class="meigou" src="../../../image/managemoney/productDetails/meigou.png" /> 同投保人信息
+						</div>
+					</div>
 					<!--银行卡-->
 					<div class="man-div-body-ul_li_div_bank mb10">
-						<div class="body_title_div">银行信息</div>
+						<div class="body_title_div" style="display: inline-block;">银行信息</div>
+						<div class="body_title_div_div" style="color: #d45050;">（银行账号所有人必须为投保人本人）</div>
+						<div class="body_title_div_div wenhaoico"></div>
 						<div class="xian"></div>
 						<ul class="man-div-body-ul">
 							<li class="man-div-body-ul_bank">
@@ -118,72 +197,6 @@
 								<span><input id='yinhangka' type="text" name="" id="cardNo" v-bind:value="Objectitle.insureInfo.bankCertificate" placeholder="请输入银行卡信息" maxlength="19"/></span>
 							</li>
 						</ul>
-					</div>
-					<!--投保人信息-->
-					<div class="man-div-body-ul_li_div_toubao mb10">
-						<div class="body_title_div">投保人信息</div>
-						<div class="body_title_div_div">仅支持投保人本人银行卡购买</div>
-						<div id="commonHoldersto" class="changyongbaoxian">常用保险人</div>
-						<div class="xian"></div>
-						<ul class="man-div-body-ul">
-							<li>
-								<span>姓名</span>
-								<span style="width:70%">
-									<input id='name' type="text"   v-model="holderbr.name">
-								</span>
-							</li>
-							<li class="xianli"></li>
-							<li>
-								<span>身份证号</span>
-								<span style="width:70%">
-									<input id='idNo' type="text" maxlength="19" v-model="holderbr.idNo"/>
-								</span>
-							</li>
-							<li class="xianli"></li>
-							<li class="man-div-body-ul_bank">
-								<span>身份证有效期</span>
-								<span>
-								<div id='shenfenzhengyxq' data-where=''>请选择</div>
-								<div class="youjiantouhuise"></div>
-								</span>
-							</li>
-							<li class="xianli"></li>
-							<li>
-								<span>手机号</span>
-								<span style="width:70%">
-									<input id='phone' maxlength="11" type="text" v-model="holderbr.phone"/>
-								</span>
-							</li>
-							<li class="xianli"></li>
-							<li class="man-div-body-ul_bank">
-								<span>所在城市</span>
-								<span>
-									<div id='chengshi' data-where=''>请选择</div>
-									<div class="youjiantouhuise"></div>
-								</span>
-							</li>
-							<li class="xianli"></li>
-							<li>
-								<span>地址</span>
-								<span style="width:70%">
-								<input id="dizhi" type="text" name="" value="" placeholder="街/路+门牌号，例国权北路888号" v-model="holderbr.address"></span>
-							</li>
-							<li class="xianli"></li>
-							<li>
-								<span>电子邮箱</span>
-								<span style="width:70%">
-								<input id="email" type="text" name="" value="" placeholder="请输入电子邮箱" v-model="holderbr.email">
-								</span>
-							</li>
-						</ul>
-					</div>
-					<!--同被保人信息-->
-					<div class="man-div-body-ul_li_div_bank mb10">
-						<div class="body_title_div" style="display: inline-block;">被保人信息</div>
-						<div class="body_title_div_right" id='beibaoren'>
-							<img class='gou' src="../../../image/managemoney/productDetails/gou.png" />
-							<img class="meigou" src="../../../image/managemoney/productDetails/meigou.png" /> 同投保人信息
-						</div>
 					</div>
 					<!--被保人信息-->
 					<!--<div id='beibaorenxinxi' class="man-div-body-ul_li_div_toubao  mb10 dsp">

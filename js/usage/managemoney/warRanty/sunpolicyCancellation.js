@@ -96,6 +96,7 @@ function backlast() {
 		"channel": "01",
 		"transTime": $.getTimeStr(),
 		"transToken": transToken,
+		"ccName":ccName,
 		"orderNo": orderNo,
 		"policyNo": policyNo,
 		"insureNo": insureNo,
@@ -105,25 +106,25 @@ function backlast() {
 		"downIco": '0',
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
-	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
+	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/sunwarrantyDetail.html?jsonKey=" + jsonStr;
 }
 /*回到列表页面*/
 function chenggong(){
 	var sendData = {
 		"userCode": userCode,
-		"customerId": customerId,
-		"commodityComId": commodityComId,
+		"customerId": customerId+'',
+		"commodityComId": commodityComId+'',
 		"channel": "01",
 		"transTime": $.getTimeStr(),
 		"transToken": transToken,
 		"orderNo": orderNo,
 		"policyNo": policyNo,
 		"insureNo": insureNo,
-		"title": title,
+		"title": '保单详情',
 		"leftIco": '1',
 		"rightIco": '0',
 		"downIco": '0',
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
-	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyList.html?jsonKey=" + jsonStr;
+	window.location.href = base.url + "tongdaoApp/html/account/myOrder/policyList.html?jsonKey=" + jsonStr;
 }

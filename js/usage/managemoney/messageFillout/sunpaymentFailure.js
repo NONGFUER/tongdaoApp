@@ -23,7 +23,7 @@ $(function() {
 		}
 	}
 	var url = base.url + 'ygBasic/getYgToken.do';
-	$.reqAjaxsFalse(url, reqData, getYgToken);
+	$.reqAjaxs(url, reqData, getYgToken);
 
 	function getYgToken(data) {
 		console.log(data);
@@ -45,7 +45,7 @@ $(function() {
 		}
 	}
 	var url = base.url + 'ygBasic/getYgOrderInform.do';
-	$.reqAjaxsFalse(url, reqData, getYgOrderInform);
+	$.reqAjaxs(url, reqData, getYgOrderInform);
 	function getYgOrderInform(data) {
 		console.log(data);
 		if(data.statusCode == '000000') {

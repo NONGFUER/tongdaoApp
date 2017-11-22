@@ -26,7 +26,7 @@ $(function() {
 		}
 	}
 	var url = base.url + 'ygBasic/getYgOrderInform.do';
-	$.reqAjaxsFalse(url, reqData, getYgOrderInform);
+	$.reqAjaxs(url, reqData, getYgOrderInform);
 	function getYgOrderInform(data) {
 		console.log(data);
 		if(data.statusCode == '000000') {
@@ -46,7 +46,6 @@ $(function() {
 	})
 	$(".on1").unbind("tap").bind("tap", function() {
 		vm.urlParm.title = '保单详情';
-		
 		var sendData = vm.urlParm;
 		var jsonStr = UrlEncode(JSON.stringify(sendData));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/sunwarrantyDetail.html?jsonKey=" + jsonStr;
@@ -61,10 +60,6 @@ $(function() {
 	})
 })
 
-function init(orderNo) {
-
-}
-
 function backlast() {
 	sysbackproduct();
 }
@@ -77,7 +72,7 @@ function huifang() {
 			"orderNo": vm.orderNo,
 		}
 	}
-	$.reqAjaxsFalse(url, reqData, huifangque);
+	$.reqAjaxs(url, reqData, huifangque);
 
 	function huifangque(data) {
 		console.log(data)
@@ -90,7 +85,7 @@ function huifang() {
 		}
 	}
 	var url = base.url + 'ygBasic/getYgToken.do';
-	$.reqAjaxsFalse(url, reqData, getYgToken);
+	$.reqAjaxs(url, reqData, getYgToken);
 
 	function getYgToken(data) {
 		console.log(data);

@@ -98,8 +98,24 @@ if(getUrlQueryString("jsonKey")){
 	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
 }else{
 	var urlParm = {};
+	urlParm.openid = getUrlQueryString("openid");
+	urlParm.roleType = getUrlQueryString("roletype");
+	urlParm.shareMobile = getUrlQueryString("shareMobile");
+	urlParm.shareCusId = getUrlQueryString("shareCusId");
+	urlParm.provinceCode = getUrlQueryString("provinceCode");
+	urlParm.cityCode = getUrlQueryString("cityCode");
+	urlParm.ccId = getUrlQueryString("ccId");
+	urlParm.customerId = getUrlQueryString("customerId") ? getUrlQueryString("customerId"):"";
+	urlParm.shareFlag = getUrlQueryString("shareFlag");
+	urlParm.mobile = getUrlQueryString("mobile") ? getUrlQueryString("mobile") : "";
+	urlParm.entry = getUrlQueryString("entry") ? getUrlQueryString("entry") : "app";
 }
 
+//微信比app多（不同）的字段
+var openid = urlParm.openid ? urlParm.openid : "";
+var shareMobile = urlParm.shareMobile ? urlParm.shareMobile : "";
+var shareCusId = urlParm.shareCusId ? urlParm.shareCusId : "";
+var shareFlag = urlParm.shareFlag ? urlParm.shareFlag : "";
 
 var isComing    = urlParm.isComing ? urlParm.isComing : "";; 			//即将上线
 
@@ -152,12 +168,15 @@ if( entry == 'app' ){
 }else{	
 	//modelAlert("浏览器或微信端");	
 	var channel = "02"
-	var channelResource = "1"
+	if( shareFlag == 'Y'){
+		var channelResource = "2"
+	}else{
+		var channelResource = "1"
+	}	
 	var payWay = '01'
 	$("header").show();
 	$(".mui-scroll-wrapper").css("margin-top", "44px");
 }
-var openid = urlParm.openid ? urlParm.openid : "";
 var PRODUCT_PICURL ={
 		"BASE" : base.url + "tongdaoApp/image/share/tongdaoic.png",
 		"MCAN" : base.url + "tongdaoApp/image/share/fangainan.png",

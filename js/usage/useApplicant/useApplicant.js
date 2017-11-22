@@ -380,30 +380,38 @@ function toInsure(obj) {
 		"phone": phone,
 		"idNo": idNo
 	}
-	urlParm.mytitle=mytitle;
-	if(mytitle=='常用被保人'){
+	urlParm.mytitle = mytitle;
+	if(mytitle == '常用被保人') {
 		urlParm.holderbr = info;
-	}else if(mytitle=='常用投保人'){
+	} else if(mytitle == '常用投保人') {
 		urlParm.holder = info;
 	}
-	if(mytitle=='常用被保人二'){
+	if(mytitle == '常用被保人二') {
 		urlParm.holdertwo = info;
-	}else if(mytitle=='常用被保人三'){
+	} else if(mytitle == '常用被保人三') {
 		urlParm.holderthree = info;
-	}else if(mytitle=='常用被保人四'){
+	} else if(mytitle == '常用被保人四') {
 		urlParm.holderfour = info;
 	}
-	urlParm.title = "投保信息";
-	urlParm.rightIco = "0";
-	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	if(urlParm.frompage == "insureHtml") { //在线产品（包含ecard,挂号险,防癌险）
+		urlParm.title = "投保信息";
+		urlParm.rightIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = base.url + "tongdaoApp/html/insurance/main/insure.html?jsonKey=" + jsonStr;
 	} else if(urlParm.frompage == "insureHtmlWechat") { //微信公众号（包含ecard,挂号险,防癌险）
+		urlParm.title = "投保信息";
+		urlParm.rightIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = base.url + "weixin/ycCancer/html/insurance/main/insure.html?jsonKey=" + jsonStr;
 	} else if(urlParm.frompage == "familyInsureHtml") { //除挂号险之外的ecard
+		urlParm.title = "投保信息";
+		urlParm.rightIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = base.url + "tongdaoApp/html/insurance/yian/familyInsure.html?jsonKey=" + jsonStr;
 	} else if(urlParm.frompage == "sunshineFilloutHtml") { //阳光
 		urlParm.title = urlParm.titles;
+		urlParm.rightIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/sunshineFillout.html?jsonKey=" + jsonStr;
 	}
 }
@@ -424,15 +432,14 @@ function backlast() {
 		urlParm.downIco = "0";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = base.url + "tongdaoApp/html/insurance/yian/familyInsure.html?jsonKey=" + jsonStr;
-	}else if(urlParm.frompage == "sunshineFilloutHtml") {
+	} else if(urlParm.frompage == "sunshineFilloutHtml") {
 		urlParm.title = urlParm.titles;
 		urlParm.leftIco = "1";
 		urlParm.rightIco = "0";
 		urlParm.downIco = "0";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
-		window.location.href = base.url + "tongdaoApp/html/insurance/yian/familyInsure.html?jsonKey=" + jsonStr;
-	}
-	else {
+		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/sunshineFillout.html?jsonKey=" + jsonStr;
+	} else {
 		sysback();
 	}
 

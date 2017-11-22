@@ -321,6 +321,8 @@ function queryShowInfoCallback(data){
 	channelSalesMan.salesProvinceName     = channelCustomerEdit.salesProvinceName
 	channelSalesMan.salesCityCode         = channelCustomerEdit.salesCityCode		//渠道所属地区
 	channelSalesMan.salesCityName         = channelCustomerEdit.salesCityName
+	$("#orgProvinceCode").text(channelCustomerEdit.salesProvinceName);	//省
+	$("#orgCityCode").text(channelCustomerEdit.salesCityName);		//市
 	channelSalesMan.salesChannelCode      = channelCustomerEdit.salesChannelCode			//渠道名称
 	channelSalesMan.salesChannelName      = channelCustomerEdit.salesChannelName
 	channelSalesMan.dotCode               = channelCustomerEdit.dotCode			//渠道网点名称
@@ -752,7 +754,7 @@ function getAllReponse(data){
          var certiNo			= lsf.agentCode;
          var businessSource  = lsf.yewuSource;
 		 var agentName		= lsf.agnetName;
-		 if( entry == "qudao" ){
+		 if( entry == "qudao" ){			
 			$("#orgProvinceCode").attr("name",provinceCode);	//省
 			$("#orgCityCode").attr("name",cityCode);		//市
 		 }
@@ -771,6 +773,10 @@ function sendInsureRequest(){
 	if(!$("#word").hasClass("on")){return false;}
 	var formData = getFormData();
 	if(!formData){return false;}
+	if(shareFlag != 'Y'){
+		shareMobile = mobile;
+		shareCusId = customerId;
+	}
 	var reqData = {
 	    "head":{
 	        "channel"  :channel,
@@ -787,7 +793,7 @@ function sendInsureRequest(){
 	            "insurePhone"            : formData.telNo,
 	            "insureIdentitycard"     : formData.certificateNo,				
 	            "coverage"               : coverage,
-	            "invitrerPhone"          : mobile,
+	            "invitrerPhone"          : shareMobile,
 	            "insureAddress"          : formData.address,
 	            "totalPieces"            : cPieces,//parseInt(peices),
 	            "channelResource"        : channelResource// '渠道来源,1-微信公众号，2-分享进入，3-App',	
@@ -800,7 +806,7 @@ function sendInsureRequest(){
 	        },
 	        "customerId"				 : customerId,
 	        "buyType"					 : "1",
-	        "recommendId"                : customerId
+	        "recommendId"                : shareCusId
 	    }
 	}
 	if(ccId != "1" && ccId != "2" && ccId != "3"){

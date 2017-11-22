@@ -1,4 +1,4 @@
-if( entry == 'qudao' ){
+if( entry == 'qudao' && shareFlag !='Y' ){
 	$('#qrcode').removeClass('yincang');
 }
 
@@ -620,7 +620,12 @@ function toHosUrl(){
 
 //跳转到定位
 function toQrcodeHtml(){
-	urlParm.lastUrl = window.location.href;
+	//urlParm.lastUrl = window.location.href;
+	urlParm.qrFlag = 'detail'
+	urlParm.ccName = ccName;
+	urlParm.shareDesc= shareDesc ;	
+	urlParm.sharePic = getProductSharePic(ccId);
+	urlParm.ccname = $('#commodityCombinationName').text();
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + 'weixin/insureChannels/QRCode/QRCode.html?jsonKey='+jsonStr;
 }
