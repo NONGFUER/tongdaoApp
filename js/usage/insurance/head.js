@@ -165,13 +165,16 @@ if( entry == 'app' ){
 	var channel = "01"
 	var channelResource = "3"
 	var payWay = '02'
+	var buyType = '1'
 }else{	
 	//modelAlert("浏览器或微信端");	
 	var channel = "02"
 	if( shareFlag == 'Y'){
 		var channelResource = "2"
+		var buyType = '2'
 	}else{
 		var channelResource = "1"
+		var buyType = '1'	
 	}	
 	var payWay = '01'
 	$("header").show();

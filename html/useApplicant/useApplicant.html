@@ -17,6 +17,10 @@
 	</head>
 
 	<body>
+		<header class="mui-bar mui-bar-nav hidden">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" ></a>
+			<h1 class="mui-title">常用保险人</h1>
+		</header>
 		<div class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
 				<div class="man mui-table-view">
@@ -190,6 +194,14 @@
 	<script src="../../js/lib/common/base.js"></script>
 	<script src="../../js/lib/common/common.js"></script>
 	<script src="../../js/lib/widget/mui/vue.mi.js"></script>
+	<script type="text/javascript">
+		var up = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
+		if(up.entry == 'qudao'){
+			$('header').show();			
+		}else{
+			$('header').remove();
+		}
+	</script>
 	<script src="../../js/usage/useApplicant/useApplicant.js?v=20171101"></script>
-
+	
 </html>

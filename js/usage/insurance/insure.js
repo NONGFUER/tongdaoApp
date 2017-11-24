@@ -14,12 +14,17 @@ for(var i = 0; i < code.length; i++) {
 }
 $(function(){
 	if(entry == 'qudao'){
-		queryShowInfo(customerId)
+		if(shareFlag == 'Y'){
+			queryShowInfo(shareCusId)
+		}else{
+			queryShowInfo(customerId)			
+		}
+		
 	}
 	formItemControl( ccId )
 	if( ccId != "1" && ccId != "2" && ccId != "3" && ccId != "14" && ccId != "22" && ccId != "23" ){//除防癌险,挂号险之外的ecard，会调默认投保地区接口
 		if( entry == 'qudao'){
-			sendCityRequest(provinceCode,cityCode,ccId);
+			getXGInfo();
 		}else{
 			sendFeeCityRequest( customerId, ccId );
 		}	
@@ -303,7 +308,7 @@ function queryShowInfo(customerId){
 				"customerId" : customerId
 			}
 	}
-	$.reqAjaxs( url, reqData, queryShowInfoCallback );
+	$.reqAjaxsFalse( url, reqData, queryShowInfoCallback );
 }
 
 function queryShowInfoCallback(data){
@@ -767,6 +772,45 @@ function getAllReponse(data){
 		 modelAlert("获取业务员信息异常!");
 	}
 }
+
+function getXGInfo(cityCode){
+	var url = base.url + 'ecardChannel/getXGInfo.do';
+	var reqData = {
+	        "head":{
+	            "channel"  :"02",
+	            "userCode" :mobile,
+	            "transTime":$.getTimeStr()
+	        },
+	        "body":{
+	            "attributionChannel":channelSalesMan.salesChannelCode,	           
+	            "intermediaryCode"  : channelSalesMan.dotCode
+	        }
+	}
+	$.reqAjaxs(url,reqData,getXGInfoCallback);	
+}
+
+function getXGInfoCallback(data){
+	if(data.statusCode == "000000"){
+		 var lsf = data.returns.landingServiceFee;
+		 var agentCode	    = lsf.intermediaryCode;
+         var teamCode	    = lsf.teamCode;	
+         var certiNo		= lsf.agentCode;
+         var businessSource = lsf.yewuSource;
+		 var agentName		= lsf.agnetName;
+		 if( entry == "qudao" ){			
+			$("#orgProvinceCode").attr("name",provinceCode);	//省
+			$("#orgCityCode").attr("name",cityCode);		//市
+		 }
+		 $("#orgCityCode").attr("agentCode",agentCode);
+		 $("#orgCityCode").attr("teamCode",teamCode);
+		 $("#orgCityCode").attr("certiNo",certiNo);
+		 $("#orgCityCode").attr("businessSource",businessSource);
+		 $("#orgCityCode").attr("agentName",agentName);
+	}else{
+		 modelAlert("获取业务员信息异常!");
+	}
+}
+
 //投保请求
 /*投保方法*/
 function sendInsureRequest(){
@@ -805,7 +849,7 @@ function sendInsureRequest(){
 	            "insuredmobile"          : formData.recogTelNo
 	        },
 	        "customerId"				 : customerId,
-	        "buyType"					 : "1",
+	        "buyType"					 : buyType,
 	        "recommendId"                : shareCusId
 	    }
 	}
@@ -1170,7 +1214,7 @@ function sendGhxInsureRequest(){
 					"inviterPhone":mobile,
 				    "channelResource":channelResource,//渠道来源  
 					"insureList": insureList,
-					"buyType":"1"
+					"buyType":buyType
 				},
 				"customerId": customerId
 			}
@@ -1236,7 +1280,7 @@ function sendBwylRequest(){
 		        "customerId"             : customerId,
 		        "premium"                : cPrem+"",
 		        "inviterPhone"           : mobile,
-		        "buyType"                : "1",	  //1app2分享
+		        "buyType"                : buyType,	  //1app2分享
 		        "commodityId"            : cId,   // 33 有社保  // 34 无社保
 		        "commodityCombinationId" : ccId,
 		        "channelResource"        : channelResource,   // '渠道来源,1-微信公众号，2-分享进入，3-App',
