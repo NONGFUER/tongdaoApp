@@ -13,7 +13,7 @@ var vm = new Vue({
 		Objectlist: {},
 		bao: {},
 	},
-	mounted() {
+	/*mounted() {
 		this.$nextTick(function() {
 			$(function() {
 				chuli();
@@ -28,7 +28,7 @@ var vm = new Vue({
 				})
 			})
 		}
-	}
+	}*/
 })
 $(function() {
 	list(userCode, transToken, customerId, commodityCommId, flag);
@@ -54,6 +54,9 @@ function policyDetail(data) {
 	} else {
 		modelAlert(data.statusMessage);
 	}
+	vm.$nextTick(function() {
+		chuli();
+	})
 	/*mui('.man-div-body-ul').on('tap', 'li', function() {
 		var policyNo = $(this).attr('policyNo');
 		var insureNo = $(this).attr('insureNo');

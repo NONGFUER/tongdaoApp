@@ -38,7 +38,7 @@ var vm = new Vue({
 		bdjiazhi:'',
 		dianzibaodan:'',
 	},
-	mounted() {
+/*	mounted() {
 		this.$nextTick(function() {
 			$(function() {
 				chuli();
@@ -53,11 +53,9 @@ var vm = new Vue({
 				})
 			})
 		}
-	}
+	}*/
 })
 $(function() {
-	console.log("页面初始化，获取上个页面传值报文--");
-	console.log(urlParm);
 	vm.ccName=ccName;
 	var reqData = {
 		"head": {
@@ -72,7 +70,6 @@ $(function() {
 		}
 	}
 	var url = base.url + 'ygBasic/ygPolicyQueryInfo.do';
-	console.log("页面初始化，发送请求报文--");
 	$.reqAjaxsFalse(url, reqData, policyQueryListInfo);
 	/*保单价值*/
 	var reqDatas = {
@@ -133,7 +130,6 @@ $(function() {
 /*页面信息*/
 function policyQueryListInfo(data) {
 	if(data.statusCode == '000000') {
-		console.log(data)
 		vm.Objectitle = data.returns;
 		vm.returnVisit = data.returns.bxPolicyFinance.returnVisit;
 	} else if(data.statusCode == '123456') {
@@ -141,6 +137,9 @@ function policyQueryListInfo(data) {
 	} else {
 		modelAlert(data.statusMessage);
 	}
+	vm.$nextTick(function() {
+		chuli();
+	})
 }
 /*保单价值*/
 function getYgPolicyValue(data){
@@ -164,7 +163,6 @@ function getYgDownloadUrl(data){
 }
 /*退保试算*/
 function getRedemption(data) {
-	console.log(data);
 	if(data.statusCode == '000000') {
 		var reqData = {
 			"orderNo": orderNo,
@@ -249,6 +247,12 @@ function chuli() {
 		})
 	}
 }
+$(".wenhaoico").unbind("tap").bind("tap", function() {
+	$('.note').show();
+})
+$(".note-div_title_right").unbind("tap").bind("tap", function() {
+	$('.note').hide();
+})
 
 function backlast() {
 	/*if(commodityComId != "" && channel == '01'&&cxflag!='2'&&cxflag!='3'&&cxflag!='10') {

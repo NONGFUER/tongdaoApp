@@ -5,7 +5,7 @@ var vm = new Vue({
 		Objectlist: {},
 		bao: null,
 	},
-	mounted() {
+	/*mounted() {
 		this.$nextTick(function() {
 			$(function() {
 				chuli();
@@ -20,7 +20,7 @@ var vm = new Vue({
 				})
 			})
 		}
-	}
+	}*/
 })
 var userCode = "",
 	commodityComId = "",
@@ -81,6 +81,9 @@ function policyQueryListInfo(data) {
 	}else{
 		modelAlert(data.statusMessage);
 	}
+	vm.$nextTick(function() {
+		chuli();
+	})
 }
 
 function chuli() {

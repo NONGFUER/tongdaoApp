@@ -6,13 +6,13 @@ var vm = new Vue({
 			huisebtn: {},
 		},
 	},
-	mounted() {
+/*	mounted() {
 		this.$nextTick(function() {
 			$(function() {
 				bankweihao()
 			})
 		})
-	}
+	}*/
 })
 var InterValObj; //timer变量，控制时间
 var count = 60; //间隔函数，1秒执行  
@@ -101,6 +101,9 @@ function redemptionTrial(data) {
 	} else {
 		modelAlert(data.statusMessage);
 	}
+	vm.$nextTick(function() {
+		bankweihao();
+	})
 }
 /*赎回试算*/
 function getRedemption(data) {

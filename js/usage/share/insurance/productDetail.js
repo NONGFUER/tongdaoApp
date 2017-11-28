@@ -7,8 +7,10 @@ var lowAge = "";
 var upAge = "";
 var healthFlag = "";
 var CommodityInfo = [];
+var hasAr = '';
 $(function(){
     $.setscroll("bodyMuiScroll");
+    hasArea();
     buyBind();
     jieshaoToshuomingBind();		//介绍和产品详情间的切换
     //在线产品详情查询(ccCode,cityCode,provinceCode,type)  商品组合code,城市代码code,省code,用户角色
@@ -451,7 +453,10 @@ function changeDate(id){
 
 function buyBind(){
 	$("#toubao").unbind('tap').bind('tap',function(){
-		//微信与app不同		
+	//已登陆    没有归属地区   ->弹窗 ->点确认跳定位页
+	//		 有归属直接跳下一页
+	//未登录   跳登陆页面phoneValidate.html		
+		//微信与app不同	
 		if( healthFlag == "y"){
 			toHealthHtml();
 		}else{
@@ -459,6 +464,39 @@ function buyBind(){
 		}				
 	});	
 }
+
+function hasArea(){	
+		var url = base.url + "customerBasic/getCustomerBasicInfo.do";
+		var sendJson = {
+				"head":{
+					"channel" : "02",
+		            "userCode" : mobile,
+		            "transTime" : $.getTimeStr(),
+		            "transToken": ""
+				},
+				"body":{
+					"customerId":customerId
+				}
+		}
+		$.reqAjaxsFalse( url, sendJson, hasAreaCallback ); 
+}
+
+function hasAreaCallback(data){
+	if( data.statusCode == '000000' ){
+		var cityAreaCode     = data.returns.customerBasic.cityCode;
+		console.log(cityAreaCode)
+		if($.isNull(cityAreaCode)){
+			hasAr = 'N';
+		}else{
+			hasAr = 'Y';
+		}		
+	}else{
+		hasAr = 'N';
+		modelAlert(data.statusMessage);
+		return false;
+	}
+}
+
 //跳转到投保页面
 function toInsure(){
 	if( ccId == COMMODITYCOMBINE_ID.JDX ){ //借贷险判断
@@ -495,15 +533,21 @@ function toInsure(){
 	urlParm.calChoices = calChoices;
 	urlParm.cPieces = cPieces;
 	urlParm.cVersion = cVersion;
+	urlParm.pagesource = 'insureShare'
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	if( roleType == "00" || roleType == "" ){
 		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=online&openid="+openid;
 	}else{
-		if( ccId == COMMODITYCOMBINE_ID.BQJ ){
-			window.location.href = base.url + "tongdaoApp/html/share/insurance/yian/familyInsure.html?jsonKey="+jsonStr;
+		console.log(hasAr)
+		if( hasAr == 'Y'){
+			if( ccId == COMMODITYCOMBINE_ID.BQJ ){
+				window.location.href = base.url + "tongdaoApp/html/share/insurance/yian/familyInsure.html?jsonKey="+jsonStr;
+			}else{
+				window.location.href = "insure.html?jsonKey="+jsonStr;
+			}
 		}else{
-			window.location.href = "insure.html?jsonKey="+jsonStr;
-		}		
+			window.location.href = base.url +  'weixin/insuranceMall/location/location.html?jsonKey='+jsonStr;
+		}				
 	}	
 }
 //跳转到健康告知页面
@@ -532,11 +576,17 @@ function toHealthHtml(){
 	urlParm.calChoices = calChoices;
 	urlParm.cPieces = cPieces;
 	urlParm.cVersion = cVersion;
+	urlParm.pagesource = 'insureShare'
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	if( roleType == "00" || roleType == "" ){
 		window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineHealth&openid="+openid+"&inviterPhone="+shareMobile;
 	}else{
-		window.location.href = "healthNotice.html?jsonKey="+jsonStr;
+		if( hasAr == 'Y'){
+			window.location.href = "healthNotice.html?jsonKey="+jsonStr;
+		}else{
+			window.location.href = base.url +  'weixin/insuranceMall/location/location.html?jsonKey='+jsonStr;
+		}
+		
 	}
 	
 }

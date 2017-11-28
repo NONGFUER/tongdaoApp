@@ -43,7 +43,7 @@ var vm = new Vue({
 		name: "",
 
 	},
-	mounted() {
+	/*mounted() {
 		this.$nextTick(function() {
 			$(function() {
 				chuli();
@@ -58,7 +58,7 @@ var vm = new Vue({
 				})
 			})
 		}
-	}
+	}*/
 })
 $(function() {
 	console.log("页面初始化，获取上个页面传值报文--");
@@ -245,6 +245,9 @@ function policyQueryListInfo(data) {
 	} else {
 		modelAlert(data.statusMessage);
 	}
+	vm.$nextTick(function() {
+		chuli();
+	})
 }
 
 /*截取银行卡号*/

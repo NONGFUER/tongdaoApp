@@ -22,27 +22,27 @@ var vm = new Vue({
 			backimg:"",
 		},
 	},
-	mounted() {
-		this.$nextTick(function() {
-			$(function() {
-				/*$(".banklist").unbind("tap").bind("tap", function() {
-					var commodityId = $(this).attr('commodityid');
-					var bankName = $(this).attr('bankName');
-					var bankCode = $(this).attr('bankCode');
-					var dayLimit = $(this).attr('dayLimit');
-					urlParm.commodityId = commodityId;
-					urlParm.bankName = bankName;
-					urlParm.bankCode = bankCode;
-					urlParm.dayLimit = dayLimit;
-					urlParm.leftIco = '1';
-					urlParm.rightIco = '0';
-					urlParm.downIco = '0';
-					var jsonStr = UrlEncode(JSON.stringify(param));
-					window.location.href = "../messageFillout/messageFillout.html?jsonKey=" + jsonStr;
-				})*/
-			})
-		})
-	}
+//	mounted() {
+//		this.$nextTick(function() {
+//			$(function() {
+//				/*$(".banklist").unbind("tap").bind("tap", function() {
+//					var commodityId = $(this).attr('commodityid');
+//					var bankName = $(this).attr('bankName');
+//					var bankCode = $(this).attr('bankCode');
+//					var dayLimit = $(this).attr('dayLimit');
+//					urlParm.commodityId = commodityId;
+//					urlParm.bankName = bankName;
+//					urlParm.bankCode = bankCode;
+//					urlParm.dayLimit = dayLimit;
+//					urlParm.leftIco = '1';
+//					urlParm.rightIco = '0';
+//					urlParm.downIco = '0';
+//					var jsonStr = UrlEncode(JSON.stringify(param));
+//					window.location.href = "../messageFillout/messageFillout.html?jsonKey=" + jsonStr;
+//				})*/
+//			})
+//		})
+//	}
 })
 
 $(function() {

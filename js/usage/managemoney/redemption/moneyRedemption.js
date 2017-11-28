@@ -4,7 +4,7 @@ var vm = new Vue({
 		Objectlist: {},
 		bao: null,
 	},
-	mounted() {
+	/*mounted() {
 		this.$nextTick(function() {
 			$(function() {
 				chuli();
@@ -44,7 +44,7 @@ var vm = new Vue({
 				})
 			})
 		}
-	}
+	}*/
 })
 var userCode = "",
 	title = "",
@@ -74,6 +74,33 @@ function redemptionList(data) {
 		modelAlert(data.statusMessage);
 		$('#noRecord').show();
 	}
+	vm.$nextTick(function() {
+		chuli();
+		$(".div_btn").unbind("tap").bind("tap", function() {
+			var url = base.url + 'hkRedemption/getRedemption.do';
+			commodityCommId = $(this).attr('commoditycommid');
+			title = $(this).attr('commdityComName');
+			orderNo = $(this).attr('orderno');
+			policyNo = $(this).attr("policyno");
+			insureNo = $(this).attr('insureno');
+			var reqData = {
+				"head": {
+					"userCode": userCode,
+					"channel": "01",
+					"transTime": $.getTimeStr(),
+					"transToken": transToken
+				},
+				"body": {
+					"orderNo": orderNo,
+					"policyNo": policyNo,
+					"insureNo": insureNo,
+					"commodityCommId": commodityCommId,
+					"customerId": customerId
+				},
+			}
+			$.reqAjaxsFalse(url, reqData, getRedemption);
+		})
+	})
 }
 
 function getRedemption(data) {
@@ -86,8 +113,8 @@ function getRedemption(data) {
 			"title": title,
 			"customerId": customerId,
 			"commodityCommId": commodityCommId,
-			"userCode":userCode,
-			"transToken":transToken,
+			"userCode": userCode,
+			"transToken": transToken,
 			"leftIco": '1',
 			"rightIco": '0',
 			"downIco": '0',

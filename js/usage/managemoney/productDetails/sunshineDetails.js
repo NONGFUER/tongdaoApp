@@ -195,6 +195,10 @@ function goldProductInfo(data) {
 					xiangguan.forEach(function(value, key) {
 						if(xiangguan[key].subModuleName == '保险条款') {
 							xiangguan[key].modueInfo = base.url + 'tongdaoApp/html/agreement/article.html';
+						}else if(xiangguan[key].subModuleName == '现金价值表') {
+							xiangguan[key].modueInfo = base.url + 'tongdaoApp/html/guize/Yangguangjiazhi.html';
+						}else if(xiangguan[key].subModuleName == '投保规则') {
+							xiangguan[key].modueInfo = base.url + 'tongdaoApp/html/guize/Yangguangguize.html';
 						}
 					})
 				}
@@ -213,7 +217,6 @@ function goldProductInfo(data) {
 			if(xiangguan!=null&&xiangguan!=''){
 				vm.xiangguanxieyi = xiangguan;
 			}
-
 		} else {
 			modelAlert(data.statusMessage);
 		}

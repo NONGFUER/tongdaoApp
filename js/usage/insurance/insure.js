@@ -627,7 +627,8 @@ function sendFeeCityRequest( cusId, ccId){
 	        },
 	        "body":{
 	            "customerId":cusId,//customerId,//773  198980 250
-	            "commodityCombinationId" : ccId
+	            "commodityCombinationId" : ccId,
+	            'salesChannels': '01'
 	        }
 	}
 	$.reqAjaxs(url,reqData,feeCityReponse);
@@ -679,7 +680,8 @@ function sendCityRequest(provinceCode,cityCode,ccId){
 	        "body":{
 	            "provinceCode":provinceCode,
 	            "commodityCombinationId": ccId,//commodityCombinationId,
-	            "cityCode" : cityCode
+	            "cityCode" : cityCode,
+	            "salesChannels" :'01'	//佰赢渠道
 	        }
 	}
 	if( provinceCode == "" && cityCode == "" ){

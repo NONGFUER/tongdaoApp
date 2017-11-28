@@ -16,13 +16,13 @@ var vm = new Vue({
 		},
 		bao: null,
 	},
-	mounted() {
+	/*mounted() {
 		this.$nextTick(function() {
 			$(function() {
 				bankweihao()
 			})
 		})
-	}
+	}*/
 })
 $(function() {
 	var reqData = {
@@ -53,6 +53,9 @@ function redemptionTrial(data) {
 	}else{
 		modelAlert(data.statusMessage);
 	}
+	vm.$nextTick(function() {
+		bankweihao();
+	})
 }
 /*登录失效*/
 function lognCont() {

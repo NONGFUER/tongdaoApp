@@ -30,7 +30,7 @@ var vm = new Vue({
 		commodityComId: "",
 		channel: "",
 	},
-	mounted() {
+	/*mounted() {
 		this.$nextTick(function() {
 			$(function() {
 				chuli();
@@ -45,7 +45,7 @@ var vm = new Vue({
 				})
 			})
 		}
-	}
+	}*/
 })
 $(function() {
 	console.log("页面初始化，获取上个页面传值报文--");
@@ -105,6 +105,9 @@ function policyQueryListInfo(data) {
 	} else {
 		modelAlert(data.statusMessage);
 	}
+	vm.$nextTick(function() {
+		chuli();
+	})
 }
 /*退保试算*/
 function getRedemption(data) {
