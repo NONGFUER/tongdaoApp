@@ -18,6 +18,7 @@ var suixinyi = {
 }
 document.write("<script language='javascript' src='"+base.url+"tongdaoApp/js/lib/common/aes.js' ></script>");
 document.write("<script language='javascript' src='"+base.url+"tongdaoApp/js/lib/common/pad-iso10126-min.js' ></script>");
+document.write("<script language='javascript' src='"+base.url+"tongdaoApp/js/lib/common/weixin.js' ></script>");
 var dic_m = new Map();
 var dic_m1 = new Map();
 if (typeof tit !== 'object') {

@@ -13,7 +13,7 @@ for(var i = 0; i < code.length; i++) {
 	insureList.push(pro)
 }
 $(function(){
-	if(entry == 'qudao'){
+	if(urlParm.sourcePage == 'qudaoMall'){
 		if(shareFlag == 'Y'){
 			queryShowInfo(shareCusId)
 		}else{
@@ -23,7 +23,7 @@ $(function(){
 	}
 	formItemControl( ccId )
 	if( ccId != "1" && ccId != "2" && ccId != "3" && ccId != "14" && ccId != "22" && ccId != "23" ){//除防癌险,挂号险之外的ecard，会调默认投保地区接口
-		if( entry == 'qudao'){
+		if( urlParm.sourcePage == 'qudaoMall'){
 			getXGInfo();
 		}else{
 			sendFeeCityRequest( customerId, ccId );
@@ -761,7 +761,7 @@ function getAllReponse(data){
          var certiNo			= lsf.agentCode;
          var businessSource  = lsf.yewuSource;
 		 var agentName		= lsf.agnetName;
-		 if( entry == "qudao" ){			
+		 if( urlParm.sourcePage == 'qudaoMall' ){			
 			$("#orgProvinceCode").attr("name",provinceCode);	//省
 			$("#orgCityCode").attr("name",cityCode);		//市
 		 }
@@ -799,7 +799,7 @@ function getXGInfoCallback(data){
          var certiNo		= lsf.agentCode;
          var businessSource = lsf.yewuSource;
 		 var agentName		= lsf.agnetName;
-		 if( entry == "qudao" ){			
+		 if( urlParm.sourcePage == 'qudaoMall' ){			
 			$("#orgProvinceCode").attr("name",provinceCode);	//省
 			$("#orgCityCode").attr("name",cityCode);		//市
 		 }
@@ -882,7 +882,7 @@ function sendInsureRequest(){
 			reqData.body.shortRiskOrder.coverage = cPieces*1000
 			reqData.body.guaranteeTerm = '1';
 		}
-		if(entry == 'qudao'){
+		if(urlParm.sourcePage == 'qudaoMall'){
 			reqData.body.channelSalesMan = channelSalesMan;
 			reqData.body.attributionChannel = channelSalesMan.salesChannelCode;// 归属渠道 06 晋商银行
 		}
@@ -904,7 +904,7 @@ function sendInsureRequest(){
 	console.log(reqData);
 	console.log("... ... ...");
 	if( ccId != "1" && ccId != "2" && ccId != "3"){
-		if( entry == 'qudao' ){
+		if( urlParm.sourcePage == 'qudaoMall' ){
 			var url = requestUrl.channelTb;
 		}else{
 			var url = requestUrl.ecardInsure;
@@ -1469,24 +1469,33 @@ function toHosUrl(){
 }
 
 function backlast(){
-	urlParm.title = '产品详情';
-	urlParm.leftIco = "1";
-	if( roleType != "00" ){
+	if( urlParm.sourcePage == 'qudaoMall'){
+		urlParm.title = '产品详情';
+		urlParm.leftIco = "1";
 		urlParm.rightIco = "1";
+		if(urlParm.holder){delete urlParm.holder}
+		if(urlParm.holderbr){delete urlParm.holderbr}		
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + 'tongdaoApp/html/insurance/main/productDetail.html?jsonKey='+jsonStr;
 	}else{
-		urlParm.rightIco = "0";
-	}
-	urlParm.downIco = "0";
-	if(urlParm.holder){
-		delete urlParm.holder
-		delete urlParm.holderbr
-	}
-	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	if( ccId != "14" ){
-		window.location.href = 'productDetail.html?jsonKey='+jsonStr;
-	}else{
-		window.location.href = base.url + 'tongdaoApp/html/insurance/ghx/ghxProductDetail.html?jsonKey='+jsonStr;
-	}
-	
+		urlParm.title = '产品详情';
+		urlParm.leftIco = "1";
+		if( roleType != "00" ){
+			urlParm.rightIco = "1";
+		}else{
+			urlParm.rightIco = "0";
+		}
+		urlParm.downIco = "0";
+		if(urlParm.holder){
+			delete urlParm.holder
+			delete urlParm.holderbr
+		}
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		if( ccId != "14" ){
+			window.location.href = 'productDetail.html?jsonKey='+jsonStr;
+		}else{
+			window.location.href = base.url + 'tongdaoApp/html/insurance/ghx/ghxProductDetail.html?jsonKey='+jsonStr;
+		}
+	}	
 };
 

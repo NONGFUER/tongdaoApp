@@ -1,4 +1,4 @@
-if( entry == 'qudao' && shareFlag !='Y' ){
+if( urlParm.sourcePage == 'qudaoMall' && shareFlag !='Y' ){
 	$('#qrcode').removeClass('yincang');
 }
 
@@ -36,11 +36,7 @@ $(function(){
     //根据保费试算项进行保费试算
     sendCaldoRequest( ccId );
     //calOptionsRender(data4);
-    if( roleType != "00" && isComing != "1"){
-    	if(entry == 'app'){
-    		 showRightIcon();
-    	}   	
-    }
+    
     /**拨打电话*/
 	$(".kefu").unbind("tap").bind("tap",function(){
     	callService("4006895505",".kefuPhone");
@@ -51,7 +47,7 @@ $(function(){
     $("#qrcode").unbind('tap').bind('tap',function(){
     	toQrcodeHtml()
     });
-	if( entry == 'qudao' && shareFlag != 'Y' ){
+	if( entry == 'qudao' && shareFlag != 'Y' && roleType != '00'){
 		var method = function() {
 			var title = ccName;
 			var desc  = shareDesc ;	
@@ -93,7 +89,7 @@ $(function(){
 			});
 		}
 		getConfig(method);
-	}else if(entry == 'mall' && shareFlag != 'Y'){
+	}else if(entry == 'mall' && shareFlag != 'Y'&& roleType != '00'){
 		var method = function() {
 			var title = ccName;
 			var desc  = shareDesc ;	
@@ -136,7 +132,11 @@ $(function(){
 		}
 		getConfig(method);
 	}
-	
+	if( roleType != "00" && isComing != "1"){
+    	if( entry == 'app' && (urlParm.sourcePage != 'qudaoMall')){
+    		 showRightIcon();
+    	}   	
+    }
 });
 
 //根据保费试算项进行保费试算
@@ -599,6 +599,8 @@ function toInsure(){
 	if( roleType == "00" || roleType == "" ){
 		if( entry == "app"){
 			loginControl();
+		}else if( entry == "mall" ){
+			window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineMall&openid="+openid+"&inviterPhone="+mobile;
 		}else{
 			window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineX&openid="+openid+"&inviterPhone="+mobile;
 		}
@@ -642,6 +644,8 @@ function toHealthHtml(){
 	if( roleType == "00" || roleType == "" ){
 		if( entry == "app"){
 			loginControl();
+		}else if( entry == "mall" ){
+			window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineMall&openid="+openid+"&inviterPhone="+mobile;
 		}else{
 			window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineHealthX&openid="+openid+"&inviterPhone="+mobile;
 		}		
@@ -719,10 +723,22 @@ function shareHandle(){
 	//var shareList = getProductShare(ccId);
 	var title = ccName;
 	var desc  = shareDesc ;	
-	var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=2';
-	var picUrl = getProductSharePic(ccId);
+	var picUrl = getProductSharePic(ccId);	
+	if( entry == 'app' && urlParm.sourcePage == 'qudaoMall'){
+		var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=11';
+	}else{
+		var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=2';
+	}	
 	shareMethod(shareurl,title,desc,"baodan",picUrl);		
 };
 function backlast(){
-	sysback();
+	if( entry == 'app' && urlParm.sourcePage == 'qudaoMall'){
+		urlParm.title = '保险商城'
+		urlParm.rightIco = '6';
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href =  base.url + 'weixin/insureChannels/insuranceMall/insuranceMall.html?jsonKey='+jsonStr;
+	}else{
+		sysback();
+	}
+	
 }

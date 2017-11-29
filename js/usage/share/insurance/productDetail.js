@@ -10,7 +10,9 @@ var CommodityInfo = [];
 var hasAr = '';
 $(function(){
     $.setscroll("bodyMuiScroll");
-    hasArea();
+    if( roleType != '00' ){
+    	hasArea();
+    }  
     buyBind();
     jieshaoToshuomingBind();		//介绍和产品详情间的切换
     //在线产品详情查询(ccCode,cityCode,provinceCode,type)  商品组合code,城市代码code,省code,用户角色
