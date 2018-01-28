@@ -161,7 +161,7 @@ function getServiceTime(){
 				publishTime.setDate(dayInit);
 				countTime = startTime;
 				$('.startButton').unbind('tap').bind('tap',function(){
-					modelAlert("今日抽奖活动已结束，请明天再来。");
+					modelAlert(buttonFontTxt+"。");
 				});
 				
 			}

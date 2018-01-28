@@ -15,9 +15,9 @@
 }
 .wenzi{
 	position:absolute;
-	left: 30%;
+	left: 13%;
     /* top: 54%; */
-    width:38%;
+    width:73%;
     margin:0 auto;
 }
 .timeShow{
@@ -75,7 +75,7 @@
 	width:92%;
 	height:85px;
 	margin: 0 auto;
-	background:#b7021e;
+	background:#cb0826;
 	padding:10px 3% 10px 3% ;
 	border-radius:10px;
 }
@@ -268,7 +268,7 @@
 	font-size:14px;
 }
 .imgIphone{
-	width:100px;
+	width:90px;
 	float:right;
 }
 .leftFont{
