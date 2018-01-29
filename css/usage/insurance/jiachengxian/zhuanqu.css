@@ -41,7 +41,8 @@ body{
 	margin:auto;
 }
 .clear{
-	margin-bottom:26px;
+	margin-bottom:6px;
+	height:3px;
 }
 .lingqu{
 	width:46.37%;

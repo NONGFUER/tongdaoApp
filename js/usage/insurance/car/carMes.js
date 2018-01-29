@@ -23,21 +23,39 @@ var cxSessionId;
 var carPlate="";//车牌
 var mobile;
 var registDate="";//注册日期全局变量
+var roleType;
+var channelcar;
 $(function() {
-	var str = window.location.search;
+	var str = window.location.search.split("&")[0];
 	str = str.substr(9, str.length);
 	str = UrlDecode(str);
 	parm = JSON.parse(str);
 	console.log(parm)
-	var mobile = parm.mobile;
-	parm.source="3";//App渠道
+	mobile = parm.mobile;
+	roleType=parm.roleType;
+	channelcar=parm.channelcar;
+	if(channelcar=="channelcar"){//渠道出单标志
+		$("#issueChannel").show();
+		sessionStorage.setItem("channelcar","channelcar");
+	}else{
+		$("#issueChannel").hide();
+	}
+	if(parm.shareFlag=="Y"){//App头部显示分享按钮
+	    parm.source="2";//分享进入
+	}else{
+		if(parm.entry="mall"){
+			parm.source="1";//微信保险商城
+		}else{
+			parm.source="3";//App渠道
+		}
+		
+	}
 	parm.leftIco="1";
-	parm.rightIco="0";
+	parm.rightIco="0";''
 	parm.downIco="0"
 	parm.title="车险指南";
 	/**首页banner跳转***/
 	$(".banner").attr("href","carInfo.html?jsonKey="+UrlEncode(JSON.stringify(parm)));
-	
 	if(!$.isNull(parm.body) && parm.body!= undefined){
 		cxSessionId=parm.body.cxSessionId
 		// 获取车辆信息
@@ -50,16 +68,18 @@ $(function() {
 				"head":{
 					"userCode":"",
 					"transTime":$.getTimeStr(),
-					"channel":"3"
+					"channel":parm.source,
 				},"body":{
 			        "userName" : mobile
 				}
 			};
 			$.reqAjaxs(url, resData, function(data){
 				if (data.statusCode == "000000") {
-	//				if(data.returns.bxCxChannel!= null){//出单渠道
-	//					$("#issueChannel").attr("channelCode",data.returns.bxCxChannel.channelCode).val(data.returns.bxCxChannel.channelName);
-	//				}
+					if(channelcar=="channelcar"){
+						if(data.returns.cxChannel!= null){//出单渠道
+							$("#issueChannel").attr("channelCode",data.returns.cxChannel.channelCode).val(data.returns.cxChannel.channelName);
+						}
+					}
 					if(data.returns.cxOrder != null){
 						//出单人员是否匹配到省
 						parm.body.cdPrivinceFlag=data.returns.cxProvince.flag;
@@ -178,6 +198,13 @@ $(function() {
 	}
 	$.setscrollarea("indexpart");
 	$.setscrollarea("lastPart");
+	//分享遮罩
+	$(".cxshare").bind("tap",function() {
+      	$("#zhezhaoImg").show();
+    });
+	$("#zhezhaoImg").bind("tap",function() {
+      	$("#zhezhaoImg").hide();
+    });
 	//车辆提示遮罩显示
     $(".howInput").bind("tap",function() {//行驶证提示
       	$("#cjh,.shadow").show();
@@ -306,8 +333,15 @@ $(function() {
 	$("#confirm1").unbind("tap").bind("tap",function() {
 		$("#brand_model_input").val("");
 		if(parm.roleType == "00" || parm.roleType == ""){
-			loginControl();
-			return false;
+			if(ua=="isApp"){
+				loginControl();
+				return false;
+			}else{
+				delete parm["body"]; 
+				var jsonKey = UrlEncode(JSON.stringify(parm));
+				window.location.href=base.url+"weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonKey+"&openid="+parm.openid+"&inviterPhone="+parm.shareMobile+"&fromtype=11";
+				return false;
+			}
 		}
        $("#plate_number_input").val($("#plate_number_input").val().toUpperCase());//车牌小写转大写
 		// 解绑实时检查车主信息
@@ -318,6 +352,9 @@ $(function() {
 		// 若校验车主信息通过则显示下一页内容
 		if (cheakOwnerFlag == true) {
 			    cxOrder.companyCode = comparyCode;
+			    if(parm.shareCusId!=""){
+			    	cxOrder.agentId=parm.shareCusId;
+			    }
 			    cxOrder.issueChannel=$("#issueChannel").attr("channelCode");
 				cxOrder.cityCode = citynum;// 车辆行驶城市
 				
@@ -406,6 +443,7 @@ $(function() {
 							$("#issuer").val("");
 						}
 						setTimeout(function() {
+							$(".rightIcon").hide();//隐藏分享图标
 							$(".firstPart").hide();//车辆投保地区隐藏
 							$(".lastPart").show();//车辆详细信息显示
 						}, 500);
@@ -423,7 +461,6 @@ $(function() {
 		}
 
 		pageflag = 1;
-		$.replacePlaceholder($("#brand_model_input"), "请输入品牌型号");
 		$.replacePlaceholder($("#vehicle_identification_input"),"请输入车辆识别代码");
 		$.replacePlaceholder($("#engine_number_input"), "请输入发动机号");
 		$.replacePlaceholder($("#vehicleInvoiceNo"), "请输入新车购置发票号");
@@ -594,6 +631,7 @@ $(function() {
 				inforCar.cityName = $("#car_shi").val();
 				inforCar.vehicleModelData = vehicleModelData;
 				parm.title="选择投保方案";
+				parm.rightIco="0";
 				parm.body.inforCar = inforCar;
 				parm.body.cityCode = citynum;
 				parm.body.pagesflag = "carinfo"; //标记是回到车辆详情
@@ -634,8 +672,16 @@ $(function() {
 		};
 	});
 	
-	
-
+	/*分享按钮显示*/
+	if(roleType != "00" && roleType != ""){
+		if(ua=="isApp"){//App头部显示分享按钮
+			showRightIcon(); 
+		}
+		if(ua=="isWechat"){
+			$(".cxshare").show();
+			getConfig(method); 
+		}
+	}
 });
 // 勾选是否
 function selectCarFlag() {
@@ -1169,7 +1215,7 @@ $.loadDisAddress = function(t, y) {
 				"head":{
 					"userCode":"",
 					"transTime":$.getTimeStr(),
-					"channel":"2",
+					"channel":parm.source,
 					"issueChannel":$("#issueChannel").attr("channelCode")
 				},"body":{}
 			
@@ -1181,7 +1227,7 @@ $.loadDisAddress = function(t, y) {
 				"head":{
 					"userCode":"",
 					"transTime":$.getTimeStr(),
-					"channel":"2",
+					"channel":parm.source,
 				    "cxProvinceId":y,
 				    "issueChannel":$("#issueChannel").attr("channelCode")
 				},"body":{}
@@ -1500,7 +1546,7 @@ function selectChannel(){
 			"head":{
 				"userCode":"",
 				"transTime":$.getTimeStr(),
-				"channel":"1"
+				"channel":parm.source,
 			},"body":{}
 	};
 	$.reqAjaxs(url, reqData, function(data){
@@ -1525,12 +1571,9 @@ function selectChannel(){
 function backlast(){//返回上一页
 	$("#indexpart_scroll").css("transform","translate3d(0px, 0px, 0px)")
 	if (pageflag == 0) {
-		if(systemsource == "ios"){
-			objcObject.OpenUrl("back");
-		}else if(systemsource == "android"){
-			android.goBack();
-		}
+		sysback();
     } else if (pageflag == 1) {
+    	$(".rightIcon").show();
     	$(".lastPart").hide();//车辆详细信息显示
     	$(".firstPart").show("fast");//车辆投保地区显示
 		pageflag = 0;
@@ -1576,4 +1619,100 @@ Date.prototype.Format = function (fmt) { //author: meizz
     for (var k in o)
         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
+}
+
+
+
+/**android IOS 调用h5分享方法*/
+function shareHandle(){
+	if(roleType != "00" && roleType != ""){
+		var shareStr = {
+			"mobile":mobile,
+		}
+		if(channelcar=="channelcar"){//渠道出单标志
+			shareStr.channelcar='channelcar';
+		}
+		shareStr = JSON.stringify(shareStr);
+		shareStr = UrlEncode(shareStr); // 加密过后的操作
+		var shareurl = base.url + 'tongdaoApp/html/share/kongbai.html?mobile=' + mobile+"&ccId=13&type=1"; // 分享链接
+		var picUrl=base.url+"tongdaoApp/image/share/car.png";
+		if(ua=="isApp"){
+			var twolink=base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+gettwolinkurl();
+			if(systemsource == "ios") {
+				var shareParams = {
+					"url": shareurl,
+					"flag": "3",
+					"title": "天安车险", // 分享标题
+					"desc": "独家专享冰点价格，7*24小时理赔服务，线上投保快捷方便。", //描述
+				    "descQuan":"天安车险-独家专享冰点价格，7*24小时理赔服务，线上投保快捷方便。",//朋友圈文案
+				    "picUrl": picUrl,//分享图标
+				    "twolink":twolink,//二维码链接
+				}
+				objcObject.share(shareParams)
+			} else if(systemsource == "android") {
+				android.JsShareBy("3",picUrl, "天安车险", "独家专享冰点价格，7*24小时理赔服务，线上投保快捷方便。", "天安车险-独家专享冰点价格，7*24小时理赔服务，线上投保快捷方便。", shareurl);
+			}
+		}
+	}else{
+		modelAlert("请先登录！");
+	}
+}
+
+
+function toQrcodeUrl(){
+	var twolink = base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+gettwolinkurl();
+	window.location.href = twolink;
+}
+
+function gettwolinkurl(){
+	var twolink={
+	    "userCode":mobile,
+		"mobile":mobile,
+		"customerId":parm.customerId,
+		"title":'同道保险二维码',
+		"leftIco":"1",
+		"rightIco":'0',
+		"state":'1',
+		"ccId":'13',
+		"ccName":"天安车险",
+		"name":'天安车险',
+		"desc":'独家专享冰点价格，7*24小时理赔服务，线上投保快捷方便。',
+		"fl":"2",
+	}
+	if(channelcar=="channelcar"){//渠道出单标志
+		shareStr.channelcar='channelcar';
+	}
+	return UrlEncode(JSON.stringify(twolink));
+}
+
+/**---分享功能----*/
+var method=function(){
+	wx.showMenuItems({
+	    menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline'] // 要显示的菜单项
+	});
+	var shareStr = {
+		"mobile":mobile,
+	}
+	if(channelcar=="channelcar"){//渠道出单标志
+		shareStr.channelcar='channelcar';
+	}
+	shareStr = JSON.stringify(shareStr);
+	shareStr = UrlEncode(shareStr); // 加密过后的操作
+	var shareurl = base.url + 'tongdaoApp/html/share/kongbai.html?mobile=' + mobile+"&ccId=13&type=1"; // 分享链接
+	var shareImgUrl=base.url+"tongdaoApp/image/share/car.png";
+	//分享给朋友
+	wx.onMenuShareAppMessage({
+	    title: '天安车险', // 分享标题
+	    desc: '独家专享冰点价格，7*24小时理赔服务，线上投保快捷方便。', // 分享描述
+	    link:shareurl , // 分享链接
+	    imgUrl: shareImgUrl, // 分享图标
+	    type: '', // 分享类型,music、video或link，不填默认为link
+	    dataUrl: ''
+	});
+	//分享朋友圈
+	wx.onMenuShareTimeline({  
+	    title: "天安车险-独家专享冰点价格，7*24小时理赔服务，线上投保快捷方便。", // 分享标题  
+	    link: shareurl, // 分享链接  
+	    imgUrl: shareImgUrl
+	});    
 }

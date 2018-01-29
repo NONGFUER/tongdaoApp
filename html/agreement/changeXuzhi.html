@@ -95,6 +95,10 @@
 				urlParm.title = "投保信息";
 				var jsonStr = UrlEncode(JSON.stringify(urlParm));
 				var toUrl = base.url + "tongdaoApp/html/insurance/yian/familyInsure.html?jsonKey="+jsonStr;
+			}else if( urlParm.frompage == "insureHtmlQudao" ){
+				urlParm.title = "投保信息";
+				var jsonStr = UrlEncode(JSON.stringify(urlParm));
+				var toUrl = base.url + "weixin/ycCancer/html/insurance/main/insure.html?jsonKey="+jsonStr;
 			}			
 			window.location.href = toUrl;
 			

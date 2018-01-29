@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>同道保险二维码</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" href="../../css/lib/common/base.css">
+		<link rel="stylesheet" href="../../css/lib/common/public.css">
+		<link rel="stylesheet" href="../../css/usage/twolink/QRCode.css">
+	</head>
+	<style type="text/css">
+		#QRCode {
+			border: 1px solid #adcff5;
+			border-radius: 15px;
+			box-shadow: 0 0 13px #adcff5;
+		}	
+		.bottom_div {
+			position: fixed;
+			bottom: 0;
+			width: 50%;
+			margin-left: 25%;
+			margin-right: 25%;
+			margin-bottom: 10%;
+		}
+		#bodyMuiScroll{
+			margin-top: 0;
+			padding-top: 20px;
+			background: #FFFFFF;
+		}
+		.body{
+			padding-top: 1px;
+		}
+	</style>
+
+	<body>
+		<div id="bodyMuiScroll" class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="title">
+					<h1 class="ccName"></h1>
+				</div>
+				<div class="body">
+					<div></div>
+					<img id="QRCode">
+				</div>
+				<div class="bottom">
+					<button id='fenxiang' type="button" class="mui-btn mui-btn-blue">分享二维码</button>
+				</div>
+			</div>
+			<div class="bottom_div">
+				<img src="../../image/common/fenxiangbottom.png" />
+			</div>
+		</div>
+		<script src="../../js/lib/common/zepto.min.js"></script>
+		<script src="../../js/lib/widget/mui/mui.min.js"></script>
+		<script src="../../js/lib/common/wx-gzpt-share.js"></script>
+		<script src="../../js/lib/common/weixin.js"></script>
+		<script src="../../js/lib/common/base.js"></script>
+		<script src="../../js/lib/common/common.js"></script>
+		<script src="../../js/usage/twolink/QRCodeShare.js"></script>
+	</body>
+
+</html>

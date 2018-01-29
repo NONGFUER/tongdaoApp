@@ -13,6 +13,7 @@ $(function() {
 
 function backlast(){//返回上一页
 	parm.title="车辆信息";
+	parm.rightIco="1";
 	if(parm.body!=undefined){
 		parm.body.pagesflag="1";
 		var jsonStr = JSON.stringify(parm);

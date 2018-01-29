@@ -26,7 +26,7 @@ var vm = new Vue({
 
 $(function() {
 	var reqData = {
-				"cacheCode" : "commonCacheBO.dictionary.yg_bank"		
+		"cacheCode" : "commonCacheBO.dictionary.yg_bank"		
 	}
 	var url = base.url + 'commonCache/getByCacheCode.do';
 	$.toAjaxs(url, reqData, getBank);

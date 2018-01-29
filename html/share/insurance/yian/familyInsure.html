@@ -13,13 +13,17 @@
     <link rel="stylesheet" href="../../../../css/usage/insurance/insure.css">
 </head>
 <body>
-    <div id="bodyMuiScroll" class="mui-scroll-wrapper">
+	<header class="mui-bar mui-bar-nav ">
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left" onclick='backlast()'></a>
+			<h1 class="mui-title">投保信息</h1>
+	</header>
+    <div id="bodyMuiScroll" class="mui-scroll-wrapper" style="margin-top:44px">
      	<div class="mui-scroll">
      		<div class="insure-form-content">
      			<!-- 投保人信息 -->
      			<dl class="insure-form-group">
      				<dt class="group-title">
-     					<div class="group-title-main">投保人信息</div>
+     					<div class="group-title-main">投保人信息</div><div id="commonHolders" class="isSame">常用保险人</div>
      				</dt>
      				<dd>
      					<label>投保人姓名</label> <input type="text" id="insureName" value="" placeholder="请输入正确的姓名"/>
@@ -51,7 +55,8 @@
 				 </dl>
 				 <dl class="insure-form-group">
      				<dt class="group-title">
-     					<div class="group-title-main">被保人信息2</div> 
+     					<div class="group-title-main">被保人信息2</div>
+     					<div id="commonHolderstwo" class="isSame mytitle">常用保险人</div> 
      				</dt>
      				<dd class="">
      					<label>与投保人关系</label> <span id="relation2" class="relation" name="10">配偶</span>
@@ -75,6 +80,7 @@
 				 <dl class="insure-form-group">
      				<dt class="group-title">
      					<div class="group-title-main">被保人信息3</div> 
+     					<div id="commonHoldersthree" class="isSame mytitle">常用保险人</div>
      				</dt>
      				<dd class="">
      					<label>与投保人关系</label> <span id="relation3" class="relation" name="40">子女</span>    			
@@ -97,7 +103,8 @@
 				 </dl>
 				 <dl class="insure-form-group hidden" id="forthItem">
      				<dt class="group-title">
-     					<div class="group-title-main">被保人信息4</div> 
+     					<div class="group-title-main">被保人信息4</div>
+     					<div id="commonHoldersfour" class="isSame mytitle">常用保险人</div> 
      				</dt>
      				<dd class="">
      					<label>与投保人关系</label> <span id="relation4" class="relation" name="40">子女</span>     					
@@ -166,7 +173,7 @@
     <script src="../../../../js/lib/widget/mui/mui.picker.min.js"></script>
     <script src="../../../../js/lib/common/base.js"></script>
 	<script src="../../../../js/lib/common/common.js"></script>
-	<script src="../../../../js/usage/share/insurance/head.js"></script>
-	<script src="../../../../js/usage/share/insurance/yian/familyInsure.js"></script>
+	<script src="../../../../js/usage/share/insurance/head.js?v=201712251536"></script>
+	<script src="../../../../js/usage/share/insurance/yian/familyInsure.js?v=201801100907"></script>
 </body>
 </html>

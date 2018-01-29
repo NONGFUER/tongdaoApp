@@ -520,7 +520,7 @@ function baojia(){
 	var cxInfoDTO = {
 	    "customerId":parm.customerId,
 	    "transToken":parm.transToken,
-	    "orderChannel":"3",
+	    "orderChannel":parm.source,
 		"productId" : product_id, // 产品编号
 		"sessionId" : cxSessionId, // 唯一流水号
 		"agentCode" : parm.mobile,
@@ -1148,6 +1148,7 @@ function backlast(){//返回上一页
 		if(parm.body.fromBaojia!="Y"){
 			parm.body.cxSessionId = cxSessionId;
 			parm.title="车辆信息";
+			parm.rightIco="1";
 			var jsonStr = JSON.stringify(parm);
 			jsonStr = UrlEncode(jsonStr);
 			window.location.href = "carMes.html?jsonKey=" + jsonStr;

@@ -78,7 +78,7 @@ function tuibao() {
 		}
 	}
 	var url = base.url + 'hkRedemption/getRedemptionConfirmation.do';
-	$.reqAjaxsFalse(url, reqData, getRedemptionConfirmation);
+	$.reqAjaxs(url, reqData, getRedemptionConfirmation);
 }
 /*退保2*/
 function getRedemptionConfirmation(data) {
@@ -128,11 +128,11 @@ function chenggong(){
 		"orderNo": orderNo,
 		"policyNo": policyNo,
 		"insureNo": insureNo,
-		"title": title,
+		"title": '我的保单',
 		"leftIco": '1',
 		"rightIco": '0',
-		"downIco": '0',
+		"downIco": '1',
 	};
 	var jsonStr = UrlEncode(JSON.stringify(sendData));
-	window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyList.html?jsonKey=" + jsonStr;
+	window.location.href = base.url + "tongdaoApp/html/account/myOrder/policyList.html?jsonKey=" + jsonStr;
 }

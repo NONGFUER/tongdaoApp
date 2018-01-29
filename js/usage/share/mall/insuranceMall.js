@@ -1,9 +1,44 @@
+//?cusId=812&mobile=13852291705&roletype=01&openid=ohNt9vx44UP2EnqzE6_C2dOXZQ4Q
+if(getUrlQueryString("jsonKey")){
+	var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
+	var mobile = urlParm.mobile + '';
+	var customerId = urlParm.customerId + '';
+	var roleType = urlParm.roleType + '';
+	var openid = urlParm.openid;
+	var provinceCode = '';
+	var cityCode = '';
+	var agentId = '';
+}else{
+	var urlParm = {};
+	var mobile     = getUrlQueryString("mobile") ? getUrlQueryString("mobile")+"" : "";
+	var customerId = (getUrlQueryString("cusId") && getUrlQueryString("cusId") != 'null') ? getUrlQueryString("cusId")+"" : "";
+	var roleType   = getUrlQueryString("roletype")+ '' ? getUrlQueryString("roletype")+"" : "";
+	var openid	   = getUrlQueryString("openid")+ '' ? getUrlQueryString("openid")+"" : "";
+	var ctName = getUrlQueryString("cityName")+ '' ? getUrlQueryString("cityName")+"" : "";
+	var ctCode = getUrlQueryString("cityCode")+ '' ? getUrlQueryString("cityCode")+"" : "";
+	var agentId = getUrlQueryString("agentId")+ '' ? getUrlQueryString("agentId")+"" : "";
+	var provinceCode = $.isNull(getUrlQueryString("provinceCode")) ? '' :getUrlQueryString("provinceCode");
+	var cityCode = $.isNull(getUrlQueryString("cityCode")) ? '' :getUrlQueryString("cityCode");
+	var shareFlag =$.isNull(getUrlQueryString("shareFlag")) ? '' :getUrlQueryString("shareFlag");
+	var shareCusId = $.isNull(getUrlQueryString("shareCusId")) ? '' :getUrlQueryString("shareCusId");
+	var shareMobile = $.isNull(getUrlQueryString("shareMobile")) ? '' :getUrlQueryString("shareMobile");
+	urlParm.mobile     = mobile;
+	urlParm.customerId = customerId;
+	urlParm.roleType   = roleType;
+	urlParm.openid     = openid;
+	urlParm.shareFlag  = shareFlag;
+	urlParm.shareCusId  = shareCusId;
+	urlParm.shareMobile  = shareMobile;
+}
+
 var tagsList = [];
 $(function(){
 	if($.isNull(customerId) && $.isNull(ctCode)){
 		deshi()
 	}	
 	if($.isNull(ctCode)){
+		getAgentInfoRequest();   //获取当前用户基本信息
+	}else if($.isNull(ctName)){
 		getAgentInfoRequest();   //获取当前用户基本信息
 	}else{
 		$('#local').text(ctName);
@@ -15,6 +50,49 @@ $(function(){
 		interval: 2000
 	});
 	mui('.mui-scroll-wrapper').scroll();
+	if( urlParm.shareFlag != 'Y' && roleType != '00'){
+		var method = function() {
+			var title = "同道保险";
+			var desc = "为您提供专业的保险服务";
+			var picUrl = base.url+'tongdaoApp/image/share/tongdaoic.png'		
+			var shareUrl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId=&type=12';
+			wx.showMenuItems({
+				menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline'] // 要显示的菜单项
+			});
+	
+			//分享给朋友
+			wx.onMenuShareAppMessage({
+				title: title, // 分享标题
+				desc: desc, // 分享描述
+				link: shareUrl, // 分享链接
+				imgUrl: picUrl, // 分享图标
+				type: '', // 分享类型,music、video或link，不填默认为link
+				dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+				success: function() {
+					// 用户确认分享后执行的回调函数
+					// mui.alert("您已成功分享给好友！","温馨提示");
+				},
+				cancel: function() {
+					// 用户取消分享后执行的回调函数
+					mui.alert("您取消了分享！", "温馨提示");
+				}
+			});
+			//分享到朋友圈
+			wx.onMenuShareTimeline({
+				title: title + "-" + desc, // 分享描述, // 分享标题  
+				link: shareUrl, // 分享链接  
+				imgUrl: picUrl, // 分享图标  
+				success: function() {
+					// 用户确认分享后执行的回调函数  
+				},
+				cancel: function() {
+					// 用户取消分享后执行的回调函数  
+					mui.alert("您取消了分享！", "温馨提示");
+				}
+			});
+		}
+		getConfig(method);
+	}
 });
 
 //获取商品类别标签
@@ -178,30 +256,40 @@ function onlineProductRequest(obj){
 				"pageSize":"100",
 				"type":"01",
 				"salesChannels":"01",   //销售渠道：01佰盈渠道，02
-				"commodityCombinationShowType":"04" //商品组合展示类型01-线上；02-线下；03-即将上线   04-微信
+				"commodityCombinationShowType":"01" //商品组合展示类型01-线上；02-线下；03-即将上线   04-微信
 			}
 	}
 	$.reqAjaxs( url, sendJson, onlineProductCallback );
 }
 
 function onlineProductCallback(data){
+	//alert(JSON.stringify(data));
 	if( data.statusCode == "000000" ){
 		var onepage = data.returns.pager.entities;
 		$("#lr").css("transform","translate3d(0px, 0px, 0px)");
-		$('#proGroup').html('');		
-		for( var i = 0; i < onepage.length; i++ ){
-			var staPrem = onepage[i].commodityCombination.startPiece;
-			var proName = onepage[i].commodityCombination.commodityCombinationName;
-			var proImge = onepage[i].commodityCombination.commodityCombinationImage;
-			var proDesc = onepage[i].commodityCombination.insuredInfo;
-			var proLink = onepage[i].commodityCombination.linkUrl;
-			var proCcid = onepage[i].commodityCombination.id + "";
-			var str = "";	 
-				str += '<li class="list display-box" data-ccid="'+proCcid+'" data-url="'+ proLink +'" onclick="toProduct(this)">'
-				str += '<img src="'+ proImge +'" id="pic" class="box-flex0" onerror="zwt(this)">'
-				str += '<div class="cont box-flex1"><h3>'+ proName +'</h3><p class="tips">'+ proDesc +'</p><p class="price-box">'+ staPrem +'</p></div></li>'				
-				$('#proGroup').append(str);
+		$('#proGroup').html('');
+		if( onepage.length != 0 ){
+		$('.product-items').css('background','#fff');
+			for( var i = 0; i < onepage.length; i++ ){
+				var staPrem = onepage[i].commodityCombination.startPiece;
+				var proName = onepage[i].commodityCombination.commodityCombinationName;
+				var proImge = onepage[i].commodityCombination.commodityCombinationImage;
+				var proDesc = onepage[i].commodityCombination.insuredInfo;
+				var proLink = onepage[i].commodityCombination.linkUrl;
+				var proCcid = onepage[i].commodityCombination.id + "";
+				var str = "";	 
+					str += '<li class="list display-box" data-ccid="'+proCcid+'" data-url="'+ proLink +'" onclick="toProduct(this)">'
+					str += '<img src="'+ proImge +'" id="pic" class="box-flex0" onerror="zwt(this)">'
+					str += '<div class="cont box-flex1"><h3>'+ proName +'</h3><p class="tips">'+ proDesc +'</p><p class="price-box">'+ staPrem +'</p></div></li>'				
+					//alert(str);
+					$('#proGroup').append(str);
+			}
+		}else{
+			$('.product-items').css('background','#ebebeb');
+			var img = '<img />'
+			$('#proGroup').append(img);
 		}
+		//alert($('#proGroup').html());
 	}else{
 		
 	}

@@ -16,6 +16,7 @@ var tradeNo;//核保请求天安接口交易流水号
 var orderStatus;//订单状态
 var syStartDate;
 var jqStartDate;
+var channelcar=false;
 $(function() {
 	/**页面滑动设置*/
 	$.setscrollarea("indexpart");
@@ -25,6 +26,13 @@ $(function() {
 	parm = JSON.parse(str);
 	console.log(parm)
 	cxSessionId = parm.body.cxSessionId;
+	if(sessionStorage.getItem("channelcar")=="channelcar"){//渠道出单
+		channelcar=true;
+		$("#btn_area").hide();
+		$("#submitorder").show("fast");
+	}
+	//获取人车联动信息
+	$.getRcldInfo("25");
 	//获取订单信息模块初始化
 	$.loadOrderInf();
 	if(parm.body.cityCode=="3110000"){//北京地区
@@ -76,6 +84,7 @@ $(function() {
 	openDataCustomized("policyholder_endDate_input");
 	//民族
 	openDicMuiList("policyholder_nation_input", "bx_nation", " ", true);
+	
 	/**--返回--*/
 	$(".h_back").unbind("tap").bind("tap",function() {
 		backlast()
@@ -83,20 +92,16 @@ $(function() {
 	
 	/**-----核保失败返回----*/
 	$("#backBtn").unbind("tap").bind("tap",function(){
-		if(systemsource == "ios"){
-			objcObject.OpenUrl("back");
-		}else if(systemsource == "android"){
-			android.goBack();
-		}
+		sysback();
 	});
 	/**--勾选条款*/
 	$("#gouxuan").unbind("tap").bind("tap",function() {
-		if($(this).attr("src")=="../../images/gouxuan2.png"){
-			$("#gouxuan").attr("src","../../images/weigouxuan.png");
+		if($(this).attr("src")=="../../../image/insurance/car/gouxuan2.png"){
+			$("#gouxuan").attr("src","../../../image/insurance/car/weigouxuan.png");
 			$("#submitorder").css("background-color","#ccc");
 			gouxuan="0";
 		}else{
-			$("#gouxuan").attr("src","../../images/gouxuan2.png");
+			$("#gouxuan").attr("src","../../../image/insurance/car/gouxuan2.png");
 			$("#submitorder").css("background-color","#1B6BBA");
 			gouxuan="1";
 		}
@@ -143,119 +148,162 @@ $(function() {
 		jsonStr = UrlEncode(jsonStr);
 		window.location.href = "policyDeliveryAddress.html?jsonKey=" + jsonStr;
 	});
+	
+	
+ 
+    /** 人车联动 人身意外险   份数  下拉选择*/
+    $(".cxld").unbind("tap").bind("tap",function() {
+    	popProvinceCXLD();
+    });
+	
 	/**--点击"下一步"邮寄地址与投被保人信息入库******/
-	$(".confirmbtn").on("tap",function(){
+	$(".confirmbtn,#submitorder").on("tap",function(){
 		type=$(this).attr("type");
-		console.log(type)
-		if(gouxuan=="1"){
-			//邮寄地址 投被保人总校验
-			cheackInsuredInfo();
-			if(cheakInsuredInfoFlag){//总校验通过
-				var sjrMobile=$.trim($("#sjrPhone").html());//收件人手机号
-			    var sjrName=$.trim($("#sjrName").html());//收件人姓名
-				var addresseeprovince=$.trim($("#addresseeprovince").html());//收件人省市
-				var psAddress=$.trim($("#psAddress").html());//收件人详细地址
-			    var phname=sametoubao=="1"?cxOrder.ownerName:$("#policyholder_name_input").val();// 投保人姓名
-			    var phidtype="01";// 投保人证件类型 身份证
-			    var phidno=sametoubao=="1"?cxOrder.ownerIdno:$("#policyholder_idnumber_input").val();// 投保人证件号码
-			    var gender=$.getSex(phidno);// 投保人性别
-			    var phbirthdate=$.getBirthDay(phidno);// 投保人出生日期
-			    var phtelephone=sametoubao=="1"?cxOrder.ownerMobile:$("#policyholder_phone_input").val();// 投保人手机
-			    var phaddress=addressInfo.province+" "+addressInfo.address;//投保人地址
-			    
-			    var insuredname=samebeibao=="1"?cxOrder.ownerName:$("#recognizee_name_input").val();// 被保人姓名
-			    var insuredidno=samebeibao=="1"?cxOrder.ownerIdno:$("#recognizee_idnumber_input").val();// 被保人证件号码
-			    var insuredgender=$.getSex(insuredidno);// 被保人性别
-			    var insuredidtype="01";// 被保人证件类型 身份证
-			    var insuredbirthdate=$.getBirthDay(insuredidno);// 被保人出生日期
-			    var insuredmobile=samebeibao=="1"?cxOrder.ownerMobile:$("#recognizee_phone_input").val();// 被保人手机
-			    var insuredadress=addressInfo.province+" "+addressInfo.address;//被保人地址
-			    if(parm.body.cityCode=="3110000"){//北京地区
-			    	  var insuredStartDate=samebeibao=="1"?timeFormatDate(cxOrder.certiStartdate.time, 'yyyy-MM-dd'):$("#recognizee_startDate_input").val();// 被保人起期
-			    	  var insuredEndDate=samebeibao=="1"?timeFormatDate(cxOrder.certiEnddate.time, 'yyyy-MM-dd'):$("#recognizee_endDate_input").val();// 被保人止期
-			    	  var insurednation=samebeibao=="1"?cxOrder.nation:$("#recognizee_nation_input").val();//被保人民族
-			    	  var insuredissuer=samebeibao=="1"?cxOrder.issuerAuthority:$("#recognizee_issuer_input").val();// 被保人签发机构
-			    	  var phStartDate=sametoubao=="1"?timeFormatDate(cxOrder.certiStartdate.time, 'yyyy-MM-dd'):$("#policyholder_startDate_input").val();// 投保人起期
-			    	  var phEndDate=sametoubao=="1"?timeFormatDate(cxOrder.certiEnddate.time, 'yyyy-MM-dd'):$("#policyholder_endDate_input").val();// 投保人止期
-			    	  var phnation=sametoubao=="1"?cxOrder.nation:$("#policyholder_nation_input").val();// 投保人民族
-			    	  var phissuer=sametoubao=="1"?cxOrder.issuerAuthority:$("#policyholder_issuer_input").val();// 投保人签发机构
-			    }
-			    if(parm.body.cityCode=="3440300"||parm.body.cityCode=="3110000"){//深圳地区  北京地区
-			    	var insuredemail=samebeibao=="1"?cxOrder.ownerEmail:$("#recognizee_email_input").val();// 被保人邮箱
-			    	var phemail=sametoubao=="1"?cxOrder.ownerEmail:$("#policyholder_email_input").val();// 投保人邮箱
-			    }
-			    var url = base.url+'/tdcx/saveAddressInsured.do';
-				var data = {
-					'head':{
-						'userCode': parm.customerId,
-						'transTime':$.getTimeStr(),
-						'channel':'3',
-						"transToken":parm.transToken
-					},'body':{
-						"addressInsuredDto":{
-							"sessionid":cxSessionId,
-							"orderNo":cxOrder.orderNo,
-							"sjrMobile":sjrMobile,//收件人手机号
-						    "sjrName":sjrName,//收件人姓名
-							"addresseeprovince":addresseeprovince,//收件人省市
-							"psAddress":psAddress,//收件人详细地址
-						    "phname":phname,// 投保人姓名
-						    "phidtype":phidtype,// 投保人证件类型 身份证
-						    "phidno":phidno,// 投保人证件号码
-						    "gender":gender,// 投保人性别
-						    "phbirthdate":phbirthdate,// 投保人出生日期
-						    "phtelephone":phtelephone,// 投保人手机
-						    "phaddress":phaddress,//投保人地址
-						    "insuredname":insuredname,// 被保人姓名
-						    "insuredidno":insuredidno,// 被保人证件号码
-						    "insuredgender":insuredgender,// 被保人性别
-						    "insuredidtype":insuredidtype,// 被保人证件类型 身份证
-						    "insuredbirthdate":insuredbirthdate,// 被保人出生日期
-						    "insuredmobile":insuredmobile,// 被保人手机
-						    "insuredadress":insuredadress//被保人地址
+		if(orderStatus=="01"){
+			if(gouxuan=="1"){
+				//邮寄地址 投被保人总校验
+				cheackInsuredInfo();
+				if(cheakInsuredInfoFlag){//总校验通过
+					var sjrMobile=$.trim($("#sjrPhone").html());//收件人手机号
+				    var sjrName=$.trim($("#sjrName").html());//收件人姓名
+					var addresseeprovince=$.trim($("#addresseeprovince").html());//收件人省市
+					var psAddress=$.trim($("#psAddress").html());//收件人详细地址
+				    var phname=sametoubao=="1"?cxOrder.ownerName:$("#policyholder_name_input").val();// 投保人姓名
+				    var phidtype="01";// 投保人证件类型 身份证
+				    var phidno=sametoubao=="1"?cxOrder.ownerIdno:$("#policyholder_idnumber_input").val();// 投保人证件号码
+				    var gender=$.getSex(phidno);// 投保人性别
+				    var phbirthdate=$.getBirthDay(phidno);// 投保人出生日期
+				    var phtelephone=sametoubao=="1"?cxOrder.ownerMobile:$("#policyholder_phone_input").val();// 投保人手机
+				    var phaddress=addressInfo.province+" "+addressInfo.address;//投保人地址
+				    
+				    var insuredname=samebeibao=="1"?cxOrder.ownerName:$("#recognizee_name_input").val();// 被保人姓名
+				    var insuredidno=samebeibao=="1"?cxOrder.ownerIdno:$("#recognizee_idnumber_input").val();// 被保人证件号码
+				    var insuredgender=$.getSex(insuredidno);// 被保人性别
+				    var insuredidtype="01";// 被保人证件类型 身份证
+				    var insuredbirthdate=$.getBirthDay(insuredidno);// 被保人出生日期
+				    var insuredmobile=samebeibao=="1"?cxOrder.ownerMobile:$("#recognizee_phone_input").val();// 被保人手机
+				    var insuredadress=addressInfo.province+" "+addressInfo.address;//被保人地址
+				    if(parm.body.cityCode=="3110000"){//北京地区
+				    	  var insuredStartDate=samebeibao=="1"?timeFormatDate(cxOrder.certiStartdate.time, 'yyyy-MM-dd'):$("#recognizee_startDate_input").val();// 被保人起期
+				    	  var insuredEndDate=samebeibao=="1"?timeFormatDate(cxOrder.certiEnddate.time, 'yyyy-MM-dd'):$("#recognizee_endDate_input").val();// 被保人止期
+				    	  var insurednation=samebeibao=="1"?cxOrder.nation:$("#recognizee_nation_input").val();//被保人民族
+				    	  var insuredissuer=samebeibao=="1"?cxOrder.issuerAuthority:$("#recognizee_issuer_input").val();// 被保人签发机构
+				    	  var phStartDate=sametoubao=="1"?timeFormatDate(cxOrder.certiStartdate.time, 'yyyy-MM-dd'):$("#policyholder_startDate_input").val();// 投保人起期
+				    	  var phEndDate=sametoubao=="1"?timeFormatDate(cxOrder.certiEnddate.time, 'yyyy-MM-dd'):$("#policyholder_endDate_input").val();// 投保人止期
+				    	  var phnation=sametoubao=="1"?cxOrder.nation:$("#policyholder_nation_input").val();// 投保人民族
+				    	  var phissuer=sametoubao=="1"?cxOrder.issuerAuthority:$("#policyholder_issuer_input").val();// 投保人签发机构
+				    }
+				    if(parm.body.cityCode=="3440300"||parm.body.cityCode=="3110000"){//深圳地区  北京地区
+				    	var insuredemail=samebeibao=="1"?cxOrder.ownerEmail:$("#recognizee_email_input").val();// 被保人邮箱
+				    	var phemail=sametoubao=="1"?cxOrder.ownerEmail:$("#policyholder_email_input").val();// 投保人邮箱
+				    }
+				    
+				    
+				    var rcldplancode=sessionStorage.getItem("rcldplancode")||"";//人车联动方案代码
+					var rcldplanname=sessionStorage.getItem("rcldplanname")||"";//人车联动方案名称
+					var rcldproductcode=sessionStorage.getItem("rcldproductcode");//'非车产品代码,
+					var rcldproductname=sessionStorage.getItem("rcldproductname");//'非车产品名称',
+					var rcldpiece=sessionStorage.getItem("rcldpiece")||"0";//人车联动份数,
+					var rcldamount=sessionStorage.getItem("rcldamount")||"0";//人车联动保费,
+					var rcldindicate=rcldamount=="0"?"0":sessionStorage.getItem("rcldindicate")||"0";//人车联动标志 0-否，1-是
+					
+					
+					
+				    var url = base.url+'/tdcx/saveAddressInsured.do';
+					var data = {
+						'head':{
+							'userCode': parm.customerId,
+							'transTime':$.getTimeStr(),
+							'channel':parm.source,
+							"transToken":parm.transToken
+						},'body':{
+							"addressInsuredDto":{
+								"sessionid":cxSessionId,
+								"orderNo":cxOrder.orderNo,
+								"sjrMobile":sjrMobile,//收件人手机号
+							    "sjrName":sjrName,//收件人姓名
+								"addresseeprovince":addresseeprovince,//收件人省市
+								"psAddress":psAddress,//收件人详细地址
+							    "phname":phname,// 投保人姓名
+							    "phidtype":phidtype,// 投保人证件类型 身份证
+							    "phidno":phidno,// 投保人证件号码
+							    "gender":gender,// 投保人性别
+							    "phbirthdate":phbirthdate,// 投保人出生日期
+							    "phtelephone":phtelephone,// 投保人手机
+							    "phaddress":phaddress,//投保人地址
+							    "insuredname":insuredname,// 被保人姓名
+							    "insuredidno":insuredidno,// 被保人证件号码
+							    "insuredgender":insuredgender,// 被保人性别
+							    "insuredidtype":insuredidtype,// 被保人证件类型 身份证
+							    "insuredbirthdate":insuredbirthdate,// 被保人出生日期
+							    "insuredmobile":insuredmobile,// 被保人手机
+							    "insuredadress":insuredadress,//被保人地址
+							    
+							    "rcldIndicate":rcldindicate,//人车联动标志 0-否，1-是'
+				                "rcldPlanCode":rcldplancode,//人车联动方案代码
+				                "rcldPlanName":rcldplanname,//人车联动方案名称
+				                "rcldUwCount":rcldpiece,//人车联动份数
+				                "rcldProductCode":rcldproductcode,//非车产品代码
+				                "rcldProductName":rcldproductname,//非车产品名称
+				                "rcldProductAmount":rcldamount,//人车联动  人身险保费
+							}
+							
 						}
-						
+					};
+					if(parm.body.cityCode=="3110000"){//北京地区
+						data.body.addressInsuredDto.phStartDate=phStartDate;
+						data.body.addressInsuredDto.phEndDate=phEndDate;
+						data.body.addressInsuredDto.phnation=phnation;
+						data.body.addressInsuredDto.phissuer=phissuer;
+						data.body.addressInsuredDto.insuredStartDate=insuredStartDate;
+						data.body.addressInsuredDto.insuredEndDate=insuredEndDate;
+						data.body.addressInsuredDto.insurednation=insurednation;
+						data.body.addressInsuredDto.insuredissuer=insuredissuer;
 					}
-				};
-				if(parm.body.cityCode=="3110000"){//北京地区
-					data.body.addressInsuredDto.phStartDate=phStartDate;
-					data.body.addressInsuredDto.phEndDate=phEndDate;
-					data.body.addressInsuredDto.phnation=phnation;
-					data.body.addressInsuredDto.phissuer=phissuer;
-					data.body.addressInsuredDto.insuredStartDate=insuredStartDate;
-					data.body.addressInsuredDto.insuredEndDate=insuredEndDate;
-					data.body.addressInsuredDto.insurednation=insurednation;
-					data.body.addressInsuredDto.insuredissuer=insuredissuer;
+					if(parm.body.cityCode=="3440300"||parm.body.cityCode=="3110000"){//深圳地区  北京地区
+						data.body.addressInsuredDto.insuredemail=insuredemail;// 被保人邮箱
+						data.body.addressInsuredDto.phemail=phemail;// 投保人邮箱
+				    }
+					$.reqAjaxs(url, data,function(respData){
+						if(respData.statusCode=="000000"){
+							parm.body.samebeibao = samebeibao;//1-被保人与车主一致  0-不一致
+							parm.body.sametoubao = sametoubao;//1-投保人与车主一致  0-不一致
+							if(channelcar){
+								parm.title="天安车险";
+								var jsonStr = JSON.stringify(parm);
+								jsonStr = UrlEncode(jsonStr);
+								window.location.href="insuranceAgen.html?jsonKey=" + jsonStr;
+							}else{
+								if(orderStatus=="01"){
+									$.saveBack(type);//核保
+						         }else{
+						        	 if(type=="pay"){
+						        		 window.location.href=payUrl
+						        	 }else{
+						        		 cxShareMethod(cxSessionId);//壳上分享方法	
+						        	 }
+						        	 
+								 }
+							}
+						}else if(respData.statusCode=="123456"){
+							modelAlert(respData.statusMessage,"",function(){
+								loginControl();
+							});
+						}else{
+							modelAlert(respData.statusMessage);
+						}
+					});
 				}
-				if(parm.body.cityCode=="3440300"||parm.body.cityCode=="3110000"){//深圳地区  北京地区
-					data.body.addressInsuredDto.insuredemail=insuredemail;// 被保人邮箱
-					data.body.addressInsuredDto.phemail=phemail;// 投保人邮箱
-			    }
-				$.reqAjaxs(url, data,function(respData){
-					if(respData.statusCode=="000000"){
-						parm.body.samebeibao = samebeibao;//1-被保人与车主一致  0-不一致
-						parm.body.sametoubao = sametoubao;//1-投保人与车主一致  0-不一致
-						if(orderStatus=="01"){
-							$.saveBack(type);//核保
-				         }else{
-				        	 if(type=="pay"){
-				        		 window.location.href=payUrl
-				        	 }else{
-				        		 cxShareMethod(cxSessionId);//壳上分享方法	
-				        	 }
-				        	 
-						 }
-						
-					}else if(respData.statusCode=="123456"){
-						modelAlert(respData.statusMessage,"",function(){
-							loginControl();
-						});
-					}else{
-						modelAlert(respData.statusMessage);
-					}
-				});
 			}
-		}
+		 }else{
+			 if(type=="next"){
+				 modelAlert("该订单已核保无法进行下一步操作，请从订单列表查看该订单！");
+			 }else if(type=="pay"){
+        		 window.location.href=payUrl
+        	 }else{
+        		 cxShareMethod(cxSessionId);//壳上分享方法	
+        	 }
+		 }	
 	});
 	
 	/**-----重新报价-------------*/
@@ -289,7 +337,7 @@ function baojia(){
 		'head':{
 			'userCode': '',
 			'transTime':$.getTimeStr(),
-			'channel':'3'
+			'channel':parm.source,
 		},'body':{
 			"quoteInfo":{
 				"sessionId":cxSessionId,
@@ -789,6 +837,26 @@ $.loadData = function(param) {
 					}
 				}
 				
+				if(param.cxInfo.cxOrder.issueChannel=="01"){
+					$("#cxldparty,.cxld-content").show();
+					if(sessionStorage.getItem("rcldindicate")=="1"){
+				    	$(".mui-control-item").removeClass("mui-active");
+				    	$(".mui-control-content").removeClass("mui-active");
+				    	var index=sessionStorage.getItem('rcldplanindex');
+				    	$(".mui-control-item").eq(index).addClass("mui-active");
+				    	$(".mui-control-content").eq(index).addClass("mui-active");
+				    	$("#piece").html(sessionStorage.getItem("rcldpiecename"))
+				    	$("#cxldpre").html(sessionStorage.getItem("rcldamount")+"元")
+				    }else{
+				    	sessionStorage.setItem("rcldindicate","1");//人车联动标志 0-否，1-是
+				    	sessionStorage.setItem("rcldplancode",$(".mui-control-item.mui-active").attr("rcldplancode"));//人车联动方案代码
+				    	sessionStorage.setItem("rcldplanname",$(".mui-control-item.mui-active").html());//人车联动方案名称
+				    	sessionStorage.setItem("rcldpiece","1");//人车联动份数,
+				    	sessionStorage.setItem("rcldpiecename","1份");//人车联动显示份数中文名称,
+				    	sessionStorage.setItem("rcldamount",$(".mui-control-item.mui-active").attr("rcldproductamount"));//人车联动保费,
+				    }
+				}
+				
 				if(parm.body.samebeibao!=null){//被保人信息与车主不一致
 					samebeibao=parm.body.samebeibao;
 					if(samebeibao=="0"){
@@ -933,4 +1001,129 @@ function backlast(){//返回上一页
 		jsonStr = UrlEncode(jsonStr);
 		window.location.href="quotationDetail.html?jsonKey=" + jsonStr;
 	}
+}
+
+
+
+
+//获取人身险信息
+$.getRcldInfo=function(commodityCombinationId){
+	var url = base.url+'/product/getRcldInfo.do';
+	var data = {
+		'head':{
+			'userCode': '',
+			'transTime':$.getTimeStr(),
+			'channel':parm.source,
+		},'body':{
+			"commodityCombinationId":commodityCombinationId
+		}
+	}
+	$.reqAjaxs(url, data,function(respData){
+		if(respData.statusCode=="000000"){
+			var cxRcld=respData.returns.cxRcld;
+			var controlItem=$(".mui-segmented-control").children().clone();
+			var controlContent=$("#control-content").children().clone();
+			$(".mui-segmented-control").empty();
+			$("#control-content").empty();
+			for(var i=0;i<cxRcld.length;i++){
+				var controlItemstr=controlItem.clone();
+				var controlContentstr=controlContent.clone();
+				if(cxRcld[i].isDefalut=="1"){
+					controlItemstr.addClass("mui-active");
+					controlContentstr.addClass("mui-active");
+			    	sessionStorage.setItem("rcldproductcode",cxRcld[0].riskCode);//'非车产品代码,
+					var rcldproductname=cxRcld[0].commodityCombinationName;
+					var commodityName=cxRcld[0].commodityCombinationAbbreviation;
+					$("#commodityCombinationName").html(commodityName);
+					sessionStorage.setItem("rcldproductname",rcldproductname);//'非车产品名称',
+				}
+				controlItemstr.attr("rcldplancode",cxRcld[i].rcldPlancode);
+				controlItemstr.attr("rcldproductamount",cxRcld[i].permiun*1);
+				controlItemstr.attr("href","#item"+i);
+				controlItemstr.html(cxRcld[i].rcldPlanname);
+				$(".mui-segmented-control").append(controlItemstr);
+				controlContentstr.attr("id","#item"+i);
+				controlContentstr.find("img").attr("src",cxRcld[i].banner);
+				controlContentstr.find(".commodityDescribe").html(cxRcld[i].commodityDescribe);
+				$("#control-content").append(controlContentstr);
+			}
+			changeItem();
+		}else{
+			modelAlert(respData.statusMessage);
+		}
+	});
+}
+
+
+/***人身险投保方案切换****/
+function changeItem(){
+	   /** 人车联动投保方案*/
+    $(".mui-control-item").unbind("tap").bind("tap",function(event) {
+    	var _this=this;
+    	var index=$(_this).index();//下标索引
+    	$(".mui-control-item").removeClass("mui-active");
+    	$(".mui-control-content").removeClass("mui-active");
+    	$(_this).addClass("mui-active");
+    	$(".mui-control-content").eq(index).addClass("mui-active");
+    	sessionStorage.setItem("rcldplanindex",index);
+    	sessionStorage.setItem("rcldplancode",$(_this).attr("rcldplancode"));//人车联动方案代码
+    	sessionStorage.setItem("rcldplanname",$(_this).html());//人车联动方案名称
+    	var rcldproductamount=$(_this).attr("rcldproductamount");//保费
+    	var piece=sessionStorage.getItem("rcldpiece");//份数
+    	amount=rcldproductamount*piece;
+    	sessionStorage.setItem("rcldamount",amount);//人车联动保费,
+        $("#cxldpre").html(amount+"元");
+    });
+}
+
+/***人身险购买份数下拉***/
+function popProvinceCXLD(){
+	var rcldproductamount=$(".mui-control-item.mui-active").attr("rcldproductamount");
+    var options = [{
+		value: '0',
+		text: '不购买'
+	}, {
+		value: '1',
+		text: '1份'
+	}, {
+		value: '2',
+		text: '2份'
+	}];
+    var dtpicker = new mui.PopPicker();
+    dtpicker.setData(options);
+    dtpicker.show(function(dt) {
+    	dtpicker.dispose();
+    	var piece=dt[0].value;
+    	var amount=piece*rcldproductamount
+    	sessionStorage.setItem("rcldpiece",piece);//人车联动份数,
+    	sessionStorage.setItem("rcldamount",amount);//人车联动保费,
+    	sessionStorage.setItem("rcldpiecename",dt[0].text);//人车联动显示份数中文名称,
+    	$("#piece").html(dt[0].text);
+        $("#cxldpre").html(amount+"元");
+    });
+}
+
+/**---分享功能----*/
+var method=function(){
+	wx.showMenuItems({
+	    menuList: ['menuItem:share:appMessage'] // 要显示的菜单项
+	});
+	var shareStr={
+			"body":{
+				"cxSessionId":cxSessionId
+			}
+	}
+	shareStr = JSON.stringify(shareStr);
+	shareStr = UrlEncode(shareStr); // 加密过后的操作
+	var shareurl=base.url+'weixin/wxcar/html/carinsure/shareOrderDetail.html?jsonKey='+shareStr;// 分享链接
+	var shareImgUrl=base.url+"weixin/wxcar/images/carshare.png";
+	//分享给朋友
+	wx.onMenuShareAppMessage({
+	    title: '同道出行', // 分享标题
+	    desc: '专业车险在线展业平台', // 分享描述
+	    link:shareurl , // 分享链接
+	    imgUrl: shareImgUrl, // 分享图标
+	    type: '', // 分享类型,music、video或link，不填默认为link
+	    dataUrl: ''
+	});
 }

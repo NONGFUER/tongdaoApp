@@ -2,7 +2,7 @@
 header {
 	position: fixed;
 	top:0;
-	z-index: 9999;
+	z-index: 20;
 }
 /*----------------------------品牌型号列表---------------------------------------*/ 
 .searcharea{
@@ -52,13 +52,13 @@ header {
 	width: 100%;
 	position: absolute;
 }
-.divWrapper {
+/* .divWrapper {
 	width: 100%;
 	float: left;
 	position: relative;
 	background-color: #f7f7f7;
 	z-index: 100;
-}
+} */
 .wrapper_line{
 	margin-left:5px;
 	margin-top:6px;

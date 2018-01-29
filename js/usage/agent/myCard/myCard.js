@@ -142,11 +142,57 @@ function getBusinessCard(data) {
 function shareHandle() {
 	var title = '我是天安佰盈保险代理人' + vm.name;
 	var desc = '愿用我的保险专业为您保驾护航,立刻点击查看我的名片。';
-	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	var shareurl = base.url + "tongdaoApp/html/agent/myCard/myCardwx.html?jsonKey=" + jsonStr;
 	var picUrl = base.url + "tongdaoApp/image/share/tongdaoic.png";
-	shareMethod(shareurl, title, desc, "mingpian", picUrl);
+	var flag='3';
+	urlParm.state='5';
+	urlParm.fl='2';
+	urlParm.title='我的名片二维码';
+	urlParm.name=title;
+	urlParm.ccName=title;
+	urlParm.desc=desc;
+	urlParm.picUrl=picUrl;
+	urlParm.rightIco='0';
+	var urlParmto={
+		"userCode":urlParm.userCode,
+		"roleType":urlParm.roleType,
+		"transToken":urlParm.transToken,
+		"customerId":urlParm.customerId,
+		"frompage":urlParm.frompage,
+	}
+	urlParmto.rightIco='0';
+	var jsonStrto = UrlEncode(JSON.stringify(urlParmto));
+	urlParm.shareurl= base.url + "tongdaoApp/html/agent/myCard/myCardwx.html?jsonKey=" + jsonStrto;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink=base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
+	var shareurl = base.url + "tongdaoApp/html/agent/myCard/myCardwx.html?jsonKey=" + jsonStr;
+	shareMethod(shareurl, title, desc,flag,picUrl,twolink);
 };
+function toQrcodeUrl(){
+	var title = '我是天安佰盈保险代理人' + vm.name;
+	var desc = '愿用我的保险专业为您保驾护航,立刻点击查看我的名片。';
+	var picUrl = base.url + "tongdaoApp/image/share/tongdaoic.png";
+	urlParm.state='5';
+	urlParm.fl='2';
+	urlParm.title='我的名片二维码';
+	urlParm.ccName=title;
+	urlParm.name=title;
+	urlParm.desc=desc;
+	urlParm.picUrl=picUrl;
+	urlParm.rightIco='0';
+	var urlParmto={
+		"userCode":urlParm.userCode,
+		"roleType":urlParm.roleType,
+		"transToken":urlParm.transToken,
+		"customerId":urlParm.customerId,
+		"frompage":urlParm.frompage,
+	}
+	urlParmto.rightIco='0';
+	var jsonStrto = UrlEncode(JSON.stringify(urlParmto));
+	urlParm.shareurl= base.url + "tongdaoApp/html/agent/myCard/myCardwx.html?jsonKey=" + jsonStrto;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink=base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
+	window.location.href = twolink;
+}
 /*登录失效*/
 function lognCont() {
 	loginControl();

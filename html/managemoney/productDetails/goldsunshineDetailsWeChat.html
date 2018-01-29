@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>产品详细</title>
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/usage/managemoney/productDetails/productDetails.css" />
+	</head>
+	<style type="text/css">
+		.man-div-anli_ul {
+			padding: 10px 10px 10px 10px;
+			margin: 0 auto;
+		}
+		
+		.man-div-anli_ul li p {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		
+		.man-div-body-ul_li_div_anli {
+			background-color: #FFFFFF;
+			padding: 10px 0px 0px 0px;
+		}
+		
+		table.gridtable {
+			font-size: 12px;
+			color: #333333;
+			border-width: 1px;
+			border-color: #666666;
+			border-collapse: collapse;
+			margin: 0 auto;
+			width: 100%;
+		}
+		
+		table.gridtable th {
+			border-width: 1px;
+			padding: 2px;
+			border-style: solid;
+			border-color: #666666;
+			background-color: #48a0f0;
+			color: #FFFFFF;
+		}
+		
+		table.gridtable td {
+			text-align: center;
+			border-width: 1px;
+			padding: 8px;
+			border-style: solid;
+			border-color: #666666;
+			background-color: #ffffff;
+		}
+		
+		table .table_title {
+			text-align: center;
+		}
+		
+		.tbs {
+			width: 100%;
+			overflow: scroll;
+			overflow-y: hidden;
+		}
+		
+		.miaoshu {
+			width: 100%;
+			font-size: 10px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.man-div-body-ul_li_div_two ul li{
+			height: auto;
+		}
+		.man-div-body-ul_li_div_two ul li span:last-child {
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 3;
+			overflow: hidden;
+			line-height: 41px;
+			width: 70%;
+			height: auto;
+			white-space: inherit;
+		}
+	</style>
+
+	<body>
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="man mui-table-view" id='list' v-cloak>
+					<div class="man-div-body-ul_li_div mb10">
+						<ul class="man-div-body-ul_li_div_ul1">
+							<li class="mb30">
+								<span class="heise" v-html="Objectitle.commodityCombination.commodityCombinationName"></span>
+							</li>
+							<!--<li class="list_two">
+								<h1 v-html="Objectitle.commodityCombination.remark"></h1>
+								<span class="miaoshu">（产品收益需根据被保险人年龄、性别才能最终确定）</span>
+							</li>-->
+							<li class="li_body">
+								<span v-html="Objectitle.commodityCombination.startPiece">1000</span>
+								<span class="xianshu"></span>
+								<span v-text="chiyoudate">365</span>
+							</li>
+							<li class="li_body_two">
+								<span>起售金额(元)</span>
+								<span class="xianshu"></span>
+								<span v-text="chiyou">建议持有(天)</span>
+							</li>
+						</ul>
+					</div>
+					<!--产品介绍-->
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title">
+							<div class="body_title_div">产品简介</div>
+							<!--<div class="jiantou"></div>-->
+							<div class="xian"></div>
+						</div>
+						<div class="mui-card-content">
+							<img v-bind:src="touzizhouqi" alt="" />
+						</div>
+					</div>
+					<!--产品保险责任-->
+					<div class="man-div-body-ul_li_div_anli mb10">
+						<div class="body_title">
+							<div class="body_title_div">产品保险责任</div>
+							<!--<div class="jiantou"></div>-->
+							<div class="xian"></div>
+						</div>
+						<ul class="man-div-anli_ul">
+							<li v-html="baoxianzeren" style="padding: 10px;">
+
+							</li>
+						</ul>
+					</div>
+					<!--案例介绍-->
+					<!--温馨提示-->
+					<div class="man-div-body-ul_li_div_anli mb10">
+						<div class="body_title">
+							<div class="body_title_div">温馨提示</div>
+							<!--<div class="jiantou"></div>-->
+							<div class="xian"></div>
+						</div>
+						<ul class="man-div-anli_ul">
+							<li v-html="wenxin">
+							</li>
+						</ul>
+					</div>
+					<!--产品信息-->
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title">
+							<div class="body_title_div">产品基本信息</div>
+							<div class="jiantou"></div>
+							<div class="xian"></div>
+						</div>
+						<ul class="man-div-body-ul">
+							<template v-for="(value,key) in CommodityCombinationModuleList">
+								<li>
+									<span v-html="value.subModuleName">承保公司</span>
+									<span v-html="value.modueInfo"></span>
+								</li>
+								<li class="xianli"></li>
+							</template>
+						</ul>
+					</div>
+					<!--相关协议-->
+					<div class="man-div-body-ul_li_div_three mb10">
+						<div class="body_title">
+							<div class="body_title_div">相关协议</div>
+							<div class="jiantou"></div>
+							<div class="xian"></div>
+						</div>
+						<ul class="man-div-body-ul_three" id='xiagguan'>
+							<template v-for="(value,key) in xiangguanxieyi">
+								<li class="neirong" v-bind:subModuleName="value.subModuleName" v-bind:modueInfo='value.modueInfo'>
+									<span class="tiaokuan" v-html="value.subModuleName"></span>
+									<span class="youjiantouhuise"></span>
+								</li>
+								<li class="xianli"></li>
+							</template>
+						</ul>
+					</div>
+					<div class="man-div-body-ul_li_div_btn_one">
+						<!--<ul>
+							<li>
+								<span class="biao"></span>
+								<span>该产品为投资连结保险,投资回报具有不确定性,产品投资风险由投保人承担。</span>
+								<div>
+									<span>如您需要追加保险费，调整保额，请拨打4008-500-365客服电话咨询客服进行申请办理</span>
+								</div>
+							</li>
+						</ul>-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--确认购买-->
+		<div class="man-div-body-ul_li_div_btn" style="position: fixed;">
+			<div id="huifang" class="div_btn" style="display: none;">立即购买</div>
+		</div>
+		<div id="product_footer" class="footer yincang">立即购买</div>
+		<div id="shadow" class="shadow" style="display:none;">
+			<div class="tip">
+				<div class="tiphead">
+					<p>温馨提示</p>
+					<!-- <img src="../../image/delete.png" class="cancleimg"> -->
+				</div>
+				<div class="tipbody">
+					<p>我已完成投资风险承受能力测试，并已明白<span id="pdname"></span>产品所需承担的风险高于投资风险承受评估建议的风险承受能力，根据本人意愿，仍然愿意继续购买。</p>
+				</div>
+				<div class="tipfoot">
+					<div class="cancle">放弃购买</div>
+					<div class="retest" onclick="buy()">继续购买</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../../js/lib/widget/mui/mui.min.js"></script>
+	<script src="../../../js/lib/common/zepto.min.js"></script>
+	<script src="../../../js/lib/common/jweixin-1.1.0.js"></script>
+    <script src="../../../js/lib/common/wx-gzpt-share.js"></script>
+    <script src="../../../js/lib/common/weixin.js"></script>
+	<script src="../../../js/lib/common/base.js"></script>
+	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
+	<script src="../../../js/usage/managemoney/productDetails/goldsunshineDetailsWeChat.js"></script>
+
+</html>

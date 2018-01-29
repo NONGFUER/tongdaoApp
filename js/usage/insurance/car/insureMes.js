@@ -92,7 +92,7 @@ $.addPriceContent = function(param) {
 		//车型产地  进口车、合资车、国产车
 		producingarea=param.cxInfo.cxCarMessage.producingarea;
 		// 总保费
-		$("#summoney").html("￥"+ $.formatNumOfTwo(param.cxInfo.cxOffer.totalpremium));// ￥7200.00
+		$("#summoney").html("￥"+ $.formatNumOfTwo(param.cxInfo.cxOffer.totalPre));// ￥7200.00
 
 		
 		var businessPre=param.cxInfo.cxOffer.businessPre;
@@ -131,6 +131,14 @@ $.addPriceContent = function(param) {
 		$("#elrLevelCOM").html(changeLevel(orderP.cxInfo.cxOrder.elrLevelCom));//商业险风险等级
 		$("#elrLevelCTP").html(changeLevel(orderP.cxInfo.cxOrder.elrLevelCtp));//交强险风险等级
 		
+		//人车联动
+		if(param.cxInfo.cxOrder.rcldIndicate=="1"){
+			$("#reldProductName").html(param.cxInfo.cxOrder.rcldProductName);
+			$("#rcldBegindate").html(timeFormatDate(param.cxInfo.cxOffer.rcldBegindate.time, 'yyyy-MM-dd'));
+			$("#reldEnddate").html(timeFormatDate(param.cxInfo.cxOffer.rcldEnddate.time, 'yyyy-MM-dd'));
+			$("#rcldmoney").html("￥"+param.cxInfo.cxOrder.rcldProductAmount);
+			$("#rcld").show();
+		}
 
 		// 被保人信息
 		// 姓名

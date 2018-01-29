@@ -1,0 +1,285 @@
+.redDoor{
+	background: #f7313b  no-repeat center top;
+    background-size: 100% auto;
+    width:100%;   
+    padding-top:1050px; 
+}
+.lookResult {
+    position: absolute;
+    right: 0;
+    top: 13px;
+    color: #fff;
+    height: 34px;
+    width:121px;
+    overflow: hidden;   
+}
+.wenzi{
+	position:absolute;
+	left: 30%;
+    /* top: 54%; */
+    width:38%;
+    margin:0 auto;
+}
+.timeShow{
+	width:100%;
+	position:absolute;
+	color:white;
+	text-align:center;
+	font-size:14px;
+}
+.chance{
+	width:100%;
+	position:absolute;
+	color:white;
+	text-align:center;
+	font-size:14px;
+}
+.startButton{
+	position:absolute;
+	width:100%;
+	font-size:16px;
+	color:#fff;
+	margin:auto;
+	text-align:center;
+	background:url('../../../../image/agent/openDoorRed/unstart.png') no-repeat center top;
+	background-size:92% auto;
+}
+.startButton img{
+	margin:0 auto;
+	width:92%;
+}
+.time{
+    background: #222;
+    display: inline-block;
+    min-width: 20px;
+    height: 24px;
+    padding: 2px 4px;
+    margin: 0 8px;
+    border-radius: 4px 4px 4px 4px;
+}
+#chance{
+	display:inline-block;
+	margin:0 10px;
+}
+.tolucky{
+	color:#fff45c;	
+}
+.buttonFont{
+}
+.rewards{
+	width:100%;
+	margin:auto;
+	position: absolute;
+}
+.rewardsbg{
+	width:92%;
+	height:85px;
+	margin: 0 auto;
+	background:#b7021e;
+	padding:10px 3% 10px 3% ;
+	border-radius:10px;
+}
+.rules{
+	width:100%;
+	margin:auto;
+	position: absolute;
+}
+.redFrame{
+	width:92%;
+	margin: 0 auto;
+	background:#cb0826;
+	padding:10px 3% 10px 3% ;
+	border-radius:10px;
+}
+
+.rules p{
+	color:#fff;
+}
+
+.bottom10{
+	margin-bottom:5px;
+}
+/* 抽奖明细 */
+.count{
+	width:100%;
+	text-align:center;
+	height:40px;
+	line-height:40px;
+	font-size:14px;
+	color:#4a4a4a;
+}
+.boldFont{
+	font-weight:bold;
+	color:#222;	
+}
+.bottomGary{
+	box-shadow:0px 3px 5px #eaeaea;
+}
+.scale-1px{
+  box-shadow: inset 0px -1px 1px -1px #c8c7cc;
+}
+.decoration{
+	color:#7c5600;
+	text-decoration:underline;
+}
+.red{
+	color:#f93b36;
+}
+/*表格*/
+.table, .table * {
+	margin: 0 auto; 
+	padding: 0;
+	font-size: 14px;
+}   
+.table {
+	display: table; 
+	width: 100%; 
+	border-collapse: collapse;
+	background:#fff;
+}   
+.table-tr {
+	display: table-row; 
+	height: 44px;
+}   
+.table-th {
+	display: table-cell;
+	font-weight: bold;
+	height: 40px;
+	/* border: 1px solid gray; */
+	text-align: center;
+	vertical-align: middle;
+}   
+.table-td {
+	display: table-cell; 
+	height: 44px;
+	/* border: 1px solid gray;  */
+	text-align: center;
+	vertical-align: middle;
+}
+
+/**/
+.padding15{
+	padding-top:15px;
+	padding-bottom:15px;
+}
+	
+.winnerList{	
+	width:86%;
+	border: 1px solid #eaeaea;
+}
+#wintt{	
+	width:100%;
+	border: 1px solid #222;
+	margin-top:10px;
+	background:#cb0a26;
+	color:#fff;
+}
+#wintt .scale-1px{
+  box-shadow: inset 0px -1px 1px -1px #222;
+}
+#wintt .grayBcak{
+	background:#bc0320;	
+}
+.grayBcak{
+	background:#f5f5f5;	
+}
+.winnerList .table-th{
+	height:27px;
+}
+.winnerList .table-tr{
+	height:27px;
+}
+.winnerList .table-td{
+	height:27px;
+	font-size:12px;
+}
+/*保单列表*/
+.detailHead{
+	height:46px;
+	font-size:12px;
+	padding:0 4%;
+	overflow:hidden;
+	border-bottom:1px solid #eaeaea;
+}
+.headLeft{
+	height:46px;
+	line-height:46px;
+	float:left;
+	overflow:hidden;
+}
+.headRight{
+	height:46px;
+	line-height:46px;
+	float:right;
+	overflow:hidden;
+}
+.detailItem{
+	width:96%;
+	margin-left:4%;
+	background:#fff;
+	padding:10px;
+	font-size:12px;
+	border-bottom: 1px solid #eaeaea;
+}
+.liitleTag{
+	font-size: 12px;
+    float: right;
+    padding: 0 10px;
+    overflow: hidden;
+    min-width: 58px;
+    text-align: center;
+    height: 20px;
+    line-height:16px;   
+    border-radius: 10px;   
+    border: 1px solid #fbfefe;
+    color: #785e00;
+    background:#fafddd;
+}
+.liitleRedTag{
+	font-size: 12px;
+    float: right;
+    padding: 0 10px;
+    overflow: hidden;
+    min-width: 58px;
+    text-align: center;
+    height: 20px;
+    line-height:16px;   
+    border-radius: 10px;   
+    border: 1px solid #ffebef;
+    color: #ff181a;
+    background:#ffebef;
+}
+.headLeft img{
+	width:12px;
+	height:12px;	  
+    position: relative;
+    top: -2px;
+    margin-right: 5px;
+}
+.font1{
+	color:#fff;
+	font-size:14px;
+}
+.font2{
+	color:yellow;
+	font-size:20px
+}
+.font3{
+	font-size:14px;
+}
+.imgIphone{
+	width:100px;
+	float:right;
+}
+.leftFont{
+	float:left;
+}
+.nbsp{
+	height:10px
+}
+.mingdan{
+	margin-bottom:10px;
+}
+.font4{
+	color:yellow;
+}

@@ -288,11 +288,22 @@ function getProductSharePic(productCode) {
 }
 
 function shareHandle() {
+	urlParm.state='5';
+	urlParm.fl='2';
+	urlParm.ccName=vm.Objectitle.commodityCombination.commodityCombinationAbbreviation;
+	urlParm.ccId=commodityCombinationId;
+	urlParm.name=vm.name;
+	urlParm.desc=vm.title;
+	urlParm.title='同道保险二维码';
 	var title = vm.name;
+	var flag='3';
 	var desc = vm.title;
-	var shareurl = base.url + "tongdaoApp/html/share/kongbai.html?mobile=" + userCode + '&ccId=' + ccId + '&type=5';
-	var picUrl = getProductSharePic(ccId);
-	shareMethod(shareurl, title, desc, "baodan", picUrl);
+	var shareurl = base.url + "tongdaoApp/html/share/kongbai.html?mobile=" + userCode + '&ccId=' + commodityCombinationId + '&type=5';
+	var picUrl = getProductSharePic(commodityCombinationId);
+	urlParm.picUrl=picUrl;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink=base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
+	shareMethod(shareurl, title, desc,flag,picUrl,twolink);
 };
 /*隐藏手机号中间几位*/
 function phoneyin(userCode) {
@@ -310,4 +321,9 @@ function register() {
 
 function backlast() {
 	sysback();
+}
+function toQrcodeUrl(){
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink=base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
+	window.location.href = twolink;
 }

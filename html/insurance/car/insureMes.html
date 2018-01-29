@@ -19,7 +19,8 @@
     <script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js" ></script>
     <script type="text/javascript" src="../../../js/lib/widget/mui/mui.picker.min.js"></script>
     <script type="text/javascript" src="../../../js/lib/common/base.js" ></script>
-    <script type="text/javascript" src="../../../js/lib/common/common.js" ></script> 
+    <script type="text/javascript" src="../../../js/lib/common/common.js" ></script>
+    <script type="text/javascript" src="../../../js/lib/common/cxutil.js" ></script> 
     <script type="text/javascript" src="../../../js/lib/common/underscore.js" ></script> 
     <script type="text/javascript" src="../../../js/usage/insurance/car/insureMes.js" ></script>
 </head>
@@ -113,49 +114,32 @@
 						<table id="cxRisk" class="jqxTable border-1px-bottom">
 						</table>
 					</div>
-				<!--	<article id="VCIarea" class="policyItem border-1px-bottom">
-						<span class="policyname">商业险保费<span id="elrLevelCOM" style="font-size: 14px"></span></span>
-						<span class="policyPrice" id="im_busmoney"></span>
-					</article>
-					<article id="busPolnoArea"  class="policyNoArea" style="display: none;">
-						<span class="policyNoName">商业险保单号</span>
-						<div class="policyNoNum">
-						     <span id="busPolno"></span>
-						</div>
-					</article>
-					<article class="VCIdate" id="vci">
-						<div class="VCI_data">商业险保障日期</div>
-						<div class="VCI_data">
-							<span id="im_busBeginDate"></span>&nbsp;&nbsp;<span>0时起</span>&nbsp;&nbsp;&nbsp;
-							<span id="im_busEndDate"></span>&nbsp;&nbsp;<span>24时止</span>
-						</div>
-					</article>
-					<section id="policycontent">
-						
-					</section>
-					
-					<article id="TCIarea" class="policyItem margin1rem border-1px-bottom">
-						<span class="policyname">交强保险费<span id="elrLevelCTP" style="font-size: 14px"></span></span>
-						<span class="policyPrice" id="im_jqxmoney"></span>
-					</article>
-					<article id="jqxPolnoArea"  class="policyNoArea" style="display: none;">
-						<span class="policyNoName">交强险保单号</span>
-						<div class="policyNoNum">
-						     <span id="jqxPolno"></span>
-						</div>
-					</article>
-					<article id="im_jqxDateArea" class="TCIdate">
-						<div class="VCI_data">交强险保障日期</div>
-						<div class="VCI_data">
-							<span id="im_jqxBeginDate"></span>&nbsp;&nbsp;<span>0时起</span>&nbsp;&nbsp;&nbsp;
-							<span id="im_jqxEndDate"></span>&nbsp;&nbsp;<span>24时止</span>
-						</div>
-					</article>
-					
-					<article class="policyItem margin1rem border-1px-bottom" id="ccsui">
-						<span class="policyname">车船税</span>
-						<span class="policyPrice" id="im_vehiclemoney"></span>
-					</article> -->
+				
+				     <!-- 	人车联动 -->
+				   <ul id="rcld" class="mui-table-view">
+				        <li class="mui-table-view-cell">
+				            <div id="reldProductName" class="mui-col-xs-12 mui-text-left"></div>
+				        </li>
+						<li class="mui-table-view-cell">
+							<div class="mui-row">
+						        <div class="mui-col-xs-4 mui-text-left">保险起保日期</div>
+						        <div class="mui-col-xs-8 mui-text-right"><span id="rcldBegindate"></span> 00:00 止</div>
+						    </div>
+						</li>
+						<li class="mui-table-view-cell">
+							<div class="mui-row">
+						        <div class="mui-col-xs-4 mui-text-left">保险终止日期</div>
+						        <div class="mui-col-xs-8 mui-text-right"><span id="reldEnddate"></span> 24:00 止</div>
+						    </div>
+						</li>
+						<li class="mui-table-view-cell">
+							<div class="mui-row">
+						        <div class="mui-col-xs-4 mui-text-left">保费</div>
+						        <div class="mui-col-xs-8 mui-text-right"><span id="rcldmoney"></span></div>
+						    </div>
+						</li>
+				    </ul>
+				    
 					<article id="carMesarea" class="policyItem margin1rem border-1px-bottom">
 						<span class="policyname">车辆信息</span>
 						<img src="../../../image/insurance/car/index_bottom.png"/>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>购买信息</title>
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.picker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/usage/managemoney/messageFillout/messageFillout.css" />
+	</head>
+	<style type="text/css">
+		#shenfenzhengyxq {
+			display: inline-block;
+			vertical-align: top;
+			margin-left: 10px;
+			height: 41px;
+			line-height: 41px;
+		}
+		
+		.changyongbaoxian {
+			float: right;
+			margin-right: 10px;
+			color: #48a0f0;
+			font-size: 14px;
+		}
+		
+		#name {
+			text-align: right;
+			font-size: 15px;
+			color: #333;
+		}
+		
+		#phone {
+			text-align: right;
+			font-size: 15px;
+			color: #333;
+		}
+		
+		#idNo {
+			text-align: right;
+			font-size: 15px;
+			color: #333;
+		}
+		
+		.wenhaoico {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			background: url(../../../image/common/wen.png) no-repeat;
+			background-size: 100%;
+			vertical-align: middle;
+		}
+		
+		.mui-checkbox input[type=checkbox]:checked:before,
+		.mui-radio input[type=radio]:checked:before {
+			color: #1b6bb8;
+		}
+		
+		.jinzhi {
+			background-color: rgb(136, 136, 136);
+		}
+		
+		.guochang {
+			width: 70%;
+		}
+		.man-div-body-ul li span:last-child {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		
+		.man-div-body-ul li span:first-child {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		
+		.man-div-body-ul_li_div_toubao .man-div-body-ul li{
+			height: auto;
+		}
+		.man-div-body-ul_li_div_btn {
+			position: relative;
+		}
+		.man-div-body-ul_bank span:last-child div{
+			    display: inline-block;
+			    vertical-align: top;
+			    margin-left: 10px;
+			    height: auto;
+			    line-height: 41px;
+		}
+		.man-div-body-ul li span:last-child {
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 3;
+			overflow: hidden;
+			line-height: 41px;
+			width: 70%;
+			height: auto;
+			white-space: inherit;
+		}
+	</style>
+
+	<body>
+		<header id='tou' class="mui-bar mui-bar-nav" v-cloak>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">产品详情</h1>
+		</header>
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="man mui-table-view" id='list'>
+					<!--投保人信息-->
+					<div class="man-div-body-ul_li_div_toubao mb10">
+						<div class="body_title_div">*提示：被保险人职业风险在五类及以上职业不可投保</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li class="man-div-body-ul_bank">
+								<span>行业名称:</span>
+								<span>
+									<div class="guochang" id='hangyename' data-where=''>请选择</div>
+									<div class="youjiantouhuise"></div>
+								</span>
+							</li>
+							<li class="xianli"></li>
+							<li class="man-div-body-ul_bank">
+								<span>行业分类:</span>
+								<span>
+									<div class="guochang" id='hangyefenlei' data-where=''>请选择</div>
+									<div class="youjiantouhuise"></div>
+								</span>
+							</li>
+							<li class="xianli"></li>
+							<li class="man-div-body-ul_bank">
+								<span>职业名称:</span>
+								<span>
+									<div class="guochang" id='zhiyename' data-where=''>请选择</div>
+									<div class="youjiantouhuise"></div>
+								</span>
+							</li>
+							<li class="xianli"></li>
+							<li class="man-div-body-ul_bank">
+								<span>岗位名称:</span>
+								<span>
+									<div class="guochang" id='gangweiname' data-where=''>请选择</div>
+									<div class="youjiantouhuise"></div>
+								</span>
+							</li>
+							<li class="xianli"></li>
+							<li class="man-div-body-ul_bank">
+								<span>职业风险等级:</span>
+								<span style="text-align: right;">
+									<div class="guochang" id='dengji' style="width: 15%;"></div>
+									<div class="guochang" id='shifou' style="color: #e23827;width: 60%;"></div>
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="man-div-body-ul_li_div_btn">
+					<div id="huifang" class="div_btn jinzhi">提交</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../../js/lib/widget/mui/mui.min.js"></script>
+	<script src="../../../js/lib/widget/mui/mui.picker.min.js"></script>
+	<script src="../../../js/lib/widget/mui/mui.poppicker.js"></script>
+	<script src="../../../js/lib/common/zepto.min.js"></script>
+	<script src="../../../js/lib/common/base.js"></script>
+	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
+	<script src="../../../js/usage/managemoney/messageFillout/goldsunzhiye.js"></script>
+
+</html>

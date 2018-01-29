@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="../../../css/lib/widget/mui/mui.picker.min.css" />
     <link rel="stylesheet" href="../../../css/lib/common/base.css">
     <link rel="stylesheet" href="../../../css/lib/common/common.css">
-    <link rel="stylesheet" href="../../../css/usage/insurance/insure.css">
+    <link rel="stylesheet" href="../../../css/usage/insurance/insure.css?v=20171205">
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav hidden">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left" onclick='backlast()'></a>
 			<h1 class="mui-title">投保信息</h1>
 	</header>
     <div id="bodyMuiScroll" class="mui-scroll-wrapper">
@@ -68,8 +68,8 @@
      					<div id="commonHoldersto" class="isSame mytitle" style="display: none;">常用保险人</div>
      					<div id="isSame" class="isSame on yincang"><img src="../../../image/common/gou.png" alt="">同投保人信息</div>
      				</dt>
-     				<dd class="beiNone">
-     					<label>与投保人关系</label> <span id="relation">请选择</span>
+     				<dd class="beiNone ib" style='display:none'>
+     					<label>与投保人关系</label><img alt="" src="../../../image/insurance/down.png" class="down prdown">  <span id="relation">请选择</span>
      					<!-- <input type="text" id="relation" value="请选择" data-relation="" readonly/> -->
      				</dd>
      				<dd class="beiNone">
@@ -86,12 +86,10 @@
 					</dd>
 					<dd class="beiNone">
      					<label>出生日期    </label> <input type="text" id="recogBirthDate" value="" readonly/>
-					</dd>
-					<!--
+					</dd>					
 					<dd class="beiNone">
      					<label>手机号码    </label> <input type="text" id="recogTelNo" value="" maxlength="11" placeholder="请输入正确的手机号码"/>
-					</dd>
-					<-->					
+					</dd>					
 					<dd style="display:none" class="zhiye">
      					<label>承保职业    </label> <img alt="" src="../../../image/insurance/wenhao.png" class="search"><img alt="" src="../../../image/insurance/down.png" class="down prdown"><span id="profession">请选择职业</span> 
 					</dd>
@@ -180,7 +178,7 @@
     <script src="../../../js/lib/widget/mui/mui.picker.min.js"></script>
     <script src="../../../js/lib/common/base.js"></script>
 	<script src="../../../js/lib/common/common.js"></script>
-	<script src="../../../js/usage/insurance/head.js?v=201711241647"></script>
-	<script src="../../../js/usage/insurance/insure.js?v=201711281647"></script>
+	<script src="../../../js/usage/insurance/head.js?v=201712211647"></script>
+	<script src="../../../js/usage/insurance/insure.js?v=201712211647"></script>
 </body>
 </html>

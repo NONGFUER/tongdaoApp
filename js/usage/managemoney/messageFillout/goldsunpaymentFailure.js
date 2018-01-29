@@ -22,7 +22,7 @@ $(function() {
 			"orderNo": vm.orderNo,
 		}
 	}
-	var url = base.url + 'ygBasic/getYgToken.do';
+	var url = base.url + 'ygJmyBasic/getYgToken.do';
 	$.reqAjaxs(url, reqData, getYgToken);
 
 	function getYgToken(data) {
@@ -44,7 +44,7 @@ $(function() {
 			"orderNo": vm.orderNo,
 		}
 	}
-	var url = base.url + 'ygBasic/getYgOrderInform.do';
+	var url = base.url + 'ygJmyBasic/getYgOrderInform.do';
 	$.reqAjaxs(url, reqData, getYgOrderInform);
 	function getYgOrderInform(data) {
 		console.log(data);
@@ -61,7 +61,7 @@ $(function() {
 	$(".on1").unbind("tap").bind("tap", function() {
 		vm.urlParm.title = '产品详情';
 		var jsonStr = UrlEncode(JSON.stringify(vm.urlParm));
-		window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/sunshineDetails.html?jsonKey=" + jsonStr;
+		window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/goldsunshineDetails.html?jsonKey=" + jsonStr;
 		/*if(urlParm.channel=='01'){
 			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/sunshineDetails.html?jsonKey=" + jsonStr;
 		}else{

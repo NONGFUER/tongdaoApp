@@ -2,12 +2,18 @@ var calChoices = urlParm.calChoices;
 var ageCal = "";
 var genderCal = "";
 var holder = urlParm.holder;
+var holdertwo = urlParm.holdertwo;
+var holderthree = urlParm.holderthree;
+var holderfour = urlParm.holderfour;
 $(function(){
 	console.log(urlParm); //删
 	getCalculateOptions();	//获取试算条件
 	sendCaldoRequest(ccId); //进行保费试算并显示
 	showProductInfo(cName,cPrem,urlParm.bzPic);		//保险信息展示
 	commomHolder(holder);
+	commomHoldertwo(holdertwo);
+	commomHolderthree(holderthree);
+	commomHolderfour(holderfour);
 	idNoChange("#certificateNo","#gender","#birthDate");					//监控投保人身份证
 	idNoChange("#recogCertificateNo2","#recogGender2","#recogBirthDate2");	//监控被保人信息2身份证
 	idNoChange("#recogCertificateNo3","#recogGender3","#recogBirthDate3");	//监控被保人信息3身份证
@@ -26,7 +32,34 @@ $(function(){
 		urlParm.userCode = mobile;
 		urlParm.title = "常用投保人";
 		urlParm.rightIco = "4";
-		urlParm.frompage = "familyInsureHtml"
+		urlParm.frompage = "familyInsureHtmlShare"
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	    window.location.href= base.url + "tongdaoApp/html/useApplicant/useApplicant.html?jsonKey="+jsonStr;
+	});
+	//跳转到常用保险人2
+	$("#commonHolderstwo").unbind("tap").bind("tap",function(){
+		urlParm.userCode = mobile;
+		urlParm.title = "常用被保人二";
+		urlParm.rightIco = "4";
+		urlParm.frompage = "familyInsureHtmlShare"
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	    window.location.href= base.url + "tongdaoApp/html/useApplicant/useApplicant.html?jsonKey="+jsonStr;
+	});
+	//跳转到常用保险人3
+	$("#commonHoldersthree").unbind("tap").bind("tap",function(){
+		urlParm.userCode = mobile;
+		urlParm.title = "常用被保人三";
+		urlParm.rightIco = "4";
+		urlParm.frompage = "familyInsureHtmlShare"
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	    window.location.href= base.url + "tongdaoApp/html/useApplicant/useApplicant.html?jsonKey="+jsonStr;
+	});
+	//跳转到常用保险人4
+	$("#commonHoldersfour").unbind("tap").bind("tap",function(){
+		urlParm.userCode = mobile;
+		urlParm.title = "常用被保人四";
+		urlParm.rightIco = "4";
+		urlParm.frompage = "familyInsureHtmlShare"
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	    window.location.href= base.url + "tongdaoApp/html/useApplicant/useApplicant.html?jsonKey="+jsonStr;
 	});
@@ -132,6 +165,52 @@ function commomHolder(commonholder){
 		genderCal = $.getSex(insuIden) + "";			
 	}
 }
+//从常用投保人带出投保人信息2
+function commomHoldertwo(commonholdertwo){
+	if(commonholdertwo){
+		var insuIden  = holdertwo.idNo;							//投保人身份证
+		var insuName  = holdertwo.name;							//投保人姓名
+		var insuPhone = holdertwo.phone;							//投保人手机号
+		var insuEmail = holdertwo.email;							//投保人邮箱
+		var insuSex   = $.getSex(insuIden) == 1 ? "男" :"女";	//投保人性别
+		var	insuBirth = $.getBirthDay(insuIden);				//生日
+		$("#recognizeeName2").val(insuName);				//投保人姓名
+		$("#recogCertificateNo2").val(insuIden);			//证件号码
+		$("#recogBirthDate2").val(insuBirth);					//手机号码
+		$("#recogGender2").val(insuSex);	
+	}
+}
+//从常用投保人带出投保人信息3
+function commomHolderthree(commonholderthree){
+	if(commonholderthree){
+		var insuIden  = holderthree.idNo;							//投保人身份证
+		var insuName  = holderthree.name;							//投保人姓名
+		var insuPhone = holderthree.phone;							//投保人手机号
+		var insuEmail = holderthree.email;							//投保人邮箱
+		var insuSex   = $.getSex(insuIden) == 1 ? "男" :"女";	//投保人性别
+		var	insuBirth = $.getBirthDay(insuIden);				//生日
+		$("#recognizeeName3").val(insuName);				//投保人姓名
+		$("#recogCertificateNo3").val(insuIden);			//证件号码
+		$("#recogBirthDate3").val(insuBirth);					//手机号码
+		$("#recogGender3").val(insuSex);	
+	}
+}
+//从常用投保人带出投保人信息4
+function commomHolderfour(commonholderfour){
+	if(commonholderfour){
+		var insuIden  = holderfour.idNo;							//投保人身份证
+		var insuName  = holderfour.name;							//投保人姓名
+		var insuPhone = holderfour.phone;							//投保人手机号
+		var insuEmail = holderfour.email;							//投保人邮箱
+		var insuSex   = $.getSex(insuIden) == 1 ? "男" :"女";	//投保人性别
+		var	insuBirth = $.getBirthDay(insuIden);				//生日
+		$("#recognizeeName4").val(insuName);				//投保人姓名
+		$("#recogCertificateNo4").val(insuIden);			//证件号码
+		$("#recogBirthDate4").val(insuBirth);					//手机号码
+		$("#recogGender4").val(insuSex);	
+	}
+}
+
 
 //监控身份证输入变化
 function idNoChange(domid,genderid,dateid){
@@ -461,6 +540,10 @@ function backlast(){
 	urlParm.leftIco = "1";
 	urlParm.rightIco = "1";
 	urlParm.downIco = "0";
+	if(urlParm.holder){delete urlParm.holder}
+	if(urlParm.holdertwo){delete urlParm.holdertwo}
+	if(urlParm.holderthree){delete urlParm.holderthree}
+	if(urlParm.holderfour){delete urlParm.holderfour}
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));	
-	window.location.href = base.url + 'tongdaoApp/html/insurance/main/productDetail.html?jsonKey='+jsonStr;		
+	window.location.href = base.url + 'tongdaoApp/html/share/insurance/main/productDetail.html?jsonKey='+jsonStr;		
 };

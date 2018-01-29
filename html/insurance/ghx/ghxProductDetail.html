@@ -48,13 +48,17 @@
 </head>
 
 <body>
+	<header class="mui-bar mui-bar-nav hidden">
+			<a class=" mui-icon mui-icon-left-nav mui-pull-left" onclick='backlast()'></a>
+			<h1 class="mui-title">投保信息</h1>
+	</header>
     <div id="bodyMuiScroll" class="mui-scroll-wrapper"><div class="mui-scroll">
     <div class="insurance">
         <div class="insurance-banner mb10">
             <img alt="" src="../../../image/banner/ghxDetail.png" class="banner-img" />
             <div class="banner-con whitebackground con">
                 <h3>挂号服务费用补偿保险<span class="look yincang">查看佣金</span></h3>
-                <p class="company">本产品由天安财产保险股份有限公司承保并负责理赔</p>
+                <p class="company">本产品由易安财产保险股份有限公司承保并负责理赔</p>
             </div>
         </div>
         <div class="insurance-choice-ghx whitebackground con mb10">
@@ -63,8 +67,11 @@
                 <div class="conter">
                     <ul class="radio">
                         <li class="on" data-value="199" data-banben="01" data-cid="18" data-index="0">优选版 </li>
+                        <li class="" data-value="498" data-banben="01" data-cid="46" data-index="1" style="width:90px">优选版+陪诊 </li><br clear="left">
                         <li class="" data-value="399" data-banben="02" data-cid="19" data-index="2">卓越版 </li>
-                        <li class="" data-value="999" data-banben="03" data-cid="20" data-index="4">至尊版 </li>
+                        <li class="" data-value="698" data-banben="02" data-cid="47" data-index="3" style="width:90px">卓越版+陪诊  </li><br clear="left">
+                        <li class="" data-value="999" data-banben="03" data-cid="20" data-index="4">至尊版 </li>                                              
+                        <li class="" data-value="1298" data-banben="03" data-cid="48" data-index="5" style="width:90px">至尊版+陪诊  </li>
                     </ul>
                 </div>
             </div>
@@ -79,14 +86,14 @@
                     </ul>
                 </div>
             </div>
-            <div class="d1" id="diagnosis">
+            <!-- <div class="d1" id="diagnosis">
                 <div class="label">就医陪诊:</div>
                 <div class="conter">
                    <ul class="radio">
                         <li class="" data-value="299">陪诊(￥299)</li>                                           
                     </ul>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="insurance-content">
             <ul class="insurance-tab whitebackground">
@@ -276,11 +283,13 @@
 		<div id="toubao" class="a1">立即投保</div>
 	</div>
     <script src="../../../js/lib/common/zepto.min.js"></script>
+    <script src="../../../js/lib/common/jweixin-1.1.0.js"></script>
+    <script src="../../../js/lib/common/wx-gzpt-share.js"></script>
     <script src="../../../js/lib/widget/mui/mui.min.js"></script>
     <script src="../../../js/lib/common/base.js"></script>
     <script src="../../../js/lib/common/common.js"></script>
     <script src="../../../js/usage/insurance/head.js"></script>
-    <script src="../../../js/usage/insurance/ghx/ghxProductDetail.js"></script>
+    <script src="../../../js/usage/insurance/ghx/ghxProductDetail.js?v=201801101450"></script>
 </body>
 
 </html>

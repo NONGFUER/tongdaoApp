@@ -9,6 +9,7 @@ var loginflag = ""; //是否登录标记
 var source = ""; //用户登录来源
 var systemsource = ""; //判断系统类型 
 var request;
+var ua="";//用户代理
 //! function(e, t) {
 //	function i() {
 //		o = 1, e.devicePixelRatioValue = o, s = 1 / o;
@@ -42,6 +43,9 @@ var request;
 $(function() {
 	/*判断系统类型 */
 	issystemsource();
+	/*判断浏览器渲染引擎*/
+	userAgent();
+	
 });
 /*判断系统类型 */
 function issystemsource() {
@@ -73,6 +77,19 @@ function issystemsource() {
 	}
 }
 
+//判断h5页面运行平台
+function userAgent() {
+	
+    var userAgent = navigator.userAgent;
+    var isApp = userAgent.indexOf("tongdao") != -1;
+    var isWechat = userAgent.indexOf("MicroMessenger") != -1;
+    if(isApp){//同道App
+    	ua="isApp";
+    }else if(isWechat){//微信
+    	ua="isWechat";
+    }
+    return ua;
+}
 /*调用壳方法
  * 使用方法：sysback();
  * */
@@ -165,19 +182,46 @@ function cxShareMethod(cxSessionId) {
 	shareStr = JSON.stringify(shareStr);
 	shareStr = UrlEncode(shareStr); // 加密过后的操作
 	var shareurl = base.url + 'weixin/wxcar/html/carinsure/shareOrderDetail.html?jsonKey=' + shareStr; // 分享链接
+	if(ua=="isApp"){
+		if(systemsource == "ios") {
+			var shareParams = {
+				"url": shareurl,
+				"flag": "1",
+				"title": "同道出行", // 分享标题
+				"desc": "专业车险在线展业平台" //描述
+			}
+			objcObject.share(shareParams)
+		} else if(systemsource == "android") {
+			android.JsShareBy("0","0", "同道出行", "专业车险在线展业平台", "", shareurl);
+		}
+	}else if(ua=="isWechat"){
+		$("#zhezhaoImg").show();
+		getConfig(method); 
+	}else{
+		modelAlert("该浏览器不支持分享功能，请在微信中打开该页面！")
+	}
+	
+}
+//防癌险 壳上分享方法
+function shareMethod(shareurl, title, desc, flag, picUrl,twolink) {
 	if(systemsource == "ios") {
 		var shareParams = {
 			"url": shareurl,
-			"flag": "1",
-			"title": "同道出行", // 分享标题
-			"desc": "专业车险在线展业平台" //描述
+			"flag": flag,
+			"title": title, // 分享标题
+			"desc": desc, //描述
+			"descQuan": desc, //描述
+			"picUrl": picUrl,
+			"twolink":twolink,//二维码链接
 		}
 		objcObject.share(shareParams)
 	} else if(systemsource == "android") {
-		android.JsShareBy("2", "同道出行", "专业车险在线展业平台", "", shareurl);
+		//android.JsShareByCopy("3", flag, title, desc, desc, shareurl);
+		android.JsShareBy(flag, picUrl, title, desc, desc, shareurl);
 	}
 }
-//防癌险 壳上分享方法
+/*
+ * //防癌险 壳上分享方法旧版本
 function shareMethod(shareurl, title, desc, flag, picUrl) {
 	if(systemsource == "ios") {
 		var shareParams = {
@@ -194,6 +238,8 @@ function shareMethod(shareurl, title, desc, flag, picUrl) {
 		android.JsShareByCopy2("flag_eCard", picUrl, title, desc, desc, shareurl);
 	}
 }
+*/
+
 //eCard 壳上分享方法
 function ecardShareMethod(shareurl, title, desc, flag, picUrl) {
 	if(systemsource == "ios") {
@@ -270,10 +316,12 @@ function headShow() {
 }
 /*调用壳方法，进壳上登录*/
 function loginControl() {
-	if(systemsource == "ios") {
-		objcObject.login();
-	} else if(systemsource == "android") {
-		android.login();
+	if(ua=="isApp"){
+		if(systemsource == "ios") {
+			objcObject.login();
+		} else if(systemsource == "android") {
+			android.login();
+		}
 	}
 }
 /*调用壳方法，进壳上实名认证*/
@@ -329,10 +377,12 @@ function setTitleMethod(back, tittle, type) {
 
 /**改变壳上标题****/
 function changeTitle(title){
-	if(systemsource == "ios"){
-		objcObject.changeTitle(title)
-	}else if(systemsource == "android"){
-		android.changeTitle(title);
+	if(ua=="isApp"){
+		if(systemsource == "ios"){
+			objcObject.changeTitle(title)
+		}else if(systemsource == "android"){
+			android.changeTitle(title);
+		}
 	}
 }
 //控制头部右边按钮的显示
@@ -382,4 +432,45 @@ function isWeixin(){
 		var wx = false;
 	}
 	return wx;
+}
+
+//封装微信分享方法
+function wechatShare(title,desc,picUrl,shareUrl){
+	var method = function() {		
+		wx.showMenuItems({
+			menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline'] // 要显示的菜单项
+		});
+
+		//分享给朋友
+		wx.onMenuShareAppMessage({
+			title: title, // 分享标题
+			desc: desc, // 分享描述
+			link: shareUrl, // 分享链接
+			imgUrl: picUrl, // 分享图标
+			type: '', // 分享类型,music、video或link，不填默认为link
+			dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+			success: function() {
+				// 用户确认分享后执行的回调函数
+				// mui.alert("您已成功分享给好友！","温馨提示");
+			},
+			cancel: function() {
+				// 用户取消分享后执行的回调函数
+				mui.alert("您取消了分享！", "温馨提示");
+			}
+		});
+		//分享到朋友圈
+		wx.onMenuShareTimeline({
+			title: title + "-" + desc, // 分享描述, // 分享标题  
+			link: shareUrl, // 分享链接  
+			imgUrl: picUrl, // 分享图标  
+			success: function() {
+				// 用户确认分享后执行的回调函数  
+			},
+			cancel: function() {
+				// 用户取消分享后执行的回调函数  
+				mui.alert("您取消了分享！", "温馨提示");
+			}
+		});
+	}
+	getConfig(method);
 }

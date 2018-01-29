@@ -48,6 +48,11 @@
 								<span>订单号</span>
 								<span v-html="Objectitle.financeOrder.orderNo"></span>
 							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>投保单号</span>
+								<span v-html="Objectitle.financeOrder.insureNo"></span>
+							</li>
 						</ul>
 					</div>
 					<div class="man-div-body-ul_li_div_two mb10">
@@ -106,6 +111,14 @@
 						</ul>
 					</div>
 					<!--电子保单-->
+					<div class="man-div-body-ul_li_div_two mb10" v-if="dianzibaodan!=null">
+						<ul class="man-div-body-ul">
+							<li class="baodan">
+								<span class="heise">电子保单</span>
+								<span class="rightjiantou  postop10"></span>
+							</li>
+						</ul>
+					</div>
 					<div class="man-div-body-ul_li_div_btn" style="display: none;">
 						 <div id="liji" class="div_btn">立即支付</div>
 					</div>

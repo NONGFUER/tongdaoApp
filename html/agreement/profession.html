@@ -91,6 +91,10 @@
 			var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));	
 			if( urlParm.frompage == 'proDetail' ){
 				window.location.href = base.url + 'tongdaoApp/html/insurance/main/productDetail.html'+urlParm.search;
+			}else if( urlParm.frompage == 'proDetailQudao' ){//app邮储
+				urlParm.title = "产品详情";
+				var jsonStr = UrlEncode(JSON.stringify(urlParm));
+				window.location.href = base.url + 'weixin/ycCancer/html/insurance/main/productDetail.html?jsonKey='+jsonStr;
 			}else{
 				urlParm.title = "投保信息";
 				var jsonStr = UrlEncode(JSON.stringify(urlParm));

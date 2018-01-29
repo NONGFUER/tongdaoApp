@@ -17,7 +17,7 @@ var leixing = urlParm.leixing;
 var InterValObj; //timer变量，控制时间
 var count = 60; //间隔函数，1秒执行  
 var curCount; //当前剩余秒数
-var productFlag='01';
+var productFlag = '01';
 if(commodityCombinationId = '4') {
 	productFlag = '01';
 } else if(commodityCombinationId = '5') {
@@ -41,7 +41,7 @@ var vm = new Vue({
 		returnVisit: {},
 		channel: "",
 		name: "",
-
+		dianzibaodan: '',
 	},
 	/*mounted() {
 		this.$nextTick(function() {
@@ -85,12 +85,12 @@ $(function() {
 	function getReview(data) {
 		console.log(data)
 	}
-	$(".baodan").unbind("tap").bind("tap", function() {
-		/*正式版使用接口↓*/
-		if(vm.Objectitle.financeOrder.policyForm != "" && vm.Objectitle.financeOrder.policyForm != null) {
-			window.location.href = base.url + vm.Objectitle.financeOrder.policyForm;
-		}
-	})
+	/*$(".baodan").unbind("tap").bind("tap", function() {*/
+	/*正式版使用接口↓*/
+	/*if(vm.Objectitle.financeOrder.policyForm != "" && vm.Objectitle.financeOrder.policyForm != null) {
+		window.location.href = base.url + vm.Objectitle.financeOrder.policyForm;
+	}*/
+	/*})*/
 	$(".chanping").unbind("tap").bind("tap", function() {
 		var commodityCombinationId = vm.Objectitle.financeOrder.commodityCombinationId;
 		var reqData = {
@@ -131,7 +131,7 @@ $(function() {
 							"cardNo": vm.Objectitle.financeOrder.bankCertificate,
 							"orderNo": orderNo,
 							"insureNo": insureNo,
-							"payAmount": vm.Objectitle.financeOrder.prem+'',
+							"payAmount": vm.Objectitle.financeOrder.prem + '',
 							"productFlag": productFlag,
 							"customerId": customerId,
 						}
@@ -240,6 +240,11 @@ function policyQueryListInfo(data) {
 		vm.Objectitle = data.returns;
 		vm.returnVisit = data.returns.financeOrder.returnVisit;
 		vm.name = data.returns.commodityCombination.commodityCombinationName;
+		if(data.returns.financeOrder.policyForm) {
+			vm.dianzibaodan = data.returns.financeOrder.policyForm;
+		} else {
+			vm.dianzibaodan = null;
+		}
 	} else if(data.statusCode == '123456') {
 		modelAlert(data.statusMessage, '', lognCont);
 	} else {
@@ -260,6 +265,20 @@ function bankweihao() {
 function phoneyin(phone) {
 	var mphone = phone.substr(0, 3) + '****' + phone.substr(7);
 	return mphone;
+}
+$(".baodan").unbind("tap").bind("tap", function() {
+	/*正式版使用接口↓*/
+	window.location.href = vm.dianzibaodan;
+})
+/*电子保单*/
+function getYgDownloadUrl(data) {
+	if(data.statusCode == '000000') {
+		vm.dianzibaodan = data.returns.DownloadUrl;
+	} else if(data.statusCode == '123456') {
+		modelAlert(data.statusMessage, '', lognCont);
+	} else {
+		modelAlert(data.statusMessage);
+	}
 }
 
 function chuli() {

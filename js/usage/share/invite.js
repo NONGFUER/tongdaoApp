@@ -8,6 +8,7 @@ $(function(){
 	window.addEventListener("resize", function () {
 		resize();
 	});	
+	$(".touinner").attr("src","../../image/share/invite/tou.png");
 	getNameRequest(cusId);
 	$("#btnSendCode").unbind("tap").bind("tap",function(){		
 		var mobile = $("#checkPhone").val();
@@ -157,21 +158,15 @@ function getNameRequest(cusId){
 }
 
 function getNameCallback(data){
-	if(data.statusCode == "000000"){
-		if(data.returns.customerBasic.name){
-			$("#name").text("："+data.returns.customerBasic.name);
-		}else{
-			$("#name").text("");
-		}
-		
+	if(data.statusCode == "000000"){		
 		shareMobile = data.returns.customerBasic.userName;
-		getTouxiang(shareMobile)
+		//getTouxiang(shareMobile)
 	}else{
 		modelAlert(data.statusMessage);
 	}
 }
 
-function getTouxiang(shareMobile){
+/*function getTouxiang(shareMobile){
 	$.ajax({
 		type: "get",
 		url: base.url+"customerBasic/getAppImage.do",
@@ -184,10 +179,10 @@ function getTouxiang(shareMobile){
 			}		
 		   },
 		error:function(){
-			$(".touinner").attr("src","../../image/account/tou.png");
+			$(".touinner").attr("src","../../image/share/invite/tou.png");
 		}
 		});
-}
+}*/
 function reload(){
 	window.location.reload(true);
 }

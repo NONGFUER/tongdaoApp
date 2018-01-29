@@ -17,17 +17,18 @@
 	<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.picker.min.css" />
 	<link rel="stylesheet" href="../../../css/usage/insurance/car/base.css" />
 	<link rel="stylesheet" href="../../../css/lib/common/common.css" />
-    <link rel="stylesheet" href="../../../css/usage/insurance/car/carMes.css?V=20171117"/>
+    <link rel="stylesheet" href="../../../css/usage/insurance/car/carMes.css?V=20171202"/>
     <link rel="stylesheet" href="../../../css/usage/insurance/car/vehicleModelSelect.css?V=20171117"/>
 </head>
 <body>
 	<header>
 		<div class="h_back"><div class="backindex"><img src="../../../image/insurance/car/back.png"/></div></div>
 		<div class="h_title" id="pageTitle">车辆信息</div>
+		<div class="cxshare rightIcon"><img style="vertical-align: middle;" src="../../../image/share/share.png"/></div>
 	</header>
 	
 	<div id="order_index" class="carMes">
-		<div id="indexpart" class="mui-scroll-wrapper">
+		<div id="indexpart" class="mui-scroll-wrapper mainpart">
 			<div id="indexpart_scroll" class="mui-scroll">
 			    <div class="firstPart">
 						<!-- 车辆基本信息 style="display:none" -->
@@ -65,7 +66,7 @@
 								</div>
 							</div>
 							<table>
-							  <tr id="carselectChannel" style="display:none;">
+							  <tr id="carselectChannel">
 									<td class="border-1px-bottom"></td>
 									<td class="border-1px-bottom"><img class="icon" src="../../../image/insurance/car/chukudan.png"></td>
 									<td class="border-1px-bottom">出单渠道</td>
@@ -157,12 +158,11 @@
 									<td class="border-1px-bottom"></td>
 								</tr>
 								<tr>
-									<td class=""></td>
-									<td class="border-1px-bottom">是否过户车</td>
-									<td class="border-1px-bottom" id="info_choose">
+									<td></td>
+									<td id="info_choose" colspan="2" class="border-1px-bottom" style="width:85.18%;">是否为过户车<span style="font-size:11px;">（车辆过户一年以上不用选）</span>
 									   <img id="chooseIcons" class="chooseicon1" src="../../../image/insurance/car/guanbi.png"/>
 									</td>
-									<td class="border-1px-bottom"></td>
+									<td class="border-1px-bottom" style="width:4%;"></td>
 								</tr>
 								<tr id="specialCarDate_select">
 									<td class=""></td>
@@ -328,7 +328,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="vehicleInfo"style="display:none;">
+	<div class="vehicleInfo mainpart"style="display:none;">
 	     <!-- 客户搜索 style="display:none;" -->
 		 <div class="searcharea">
 		    <div style="width:100%;height:44px;">
@@ -400,14 +400,20 @@
 	 <div class="backload" style="position: absolute;width:100%;height:100%;top:0;z-index: 1000;background: #f7f7f7;">
         <img src="../../../image/common/dh_loading.gif" style="width:30%;margin-top: 62%;margin-left: 35%;"/>
     </div>
+    
+    <!-- 发送给朋友分享遮罩 -->
+	<img id="zhezhaoImg"  style="width:100%;height:100%;position: absolute;top:0;left:0;z-index: 99;display:none;" src="../../../image/insurance/car/weixin.png">
 </body>
     <script type="text/javascript" src="../../../js/lib/common/zepto.min.js" ></script>
+    <script type="text/javascript" src="../../../js/lib/common/jweixin-1.1.0.js"></script>
+	<script type="text/javascript" src="../../../js/lib/common/wx-gzpt-share.js"></script>
     <script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js" ></script>
     <script type="text/javascript" src="../../../js/lib/widget/mui/mui.picker.min.js"></script>
     <script type="text/javascript" src="../../../js/lib/common/base.js?v=20171023" ></script>
-    <script type="text/javascript" src="../../../js/lib/common/common.js" ></script> 
-    <script type="text/javascript" src="../../../js/usage/insurance/car/carMes.js?V=20171122" ></script>
-    <script type="text/javascript" src="../../../js/usage/insurance/car/vehicleModelSelect.js?V=20171117" ></script>
+    <script type="text/javascript" src="../../../js/lib/common/common.js" ></script>
+    <script type="text/javascript" src="../../../js/lib/common/cxutil.js" ></script>
+    <script type="text/javascript" src="../../../js/usage/insurance/car/carMes.js?V=20180102" ></script>
+    <script type="text/javascript" src="../../../js/usage/insurance/car/vehicleModelSelect.js?V=20180108" ></script>
     <script type="text/javascript" charset="utf-8">
 		var slider = mui("#slider");
 		slider.slider({

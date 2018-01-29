@@ -29,6 +29,7 @@ var vm = new Vue({
 		returnVisit: {},
 		commodityComId: "",
 		channel: "",
+		insureNo:'',
 	},
 	/*mounted() {
 		this.$nextTick(function() {
@@ -50,7 +51,7 @@ var vm = new Vue({
 $(function() {
 	console.log("页面初始化，获取上个页面传值报文--");
 	console.log(urlParm);
-
+	vm.insureNo=insureNo;
 	var reqData = {
 		"head": {
 			"userCode": userCode,

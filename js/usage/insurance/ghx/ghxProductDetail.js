@@ -38,6 +38,13 @@ $(function(){
     $(".hospital").unbind("tap").bind("tap",function(){
     	toHospital();
     });
+	if(roleType != '00' && shareFlag == 'Y'){       //二次分享（即分享页面中也可分享，满足登陆用户）
+        var title = "易安挂号险";
+    	var desc = "绿色通道挂号服务，就诊咨询，就医陪诊";
+    	var picUrl = getProductSharePic('14');
+    	var shareUrl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId=14&type=6';
+    	wechatShare(title,desc,picUrl,shareUrl);
+    }
 	if( roleType != "00" && isComing != "1"){
 	   	 showRightIcon();
 	}
@@ -93,9 +100,9 @@ function jieshaoToshuomingBind(){
 function calPrem(){
 	var  aPrem= $("#versions").find(".on").attr("data-value");
 	var  bPrem = 0;
-	var  cPrem = 0;
+	//var  cPrem = 0;
 	var bLength = $("#expandperson").find(".on").length;
-	var cLength = $("#diagnosis").find(".on").length;
+	//var cLength = $("#diagnosis").find(".on").length;
 	if( bLength != 0 ){
 		for( var i = 0; i < bLength; i++ ){
 			bPrem += parseInt($("#expandperson").find(".on").eq(i).attr("data-value"));
@@ -103,16 +110,22 @@ function calPrem(){
 	}else{
 		bPrem = 0;
 	}
-	if( cLength != 0 ){
-		cPrem = parseInt($("#diagnosis").find(".on").attr("data-value"));
-		var index = $("#versions").find(".on").data("index") + 1;
-		urlParm.isA = "1";
-	}else{
-		cPrem = 0;
-		var index = $("#versions").find(".on").data("index");
+//	if( cLength != 0 ){
+//		cPrem = parseInt($("#diagnosis").find(".on").attr("data-value"));
+//		var index = $("#versions").find(".on").data("index") + 1;
+//		urlParm.isA = "1";
+//	}else{
+//		cPrem = 0;
+//		var index = $("#versions").find(".on").data("index");
+//		urlParm.isA = "0";
+//	}
+	var index = $("#versions").find(".on").data("index");
+	if( index == '0' || index == '2' || index == '4' ){
 		urlParm.isA = "0";
+	}else{
+		urlParm.isA = "1";
 	}
-	var  totalPrem = parseInt(aPrem) + parseInt(bPrem) + parseInt(cPrem);
+	var  totalPrem = parseInt(aPrem) + parseInt(bPrem);
 	var premStr = "价格￥"+totalPrem;
 	$("#jwx_foot_price").text(premStr);
 
@@ -124,8 +137,8 @@ function calPrem(){
 	urlParm.zinvFlag = $("#zinv").attr("data-flag");
 	urlParm.qitaFlag = $("#qita").attr("data-flag");
 	urlParm.banbenFlag = $("#versions").find(".on").attr("data-banben");
-	urlParm.cId = $("#versions").find(".on").attr("data-cid");
-	console.log(aPrem+" "+bPrem+" "+cPrem + " " +premStr);
+	urlParm.cId = $("#versions").find(".on").attr("data-cid");	
+	console.log(aPrem+" "+bPrem+" "+premStr);
 	console.log(ghxDicChannel+" "+ghxDicCode+" "+ghxRemark );
 	urlParm.ghxDicChannel = ghxDicChannel;
 	urlParm.ghxDicCode    = ghxDicCode;
@@ -165,11 +178,11 @@ function toFillPolicyHtml(){
 	urlParm.downIco  = "0";
 	urlParm.ccId     = "14";
 	var indax = $("#versions").find(".on").data("index");
-	if( indax == "0" ){
+	if( indax == "0" || indax == "1" ){		
 		urlParm.bzPic = "http://jichupro.oss-cn-szfinance.aliyuncs.com/commodityCombination/commodityBaoZhang/00500001.png"
-	}else if( indax == "1" ){
+	}else if( indax == "2" || indax == "3" ){		
 		urlParm.bzPic = "http://jichupro.oss-cn-szfinance.aliyuncs.com/commodityCombination/commodityBaoZhang/00500002.png"
-	}else if( indax == "2" ){
+	}else if( indax == "4" || indax == "5" ){		
 		urlParm.bzPic = "http://jichupro.oss-cn-szfinance.aliyuncs.com/commodityCombination/commodityBaoZhang/00500003.png"
 	}
 	
@@ -186,14 +199,43 @@ function toHospital(){
 	window.location.href = base.url + "tongdaoApp/html/insurance/ghx/hospitalList.html?jsonKey=" + jsonStr;
 }
 
-function shareHandle(){
+/*function shareHandle(){
 	var title = "易安挂号险";
 	var desc  = "绿色通道挂号服务，就诊咨询，就医陪诊" ;	
 	var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=6';
-	var picUrl = "";
+	var picUrl = base.url + "tongdaoApp/image/share/tongdaoic.png";
 	shareMethod(shareurl,title,desc,"baodan",picUrl);		
-};
+};*/
 
 function backlast(){
-	sysback();
+	if(entry == 'mall' && shareFlag == "Y"){
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href =  base.url + 'tongdaoApp/html/share/insurance/insuranceMall.html?openid='+openid +'&roletype='+roleType +'&mobile='+mobile+'&shareMobile='+shareMobile+'&shareCusId='+shareCusId+'&provinceCode='+provinceCode+'&cityCode='+cityCode+'&cusId='+customerId+'&shareFlag=Y'
+	}else{
+		sysback();
+	}
+	
+}
+function shareHandle(){		
+	urlParm.fl='2';				//判断是否是产品详情
+	urlParm.ccName="易安挂号险";		//产品名称
+	urlParm.ccId=ccId;			//产品编号
+	urlParm.name = "易安挂号险";
+	urlParm.desc= "绿色通道挂号服务，就诊咨询，就医陪诊";	
+	var title = "易安挂号险";
+	var desc  = "绿色通道挂号服务，就诊咨询，就医陪诊" ;	
+	var picUrl = getProductSharePic(ccId);	
+	var flag = '3';		
+	urlParm.state='6';
+	var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=6';	
+	//shareMethod(shareurl,title,desc,"baodan",picUrl);
+	urlParm.picUrl=picUrl;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink=base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
+	shareMethod(shareurl, title, desc,flag,picUrl,twolink);
+};
+function toQrcodeUrl(){
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink = base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
+	window.location.href = twolink;
 }

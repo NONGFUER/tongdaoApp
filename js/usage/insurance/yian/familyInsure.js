@@ -376,6 +376,9 @@ function getFormData(){
 function sendInsureRequest(){
 	var formData = getFormData();
 	if(!formData){return false;}
+	if(shareFlag != 'Y'){
+		shareMobile = mobile;
+	}
 	var reqData = {
 			  "head": {
 				    "channel": "01",
@@ -398,7 +401,7 @@ function sendInsureRequest(){
 				    "buyType"         : "1",
 				    "userId"          : customerId,
 				    "customerId"      : customerId,
-				    "inviterPhone"    : mobile,
+				    "inviterPhone"    : shareMobile,
 				    "customerList": [
 				      {
 				        "beicustomerName": formData.insureName,
@@ -547,6 +550,9 @@ function backlast(){
 	if(urlParm.holder){
 		delete urlParm.holder
 	}
+	if(urlParm.holdertwo){delete urlParm.holdertwo}
+	if(urlParm.holderthree){delete urlParm.holderthree}
+	if(urlParm.holderfour){delete urlParm.holderfour}
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));	
 	window.location.href = base.url + 'tongdaoApp/html/insurance/main/productDetail.html?jsonKey='+jsonStr;		
 };

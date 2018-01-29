@@ -107,12 +107,16 @@ $(function() {
 		var orderNo = $(this).attr('orderNo');
 		var insureNo = $(this).attr('insureNo');
 		var commodityId = $(this).attr('commodityId');
+		var commodityComId = $(this).attr('commodityCombinationId');
+		var ccName=$(this).attr('ccName');
 		var param = {
 			"userCode": userCode,
 			"mobile": userCode,
 			"policyNo": policyNo,
 			"orderNo": orderNo,
 			"roleType": roleType,
+			"ccName":ccName,
+			"insureNo":insureNo,
 			"customerId": customerId,
 			"transToken": transToken,
 			"policyStatus": policyStatus,
@@ -135,7 +139,9 @@ $(function() {
 		} else if(riskType == '02') {
 			if(commodityId == '36') {
 				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/sunwarrantyDetail.html?jsonKey=" + jsonStr;
-			} else {
+			}else if(commodityId=='42'){
+				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/goldsunwarrantyDetail.html?jsonKey=" + jsonStr;
+			}else {
 				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
 			}
 		}

@@ -8,6 +8,8 @@ function backlast(){
 		toCommodityList();//返回商品列表
 	}else if( urlParm.frompage == "insureHtml"){
 		toProductDetail();
+	}else if( urlParm.frompage == "insureHtmlQudao"){
+		toProductDetailQudao();
 	}else if( urlParm.frompage == "jcxHtml" ){
 		toJcxHtml();
 	}else if( urlParm.frompage == "policyInfoHtml" ){
@@ -63,6 +65,9 @@ function toProductDetail(){
 	urlParm.downIco = "0";
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/insurance/main/insure.html?jsonKey="+jsonStr;
+}
+function toProductDetailQudao(){
+	window.location.href = base.url + "weixin/ycCancer/html/insurance/main/insure.html"+urlParm.search;
 }
 function getArticlesReq(cId){
 	var url = base.url+'offlineCommodityComDetail/getOfflineCommodityClauseList.do';	

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>赎回退保领取</title>
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/usage/managemoney/warRanty/policyCancellation.css" />
+	</head>
+
+	<body>
+		<div class="mui-content mui-scroll-wrapper" >
+			<div class="mui-scroll">
+				<div class="man mui-table-view" id='list' v-cloak>
+					<div class="man-div-body-ul_li_div mb10">
+						<ul class="man-div-body-ul_li_div_ul1">
+							<li>
+								<span class="heise" v-text="ccName">安溢保两全保险(一年期)</span>
+							</li>
+							<li class="marb20">
+								<span v-text="'保单号'+policyNo">保单号:1322727262627272</span>
+							</li>
+							<li class="list_two">
+								<h1 v-text="remark">5.40%</h1>
+							</li>
+							<li>
+								<!--<span>历史年化投资回报率</span>-->
+							</li>
+						</ul>
+					</div>
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title_div">领取信息</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li>
+								<span>保单缴费金额</span>
+								<span class="chengse" v-html="Objectlist.prem+'元'">232323.32元</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>保单账户价值</span>
+								<span v-html="Objectlist.policy_value+'元'">3.32元</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>领取/退保申请金额</span>
+								<span v-html="Objectlist.withdrawMoney+'元'">3.32元</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>实际退还金额</span>
+								<span class="lanse" v-html="Objectlist.availableMoney+'元'">232323.32元</span>
+							</li>
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<!--确认赎回-->
+		<div class="man-div-body-ul_li_div_btn" style="position: fixed; bottom: 0;z-index:9999;width: 100%;">
+			<div id="huifang" class="div_btn">确认赎回</div>
+		</div>
+	</body>
+	<script src="../../../js/lib/widget/mui/mui.min.js"></script>
+	<script src="../../../js/lib/common/zepto.min.js"></script>
+	<script src="../../../js/lib/common/base.js"></script>
+	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
+	<script src="../../../js/usage/managemoney/warRanty/goldsunpolicyCancellation.js"></script>
+
+</html>

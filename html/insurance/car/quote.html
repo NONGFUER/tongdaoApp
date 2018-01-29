@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="../../../css/lib/widget/mui/mui.picker.min.css" />
 	<link rel="stylesheet" href="../../../css/usage/insurance/car/base.css" />
 <!-- 	<link rel="stylesheet" href="../../../css/lib/common/common.css" />-->
-     <link rel="stylesheet" href="../../../css/usage/insurance/car/quote.css?V=20171117"/>
+     <link rel="stylesheet" href="../../../css/usage/insurance/car/quote.css?V=20180125"/>
 </head>
 <body>
     <div class="quoteArticle">
@@ -28,7 +28,7 @@
 			<div class="h_title" id="pageTitle">精确报价</div>
 		</header>
 		<!-- 页面主体部分 -->
-		<div id="indexpart" class="container mui-scroll-wrapper">
+		<div id="indexpart" class="container mui-scroll-wrapper mainpart">
 		   <div  class="mui-scroll">
 		  <!-- 报价信息部分 -->
 		  <div class="platePart">
@@ -108,7 +108,45 @@
 				    </div>
 				</li>
 		    </ul>
-		    
+		    <!-- 	人车联动 -->
+			<ul id="cxldparty" class="mui-table-view">
+				<li class="mui-table-view-cell cxld-buy">
+					<div class="mui-row">
+				        <div class="mui-col-xs-12 mui-text-left" style="font-size: 16px;color: #212121"><b id="commodityCombinationName"></b></div>
+				    </div>
+		        </li>
+		     </ul>
+			 <div class="mui-content cxld-content">
+					<div id="mui-segmented-control" class="mui-segmented-control mui-segmented-control-inverted">
+						 <a class="mui-control-item"></a>
+				   </div>
+				   <div id="control-content">
+					   <div  class="mui-control-content">
+					        <img style="width:100%;">
+							<div class="special-agreement">
+							     <p class="special-agreement-title">特别约定</p>
+							     <div class="commodityDescribe"></div>
+							   
+							</div>
+					  </div>
+				   </div>	
+					<ul class="mui-table-view">
+					    <li class="mui-table-view-cell cxld">
+							<div class="mui-row">
+						        <div class="mui-col-xs-3 mui-text-left">购买份额</div>
+						        <div class="mui-col-xs-8 mui-text-right"><span id="piece">1份</span></div>
+						        <div class="mui-col-xs-1 mui-text-right"><img  style="width:30%;" src="../../../image/insurance/car/pieceright.png"></div>
+						    </div>
+						</li>
+						<li class="mui-table-view-cell">
+							<div class="mui-row">
+						        <div class="mui-col-xs-3 mui-text-left">保费</div>
+						        <div class="mui-col-xs-8 mui-text-right"><span id="cxldpre">100元</span></div>
+						        <div class="mui-col-xs-1 mui-text-left"></div>
+						    </div>
+						</li>
+				     </ul> 	
+			 </div>	
 		    <!-- 配送地址部分 -->
 	       <ul id="addressHead" class="mui-table-view addressPart">
 				<li class="mui-table-view-cell">
@@ -385,7 +423,7 @@
 				    <img id="gouxuan" src="../../../image/insurance/car/gouxuan2.png" class="import">我已认真阅读<label id="insurance_statement">《保险条款》</label>、<label id="insurance_declaration">《投保须知》</label>，了解并接受包括有关责任条款及免除责任条款等约定。
 			    </div>
 			    
-			<!-- 	<div id="submitorder" class="btn_jump_order_info">下一步</div> -->
+			 	<div id="submitorder" class="btn_jump_order_info" type="next">下一步</div> 
 			       <!--  核保失败原因   -->
 					<div id="hebaoFail_reason_area" style="width:90%;margin: 10px auto;background: #fff;color:#666;font-size: 14px;display:none;">
 						<ul id="refusing_reason_ul"  class="border-1px-bottom">
@@ -425,12 +463,17 @@
 	      <div id="quote">确定</div>
 		</div>
 	</div>
+	<!-- 发送给客户支付分享遮罩 -->
+	<img id="zhezhaoImg"  style="width:100%;height:100%;position: absolute;top:0;left:0;z-index: 99;display:none;" src="../../../image/insurance/car/22.png">
 	<!-- <iframe id="quoteIframe" class="bi_iframe"></iframe> -->
 	<script type="text/javascript" src="../../../js/lib/common/zepto.min.js" ></script>
+	<script type="text/javascript" src="../../../js/lib/common/jweixin-1.1.0.js"></script>
+	<script type="text/javascript" src="../../../js/lib/common/wx-gzpt-share.js"></script>
     <script type="text/javascript" src="../../../js/lib/widget/mui/mui.min.js" ></script>
     <script type="text/javascript" src="../../../js/lib/widget/mui/mui.picker.min.js"></script>
     <script type="text/javascript" src="../../../js/lib/common/base.js?V=20171117" ></script>
-    <script type="text/javascript" src="../../../js/lib/common/common.js" ></script> 
-    <script type="text/javascript" src="../../../js/usage/insurance/car/quote.js?V=20171117" ></script>
+    <script type="text/javascript" src="../../../js/lib/common/common.js?V=20171129" ></script> 
+    <script type="text/javascript" src="../../../js/lib/common/cxutil.js" ></script>
+    <script type="text/javascript" src="../../../js/usage/insurance/car/quote.js?V=20180125" ></script>
 </body>
 </html>

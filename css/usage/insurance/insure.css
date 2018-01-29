@@ -245,13 +245,16 @@ table.gridtable td {
 
 #relation {
 	font-size: 14px;
-	height: 22px;
+	/* height: 22px; */
 	padding: 1px 0;
 	color: #333;
 	text-align: right;
-	width: 30%;
+	width: 60%;
 	display: inline-block;
 	float: right;
+	/* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
 }
 
 .relation{
@@ -381,5 +384,10 @@ table.gridtable td {
     background-position: right;
     background-size: 8%;
     padding-right:8% !important;
+}
+.ib{
+	display: inline-block;
+    width: 95.6%;
+    height: auto;
 }
    

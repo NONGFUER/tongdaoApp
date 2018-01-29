@@ -393,6 +393,34 @@ function getTouxiang(mobile){
 function backlast(){
 	sysback();
 }
+
+function shareHandle(){		
+	urlParm.fl='2';				//判断是否是产品详情
+	urlParm.ccName=shareTitle;		//产品名称
+	urlParm.ccId=ccId;			//产品编号
+	urlParm.name = shareTitle;
+	urlParm.desc= shareDesc;	
+	var title = shareTitle;
+	var desc  = shareDesc ;	
+	var picUrl = getProductSharePic(ccId);	
+	var flag = '3';		
+	urlParm.state='11';
+	var shareurl = base.url+"tongdaoApp/html/share/insurance/main/liveProductDetail.html"+window.location.search;	
+	//shareMethod(shareurl,title,desc,"baodan",picUrl);
+	urlParm.picUrl=picUrl;
+	urlParm.shareurl = shareurl;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink=base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
+	shareMethod(shareurl, title, desc,flag,picUrl,twolink);
+};
+
+function toQrcodeUrl(){
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink = base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
+	window.location.href = twolink;
+}
+/*
+//旧版本  分享
 function shareHandle(){
 	var title = shareTitle;
 	var desc  = shareDesc;	
@@ -400,3 +428,4 @@ function shareHandle(){
 	var picUrl = getProductSharePic(ccId);
 	shareMethod(shareurl,title,desc,"baodan",picUrl);		
 };
+*/

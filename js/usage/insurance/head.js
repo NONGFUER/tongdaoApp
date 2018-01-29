@@ -23,7 +23,8 @@ var COMMODITYCOMBINE_ID ={
 	    "LRX"  : "20",	 //老人险
 	    "BQJ"  : "21",    //易安保全家疾病保险
 	    "BWYL" : "22",    //易安百万医疗险
-	    "AXYW" : "23"    //易安安心意外险
+	    "AXYW" : "23",    //易安安心意外险
+	    "BWZJ" : "27"     //天安百万重疾
 	}
 var COMMODITY_ID ={
 		"MCAN" : "1",
@@ -180,6 +181,9 @@ if( entry == 'app' ){
 	$("header").show();
 	$(".mui-scroll-wrapper").css("margin-top", "44px");
 }
+if(urlParm.productCode == '00400015' || urlParm.ccCode == '00400015'){
+	ccId = '20'//暂时性元旦活动补老人先
+}
 var PRODUCT_PICURL ={
 		"BASE" : base.url + "tongdaoApp/image/share/tongdaoic.png",
 		"MCAN" : base.url + "tongdaoApp/image/share/fangainan.png",
@@ -197,7 +201,8 @@ var PRODUCT_PICURL ={
 		"JDX"  : base.url + "tongdaoApp/image/share/jdx.png",   //借贷险	
 		"BQJ"  : base.url + "tongdaoApp/image/share/bqj.png",	//保全家
 		"BWYL" : base.url + "tongdaoApp/image/share/bwyl.png",   //百万医疗
-		"AXYW" : base.url + "tongdaoApp/image/share/axyw.png"	//安心意外险
+		"AXYW" : base.url + "tongdaoApp/image/share/axyw.png",	//安心意外险
+		"BWZJ" : base.url + "tongdaoApp/image/share/bwzj.png"	//百万重疾
 }
 //根据不同的产品获取分享信息
 function getProductSharePic(productCode){
@@ -234,6 +239,8 @@ function getProductSharePic(productCode){
 		picUrl = PRODUCT_PICURL.BWYL;
 	}else if( productCode == COMMODITYCOMBINE_ID.AXYW ){
 		picUrl = PRODUCT_PICURL.AXYW;
+	}else if( productCode == COMMODITYCOMBINE_ID.BWZJ ){
+		picUrl = PRODUCT_PICURL.BWZJ;
 	}else{
 		picUrl = PRODUCT_PICURL.BASE;
 	}	

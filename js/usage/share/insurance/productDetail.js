@@ -12,6 +12,7 @@ $(function(){
     $.setscroll("bodyMuiScroll");
     if( roleType != '00' ){
     	hasArea();
+    	
     }  
     buyBind();
     jieshaoToshuomingBind();		//介绍和产品详情间的切换
@@ -45,7 +46,7 @@ $(function(){
     });
 	$(".download").unbind("tap").bind("tap",function(){
 		toDownload();
-	});
+	});	
 });
 
 //根据保费试算项进行保费试算
@@ -170,7 +171,7 @@ function appendStr(showType,calOptions,calCode){
 
 //针对listArea试算枚举
 //渲染规则 ：遍历listArea类型枚举，给默认值加加on
-function calOptionDetails(calOptions){
+function calOptionDetails(calOptions,calCode){
     var optionsLength = calOptions.length;
     var str = "";
     str += '<ul class="radio" >'
@@ -179,7 +180,11 @@ function calOptionDetails(calOptions){
     	   str += '<li class="on" data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
     	   $('div[name='+calOptions[0].calCode+']').attr("data-value",calOptions[i].enuCode);
        }else{
-           str += '<li data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
+    	   if( ccId == '23' && calCode == 'insuranceCoverage1' && i > 1){
+    		   str += '<li class="hidden" data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
+    	   }else{
+    		   str += '<li data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
+    	   }
        }
     }
     str += '</ul>'   
@@ -239,6 +244,21 @@ function choiceBind( calName ){
 		var choiceValue = $(this).attr("data-value");
 		$('div[name='+calName+']').attr("data-value",choiceValue);
 		addChoice();
+		if(ccId == '23'){
+			if( calName == 'versions' && choiceValue == '02'  ){
+				$('#insuranceCoverage1').find('.hidden').show();
+				tab($('#insuranceCoverage1').find('li').eq(0),"on");
+				var choiceValue = $('#insuranceCoverage1').find('li').eq(0).attr("data-value");
+				$('div[name="insuranceCoverage1"]').attr("data-value",choiceValue);
+				addChoice();
+			}else if( calName == 'versions' && choiceValue == '01' ){
+				$('#insuranceCoverage1').find('.hidden').hide();
+				tab($('#insuranceCoverage1').find('li').eq(0),"on");
+				var choiceValue = $('#insuranceCoverage1').find('li').eq(0).attr("data-value");
+				$('div[name="insuranceCoverage1"]').attr("data-value",choiceValue);
+				addChoice();
+			}
+		}
 		console.log(calName +":"+$(this).attr("data-value"));//
 		sendCaldoRequest( ccId );
 	});
@@ -312,11 +332,19 @@ function productInfoRender(data){
         cId   = body.CommodityInfo[0].id;
         cName = body.CommodityInfo[0].commodityName;
         ccName = commodityCombination.commodityCombinationName;
+        shareDesc = commodityCombination.insuredInfo;
         $(".banner-img").attr("src",commodityCombination.banner);		//渲染图片
         $("#commodityCombinationName").text(ccName);					//渲染商品组合名
         $("#companyName").text(companyProfile.companyName);				//渲染保险公司名字
         for(var i = 0; i < commodityCombinationModuleMapper.length; i++){
             moduleStr(commodityCombinationModuleMapper[i])				//渲染产品介绍和产品说明
+        }
+        if(roleType != '00'){       //二次分享（即分享页面中也可分享，满足登陆用户）
+	        var title = ccName;
+	    	var desc = shareDesc;
+	    	var picUrl = getProductSharePic(ccId);
+	    	var shareUrl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=2';
+	    	wechatShare(title,desc,picUrl,shareUrl);
         }
     }else{
         modelAlert( message.requestFail );
@@ -515,7 +543,7 @@ function toInsure(){
 		//cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
 		cVersion = $("div[name='versions']").attr("data-value");
 		//alert(cId+":"+cName);
-		var indax =$("div[name='versions']").find("li").index($(".on"));
+		var indax =$("div[name='versions']").find("li.on").index();
 	}
 	if( CommodityInfo.length == 1 ){
 		urlParm.bzPic = CommodityInfo[0].banner;
@@ -558,7 +586,7 @@ function toHealthHtml(){
 		cId = $("div[name='versions']").find(".on").attr("data-cid");
 		//cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
 		cVersion = $("div[name='versions']").attr("data-value");
-		var indax =$("div[name='versions']").find("li").index($(".on"));
+		var indax =$("div[name='versions']").find("li.on").index();
 	}
 	if( CommodityInfo.length == 1 ){
 		urlParm.bzPic = CommodityInfo[0].banner;

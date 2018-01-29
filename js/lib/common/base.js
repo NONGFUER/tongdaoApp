@@ -731,7 +731,7 @@ if (typeof tit.regExp !== 'object') {
 			return reg.test(str);
 		},
 		isMobile : function(str) {
-			var reg = /^0*(13|14|15|17|18)\d{9}$/;
+			var reg = /^0*(13|14|15|16|17|18|19)\d{9}$/;
 			return reg.test(str);
 		},
 		isQQ : function(str) {

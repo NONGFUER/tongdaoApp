@@ -1,0 +1,18 @@
+.my-list{
+	height: 45px;
+    line-height: 45px;
+    padding: 0 15px 0 20px;
+    border-bottom: 2px solid #f8f8fa;
+    color: #444;
+    font-size: 15px;
+    display: block;
+    background-color: #fff;
+}
+.chudan{
+	width:26px;
+}
+.rightArrow{
+	float: right;
+    width: 10px;
+    margin-top: 14px;
+}

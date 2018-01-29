@@ -2,6 +2,9 @@
 header{
 	top:0;
 }
+h4{
+	font-size: 16px;
+}
 .container{
 	position: relative;
 	font-size: 16px;
@@ -143,7 +146,6 @@ header{
 /**--- 我已阅读并同意以上内容 */
 .detailcomfrim {
     width: 100%;
-/*     height: 14rem; */
 }
 .gou_terms_line {
     margin: 1rem 1.5rem;
@@ -156,6 +158,8 @@ header{
     margin-top: -5px;
     margin-right: 0.6rem;
 }
+
+/* 下一步按钮 */
 .btn_jump_order_info {
     width: 94.66674%;
     line-height: 3.75rem;
@@ -166,6 +170,7 @@ header{
     background-color: #1b6bb8;
     border-radius: 0.5rem;
     margin-bottom: 2rem;
+    display:none;
 }
 
 
@@ -283,7 +288,6 @@ header{
 }
 
 
-
 /* 立即投保按钮 */
 .confirmbtn {
     width: 44%;
@@ -335,4 +339,34 @@ input[type=color], input[type=date], input[type=datetime-local], input[type=date
     border-radius: 0;
     outline: 0;
     -webkit-appearance: none;
+}
+
+/* 人车联动 */
+#cxldparty{
+	margin-top: 10px;
+	display:none;
+}
+.mui-segmented-control {
+    background-color: #fff;
+}
+.cxld-content{
+	 display:none; 
+}
+#cxldpre{
+	color: #1b6bb8;
+}
+.mui-control-content{
+	background-color:#fafafa; 
+}
+.special-agreement{
+	padding: 10px;
+}
+.commodityDescribe p{
+	font-size: 11px;
+	color:#262626;
+}
+.special-agreement-title{
+	font-size: 12px;
+	color:#212121;
+	font-weight: bold;
 }

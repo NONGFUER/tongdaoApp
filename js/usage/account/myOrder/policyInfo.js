@@ -69,6 +69,7 @@ function policyNoDetailCallback(data){
 		
 		//投保人星系
 		$("#policyNo").text(policyNo);//订单号
+		$("#insureNo").text(policyBasic.insureNo);//投保单号
 		$("#riskName").text(commodityInfo.commodityName);//商品名称
 		$("#TBRName").text(shortRiskOrder.insureName);//投保人姓名
 		$("#TBRID").text(shortRiskOrder.insureIdentitycard);//投保人身份证
@@ -188,13 +189,16 @@ function toArticle(obj){
 }
 
 function backlast(){
-		if( cxflag == "2" ){
+	if(urlParm.channel == '02'){
+		history.go(-1);
+	}else{
+		if( cxflag == "2" ){			
 			urlParm.title = "我的保单";
 			urlParm.leftIco = "1";
 			urlParm.rightIco = "0";
 			urlParm.downIco = "1";
 			var jsonStr = UrlEncode(JSON.stringify(urlParm));
-			window.location.href = "policyList.html?jsonKey="+jsonStr;
+			window.location.href = "policyList.html?jsonKey="+jsonStr;				
 		}else if(cxflag == "3"){
 			urlParm.title = "我的出单";
 			urlParm.leftIco = "1";
@@ -215,5 +219,7 @@ function backlast(){
 			window.location.href = base.url + "tongdaoApp/page/html/cancerRisk/result.html" + urlParm.search;
 		}else if(cxflag == "ecard"){
 			window.location.href = base.url + "tongdaoApp/page/html/ecard/result.html" + urlParm.search;
-		}	
+		}
+	}
+			
 }

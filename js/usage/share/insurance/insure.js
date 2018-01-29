@@ -4,7 +4,10 @@ var genderCal = "";
 var code = ghxRemark.split(",");
 var insureList = [];
 var holder = urlParm.holder;
+var holderbr = urlParm.holderbr;//被保人常用保险人
 var shareType = '';
+var buyType = "";
+var channelResource = "";
 for(var i = 0; i < code.length; i++) {
 	var pro = {
 		"productId": code[i]
@@ -12,6 +15,19 @@ for(var i = 0; i < code.length; i++) {
 	insureList.push(pro)
 }
 $(function(){
+	if($.isNull(shareMobile)&&$.isNull(shareCusId)&&$.isNull(shareFlag)){
+		buyType = "1";
+		channelResource = "1";
+	}else{
+		buyType = "2";
+		channelResource = "2";
+	}
+	if($.isNull(shareCusId)){
+		shareCusId = customerId;
+	}
+	if($.isNull(shareMobile)){
+		shareMobile = mobile;
+	}	
 	formItemControl( ccId )
 	if( ccId != "1" && ccId != "2" && ccId != "3" && ccId != "14" && ccId != "22" && ccId != "23" ){//除防癌险,挂号险之外的ecard，会调默认投保地区接口
 		getTypeRequest(shareCusId)
@@ -32,6 +48,28 @@ $(function(){
 			var picStr =  '<img src="'+urlParm.bzPic+'" />'
 		}
 		$(".duty").html(picStr);
+	}
+	if(holderbr) {
+		$("#isSame").removeClass("on")
+		$('#isSame').find('img').attr('src', '../../../../image/common/meigou.png');
+		$('.beiNone').show();
+		$('.mytitle').show();
+		var insuIden1 = holderbr.idNo;
+		var insuName1 = holderbr.name;
+		var insuPhone1 = holderbr.phone;
+		var insuEmail1 = holderbr.email;
+		var insuSex1 = $.getSex(insuIden1) == 1 ? "男" : "女";
+		var insuBirth1 = $.getBirthDay(insuIden1);
+		$("#recognizeeName").val(insuName1); //投保人姓名
+		$("#recogCertificateNo").val(insuIden1); //证件号码
+		$("#recogTelNo").val(insuPhone1); //手机号码*/
+		$("#recogGender").val(insuSex1); //性别
+		$("#recogBirthDate").val(insuBirth1); //出生日期
+		ageCal = $.getAge($.getBirthDay(insuIden1),now);
+		genderCal = $.getSex(insuIden1) + "";
+		if( ccId != "14"){			
+			productCalculate( ccId, ageCal, genderCal);			      	
+        }	
 	}
 	if(holder){		
 		var insuIden  = holder.idNo;		
@@ -127,7 +165,7 @@ $(function(){
 	});
 	$("#relation").unbind("tap").bind("tap",function(){
 	    var selectPicker1 = new mui.PopPicker();
-	    var popArray1 = [{"text":"配偶","value":"10"},{"text":"子女","value":"40"},{"text":"父母","value":"50"},{"text":"其他","value":"99"}];
+	    var popArray1 = [{"text":"配偶","value":"10"},{"text":"子女","value":"40"},{"text":"父母","value":"50"},{"text":"与投保人有赡养或者扶养关系的家庭其他成员、近亲属","value":"99"}];
 	    selectPicker1.setData(popArray1);
 	    selectPicker1.show(function(item){
 	        $("#relation").text(item[0].text);
@@ -187,6 +225,7 @@ $(function(){
 		        $(this).find("img").attr("src","../../../../image/common/meigou.png");
 		        $(".beiNone").show(1000);
 	    	}
+	    	$('.mytitle').show();
 	    }else{
 	        var sameName    = $.trim($("#insureName").val());		//投保人姓名
 	        var sameNo      = $.trim($("#certificateNo").val());	//证件号码
@@ -204,7 +243,8 @@ $(function(){
 	        if( ccId != "14" ){
 	        	productCalculate( ccId, ageCal, genderCal);
 	        }
-	        
+	        $('.mytitle').hide();
+	        urlParm.holderbr='';
 	    }
 	});
 	//跳转到保险条款页面
@@ -220,9 +260,19 @@ $(function(){
 		urlParm.userCode = mobile;
 		urlParm.title = "常用投保人";
 		urlParm.rightIco = "4";
-		urlParm.frompage = "insureHtml"
+		urlParm.frompage = "insureHtmlShare"
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	    window.location.href= base.url + "tongdaoApp/html/useApplicant/useApplicant.html?jsonKey="+jsonStr;
+	});
+	//跳转到常用被保人
+	$("#commonHoldersto").unbind("tap").bind("tap", function() {
+		urlParm.userCode = mobile;
+		urlParm.title = "常用被保人";
+		urlParm.rightIco = "4";
+		urlParm.frompage = "insureHtmlShare"
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/useApplicant/useApplicant.html?jsonKey=" + jsonStr;
+		return false;
 	});
 	//选择座位数
 	$("#FieldAN,.zdown").unbind("tap").bind("tap",function(){
@@ -292,7 +342,7 @@ function getFormData(){
 	    var relation      = $("#relation").attr("name");	 		//与投保人关系
 	    var recogName     = $.trim($("#recognizeeName").val());	 	//被保人姓名
 	    var recogCertiNo  = $.trim($("#recogCertificateNo").val()); //被保人证件号码
-	    var recogTelNo	  = telNo;//$.trim($("#recogTelNo").val());	//被保人手机号	
+	    var recogTelNo	  = $.trim($("#recogTelNo").val());	//被保人手机号	
 	}
 	
 	if(cId == COMMODITY_ID.JKJR || cId == COMMODITY_ID.QCWY || cId == COMMODITY_ID.JXJS || ccId == COMMODITYCOMBINE_ID.LRX ){
@@ -716,7 +766,7 @@ function sendInsureRequest(){
 	            "invitrerPhone"          : shareMobile,
 	            "insureAddress"          : formData.address,
 	            "totalPieces"            : cPieces,//parseInt(peices),
-	            "channelResource"        : '2'// '渠道来源,1-微信公众号，2-分享进入，3-App',	
+	            "channelResource"        : channelResource// '渠道来源,1-微信公众号，2-分享进入，3-App',	
 	        },
 	        "shortRiskInsured":{
 	            "apRelation"  			 : formData.relation,
@@ -725,7 +775,7 @@ function sendInsureRequest(){
 	            "insuredmobile"          : formData.recogTelNo
 	        },
 	        "customerId"				 : customerId,
-	        "buyType"					 : "2",
+	        "buyType"					 : buyType,
 	        "recommendId"                : shareCusId
 	    }
 	}
@@ -755,6 +805,9 @@ function sendInsureRequest(){
 			reqData.body.shortRiskOrder.totalPieces = cPieces;
 			reqData.body.shortRiskOrder.coverage = cPieces*1000
 			reqData.body.guaranteeTerm = '1';			
+		}else if(ccId == COMMODITYCOMBINE_ID.BWZJ){
+			reqData.body.fieldAA ='';
+			reqData.body.shortRiskOrder.type = cVersion;
 		}
 	}else{
 		reqData.body.versions = cVersion;//版本
@@ -1079,9 +1132,9 @@ function sendGhxInsureRequest(){
 					"ghOptionalFlag": isA, // '可选保障项代码1：附加，0不附加',
 					//"inviterCode":"",
 					"inviterPhone":shareMobile,
-				    "channelResource":"2",//渠道来源  
+				    "channelResource":channelResource,//渠道来源  
 					"insureList": insureList,
-					"buyType":"2"//2分享
+					"buyType":buyType//2分享
 				},
 				"customerId":customerId
 
@@ -1149,10 +1202,10 @@ function sendBwylRequest(){
 		        "customerId"             : customerId,
 		        "premium"                : cPrem+"",
 		        "inviterPhone"           : shareMobile,
-		        "buyType"                : "2",	//1app2分享
+		        "buyType"                : buyType,	//1app2分享
 		        "commodityId"            : cId, // 33 有社保  // 34 无社保
 		        "commodityCombinationId" : ccId,		   
-		        "channelResource"        : "2",  // '渠道来源,1-微信公众号，2-分享进入，3-App',
+		        "channelResource"        : channelResource,  // '渠道来源,1-微信公众号，2-分享进入，3-App',
 		        "applicant": {
 		            "name"               : formData.insureName,
 		            "idNo"               : formData.certificateNo,
@@ -1170,6 +1223,10 @@ function sendBwylRequest(){
 		    }
 	}
 	if( ccId == COMMODITYCOMBINE_ID.AXYW ){
+		if(cCoverage1 > 10 && ageCal < 18){
+			modelAlert('该被保人未满18周岁，身故残疾保额最高不超过10万，请确认后投保！');
+			return false;
+		}
 		reqData.body.order = {}
 		reqData.body.order.guaranteeTerm = cGuaranteeTerm;			// 保障期限
 		reqData.body.order.insuranceCoverage1 = cCoverage1;		// insuranceCoverage1意外身故残疾
@@ -1253,6 +1310,8 @@ function formItemControl( ccId ){
 		$(".email").show();
 	}else if( ccId == COMMODITYCOMBINE_ID.AXYW ){//
 		$(".email").show();
+	}else if( ccId == COMMODITYCOMBINE_ID.BWZJ ){//
+		$(".diqu").show();
 	}				
 }
 
@@ -1322,7 +1381,12 @@ function getTypeRequest(cusid){
 
 function getTypeCallback(data){
 	console.log(data)
-	shareType = data.returns.customerBasic.type;
+	if(data.statusCode == '000000'){
+		shareType = data.returns.customerBasic.type;
+	}else{
+		shareType = '01'
+	}
+	
 }
 
 function backlast(){
@@ -1330,6 +1394,8 @@ function backlast(){
 	urlParm.leftIco = "1";
 	urlParm.rightIco = "1";
 	urlParm.downIco = "0";
+	if(urlParm.holder){delete urlParm.holder}
+	if(urlParm.holderbr){delete urlParm.holderbr}
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	if( ccId != "14" ){
 		window.location.href = 'productDetail.html?jsonKey='+jsonStr;

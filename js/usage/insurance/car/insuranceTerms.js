@@ -13,7 +13,7 @@ $(function(){
 		parm.title="车险商业险条款";
 		var jsonStr = JSON.stringify(parm);
 		jsonStr = UrlEncode(jsonStr);
-		window.location.href = "JQProtocal.html?jsonKey=" + jsonStr;
+		window.location.href = "SYProtocal.html?jsonKey=" + jsonStr;
 	})
 	//交强险条款
 	$("#JQProtocal").unbind("tap").bind("tap",function(){

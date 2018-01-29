@@ -155,6 +155,8 @@ $(function() {
 		} else if(riskType == '02') {
 			if(commodityCombinationId == '24') {
 				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/sunorderDetails.html?jsonKey=" + jsonStr;
+			}else if(commodityCombinationId == '26'){
+				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/goldsunorderDetails.html?jsonKey=" + jsonStr;
 			} else {
 				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/orderDetails.html?jsonKey=" + jsonStr;
 			}

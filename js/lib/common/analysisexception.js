@@ -52,7 +52,8 @@ function exception_translate(content)
 	translates.push('{"keyword":"新增设保险","info":"投保车辆不能投保新增设保险!"}');
 	translates.push('{"keyword":"精神损害险","info":"投保车辆不能投保精神损害险!"}');
 	translates.push('{"keyword":"非营运车使用车损险免赔","info":"投保车辆不能进行此项投保!"}');
-
+	translates.push('{"keyword":"车主名称与上张保单一致","info":"车主名称与上张保单一致，请关闭勾选为 ‘过户车’ 后再次报价"}');
+	
     content = content.replace(/，/g,",");
     content = content.replace(/。/g,".");
 

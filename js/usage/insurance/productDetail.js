@@ -47,6 +47,9 @@ $(function(){
     $("#qrcode").unbind('tap').bind('tap',function(){
     	toQrcodeHtml()
     });
+	$("#headClick").unbind('tap').bind('tap',function(){
+		backlast()
+	});
 	if( entry == 'qudao' && shareFlag != 'Y' && roleType != '00'){
 		var method = function() {
 			var title = ccName;
@@ -89,7 +92,7 @@ $(function(){
 			});
 		}
 		getConfig(method);
-	}else if(entry == 'mall' && shareFlag != 'Y'&& roleType != '00'){
+	}else if(entry == 'mall' && roleType != '00'){//开启二次分享 && shareFlag != 'Y'
 		var method = function() {
 			var title = ccName;
 			var desc  = shareDesc ;	
@@ -261,7 +264,7 @@ function appendStr(showType,calOptions,calCode){
 
 //针对listArea试算枚举
 //渲染规则 ：遍历listArea类型枚举，给默认值加加on
-function calOptionDetails(calOptions){
+function calOptionDetails(calOptions,calCode){
     var optionsLength = calOptions.length;
     var str = "";
     str += '<ul class="radio" >'
@@ -270,7 +273,11 @@ function calOptionDetails(calOptions){
     	   str += '<li class="on" data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
     	   $('div[name='+calOptions[0].calCode+']').attr("data-value",calOptions[i].enuCode);
        }else{
-           str += '<li data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
+    	   if( ccId == '23' && calCode == 'insuranceCoverage1' && i > 1){
+    		   str += '<li class="hidden" data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
+    	   }else{
+    		   str += '<li data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
+    	   }
        }
     }
     str += '</ul>'   
@@ -330,6 +337,21 @@ function choiceBind( calName ){
 		var choiceValue = $(this).attr("data-value");
 		$('div[name='+calName+']').attr("data-value",choiceValue);
 		addChoice();
+		if(ccId == '23'){
+			if( calName == 'versions' && choiceValue == '02'  ){
+				$('#insuranceCoverage1').find('.hidden').show();
+				tab($('#insuranceCoverage1').find('li').eq(0),"on");
+				var choiceValue = $('#insuranceCoverage1').find('li').eq(0).attr("data-value");
+				$('div[name="insuranceCoverage1"]').attr("data-value",choiceValue);
+				addChoice();
+			}else if( calName == 'versions' && choiceValue == '01' ){
+				$('#insuranceCoverage1').find('.hidden').hide();
+				tab($('#insuranceCoverage1').find('li').eq(0),"on");
+				var choiceValue = $('#insuranceCoverage1').find('li').eq(0).attr("data-value");
+				$('div[name="insuranceCoverage1"]').attr("data-value",choiceValue);
+				addChoice();
+			}
+		}
 		console.log(calName +":"+$(this).attr("data-value"));//
 		sendCaldoRequest( ccId );
 	});
@@ -575,7 +597,7 @@ function toInsure(){
 		//cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
 		cVersion = $("div[name='versions']").attr("data-value");
 		//alert(cId+":"+cName);
-		var indax =$("div[name='versions']").find("li").index($(".on"));
+		var indax =$("div[name='versions']").find("li.on").index();
 	}
 	if( CommodityInfo.length == 1 ){
 		urlParm.bzPic = CommodityInfo[0].banner;
@@ -619,7 +641,7 @@ function toHealthHtml(){
 		//cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
 		cVersion = $("div[name='versions']").attr("data-value");
 		//alert(cId+":"+cName);
-		var indax =$("div[name='versions']").find("li").index($(".on"));
+		var indax =$("div[name='versions']").find("li.on").index();
 	}
 	if( CommodityInfo.length == 1 ){
 		urlParm.bzPic = CommodityInfo[0].banner;
@@ -660,6 +682,7 @@ function toCommodityList(){
 	urlParm.leftIco = "1";
 	urlParm.rightIco = "0";
 	urlParm.downIco = "0"
+	urlParm.search = window.location.search;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/insurance/main/commodityList.html?jsonKey="+jsonStr;
 }
@@ -670,6 +693,7 @@ function toHetongDemo(obj){
 	urlParm.rightIco = "0";
 	urlParm.downIco = "0";
 	urlParm.picurl = $(obj).attr("data-url");
+	urlParm.search = window.location.search;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	window.location.href = base.url + "tongdaoApp/html/agreement/hetong.html?jsonKey="+jsonStr;
 }
@@ -710,6 +734,8 @@ function toHosUrl(){
 //跳转到定位
 function toQrcodeHtml(){
 	//urlParm.lastUrl = window.location.href;
+	urlParm.title = '出单二维码';
+	urlParm.rightIco = '0';
 	urlParm.qrFlag = 'detail'
 	urlParm.ccName = ccName;
 	urlParm.shareDesc= shareDesc ;	
@@ -719,6 +745,36 @@ function toQrcodeHtml(){
 	window.location.href = base.url + 'weixin/insureChannels/QRCode/QRCode.html?jsonKey='+jsonStr;
 }
 
+
+function shareHandle(){		
+	urlParm.fl='2';				//判断是否是产品详情
+	urlParm.ccName=ccName;		//产品名称
+	urlParm.ccId=ccId;			//产品编号
+	urlParm.name = ccName;
+	urlParm.desc= shareDesc;
+	urlParm.title = '同道保险二维码'
+	urlParm.rightIco = '0';	
+	var title = ccName;
+	var desc  = shareDesc ;	
+	var picUrl = getProductSharePic(ccId);	
+	var flag = '3';	
+	if( entry == 'app' && urlParm.sourcePage == 'qudaoMall'){
+		urlParm.state='11';
+		var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=11';
+	}else{
+		urlParm.state='2';
+		var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=2';
+	}	
+	//shareMethod(shareurl,title,desc,"baodan",picUrl);
+	urlParm.picUrl=picUrl;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink=base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
+	shareMethod(shareurl, title, desc,flag,picUrl,twolink);
+};
+
+/*
+ * 
+ //上一版本分享
 function shareHandle(){
 	//var shareList = getProductShare(ccId);
 	var title = ccName;
@@ -731,14 +787,26 @@ function shareHandle(){
 	}	
 	shareMethod(shareurl,title,desc,"baodan",picUrl);		
 };
+*/
+
 function backlast(){
-	if( entry == 'app' && urlParm.sourcePage == 'qudaoMall'){
+	if( urlParm.sourcePage == 'qudaoMall'){
 		urlParm.title = '保险商城'
 		urlParm.rightIco = '6';
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href =  base.url + 'weixin/insureChannels/insuranceMall/insuranceMall.html?jsonKey='+jsonStr;
+	}else if(entry == 'mall'){
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href =  base.url + 'tongdaoApp/html/share/insurance/insuranceMall.html?openid='+openid +'&roletype='+roleType +'&mobile='+mobile+'&shareMobile='+shareMobile+'&shareCusId='+shareCusId+'&provinceCode='+provinceCode+'&cityCode='+cityCode+'&cusId='+customerId+'&shareFlag=Y'
 	}else{
 		sysback();
 	}
 	
+}
+function toQrcodeUrl(){
+	urlParm.title = '同道保险二维码'
+	urlParm.rightIco = '0';	
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink = base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
+	window.location.href = twolink;
 }

@@ -1,8 +1,10 @@
+var isOnline = '';
 $(function(){
 	/* 设置滑动区域 */
 	$.setscroll();		
 	//获取剩余份数
 	$.getShengyu("21");
+	sendProductInfoRequest('15','','',roleType)
 	//领取
 	// getAppInfo();	
 	if( isComing == "1" ){
@@ -11,6 +13,10 @@ $(function(){
 	}
 		$(".lingqu").unbind("tap").bind("tap",function(){
 			if( isComing == "1" ){				
+				return false;
+			}
+			if( isOnline == "0"){
+				modelAlert("赠险活动截止到12月31日！");
 				return false;
 			}
 			if(roleType == "00" || roleType == "") {
@@ -23,6 +29,10 @@ $(function(){
 		})	
 		$(".zengsong").unbind().bind("tap",function(){
 			if( isComing == "1" ){				
+				return false;
+			}
+			if( isOnline == "0"){
+				modelAlert("赠险活动截止到12月31日！");
 				return false;
 			}
 			if(roleType == "00" || roleType == "") {
@@ -171,14 +181,60 @@ function tuLingqu(){
 	window.location.href="jcxshouye.html?jsonKey="+jsonStr;
 }
 
-function shareHandle(){
+function shareHandle(){		
+	urlParm.fl='2';				//判断是否是产品详情
+	urlParm.ccName="易安驾乘无忧意外保险";		//产品名称
+	urlParm.ccId=ccId;			//产品编号
+	urlParm.name = "易安驾乘无忧意外保险";
+	urlParm.desc= "20万保额免费领，驾车乘车都能保，放心自驾游。";	
+	var title = "易安驾乘无忧意外保险";
+	var desc  = "20万保额免费领，驾车乘车都能保，放心自驾游。" ;	
+	var picUrl = base.url + "tongdaoApp/image/share/jiachenxianfen.png";	
+	var flag = '3';		
+	urlParm.state='4';
+	var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=4';	
+	//shareMethod(shareurl,title,desc,"baodan",picUrl);
+	urlParm.picUrl=picUrl;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink=base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
+	shareMethod(shareurl, title, desc,flag,picUrl,twolink);
+};
+
+/*function shareHandle(){
 	var title = "易安驾乘无忧意外保险" ;
 	var desc  = "20万保额免费领，驾车乘车都能保，放心自驾游。" ;	
 	var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=4';
 	var picUrl = base.url + "tongdaoApp/image/share/jiachenxianfen.png";
 	shareMethod(shareurl,title,desc,"baodan",picUrl);		
-};
+};*/
 
 function backlast(){
 	sysback();
+}
+function toQrcodeUrl(){
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink = base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
+	window.location.href = twolink;
+}
+//在线产品详情查询
+function sendProductInfoRequest(ccId,cityCode,provinceCode,type){
+    var url = requestUrl.onlineProductInfoUrl;
+    var sendJson = {
+        "head" : {
+            "channel" : '02',
+            "userCode" : mobile,
+            "transTime" : $.getTimeStr(),
+            "transToken": ""
+        },
+        "body" : {
+            "commodityCombinationId": ccId,//
+            "cityCode":cityCode,//"220001",
+            "type":type,//"04",
+            "provinceCode":provinceCode//"220000"
+        }
+    }
+    $.reqAjaxsFalse( url, sendJson, productInfoRender ); 
+}
+function productInfoRender(data){
+	isOnline = data.returns.commodityCombination.commodityCombinationStatus;
 }

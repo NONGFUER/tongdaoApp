@@ -517,3 +517,13 @@
     z-index: 1000;
     text-align: center;
 }
+
+
+/* 右上角分享图标 */
+.rightIcon{
+	float: right;
+    width: 9%;
+    height: 44px;
+    padding-right: 4%;
+    display: none;
+}

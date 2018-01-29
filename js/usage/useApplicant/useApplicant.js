@@ -408,11 +408,26 @@ function toInsure(obj) {
 		urlParm.rightIco = "0";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = base.url + "tongdaoApp/html/insurance/yian/familyInsure.html?jsonKey=" + jsonStr;
+	}else if(urlParm.frompage == "familyInsureHtmlShare") { //除挂号险之外的ecard
+		urlParm.title = "投保信息";
+		urlParm.rightIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/share/insurance/yian/familyInsure.html?jsonKey=" + jsonStr;
 	} else if(urlParm.frompage == "sunshineFilloutHtml") { //阳光
 		urlParm.title = urlParm.titles;
 		urlParm.rightIco = "0";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/sunshineFillout.html?jsonKey=" + jsonStr;
+	}else if(urlParm.frompage == "goldsunshineFilloutHtml") { //阳光
+		urlParm.title = urlParm.titles;
+		urlParm.rightIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/goldsunshineFillout.html?jsonKey=" + jsonStr;
+	}else if(urlParm.frompage == "insureHtmlShare"){	//在线产品分享（包含ecard,挂号险,防癌险）	
+		urlParm.title = "投保信息";
+		urlParm.rightIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/share/insurance/main/insure.html?jsonKey=" + jsonStr;
 	}
 }
 //返回上一页

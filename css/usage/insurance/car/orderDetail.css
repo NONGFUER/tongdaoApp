@@ -367,5 +367,8 @@ header .changeChar{
     padding-right: 7%;
     text-align: right;	
 }
-
+/* 人车联动 */
+.rcld,#rcldPolnoArea{
+	display:none;
+}
 	

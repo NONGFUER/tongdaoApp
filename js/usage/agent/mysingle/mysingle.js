@@ -16,6 +16,7 @@ var vm = new Vue({
 	el: '#list',
 	data: {
 		Objectlist: {},
+		ccName:'',
 	},
 	/*mounted() {
 		this.$nextTick(function() {
@@ -58,32 +59,39 @@ $(function() {
 		var orderNo = $(this).attr('orderNo');
 		var insureNo = $(this).attr('insureNo');
 		var commodityId = $(this).attr('commodityId');
+		var ccName=$(this).attr('ccName');
 		var param = {
 			"userCode": userCode,
 			"mobile": userCode,
 			"policyNo": policyNo,
 			"orderNo": orderNo,
-/*			"riskType": riskType,*/
+			"insureNo":insureNo,
+			/*			"riskType": riskType,*/
 			"customerId": customerId,
 			"transToken": transToken,
 			"policyStatus": policyStatus,
-			"commodityComId":commodityId+'',
+			"commodityComId": commodityId + '',
+			"ccName":ccName,
 			"cxflag": '3',
-/*			"tagId": tagId,*/
+			/*			"tagId": tagId,*/
 			"title": '出单详情',
 			"leftIco": '1',
 			"rightIco": '0',
-			"downIco": '1',
+			"downIco": '0',
 		}
 		var jsonStr = UrlEncode(JSON.stringify(param));
 		if(riskType == '03') {
 			window.location.href = base.url + "tongdaoApp/html/insurance/car/orderDetail.html?jsonKey=" + jsonStr;
 		} else if(riskType == '01') {
 			if(commodityId != '17') {
-				window.location.href = base.url+"tongdaoApp/html/account/myOrder/policyInfo.html?jsonKey=" + jsonStr;
+				window.location.href = base.url + "tongdaoApp/html/account/myOrder/policyInfo.html?jsonKey=" + jsonStr;
 			}
 		} else if(riskType == '02') {
-			window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
+			if(commodityId == '42') {
+				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/goldsunwarrantyDetail.html?jsonKey=" + jsonStr;
+			} else {
+				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
+			}
 		}
 	})
 
@@ -98,13 +106,13 @@ function getPolicyList(data) {
 				datas.push(index);
 				if(index.prem != "" && index.prem != null) {
 					datas[element].prem = toDecimal2(datas[element].prem);
-				}else{
+				} else {
 					datas[element].prem = '0.00';
 				}
 				if(index.underWrite != null && index.underWrite != "") {
 					if(index.underWrite.time != null && index.underWrite.time != "") {
 						datas[element].underWrite = ($.getTimeStr2(index.underWrite.time));
-					}else{
+					} else {
 						datas[element].underWrite = ("----");
 					}
 				} else {
@@ -188,7 +196,7 @@ function chuli() {
 	})
 }
 /*壳上调用的方法*/
-function mylist(userCode, transToken, customerId,riskType,policyStatus) {
+function mylist(userCode, transToken, customerId, riskType, policyStatus) {
 	userCode = userCode;
 	transToken = transToken;
 	customerId = customerId;
@@ -200,15 +208,15 @@ function mylist(userCode, transToken, customerId,riskType,policyStatus) {
 	if(riskType == '全部') {
 		riskType = null;
 	}
-	xinzhen(userCode, transToken, customerId,policyStatus,riskType);
+	xinzhen(userCode, transToken, customerId, policyStatus, riskType);
 	mui('.man-div-title ul').on('tap', 'li', function() {
 		$('.man-div-title ul').children('li').removeClass('li_xuan');
 		$(this).addClass('li_xuan');
 		var policyStatus = $(this).attr('policyStatus');
 		if(policyStatus == '') {
 			policyStatus = null;
-		} 
-		xinzhen(userCode, transToken, customerId,policyStatus,riskType);
+		}
+		xinzhen(userCode, transToken, customerId, policyStatus, riskType);
 		return false;
 	})
 }

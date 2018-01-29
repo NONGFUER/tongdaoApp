@@ -74,6 +74,11 @@ $.loadData = function(param) {
 				orderNos = param.cxInfo.cxOrder.orderNo;
 				cxSessionId=param.cxInfo.cxOrder.sessionid;
 				$("#orderno").html(orderNos);// A123456789012345657
+				$("#appno").html(param.cxInfo.cxOrder.appno);
+				if (!$.isNull(param.cxInfo.cxOrder.polno)) {
+					$("#polno").html(param.cxInfo.cxOrder.polno);
+					$(".polnoli").show();
+				}
 				// 车险公司名称
 				$("#comtype").html("天安财险");
 				$("#version").html(param.cxInfo.cxOrder.commodityName);
@@ -152,7 +157,7 @@ $.loadData = function(param) {
 				}
 				
 				// 总保费
-				$("#summoney").html("￥"+ $.formatNumOfTwo(param.cxInfo.cxOffer.totalpremium));// ￥7200.00
+				$("#summoney").html("￥"+ $.formatNumOfTwo(param.cxInfo.cxOffer.totalPre));// ￥7200.00
 
 				// 商业险保费
 				$("#busmoney").html($.formatNumOfTwo(param.cxInfo.cxOffer.businessPre)+"元");// 6000.00
@@ -162,6 +167,19 @@ $.loadData = function(param) {
 
 				// 车船税
 				$("#vehiclemoney").html($.formatNumOfTwo(param.cxInfo.cxOffer.vehicletaxPre)+"元");// 300.00
+				
+				//人身险
+				if(param.cxInfo.cxOrder.rcldIndicate=="1"){
+					$("#rcldProductName").html(param.cxInfo.cxOrder.rcldProductName);
+					$("#rcldAppno").html(param.cxInfo.cxOrder.rcldAppno);
+					$("#rcldmoney").html(param.cxInfo.cxOrder.rcldProductAmount+"元");
+					$(".rcld").show();
+					if (!$.isNull(param.cxInfo.cxOrder.rcldPolno)&&param.cxInfo.cxOrder.rcldPolno!="") {
+						$("#rcldPolnoArea").show("fast");
+						// 商业险投保单号
+						$("#rcldPolno").html(param.cxInfo.cxOrder.rcldPolno);// 人身险投保单号
+					}
+				}
 
 			}
 		} else {

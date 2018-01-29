@@ -48,7 +48,7 @@ function orderDetailCallback(data){
 		var status				 = shortRiskOrder.policyStatus;
 		var picPath	= picStatus(status);
 		$(".zhuangtai").attr("src",picPath);
-			
+		var epolicyUrl			 = shortRiskOrder.epolicyUrl;	
 		var startTime = shortRiskOrder.startTime.time;
 			startTime = timeFormatDate(startTime,"yyyy-MM-dd");
 		var endTime   = shortRiskOrder.endTime.time;
@@ -57,6 +57,7 @@ function orderDetailCallback(data){
 			yuyueId = shortRiskOrder.yuyueId;
 		//投保人星系
 		$("#orderNo").text(orderNo);//订单号
+		$("#insureNo").text(orderBasic.insureNo);//订单号
 		$("#insureName").text(commodityInfo.commodityName);//商品名称
 		$("#TBRName").text(shortRiskOrder.insureName);//投保人姓名
 		$("#TBRID").text(shortRiskOrder.insureIdentitycard);//投保人身份证
@@ -76,8 +77,12 @@ function orderDetailCallback(data){
 		
 		//保险条款
 		$("#riskTiaokuan").attr("data-cid",commodityInfo.id + "");		
+		if(epolicyUrl){			
+				$("#epolicy").show();					
+		}
 		$("#epolicy").unbind("tap").bind("tap",function(){
-			window.location.href = epolicyUrl;
+			//window.location.href = epolicyUrl;
+			sysbackurl(epolicyUrl);
 		});
 		$(".anniu1").unbind("tap").bind("tap",function(){
 			if( ccId == "14" ){
@@ -92,12 +97,16 @@ function orderDetailCallback(data){
 }
 
 function backlast(){
-	urlParm.title = "我的订单";
-	urlParm.leftIco = "1";
-	urlParm.rightIco = "0";
-	urlParm.downIco = "1";
-	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	window.location.href = "allOrder.html?jsonKey="+jsonStr;
+	if(urlParm.channel == '02'){
+		history.go(-1);
+	}else{
+		urlParm.title = "我的订单";
+		urlParm.leftIco = "1";
+		urlParm.rightIco = "0";
+		urlParm.downIco = "1";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = "allOrder.html?jsonKey="+jsonStr;
+	}
 }
 
 /*支付接口*/

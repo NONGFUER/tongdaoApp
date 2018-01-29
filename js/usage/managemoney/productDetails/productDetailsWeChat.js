@@ -65,8 +65,11 @@ var vm = new Vue({
 		goumaishuoming: {},
 		xiangguanxieyi: {},
 		cid: {},
-		chiyou:"",
-		chiyoudate:"",
+		name: "",
+		title: "",
+		chiyou: "",
+		chiyoudate: "",
+
 	}
 })
 $(function() {
@@ -116,6 +119,13 @@ $(function() {
 		$(this).children('.jiantou').toggleClass('shangjiantou');
 		$(this).siblings('ul').toggle();
 	})
+	if(roleType == "" || roleType == "00") {
+		
+	} else if(idAuth == '0') {
+		wxfenxiang();
+	}else{
+		wxfenxiang();
+	}
 	/*点击购买*/
 	$("#huifang").unbind("tap").bind("tap", function() {
 		if(roleType == "" || roleType == "00") {
@@ -133,7 +143,7 @@ $(function() {
 				}
 				var jsonStr1 = JSON.stringify(sendData);
 				jsonStr1 = UrlEncode(jsonStr1);
-				window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?	fromtype=" + fromtype + "&openid=" + openid + "&inviterPhone=" + shareMobile + "&jsonKey=" + jsonStr1;
+				window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?fromtype=" + fromtype + "&openid=" + openid + "&inviterPhone=" + shareMobile + "&jsonKey=" + jsonStr1;
 			});
 		} else if(idAuth == '0') {
 			modelAlert('请先实名', '', function() {
@@ -181,7 +191,6 @@ $(function() {
 	$(".suoding_left img").unbind("tap").bind("tap", function() {
 		modelAlert("锁定期是指在购买后处于锁定期内进行赎回，需收取一定费率的手续费（在锁定期外或犹豫期内赎回免手续费）");
 	});
-
 })
 /*购买*/
 function buy() {
@@ -214,8 +223,10 @@ function goldProductInfo(data) {
 		vm.CommodityCombinationModuleList = data.returns.CommodityCombinationModuleList;
 		/*$('。mui-title').html(data.)*/
 		vm.cid = data.returns.commodityInfo.id;
+		vm.name = data.returns.commodityCombination.commodityCombinationAbbreviation;
+		vm.title = data.returns.commodityCombination.insuredInfo;
 		vm.chiyou = data.returns.CommodityCombinationModuleList[0].subModuleName;
-		vm.chiyoudate=data.returns.CommodityCombinationModuleList[0].modueInfo;
+		vm.chiyoudate = data.returns.CommodityCombinationModuleList[0].modueInfo;
 		/*产品基本信息*/
 		var cmlist = new Array();
 		/*产品投资周期*/
@@ -304,6 +315,65 @@ function getRiskAble(data) {
 		modelAlert(data.statusMessage, "", lognCont);
 	}
 }
+var PRODUCT_PICURL = {
+	"HONGKANG": base.url + "tongdaoApp/image/share/tongdaoicyi.png",
+	"HONGKANGWU": base.url + "tongdaoApp/image/share/tongdaoicwu.png",
+}
+//根据不同的产品获取分享信息
+function getProductSharePic(productCode) {
+	var picUrl = "";
+	if(productCode == '4') {
+		picUrl = PRODUCT_PICURL.HONGKANG;
+	} else {
+		picUrl = PRODUCT_PICURL.HONGKANGWU;
+	}
+	return picUrl;
+}
+/*微信分享*/
+function wxfenxiang() {
+	var method = function() {
+		var title = vm.name;
+		var desc = vm.title;
+		var picUrl = getProductSharePic(commodityCombinationId);
+		var shareUrl = base.url + "tongdaoApp/html/share/kongbai.html?mobile=" + userCode + '&ccId=' + commodityCombinationId + '&type=5';
+		wx.showMenuItems({
+			menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline'] // 要显示的菜单项
+		});
+
+		//分享给朋友
+		wx.onMenuShareAppMessage({
+			title: title, // 分享标题
+			desc: desc, // 分享描述
+			link: shareUrl, // 分享链接
+			imgUrl: picUrl, // 分享图标
+			type: '', // 分享类型,music、video或link，不填默认为link
+			dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+			success: function() {
+				// 用户确认分享后执行的回调函数
+				// mui.alert("您已成功分享给好友！","温馨提示");
+			},
+			cancel: function() {
+				// 用户取消分享后执行的回调函数
+				mui.alert("您取消了分享！", "温馨提示");
+			}
+		});
+		//分享到朋友圈
+		wx.onMenuShareTimeline({
+			title: title + "-" + desc, // 分享描述, // 分享标题  
+			link: shareUrl, // 分享链接  
+			imgUrl: picUrl, // 分享图标  
+			success: function() {
+				// 用户确认分享后执行的回调函数  
+			},
+			cancel: function() {
+				// 用户取消分享后执行的回调函数  
+				mui.alert("您取消了分享！", "温馨提示");
+			}
+		});
+	}
+	getConfig(method);
+}
+
 /*获取用户信息*/
 function adid() {
 	var url = base.url + "customerBasic/getCustomerBasicInfo.do";
