@@ -167,8 +167,10 @@ if( entry == 'app' ){
 	var channelResource = "3"
 	var payWay = '02'
 	var buyType = '1'
+	var payType = "7"//短险支付方式
 }else{	
-	//modelAlert("浏览器或微信端");	
+	//modelAlert("浏览器或微信端");
+	var payType = "3"//短险支付方式
 	var channel = "02"
 	if( shareFlag == 'Y'){
 		var channelResource = "2"

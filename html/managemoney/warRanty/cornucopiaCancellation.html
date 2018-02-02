@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>赎回退保领取</title>
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/usage/managemoney/warRanty/policyCancellation.css" />
+	</head>
+	<style type="text/css">
+		/*开户银行*/
+		
+		.man-div-body-ul_li_div_bank {
+			background-color: #FFFFFF;
+			padding: 10px 0px 10px 0px;
+		}
+		
+		.man-div-body-ul_li_div_bank .body_title_div {
+			height: 25px;
+			line-height: 25px;
+			font-size: 14px;
+			color: #333;
+		}
+		
+		.man-div-body-ul_li_div_bank .man-div-body-ul {
+			padding-right: 0;
+		}
+		
+		.man-div-body-ul_li_div_bank .man-div-body-ul li {
+			padding: 0 20px 0 0;
+			height: 41px;
+			line-height: 41px;
+			display: flex;
+		}
+		
+		.man-div-body-ul_bank span:last-child div {
+			display: inline-block;
+			vertical-align: top;
+			margin-left: 10px;
+			height: 41px;
+			line-height: 41px;
+		}
+		
+		.body_title_div_div {
+			display: inline-block;
+			font-size: 11px;
+			color: #888888;
+		}
+		
+		.wenhaoico {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			background: url(../../../image/common/wen.png) no-repeat;
+			background-size: 100%;
+			vertical-align: middle;
+		}
+		
+		.man-div-body-ul_li_div_bank .man-div-body-ul li {
+			padding: 0 20px 0 0;
+			height: 41px;
+			line-height: 41px;
+			display: flex;
+		}
+		
+		.man-div-body-ul_bank span:last-child div {
+			display: inline-block;
+			vertical-align: top;
+			margin-left: 10px;
+			height: 41px;
+			line-height: 41px;
+		}
+		
+		.man-div-body-ul li span:last-child {
+			float: right;
+			flex: 3;
+			text-align: right;
+		}
+		
+		#yinhangka {
+			text-align: right;
+			font-size: 15px;
+			height: 41px;
+			/*	line-height: 41px;*/
+			color: #333;
+		}
+		
+		.man-div-body-ul li span:first-child {
+			float: left;
+			flex: 1.5;
+			color: #959595;
+			text-align: left;
+		}
+		
+		.man-div-body-ul li span:first-child {
+			float: left;
+			flex: 1.5;
+			color: #959595;
+			text-align: left;
+		}
+		
+		.youjiantouhuise {
+			width: 9px!important;
+			height: 19px!important;
+			background: url(../../../image/managemoney/productDetails/youjiantouhuise.png) no-repeat;
+			background-size: 100%;
+			margin-top: 13px;
+		}
+	</style>
+
+	<body>
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="man mui-table-view" id='list' v-cloak>
+					<div class="man-div-body-ul_li_div mb10">
+						<ul class="man-div-body-ul_li_div_ul1">
+							<li>
+								<span class="heise" v-text="ccName">安溢保两全保险(一年期)</span>
+							</li>
+							<li class="marb20">
+								<span v-text="'保单号'+policyNo">保单号:1322727262627272</span>
+							</li>
+							<!--<li class="list_two">
+								<h1 v-text="remark">5.40%</h1>
+							</li>
+							<li>
+								<span>历史年化投资回报率</span>
+							</li>-->
+						</ul>
+					</div>
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title_div">领取信息</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li>
+								<span>投资本金</span>
+								<span class="chengse" v-html="Objectlist.prem+'元'">232323.32元</span>
+							</li>
+						</ul>
+					</div>
+					<!--银行卡-->
+					<div class="man-div-body-ul_li_div_bank mb10">
+						<div class="body_title_div" style="display: inline-block;">回款账户信息</div>
+						<div class="body_title_div_div" style="color: #d45050;">（银行账号所有人必须为投保人本人）</div>
+						<div class="body_title_div_div wenhaoico"></div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li class="man-div-body-ul_bank">
+								<span>开户银行</span>
+								<span>
+									<div class="bank" v-text="Objectlist.bankName" v-bind:bankCode="Objectlist.bankCode">请选择开户行</div>
+									<div class="youjiantouhuise"></div>
+								</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>银行卡号</span>
+								<span><input id='yinhangka' type="text" name="" id="cardNo" v-bind:value="Objectlist.bankCertificate" placeholder="请输入银行卡信息" maxlength="19"/></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--确认赎回-->
+		<div class="man-div-body-ul_li_div_btn" style="position: fixed; bottom: 0;z-index:9999;width: 100%;">
+			<div id="huifang" class="div_btn">确认赎回</div>
+		</div>
+	</body>
+	<script src="../../../js/lib/widget/mui/mui.min.js"></script>
+	<script src="../../../js/lib/common/zepto.min.js"></script>
+	<script src="../../../js/lib/common/base.js"></script>
+	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
+	<script src="../../../js/usage/managemoney/warRanty/cornucopiaCancellation.js"></script>
+
+</html>

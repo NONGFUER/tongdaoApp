@@ -33,7 +33,7 @@ function queryTicketPageDetail(){
 					listStr += '<div class="table-td" id="day">'+ ticketList[i].day +'</div>' //交单时间
 					listStr += '<div class="table-td decoration" id="amount">' + toDecimal2(ticketList[i].amount) + '(元)</div>'  //当日交单金额
 					listStr += '<div class="table-td">' + ticketList[i].ticketNo + '</div>'//抽奖券号
-					if( ticketList[i].statu == '已中奖'){
+					if( ticketList[i].statu == '已中奖' || ticketList[i].statu == '一等奖' || ticketList[i].statu == '二等奖' ){
 						listStr += '<div class="table-td red">' + ticketList[i].statu + '</div>'    //抽奖券状态
 					}else{
 						listStr += '<div class="table-td">' + ticketList[i].statu + '</div>'    //抽奖券状态

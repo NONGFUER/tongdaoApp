@@ -74,6 +74,7 @@ $(function() {
 		var payUrl = $(this).attr('payUrl');
 		var riskSupportAbility = $(this).attr('riskSupportAbility');
 		var orderStatus = $(this).attr('orderStatus');
+		var prem=$(this).attr('prem');
 		if(commodityCombinationId == '4') {
 			var productFlag = '01';
 		} else {
@@ -126,12 +127,13 @@ $(function() {
 					}
 				}
 				$.reqAjaxs(url, redata, getYgUrl);
+
 				function getYgUrl(data) {
 					if(data.statusCode == '000000') {
 						window.location.href = data.returns.url;
 					}
 				}
-			}else if(commodityCombinationId == '26'){
+			} else if(commodityCombinationId == '26') {
 				var url = base.url + 'ygJmyBasic/getYgUrl.do';
 				var redata = {
 					"head": {
@@ -145,13 +147,49 @@ $(function() {
 					}
 				}
 				$.reqAjaxs(url, redata, getYgUrl);
+
 				function getYgUrl(data) {
 					if(data.statusCode == '000000') {
 						window.location.href = data.returns.url;
 					}
 				}
-			}else {
+			} else {
 				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/orderDetails.html?jsonKey=" + jsonStr;
+			}
+		} else if(riskType == '05') {
+			if(commodityCombinationId == '28') {
+				var url = base.url + 'insuredkunlun/payCost.do';
+				var redata = {
+					"head": {
+						"userCode": userCode,
+						"channel": channel,
+						"transTime": $.getTimeStr(),
+						"transToken": transToken
+					},
+					"body": {
+						"proposalContNo": insureNo,
+						"oldTranNo": orderNo,
+					}
+				}
+				$.reqAjaxs(url, redata, payCost);
+
+				function payCost(data) {
+					if(data.statusCode == '000000') {
+						var sendData = datalist;
+						sendData.commodityCombinationId = commodityCombinationId;
+						sendData.comComName = commodityName;
+						sendData.startPiece = prem;
+						sendData.userCode = userCode;
+						sendData.customerId = customerId;
+						sendData.transToken = transToken;
+						var jsonStr = UrlEncode(JSON.stringify(sendData));
+						window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/cornucopiapayResult.html?jsonKey=" + jsonStr;
+					} else if(data.statusCode == '123456') {
+						modelAlert(data.statusMessage, '', lognCont);
+					} else {
+						modelAlert(data.statusMessage);
+					}
+				}
 			}
 		}
 		return false;
@@ -217,10 +255,14 @@ $(function() {
 		} else if(riskType == '02') {
 			if(commodityCombinationId == '24') {
 				window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/sunshineDetails.html?jsonKey=" + jsonStr;
-			}else if(commodityCombinationId == '26'){
+			} else if(commodityCombinationId == '26') {
 				window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/goldsunshineDetails.html?jsonKey=" + jsonStr;
-			}else{
+			} else {
 				window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
+			}
+		}else if(riskType == '05') {
+			if(commodityCombinationId == '28') {
+				window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/cornucopiaDetails.html?jsonKey=" + jsonStr;
 			}
 		}
 		return false;
@@ -275,10 +317,14 @@ $(function() {
 		} else if(riskType == '02') {
 			if(commodityCombinationId == '24') {
 				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/sunorderDetails.html?jsonKey=" + jsonStr;
-			}else if(commodityCombinationId == '26'){
+			} else if(commodityCombinationId == '26') {
 				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/goldsunorderDetails.html?jsonKey=" + jsonStr;
-			}else {
+			} else {
 				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/orderDetails.html?jsonKey=" + jsonStr;
+			}
+		}else if(riskType=='05'){
+			if(commodityCombinationId == '28') {
+				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/cornucopiaorderDetails.html?jsonKey=" + jsonStr;
 			}
 		}
 	})

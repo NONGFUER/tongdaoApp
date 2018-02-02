@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>银行卡列表</title>
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/usage/managemoney/cardList/cardList.css" />
+	</head>
+
+	<body>
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="man mui-table-view" id='list' v-cloak> 
+					<div class="b"></div>
+					<div class="banklist clearfix tui"  v-for="(value,key) in Objectitle" v-bind:bankName='value.bankName' v-bind:commodityId='value.commodityId' v-bind:bankCode='value.bankCode' v-bind:dayLimit='value.dayLimit'>
+						<div class="banklogo"><img v-bind:src="'../../../image/banklogo/'+value.bankLogo+'.png'"></div>
+						<div class="bankdetail">
+							<div class="bank"> <span class="bankname" v-html="value.bankName">广发银行</span> <span class="cardtype" v-html="">储蓄卡</span></div>
+							<div class="limit" v-text="'单笔限额'+value.singleLimit+'，日累计限额'+value.dayLimit"></div>
+						</div>
+						<div></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../../js/lib/widget/mui/mui.min.js"></script>
+	<script src="../../../js/lib/common/zepto.min.js"></script>
+	<script src="../../../js/lib/common/base.js"></script>
+	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
+	<script src="../../../js/usage/managemoney/cardList/cornucopiaList.js"></script>
+
+</html>

@@ -41,6 +41,13 @@ $("#btnHaif").click(function() { //“全部为否”按钮
 		urlParm.downIco = "0";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/goldsunshineFillout.html?jsonKey=" + jsonStr;
+	}else if(urlParm.myhtml == 'cornucopia') {
+		urlParm.title = urlParm.titles;
+		urlParm.leftIco = "1";
+		urlParm.rightIco = "0";
+		urlParm.downIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/cornucopiaFillout.html?jsonKey=" + jsonStr;
 	} else {
 		urlParm.title = "投保信息";
 		urlParm.leftIco = "1";
@@ -108,6 +115,13 @@ function backlast() {
 		urlParm.downIco = "0";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/goldsunshineDetails.html?jsonKey=" + jsonStr;
+	}else if(urlParm.myhtml == 'cornucopia') {
+		urlParm.title = '产品详情';
+		urlParm.leftIco = "1";
+		urlParm.rightIco = "1";
+		urlParm.downIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/cornucopiaDetails.html?jsonKey=" + jsonStr;
 	} else {
 		urlParm.title = "产品详情";
 		urlParm.leftIco = "1";

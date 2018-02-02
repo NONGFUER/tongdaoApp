@@ -160,6 +160,41 @@ $(function() {
 			} else {
 				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/orderDetails.html?jsonKey=" + jsonStr;
 			}
+		}else if(riskType == '05') {
+			if(commodityCombinationId == '28') {
+				var url = base.url + 'insuredkunlun/payCost.do';
+				var redata = {
+					"head": {
+						"userCode": userCode,
+						"channel": channel,
+						"transTime": $.getTimeStr(),
+						"transToken": transToken
+					},
+					"body": {
+						"proposalContNo": insureNo,
+						"oldTranNo": orderNo,
+					}
+				}
+				$.reqAjaxs(url, redata, payCost);
+
+				function payCost(data) {
+					if(data.statusCode == '000000') {
+						var sendData = datalist;
+						sendData.commodityCombinationId = commodityCombinationId;
+						sendData.comComName = commodityName;
+						sendData.startPiece = prem;
+						sendData.userCode = userCode;
+						sendData.customerId = customerId;
+						sendData.transToken = transToken;
+						var jsonStr = UrlEncode(JSON.stringify(sendData));
+						window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/cornucopiapayResult.html?jsonKey=" + jsonStr;
+					} else if(data.statusCode == '123456') {
+						modelAlert(data.statusMessage, '', lognCont);
+					} else {
+						modelAlert(data.statusMessage);
+					}
+				}
+			}
 		}
 	})
 

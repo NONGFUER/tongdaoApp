@@ -413,12 +413,17 @@ function toInsure(obj) {
 		urlParm.rightIco = "0";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = base.url + "tongdaoApp/html/share/insurance/yian/familyInsure.html?jsonKey=" + jsonStr;
-	} else if(urlParm.frompage == "sunshineFilloutHtml") { //阳光
+	} else if(urlParm.frompage == "sunshineFilloutHtml") { //阳光1
 		urlParm.title = urlParm.titles;
 		urlParm.rightIco = "0";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/sunshineFillout.html?jsonKey=" + jsonStr;
-	}else if(urlParm.frompage == "goldsunshineFilloutHtml") { //阳光
+	}else if(urlParm.frompage == "cornucopiaFilloutHTML") { //聚宝盆
+		urlParm.title = urlParm.titles;
+		urlParm.rightIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/cornucopiaFillout.html?jsonKey=" + jsonStr;
+	}else if(urlParm.frompage == "goldsunshineFilloutHtml") { //阳光2
 		urlParm.title = urlParm.titles;
 		urlParm.rightIco = "0";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
@@ -440,7 +445,14 @@ function backlast() {
 		urlParm.downIco = "0";
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
 		window.location.href = base.url + "tongdaoApp/html/insurance/main/insure.html?jsonKey=" + jsonStr;
-	} else if(urlParm.frompage == "familyInsureHtml") {
+	} else if(urlParm.frompage == "cornucopiaFilloutHTML") {
+		urlParm.title = urlParm.titles;
+		urlParm.leftIco = "1";
+		urlParm.rightIco = "0";
+		urlParm.downIco = "0";
+		var jsonStr = UrlEncode(JSON.stringify(urlParm));
+		window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/cornucopiaFillout.html?jsonKey=" + jsonStr;
+	}else if(urlParm.frompage == "familyInsureHtml") {
 		urlParm.title = "投保信息";
 		urlParm.leftIco = "1";
 		urlParm.rightIco = "0";

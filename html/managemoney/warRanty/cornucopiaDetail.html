@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>保单详细</title>
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/base.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/lib/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../css/usage/managemoney/warRanty/warrantyDetail.css" />
+	</head>
+	<style type="text/css">
+		.wenhaoico {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			background: url(../../../image/common/wen.png) no-repeat;
+			background-size: 100%;
+			vertical-align: middle;
+		}
+		
+		.note-div {
+			margin: auto;
+			position: absolute;
+			top: 15%;
+			left: 0;
+			right: 0;
+			bottom: 10%;
+			opacity: 1;
+			width: 80%;
+			height: auto;
+			background-color: #FFFFFF;
+			z-index: 9999;
+			border-radius: 12px;
+		}
+		
+		.note-div_title {
+			height: 10%;
+		}
+		
+		.man-div-body-ul_li_div_bank {
+			background-color: #FFFFFF;
+			padding: 10px 0px 10px 0px;
+		}
+		
+		#beibaoren {
+			float: right;
+			padding-right: 20px;
+			color: #1B6BB8;
+			vertical-align: middle;
+			font-size: 14px;
+			line-height: 22px;
+		}
+		
+		#beibaoren img {
+			position: relative;
+			width: 15px;
+			vertical-align: middle;
+			margin-right: 5px;
+			top: -2px;
+		}
+		
+		.body_title_div {
+			height: 25px;
+			line-height: 25px;
+			font-size: 14px;
+			color: #333;
+		}
+	</style>
+
+	<body>
+		<div class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="man mui-table-view" id='list' v-cloak>
+					<div class="man-div-body-ul_li_div mb10">
+						<ul class="man-div-body-ul_li_div_ul1">
+							<li>
+								<span v-text="Objectitle.commodityCombination.commodityCombinationAbbreviation"></span>
+								<span class="jiantou"></span>
+								<span class="chanping" v-if="channel!='02'">查看产品详细</span>
+							</li>
+							<li>
+								<span></span>
+								<span v-text="Objectitle.lifeRiskPolicy.orderStatus" class="baozhang"></span>
+							</li>
+						</ul>
+					</div>
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title_div">保单信息</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li>
+								<span>保单缴费金额</span>
+								<span v-text="Objectitle.lifeRiskPolicy.prem+'元'">232323.32元</span>
+							</li>
+							<li class="xianli"></li>
+							<!--<li>
+								<span>保单账户价值</span>
+								<span class="wenhaoico"></span>
+								<span></span>
+								<span v-text="bdjiazhi+'元'"></span>
+							</li>-->
+							<!--<li class="xianli"></li>-->
+							<li>
+								<span>保单号</span>
+								<span v-text="Objectitle.lifeRiskPolicy.policyNo">123456789010292821</span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>投保单号</span>
+								<span v-text="insureNo">123456789010292821</span>
+							</li>
+						</ul>
+					</div>
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title_div">投保人信息</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li>
+								<span>投保人</span>
+								<span v-text="insurelist.name"></span>
+							</li>
+							<li class="xianli"></li>
+							<!--<li>
+								<span>证件类型</span>
+								<span v-text="Objectitle.lifeRiskPolicy.insureName"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>证件号码</span>
+								<span v-text="Objectitle.lifeRiskPolicy.insureName"></span>
+							</li>
+							<li class="xianli"></li>-->
+							<li>
+								<span>省市名称</span>
+								<span v-text="insurelist.provinceName"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>详细地址</span>
+								<span v-text="insurelist.address"></span>
+							</li>
+							<li class="xianli"></li>
+							<!--<li>
+								<span>邮      编</span>
+								<span v-text="Objectitle.lifeRiskPolicy.insureName"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>年收入</span>
+								<span v-text="Objectitle.lifeRiskPolicy.insureName"></span>
+							</li>
+							<li class="xianli"></li>-->
+							<li>
+								<span>手机号</span>
+								<span class="phoneyin" v-text="insurelist.phone"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>电子邮箱</span>
+								<span v-text="insurelist.email"></span>
+							</li>
+						</ul>
+					</div>
+					<!--投保人信息-->
+					<div class="man-div-body-ul_li_div_two mb10">
+						<!--<ul class="man-div-body-ul">
+							<li>
+								<span class="heise">被保人信息</span>
+								<span class="lanse">同投保人</span>
+							</li>
+							
+						</ul>-->
+						<div class="body_title_div">被保人信息</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<!--<li>
+								<span>投被保人关系</span>
+								<span v-text="Objectitle.lifeRiskPolicy.insureName"></span>
+							</li>
+							<li class="xianli"></li>-->
+							<li>
+								<span>被保人名称</span>
+								<span v-text="recognizeelist.name"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>被保人手机号</span>
+								<span v-text="recognizeelist.phone"></span>
+							</li>
+						</ul>
+					</div>
+					<!--受益人-->
+					<!--<div class="man-div-body-ul_li_div_bank mb10">
+						<div class="body_title_div" style="display: inline-block;">受益人信息</div>
+						<div class="body_title_div_right" id="beibaoren">
+							<img class="gou" src="../../../image/managemoney/productDetails/gou.png"> 法定受益人
+						</div>
+					</div>-->
+					<!--银行卡-->
+					<div class="man-div-body-ul_li_div_two mb10">
+						<div class="body_title_div">银行卡信息</div>
+						<div class="xian"></div>
+						<ul class="man-div-body-ul">
+							<li>
+								<span>银行名称</span>
+								<span v-html="bankName"></span>
+							</li>
+							<li class="xianli"></li>
+							<li>
+								<span>银行卡号</span>
+								<span class="bank_weihao" v-html="Objectitle.lifeRiskPolicy.bankAccNo">尾号 2333</span>
+							</li>
+						</ul>
+					</div>
+					<!--电子保单-->
+					<div class="man-div-body-ul_li_div_two">
+						<ul class="man-div-body-ul">
+							<li class="baodan">
+								<span class="heise">电子保单</span>
+								<span class="rightjiantou  postop10"></span>
+							</li>
+						</ul>
+					</div>
+					<div class="man-div-body-ul_li_div_btn" v-if="commodityComId!=''">
+						<!--<div id="huifang" class="div_btn mbright30">在线回访</div>-->
+						<div id='lingqu' class="div_btn">申请退保</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="note">
+			<div class="note-div">
+				<div class="note-div_title">
+					<div class="title">保单现金价值</div>
+					<div class="note-div_title_right"></div>
+				</div>
+				<div class="note-div_body" style="padding: 10px;">
+					<img src="../../../image/common/jiazhi.jpg" style=w idth: 100%;height: 100%;padding: 10px; ">
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../../js/lib/widget/mui/mui.min.js "></script>
+	<script src="../../../js/lib/common/zepto.min.js "></script>
+	<script src="../../../js/lib/common/base.js "></script>
+	<script src="../../../js/lib/common/common.js "></script>
+	<script src="../../../js/lib/widget/mui/vue.mi.js "></script>
+	<script src="../../../js/usage/managemoney/warRanty/cornucopiaDetail.js"></script>
+
+</html>

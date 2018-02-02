@@ -110,6 +110,10 @@ $(function() {
 			}else{
 				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyDetail.html?jsonKey=" + jsonStr;
 			}
+		}else if(riskType == '05'){
+			if(commodityId=='49'){
+				window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/cornucopiaDetail.html?jsonKey=" + jsonStr;
+			}
 		}
 	})
 })

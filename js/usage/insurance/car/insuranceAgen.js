@@ -202,7 +202,7 @@ function init(){
 		  }
 		 
 		}else{
-			mui.alert(data.statusMessage,"温馨提示");
+			modelAlert(data.statusMessage,"温馨提示");
 		}
 	});
 }
@@ -250,7 +250,7 @@ $.respBack=function(data){
 			}
 		});
 	}else{
-		mui.alert(data.statusMessage,"温馨提示");
+		modelAlert(data.statusMessage,"温馨提示");
 	}
 	
 }
@@ -259,7 +259,8 @@ $.respBack=function(data){
 
 
 /**--点击下一步ajax回调-------*/
-$.saveBack=function(){
+$.saveBack=function(data){
+	if(data.statusCode=="000000"){
 		++times;
 		var url = base.url + "vi/orderConfirm.do";
 		var data = {
@@ -332,6 +333,9 @@ $.saveBack=function(){
 				modelAlert(refuseReason);
 			}
 		}
+	}else{
+		modelAlert(data.statusMessage);
+	}	
 }
 
 
@@ -354,7 +358,7 @@ function selectHzCity(){
 	$.reqAjaxs(url, reqData, function(data){
 		if(data.statusCode=="000000"){
 			  if(data.returns.resultStatus=="0"){
-				  mui.alert(data.statusMessage,"温馨提示");
+				  modelAlert(data.statusMessage,"温馨提示");
 				  $("#hzArea").attr("hzProvinceCode","").attr("hzProvinceName","").attr("hzCityCode","").attr("hzCityName","").val(" ");
 			  }else if(data.returns.resultStatus=="1"){
 				  $("#hzArea").attr("hzProvinceCode",data.returns.cityList[0].hzProvinceCode).attr("hzProvinceName",data.returns.cityList[0].hzProvinceName).attr("hzCityCode",data.returns.cityList[0].value).attr("hzCityName",data.returns.cityList[0].text).val(data.returns.cityList[0].hzProvinceName+data.returns.cityList[0].text);
@@ -367,7 +371,7 @@ function selectHzCity(){
 			  }
 			 
 		}else{
-			mui.alert(data.statusMessage,"温馨提示");
+			modelAlert(data.statusMessage,"温馨提示");
 		}
 	});
 }
@@ -402,7 +406,7 @@ function getHzInfo(tareFlag){
 						totalcheck($.saveBack);
 					}
 				}else{
-					mui.alert("该保险机构人员不属于出单区域!","温馨提示",function(){
+					modelAlert("该保险机构人员不属于出单区域!","温馨提示",function(){
 						$("#hzName,#hzNote").val("");
 						/**--天安人寿输入营销员代码查询营销员信息--*/
 						$("#hzWorkno").unbind("blur").bind("blur",function(){
@@ -414,7 +418,7 @@ function getHzInfo(tareFlag){
 					});
 				}
 			}else{
-				mui.alert(data.statusMessage,"温馨提示",function(){
+				modelAlert(data.statusMessage,"温馨提示",function(){
 					$("#hzName,#hzNote").val("");
 					/**--天安人寿输入营销员代码查询营销员信息--*/
 					$("#hzWorkno").unbind("blur").bind("blur",function(){
@@ -426,7 +430,7 @@ function getHzInfo(tareFlag){
 			}
 	   });
 	}else{
-		mui.alert("请填写营销员代码!","温馨提示",function(){
+		modelAlert("请填写营销员代码!","温馨提示",function(){
 			$("#hzName,#hzNote").val("");
 			/**--天安人寿输入营销员代码查询营销员信息--*/
 			$("#hzWorkno").unbind("blur").bind("blur",function(){
@@ -453,55 +457,55 @@ function totalcheck(func){
 			if(/^[A-Za-z0-9]+$/.test($("#cdWorkno").val().trim())){
 				if($("#cdName").val()!=""){
 					if(!tit.regExp.isChinese($("#cdName").val().trim())){
-						mui.alert("业务员姓名为汉字，请重新填写该信息！","温馨提示");
+						modelAlert("业务员姓名为汉字，请重新填写该信息！","温馨提示");
 						return false;
 					}
 				}else{
-					mui.alert("业务员姓名为必填项，请填写该信息！","温馨提示");
+					modelAlert("业务员姓名为必填项，请填写该信息！","温馨提示");
 					return false;
 				}
 			}else{
-				mui.alert("业务员代码为数字或字母，请重新填写该信息！","温馨提示");
+				modelAlert("业务员代码为数字或字母，请重新填写该信息！","温馨提示");
 				return false;
 			}
 			
 		}else{
-			mui.alert("业务员代码为必填项，请填写该信息！","温馨提示");
+			modelAlert("业务员代码为必填项，请填写该信息！","温馨提示");
 			return false;
 		}	
 				
 	}
 	if( $("#hezuoChoose").attr("src")=="../../../image/insurance/car/weigouxuan3.png"){
 		if($("#company").attr("hzCompanyCode")==""){
-			mui.alert("公司名称不能为空，请填写该信息！","温馨提示");
+			modelAlert("公司名称不能为空，请填写该信息！","温馨提示");
 			return false;
 		}
 		if($("#hzWorkno").val()!=""){
 			if(!/^[A-Za-z0-9]+$/.test($("#hzWorkno").val().trim())){
-				mui.alert("工号为数字或字母，请重新填写该信息！","温馨提示");
+				modelAlert("工号为数字或字母，请重新填写该信息！","温馨提示");
 				return false;
 			}
 		}else{
-			mui.alert("工号为必填项，请填写该信息！","温馨提示");
+			modelAlert("工号为必填项，请填写该信息！","温馨提示");
 			return false;
 		}	
 		if($("#hzName").val()!=""){
 			if(!tit.regExp.isChinese($("#hzName").val().trim())){
-				mui.alert("姓名为汉字，请重新填写该信息！","温馨提示");
+				modelAlert("姓名为汉字，请重新填写该信息！","温馨提示");
 				return false;
 			}
 		}else{
-			mui.alert("姓名不能为空，请填写该信息！","温馨提示");
+			modelAlert("姓名不能为空，请填写该信息！","温馨提示");
 			return false;
 		}
 		if($("#hzPhone").val()!=""){
 			if(!tit.regExp.isMobile($("#hzPhone").val().trim())){
-				mui.alert("手机号输入错误，请重新输入！","温馨提示");
+				modelAlert("手机号输入错误，请重新输入！","温馨提示");
 				return false;
 			}
 		}else{
 			if(issueChannel!="07"){//天安人寿渠道手机号选填
-				mui.alert("手机号不能为空，请填写该信息！","温馨提示");
+				modelAlert("手机号不能为空，请填写该信息！","温馨提示");
 				return false;
 			}
 		}

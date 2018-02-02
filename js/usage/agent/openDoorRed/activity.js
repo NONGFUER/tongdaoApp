@@ -73,31 +73,19 @@ function getServiceTime(){
 		var diffEndDate = currentDate - endDate;
 		$('.rewards').removeClass('hidden');
 		$(".redDoor").css('background-image','url("../../../image/agent/openDoorRed/iphoneBg.jpg")');
-		$(".wenzi img").attr('src','../../../image/agent/openDoorRed/truth.png');
-		$("#thing").text("一等奖：每天1名，华为 HUAWEI nova 2S （4GB+64GB）一台。");
-		$("#thing2").text("二等奖：每天9名，华为 荣耀9 标配版 （4GB+64GB）一台。");
+		$(".wenzi img").attr('src','../../../image/agent/openDoorRed/truth.png');		
 		if(diffPreDate < 0){	//1月29号之前（不含1月29）
-			$('#mingdanTable').hide();
-			/*
-			$(".redDoor").css('background-image','url("../../../image/agent/openDoorRed/redbg.jpg")');
-			$("#thing").text("敬请期待");*/
+			$('#mingdanTable').hide();		
 		}else if(diffStartDate < 0){	//1月29号~2月8号
-			$('#mingdanTable').hide();
-			/*
-			$('.rewards').removeClass('hidden');
-			$(".redDoor").css('background-image','url("../../../image/agent/openDoorRed/iphoneBg.jpg")');
-			$(".wenzi img").attr('src','../../../image/agent/openDoorRed/truth.png');
-			$("#thing").text("一等奖：每天1名，华为 HUAWEI nova 2S (4GB+64GB)一台。");
-			$("#thing2").text("二等奖：每天9名，华为 荣耀9 标配版 (4GB+64GB)一台。");*/
+			$('#mingdanTable').hide();			
 			bgTxt = "../../../image/agent/openDoorRed/unstart.png"			
-		}else if(diffEndDate<0){	//2月9号~2月15号（活动期间）
-			/*$('.rewards').removeClass('hidden');
-			$(".redDoor").css('background-image','url("../../../image/agent/openDoorRed/iphoneBg.jpg")');
-			$(".wenzi img").attr('src','../../../image/agent/openDoorRed/truth.png');
-			$("#thing").text("一等奖：每天1名，华为 HUAWEI nova 2S （4GB+64GB）一台。");
-			$("#thing2").text("二等奖：每天9名，华为 荣耀9 标配版 （4GB+64GB）一台。");*/
+		}else if(diffEndDate<0){	//2月9号~2月15号（活动期间）			
 			bgTxt = "../../../image/agent/openDoorRed/unstart.png"
 			dayInit = currentDate.getDate();				//获取服务器现在日期是几号
+			var monthInit = currentDate.getMonth();
+			startTime.setMonth(monthInit);
+			endTime.setMonth(monthInit);
+			publishTime.setMonth(monthInit);
 			startTime.setDate(dayInit);
 			endTime.setDate(dayInit);
 			publishTime.setDate(dayInit);
@@ -118,26 +106,25 @@ function getServiceTime(){
 				});
 			}else if (diffEndTime < 0){		//10:00~10:10
 				$('#mingdanTable').hide();
-				chouStateTxt ='抽奖结束';
-				if(chance == 0){
-					buttonFontTxt = '立即参与抽奖'
+				chouStateTxt ='抽奖结束';				
+				if( joined == 1){
+					buttonFontTxt = '今日抽奖成功，稍后公布中奖结果'
 					$('.startButton').unbind('tap').bind('tap',function(){
-						modelAlert("您今天没有抽奖机会可用。【业务员在一天内完成1万元寿险标准保费，在下一日可获得一次的抽奖资格。】");
+						modelAlert("今日抽奖成功，稍后公布中奖结果。");
 					});
-				}else{					
-					if( joined == 1){
-						buttonFontTxt = '今日抽奖成功，稍后公布中奖结果'
+				}else{
+					buttonFontTxt = '立即参与抽奖'
+					if(chance == 0){
 						$('.startButton').unbind('tap').bind('tap',function(){
-							modelAlert("今日抽奖成功，稍后公布中奖结果。");
+							modelAlert("您今天没有抽奖机会可用。【业务员在一天内完成1万元寿险标准保费，在下一日可获得一次的抽奖资格。】");
 						});
 					}else{
-						buttonFontTxt = '立即参与抽奖'
 						bgTxt = "../../../image/agent/openDoorRed/start.png"
 						$('.startButton').unbind('tap').bind('tap',function(){
 							getDraw()
 						});
-					}
-				}				
+					}												
+				}								
 				countTime = endTime;
 			}else if(diffPublishTime < 0){//10:00~10:18	
 				$('#mingdanTable').hide();
@@ -171,8 +158,7 @@ function getServiceTime(){
 			$(".timeShow").hide();
 			buttonFontTxt = '活动已结束'
 			$(".redDoor").css('background-image','url("../../../image/agent/openDoorRed/iphoneBg.jpg")');
-			$(".wenzi img").attr('src','../../../image/agent/openDoorRed/truth.png');
-			$("#thing").text("iPHONE X 256G一台。");
+			$(".wenzi img").attr('src','../../../image/agent/openDoorRed/truth.png');			
 			bgTxt = "../../../image/agent/openDoorRed/unstart.png"	
 		}
 		$('#chouState').text(chouStateTxt);

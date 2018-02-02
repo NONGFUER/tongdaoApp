@@ -73,7 +73,8 @@
 }
 .rewardsbg{
 	width:92%;
-	height:85px;
+	/* height:85px; */
+	height:215px;
 	margin: 0 auto;
 	background:#cb0826;
 	padding:10px 3% 10px 3% ;
@@ -169,7 +170,7 @@
 }
 #wintt{	
 	width:100%;
-	border: 1px solid #222;
+	border: 1px solid  #aa0216;
 	margin-top:10px;
 	background:#cb0a26;
 	color:#fff;
@@ -268,10 +269,12 @@
 	font-size:14px;
 }
 .imgIphone{
+	display:block;
 	width:90px;
-	float:right;
+	/* float:right; */
 }
 .leftFont{
+	width:50%;
 	float:left;
 }
 .nbsp{

@@ -35,10 +35,10 @@ $(function() {
 	roleType=parm.roleType;
 	channelcar=parm.channelcar;
 	if(channelcar=="channelcar"){//渠道出单标志
-		$("#issueChannel").show();
+		$("#carselectChannel").show();
 		sessionStorage.setItem("channelcar","channelcar");
 	}else{
-		$("#issueChannel").hide();
+		$("#carselectChannel").hide();
 	}
 	if(parm.shareFlag=="Y"){//App头部显示分享按钮
 	    parm.source="2";//分享进入
@@ -1626,15 +1626,10 @@ Date.prototype.Format = function (fmt) { //author: meizz
 /**android IOS 调用h5分享方法*/
 function shareHandle(){
 	if(roleType != "00" && roleType != ""){
-		var shareStr = {
-			"mobile":mobile,
-		}
-		if(channelcar=="channelcar"){//渠道出单标志
-			shareStr.channelcar='channelcar';
-		}
-		shareStr = JSON.stringify(shareStr);
-		shareStr = UrlEncode(shareStr); // 加密过后的操作
 		var shareurl = base.url + 'tongdaoApp/html/share/kongbai.html?mobile=' + mobile+"&ccId=13&type=1"; // 分享链接
+		if(channelcar=="channelcar"){//渠道出单标志
+			shareurl = base.url + 'tongdaoApp/html/share/kongbai.html?mobile=' + mobile+"&ccId=13&type=15"; // 分享链接
+		}
 		var picUrl=base.url+"tongdaoApp/image/share/car.png";
 		if(ua=="isApp"){
 			var twolink=base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+gettwolinkurl();
@@ -1678,9 +1673,10 @@ function gettwolinkurl(){
 		"name":'天安车险',
 		"desc":'独家专享冰点价格，7*24小时理赔服务，线上投保快捷方便。',
 		"fl":"2",
+		"picUrl":base.url+"tongdaoApp/image/share/car.png",
 	}
 	if(channelcar=="channelcar"){//渠道出单标志
-		shareStr.channelcar='channelcar';
+		twolink.state='15';
 	}
 	return UrlEncode(JSON.stringify(twolink));
 }
@@ -1690,15 +1686,11 @@ var method=function(){
 	wx.showMenuItems({
 	    menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline'] // 要显示的菜单项
 	});
-	var shareStr = {
-		"mobile":mobile,
-	}
-	if(channelcar=="channelcar"){//渠道出单标志
-		shareStr.channelcar='channelcar';
-	}
-	shareStr = JSON.stringify(shareStr);
-	shareStr = UrlEncode(shareStr); // 加密过后的操作
+
 	var shareurl = base.url + 'tongdaoApp/html/share/kongbai.html?mobile=' + mobile+"&ccId=13&type=1"; // 分享链接
+	if(channelcar=="channelcar"){//渠道出单标志
+		 shareurl = base.url + 'tongdaoApp/html/share/kongbai.html?mobile=' + mobile+"&ccId=13&type=15"; // 分享链接
+	}
 	var shareImgUrl=base.url+"tongdaoApp/image/share/car.png";
 	//分享给朋友
 	wx.onMenuShareAppMessage({

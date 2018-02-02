@@ -971,7 +971,7 @@ function payRequest(serialNo){
 	    }
 	}
 	if( ccId != "1" && ccId != "2" && ccId != "3"){
-		reqData.body.payType = "7";
+		reqData.body.payType = payType;
 	}else{
 		reqData.body.orderResource = "5";
 	}	
