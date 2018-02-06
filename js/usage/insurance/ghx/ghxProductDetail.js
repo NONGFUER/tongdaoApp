@@ -1,6 +1,7 @@
 var dicChannelList = [];
 var dicCodeList    = [];
 var remarkList	   = [];
+var ccStayus = '';
 $(function(){
 	if( isComing == "1"){
 		$("#toubao").css({background:"#ccc"});
@@ -23,6 +24,10 @@ $(function(){
     });
     $("#toubao").bind("tap",function(){
     	if( isComing == "1"){
+			return false;
+		}
+    	if(ccStayus == '0'){
+			modelAlert("此产品已下架！");
 			return false;
 		}
     	isLogin(roleType,toFillPolicyHtml);
@@ -82,6 +87,10 @@ function sendProductInfoCallBack(data){
 		console.log(dicCodeList);
 		console.log(remarkList);
 		urlParm.cName =  CommodityCombination.commodityCombinationName;
+		ccStayus = commodityCombination.commodityCombinationStatus;	//上下架状态 1-上架 0-下架
+	    if( ccStayus == "0"){
+	    	$("#toubao").css({background:"#ccc"});
+	    }
 		calPrem();
 		
 	}else{

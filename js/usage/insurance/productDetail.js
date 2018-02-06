@@ -11,6 +11,7 @@ var lowAge = "";
 var upAge = "";
 var healthFlag = "";
 var CommodityInfo = [];
+var ccStayus = '';
 $(function(){
 	if( isComing == "1"){
 		$("#toubao").css({background:"#ccc"});
@@ -427,6 +428,10 @@ function productInfoRender(data){
         cName = body.CommodityInfo[0].commodityName;
         ccName = commodityCombination.commodityCombinationName;
         shareDesc = commodityCombination.insuredInfo;
+        ccStayus = commodityCombination.commodityCombinationStatus;
+        if( ccStayus == "0"){
+    		$("#toubao").css({background:"#ccc"});
+    	}
         $(".banner-img").attr("src",commodityCombination.banner);		//渲染图片
         $("#commodityCombinationName").text(ccName);					//渲染商品组合名
         $("#companyName").text(companyProfile.companyName);				//渲染保险公司名字
@@ -572,6 +577,10 @@ function changeDate(id){
 function buyBind(){
 	$("#toubao").unbind('tap').bind('tap',function(){
 		if( isComing == "1"){
+			return false;
+		}
+		if(ccStayus == '0'){
+			modelAlert("此产品已下架！");
 			return false;
 		}
 		if( healthFlag == "y"){

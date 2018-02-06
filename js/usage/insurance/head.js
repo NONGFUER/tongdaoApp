@@ -186,6 +186,9 @@ if( entry == 'app' ){
 if(urlParm.productCode == '00400015' || urlParm.ccCode == '00400015'){
 	ccId = '20'//暂时性元旦活动补老人先
 }
+if(urlParm.productCode == '00400017' || urlParm.ccCode == '00400017'){
+	ccId = '27'//天安百万重疾
+}
 var PRODUCT_PICURL ={
 		"BASE" : base.url + "tongdaoApp/image/share/tongdaoic.png",
 		"MCAN" : base.url + "tongdaoApp/image/share/fangainan.png",

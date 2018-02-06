@@ -147,7 +147,6 @@ $(function() {
 					}
 				}
 				$.reqAjaxs(url, redata, getYgUrl);
-
 				function getYgUrl(data) {
 					if(data.statusCode == '000000') {
 						window.location.href = data.returns.url;
@@ -172,10 +171,9 @@ $(function() {
 					}
 				}
 				$.reqAjaxs(url, redata, payCost);
-
 				function payCost(data) {
 					if(data.statusCode == '000000') {
-						var sendData = datalist;
+						var sendData = param;
 						sendData.commodityCombinationId = commodityCombinationId;
 						sendData.comComName = commodityName;
 						sendData.startPiece = prem;

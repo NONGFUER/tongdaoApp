@@ -9,7 +9,7 @@ var userCode = getUrlQueryString('mobile'),
 	openid = getUrlQueryString('openid'),
 	idAuth = '',
 	channel = '02',
-	fromtype = 'licai',
+	fromtype = 'licaigold',
 	transToken = '';
 if(userCode == null) {
 	userCode = '';

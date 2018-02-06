@@ -163,7 +163,11 @@
 							<li class="xianli"></li>
 							<li>
 								<span>银行卡号</span>
-								<span><input id='yinhangka' type="text" name="" id="cardNo" v-bind:value="Objectlist.bankCertificate" placeholder="请输入银行卡信息" maxlength="19"/></span>
+								<span class="bank_weihao" v-text="Objectlist.bankCertificate">
+									
+								<!--<input id='yinhangka' type="text" name="" id="cardNo" v-bind:value="Objectlist.bankCertificate" placeholder="请输入银行卡信息" maxlength="19" readonly="readonly"/>-->
+									
+								</span>
 							</li>
 						</ul>
 					</div>

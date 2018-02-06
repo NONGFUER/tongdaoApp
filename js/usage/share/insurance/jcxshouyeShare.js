@@ -116,8 +116,8 @@ $(function(){
 				if(mail==""||mail==null||mail=="请输入电子邮箱（选填）"){
 					mail="";
 				}
-				
-				var url=base.url + "insuranceSave/insuranceSaveInfo.do"
+				modelAlert("赠险活动截止到2017年12月31日！");
+/*				var url=base.url + "insuranceSave/insuranceSaveInfo.do"
 				var reqData={
 						"head":{
 							"channel": "02",
@@ -149,7 +149,7 @@ $(function(){
 					}else{
 						modelAlert(data.statusMessage);
 					}
-				})
+				})*/
 			}
 		}
 	})

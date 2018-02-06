@@ -28,6 +28,7 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	zhiyename = urlParm.zhiyename,
 	baoxiantiaokuan = urlParm.baoxiantiaokuan,
 	toubaoguize = urlParm.toubaoguize,
+	myhoder = urlParm.myhoder,
 	title = urlParm.title;
 
 function isWeiXin() {
@@ -42,6 +43,9 @@ function isWeiXin() {
 /*if(isWeiXin()) {
 	$(".changyongbaoxian").hide();
 }*/
+if(typeof(myhoder) == 'undefined') {
+	myhoder = true;
+}
 var inFlag = '1';
 if(title == null || title == "") {
 	title = urlParm.titles;
@@ -123,10 +127,24 @@ if(pieces) {
 }
 $(function() {
 	vm.remark = remark;
-
 	if(channel == '02') {
 		$('#tou').show();
 		$('.mui-content').css('padding-top', '44px');
+	}
+	if(myhoder) {
+		$('.meigou').hide();
+		$('.gou').show();
+		vm.myhoder = true;
+		$('.bbrul').hide()
+		$('#guanxi').attr('data-where', '00');
+		$('#guanxi').html('本人');
+	} else {
+		$('.gou').hide();
+		$('.meigou').show();
+		vm.myhoder = false;
+		$('.bbrul').show()
+		$('#guanxi').attr('data-where', '');
+		$('#guanxi').html('请选择');
 	}
 	vm.toubaoguize = toubaoguize;
 	vm.baoxiantiaokuan = baoxiantiaokuan;
@@ -146,12 +164,7 @@ $(function() {
 	}
 	var url = base.url + 'inureProduct/getInsureInfo.do';
 	$.reqAjaxs(url, reqData, getInsureInfo);
-	if(level == '' || level == null) {
-		$('#zhiyeleibie').html('请选择');
-	} else {
-		$('#zhiyeleibie').html(zhiyename);
-		$('#zhiyeleibie').attr('data-where', ccod);
-	}
+
 	if(youxiaoqi != null && youxiaoqi != '') {
 		$('#shenfenzhengyxq').html(youxiaoqi);
 	}
@@ -306,6 +319,8 @@ $("#huifang").unbind("tap").bind("tap", function() {
 			}
 			var whereCode = $("#chengshi").attr("data-where");
 			whereCode = whereCode.split(",");
+			var whereName = $("#chengshi").html();
+			whereName = whereName.split(" ");
 			buyPrem = $('#money').html().split('.');
 			//var startPrem = Number(buyPrem[0]) * Number(vm.feilvshuzi);
 			var redata = {
@@ -346,6 +361,8 @@ $("#huifang").unbind("tap").bind("tap", function() {
 					"buyType": buyType, //1直接购买，2分享购买
 					"provinceCode": whereCode[0], //投保人所属地区的省代码
 					"cityCode": whereCode[1], //投保人所属地区的市代码
+					"provinceName": whereName[0], //投保人所属地区的省代码
+					"cityName": whereName[1], //投保人所属地区的市代码
 					"invitePhone": shareMobile,
 				}
 			}
@@ -381,6 +398,12 @@ function getInsureInfo(data) {
 	vm.feilvshuzi = 0;
 	vm.Objectitle = data.returns;
 	if(holderbr) {
+		if(holderbr.zhiyeleibie != null && holderbr.zhiyeleibie != '') {
+			$('#zhiyeleibie').html(holderbr.zhiyeleibie);
+		}
+		if(holderbr.zhiyeleibiecod != null && holderbr.zhiyeleibiecod != '') {
+			$('#zhiyeleibie').attr('data-where', holderbr.zhiyeleibiecod);
+		}
 		vm.holderbr = holderbr;
 		$('#name').val(vm.holderbr.name);
 		$('#idNo').val(vm.holderbr.idNo);
@@ -390,26 +413,19 @@ function getInsureInfo(data) {
 		$('#phone').val(vm.holderbr.phone);
 		$('#email').val(vm.holderbr.email);
 	}
-	if(vm.myhoder) {
-		vm.holderbrto = vm.holderbr;
-	}
-	if(holderbrto) {
-		vm.holderbrto = holderbrto;
+	if(!vm.myhoder) {
+		if(holderbrto) {
+			vm.holderbrto = holderbrto;
+			if(holderbrto.guanxi != null && holderbrto.guanxi != '') {
+				$('#guanxi').html(holderbrto.guanxi);
+			}
+			if(holderbrto.guanxicod != null && holderbrto.guanxicod != '') {
+				$('#guanxi').attr('data-where', holderbrto.guanxicod);
+			}
+		}
 		$('#nameto').val(vm.holderbrto.name);
 		$('#idNoto').val(vm.holderbrto.idNo);
 		$('#phoneto').val(vm.holderbrto.phone);
-		if(holderbrto.guanxi != null && holderbrto.guanxi != '') {
-			$('#guanxi').html(holderbrto.guanxi);
-		}
-		if(holderbrto.guanxicod != null && holderbrto.guanxicod != '') {
-			$('#guanxi').attr('data-where', holderbrto.guanxicod);
-		}
-		if(holderbr.zhiyeleibie != null && holderbr.zhiyeleibie != '') {
-			$('#zhiyeleibie').html(holderbr.zhiyeleibie);
-		}
-		if(holderbr.zhiyeleibiecod != null && holderbr.zhiyeleibiecod != '') {
-			$('#zhiyeleibie').attr('data-where', holderbr.zhiyeleibiecod);
-		}
 	}
 	if(pieces) {
 		vm.mymoney = intToFloat(1000 * pieces);
@@ -500,13 +516,14 @@ $(".bank").unbind("tap").bind("tap", function() {
 	vm.holderbr.income = $('#income').val();
 	vm.holderbr.zhiyeleibie = $('#zhiyeleibie').html();
 	vm.holderbr.zhiyeleibiecod = $('#zhiyeleibie').attr('data-where');
-
-	vm.holderbrto.guanxi = $('#guanxi').html();
-	vm.holderbrto.guanxidata = $('#guanxi').attr('data-where');
-	vm.holderbrto.name = $('#nameto').val();
-	vm.holderbrto.idNo = $('#idNoto').val();
-	vm.holderbrto.phone = $('#phoneto').val();
-
+	if(!vm.myhoder) {
+		vm.holderbrto.guanxi = $('#guanxi').html();
+		vm.holderbrto.guanxicod = $('#guanxi').attr('data-where');
+		vm.holderbrto.name = $('#nameto').val();
+		vm.holderbrto.idNo = $('#idNoto').val();
+		vm.holderbrto.phone = $('#phoneto').val();
+	}
+	urlParm.myhoder = vm.myhoder;
 	urlParm.title = '银行卡信息';
 	urlParm.holderbr = vm.holderbr;
 	urlParm.holderbrto = vm.holderbrto;
@@ -680,6 +697,7 @@ function saveOrder(data) {
 				"transToken": transToken
 			},
 			"body": {
+				"customerId": customerId, //用户id
 				"prtNo": PrtNo,
 				"proposalContNo": ProposalContNo,
 				"oldTranNo": orderNo,
@@ -855,6 +873,7 @@ $("#goumai").blur(function() {
 		vm.startPiece = intToFloat(goumai * money);
 	}
 });
+
 $('.gou').unbind("tap").bind("tap", function() {
 	$('.gou').hide();
 	$('.meigou').show();

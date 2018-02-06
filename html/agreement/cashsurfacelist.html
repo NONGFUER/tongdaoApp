@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 -->
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<!-- 忽略IOS将页面中的数字识别为电话号码 -->
+		<meta name="format-detection" content="telephone=no" />
+		<!-- 忽略Android平台中对邮箱地址的识别 -->
+		<meta name="format-detection" content="email=no" />
+		<title>现金价值表列表</title>
+		<link rel="stylesheet" href="../../css/lib/widget/mui/mui.min.css" />
+		<link rel="stylesheet" href="../../css/lib/common/base.css" />
+		<link rel="stylesheet" href="../../css/lib/common/common.css" />
+		<link rel="stylesheet" href="../../css/usage/agreement/article.css" />
+	</head>
+	<style type="text/css">
+		li {
+			list-style: none;
+		}
+		
+		.mui-content {
+			background: #FFFFFF;
+		}
+		
+		.mui-table-view-cell {
+			border-bottom: 1px solid #cccccc;
+			margin-left: 4%;
+			margin-right: 4%;
+		}
+		
+		.mui-row {
+			padding-bottom: 5%;
+		}
+		
+		.mui-navigate-right {
+			margin: -11px -23px!important;
+		}
+	</style>
+
+	<body>
+		<!-- 滚动区域 -->
+		<div id="product_scroll" class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="product_info">
+					<div class="mui-content">
+						<div class="mui-row">
+							<div class=" mui-col-xs-12">
+								<li class="mui-table-view-cell">
+									<a id='huli' class="mui-navigate-right">
+										聚宝盆长期护理保险A款现金价值表
+									</a>
+								</li>
+							</div>
+							<div class="mui-col-xs-12">
+								<li class="mui-table-view-cell">
+									<a id='yiwai' class="mui-navigate-right">
+										附加聚宝盆长期意外伤害保险A款现金价值表
+									</a>
+								</li>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/lib/common/zepto.min.js"></script>
+	<script type="text/javascript" src="../../js/lib/widget/mui/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/lib/common/base.js"></script>
+	<script type="text/javascript" src="../../js/lib/common/common.js"></script>
+	<script type="text/javascript" src="../../js/usage/agreement/article.js"></script>
+	<script>
+		$("#huli").unbind("tap").bind("tap", function() {
+			urlParm.title = '现金价值表';
+			urlParm.titles = '产品详情';
+			urlParm.leftIco = '1';
+			urlParm.rightIco = '0';
+			urlParm.downIco = '0';
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+			window.location.href = base.url + 'tongdaoApp/html/guize/cornucopiaHuli.html?jsonKey=' + jsonStr;
+		})
+		$("#yiwai").unbind("tap").bind("tap", function() {
+			urlParm.title = '现金价值表';
+			urlParm.titles = '产品详情';
+			urlParm.leftIco = '1';
+			urlParm.rightIco = '0';
+			urlParm.downIco = '0';
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+			window.location.href = base.url + 'tongdaoApp/html/guize/cornucopiaYiwai.html?jsonKey=' + jsonStr;
+		})
+	</script>
+
+</html>

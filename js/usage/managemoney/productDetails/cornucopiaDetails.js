@@ -8,6 +8,7 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	idAuth = urlParm.idAuth,
 	isComing = urlParm.isComing,
 	customerId = urlParm.customerId,
+	entry=urlParm.entry,
 	channel = '01';
 var productFlag = '01';
 if(userCode == null) {
@@ -15,6 +16,9 @@ if(userCode == null) {
 }
 if(commodityCombinationId == null || commodityCombinationId == '') {
 	commodityCombinationId = ccId;
+}
+if(entry=='mall'){
+	channel='02';
 }
 if(ccId == null || ccId == '') {
 	ccId = commodityCombinationId;
@@ -76,7 +80,7 @@ $(function() {
 		},
 		"head": {
 			"userCode": userCode,
-			"channel": "01",
+			"channel": channel,
 			"transTime": $.getTimeStr(),
 			"transToken": transToken
 		}
@@ -219,11 +223,16 @@ function goldProductInfo(data) {
 						} else if(xiangguan[key].subModuleName == '现金价值表') {
 							urlParm.title = '现金价值表';
 							urlParm.titles = '产品详情';
+							urlParm.channel='01';
+							urlParm.leftIco='1';
+							urlParm.rightIco='0';
+							urlParm.downIco='0';
 							var jsonStr = UrlEncode(JSON.stringify(urlParm));
-							xiangguan[key].modueInfo = base.url + 'tongdaoApp/html/guize/goldYangguangjiazhi.html?jsonKey=' + jsonStr;
+							xiangguan[key].modueInfo = base.url + 'tongdaoApp/html/agreement/cashsurfacelist.html?jsonKey=' + jsonStr;
 						} else if(xiangguan[key].subModuleName == '投保规则') {
 							toubaoguize = xiangguan[key].modueInfo;
 						}
+						
 					})
 				}
 			})
@@ -256,7 +265,7 @@ function goldProductInfo(data) {
 }
 /*分享*/
 function shareHandle() {
-	urlParm.state = '14';
+	urlParm.state = '16';
 	urlParm.fl = '2';
 	urlParm.ccName = vm.Objectitle.commodityCombination.commodityCombinationAbbreviation;
 	urlParm.ccId = commodityCombinationId;
@@ -266,8 +275,8 @@ function shareHandle() {
 	var title = vm.name;
 	var flag = '3';
 	var desc = vm.title;
-	var shareurl = base.url + "tongdaoApp/html/share/kongbai.html?mobile=" + userCode + '&ccId=' + commodityCombinationId + '&type=14';
-	var picUrl = base.url + "tongdaoApp/image/managemoney/productDetails/goldsun.png";
+	var shareurl = base.url + "tongdaoApp/html/share/kongbai.html?mobile=" + userCode + '&ccId=' + commodityCombinationId + '&type=16';
+	var picUrl = base.url + "tongdaoApp/image/managemoney/productDetails/jubaopen.png";
 	urlParm.picUrl = picUrl;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
 	var twolink = base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey=" + jsonStr;

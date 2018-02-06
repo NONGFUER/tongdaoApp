@@ -42,8 +42,8 @@ var vm = new Vue({
 		dianzibaodan: '',
 		insureNo: '',
 		bankName: '', //银行名称
-		insurelist:'',//投人信息
-		recognizeelist:'',//被保人信息
+		insurelist: '', //投人信息
+		recognizeelist: '', //被保人信息
 	},
 	/*	mounted() {
 			this.$nextTick(function() {
@@ -98,7 +98,11 @@ $(function() {
 			"title": '产品详情',
 		}
 		var jsonStr = UrlEncode(JSON.stringify(reqData));
-		window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/goldsunshineDetails.html?jsonKey=" + jsonStr;
+		if(channel == '01') {
+			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/cornucopiaDetails.html?jsonKey=" + jsonStr;
+		} else {
+			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/cornucopiaDetailsWeChat.html?jsonKey=" + jsonStr;
+		}
 	})
 	vm.commodityComId = commodityComId;
 	vm.channel = channel;
@@ -110,13 +114,13 @@ function policyQueryListInfo(data) {
 	if(data.statusCode == '000000') {
 		vm.Objectitle = data.returns;
 		vm.bankName = data.returns.bankName;
-		vm.dianzibaodan=data.returns.lifeRiskPolicy.epolicyUrl;
+		vm.dianzibaodan = data.returns.lifeRiskPolicy.epolicyUrl;
 		vm.returnVisit = '0';
 		for(i = 0; i < vm.Objectitle.listRiskPartys.length; i++) {
-			if(vm.Objectitle.listRiskPartys[i].partyType=='1'){
-				vm.insurelist=vm.Objectitle.listRiskPartys[i];
-			}else if(vm.Objectitle.listRiskPartys[i].partyType=='2'){
-				vm.recognizeelist=vm.Objectitle.listRiskPartys[i];
+			if(vm.Objectitle.listRiskPartys[i].partyType == '1') {
+				vm.insurelist = vm.Objectitle.listRiskPartys[i];
+			} else if(vm.Objectitle.listRiskPartys[i].partyType == '2') {
+				vm.recognizeelist = vm.Objectitle.listRiskPartys[i];
 			}
 		}
 	} else if(data.statusCode == '123456') {
@@ -134,7 +138,7 @@ function chuli() {
 		$('.baozhang').html('待生效')
 	} else if($('.baozhang').html() == '2') {
 		$('.baozhang').html('保障中')
-	} else if($('.baozhang').html() == '4') {
+	} else if($('.baozhang').html() == '4' || $('.baozhang').html() == '5') {
 		$('.baozhang').html('已领取')
 		$('#lingqu').off('tap', '#lingqu');
 		$('#lingqu').addClass('huisebtn');
@@ -147,32 +151,32 @@ function chuli() {
 	if($('.baozhang').html() != '03' && $('.baozhang').html() != '已领取') {
 		mui('.man-div-body-ul_li_div_btn').on('tap', '#lingqu', function() {
 			var reqData = {
-			"orderNo": orderNo,
-			"insureNo": insureNo,
-			"policyNo": policyNo,
-			"customerId": customerId,
-			"commodityComId": commodityComId,
-			"userCode": userCode,
-			"ccName": ccName,
-			"remark": vm.Objectitle.commodityCombination.remark,
-			"prem":vm.Objectitle.lifeRiskPolicy.prem,
-			"bankName":vm.bankName,
-			"bankAccNo":vm.Objectitle.lifeRiskPolicy.bankAccNo,
-			"transTime": "",
-			"channel": channel,
-			"transToken": transToken,
-			"title": title,
-			"leftIco": '1',
-			"rightIco": '0',
-			"downIco": '0',
-		}
-		var jsonStr = UrlEncode(JSON.stringify(reqData));
-		window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/cornucopiaCancellation.html?jsonKey=" + jsonStr;
+				"orderNo": orderNo,
+				"insureNo": insureNo,
+				"policyNo": policyNo,
+				"customerId": customerId,
+				"commodityComId": commodityComId,
+				"userCode": userCode,
+				"ccName": ccName,
+				"remark": vm.Objectitle.commodityCombination.remark,
+				"prem": vm.Objectitle.lifeRiskPolicy.prem,
+				"bankName": vm.bankName,
+				"bankAccNo": vm.Objectitle.lifeRiskPolicy.bankAccNo,
+				"transTime": "",
+				"channel": channel,
+				"transToken": transToken,
+				"title": title,
+				"leftIco": '1',
+				"rightIco": '0',
+				"downIco": '0',
+			}
+			var jsonStr = UrlEncode(JSON.stringify(reqData));
+			window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/cornucopiaCancellation.html?jsonKey=" + jsonStr;
 		})
 		mui('.man-div-body-ul_li_div_btn').on('tap', '#huifang', function() {
 			/*接口请求位子*/
 			if(vm.returnVisit == '0' && $('.baozhang').html() != '已领取') {
-				
+
 			} else {
 				$('#huifang').addClass('huisebtn');
 			}
@@ -193,7 +197,7 @@ function lognCont() {
 }
 /*截取银行卡号*/
 function bankweihao() {
-	var banke = $('.bank_weihao').html();
+	var banke = vm.Objectitle.lifeRiskPolicy.bankAccNo;
 	banke = banke.substr(banke.length - 4);
 	$('.bank_weihao').html('尾号 ' + banke);
 }

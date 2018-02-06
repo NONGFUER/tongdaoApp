@@ -1571,7 +1571,23 @@ function selectChannel(){
 function backlast(){//返回上一页
 	$("#indexpart_scroll").css("transform","translate3d(0px, 0px, 0px)")
 	if (pageflag == 0) {
-		sysback();
+		if(channelcar=="channelcar"){//渠道出单标志
+			//app:返回渠道出单首页weixin/insureChannels/index.html 参数jsonkey
+			//分享：不显示或者关闭
+			//微信：返回渠道出单首页weixin/insureChannels/index.html	参数&字符参openid=ohNt9vx44UP2EnqzE6_C2dOXZQ4Q&mobile=12300000000&cusId=89884&roletype=01
+			if(ua=="isApp"){
+				parm.title = '渠道出单';
+				parm.rightIco='0';
+				parm.entry="app";
+				delete parm.body;
+				var jsonStr = UrlEncode(JSON.stringify(parm));
+				window.location.href = base.url + 'weixin/insureChannels/index.html?jsonKey='+jsonStr;
+			}else{
+				window.location.href = base.url + 'weixin/insureChannels/index.html?openid='+parm.openid+'&mobile='+parm.mobile+'&cusId='+parm.customerId+'&roletype='+parm.roleType;
+			}
+		}else{
+			sysback();
+		}
     } else if (pageflag == 1) {
     	$(".rightIcon").show();
     	$(".lastPart").hide();//车辆详细信息显示

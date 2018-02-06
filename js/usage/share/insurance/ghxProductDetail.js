@@ -1,6 +1,7 @@
 var dicChannelList = [];
 var dicCodeList    = [];
 var remarkList	   = [];
+var ccStayus = '';
 $(function(){
     $.setscroll("bodyMuiScroll"); 
     sendProductInfoRequest("14");
@@ -19,6 +20,10 @@ $(function(){
     	calPrem()
     });
     $("#toubao").bind("tap",function(){
+    	if(ccStayus == '0'){
+			modelAlert("此产品已下架！");
+			return false;
+		}
     	toFillPolicyHtml();//跳转到投保信息
     });
     /**拨打电话*/
@@ -69,7 +74,12 @@ function sendProductInfoCallBack(data){
 		console.log(dicCodeList);
 		console.log(remarkList);
 		urlParm.cName =  CommodityCombination.commodityCombinationName;
+		ccStayus = commodityCombination.commodityCombinationStatus;	//上下架状态 1-上架 0-下架
+	    if( ccStayus == "0"){
+	    	$("#toubao").css({background:"#ccc"});
+	    }
 		calPrem();
+		$("#insure_footer").css("opacity",'1')
 		
 	}else{
 		modelAlert(data.statusMessage);

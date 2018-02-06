@@ -124,8 +124,14 @@ function chenggong() {
 	}else{
 		window.location.href = base.url + "tongdaoApp/html/account/myOrder/policyListWeChat.html?jsonKey=" + jsonStr;
 	}
-	
 }
 $('.wenhaoico').unbind("tap").bind("tap", function() {
 	modelAlert('该银行账户将用于领取保费或者退保，要求该银行账号所有人必须为投保人本人');
 })
+
+/*截取银行卡号*/
+function bankweihao() {
+	var banke = $('.bank_weihao').html();
+	banke = banke.substr(banke.length - 4);
+	$('.bank_weihao').html('尾号 ' + banke);
+}

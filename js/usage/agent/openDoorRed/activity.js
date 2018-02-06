@@ -22,6 +22,18 @@ var chouStateTxt = '下次抽奖开始';
 var buttonFontTxt = '活动未开始';
 var bgTxt = '../../../image/agent/openDoorRed/unstart.png'
 $(function(){
+	mui.init({  
+	    pullRefresh: {  
+	        container: "#bodyMuiScroll",//下拉加载容器标识，querySelector能定位的css选择器均可，比如：id、.class等  
+	        down:{  
+	            style:"cirecle",//必选,下拉刷新样式,目前支持原生5+"cirecle"样式  
+	            color:"#2BD009", //可选，默认“#2BD009” 下拉刷新控件颜色  
+	            height:50,//可选,默认50.触发下拉刷新拖动距离  
+	            auto:false,//可选,默认false.首次加载自动上拉刷新一次  
+	            callback:getServiceTime//必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；  
+	        }  
+	    }  
+	});  
 	getDrawDate()
 	queryDrawChance()
 	getServiceTime()//获取服务器时间，获取时差	
@@ -169,7 +181,8 @@ function getServiceTime(){
 		activityTimes = activityTime.getTime();
 		var diffTime = activityTimes-currentTimes > 0 ? (activityTimes-currentTimes):0;//距离		
 		temp1 = diffTime;
-		countDown(diffTime)		
+		countDown(diffTime)
+		 mui('#bodyMuiScroll').pullRefresh().endPulldownToRefresh();
 	});
 }
 

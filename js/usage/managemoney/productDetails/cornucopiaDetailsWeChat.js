@@ -1,5 +1,52 @@
 /*获取数据*/
-var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
+var userCode = getUrlQueryString('mobile'),
+	shareMobile = getUrlQueryString('shareMobile'),
+	customerId = getUrlQueryString('customerId'),
+	ccId = getUrlQueryString('ccId'),
+	commodityCombinationId = getUrlQueryString('ccId'),
+	shareFlag = getUrlQueryString('shareFlag'),
+	roleType = getUrlQueryString('roletype'),
+	openid = getUrlQueryString('openid'),
+	idAuth = '',
+	channel = '02',
+	fromtype = 'licaicornucopia',
+	transToken = '';
+if(userCode == null) {
+	userCode = '';
+}
+var jsonKey = getUrlQueryString("jsonKey");
+if(jsonKey) {
+	var urlParm = JSON.parse(UrlDecode(jsonKey)),
+		shareMobile = urlParm.shareMobile,
+		commodityCombinationId = urlParm.commodityCombinationId,
+		userCode = urlParm.userCode,
+		roleType = urlParm.roleType,
+		shareFlag = urlParm.shareFlag,
+		openid = urlParm.openid,
+		transToken = "",
+		ccid = urlParm.commodityCombinationId,
+		productFlag = urlParm.productFlag,
+		idAuth = urlParm.idAuth,
+		channel = '02',
+		customerId = urlParm.customerId;
+} else {
+	var urlParm = {};
+	urlParm.userCode = userCode;
+	urlParm.shareMobile = shareMobile;
+	urlParm.customerId = customerId;
+	urlParm.ccId = ccId;
+	urlParm.commodityCombinationId = commodityCombinationId;
+	urlParm.shareFlag = shareFlag;
+	urlParm.roleType = roleType;
+	urlParm.openid = openid;
+	urlParm.idAuth = idAuth;
+	urlParm.channel = channel;
+	urlParm.fromtype = fromtype;
+	urlParm.transToken = transToken;
+}
+
+/*获取数据*/
+/*var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	commodityCombinationId = urlParm.commodityCombinationId,
 	userCode = urlParm.userCode,
 	roleType = urlParm.roleType,
@@ -9,7 +56,7 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	isComing = urlParm.isComing,
 	customerId = urlParm.customerId,
 	channel = '01';
-var productFlag = '01';
+var productFlag = '01';*/
 if(userCode == null) {
 	userCode = '';
 }
@@ -143,7 +190,8 @@ $(function() {
 function buy() {
 	var sendData = {
 		"riskSupportAbility": $('.retest').attr('testType'),
-		"insurePhone": userCode,
+		"shareMobile":shareMobile,
+		"insurePhone": shareMobile,
 		"userCode": userCode,
 		"customerId": customerId,
 		"ccId": commodityCombinationId,
@@ -168,7 +216,6 @@ function buy() {
 	}
 	var jsonStr = JSON.stringify(sendData);
 	jsonStr = UrlEncode(jsonStr);
-	/*	window.location.href = base.url + "tongdaoApp/html/managemoney/messageFillout/goldsunshineFillout.html?jsonKey=" + jsonStr;*/
 	window.location.href = base.url + "tongdaoApp/html/insurance/main/healthNotice.html?jsonKey=" + jsonStr;
 }
 
@@ -227,8 +274,12 @@ function goldProductInfo(data) {
 						} else if(xiangguan[key].subModuleName == '现金价值表') {
 							urlParm.title = '现金价值表';
 							urlParm.titles = '产品详情';
+							urlParm.channel='02';
+							urlParm.leftIco='1';
+							urlParm.rightIco='0';
+							urlParm.downIco='0';
 							var jsonStr = UrlEncode(JSON.stringify(urlParm));
-							xiangguan[key].modueInfo = base.url + 'tongdaoApp/html/guize/goldYangguangjiazhi.html?jsonKey=' + jsonStr;
+							xiangguan[key].modueInfo = base.url + 'tongdaoApp/html/agreement/cashsurfacelist.html?jsonKey=' + jsonStr;
 						} else if(xiangguan[key].subModuleName == '投保规则') {
 							toubaoguize = xiangguan[key].modueInfo;
 						}
@@ -294,7 +345,7 @@ function lognCont() {
 		"customerId": customerId,
 		"commodityCombinationId": commodityCombinationId,
 		"ccId": ccId,
-		"fromtype": 'licaigold',
+		"fromtype": 'licaicornucopia',
 		"shareFlag": shareFlag,
 		"roleType": roleType,
 		"channel": '02',
@@ -311,7 +362,7 @@ function register() {
 		"customerId": customerId,
 		"commodityCombinationId": commodityCombinationId,
 		"ccId": ccId,
-		"fromtype": 'licaigold',
+		"fromtype": 'licaicornucopia',
 		"shareFlag": shareFlag,
 		"roleType": roleType,
 	}
@@ -334,7 +385,7 @@ function wxfenxiang() {
 	var method = function() {
 		var title = vm.name;
 		var desc = vm.title;
-		var picUrl = base.url + "tongdaoApp/image/managemoney/productDetails/goldsun.png";
+		var picUrl = base.url + "tongdaoApp/image/managemoney/productDetails/jubaopen.png";
 		var shareUrl = base.url + "tongdaoApp/html/share/kongbai.html?mobile=" + userCode + '&ccId=' + commodityCombinationId + '&type=14';
 		wx.showMenuItems({
 			menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline'] // 要显示的菜单项

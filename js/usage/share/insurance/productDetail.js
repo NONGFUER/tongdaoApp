@@ -8,6 +8,7 @@ var upAge = "";
 var healthFlag = "";
 var CommodityInfo = [];
 var hasAr = '';
+var ccStayus = '';
 $(function(){
     $.setscroll("bodyMuiScroll");
     if( roleType != '00' ){
@@ -333,6 +334,10 @@ function productInfoRender(data){
         cName = body.CommodityInfo[0].commodityName;
         ccName = commodityCombination.commodityCombinationName;
         shareDesc = commodityCombination.insuredInfo;
+        ccStayus = commodityCombination.commodityCombinationStatus;	//上下架状态 1-上架 0-下架
+        if( ccStayus == "0"){
+    		$("#toubao").css({background:"#ccc"});
+    	}
         $(".banner-img").attr("src",commodityCombination.banner);		//渲染图片
         $("#commodityCombinationName").text(ccName);					//渲染商品组合名
         $("#companyName").text(companyProfile.companyName);				//渲染保险公司名字
@@ -346,6 +351,7 @@ function productInfoRender(data){
 	    	var shareUrl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=2';
 	    	wechatShare(title,desc,picUrl,shareUrl);
         }
+        $("#insure_footer").css("opacity",'1')
     }else{
         modelAlert( message.requestFail );
     }
@@ -487,6 +493,10 @@ function buyBind(){
 	//		 有归属直接跳下一页
 	//未登录   跳登陆页面phoneValidate.html		
 		//微信与app不同	
+		if( ccStayus == '0'){
+			modelAlert("此产品已下架！");
+			return false;
+		}
 		if( healthFlag == "y"){
 			toHealthHtml();
 		}else{

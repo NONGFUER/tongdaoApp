@@ -15,7 +15,7 @@ for(var i = 0; i < code.length; i++) {
 	insureList.push(pro)
 }
 $(function(){
-	if($.isNull(shareMobile)&&$.isNull(shareCusId)&&$.isNull(shareFlag)){
+	if($.isNull(shareMobile)||$.isNull(shareCusId)||$.isNull(shareFlag)|| shareFlag == 'N'){
 		buyType = "1";
 		channelResource = "1";
 	}else{

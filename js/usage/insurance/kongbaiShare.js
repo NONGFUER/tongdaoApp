@@ -3,10 +3,17 @@ $(function(){
 	mobile=getUrlQueryString("mobile");
 	ccId = getUrlQueryString("ccId");
 	type = getUrlQueryString("type");
+	shareFlag = getUrlQueryString("shareFlag");
 	if(mobile=="" || mobile==null || mobile==undefined){
 		mobile="123";
 	}
-	var shareState = type +"-"+mobile+"-"+ccId;
+	//不传shareFlag，则默认为Y
+	if(shareFlag == null || shareFlag=="" || shareFlag == undefined ){
+		var shareState = type +"-"+mobile+"-"+ccId+"-Y";
+	}else{//传了，shareFlag传过来是啥就是啥
+		var shareState = type +"-"+mobile+"-"+ccId+"-"+shareFlag;
+	}
+	
 	//sit:wx8072ddd1e7874afa
 	//uat:wxfd8ae5c588d7959f
 	//pro:wx8e38f82b04e3d17e
