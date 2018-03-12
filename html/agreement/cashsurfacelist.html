@@ -74,7 +74,7 @@
 	<script>
 		$("#huli").unbind("tap").bind("tap", function() {
 			urlParm.title = '现金价值表';
-			urlParm.titles = '产品详情';
+			urlParm.titles = '现金价值列表';
 			urlParm.leftIco = '1';
 			urlParm.rightIco = '0';
 			urlParm.downIco = '0';
@@ -83,13 +83,22 @@
 		})
 		$("#yiwai").unbind("tap").bind("tap", function() {
 			urlParm.title = '现金价值表';
-			urlParm.titles = '产品详情';
+			urlParm.titles = '现金价值列表';
 			urlParm.leftIco = '1';
 			urlParm.rightIco = '0';
 			urlParm.downIco = '0';
 			var jsonStr = UrlEncode(JSON.stringify(urlParm));
 			window.location.href = base.url + 'tongdaoApp/html/guize/cornucopiaYiwai.html?jsonKey=' + jsonStr;
 		})
+		function backlast() {
+			urlParm.title = '产品详情';
+			var jsonStr = UrlEncode(JSON.stringify(urlParm));
+			if(urlParm.channel == '01') {
+				window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/cornucopiaDetails.html?jsonKey=" + jsonStr;
+			} else {
+				window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/cornucopiaDetailsWeChat.html?jsonKey=" + jsonStr;
+			}
+		}
 	</script>
 
 </html>

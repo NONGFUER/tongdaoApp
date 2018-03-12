@@ -23,6 +23,24 @@ var vm = new Vue({
 		mui('.mui-scroll-wrapper').scroll({
 			deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006 
 		});
+		$(".iphone").unbind("tap").bind("tap", function() {
+			var phone = $(this).attr('phone');
+			callService(phone)
+		})
+		$(".duanxin").unbind("tap").bind("tap", function() {
+			var phone = $(this).attr('phone');
+			callSendMessage(phone)
+		})
+		$(".leirong").unbind("tap").bind("tap", function() {
+			var isDefault = $(this).attr('isDefault');
+			if(isDefault != '01') {
+				$('.man-div-body-li').children('.xuan').hide();
+				$(this).children('.xuan').show();
+				insuranceConsultantId = $(this).attr('insuranceConsultantId');
+				var phones = $(this).attr('phone');
+				qiechaxun(userCode, transToken, phones)
+			}
+		})
 	},
 })
 $(function() {
@@ -65,16 +83,6 @@ $(function() {
 				}, 0);
 			}
 		});
-	})
-	mui('.man-div-body-ul ').on('tap', '.man-div-body-li', function() {
-		var isDefault = $(this).attr('isDefault');
-		if(isDefault != '01') {
-			$('.man-div-body-li').children('.xuan').hide();
-			$(this).children('.xuan').show();
-			insuranceConsultantId = $(this).attr('insuranceConsultantId');
-			var phones = $(this).attr('phone');
-			qiechaxun(userCode, transToken, phones)
-		}
 	})
 })
 /*新增查询保险人和保险顾问地区是否一致*/
@@ -125,7 +133,7 @@ function getqiehuan(data) {
 					} else {}
 				})
 			} else {
-				qiehuan(userCode, transToken, customerId, insuranceConsultantId);
+				modelAlert('恭喜您，设置成功','',qiehuan(userCode, transToken, customerId, insuranceConsultantId));
 			}
 		}
 
@@ -232,8 +240,13 @@ function baoxianimg(username) {
 /*新增保险顾问*/
 function updateInsuranceConsultantInfo(data) {
 	/*chaxunend(userCode, transToken, customerId);*/
-	location.reload();
+	modelAlert('恭喜您，设置成功','',locations);
+
 	/*	modelAlert(data.statusMessage, '', guanbi);*/
+}
+
+function locations() {
+	location.reload();
 }
 var am = new Vue({
 	el: '.note',

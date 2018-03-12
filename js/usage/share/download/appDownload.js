@@ -24,6 +24,11 @@ $(function(){
 	    }
 		
 	});
+	if(window.location.pathname == "/tongdaoPlatform/tongdaoApp/html/share/download/appDownloadXJTest.html"){
+		wechatShareXJ()
+	}else{
+		wechatShareDL()
+	}
 })
 $.setscroll = function() {
 	var Scrollheight = window.innerHeight;
@@ -38,4 +43,19 @@ function isWeixn(){
     } else {  
         return false;  
     }  
+}
+
+function wechatShareDL(){
+	var title = '下载同道APP';
+	var desc  ='为您提供专业保险服务';	
+	var picUrl = base.url + "tongdaoApp/image/share/tongdaoic.png";		
+	var shareUrl = base.url + "tongdaoApp/html/share/download/appDownload.html"	
+	wechatShare(title,desc,picUrl,shareUrl)
+}
+function wechatShareXJ(){
+	var title = '下载同道APP';
+	var desc  ='为您提供专业保险服务';	
+	var picUrl = base.url + "tongdaoApp/image/share/tongdaoic.png";		
+	var shareUrl = base.url + "tongdaoApp/html/share/download/appDownloadXJTest.html"	
+	wechatShare(title,desc,picUrl,shareUrl)
 }

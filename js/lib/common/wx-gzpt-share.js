@@ -10,6 +10,14 @@ function getConfig(fuc) {
 	};
 	$.toAjaxs(url, data, $.getConfigBack);
 }
+function getConfigChannel(fuc) {
+	method=fuc
+	var url = base.url + "wxBasic/getConfig.do";// 获取验证码
+	var data = {
+		"url" : encodeURIComponent(location.href.split('#')[0])
+	};
+	$.toAjaxsChannel(url, data, $.getConfigBack);
+}
 $.getConfigBack = function(param) {
 	if (param.statusCode == '000000') {
 		wx.config({

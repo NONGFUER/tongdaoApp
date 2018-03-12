@@ -204,7 +204,7 @@ function cheackRiskinfo() {
 			// busiSelectedFlag = true;// 校验是否有选择商业主险险种标志
 		}
 	}
-	if (toubaoFlag == false) {
+	if (toubaoFlag == false&&sytoubaoFlag) {
 		cheakOfferinfoFlag = false;
 		modelAlert("请至少选择一条主险险种数据进行操作！");
 		return false;

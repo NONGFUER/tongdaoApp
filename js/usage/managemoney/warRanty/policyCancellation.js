@@ -16,13 +16,6 @@ var vm = new Vue({
 		},
 		bao: null,
 	},
-	/*mounted() {
-		this.$nextTick(function() {
-			$(function() {
-				bankweihao()
-			})
-		})
-	}*/
 })
 $(function() {
 	var reqData = {

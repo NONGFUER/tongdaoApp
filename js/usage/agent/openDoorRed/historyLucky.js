@@ -1,10 +1,13 @@
 var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey")));
 console.log(JSON.stringify(urlParm))
 var customerId = urlParm.customerId ? urlParm.customerId : '';
+var diff = 0;
+var timeReal = ''
 /**
  * http://usejsdoc.org/
  */
 $(function(){
+	getServiceTime();
 	queryDrawList()
 });
 
@@ -15,7 +18,9 @@ function queryDrawList(){
 		var obj = data.returns;
 		var p=0;
 		for(var k in obj) {
-		 
+			if( diff < 0 && timeReal == k){
+				continue;
+			}
 		    //遍历对象，k即为key，obj[k]为当前k对应的值
 		    var lastObj = obj[k]
 		    var itemStr = '';
@@ -65,6 +70,18 @@ function queryDrawList(){
 			$("#board").html(itemStr1)
 		}
 	} );
+}
+
+function getServiceTime(){
+	var url = base.url + 'openDoor/queryServerTime.do';
+	var reqData = {}	
+	$.reqAjaxsFalse(url,reqData,function(data){
+		var currentTimes = data;						//服务器时间
+		 timeReal =  timeFormatDate(currentTimes,"yyyy-MM-dd");
+		var currentDate = new Date(currentTimes);		//服务器时间转为Date类型	
+		var twelweTime = currentDate.setHours( 12, 0, 0, 0 )
+		diff = currentTimes - twelweTime;//>=0 则公布  
+	})
 }
 
 //

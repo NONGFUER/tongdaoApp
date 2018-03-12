@@ -56,7 +56,7 @@
 							<li class="xianli"></li>
 							<li>
 								<span>投资本金</span>
-								<span  v-html="Objectitle.bxPolicyFinance.prem+'元'">232323.32元</span>
+								<span v-html="Objectitle.bxPolicyFinance.prem+'元'">232323.32元</span>
 							</li>
 							<li class="xianli"></li>
 							<li>
@@ -139,11 +139,20 @@
 							</li>
 						</ul>
 					</div>
+					<div class="man-div-body-ul_li_div_btn" style="height: auto;line-height: 0;position: relative;top: 50px;">
+						<div id="epolicyShare" class="div_btn" style="width: 85%;">电子保单分享</div>
+					</div>
 					<div class="man-div-body-ul_li_div_btn" v-if="commodityComId!=''">
-						 <div id="huifang" class="div_btn mbright30">回访确认</div>
-						 <div id='lingqu' class="div_btn">退保领取</div>
+						<div id="huifang" class="div_btn mbright30">回访确认</div>
+						<div id='lingqu' class="div_btn">退保领取</div>
 					</div>
 				</div>
+			</div>
+		</div>
+		<div id="weixin" style="display:none">
+			<img src="../../../image/common/weixin.png" alt="" style="z-index: 2; width: 100%;height: 100%;    position: absolute;">
+			<div id="guanbi" style="position: absolute;bottom: 30px;width: 100%;text-align: center;z-index: 3;">
+				<img src="../../../image/common/cha.png" style="width: 50px;height: 50px;">
 			</div>
 		</div>
 	</body>
@@ -151,6 +160,9 @@
 	<script src="../../../js/lib/common/zepto.min.js"></script>
 	<script src="../../../js/lib/common/base.js"></script>
 	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/common/jweixin-1.1.0.js"></script>
+    <script src="../../../js/lib/common/wx-gzpt-share.js"></script>
+    <script src="../../../js/lib/common/weixin.js"></script>
 	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
 	<script src="../../../js/usage/managemoney/warRanty/warrantyDetail.js"></script>
 

@@ -8,61 +8,180 @@
 		<meta name="format-detection" content="telephone=no" />
 		<!-- 忽略Android平台中对邮箱地址的识别 -->
 		<meta name="format-detection" content="email=no" />
-		<title>保险顾问</title>
+		<title>您的专属保险顾问</title>
 		<link rel="stylesheet" type="text/css" href="../../css/lib/widget/mui/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/lib/common/base.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/lib/common/common.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/usage/insuranceConsultant/insuranceConsultant.css" />
 	</head>
+	<style type="text/css">
+		.man-div-body-ul .man-div-body-li {
+			background-color: #FFFFFF;
+		}
+		
+		.outxuan {
+			background: url(../../image/insuranceConsultant/0.png) no-repeat;
+			background-size: 100% 100%;
+		}
+		
+		.zuansu {
+			background: url(../../image/insuranceConsultant/zuansu.png) no-repeat;
+			background-size: 100% 100%;
+			width: 75px;
+			height: 20px;
+			margin-left: 6px;
+			display: inline-block;
+			vertical-align: middle;
+		}
+		
+		.chu {
+			color: #333;
+			font-weight: bold;
+		}
+		
+		.huise {
+			color: #333!important;
+		}
+		
+		.uxian {
+			border-top: 1px solid #f2f2f2;
+			margin: 0 20px 0 20px;
+		}
+		
+		.phonedian {
+			display: flex;
+			background-color: #FFFFFF;
+		}
+		
+		.iphone {
+			flex: 1;
+			text-align: center;
+			line-height: 36px;
+			font-size: 13px;
+			color: #48A0F0;
+			display: inline-block;
+		}
+		
+		.tuphone {
+			display: inline-block;
+			vertical-align: middle;
+			width: 16px;
+			height: 16px;
+			margin-right: 5px;
+			background: url(../../image/insuranceConsultant/phoneda.png) no-repeat;
+			background-size: 100% 100%;
+		}
+		
+		.tutext {
+			vertical-align: middle;
+		}
+		
+		.tuduan {
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 5px;
+			width: 16px;
+			height: 16px;
+			background: url(../../image/insuranceConsultant/duanxin.png) no-repeat;
+			background-size: 100% 100%;
+		}
+		
+		.shuxian {
+			flex: 0;
+		}
+		
+		.duanxin {
+			flex: 1;
+			text-align: center;
+			line-height: 36px;
+			font-size: 13px;
+			color: #48A0F0;
+			display: inline-block;
+		}
+		
+		.shuxiancolo {
+			border-left: 1px solid #f2f2f2;
+			margin-top: 4px;
+			margin-bottom: 4px;
+		}
+		
+		.huise span {
+			font-size: 11px;
+			font-weight: bold;
+			color: #35404a;
+		}
+		
+		.baoxian {
+			position: fixed;
+			width: 100%;
+			bottom: 0;
+			font-size: 13px;
+			font-weight: bold;
+			z-index: 9999;
+			color: #48A0F0;
+		}
+	</style>
 
 	<body>
 		<div class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
-				<div class="man mui-table-view" id="list">
+				<div class="man mui-table-view" id="list" style="margin-bottom: 60px;">
 					<div class="man-div-body">
-						<ul class="man-div-body-ul">
-							<li class="man-div-body-li mb10 mui-table-view-cell" v-for="(value,key) in Objectitle" v-bind:agentId='value.agentId' v-bind:isDefault='value.isDefault' v-bind:phone='value.userPhone' v-bind:insuranceConsultantId='value.id' v-cloak>
+						<ul class="man-div-body-ul" v-cloak>
+							<li class="man-div-body-li mb10 mui-table-view-cell" v-for="(value,key) in Objectitle">
 								<div class="mui-slider-right mui-disabled shanchu" v-if="value.isDefault!='01'">
 									<a class="mui-btn mui-btn-red" v-bind:insuranceConsultantId='value.id' v-bind:agentId="value.agentId">
 										<!--<i class="lajitong"></i>-->
 										<span>删除</span>
 									</a>
 								</div>
-								<div class="man-div-body-ul_li_div mui-slider-handle leirong">
-									<i class="xuan" v-if='value.isDefault=="01"'></i>
-									<span class="first">
-									<img class="imgzhao"  v-bind:src="value.postcardWxImage==''?'../../image/insuranceConsultant/1.png':urlimg+value.postcardWxImage">
-									<span class="renzheng">
-										权威认证
-									</span>
-									</span>
-									<span class="last mgr15">
-									<ul>
-									<li v-html="value.name">陈某人</li>
-													<li class='guwen mb10'>
-														<span>保险顾问</span>
-									<span class="heng"></span>
-									<span>服务区域:</span>
-									<span v-html="value.provinceName+' '+value.cityName"></span>
+								<div class="man-div-body-ul_li_div mui-slider-handle ">
+									<div class="leirong" style="margin-bottom: 10px;" v-bind:agentId='value.agentId' v-bind:isDefault='value.isDefault' v-bind:phone='value.userPhone' v-bind:insuranceConsultantId='value.id'>
+										<i class="xuan outxuan"></i>
+										<i class="xuan" v-if='value.isDefault=="01"'></i>
+										<span class="first">
+										<img class="imgzhao"  v-bind:src="value.postcardWxImage==''?'../../image/insuranceConsultant/1.png':urlimg+value.postcardWxImage">
+										</span>
+										<span class="last mgr15">
+										<ul>
+										<li class="mb10"> 
+											<span v-text="value.name">陈某人</span>
+										<span class="zuansu"></span>
+							</li>
+							<li class='guwen mb10'>
+								<span class="chu">服务区域:</span>
+								<span v-html="value.provinceName+' '+value.cityName"></span>
 							</li>
 							<li class='huise'>
 								<span>手机号码：</span>
 								<span v-html="value.userPhone"></span>
-							</li>
-							<li class='huise'> <span>业务员代码：</span>
+								<span style="margin-left: 5px;">业务员代码：</span>
 								<span v-html="value.agentCode"></span>
 							</li>
 						</ul>
 						</span>
 						</div>
+						<div class="uxian "></div>
+						<div class="phonedian">
+							<span class="iphone" v-bind:phone='value.userPhone'>
+									<i class="tuphone"></i>
+									<span class="tutext">电话联系我</span>
+							</span>
+							<span class="shuxian shuxiancolo"></span>
+							<span class="duanxin" v-bind:phone='value.userPhone'>
+									<i class="tuduan"></i>
+									<span class="tutext">短信联系我</span>
+							</span>
+						</div>
+						</div>
 						</li>
 						</ul>
 					</div>
-					<div class="baoxian" style="display: none;">
-						<div class="tianjia"><span class="jia">+</span>添加保险顾问</div>
-					</div>
 				</div>
 			</div>
+		</div>
+		<div class="baoxian" style="display: none;">
+			<div class="tianjia"><span class="jia">+</span>添加保险顾问</div>
 		</div>
 		<!--添加保险顾问-->
 		<div class="note">

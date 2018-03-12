@@ -1,10 +1,6 @@
-if( urlParm.sourcePage == 'qudaoMall' && shareFlag !='Y' ){
-	$('#qrcode').removeClass('yincang');
-}
-
 //试算条件
-var calChoices = []; 
-var calNames	= [];
+var calChoices = []; //试算项数组
+var calNames	= []; //试算项属性名数组
 var choiceEdit = [];
 var listArray = [];
 var lowAge = "";		
@@ -13,17 +9,20 @@ var healthFlag = "";//是否进入健康告知页的标志   y-存在健康告�
 var CommodityInfo = [];
 var ccStayus = '';	//是否上架标志  0-未上架 1-上架(ps:都是ccStayus，不要奇怪)
 $(function(){
-	if( isComing == "1"){
-		$("#toubao").css({background:"#ccc"});//即将上线的产品按钮置灰
-	}
-	$("body").show();
     $.setscroll("bodyMuiScroll");
-    buyBind();						//"立即投保"判断逻辑
-    jieshaoToshuomingBind();		//介绍和产品详情间的切换
+    
+    //"立即投保"判断逻辑
+    buyBind();					
+    
+    //介绍和产品详情间的切换
+    jieshaoToshuomingBind();	
+    
     //在线产品详情查询(ccCode,cityCode,provinceCode,type)  商品组合code,城市代码code,省code,用户角色
-    sendProductInfoRequest( ccId, cityCode, provinceCode, roleType );	
+    //sendProductInfoRequest( ccId, cityCode, provinceCode, roleType );	
+    sendProductInfoRequest( ccId, "", "", "00" );
     //根据商品组合id查询保费试算项 (ccId)           商品组合Id
     sendCalOptionsRequest( ccId );
+    
     //对date类型试算项的初始化（绑定初始值和试算动作）
 	getServiceTime()
 	addChoice();
@@ -32,115 +31,18 @@ $(function(){
     }
 	listChoiceBind();
 	textBind();//借贷险中的输入框作为试算条件，触发绑定
-	console.log(calChoices);
-	console.log(choiceEdit);
+	//console.log(calChoices);
+	//console.log(choiceEdit);
     //根据保费试算项进行保费试算
     sendCaldoRequest( ccId );
-    //calOptionsRender(data4);
-    
-    /**拨打电话*/
-	$(".kefu").unbind("tap").bind("tap",function(){
-    	callService("4006895505",".kefuPhone");
-    })
-    $(".rexian").unbind("tap").bind("tap",function(){
-    	callService("95505",".rexian");
-    })
-    $("#qrcode").unbind('tap').bind('tap',function(){
-    	toQrcodeHtml()
-    });
+   
+    //打电话
+   callServiceH5("4006895505",".kefuPhone");   
+   callServiceH5("95505",".rexian");
+      
 	$("#headClick").unbind('tap').bind('tap',function(){
 		backlast()
 	});
-	if( entry == 'qudao' && shareFlag != 'Y' && roleType != '00'){
-		var method = function() {
-			var title = ccName;
-			var desc  = shareDesc ;	
-			var picUrl = getProductSharePic(ccId);		
-			var shareUrl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=11';
-			wx.showMenuItems({
-				menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline'] // 要显示的菜单项
-			});
-
-			//分享给朋友
-			wx.onMenuShareAppMessage({
-				title: title, // 分享标题
-				desc: desc, // 分享描述
-				link: shareUrl, // 分享链接
-				imgUrl: picUrl, // 分享图标
-				type: '', // 分享类型,music、video或link，不填默认为link
-				dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-				success: function() {
-					// 用户确认分享后执行的回调函数
-					// mui.alert("您已成功分享给好友！","温馨提示");
-				},
-				cancel: function() {
-					// 用户取消分享后执行的回调函数
-					mui.alert("您取消了分享！", "温馨提示");
-				}
-			});
-			//分享到朋友圈
-			wx.onMenuShareTimeline({
-				title: title + "-" + desc, // 分享描述, // 分享标题  
-				link: shareUrl, // 分享链接  
-				imgUrl: picUrl, // 分享图标  
-				success: function() {
-					// 用户确认分享后执行的回调函数  
-				},
-				cancel: function() {
-					// 用户取消分享后执行的回调函数  
-					mui.alert("您取消了分享！", "温馨提示");
-				}
-			});
-		}
-		getConfigChannel(method);
-	}else if(entry == 'mall' && roleType != '00'){//开启二次分享 && shareFlag != 'Y'
-		var method = function() {
-			var title = ccName;
-			var desc  = shareDesc ;	
-			var picUrl = getProductSharePic(ccId);		
-			var shareUrl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=2';
-			wx.showMenuItems({
-				menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline'] // 要显示的菜单项
-			});
-
-			//分享给朋友
-			wx.onMenuShareAppMessage({
-				title: title, // 分享标题
-				desc: desc, // 分享描述
-				link: shareUrl, // 分享链接
-				imgUrl: picUrl, // 分享图标
-				type: '', // 分享类型,music、video或link，不填默认为link
-				dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-				success: function() {
-					// 用户确认分享后执行的回调函数
-					// mui.alert("您已成功分享给好友！","温馨提示");
-				},
-				cancel: function() {
-					// 用户取消分享后执行的回调函数
-					mui.alert("您取消了分享！", "温馨提示");
-				}
-			});
-			//分享到朋友圈
-			wx.onMenuShareTimeline({
-				title: title + "-" + desc, // 分享描述, // 分享标题  
-				link: shareUrl, // 分享链接  
-				imgUrl: picUrl, // 分享图标  
-				success: function() {
-					// 用户确认分享后执行的回调函数  
-				},
-				cancel: function() {
-					// 用户取消分享后执行的回调函数  
-					mui.alert("您取消了分享！", "温馨提示");
-				}
-			});
-		}
-		getConfig(method);
-	}
-	if( roleType != "00" && isComing != "1"){
-    	if( entry == 'app' && (urlParm.sourcePage != 'qudaoMall')){
-    		 showRightIcon();
-    	}   	
-    }
 });
 
 //根据保费试算项进行保费试算
@@ -576,9 +478,6 @@ function changeDate(id){
 
 function buyBind(){
 	$("#toubao").unbind('tap').bind('tap',function(){
-		if( isComing == "1"){
-			return false;
-		}
 		if(ccStayus == '0'){
 			modelAlert("此产品已下架！");
 			return false;
@@ -602,10 +501,8 @@ function toInsure(){
 		}
 	}	
 	if($("div[name='versions']").length != 0){
-		cId = $("div[name='versions']").find(".on").attr("data-cid");
-		//cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
-		cVersion = $("div[name='versions']").attr("data-value");
-		//alert(cId+":"+cName);
+		cId = $("div[name='versions']").find(".on").attr("data-cid");		
+		cVersion = $("div[name='versions']").attr("data-value");	
 		var indax =$("div[name='versions']").find("li.on").index();
 	}
 	if( CommodityInfo.length == 1 ){
@@ -616,8 +513,7 @@ function toInsure(){
 		urlParm.cName = CommodityInfo[indax].commodityName;
 	}	
 	title = "投保信息"
-	urlParm.cId = cId;
-	//urlParm.cName = cName;
+	urlParm.cId = cId;	
 	urlParm.cPrem = cPrem;
 	urlParm.title = title;
 	urlParm.leftIco = "1";
@@ -627,29 +523,14 @@ function toInsure(){
 	urlParm.cPieces = cPieces;
 	urlParm.cVersion = cVersion;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	if( roleType == "00" || roleType == "" ){
-		if( entry == "app"){
-			loginControl();
-		}else if( entry == "mall" ){
-			window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineMall&openid="+openid+"&inviterPhone="+mobile;
-		}else{
-			window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineX&openid="+openid+"&inviterPhone="+mobile;
-		}
-	}else{
-		if( ccId == COMMODITYCOMBINE_ID.BQJ ){
-			window.location.href = "../yian/familyInsure.html?jsonKey="+jsonStr;
-		}else{
-			window.location.href = "insure.html?jsonKey="+jsonStr;
-		}	
-	}	
+	window.location.href = "insure.html?jsonKey="+jsonStr;
+		
 }
 //跳转到健康告知页面
 function toHealthHtml(){
 	if($("div[name='versions']").length != 0){
-		cId = $("div[name='versions']").find(".on").attr("data-cid");
-		//cName = ccName + "" + $("div[name='versions']").find(".on").html() ;
+		cId = $("div[name='versions']").find(".on").attr("data-cid");		
 		cVersion = $("div[name='versions']").attr("data-value");
-		//alert(cId+":"+cName);
 		var indax =$("div[name='versions']").find("li.on").index();
 	}
 	if( CommodityInfo.length == 1 ){
@@ -672,17 +553,7 @@ function toHealthHtml(){
 	urlParm.cPieces = cPieces;
 	urlParm.cVersion = cVersion;
 	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	if( roleType == "00" || roleType == "" ){
-		if( entry == "app"){
-			loginControl();
-		}else if( entry == "mall" ){
-			window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineMall&openid="+openid+"&inviterPhone="+mobile;
-		}else{
-			window.location.href = base.url + "weixin/wxusers/html/users/phoneValidate.html?jsonKey="+jsonStr+"&fromtype=onlineHealthX&openid="+openid+"&inviterPhone="+mobile;
-		}		
-	}else{
-		window.location.href = "healthNotice.html?jsonKey="+jsonStr;
-	}
+	window.location.href = "healthNotice.html?jsonKey="+jsonStr;
 }
 
 //跳转到商品列表页
@@ -729,6 +600,7 @@ function toYiUrl(){
 	window.location.href = base.url+"tongdaoApp/html/agreement/yiAnProfession.html?jsonKey="+jsonStr;
 }
 
+
 function toHosUrl(){
 	urlParm.title = "重疾就医绿色通道服务医院清单";
 	urlParm.leftIco = "1";
@@ -740,82 +612,8 @@ function toHosUrl(){
 	window.location.href = base.url+"tongdaoApp/html/agreement/yiAnHospital.html?jsonKey="+jsonStr;
 }
 
-//跳转到定位
-function toQrcodeHtml(){
-	//urlParm.lastUrl = window.location.href;
-	urlParm.title = '出单二维码';
-	urlParm.rightIco = '0';
-	urlParm.qrFlag = 'detail'
-	urlParm.ccName = ccName;
-	urlParm.shareDesc= shareDesc ;	
-	urlParm.sharePic = getProductSharePic(ccId);
-	urlParm.ccname = $('#commodityCombinationName').text();
-	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	window.location.href = base.url + 'weixin/insureChannels/QRCode/QRCode.html?jsonKey='+jsonStr;
-}
-
-
-function shareHandle(){		
-	urlParm.fl='2';				//判断是否是产品详情
-	urlParm.ccName=ccName;		//产品名称
-	urlParm.ccId=ccId;			//产品编号
-	urlParm.name = ccName;
-	urlParm.desc= shareDesc;
-	urlParm.title = '同道保险二维码'
-	urlParm.rightIco = '0';	
-	var title = ccName;
-	var desc  = shareDesc ;	
-	var picUrl = getProductSharePic(ccId);	
-	var flag = '3';	
-	if( entry == 'app' && urlParm.sourcePage == 'qudaoMall'){
-		urlParm.state='11';
-		var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=11';
-	}else{
-		urlParm.state='2';
-		var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=2';
-	}	
-	//shareMethod(shareurl,title,desc,"baodan",picUrl);
-	urlParm.picUrl=picUrl;
-	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	var twolink=base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
-	shareMethod(shareurl, title, desc,flag,picUrl,twolink);
-};
-
-/*
- * 
- //上一版本分享
-function shareHandle(){
-	//var shareList = getProductShare(ccId);
-	var title = ccName;
-	var desc  = shareDesc ;	
-	var picUrl = getProductSharePic(ccId);	
-	if( entry == 'app' && urlParm.sourcePage == 'qudaoMall'){
-		var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=11';
-	}else{
-		var shareurl = base.url+"tongdaoApp/html/share/kongbai.html?mobile="+mobile+'&ccId='+ccId+'&type=2';
-	}	
-	shareMethod(shareurl,title,desc,"baodan",picUrl);		
-};
-*/
-
+//返回
 function backlast(){
-	if( urlParm.sourcePage == 'qudaoMall'){
-		urlParm.title = '保险商城'
-		urlParm.rightIco = '6';
-		var jsonStr = UrlEncode(JSON.stringify(urlParm));
-		window.location.href =  base.url + 'weixin/insureChannels/insuranceMall/insuranceMall.html?jsonKey='+jsonStr;
-	}else if(entry == 'mall'){
-		var jsonStr = UrlEncode(JSON.stringify(urlParm));
-		window.location.href =  base.url + 'tongdaoApp/html/share/insurance/insuranceMall.html?openid='+openid +'&roletype='+roleType +'&mobile='+mobile+'&shareMobile='+shareMobile+'&shareCusId='+shareCusId+'&provinceCode='+provinceCode+'&cityCode='+cityCode+'&cusId='+customerId+'&shareFlag=Y'
-	}else{
-		sysback();
-	}
-	
-}
-function toQrcodeUrl(){
-	urlParm.title = '同道保险二维码'
-	urlParm.rightIco = '0';	
-	var jsonStr = UrlEncode(JSON.stringify(urlParm));
-	var twolink = base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
-	window.location.href = twolink;
+		
+		//sysback();	
 }

@@ -6,11 +6,12 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	insureNo = urlParm.insureNo,
 	transToken = urlParm.transToken,
 	customerId = urlParm.customerId,
-	cxflag=urlParm.cxflag,
+	cxflag = urlParm.cxflag,
 	title = urlParm.title,
 	orderNo = urlParm.orderNo;
 var channel = urlParm.channel;
 var commodityComId = urlParm.commodityComId;
+var epolicyUrl = '';
 if(typeof(commodityComId) == 'undefined') {
 	commodityComId = '';
 }
@@ -29,29 +30,13 @@ var vm = new Vue({
 		returnVisit: {},
 		commodityComId: "",
 		channel: "",
-		insureNo:'',
+		insureNo: '',
 	},
-	/*mounted() {
-		this.$nextTick(function() {
-			$(function() {
-				chuli();
-			})
-		})
-	},
-	watch: {
-		Objectlist: function(val) {
-			this.$nextTick(function() {
-				$(function() {
-					chuli();
-				})
-			})
-		}
-	}*/
 })
 $(function() {
 	console.log("页面初始化，获取上个页面传值报文--");
 	console.log(urlParm);
-	vm.insureNo=insureNo;
+	vm.insureNo = insureNo;
 	var reqData = {
 		"head": {
 			"userCode": userCode,
@@ -74,6 +59,7 @@ $(function() {
 	$(".baodan").unbind("tap").bind("tap", function() {
 		/*正式版使用接口↓*/
 		window.location.href = vm.Objectitle.bxPolicyFinance.policyForm;
+
 	})
 	$(".chanping").unbind("tap").bind("tap", function() {
 		var commodityCombinationId = vm.Objectitle.bxPolicyFinance.commodityCombinationId;
@@ -91,6 +77,16 @@ $(function() {
 		var jsonStr = UrlEncode(JSON.stringify(reqData));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
 	})
+	$("#epolicyShare").unbind("tap").bind("tap", function() {
+		if(!isWeixin()) {
+			shareHandle()
+		} else {
+			wechatEpolicyShare()
+		}
+	})
+	$("#guanbi").unbind('tap').bind("tap", function() {
+		$('#weixin').hide()
+	})
 	vm.commodityComId = commodityComId;
 	vm.channel = channel;
 })
@@ -101,6 +97,7 @@ function policyQueryListInfo(data) {
 		console.log(data)
 		vm.Objectitle = data.returns;
 		vm.returnVisit = data.returns.bxPolicyFinance.returnVisit;
+		epolicyUrl = vm.Objectitle.bxPolicyFinance.policyForm;
 	} else if(data.statusCode == '123456') {
 		modelAlert(data.statusMessage, '', lognCont);
 	} else {
@@ -235,7 +232,7 @@ function chuli() {
 }
 
 function backlast() {
-	if(commodityComId != "" && channel == '01'&&cxflag!='2'&&cxflag!='3'&&cxflag!='10') {
+	if(commodityComId != "" && channel == '01' && cxflag != '2' && cxflag != '3' && cxflag != '10') {
 		var sendData = {
 			"userCode": userCode,
 			"commodityComId": commodityComId,
@@ -251,25 +248,25 @@ function backlast() {
 		var jsonStr = UrlEncode(JSON.stringify(sendData));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/warRanty/warrantyList.html?jsonKey=" + jsonStr;
 	} else {
-		if(channel == '01'&&cxflag=='2') {
+		if(channel == '01' && cxflag == '2') {
 			urlParm.title = '我的保单';
 			urlParm.downIco = '1';
 			urlParm.channel = channel;
 			var jsonStr = UrlEncode(JSON.stringify(urlParm));
 			window.location.href = base.url + "tongdaoApp/html/account/myOrder/policyList.html?jsonKey=" + jsonStr;
-		}else if(channel == '02'&&cxflag=='2') {
+		} else if(channel == '02' && cxflag == '2') {
 			urlParm.title = '我的保单';
 			urlParm.downIco = '1';
 			urlParm.channel = channel;
 			var jsonStr = UrlEncode(JSON.stringify(urlParm));
 			window.location.href = base.url + "tongdaoApp/html/account/myOrder/policyListWeChat.html?jsonKey=" + jsonStr;
-		}else if(cxflag=='3'){
+		} else if(cxflag == '3') {
 			urlParm.title = '我的出单';
 			urlParm.downIco = '1';
 			urlParm.channel = channel;
 			var jsonStr = UrlEncode(JSON.stringify(urlParm));
 			window.location.href = base.url + "tongdaoApp/html/agent/mysingle/mysingle.html?jsonKey=" + jsonStr;
-		}else if(cxflag=='10'){
+		} else if(cxflag == '10') {
 			urlParm.title = '我的出单';
 			urlParm.downIco = '0';
 			urlParm.channel = channel;
@@ -282,4 +279,31 @@ function backlast() {
 /*登录失效*/
 function lognCont() {
 	loginControl();
+}
+
+/*电子保单分享*/
+function shareHandle() {
+	var title = '同道保险电子保单';
+	var desc = '点击查看详情';
+	var picUrl = base.url + "tongdaoApp/image/share/tongdaoic.png";
+	var flag = '2';
+	var shareurl = epolicyUrl;
+	urlParm.picUrl = epolicyUrl;
+	urlParm.shareurl = epolicyUrl;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink = base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey=" + jsonStr;
+	shareMethod(shareurl, title, desc, flag, picUrl, twolink);
+};
+
+function wechatEpolicyShare() {
+	$("#weixin").show()
+	var title = '同道保险电子保单';
+	var desc = '点击查看详情';
+	var picUrl = base.url + "tongdaoApp/image/share/tongdaoic.png";
+	var epolicyObj = {
+		"directUrl": epolicyUrl
+	}
+	var jsonStr = UrlEncode(JSON.stringify(epolicyObj));
+	var shareUrl = base.url + "tongdaoApp/html/share/epolicyShare.html?jsonKey=" + jsonStr;
+	wechatShare(title, desc, picUrl, shareUrl)
 }

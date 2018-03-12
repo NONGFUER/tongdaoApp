@@ -124,6 +124,13 @@ $(function() {
 	} else if(idAuth == '0') {
 		$('#huifang').addClass('btnhuise');
 	}
+	if(roleType == "" || roleType == "00") {
+		
+	} else if(idAuth == '0') {
+		wxfenxiang();
+	}else{
+		wxfenxiang();
+	}
 	var reqData = {
 		"body": {
 			"commodityCombinationId": commodityCombinationId + '',
@@ -386,7 +393,7 @@ function wxfenxiang() {
 		var title = vm.name;
 		var desc = vm.title;
 		var picUrl = base.url + "tongdaoApp/image/managemoney/productDetails/jubaopen.png";
-		var shareUrl = base.url + "tongdaoApp/html/share/kongbai.html?mobile=" + userCode + '&ccId=' + commodityCombinationId + '&type=14';
+		var shareUrl = base.url + "tongdaoApp/html/share/kongbai.html?mobile=" + userCode + '&ccId=' + commodityCombinationId + '&type=16';
 		wx.showMenuItems({
 			menuList: ['menuItem:share:appMessage', 'menuItem:share:timeline'] // 要显示的菜单项
 		});

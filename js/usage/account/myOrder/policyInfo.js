@@ -12,6 +12,7 @@ if(getUrlQueryString("jsonKey")){
 	var customerId = "";//"812";
 	var policyNo = getUrlQueryString("policyNo");//"8G8013423201700090000057"
 }
+var epolicyUrl = ''
 
 $(function(){
 //	if(cxflag == "3"){
@@ -24,7 +25,19 @@ $(function(){
 	$("#riskTiaokuan").unbind("tap").bind("tap",function(){
 		toArticle($(this))
 	});
+	
+	$("#epolicyShare").unbind("tap").bind("tap",function(){
+		if(!isWeixin()){
+			shareHandle()
+		}else{
+			wechatEpolicyShare()
+		}		
+	})
+	$("#guanbi").unbind('tap').bind("tap", function() {
+		$('#weixin').hide()
+	})
 });
+
 function getPolicyDetailRequest(customerId,policyNo){
 	var url = base.url + "personal/getMyPolicyDetail.do";
 	var sendJson = {
@@ -60,7 +73,7 @@ function policyNoDetailCallback(data){
 			
 		}
 		$(".zhuangtai").attr("src",picPath);
-		var epolicyUrl			 = shortRiskOrder.epolicyUrl;
+		epolicyUrl			 = shortRiskOrder.epolicyUrl;
 		var startTime = shortRiskOrder.startTime.time;
 			startTime = timeFormatDate(startTime,"yyyy-MM-dd");
 		var endTime   = shortRiskOrder.endTime.time;
@@ -97,6 +110,7 @@ function policyNoDetailCallback(data){
 		if(epolicyUrl){		
 			if( urlParm.frompage != "payResultHtml" ){
 				$("#epolicy").show();
+				$("#epolicyShare").show();
 			}					
 		}
 		$("#epolicy").unbind("tap").bind("tap",function(){
@@ -222,4 +236,27 @@ function backlast(){
 		}
 	}
 			
+}
+function shareHandle(){			
+	var title = '同道保险电子保单';
+	var desc  ='点击查看详情';	
+	var picUrl = base.url + "tongdaoApp/image/share/tongdaoic.png";	
+	var flag = '2';			
+	var shareurl = epolicyUrl;	
+	urlParm.picUrl=epolicyUrl;
+	urlParm.shareurl = epolicyUrl;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink=base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey="+jsonStr;
+	shareMethod(shareurl, title, desc,flag,picUrl,twolink);
+};
+
+function wechatEpolicyShare(){
+	$("#weixin").show()
+	var title = '同道保险电子保单';
+	var desc  ='点击查看详情';	
+	var picUrl = base.url + "tongdaoApp/image/share/tongdaoic.png";	
+	var epolicyObj = {"directUrl":epolicyUrl}
+	var jsonStr = UrlEncode(JSON.stringify(epolicyObj));
+	var shareUrl = base.url + "tongdaoApp/html/share/epolicyShare.html?jsonKey="+jsonStr;	
+	wechatShare(title,desc,picUrl,shareUrl)
 }

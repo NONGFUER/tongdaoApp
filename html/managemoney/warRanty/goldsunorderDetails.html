@@ -111,7 +111,7 @@
 						</ul>
 					</div>
 					<!--电子保单-->
-					<div class="man-div-body-ul_li_div_two" v-if="dianzibaodan!=null">
+					<div class="man-div-body-ul_li_div_two" v-if="Objectitle.financeOrder.orderStatus!='4'&&Objectitle.financeOrder.orderStatus!='12'">
 						<ul class="man-div-body-ul">
 							<li class="baodan">
 								<span class="heise">电子保单</span>
@@ -119,8 +119,9 @@
 							</li>
 						</ul>
 					</div>
-					<div class="man-div-body-ul_li_div_btn" style="display: none;">
-						 <div id="liji" class="div_btn">立即支付</div>
+					<div class="man-div-body-ul_li_div_btn">
+						<div id="epolicyShare" class="div_btn mbright30" v-if="Objectitle.financeOrder.orderStatus!='4'&&Objectitle.financeOrder.orderStatus!='12'">电子保单分享</div>
+						<div id="liji" class="div_btn" style="display: none;">立即支付</div>
 					</div>
 				</div>
 			</div>
@@ -161,11 +162,20 @@
 				</div>
 			</div>
 		</div>
+		<div id="weixin" style="display:none">
+			<img src="../../../image/common/weixin.png" alt="" style="z-index: 2; width: 100%;height: 100%;    position: absolute;">
+			<div id="guanbi" style="position: absolute;bottom: 30px;width: 100%;text-align: center;z-index: 3;">
+				<img src="../../../image/common/cha.png" style="width: 50px;height: 50px;">
+			</div>
+		</div>
 	</body>
 	<script src="../../../js/lib/widget/mui/mui.min.js"></script>
 	<script src="../../../js/lib/common/zepto.min.js"></script>
 	<script src="../../../js/lib/common/base.js"></script>
 	<script src="../../../js/lib/common/common.js"></script>
+	<script src="../../../js/lib/common/jweixin-1.1.0.js"></script>
+    <script src="../../../js/lib/common/wx-gzpt-share.js"></script>
+    <script src="../../../js/lib/common/weixin.js"></script>
 	<script src="../../../js/lib/widget/mui/vue.mi.js"></script>
 	<script src="../../../js/usage/managemoney/warRanty/goldsunorderDetails.js"></script>
 

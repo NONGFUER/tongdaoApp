@@ -154,6 +154,12 @@ function callService(phone, obj) {
 		}
 	}
 }
+
+/*调用h5方法，拨打客服电话 */
+function callServiceH5(phone, obj){
+	$(obj).attr("href", "tel:" + phone);
+}
+
 /*调用壳方法，发短信 */
 function callSendMessage(phone){
 	var ua = navigator.userAgent.toLowerCase();
@@ -210,14 +216,14 @@ function shareMethod(shareurl, title, desc, flag, picUrl,twolink) {
 			"flag": flag,
 			"title": title, // 分享标题
 			"desc": desc, //描述
-			"descQuan": desc, //描述
+			"descQuan":title+"-"+desc, //描述
 			"picUrl": picUrl,
 			"twolink":twolink,//二维码链接
 		}
 		objcObject.share(shareParams)
 	} else if(systemsource == "android") {
 		//android.JsShareByCopy("3", flag, title, desc, desc, shareurl);
-		android.JsShareBy(flag, picUrl, title, desc, desc, shareurl);
+		android.JsShareBy(flag, picUrl, title, desc, title+"-"+desc, shareurl);
 	}
 }
 /*

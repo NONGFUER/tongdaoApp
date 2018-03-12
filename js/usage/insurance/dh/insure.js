@@ -1531,33 +1531,8 @@ function toHosUrl(){
 }
 
 function backlast(){
-	if( urlParm.sourcePage == 'qudaoMall' || entry == 'qudao'){
-		urlParm.title = '产品详情';
-		urlParm.leftIco = "1";
-		urlParm.rightIco = "1";
-		if(urlParm.holder){delete urlParm.holder}
-		if(urlParm.holderbr){delete urlParm.holderbr}		
-		var jsonStr = UrlEncode(JSON.stringify(urlParm));
-		window.location.href = base.url + 'tongdaoApp/html/insurance/main/productDetail.html?jsonKey='+jsonStr;
-	}else{
-		urlParm.title = '产品详情';
-		urlParm.leftIco = "1";
-		if( roleType != "00" ){
-			urlParm.rightIco = "1";
-		}else{
-			urlParm.rightIco = "0";
-		}
-		urlParm.downIco = "0";
-		if(urlParm.holder){
-			delete urlParm.holder
-			delete urlParm.holderbr
-		}
-		var jsonStr = UrlEncode(JSON.stringify(urlParm));
-		if( ccId != "14" ){
-			window.location.href = 'productDetail.html?jsonKey='+jsonStr;
-		}else{
-			window.location.href = base.url + 'tongdaoApp/html/insurance/ghx/ghxProductDetail.html?jsonKey='+jsonStr;
-		}
-	}	
+	
+			window.location.href = 'productDetail.html?ccId='+ccId+'&channel=dh';
+		
 };
 

@@ -1,0 +1,1147 @@
+文件夹 PATH 列表
+卷序列号为 7474-F284
+F:.
+│  .gitignore
+│  tree.txt
+│  
+├─css
+│  ├─lib
+│  │  ├─common
+│  │  │      base.css
+│  │  │      common.css
+│  │  │      public.css
+│  │  │      
+│  │  ├─commons
+│  │  │      base.css
+│  │  │      common.css
+│  │  │      
+│  │  └─widget
+│  │      ├─fonts
+│  │      │      mui.ttf
+│  │      │      
+│  │      └─mui
+│  │              mui.min.css
+│  │              mui.picker.min.css
+│  │              mui.poppicker.css
+│  │              popovers.js
+│  │              
+│  └─usage
+│      ├─account
+│      │  │  mybankCard.css
+│      │  │  myCard.css
+│      │  │  myCardEdit.css
+│      │  │  myCardShare.css
+│      │  │  myRank.css
+│      │  │  
+│      │  ├─help
+│      │  │      helpcenter.css
+│      │  │      helpcenterInfo.css
+│      │  │      helpInfo.css
+│      │  │      
+│      │  └─myOrder
+│      │          allOrder.css
+│      │          orderInfo.css
+│      │          policyList.css
+│      │          
+│      ├─agent
+│      │  ├─commissionDetail
+│      │  │      commissionDetail.css
+│      │  │      
+│      │  ├─cyCar
+│      │  │      cyCar.css
+│      │  │      
+│      │  ├─myApplication
+│      │  │      agentExam.css
+│      │  │      agentInfoRegister.css
+│      │  │      
+│      │  ├─myBookings
+│      │  │      bookingDetails.css
+│      │  │      myManager.css
+│      │  │      subscribeList.css
+│      │  │      
+│      │  ├─myCard
+│      │  │      myCard.css
+│      │  │      
+│      │  ├─openDoorRed
+│      │  │      activity.css
+│      │  │      
+│      │  └─teamManange
+│      │          teamManange.css
+│      │          
+│      ├─agreement
+│      │      article.css
+│      │      companyIntro.css
+│      │      liveProductProtocol.css
+│      │      tiaokuan.css
+│      │      yiAnHospital.css
+│      │      yiAnProfession.css
+│      │      
+│      ├─banner
+│      │      advertisement.css
+│      │      
+│      ├─finance
+│      ├─insurance
+│      │  │  checkProductList.css
+│      │  │  common.css
+│      │  │  healthNotice.css
+│      │  │  insure.css
+│      │  │  liveProductDetail.css
+│      │  │  payResult.css
+│      │  │  productDetail.css
+│      │  │  
+│      │  ├─car
+│      │  │      baojiaInfo.css
+│      │  │      base.css
+│      │  │      carMes.css
+│      │  │      createNewAddress.css
+│      │  │      editAddress.css
+│      │  │      insuranceAgen.css
+│      │  │      insuranceCoverage.css
+│      │  │      insuranceTerms.css
+│      │  │      insureMes.css
+│      │  │      JQProtocal.css
+│      │  │      notice.css
+│      │  │      orderDetail.css
+│      │  │      payResolt.css
+│      │  │      policyDeliveryAddress.css
+│      │  │      quotationDetail.css
+│      │  │      quote.css
+│      │  │      vehicleModelSelect.css
+│      │  │      vehiclequery.css
+│      │  │      
+│      │  ├─ghx
+│      │  │      fillInPolicyHolder.css
+│      │  │      hospitalList.css
+│      │  │      
+│      │  ├─jiachengxian
+│      │  │      jcxshouye.css
+│      │  │      jcxshouyeShare.css
+│      │  │      jcxtiaokuan.css
+│      │  │      zhuanqu.css
+│      │  │      
+│      │  └─sxy
+│      │          chooseChuxingWay1.css
+│      │          
+│      ├─insuranceConsultant
+│      │      insuranceConsultant.css
+│      │      
+│      ├─managemoney
+│      │  ├─cardList
+│      │  │      cardList.css
+│      │  │      
+│      │  ├─messageFillout
+│      │  │      messageFillout.css
+│      │  │      riskQuestion.css
+│      │  │      riskResult.css
+│      │  │      
+│      │  ├─productDetails
+│      │  │      productDetails.css
+│      │  │      
+│      │  ├─redemption
+│      │  │      moneyRedemption.css
+│      │  │      policyRedemption.css
+│      │  │      
+│      │  └─warRanty
+│      │          policyCancellation.css
+│      │          transactionDetail.css
+│      │          warrantyDetail.css
+│      │          warrantyList.css
+│      │          
+│      ├─message
+│      │      messageDetail.css
+│      │      
+│      ├─share
+│      │  │  insuranceMall.css
+│      │  │  
+│      │  └─download
+│      │          appDownload.css
+│      │          
+│      ├─twolink
+│      │      QRCode.css
+│      │      
+│      └─useApplicant
+│              useApplicant.css
+│              
+├─font
+│      font_0nwe5isk2xz5b3xr.eot
+│      font_0nwe5isk2xz5b3xr.svg
+│      font_0nwe5isk2xz5b3xr.ttf
+│      font_0nwe5isk2xz5b3xr.woff
+│      
+├─html
+│  ├─account
+│  │  ├─help
+│  │  │      helpcenter.html
+│  │  │      helpcenterInfo.html
+│  │  │      helpInfo.html
+│  │  │      
+│  │  ├─myOrder
+│  │  │      allOrder.html
+│  │  │      allOrderWeChat.html
+│  │  │      orderInfo.html
+│  │  │      policyInfo.html
+│  │  │      policyList.html
+│  │  │      policyListWeChat.html
+│  │  │      
+│  │  └─welfare
+│  │          welfareList.html
+│  │          
+│  ├─agent
+│  │  ├─commissionDetail
+│  │  │      commissionDetail.html
+│  │  │      
+│  │  ├─cyCar
+│  │  │      cyCar.html
+│  │  │      
+│  │  ├─myApplication
+│  │  │      agentExam.html
+│  │  │      agentInfoRegister.html
+│  │  │      fgj.html
+│  │  │      
+│  │  ├─myBookings
+│  │  │      bookingDetails.html
+│  │  │      myManager.html
+│  │  │      subscribeList.html
+│  │  │      
+│  │  ├─myCard
+│  │  │      getEWM.html
+│  │  │      mybankCard.html
+│  │  │      myCard.html
+│  │  │      myCardEdit.html
+│  │  │      myCardShare.html
+│  │  │      myCardwx.html
+│  │  │      myRank.html
+│  │  │      
+│  │  ├─mysingle
+│  │  │      mysingle.html
+│  │  │      teaMmysingle.html
+│  │  │      
+│  │  ├─openDoorRed
+│  │  │      activity.html
+│  │  │      historyLucky.html
+│  │  │      luckyDetail.html
+│  │  │      luckyOrderList.html
+│  │  │      
+│  │  └─teamManange
+│  │          teamManange.html
+│  │          
+│  ├─agreement
+│  │      aboutBY.html
+│  │      agentProtocol.html
+│  │      agreeProtocol.html
+│  │      article.html
+│  │      bwylGreenHospital.html
+│  │      cashsurfacelist.html
+│  │      changeXuzhi.html
+│  │      companyIntro.html
+│  │      companyIntroNT.html
+│  │      cornucopiaA.html
+│  │      hetong.html
+│  │      liveProductProtocol.html
+│  │      profession.html
+│  │      yiAnHospital.html
+│  │      yiAnProfession.html
+│  │      
+│  ├─banner
+│  │      bannerDetail.html
+│  │      
+│  ├─guize
+│  │      cornucopiaHuli.html
+│  │      cornucopiaYiwai.html
+│  │      goldYangguangjiazhi.html
+│  │      Yangguangguize.html
+│  │      
+│  ├─insurance
+│  │  ├─car
+│  │  │      baojiaInfo.html
+│  │  │      carInfo.html
+│  │  │      carMes.html
+│  │  │      createNewAddress.html
+│  │  │      editAddress.html
+│  │  │      insuranceAgen.html
+│  │  │      insuranceCoverage.html
+│  │  │      insuranceTerms.html
+│  │  │      insureMes.html
+│  │  │      JQProtocal.html
+│  │  │      notice.html
+│  │  │      orderDetail.html
+│  │  │      payResolt.html
+│  │  │      policyDeliveryAddress.html
+│  │  │      quotationDetail.html
+│  │  │      quote.html
+│  │  │      shareOrderDetail.html
+│  │  │      SYProtocal.html
+│  │  │      vehiclequery.html
+│  │  │      zhinanPage.html
+│  │  │      
+│  │  ├─ghx
+│  │  │      ghxProductDetail.html
+│  │  │      hospitalList.html
+│  │  │      
+│  │  ├─jiachengxian
+│  │  │      jcxshouye.html
+│  │  │      zhuanqu.html
+│  │  │      
+│  │  ├─main
+│  │  │      checkProductList.html
+│  │  │      commodityList.html
+│  │  │      healthNotice.html
+│  │  │      insure.html
+│  │  │      liveProductDetail.html
+│  │  │      payResult.html
+│  │  │      productDetail.html
+│  │  │      
+│  │  ├─sxy
+│  │  │      chooseChuxingWay.html
+│  │  │      
+│  │  └─yian
+│  │          familyInsure.html
+│  │          
+│  ├─insuranceConsultant
+│  │      insuranceConsultant.html
+│  │      
+│  ├─managemoney
+│  │  ├─cardList
+│  │  │      cardList.html
+│  │  │      cornucopiaList.html
+│  │  │      goldsuncardList.html
+│  │  │      suncardList.html
+│  │  │      
+│  │  ├─messageFillout
+│  │  │      cornucopiaFillout.html
+│  │  │      cornucopiapayResult.html
+│  │  │      goldsunpaymentFailure.html
+│  │  │      goldsunpayResult.html
+│  │  │      goldsunshineFillout.html
+│  │  │      goldsunzhiye.html
+│  │  │      messageFillout.html
+│  │  │      paymentFailure.html
+│  │  │      payResult.html
+│  │  │      returnVisit.html
+│  │  │      riskQuestion.html
+│  │  │      riskResult.html
+│  │  │      sunpaymentFailure.html
+│  │  │      sunpayResult.html
+│  │  │      sunshineFillout.html
+│  │  │      
+│  │  ├─productDetails
+│  │  │      cornucopiaDetails.html
+│  │  │      cornucopiaDetailsWeChat.html
+│  │  │      goldsunshineDetails.html
+│  │  │      goldsunshineDetailsWeChat.html
+│  │  │      productDetails.html
+│  │  │      sunshineDetails.html
+│  │  │      sunshineDetailsWeChat.html
+│  │  │      
+│  │  ├─productDetailsWeChat
+│  │  │      productDetailsWeChat.html
+│  │  │      
+│  │  ├─redemption
+│  │  │      moneyRedemption.html
+│  │  │      policyRedemption.html
+│  │  │      
+│  │  └─warRanty
+│  │          cornucopiaCancellation.html
+│  │          cornucopiaDetail.html
+│  │          cornucopiaorderDetails.html
+│  │          goldsunorderDetails.html
+│  │          goldsunpolicyCancellation.html
+│  │          goldsunwarrantyDetail.html
+│  │          orderDetails.html
+│  │          policyCancellation.html
+│  │          sunorderDetails.html
+│  │          sunpolicyCancellation.html
+│  │          sunwarrantyDetail.html
+│  │          transactionDetail.html
+│  │          warrantyDetail.html
+│  │          warrantyList.html
+│  │          
+│  ├─message
+│  │      messageDetail.html
+│  │      
+│  ├─share
+│  │  │  epolicyShare.html
+│  │  │  invite.html
+│  │  │  inviteXJ.html
+│  │  │  kongbai.html
+│  │  │  
+│  │  ├─download
+│  │  │      appDownload.html
+│  │  │      appDownloadCopy.html
+│  │  │      appDownloadXJTest.html
+│  │  │      
+│  │  └─insurance
+│  │      │  insuranceMall.html
+│  │      │  payResultShare.html
+│  │      │  
+│  │      ├─ghx
+│  │      │      ghxProductDetail.html
+│  │      │      
+│  │      ├─jiachengxian
+│  │      │      jcxshouyeShare.html
+│  │      │      jcxshouyeSharewx.html
+│  │      │      
+│  │      ├─main
+│  │      │      healthNotice.html
+│  │      │      insure.html
+│  │      │      liveProductDetail.html
+│  │      │      productDetail.html
+│  │      │      
+│  │      └─yian
+│  │              familyInsure.html
+│  │              
+│  ├─twolink
+│  │      QRCodeShare.html
+│  │      
+│  └─useApplicant
+│          useApplicant.html
+│          
+├─image
+│  ├─account
+│  │  │  add.png
+│  │  │  banner1.png
+│  │  │  baojianhui.png
+│  │  │  baoxianguwen.png
+│  │  │  caixian.png
+│  │  │  cardbacground.png
+│  │  │  code.png
+│  │  │  cross.png
+│  │  │  delete.png
+│  │  │  faguang.png
+│  │  │  field.png
+│  │  │  first0.png
+│  │  │  first1.png
+│  │  │  first2.png
+│  │  │  hao.png
+│  │  │  how.png
+│  │  │  intro.png
+│  │  │  jwx_close.png
+│  │  │  kongbai.png
+│  │  │  left-cross.png
+│  │  │  left.png
+│  │  │  leftlight.png
+│  │  │  logo.png
+│  │  │  loser.png
+│  │  │  mmqrcode.png
+│  │  │  phone.png
+│  │  │  right-cross.png
+│  │  │  right.png
+│  │  │  rightArrow.png
+│  │  │  rightlight.png
+│  │  │  shouxian.png
+│  │  │  tou.png
+│  │  │  wechat.png
+│  │  │  wen.png
+│  │  │  winer.png
+│  │  │  x.png
+│  │  │  
+│  │  ├─help
+│  │  │      arrowmore.png
+│  │  │      arrowmore1.png
+│  │  │      backicon.png
+│  │  │      bz_leftbtn.png
+│  │  │      editingicon.png
+│  │  │      helpicon.png
+│  │  │      helpicon1.png
+│  │  │      helpicon2.png
+│  │  │      helpicon3.png
+│  │  │      helpicon4.png
+│  │  │      helpicon5.png
+│  │  │      helpicon6.png
+│  │  │      noRecord.png
+│  │  │      
+│  │  └─myOrder
+│  │          lajitong.png
+│  │          
+│  ├─agent
+│  │  │  banner1.png
+│  │  │  btn-right.png
+│  │  │  chooseno.png
+│  │  │  chooseyes.png
+│  │  │  cross.png
+│  │  │  delete.png
+│  │  │  field.png
+│  │  │  first0.png
+│  │  │  first1.png
+│  │  │  first2.png
+│  │  │  gzpt_noRecord.png
+│  │  │  hao.png
+│  │  │  left-cross.png
+│  │  │  reg.png
+│  │  │  renzheng.png
+│  │  │  right-cross.png
+│  │  │  rightArrow.png
+│  │  │  
+│  │  ├─myRank
+│  │  │      add.png
+│  │  │      banner1.png
+│  │  │      baojianhui.png
+│  │  │      caixian.png
+│  │  │      cardbacground.png
+│  │  │      code.png
+│  │  │      cross.png
+│  │  │      delete.png
+│  │  │      field.png
+│  │  │      first0.png
+│  │  │      first1.png
+│  │  │      first2.png
+│  │  │      hao.png
+│  │  │      how.png
+│  │  │      intro.png
+│  │  │      kongbai.png
+│  │  │      left-cross.png
+│  │  │      left.png
+│  │  │      leftlight.png
+│  │  │      logo.png
+│  │  │      loser.png
+│  │  │      mmqrcode.png
+│  │  │      phone.png
+│  │  │      right-cross.png
+│  │  │      right.png
+│  │  │      rightArrow.png
+│  │  │      rightlight.png
+│  │  │      shouxian.png
+│  │  │      tou.png
+│  │  │      wechat.png
+│  │  │      wen.png
+│  │  │      winer.png
+│  │  │      x.png
+│  │  │      
+│  │  └─openDoorRed
+│  │          dateIco.png
+│  │          erdengjiang.png
+│  │          iphoneBg.jpg
+│  │          iphonex.png
+│  │          lookButton.png
+│  │          redbg.jpg
+│  │          secret.png
+│  │          start.png
+│  │          truth.png
+│  │          unstart.png
+│  │          
+│  ├─banklogo
+│  │      ABC.png
+│  │      BCOM.png
+│  │      BOB.png
+│  │      BOC.png
+│  │      CBHB.png
+│  │      CCB.png
+│  │      CEB.png
+│  │      CGB.png
+│  │      CIB.png
+│  │      CITIC.png
+│  │      CMB.png
+│  │      CMBC.png
+│  │      CZB.png
+│  │      EGB.png
+│  │      GDB.png
+│  │      guanfa.png
+│  │      GZB.png
+│  │      HXB.png
+│  │      ICBC.png
+│  │      NBB.png
+│  │      PAB.png
+│  │      POST.png
+│  │      PSBC.png
+│  │      SHB.png
+│  │      SPDB.png
+│  │      
+│  ├─banner
+│  │      1.jpg
+│  │      11.jpg
+│  │      125.jpg
+│  │      13.jpg
+│  │      15.jpg
+│  │      16.png
+│  │      4.jpg
+│  │      5.jpg
+│  │      agent_01.png
+│  │      babyCancer.png
+│  │      carbanner1.png
+│  │      carbanner2.png
+│  │      ghxDetail.png
+│  │      kongbai.png
+│  │      lrxbanner.jpg
+│  │      shouyeBanner.png
+│  │      
+│  ├─common
+│  │      addperson.png
+│  │      android_icon.png
+│  │      baozhanging.png
+│  │      cardbacground.png
+│  │      cha.png
+│  │      cibg.png
+│  │      cibg1.png
+│  │      cibg2.png
+│  │      code.png
+│  │      daishengxiao.png
+│  │      daizhifu.png
+│  │      date.png
+│  │      demo.png
+│  │      dh_loading.gif
+│  │      dh_loading_channel.gif
+│  │      downloadShadow.png
+│  │      dui.png
+│  │      fenxiangbottom.png
+│  │      field.png
+│  │      gou.png
+│  │      gouxuankuang1.png
+│  │      gzpt_noRecord.png
+│  │      intro.png
+│  │      ios_icon.png
+│  │      jiazhi.jpg
+│  │      kehu.png
+│  │      left.png
+│  │      loadPageBanner.png
+│  │      loadPageBanner1.png
+│  │      logo.png
+│  │      meigou.png
+│  │      myCard.png
+│  │      notetitle.png
+│  │      null.png
+│  │      nullstatus.png
+│  │      payFail.png
+│  │      paySuccess.png
+│  │      phone.png
+│  │      right.png
+│  │      right_arrow.png
+│  │      shanchulian.png
+│  │      titile.png
+│  │      tou.png
+│  │      wechat.png
+│  │      weixin.png
+│  │      wen.png
+│  │      wenhao.png
+│  │      yiguanbi.png
+│  │      yiguoqi.png
+│  │      yishixiao.png
+│  │      yizhifu.png
+│  │      yizhongzhi.png
+│  │      youjiantou.png
+│  │      yuanquan.png
+│  │      yuyueSuccess.png
+│  │      zhifuzhong.png
+│  │      zwt.png
+│  │      
+│  ├─finance
+│  │      welfare.png
+│  │      
+│  ├─insurance
+│  │  │  choice.png
+│  │  │  da.png
+│  │  │  detailLook.png
+│  │  │  down.png
+│  │  │  five.png
+│  │  │  gh_3.png
+│  │  │  gouxuankuang.png
+│  │  │  gouxuankuang1.png
+│  │  │  kefu.png
+│  │  │  phone.png
+│  │  │  product_detail.png
+│  │  │  product_point.png
+│  │  │  tkright.png
+│  │  │  tou.jpg
+│  │  │  unchoice.png
+│  │  │  wen.png
+│  │  │  wenhao.png
+│  │  │  
+│  │  ├─car
+│  │  │      22.png
+│  │  │      accurate_icon.png
+│  │  │      address.png
+│  │  │      alter.png
+│  │  │      back.png
+│  │  │      bank.png
+│  │  │      banner1.png
+│  │  │      banner2.png
+│  │  │      bannerdot.png
+│  │  │      bannerdot1.png
+│  │  │      baoxian.png
+│  │  │      baoxian2.png
+│  │  │      beneficiaryDown.png
+│  │  │      beneficiaryUp.png
+│  │  │      btn-right.png
+│  │  │      carInfo.png
+│  │  │      carInfoPage.png
+│  │  │      carshare.png
+│  │  │      car_delete.png
+│  │  │      car_modifybtn.png
+│  │  │      chahao.png
+│  │  │      chahao2.png
+│  │  │      cheliang.png
+│  │  │      cheliang2.png
+│  │  │      chengshi.png
+│  │  │      chepai.png
+│  │  │      chezhu.png
+│  │  │      chooseNo.png
+│  │  │      chooseYes.png
+│  │  │      chukudan.png
+│  │  │      cusselect.png
+│  │  │      cxld.png
+│  │  │      dakai.png
+│  │  │      date.png
+│  │  │      delete.png
+│  │  │      detail.png
+│  │  │      dh_loading.gif
+│  │  │      dh_norecord.png
+│  │  │      dianhua.png
+│  │  │      ewm.png
+│  │  │      fujiaxian.png
+│  │  │      gouxuan1.png
+│  │  │      gouxuan2.png
+│  │  │      gouxuan3.png
+│  │  │      gouxuankuang.png
+│  │  │      gouxuankuang1.png
+│  │  │      guanbi.png
+│  │  │      hezuo.png
+│  │  │      idcard.png
+│  │  │      index_bottom.png
+│  │  │      index_top.png
+│  │  │      insureinfo_left.png
+│  │  │      license.png
+│  │  │      loading.gif
+│  │  │      logo.png
+│  │  │      logo_53.png
+│  │  │      moneybtn.png
+│  │  │      noProduct.png
+│  │  │      pay.png
+│  │  │      payf.png
+│  │  │      pieceright.png
+│  │  │      policyDeliveryAddress_add.png
+│  │  │      policyDistribution_addrss.png
+│  │  │      policyDistribution_btn.png
+│  │  │      policyDistribution_btn01.png
+│  │  │      policyDistribution_check.png
+│  │  │      policyDistribution_check01.png
+│  │  │      policyDistribution_modify.png
+│  │  │      policyDistribution_touxiang.png
+│  │  │      renqi1.png
+│  │  │      renqi2.png
+│  │  │      shangyexian.png
+│  │  │      sheng.png
+│  │  │      siji1.png
+│  │  │      siji2.png
+│  │  │      talogo.png
+│  │  │      tianan.png
+│  │  │      tiananlogo.png
+│  │  │      time.png
+│  │  │      tishi.png
+│  │  │      toubaoxinxi.png
+│  │  │      weigouxuan.png
+│  │  │      weigouxuan3.png
+│  │  │      weixin.png
+│  │  │      wenhao.png
+│  │  │      wenhao1.png
+│  │  │      xgaddress.png
+│  │  │      xiala.png
+│  │  │      xiala1.png
+│  │  │      xingshizheng.png
+│  │  │      xinzeng.png
+│  │  │      yewuxinxii.png
+│  │  │      youhui1.png
+│  │  │      youhui2.png
+│  │  │      yuanjiaojuxing.png
+│  │  │      yuanjiaojuxing1.png
+│  │  │      yuanjiaojuxing2.png
+│  │  │      yuanjiaojuxing3.png
+│  │  │      yuanjiaojuxing4.png
+│  │  │      yuanjiaojuxing5.png
+│  │  │      yuanjiaojuxing6.png
+│  │  │      yuanjiaojuxing7.png
+│  │  │      yuanjiaojuxing8.png
+│  │  │      yuanjiaojuxing9.png
+│  │  │      zhuanshufuwu.png
+│  │  │      zhuxian.png
+│  │  │      
+│  │  ├─jcx
+│  │  │      bannerjiachengxian.png
+│  │  │      bannerZengxianPage.png
+│  │  │      gongxi.png
+│  │  │      jcxchepai.png
+│  │  │      jcxIDcard.png
+│  │  │      jcxmail.png
+│  │  │      jcxmobile.png
+│  │  │      jcxname.png
+│  │  │      jcxweigouxuan.png
+│  │  │      jcxyigouxuan.png
+│  │  │      jiachenxianfen.png
+│  │  │      jiantou1.png
+│  │  │      jiantou2.png
+│  │  │      kefu.png
+│  │  │      left.png
+│  │  │      table.png
+│  │  │      xuxian.png
+│  │  │      
+│  │  └─sxy
+│  │          background.png
+│  │          background2.png
+│  │          feiji100wan.png
+│  │          huoche.png
+│  │          huoche100wan.png
+│  │          huoche2.png
+│  │          lunchuan.png
+│  │          lunchuan100wan.png
+│  │          lunchuan2.png
+│  │          plane.png
+│  │          plane1.png
+│  │          qiche.png
+│  │          qiche100wan.png
+│  │          qiche2.png
+│  │          wenhao.png
+│  │          yuan.png
+│  │          
+│  ├─insuranceConsultant
+│  │      0.png
+│  │      1.png
+│  │      2.png
+│  │      duanxin.png
+│  │      fangda.png
+│  │      phoneda.png
+│  │      zuansu.png
+│  │      
+│  ├─managemoney
+│  │  ├─messageFillout
+│  │  │      add.png
+│  │  │      ba.png
+│  │  │      banner.png
+│  │  │      cha.png
+│  │  │      dealDetail.png
+│  │  │      detail.png
+│  │  │      down.png
+│  │  │      gou.png
+│  │  │      iconPig.png
+│  │  │      info.png
+│  │  │      left.png
+│  │  │      logoBottom.png
+│  │  │      math.png
+│  │  │      minus.png
+│  │  │      myPolicy.png
+│  │  │      newBanner.png
+│  │  │      nogou.png
+│  │  │      orangeBanner.png
+│  │  │      productShare.png
+│  │  │      right.png
+│  │  │      risk-backgroundclean.jpg
+│  │  │      risk-chooseno.png
+│  │  │      risk-chooseyes.png
+│  │  │      risk-result.png
+│  │  │      risk-right.png
+│  │  │      riskQuestion-title.png
+│  │  │      riskresult-title.png
+│  │  │      rist-background.jpg
+│  │  │      share.png
+│  │  │      success.png
+│  │  │      tkright.png
+│  │  │      touing.png
+│  │  │      tuijian.png
+│  │  │      whiteBg.png
+│  │  │      zhengchangtuibao.png
+│  │  │      zhouqi.png
+│  │  │      
+│  │  └─productDetails
+│  │          baoxian.png
+│  │          baozhangkuang.png
+│  │          chanpin.png
+│  │          dui.png
+│  │          gantan.png
+│  │          goldsun.png
+│  │          gou.png
+│  │          ICBC.png
+│  │          jubaopen.png
+│  │          kong.png
+│  │          meigou.png
+│  │          shangjiantou.png
+│  │          tkright.png
+│  │          xiajiantou.png
+│  │          xiaoyuanquan.png
+│  │          yang.png
+│  │          yangguang.png
+│  │          youjiantouhuise.png
+│  │          zhouqi.png
+│  │          
+│  ├─share
+│  │  │  axyw.png
+│  │  │  bqj.png
+│  │  │  bwyl.png
+│  │  │  bwzj.png
+│  │  │  car.png
+│  │  │  fangaihai.png
+│  │  │  fangainan.png
+│  │  │  fangainv.png
+│  │  │  jdx.png
+│  │  │  jiachenxianfen.png
+│  │  │  jkax.png
+│  │  │  jkjr.png
+│  │  │  jxjs.png
+│  │  │  llhm.png
+│  │  │  lrx.png
+│  │  │  lyx.png
+│  │  │  qcwy.png
+│  │  │  share.png
+│  │  │  swfr.png
+│  │  │  tongdaoic.png
+│  │  │  tongdaoicwu.png
+│  │  │  tongdaoicyi.png
+│  │  │  zhx.png
+│  │  │  
+│  │  └─invite
+│  │          hgou.png
+│  │          invite_button.png
+│  │          invite_button1.png
+│  │          invite_foot.png
+│  │          invite_foot2.png
+│  │          invite_head.png
+│  │          lgou.png
+│  │          tou.png
+│  │          
+│  └─useApplicant
+│          bianji.png
+│          email.png
+│          name.png
+│          phone.png
+│          shanchu.png
+│          shenfenzheng.png
+│          
+├─img
+│  └─wxQRCode
+├─js
+│  ├─lib
+│  │  ├─common
+│  │  │      aes.js
+│  │  │      analysisexception.js
+│  │  │      base.js
+│  │  │      city.data-3.js
+│  │  │      common.js
+│  │  │      cxutil.js
+│  │  │      jquery-1.11.0.js
+│  │  │      jweixin-1.1.0.js
+│  │  │      pad-iso10126-min.js
+│  │  │      titPackage.js
+│  │  │      underscore.js
+│  │  │      weixin.js
+│  │  │      weixin1.js
+│  │  │      wx-gzpt-share.js
+│  │  │      zepto.min.js
+│  │  │      
+│  │  └─widget
+│  │      └─mui
+│  │              mui.min.js
+│  │              mui.picker.min.js
+│  │              mui.poppicker.js
+│  │              vue.mi.js
+│  │              
+│  └─usage
+│      ├─account
+│      │  ├─help
+│      │  │      helpcenter.js
+│      │  │      helpcenterInfo.js
+│      │  │      helpInfo.js
+│      │  │      
+│      │  ├─myOrder
+│      │  │      allOrder.js
+│      │  │      allOrderWeChat.js
+│      │  │      orderInfo.js
+│      │  │      policyInfo.js
+│      │  │      policyList.js
+│      │  │      policyListWeChat.js
+│      │  │      
+│      │  └─welfare
+│      │          welfareList.js
+│      │          
+│      ├─agent
+│      │  ├─commissionDetail
+│      │  │      commissionDetail.js
+│      │  │      
+│      │  ├─cyCar
+│      │  │      cyCar.js
+│      │  │      
+│      │  ├─myApplication
+│      │  │      agentExam.js
+│      │  │      agentInfoRegister.js
+│      │  │      head.js
+│      │  │      
+│      │  ├─myBookings
+│      │  │      bookingDetails.js
+│      │  │      myManager.js
+│      │  │      subscribeList.js
+│      │  │      
+│      │  ├─myCard
+│      │  │      getEWM.js
+│      │  │      mybankCard.js
+│      │  │      myCard.js
+│      │  │      myCardEdit.js
+│      │  │      myCardwx.js
+│      │  │      myRank.js
+│      │  │      
+│      │  ├─mysingle
+│      │  │      mysingle.js
+│      │  │      teaMmysingle.js
+│      │  │      
+│      │  ├─openDoorRed
+│      │  │      activity.js
+│      │  │      historyLucky.js
+│      │  │      luckyDetail.js
+│      │  │      luckyOrderList.js
+│      │  │      
+│      │  └─teamManange
+│      │          teamManange.js
+│      │          
+│      ├─agreement
+│      │      article.js
+│      │      hetong.js
+│      │      liveProductProtocal.js
+│      │      
+│      ├─banner
+│      │      advertisement.js
+│      │      
+│      ├─finance
+│      ├─insurance
+│      │  │  all.js
+│      │  │  checkProductList.js
+│      │  │  commodityList.js
+│      │  │  getjson.js
+│      │  │  head.js
+│      │  │  healthNotice.js
+│      │  │  insure.js
+│      │  │  kongbaiShare.js
+│      │  │  liveProductDetail.js
+│      │  │  payResult.js
+│      │  │  payResultC.js
+│      │  │  payResultE.js
+│      │  │  productDetail.js
+│      │  │  
+│      │  ├─car
+│      │  │      baojiaInfo.js
+│      │  │      carInfo.js
+│      │  │      carMes.js
+│      │  │      createNewAddress.js
+│      │  │      editAddress.js
+│      │  │      insuranceAgen.js
+│      │  │      insuranceCoverage.js
+│      │  │      insuranceTerms.js
+│      │  │      insureMes.js
+│      │  │      JQProtocal.js
+│      │  │      notice.js
+│      │  │      orderDetail.js
+│      │  │      payResolt.js
+│      │  │      policyDeliveryAddress.js
+│      │  │      quotationDetail.js
+│      │  │      quote.js
+│      │  │      shareOrderDetail.js
+│      │  │      SYProtocal.js
+│      │  │      vehicleModelSelect.js
+│      │  │      vehiclequery.js
+│      │  │      zhinanPage.js
+│      │  │      
+│      │  ├─ghx
+│      │  │      ghxProductDetail.js
+│      │  │      hospitalList.js
+│      │  │      
+│      │  ├─jiachengxian
+│      │  │      jcxshouye.js
+│      │  │      zhuanqu.js
+│      │  │      
+│      │  ├─sxy
+│      │  │      chooseChuxingWay.js
+│      │  │      
+│      │  └─yian
+│      │          familyInsure.js
+│      │          
+│      ├─insuranceConsultant
+│      │      insuranceConsultant.js
+│      │      
+│      ├─managemoney
+│      │  ├─cardList
+│      │  │      cardList.js
+│      │  │      cornucopiaList.js
+│      │  │      goldsuncardList.js
+│      │  │      suncardList.js
+│      │  │      
+│      │  ├─messageFillout
+│      │  │      cornucopiaFillout.js
+│      │  │      cornucopiapayResult.js
+│      │  │      goldsunpaymentFailure.js
+│      │  │      goldsunpayResult.js
+│      │  │      goldsunshineFillout.js
+│      │  │      goldsunzhiye.js
+│      │  │      messageFillout.js
+│      │  │      paymentFailure.js
+│      │  │      payResult.js
+│      │  │      returnVisit.js
+│      │  │      riskQuestion.js
+│      │  │      riskResult.js
+│      │  │      sunpayResult.js
+│      │  │      sunshineFillout.js
+│      │  │      
+│      │  ├─productDetails
+│      │  │      cornucopiaDetails.js
+│      │  │      cornucopiaDetailsWeChat.js
+│      │  │      goldsunshineDetails.js
+│      │  │      goldsunshineDetailsWeChat.js
+│      │  │      productDetails.js
+│      │  │      productDetailsWeChat.js
+│      │  │      sunshineDetails.js
+│      │  │      sunshineDetailsWeChat.js
+│      │  │      
+│      │  ├─redemption
+│      │  │      moneyRedemption.js
+│      │  │      policyRedemption.js
+│      │  │      
+│      │  └─warRanty
+│      │          cornucopiaCancellation.js
+│      │          cornucopiaDetail.js
+│      │          cornucopiaorderDetails.js
+│      │          goldsunorderDetails.js
+│      │          goldsunpolicyCancellation.js
+│      │          goldsunwarrantyDetail.js
+│      │          orderDetails.js
+│      │          policyCancellation.js
+│      │          sunorderDetails.js
+│      │          sunpolicyCancellation.js
+│      │          sunwarrantyDetail.js
+│      │          transactionDetail.js
+│      │          warrantyDetail.js
+│      │          warrantyList.js
+│      │          
+│      ├─message
+│      │      messageDetail.js
+│      │      msgToProduct.js
+│      │      
+│      ├─share
+│      │  │  invite.js
+│      │  │  inviteXJ.js
+│      │  │  
+│      │  ├─download
+│      │  │      appDownload.js
+│      │  │      
+│      │  ├─insurance
+│      │  │  │  getjson.js
+│      │  │  │  ghxProductDetail.js
+│      │  │  │  head.js
+│      │  │  │  healthNotice.js
+│      │  │  │  insure.js
+│      │  │  │  jcxshouyeShare.js
+│      │  │  │  jcxshouyeSharewx.js
+│      │  │  │  liveProductDetail.js
+│      │  │  │  productDetail.js
+│      │  │  │  
+│      │  │  └─yian
+│      │  │          familyInsure.js
+│      │  │          
+│      │  └─mall
+│      │          insuranceMall.js
+│      │          
+│      ├─twolink
+│      │      QRCodeShare.js
+│      │      
+│      └─useApplicant
+│              useApplicant.js
+│              
+└─page
+    └─html
+        ├─cancerRisk
+        │      result.html
+        │      
+        └─ecard
+                result.html
+                

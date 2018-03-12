@@ -156,6 +156,7 @@ function buy() {
 		"title": vm.Objectitle.commodityCombination.commodityCombinationName,
 		"productFlag": productFlag,
 		"channel": channel,
+		"entry":entry,
 		"roleType": roleType,
 		"invMobie":invMobie,
 		"idAuth": idAuth,

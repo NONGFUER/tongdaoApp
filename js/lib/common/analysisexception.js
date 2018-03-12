@@ -39,6 +39,7 @@ function exception_translate(content)
 	translates.push('{"keyword":"新车业务","info":"车辆为新车业务,暂不能投保!"}');
 	translates.push('{"keyword":"参考VIN码第10位","info":"车辆识别代码与车辆注册日期不符,请按照行驶证信息填写!"}');
 	translates.push('{"keyword":"车主名称与上张保单不一致","info":"车主姓名与上年度保单不一致,请按照行驶证信息填写!"}');
+	translates.push('{"keyword":"商业险重复投保","info":"此车商业险未到可投保日期，请明日再试!"}');
 	translates.push('{"keyword":"未获取到终保日期","info":"未能找到车辆信息,请按照行驶证信息填写!"}');
 	translates.push('{"keyword":"三者险必保","info":"车辆需要购买第三者责任险,请勾选第三者责任险!"}');
 	translates.push('{"keyword":"日期必须在当前日期的规定时间范围","info":"未到可以投保车辆保险的日期,请明日再试!"}');

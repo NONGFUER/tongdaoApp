@@ -8654,11 +8654,7 @@
 	function backlast() {
 		urlParm.title = urlParm.titles;
 		var jsonStr = UrlEncode(JSON.stringify(urlParm));
-		if(urlParm.channel=='01'){
-			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/cornucopiaDetails.html?jsonKey=" + jsonStr;
-		}else{
-			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/cornucopiaDetailsWeChat.html?jsonKey=" + jsonStr;
-		}	
+		window.location.href = base.url + "tongdaoApp/html/agreement/cashsurfacelist.html?jsonKey=" + jsonStr;
 	}
 </script>
 

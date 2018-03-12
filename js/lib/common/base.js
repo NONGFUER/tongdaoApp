@@ -631,7 +631,11 @@ $.ajaxPrevent = function() {
 	ajaxPrevent += "<div class='ajax_prevent_a' style='width: 30%;margin-top: 55%;"
 			+ "margin-left: 35%;text-align: center;background-clip: padding-box;"
 			+ "color: #585858;'>";
-	ajaxPrevent += "<img src='"+base.url+"tongdaoApp/image/common/dh_loading.gif' style='width:100%'></div></div>";
+	if(sessionStorage.getItem("channelcar")=="channelcar"){//渠道出单
+		ajaxPrevent += "<img src='"+base.url+"tongdaoApp/image/common/dh_loading_channel.gif' style='width:100%'></div></div>";
+	}else{
+		ajaxPrevent += "<img src='"+base.url+"tongdaoApp/image/common/dh_loading.gif' style='width:100%'></div></div>";
+	}
 	$("body").append(ajaxPrevent);
 	$(".ajax_prevent_a").css("margin-top",(window.innerHeight - $(".ajax_prevent_a").width())/2);
 };
@@ -2590,3 +2594,74 @@ function changeChannel(channel){
 function subTime(timeStr){
   return timeStr.substring(0,10);
 }
+/* 页面加载时的遮罩  渠道专属遮罩 */
+$.ajaxPreventChannel = function() {
+	// 创建遮罩
+	var ajaxPrevent = "";
+	ajaxPrevent += "<div class='ajax_prevent_channel' style='position: fixed;width: 100%;height: 100%;top: 0;"
+			+ "left: 0;z-index: 1000;background:rgba(0,0,0,0)'>";
+	ajaxPrevent += "<div class='ajax_prevent_a' style='width: 30%;margin-top: 55%;"
+			+ "margin-left: 35%;text-align: center;background-clip: padding-box;"
+			+ "color: #585858;'>";
+	ajaxPrevent += "<img src='"+base.url+"tongdaoApp/image/common/dh_loading_channel.gif' style='width:100%'></div></div>";
+	$("body").append(ajaxPrevent);
+	$(".ajax_prevent_a").css("margin-top",(window.innerHeight - $(".ajax_prevent_a").width())/2);
+};
+/**----请求报文无request节点的ajax请求---*/
+$.reqAjaxsChannel = function(url, requestData, callBack) {
+	var requestJson = aesEncrypt(JSON.stringify(requestData), secretKey, secretKey);
+	requestJson=URLencodeForBase64(requestJson);
+	$.ajax({
+		url : url,
+		type : 'POST',
+		data : "jsonKey=" + requestJson,
+		dataType : "json",
+		timeout : 60000,
+		success : function(data) {
+			$(".ajax_prevent_channel").remove();// 去除遮罩
+			if (!$.isNull(callBack)) {
+				callBack(data);
+			}
+		},
+		error : function(data) {
+			$(".ajax_prevent_channel").remove();// 去除遮罩
+			modelAlert("网络好像开小差了呢，请设置给力一点儿网络吧！");
+		},
+		beforeSend : function(xhr) {
+			$.ajaxPreventChannel();
+		},
+		async : true,
+	});
+};
+/*有request节点的*/
+$.toAjaxsChannel = function(url, dataList, callBack) {
+	var requestData = {};
+	requestData.request = dataList;
+	var requestJson = aesEncrypt(JSON.stringify(requestData), secretKey, secretKey);
+	requestJson=URLencodeForBase64(requestJson);
+	$.ajax({
+		url : url,
+		type : 'POST',
+		data : "jsonKey=" + requestJson,
+		dataType : "json",
+		timeout : 60000,
+		success : function(data) {
+			$(".ajax_prevent_channel").remove();// 去除遮罩
+			if ($.isNull(callBack)) {
+
+			} else {
+				callBack(data);
+			}
+		},
+		error : function(data) {
+			$(".ajax_prevent_channel").remove();// 去除遮罩
+			modelAlert("网络好像开小差了呢，请设置给力一点儿网络吧！");
+		},
+		complete : function(data) {
+		},
+		beforeSend : function(xhr) {
+			$.ajaxPreventChannel();
+		},
+		async : true,
+	});
+};

@@ -18,13 +18,14 @@ var InterValObj; //timer变量，控制时间
 var count = 60; //间隔函数，1秒执行  
 var curCount; //当前剩余秒数
 var productFlag = '01';
+var epolicyUrl = '';
 if(commodityCombinationId = '4') {
 	productFlag = '01';
 } else if(commodityCombinationId = '5') {
 	productFlag = '02';
 }
 if(leixing == 'liji') {
-	$('.man-div-body-ul_li_div_btn').show();
+	$('#liji').show();
 }
 if(userCode) {
 	$('.phone').html(phoneyin(userCode));
@@ -43,22 +44,6 @@ var vm = new Vue({
 		name: "",
 		dianzibaodan: '',
 	},
-	/*mounted() {
-		this.$nextTick(function() {
-			$(function() {
-				chuli();
-			})
-		})
-	},
-	watch: {
-		Objectlist: function(val) {
-			this.$nextTick(function() {
-				$(function() {
-					chuli();
-				})
-			})
-		}
-	}*/
 })
 $(function() {
 	console.log("页面初始化，获取上个页面传值报文--");
@@ -111,7 +96,9 @@ $(function() {
 			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetailsWeChat/productDetailsWeChat.html?jsonKey=" + jsonStr;
 		}
 	})
-
+	$("#guanbi").unbind('tap').bind("tap", function() {
+		$('#weixin').hide()
+	})
 	$("#liji").unbind("tap").bind("tap", function() {
 		$('.note').show();
 		/*触发短信接口*/
@@ -245,6 +232,7 @@ function policyQueryListInfo(data) {
 		} else {
 			vm.dianzibaodan = null;
 		}
+		epolicyUrl = vm.dianzibaodan;
 	} else if(data.statusCode == '123456') {
 		modelAlert(data.statusMessage, '', lognCont);
 	} else {
@@ -252,6 +240,13 @@ function policyQueryListInfo(data) {
 	}
 	vm.$nextTick(function() {
 		chuli();
+		$("#epolicyShare").unbind("tap").bind("tap", function() {
+			if(!isWeixin()) {
+				shareHandle()
+			} else {
+				wechatEpolicyShare()
+			}
+		})
 	})
 }
 
@@ -351,4 +346,31 @@ function backlast() {
 /*登录失效*/
 function lognCont() {
 	loginControl();
+}
+
+/*电子保单分享*/
+function shareHandle() {
+	var title = '同道保险电子保单';
+	var desc = '点击查看详情';
+	var picUrl = base.url + "tongdaoApp/image/share/tongdaoic.png";
+	var flag = '2';
+	var shareurl = epolicyUrl;
+	urlParm.picUrl = epolicyUrl;
+	urlParm.shareurl = epolicyUrl;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink = base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey=" + jsonStr;
+	shareMethod(shareurl, title, desc, flag, picUrl, twolink);
+};
+
+function wechatEpolicyShare() {
+	$("#weixin").show()
+	var title = '同道保险电子保单';
+	var desc = '点击查看详情';
+	var picUrl = base.url + "tongdaoApp/image/share/tongdaoic.png";
+	var epolicyObj = {
+		"directUrl": epolicyUrl
+	}
+	var jsonStr = UrlEncode(JSON.stringify(epolicyObj));
+	var shareUrl = base.url + "tongdaoApp/html/share/epolicyShare.html?jsonKey=" + jsonStr;
+	wechatShare(title, desc, picUrl, shareUrl)
 }

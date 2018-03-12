@@ -18,13 +18,14 @@ var InterValObj; //timer变量，控制时间
 var count = 60; //间隔函数，1秒执行  
 var curCount; //当前剩余秒数
 var productFlag = '01';
+var epolicyUrl = '';
 if(commodityCombinationId = '4') {
 	productFlag = '01';
 } else if(commodityCombinationId = '5') {
 	productFlag = '02';
 }
 if(leixing == 'liji') {
-	$('.man-div-body-ul_li_div_btn').show();
+	$('#liji').show();
 }
 if(userCode) {
 	$('.phone').html(phoneyin(userCode));
@@ -92,14 +93,18 @@ $(function() {
 			if(data.returns.DownloadUrl) {
 				vm.dianzibaodan = data.returns.DownloadUrl;
 			} else {
-				vm.dianzibaodan = null;
+				vm.dianzibaodan = '';
 			}
+			epolicyUrl = vm.dianzibaodan;
 		} else if(data.statusCode == '123456') {
 			modelAlert(data.statusMessage, '', lognCont);
 		} else {
 			modelAlert(data.statusMessage);
 		}
 	}
+	$("#guanbi").unbind('tap').bind("tap", function() {
+		$('#weixin').hide()
+	})
 
 	$(".chanping").unbind("tap").bind("tap", function() {
 		var commodityCombinationId = vm.Objectitle.financeOrder.commodityCombinationId;
@@ -116,11 +121,6 @@ $(function() {
 		}
 		var jsonStr = UrlEncode(JSON.stringify(reqData));
 		window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/goldsunshineDetails.html?jsonKey=" + jsonStr;
-		/*if(channel == '01') {
-			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetails/productDetails.html?jsonKey=" + jsonStr;
-		} else {
-			window.location.href = base.url + "tongdaoApp/html/managemoney/productDetailsWeChat/productDetailsWeChat.html?jsonKey=" + jsonStr;
-		}*/
 	})
 
 	$("#liji").unbind("tap").bind("tap", function() {
@@ -167,6 +167,13 @@ $(function() {
 		$(".baodan").unbind("tap").bind("tap", function() {
 			/*正式版使用接口↓*/
 			window.location.href = vm.dianzibaodan;
+		})
+		$("#epolicyShare").unbind("tap").bind("tap", function() {
+			if(!isWeixin()) {
+				shareHandle()
+			} else {
+				wechatEpolicyShare()
+			}
 		})
 	})
 })
@@ -257,6 +264,7 @@ function policyQueryListInfo(data) {
 		console.log(data)
 		vm.Objectitle = data.returns;
 		vm.returnVisit = data.returns.financeOrder.returnVisit;
+
 		vm.name = data.returns.commodityCombination.commodityCombinationName;
 	} else if(data.statusCode == '123456') {
 		modelAlert(data.statusMessage, '', lognCont);
@@ -347,4 +355,31 @@ function backlast() {
 /*登录失效*/
 function lognCont() {
 	loginControl();
+}
+
+/*电子保单分享*/
+function shareHandle() {
+	var title = '同道保险电子保单';
+	var desc = '点击查看详情';
+	var picUrl = base.url + "tongdaoApp/image/share/tongdaoic.png";
+	var flag = '2';
+	var shareurl = epolicyUrl;
+	urlParm.picUrl = epolicyUrl;
+	urlParm.shareurl = epolicyUrl;
+	var jsonStr = UrlEncode(JSON.stringify(urlParm));
+	var twolink = base.url + "tongdaoApp/html/twolink/QRCodeShare.html?jsonKey=" + jsonStr;
+	shareMethod(shareurl, title, desc, flag, picUrl, twolink);
+};
+
+function wechatEpolicyShare() {
+	$("#weixin").show()
+	var title = '同道保险电子保单';
+	var desc = '点击查看详情';
+	var picUrl = base.url + "tongdaoApp/image/share/tongdaoic.png";
+	var epolicyObj = {
+		"directUrl": epolicyUrl
+	}
+	var jsonStr = UrlEncode(JSON.stringify(epolicyObj));
+	var shareUrl = base.url + "tongdaoApp/html/share/epolicyShare.html?jsonKey=" + jsonStr;
+	wechatShare(title, desc, picUrl, shareUrl)
 }

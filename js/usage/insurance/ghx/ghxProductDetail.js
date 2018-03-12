@@ -87,7 +87,7 @@ function sendProductInfoCallBack(data){
 		console.log(dicCodeList);
 		console.log(remarkList);
 		urlParm.cName =  CommodityCombination.commodityCombinationName;
-		ccStayus = commodityCombination.commodityCombinationStatus;	//上下架状态 1-上架 0-下架
+		ccStayus = CommodityCombination.commodityCombinationStatus;	//上下架状态 1-上架 0-下架
 	    if( ccStayus == "0"){
 	    	$("#toubao").css({background:"#ccc"});
 	    }

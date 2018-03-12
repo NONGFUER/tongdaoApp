@@ -29,6 +29,7 @@ var urlParm = JSON.parse(UrlDecode(getUrlQueryString("jsonKey"))),
 	baoxiantiaokuan = urlParm.baoxiantiaokuan,
 	toubaoguize = urlParm.toubaoguize,
 	myhoder = urlParm.myhoder,
+	entry=urlParm.entry,
 	title = urlParm.title;
 
 function isWeiXin() {
@@ -56,6 +57,9 @@ if(roleType != '00') {
 	rightIco = '0';
 }
 if(channel == '01') {
+	inFlag = '3';
+	buyType = '1';
+} else if(entry=='mall') {
 	inFlag = '3';
 	buyType = '1';
 } else {
@@ -117,6 +121,8 @@ var vm = new Vue({
 		},
 		channel: '',
 		baoxiantiaokuan: '',
+		chanpingshuoming: '',
+		tishishu: '',
 		toubaoguize: '',
 		myhoder: true, //判定是否是个
 	}
@@ -127,6 +133,8 @@ if(pieces) {
 }
 $(function() {
 	vm.remark = remark;
+	vm.chanpingshuoming = 'http://jichupro.oss-cn-szfinance.aliyuncs.com/commodityCombination/module/01300001_tbsms.pdf';
+	vm.tishishu = 'http://jichupro.oss-cn-szfinance.aliyuncs.com/commodityCombination/module/01300001_tishishu.pdf';
 	if(channel == '02') {
 		$('#tou').show();
 		$('.mui-content').css('padding-top', '44px');
@@ -364,6 +372,7 @@ $("#huifang").unbind("tap").bind("tap", function() {
 					"provinceName": whereName[0], //投保人所属地区的省代码
 					"cityName": whereName[1], //投保人所属地区的市代码
 					"invitePhone": shareMobile,
+					"invMobie":invMobie,
 				}
 			}
 			var url = base.url + 'insuredkunlun/insured.do';
@@ -852,6 +861,10 @@ function getAge_premium(birth) {
 $("#goumai").blur(function() {
 	var goumai = $("#goumai").val();
 	vm.startPiece = '1000.00';
+	if(isNaN(goumai)) {
+		goumai = 10;
+		$("#goumai").val(10);
+	}
 	if(goumai > 5000) {
 		$("#goumai").val('5000');
 		var goumai = $("#goumai").val();

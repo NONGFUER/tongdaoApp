@@ -182,7 +182,7 @@ function calOptionDetails(calOptions,calCode){
     	   $('div[name='+calOptions[0].calCode+']').attr("data-value",calOptions[i].enuCode);
        }else{
     	   if( ccId == '23' && calCode == 'insuranceCoverage1' && i > 1){
-    		   str += '<li class="hidden" data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
+    		   str += '<li class="hidden" style="display:list-item" data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
     	   }else{
     		   str += '<li data-value="' + calOptions[i].enuCode + '" data-cid="' + calOptions[i].commodityId + '" >' + calOptions[i].enuContent + '</li>'
     	   }

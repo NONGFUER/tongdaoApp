@@ -1,3 +1,4 @@
+
 // 全局常量
 /*全局常量*/
 var CERTIFICATENO_LENGTH = 18;
@@ -25,7 +26,12 @@ var COMMODITYCOMBINE_ID ={
 	    "BWYL" : "22",    //易安百万医疗险
 	    "AXYW" : "23",    //易安安心意外险
 	    "BWZJ" : "27",     //天安百万重疾
-	    "JKAX_GZ":"29"		//天安健康安享百万重疾保障（贵州银保专属）
+	    "JKAX_GZ":"29",		//天安健康安享百万重疾保障（贵州银保专属）
+	    "JKAX_GZ":"30",		//乐享全能幸福家庭家主综合保障保险 
+	    "JKAX_GZ":"31",		//安享无忧个人资金账户安全保险
+	    "JKAX_GZ":"32",		//尊享一生愉快人身意外伤害保险
+	    "JKAX_GZ":"33",		//跃享至尊航空旅客人身意外伤害保险
+	    "JKAX_GZ":"34",		//逸享畅行锦程交通意外伤害保险
 	}
 var COMMODITY_ID ={
 		"MCAN" : "1",
@@ -110,7 +116,7 @@ if(getUrlQueryString("jsonKey")){
 	urlParm.customerId = getUrlQueryString("customerId") ? getUrlQueryString("customerId"):"";
 	urlParm.shareFlag = getUrlQueryString("shareFlag");
 	urlParm.mobile = getUrlQueryString("mobile") ? getUrlQueryString("mobile") : "";
-	urlParm.entry = getUrlQueryString("entry") ? getUrlQueryString("entry") : "app";
+	urlParm.entry = getUrlQueryString("entry") ? getUrlQueryString("entry") : "dh";
 }
 
 //微信比app多（不同）的字段

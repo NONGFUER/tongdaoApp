@@ -60,6 +60,7 @@ $(function() {
 		var insureNo = $(this).attr('insureNo');
 		var commodityId = $(this).attr('commodityId');
 		var ccName=$(this).attr('ccName');
+		var commodityCombinationId=$(this).attr('commodityCombinationId');
 		var param = {
 			"userCode": userCode,
 			"mobile": userCode,
@@ -70,6 +71,7 @@ $(function() {
 			"customerId": customerId,
 			"transToken": transToken,
 			"policyStatus": policyStatus,
+			"commodityCombinationId":commodityCombinationId+'',
 			"commodityComId": commodityId + '',
 			"ccName":ccName,
 			"cxflag": '3',
